@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dwjkccutgf7r4"]
+
+[ext_resource type="Script" uid="uid://cwukmhnqtsk1u" path="res://scripts/harbor.gd" id="1"]
+
+[node name="Harbor" type="Node2D" unique_id=149206743]
+texture_filter = 1
+script = ExtResource("1")

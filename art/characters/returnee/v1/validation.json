@@ -1,0 +1,45 @@
+{
+  "file": "returnee.blend",
+  "mesh_objects": 78,
+  "bones": 22,
+  "base_vertices": 14414,
+  "base_triangles": 28196,
+  "blended_vertices": 768,
+  "weights_normalized": true,
+  "influence_limit": 4,
+  "max_influences": 2,
+  "actions": {
+    "Idle": {
+      "start": 1,
+      "duplicate_end": 61,
+      "unique_frames": 60,
+      "loop_matrix_error": 0.0,
+      "minimum_sole_z": 1.1138617992401123e-06,
+      "peak_sole_z": 1.4565885066986084e-06,
+      "hand_excursion_m": 0.012131330540611782
+    },
+    "Walk": {
+      "start": 1,
+      "duplicate_end": 33,
+      "unique_frames": 32,
+      "loop_matrix_error": 0.0,
+      "minimum_sole_z": 1.1213123798370361e-06,
+      "peak_sole_z": 0.10246153175830841,
+      "hand_excursion_m": 0.2795710063072631
+    },
+    "Run": {
+      "start": 1,
+      "duplicate_end": 25,
+      "unique_frames": 24,
+      "loop_matrix_error": 0.0,
+      "minimum_sole_z": 1.171603798866272e-06,
+      "peak_sole_z": 0.20686395466327667,
+      "hand_excursion_m": 0.4861183110357213
+    }
+  },
+  "passed": true,
+  "evaluated_triangles": 56916,
+  "posed_height_m": 1.6919472608715296,
+  "head_proportion_excluding_hair": 4.679546195166574,
+  "scope": "Blender only. No Unity import or runtime validation."
+}

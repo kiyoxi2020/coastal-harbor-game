@@ -1,0 +1,105 @@
+{
+  "migration": [
+    {
+      "from": "交付与预览",
+      "to": "archive/2026-10-12-reorganization/交付与预览-历史",
+      "verified_files": 483
+    },
+    {
+      "from": "archive/2026-10-12-reorganization/交付与预览-历史/10-Godot2D试玩发布/2026-10-12-v0.3.1",
+      "to": "交付与预览/2D",
+      "verified_files": 21
+    },
+    {
+      "from": "archive/2026-10-12-reorganization/交付与预览-历史/01-当前试玩版",
+      "to": "交付与预览/3D/试玩",
+      "verified_files": 296
+    },
+    {
+      "from": "交付与预览/3D/试玩/CoastalHarbor.app",
+      "to": "archive/2026-10-12-reorganization/交付重复应用/CoastalHarbor.app",
+      "verified_files": 289
+    },
+    {
+      "from": "archive/2026-10-12-reorganization/交付与预览-历史/06-Blender场景建模/2026-10-10-v3",
+      "to": "交付与预览/3D/建模",
+      "verified_files": 12
+    },
+    {
+      "from": "交付与预览/3D/建模/comparison-v2-same-camera.png",
+      "to": "archive/2026-10-12-reorganization/旧版对照/comparison-v2-same-camera.png",
+      "verified_files": 1
+    },
+    {
+      "from": "docs/superpowers",
+      "to": "archive/2026-10-12-reorganization/历史设计与实施记录",
+      "verified_files": 15
+    },
+    {
+      "from": "godot2d/assets/tree-study-v3",
+      "to": "archive/2026-10-12-reorganization/godot2d旧树/assets/tree-study-v3",
+      "verified_files": 2
+    },
+    {
+      "from": "godot2d/assets/environment-v2/tree-0.png",
+      "to": "archive/2026-10-12-reorganization/godot2d旧树/assets/environment-v2/tree-0.png",
+      "verified_files": 1
+    },
+    {
+      "from": "godot2d/assets/environment-v2/tree-0.png.import",
+      "to": "archive/2026-10-12-reorganization/godot2d旧树/assets/environment-v2/tree-0.png.import",
+      "verified_files": 1
+    },
+    {
+      "from": "godot2d/assets/environment-v2/tree-1.png",
+      "to": "archive/2026-10-12-reorganization/godot2d旧树/assets/environment-v2/tree-1.png",
+      "verified_files": 1
+    },
+    {
+      "from": "godot2d/assets/environment-v2/tree-1.png.import",
+      "to": "archive/2026-10-12-reorganization/godot2d旧树/assets/environment-v2/tree-1.png.import",
+      "verified_files": 1
+    },
+    {
+      "from": "godot2d/assets/environment-v2/tree-2.png",
+      "to": "archive/2026-10-12-reorganization/godot2d旧树/assets/environment-v2/tree-2.png",
+      "verified_files": 1
+    },
+    {
+      "from": "godot2d/assets/environment-v2/tree-2.png.import",
+      "to": "archive/2026-10-12-reorganization/godot2d旧树/assets/environment-v2/tree-2.png.import",
+      "verified_files": 1
+    },
+    {
+      "from": "godot2d/assets/environment-v2/tree-3.png",
+      "to": "archive/2026-10-12-reorganization/godot2d旧树/assets/environment-v2/tree-3.png",
+      "verified_files": 1
+    },
+    {
+      "from": "godot2d/assets/environment-v2/tree-3.png.import",
+      "to": "archive/2026-10-12-reorganization/godot2d旧树/assets/environment-v2/tree-3.png.import",
+      "verified_files": 1
+    },
+    {
+      "from": "godot2d/tests/test_tree_study.gd",
+      "to": "archive/2026-10-12-reorganization/godot2d旧树/tests/test_tree_study.gd",
+      "verified_files": 1
+    },
+    {
+      "from": "godot2d/tests/test_tree_study.gd.uid",
+      "to": "archive/2026-10-12-reorganization/godot2d旧树/tests/test_tree_study.gd.uid",
+      "verified_files": 1
+    }
+  ],
+  "runtime_matches_v031": true,
+  "runtime_sha256": {
+    "godot2d/scripts/hud.gd": "647aa3790072b5e8768a98172f23034a86eaac5df0852b49830ea5dcf45f2093",
+    "godot2d/scripts/player.gd": "2d9ec7c5e275daeab00308cb5f828d7f258369b2433babd7777ced2f69632f25",
+    "godot2d/scripts/water_detail.gd": "cdea263a6b5dd45b2d67cbfd90ac5ebf806c7783a084221323a2cd9faeb07350",
+    "godot2d/scripts/atlas.gd": "571d3e25bfc9a12250229d6e5d73b98548517707dcf7f5d6e364dc98bec759c8",
+    "godot2d/scripts/harbor.gd": "f6e4e7963c87e0621fbdf9dda7aafe95ff655cf9b99503cd6808690cf4ed477a",
+    "godot2d/scripts/terrain.gd": "cfaf0c72531fa1b4d59dce8ae47843f51d776391d3c2f04951d3ec1f2d4e7095",
+    "godot2d/scripts/harbor_data.gd": "908e4e5deeb7d98adf8357779758ac8ea1f9a7804ba55f3619ba6790d39f728a"
+  },
+  "deleted_files": 0
+}

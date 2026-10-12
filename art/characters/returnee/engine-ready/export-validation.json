@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "mesh_count": 1,
+  "material_count": 1,
+  "bone_count": 22,
+  "actions": [
+    "Returnee_Rig|Returnee_Rig|Idle",
+    "Returnee_Rig|Returnee_Rig|Run",
+    "Returnee_Rig|Returnee_Rig|Walk"
+  ],
+  "atlas_uv_channels": 1,
+  "mapped_palette_cells": 18,
+  "crown_average_up_normal": 0.9717606331778258
+}

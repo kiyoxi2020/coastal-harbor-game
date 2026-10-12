@@ -1,0 +1,25 @@
+{
+  "clips": [
+    {
+      "name": "Idle",
+      "first": 1,
+      "last": 61,
+      "fps": 30,
+      "nominalSpeed": 0.0
+    },
+    {
+      "name": "Walk",
+      "first": 1,
+      "last": 33,
+      "fps": 30,
+      "nominalSpeed": 0.796875
+    },
+    {
+      "name": "Run",
+      "first": 1,
+      "last": 25,
+      "fps": 30,
+      "nominalSpeed": 2.006578947368421
+    }
+  ]
+}

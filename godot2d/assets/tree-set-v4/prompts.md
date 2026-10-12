@@ -1,0 +1,28 @@
+# 全树统一 · 生图记录
+
+内置image_gen，每类独立生成；工具未核实具体模型版本。原稿参考已批准v3树木的大色块风格。输出经prepare_trees.gd做alpha、连通区域、nearest尺寸与固定色板处理，不是逐像素手绘。树号对应：0阔叶、1疏冠、2海岸松、3果树。
+
+## tree-0
+
+```text
+Use case: precise-object-edit. Image 1 is the edit target. Retain the exact coherent crown silhouette, small trunk shape, composition and large connected pixel-cluster design of this single broadleaf tree. Change ONLY its palette and subtle plane contrast: replace the grey sage cast with warm clear lively middle greens, brighter warm upper-left planes, deep forest-green lower-right shadows. Preserve very small sprite readability, no extra details, no new individual leaves, no round glossy broccoli balls. Palette: #285746 #35704a #4b8b4e #66a44f #85b952 #a7cc67 #c6dc87 #dce7aa, wood #65482f #94623c #be8c53. True transparent background, no shadow, no scenery, no text or palette swatches. Pixel art only, hard large square color blocks, no gradients or soft alpha. Preserve full tree with ample transparent margin.
+```
+
+## tree-1
+
+```text
+Use case: stylized-concept. ONE original game tree sprite for a cozy modern coastal village top-down 2D farming game. Image 1 is a style reference (connected large pixel color clusters, modest trunk), not a request for an illustration. True transparent background, no ground/shadow, no lettering, no swatches, no checkerboard. Entire tree centered with generous 12% clear padding. Actual tiny 64x80 logical pixel sprite enlarged with nearest-neighbor: hard LARGE pixel steps, solid flat connected areas, NO gradients, dithering, tiny leaf noise, round individually lit broccoli puffballs, 3D shading, bright glitter spots, bonsai trunks or sprawling roots. 3-5 broad overlapping canopy planes, mostly middle green, warm brighter upper-left planes and deeper green lower-right shadows. Consistent 8-color leaf palette suggested: #285746 #35704a #4b8b4e #66a44f #85b952 #a7cc67 #c6dc87 #dce7aa. Warm wood #65482f #94623c #be8c53. Greens lively warm sunny but not neon, clear darker lower edge. Trunk 5-7 logical pixels wide, modest taper, base only a little wider than trunk, no exposed root star. Camera angle top-down RPG showing tree top and front, not isometric. Subject: one lighter open-crown deciduous village tree. Taller irregular pear-shaped crown with two small open gaps near lower foliage, one plain Y branch visible beneath leaves. Not a huge old oak. Preserve broad connected leaf mass; asymmetry differentiates it from a full oval broadleaf. Lower trunk visible about 22% total height. Only ONE tree.
+```
+
+## tree-2
+
+```text
+Use case: stylized-concept. ONE original game tree sprite for a cozy modern coastal village top-down 2D farming game. Image 1 is a style reference (connected large pixel color clusters, modest trunk), not a request for an illustration. True transparent background, no ground/shadow, no lettering, no swatches, no checkerboard. Entire tree centered with generous 12% clear padding. Actual tiny 64x80 logical pixel sprite enlarged with nearest-neighbor: hard LARGE pixel steps, solid flat connected areas, NO gradients, dithering, tiny leaf noise, round individually lit broccoli puffballs, 3D shading, bright glitter spots, bonsai trunks or sprawling roots. 3-5 broad overlapping canopy planes, mostly middle green, warm brighter upper-left planes and deeper green lower-right shadows. Consistent 8-color leaf palette suggested: #285746 #35704a #4b8b4e #66a44f #85b952 #a7cc67 #c6dc87 #dce7aa. Warm wood #65482f #94623c #be8c53. Greens lively warm sunny but not neon, clear darker lower edge. Trunk 5-7 logical pixels wide, modest taper, base only a little wider than trunk, no exposed root star. Camera angle top-down RPG showing tree top and front, not isometric. Subject: one modest coastal pine shaped by sea breeze, slightly leaning trunk and 3 broad flattened connected canopy tiers forming an off-center umbrella. Restrained natural bend, NOT twisted bonsai. More horizontal crown than ordinary broadleaf, slightly darker green using same palette. Sparse branch visibility only just under canopy, no needle texture. Mature roadside pine rather than ornamental sculpture. Only ONE tree.
+```
+
+## tree-3
+
+```text
+Use case: stylized-concept. ONE original game tree sprite for a cozy modern coastal village top-down 2D farming game. Image 1 is a style reference (connected large pixel color clusters, modest trunk), not a request for an illustration. True transparent background, no ground/shadow, no lettering, no swatches, no checkerboard. Entire tree centered with generous 12% clear padding. Actual tiny 64x80 logical pixel sprite enlarged with nearest-neighbor: hard LARGE pixel steps, solid flat connected areas, NO gradients, dithering, tiny leaf noise, round individually lit broccoli puffballs, 3D shading, bright glitter spots, bonsai trunks or sprawling roots. 3-5 broad overlapping canopy planes, mostly middle green, warm brighter upper-left planes and deeper green lower-right shadows. Consistent 8-color leaf palette suggested: #285746 #35704a #4b8b4e #66a44f #85b952 #a7cc67 #c6dc87 #dce7aa. Warm wood #65482f #94623c #be8c53. Greens lively warm sunny but not neon, clear darker lower edge. Trunk 5-7 logical pixels wide, modest taper, base only a little wider than trunk, no exposed root star. Camera angle top-down RPG showing tree top and front, not isometric. Subject: one small round-crown citrus fruit tree, tidy coherent round oval leafy canopy with four broad shade planes, thin straight trunk. Exactly 5 small golden-orange fruits, separated on canopy; fruits tiny restrained 3-4 logical pixel accents, not shiny giant balls. Additional fruit palette #b87528 #e7ae3e #f5d77b, no white sparkle. Lower trunk about22% height, no roots. Only ONE tree.
+```
+

@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "checks": {
+    "asymmetric_porch": true,
+    "patched_sail": true,
+    "sail_canopy": true,
+    "fish_marker": true,
+    "tidal_steps": true,
+    "tide_gauge": true,
+    "boat_fenders": true,
+    "windswept_foliage": true,
+    "finite_geometry": true,
+    "pot_rims_follow_pots": true,
+    "environment_triangle_guardrail": true,
+    "preserved_22_bone_rig": true,
+    "three_character_actions": true,
+    "walk_run_sampled_motion": true,
+    "no_placeholder_character": true,
+    "no_missing_external_images": true
+  },
+  "statistics": {
+    "environment_triangles": 68603,
+    "character_triangles": 56916,
+    "mesh_objects": 847,
+    "sampled_shin_rotation_degrees": {
+      "Walk": 45.92174211092147,
+      "Run": 76.99685228714797
+    },
+    "used_materials": 54
+  },
+  "scope": "Blender saved-scene structure; not Unity or performance validation"
+}
