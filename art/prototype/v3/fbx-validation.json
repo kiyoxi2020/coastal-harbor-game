@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "checks": {
+    "V3_PorchRoof": true,
+    "V3_SailCanopy": true,
+    "V3_SailPatch": true,
+    "V3_TideStep": true,
+    "V3_TideGauge": true,
+    "V3_BoatFender": true,
+    "all_meshes_nonempty": true,
+    "all_meshes_materialed": true,
+    "finite_geometry": true,
+    "environment_only": true,
+    "object_count_roundtrip": true,
+    "triangles_roundtrip": true
+  },
+  "mesh_count": 769,
+  "triangles": 68603,
+  "scope": "FBX environment geometry readback; not Unity integration"
+}
