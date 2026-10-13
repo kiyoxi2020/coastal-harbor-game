@@ -162,7 +162,7 @@ func _title() -> void:
 	new_button.disabled = status.get("future",false)
 	_button(surface,"设置",Rect2(76,456,142,50),show_page.bind("settings"),"settings")
 	_button(surface,"退出",Rect2(232,456,144,50),world.request_exit,"quit")
-	_label(surface,status.message+"\n\n单人原型 · v0.5.1\n自动保存 / 单存档槽\n交易、种植和日循环尚未开放",Rect2(580,320,470,208),24)
+	_label(surface,status.message+"\n\n单人原型 · v0.5.2\n自动保存 / 单存档槽\n交易、种植和日循环尚未开放",Rect2(580,320,470,208),24)
 	_portrait(surface,Vector2(860,154),144)
 
 func new_game_dialog() -> void:

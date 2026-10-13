@@ -72,9 +72,9 @@ func run() -> void:
 		check("root_position_%d" % i,trees[i].position == scene.data.TREES[i])
 		check("integer_tree_scale_%d" % i,trees[i].get_child(0).scale == Vector2.ONE)
 		check("tree_sorted_%d" % i,trees[i].get_parent() == scene.sort_layer)
-	var terrain: Node = scene.get_node_or_null("Terrain")
+	var terrain: Node = scene.get_node_or_null("HarborExterior/Terrain")
 	check("named_terrain",terrain != null)
-	var water: Node = scene.get_node_or_null("Terrain/WaterDetail")
+	var water: Node = scene.get_node_or_null("HarborExterior/Terrain/WaterDetail")
 	check("water_layer",water != null)
 	if water != null:
 		check("frame_four_steps",water.frame_at(0.0,0) == 0 and water.frame_at(0.25,0) == 1 and water.frame_at(0.5,0) == 2 and water.frame_at(0.75,0) == 3)
@@ -88,7 +88,7 @@ func run() -> void:
 		check("water_beyond_beach",water.is_open_water(Vector2(296,375)))
 		check("no_foam_outside_canvas",not water.is_open_water(Vector2(640,340)) and not water.is_open_water(Vector2(-1,340)))
 	var before: Array = scene.data.blockers()
-	# Two side-water rectangles are now split around the accessible beach.
-	check("beach_blocker_count",before.size() == 20)
+	# The house rectangle is now split in three around a separately colliding door.
+	check("beach_blocker_count",before.size() == 22)
 	check("unchanged_spawn",scene.data.SPAWN == Vector2(330,250))
 	finish()

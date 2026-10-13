@@ -17,6 +17,9 @@ func _process(_delta: float) -> void:
 func update_position() -> void:
 	if not is_instance_valid(target):
 		return
+	if target.get("world") != null and target.world.foraging.location=="house":
+		position=Vector2(320,200)
+		return
 	var half_view := get_viewport_rect().size / zoom / 2.0
 	var bounds: Rect2 = Data.WORLD_BOUNDS
 	var desired := target.position + Vector2(0,-40)
