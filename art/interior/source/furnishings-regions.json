@@ -1,0 +1,19 @@
+{
+  "source": "art/interior/source/furnishings-atlas.png",
+  "source_size": [1254, 1254],
+  "regions": {
+    "nightstand": {"box": [85, 60, 240, 325], "logical_size": [24, 42]},
+    "kitchen": {"box": [315, 75, 730, 325], "logical_size": [80, 48]},
+    "table": {"box": [749, 120, 998, 319], "logical_size": [48, 38]},
+    "chair": {"box": [1045, 105, 1185, 317], "logical_size": [18, 29]},
+    "chest": {"box": [40, 444, 297, 635], "logical_size": [32, 24]},
+    "shelf": {"box": [330, 455, 653, 635], "logical_size": [40, 22]},
+    "photo": {"box": [735, 475, 915, 625], "logical_size": [20, 18]},
+    "plant": {"box": [1000, 365, 1204, 655], "logical_size": [24, 40]},
+    "window": {"box": [33, 674, 309, 912], "logical_size": [48, 42]},
+    "rug": {"box": [320, 705, 688, 915], "logical_size": [72, 48]},
+    "bed_rug": {"box": [705, 758, 950, 883], "logical_size": [48, 24]},
+    "floor": {"box": [48, 940, 300, 1190], "logical_size": [64, 64], "opaque_texture": true},
+    "wall": {"box": [362, 940, 616, 1188], "logical_size": [64, 64], "opaque_texture": true}
+  }
+}
