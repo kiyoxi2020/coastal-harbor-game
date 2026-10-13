@@ -1,6 +1,6 @@
 # Cottage pilot asset normalization report
 
-Status: DONE_WITH_CONCERNS. This prepares and validates the four pilot assets only. No room scene, door behavior, or game package was changed.
+Status: DONE. This prepares and validates the four pilot assets only. No room scene, door behavior, or game package was changed.
 
 ## Method and registration
 
@@ -28,10 +28,11 @@ Every output has binary alpha only. The four PNGs and `pilot.json` are byte-iden
 - Godot missing-manifest RED: `/Applications/Godot.app/Contents/MacOS/Godot --headless --log-file /private/tmp/cottage-test-red.log --path godot2d --script res://tests/test_cottage_assets.gd -- --manifest res://assets/house-interior/absent.json` exited 1 with `FAIL missing pilot manifest`.
 - Godot import GREEN: `... --headless --log-file /private/tmp/cottage-import.log --path godot2d --editor --import` exited 0 and imported the four PNGs. It reported the known macOS certificate warning and an editor settings save error outside the sandbox; neither blocked import.
 - Godot validator GREEN: `... --headless --log-file /private/tmp/cottage-test.log --path godot2d --script res://tests/test_cottage_assets.gd` exited 0 with `PASS cottage pilot assets: 4`. The macOS certificate warning remains.
+- Preview scale RED: the validator failed on `Nonexistent function 'player_preview_scale'` before the preview normalization helper was added. GREEN: it now checks that the player atlas frame renders at 96 screen pixels, matching the runtime 48-pixel sprite scale with 2× camera zoom.
 - Graphical preview: `/Applications/Godot.app/Contents/MacOS/Godot --log-file /private/tmp/cottage-preview-gui.log --path godot2d --script res://tests/cottage_asset_preview.gd -- --output /private/tmp/cottage-asset-preview.png` exited 0. Screenshot: `/private/tmp/cottage-asset-preview.png`. Godot's headless dummy renderer cannot produce a viewport image, so graphical execution was used.
 
-## Review concern and plan deviation
+## Preview correction and plan deviation
 
-At 2× world scale, the current `atlas.gd` player frame is approximately 313×313 source pixels, visually much larger than the 48×80 bed and 30×59 door. The screenshot makes this clear. Runtime integration should choose placement and player scaling deliberately. The closed visible leaf is 26×49 rather than the approximate 30×44 target; preserving aspect and using one transform for all door poses kept their shapes and relative widths intact.
+The first preview incorrectly displayed the raw player atlas frame at 2×. The runtime instead scales that frame to 48 world pixels in `player.gd`, then the camera shows it at 2×. The corrected preview applies the same effective `96 / frame_width` scale, aligns the player's feet and asset floor anchors on a shared baseline, and fills the 1280×720 viewport. The corrected screenshot shows a coherent pilot scale. The closed visible leaf is 26×49 rather than the approximate 30×44 target; preserving aspect and using one transform for all door poses kept their shapes and relative widths intact.
 
 The initial source-only pilot plan was amended with user-authorized alpha cleanup, nearest pixel reduction, shared door canvas registration, mirrored processed copies, richer manifest metadata, and a rendering preview. This report covers the pilot only.
