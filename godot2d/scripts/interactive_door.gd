@@ -69,12 +69,12 @@ func set_pose(value: int) -> void:
 
 func _draw() -> void:
 	if inside:
-		# A low south-wall cutaway: the source leaf tint is reused, not its tall silhouette.
+		# Use the same registered waist-height strip in each pose, at native pixel scale.
+		# It retains the rail and handle without laying a tall front-facing door on the floor.
 		draw_rect(Rect2(-19,-9,38,12),Color("264d51"))
 		draw_rect(Rect2(-15,-7,30,8),Color("172e34"))
-		var leaf_width: float=[30.0,15.0,3.0][pose]
-		if texture:
-			draw_texture_rect_region(texture,Rect2(-15,-7,leaf_width,8),Rect2(348,383,61,81))
+		if pilot_frames.size()==3 and pilot_frames[pose]:
+			draw_texture_rect_region(pilot_frames[pose],Rect2(-15,-7,30,8),Rect2(0,29,30,8))
 		draw_rect(Rect2(-19,0,38,3),Color("d6c7a0"))
 		return
 	var width:=32.0 if inside else 22.0
