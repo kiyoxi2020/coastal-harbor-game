@@ -39,6 +39,7 @@ func set_doorway_hidden(value: float) -> void:
 
 func reset_doorway_visual() -> void:
 	set_doorway_hidden(0)
+	doorway_material.set_shader_parameter("aperture_top",-1000000.0)
 	sprite.z_index=0
 	modulate=Color.WHITE
 	sprite.modulate=Color.WHITE

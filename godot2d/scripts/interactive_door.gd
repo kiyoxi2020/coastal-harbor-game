@@ -48,6 +48,9 @@ func can_interact(point: Vector2) -> bool:
 	var lateral:=offset.dot(Vector2(entrance_normal.y,-entrance_normal.x))
 	return depth>=0 and depth<=56 and absf(lateral)<=24
 
+func aperture_top() -> float:
+	return global_position.y+(pilot_frame_top+4 if inside else -29.0)
+
 func set_pose(value: int) -> void:
 	pose=clampi(value,0,2)
 	if is_instance_valid(collision): collision.set_deferred("disabled",pose==2)
