@@ -7,6 +7,8 @@ static func frame_at(seconds: float, phase: int) -> int:
 	return (floori(seconds*4.0)+phase)%4
 
 static func is_open_water(point: Vector2) -> bool:
+	if preload("res://scripts/harbor_data.gd").BEACH.has_point(point):
+		return false
 	if point.x < 0 or point.x >= 640 or point.y < 292 or point.y >= 416:
 		return false
 	if Rect2(403,272,74,128).has_point(point):
@@ -53,4 +55,3 @@ func _draw() -> void:
 			var phase := frame_at(elapsed,(y/3)%4)
 			for j in range(5):
 				pixel(Vector2(x-3+j,y+phase%2),Color("a9dcd3"))
-

@@ -55,7 +55,17 @@ func _draw() -> void:
 		draw_rect(Rect2(x+1,288,14,3),Color("527e76"))
 		if x%48 == 0:
 			draw_rect(Rect2(x+4,287,3,2),Color("749568"))
-	# Five accessible dry tidal steps, then a water blocker.
+	# Low-tide pocket: quiet dry sand, damp rim and broken shoreline.
+	var beach: Rect2 = preload("res://scripts/harbor_data.gd").BEACH
+	draw_rect(beach,Color("bda980"))
+	draw_rect(Rect2(228,317,136,45),Color("dfc798"))
+	draw_rect(Rect2(232,319,128,37),Color("ebd7ab"))
+	for i in range(34):
+		var p := Vector2(233+(i*37)%126,322+(i*17)%32)
+		draw_rect(Rect2(p,Vector2(2+i%2,1)),Color("cbb58a") if i%3 else Color("f6e6bb"))
+	for x in range(225,367,11):
+		draw_rect(Rect2(x,366,6,1),Color("e7ead1"))
+	# Five dry steps connect the promenade to the low-tide beach.
 	for step in range(5):
 		draw_rect(Rect2(272,272+step*9,48,9),Color("96aba0"))
 		draw_rect(Rect2(273,272+step*9,46,5),Color("d8d9bd"))

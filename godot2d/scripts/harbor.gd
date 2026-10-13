@@ -5,6 +5,8 @@ const Art = preload("res://scripts/atlas.gd")
 var player: CharacterBody2D
 var sort_layer: Node2D
 var hud: CanvasLayer
+var foraging = preload("res://scripts/foraging_state.gd").new()
+var pickup_nodes: Dictionary = {}
 
 func _ready() -> void:
 	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
@@ -56,8 +58,25 @@ func _ready() -> void:
 	hud = CanvasLayer.new()
 	hud.set_script(load("res://scripts/hud.gd"))
 	add_child(hud)
+	for entry in data.pickups():
+		var pickup := Node2D.new()
+		pickup.set_script(preload("res://scripts/forage_pickup.gd"))
+		pickup.kind = entry.kind
+		pickup.position = entry.point
+		pickup.name = entry.id
+		sort_layer.add_child(pickup)
+		pickup_nodes[entry.id] = pickup
+	foraging.changed.connect(func(): hud.update_inventory(foraging.counts))
+	hud.update_inventory(foraging.counts)
+	hud.show_toast("低潮赶海：沿台阶下沙滩。暂不保存，重开重置。",8.0)
 	# Explicit opt-in integration harness also runs inside an exported app.
-	if OS.get_cmdline_user_args().has("--verify-interaction"):
+	if get_meta("skip_verification",false):
+		return
+	if OS.get_cmdline_user_args().has("--verify-foraging"):
+		var runner := Node.new()
+		runner.set_script(load("res://tests/foraging_driver.gd"))
+		add_child(runner)
+	elif OS.get_cmdline_user_args().has("--verify-interaction"):
 		var runner := Node.new()
 		runner.set_script(load("res://tests/interaction_driver.gd"))
 		add_child(runner)
@@ -103,14 +122,41 @@ func nearest_location(point: Vector2) -> Dictionary:
 			nearest = location
 	return nearest
 
+func nearest_pickup(point: Vector2) -> Dictionary:
+	if not data.BEACH.has_point(point):
+		return {}
+	var nearest: Dictionary = {}
+	var distance := 24.0
+	for entry in data.pickups():
+		if foraging.collected.has(entry.id):
+			continue
+		var gap := point.distance_to(entry.point)
+		if gap <= 24.0 and (nearest.is_empty() or gap < distance):
+			distance = gap
+			nearest = entry
+	return nearest
+
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("inspect"):
 		if hud.panel.visible:
 			hud.dismiss()
 		else:
-			hud.show_location(nearest_location(player.position))
+			var target := nearest_pickup(player.position)
+			if not target.is_empty():
+				if foraging.collect(target.id,target.kind):
+					pickup_nodes[target.id].hide()
+					hud.show_toast(data.ITEM_NAMES[target.kind]+" +1")
+			else:
+				hud.show_location(nearest_location(player.position))
 	if Input.is_action_just_pressed("reset"):
 		player.position = data.SPAWN
 		player.velocity = Vector2.ZERO
 		hud.dismiss()
 	hud.update_location(nearest_location(player.position))
+	var target := nearest_pickup(player.position)
+	for id in pickup_nodes:
+		pickup_nodes[id].highlighted = not hud.panel.visible and target.get("id","") == id
+	if not target.is_empty():
+		hud.prompt.text = "[ E ] 拾取" + data.ITEM_NAMES[target.kind]
+	elif foraging.collected.size() == data.pickups().size() and nearest_location(player.position).is_empty():
+		hud.prompt.text = "今日赶海收获已集齐；市集交易将在后续版本开放。"

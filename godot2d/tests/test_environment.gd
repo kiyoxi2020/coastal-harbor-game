@@ -84,9 +84,11 @@ func run() -> void:
 		check("no_foam_on_land",not water.is_open_water(Vector2(30,240)))
 		check("no_foam_on_pier",not water.is_open_water(Vector2(440,340)))
 		check("no_foam_on_steps",not water.is_open_water(Vector2(296,302)))
-		check("water_below_steps",water.is_open_water(Vector2(296,325)))
+		check("sand_below_steps",not water.is_open_water(Vector2(296,325)))
+		check("water_beyond_beach",water.is_open_water(Vector2(296,375)))
 		check("no_foam_outside_canvas",not water.is_open_water(Vector2(640,340)) and not water.is_open_water(Vector2(-1,340)))
 	var before: Array = scene.data.blockers()
-	check("unchanged_blocker_count",before.size() == 18)
+	# Two side-water rectangles are now split around the accessible beach.
+	check("beach_blocker_count",before.size() == 20)
 	check("unchanged_spawn",scene.data.SPAWN == Vector2(330,250))
 	finish()

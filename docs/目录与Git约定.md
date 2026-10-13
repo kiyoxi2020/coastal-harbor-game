@@ -10,13 +10,13 @@ Git根目录即项目根目录，分支main；只建本地仓库，不配置远�
 
 ## 最新工程
 
-始终修改godot2d，不从历史压缩包覆盖回来。当前生产脚本已与v0.3.1源码包逐字节比对，E查看/继续关闭和tree-set-v4引用保留。环境测试现检查当前树；旧单树25项专项移入archive，现有有效检查为36+44+47+66=193项。
+始终修改godot2d，不从历史压缩包覆盖回来。当前为v0.4.0赶海与背包，E查看/继续关闭和tree-set-v4引用保留，新增E拾取。旧单树专项在archive，当前五组有效检查为36+44+51+67+49=247项。
 
 ## 验证与交付
 
-Godot4.7.1导入godot2d/project.godot，F5运行。命令行可运行tests/test_interaction.gd、test_world.gd、test_tree_set.gd、test_environment.gd。日志写/private/tmp或work。先完成导入再运行测试。
+Godot4.7.1导入godot2d/project.godot，F5运行。命令行可运行tests/test_interaction.gd、test_world.gd、test_tree_set.gd、test_environment.gd、test_foraging.gd。日志用--log-file明确写入/private/tmp或work，避免沙箱下user目录日志访问失败。先完成导入再运行测试。
 
-交付与预览只保留2D和3D入口。更新交付时旧文件移到archive，再将最新版放回稳定目录，勿新增日期版本目录。Mac包仍为v0.3.1运行基线；源码包随本次目录整理更新，测试/文档调整不改变运行逻辑。
+交付与预览只保留2D和3D入口。更新交付时旧文件移到archive，再将最新版放回稳定目录，勿新增日期版本目录。Mac包和源码包必须对应同一当前运行版本，当前为v0.4.0。
 
 Unity已接入的源资产保存在art/prototype/engine-ready和art/characters/returnee/engine-ready；最新Blender场景在art/prototype/v3，尚未接入Unity。历史生成脚本依赖旧场景，留本地不跟踪；Git克隆后可直接编辑当前.blend，不能假定可从旧v2重新生成。Unity/Blender本轮未重建测试。
 
