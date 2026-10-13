@@ -24,6 +24,7 @@ func _ready() -> void:
 	exterior_door.name="ExteriorDoor"
 	exterior_door.position=Room.OUTSIDE_DOOR
 	exterior_door.approach=Room.OUTSIDE_APPROACH
+	exterior_door.entrance_normal=Room.ENTRANCE_NORMAL
 	exterior_door.z_index=0
 	world.sort_layer.add_child(exterior_door)
 	interior=Node2D.new()
@@ -54,6 +55,7 @@ func switch_room(location: String,point: Vector2,transient: bool=false) -> bool:
 	if is_instance_valid(interior): interior.door.set_pose(0)
 	world.player.position=point if transient else safe_position(location,point)
 	world.player.velocity=Vector2.ZERO
+	world.player.reset_doorway_visual()
 	world.hud.dismiss()
 	world.hud.region.text="旧屋 / 海风入窗" if inside else "晴 / 渔港的一天"
 	world.hud.controls.text="WASD / 方向键 移动   E 查看 / 开门   B / Tab 手账   R 回入口" if inside else "WASD / 方向键 移动   E 拾取 / 查看   B / Tab 手账   R 回路口"
@@ -71,12 +73,13 @@ func safe_position(location: String,point: Vector2) -> Vector2:
 		if rect.grow(6).has_point(point): return fallback
 	var door_position: Vector2=Room.DOOR if inside else Room.OUTSIDE_DOOR
 	if inside:
-		if Rect2(Vector2(300,308),Vector2(40,52)).grow(6).has_point(point): return fallback
+		if Rect2(door_position-Vector2(20,16),Vector2(40,40)).has_point(point): return fallback
 	elif Rect2(door_position-Vector2(24,10),Vector2(48,20)).has_point(point): return fallback
 	return point
 func storage_point() -> Vector2:
 	return Room.STORAGE+Vector2(0,24) if world.foraging.location=="house" else world.STORAGE_POINT
 func reset_player() -> void:
+	world.player.reset_doorway_visual()
 	world.player.position=Room.SPAWN if world.foraging.location=="house" else world.data.SPAWN
 	world.player.velocity=Vector2.ZERO
 	world.hud.dismiss()

@@ -27,7 +27,7 @@ func exit_report(value: String) -> void:
 	if value!="Idle": return
 	var saved: Dictionary=scene.save_service.read_save()
 	check("exit_saved_destination",saved.ok and saved.data.location=="house")
-	check("exit_saved_safe_point",saved.ok and saved.data.position==[320.0,300.0])
+	check("exit_saved_safe_point",saved.ok and saved.data.position==[320.0,160.0])
 	write_report()
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -68,7 +68,7 @@ func run() -> void:
 	if OS.get_cmdline_user_args().has("--resume-check"):
 		check("restart",scene.continue_game())
 		check("restart_house",scene.foraging.location=="house")
-		check("restart_position",scene.player.position.distance_to(Vector2(320,300))<1)
+		check("restart_position",scene.player.position.distance_to(Vector2(320,160))<1)
 		check("restart_inventory",scene.foraging.chest.count_item("clam")==1)
 		check("restart_doors_closed",scene.home.active_door().pose==0)
 		await shot("12-restarted")
@@ -113,7 +113,7 @@ func run() -> void:
 	check("reset_locked",scene.player.position.distance_to(scene.data.SPAWN)>10)
 	await wait_door()
 	check("entered",scene.foraging.location=="house")
-	check("indoor_safe",scene.player.position.distance_to(Vector2(320,300))<1)
+	check("indoor_safe",scene.player.position.distance_to(Vector2(320,160))<1)
 	check("outdoor_disabled",home.outdoor.process_mode==Node.PROCESS_MODE_DISABLED and not home.outdoor.visible)
 	check("indoor_enabled",home.interior.visible and home.interior.process_mode!=Node.PROCESS_MODE_DISABLED)
 	check("camera_fixed",scene.get_node("WorldCamera").position==Vector2(320,200))
@@ -122,15 +122,15 @@ func run() -> void:
 	check("no_outdoor_pickups",scene.nearest_pickup(Vector2(244,330)).is_empty())
 	await shot("04-interior")
 	scene.foraging.collect("clam_a","clam")
-	scene.player.position=Vector2(448,316)
+	scene.player.position=Vector2(416,306)
 	await key("inspect")
 	check("inside_storage",scene.journal.mode=="storage")
 	check("store",scene.foraging.bag.transfer_to(scene.foraging.chest,0,1)==1)
 	scene.journal.close_menu()
 	for i in range(3): await get_tree().process_frame
 	await key("reset")
-	check("indoor_reset",scene.player.position.distance_to(Vector2(320,300))<1)
-	scene.player.position=Vector2(144,228)
+	check("indoor_reset",scene.player.position.distance_to(Vector2(320,160))<1)
+	scene.player.position=Vector2(216,240)
 	await key("inspect")
 	check("bed_view",scene.hud.panel.visible and "休息" in scene.hud.description.text)
 	await key("inspect")
@@ -168,6 +168,7 @@ func run() -> void:
 	await wait_door()
 	check("failure_restores_source",scene.foraging.location=="harbor" and scene.player.position==home.exterior_door.approach)
 	check("failure_clears_fade",home.transition.fade.modulate.a==0 and home.exterior_door.pose==0)
+	check("failure_clears_visual",scene.player.doorway_hidden==0 and scene.player.modulate.a==1 and scene.player.z_index==0)
 	home.interior=saved_interior
 	for i in range(3): await get_tree().process_frame
 	var nodes_before:=get_tree().get_node_count()
@@ -177,23 +178,24 @@ func run() -> void:
 		await wait_door()
 	check("20_crossings_no_nodes_leaked",get_tree().get_node_count()==nodes_before)
 	check("20_crossings_inventory",scene.foraging.chest.count_item("clam")==1 and scene.foraging.total_collected==1)
+	check("20_crossings_visual_restored",scene.player.doorway_hidden==0 and scene.player.modulate.a==1 and scene.player.z_index==0)
 	# Real physics: indoor furniture and wall contacts, not only rectangle math.
-	home.switch_room("house",Vector2(144,228))
+	home.switch_room("house",Vector2(216,240))
 	Input.action_press("up")
 	for i in range(45): await get_tree().physics_frame
 	Input.action_release("up")
-	check("bed_blocks",scene.player.position.y>=211)
-	scene.player.position=Vector2(116,228)
+	check("bed_blocks",scene.player.position.y>=227)
+	scene.player.position=Vector2(280,240)
 	Input.action_press("up")
 	for i in range(45): await get_tree().physics_frame
 	Input.action_release("up")
 	check("old_bed_side_walkable",scene.player.position.y<200)
-	scene.player.position=Vector2(540,240)
+	scene.player.position=Vector2(452,240)
 	Input.action_press("right")
 	for i in range(45): await get_tree().physics_frame
 	Input.action_release("right")
-	check("wall_blocks",scene.player.position.x<558)
-	home.switch_room("house",Vector2(320,300))
+	check("wall_blocks",scene.player.position.x<459)
+	home.switch_room("house",Vector2(320,160))
 	check("save_inside",scene.save_progress())
 	scene.return_to_title()
 	check("continue_inside",scene.continue_game() and scene.foraging.location=="house")
@@ -203,7 +205,7 @@ func run() -> void:
 	scene.return_to_title()
 	# Returning to title autosaves: inject the bad fixture after that save.
 	scene.save_service.write_save(bad)
-	check("bad_house_continue",scene.continue_game() and scene.player.position==Vector2(320,300))
+	check("bad_house_continue",scene.continue_game() and scene.player.position==Vector2(320,160))
 	var legacy: Dictionary=scene.foraging.to_data(Vector2(330,250))
 	legacy.version=1
 	legacy.erase("location")
@@ -213,14 +215,14 @@ func run() -> void:
 	fixture.close()
 	check("old_save_continues_outside",scene.continue_game() and scene.foraging.location=="harbor" and scene.player.position==Vector2(330,250))
 	check("old_save_keeps_inventory",scene.foraging.chest.count_item("clam")==1)
-	home.switch_room("house",Vector2(320,300))
+	home.switch_room("house",Vector2(320,160))
 	check("final_indoor_save",scene.save_progress())
 	var normal_save=scene.save_service
 	scene.save_service=load("res://scripts/save_service.gd").new(normal_save.directory+"/progress.json/impossible")
 	check("save_failure_explicit",not scene.save_progress() and scene.save_message!="进度已保存。")
 	scene.save_service=normal_save
 	scene.hud.toast_remaining=0
-	check("bad_position_fallback",home.safe_position("house",Vector2(140,140))==Vector2(320,300))
+	check("bad_position_fallback",home.safe_position("house",Vector2(140,140))==Vector2(320,160))
 	check("bad_outdoor_fallback",home.safe_position("harbor",Vector2(-50,-50))==scene.data.SPAWN)
 	await shot("10-interior-saved")
 	finish()

@@ -2,6 +2,7 @@ extends Node2D
 # Separate interactive body, frame, darkness and leaf. No rotated smooth sprites.
 const CottageArt=preload("res://scripts/cottage_art.gd")
 var inside := false
+var entrance_normal := Vector2.DOWN
 var approach := Vector2.ZERO
 var pose := 0
 var collision: CollisionShape2D
@@ -33,11 +34,19 @@ func _ready() -> void:
 	collision.shape=shape
 	body.add_child(collision)
 	add_child(body)
+	var jamb:=Node2D.new()
+	jamb.set_script(preload("res://scripts/door_jamb.gd"))
+	jamb.width=38.0 if inside else 28.0
+	jamb.height=54.0 if inside else 32.0
+	jamb.z_index=2
+	add_child(jamb)
 	set_pose(0)
 
 func can_interact(point: Vector2) -> bool:
-	var offset:=point-approach
-	return offset.length()<=24 and absf(offset.x)<=16 and (point.y<=position.y-4 if inside else point.y>=position.y+12)
+	var offset:=point-position
+	var depth:=offset.dot(entrance_normal)
+	var lateral:=offset.dot(Vector2(entrance_normal.y,-entrance_normal.x))
+	return depth>=0 and depth<=56 and absf(lateral)<=24
 
 func set_pose(value: int) -> void:
 	pose=clampi(value,0,2)
