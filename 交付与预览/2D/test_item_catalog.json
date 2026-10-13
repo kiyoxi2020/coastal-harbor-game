@@ -1,6 +1,0 @@
-{
-  "passed": true,
-  "count": 8,
-  "scope": "source headless tests",
-  "log": "Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org\n\nERROR: Condition \"ret != noErr\" is true. Returning: \"\"\n   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)\nCATALOG checks=8 passed=true\n"
-}
