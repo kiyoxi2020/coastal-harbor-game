@@ -51,6 +51,14 @@ func run() -> void:
 	check("new_game", scene.start_new_game("海风"))
 	await get_tree().process_frame
 	check("world_resumes", not get_tree().paused)
+	check("pixel_skin", ResourceLoader.exists("res://scripts/ui/pixel_style.gd"))
+	check("bag_icon_exists", scene.hud.get("bag_button") is Button)
+	if not results.bag_icon_exists:
+		finish({})
+		return
+	scene.hud.bag_button.pressed.emit()
+	check("icon_opens_bag", ui.mode == "bag" and get_tree().paused)
+	ui.close_menu()
 	for entry in scene.data.pickups():
 		check("collect_"+entry.id, scene.foraging.collect(entry.id, entry.kind))
 	scene.refresh_pickups()

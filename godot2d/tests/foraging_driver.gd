@@ -105,7 +105,7 @@ func integration() -> void:
 	await press("inspect",40)
 	check("hold_collects_once", scene.foraging.counts.clam == 1 and scene.foraging.collected.size() == 1)
 	check("collected_hidden", not scene.pickup_nodes.clam_a.visible)
-	check("hud_updates", "蛤蜊 1" in scene.hud.inventory.text)
+	check("pickup_feedback", "蛤蜊 +1" in scene.hud.toast.text and scene.hud.bag_button != null)
 	await press("reset")
 	check("reset_keeps_loot", scene.foraging.counts.clam == 1 and scene.player.position.distance_to(scene.data.SPAWN) < 1)
 	for entry in scene.data.pickups():

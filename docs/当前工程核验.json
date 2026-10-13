@@ -1,5 +1,5 @@
 {
-  "version": "0.5.0",
+  "version": "0.5.1",
   "internal_resolution": [
     1280,
     720
@@ -11,9 +11,9 @@
     640,
     416
   ],
-  "source_checks": 382,
+  "source_checks": 386,
   "source_passed": true,
-  "export_checks": 49,
+  "export_checks": 52,
   "restart_checks": 8,
   "export_passed": true,
   "restart_passed": true,
@@ -29,7 +29,7 @@
   "apple_notarized": false,
   "windows_intel_tested": false,
   "player_save_untouched": true,
-  "screenshots_scope": "v0.5.0 exported Mac app; all 1280x720",
+  "screenshots_scope": "v0.5.1 exported Mac app; all 1280x720",
   "limitations": [
     "No trading, planting, daily refresh, quests or music tracks",
     "Legacy scene tests deliberately run without persistence; journal tests use isolated temporary saves",
