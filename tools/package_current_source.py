@@ -1,10 +1,10 @@
-"""Package only Git-tracked current 2D sources. Run from any directory."""
+"""Package current non-ignored 2D sources, including new unstaged files."""
 from pathlib import Path
 from zipfile import ZipFile, ZIP_DEFLATED
 import subprocess,hashlib,json,re
 root=Path(__file__).resolve().parents[1]
 delivery=root/"交付与预览/2D"
-names=subprocess.check_output(["git","ls-files","-z"],cwd=root).decode().split("\0")[:-1]
+names=sorted(set(subprocess.check_output(["git","ls-files","--cached","--others","--exclude-standard","-z"],cwd=root).decode().split("\0")[:-1]))
 selected=[n for n in names if n.startswith(("godot2d/","art/godot2d/","docs/")) or n=="沿海小镇复兴-游戏设计简稿.md"]
 assert "godot2d/scripts/harbor.gd" in selected
 assert not any("tree-study-v3" in n or "test_tree_study" in n for n in selected)
@@ -22,7 +22,7 @@ with ZipFile(path) as z:
 report_path=delivery/"package-verification.json"
 report=json.loads(report_path.read_text())
 report["source_files_matched"]=count
-report["source_scope"]="current Git-tracked 2D sources only; retired tree studies removed"
+report["source_scope"]="current non-ignored 2D working sources, including new unstaged files"
 report[path.name]={"bytes":path.stat().st_size,"sha256":hashlib.sha256(path.read_bytes()).hexdigest()}
 report_path.write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n")
 print("Verified current source ZIP:",count,"files,",path.stat().st_size,"bytes")

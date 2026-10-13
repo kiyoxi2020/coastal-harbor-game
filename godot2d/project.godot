@@ -16,12 +16,13 @@ config/features=PackedStringArray("4.7", "GL Compatibility")
 
 [display]
 
-window/size/viewport_width=640
-window/size/viewport_height=416
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/size/window_width_override=1280
-window/size/window_height_override=832
+window/size/window_height_override=720
+window/size/mode=0
 window/stretch/mode="viewport"
-window/stretch/scale_mode="integer"
+window/stretch/scale_mode="fractional"
 
 [rendering]
 

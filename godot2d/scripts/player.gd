@@ -26,6 +26,11 @@ func _draw() -> void:
 	draw_rect(Rect2(-6,-3,12,4),Color(0.08,0.22,0.22,0.24))
 
 func _physics_process(_delta: float) -> void:
+	var world = get_parent().get_parent()
+	if world.get("release_input") == true:
+		velocity = Vector2.ZERO
+		sprite.stop()
+		return
 	var direction := Input.get_vector("left","right","up","down")
 	if direction != Vector2.ZERO:
 		if abs(direction.x) > abs(direction.y):

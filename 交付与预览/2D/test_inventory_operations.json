@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "count": 40,
+  "scope": "source headless tests",
+  "log": "Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org\n\nERROR: Condition \"ret != noErr\" is true. Returning: \"\"\n   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)\nPASS api_move_slot\nPASS api_split_stack\nPASS api_organize\nPASS api_discard\nPASS api_transfer_to\nPASS api_deposit_matching\nPASS move_empty\nPASS split\nPASS split_occupied_rejected\nPASS split_whole_rejected\nPASS split_zero_rejected\nPASS merge\nPASS swap\nPASS invalid_indices\nPASS same_slot\nPASS invalid_unchanged\nPASS organize\nPASS sort_and_conserve\nPASS organize_noop\nPASS discard_requires_confirmation\nPASS discard_confirmed\nPASS over_discard_rejected\nPASS protected\nPASS partial_transfer\nPASS transfer_conserved\nPASS observer_sees_consistent_total\nPASS full_transfer_rejected\nPASS self_transfer_rejected\nPASS invalid_transfer\nPASS transfer_back\nPASS deposit_matching\nPASS only_existing_kinds\nPASS empty_source_clean\nPASS self_deposit\nPASS merge_remainder\nPASS full_merge_noop\nPASS empty_ops\nPASS null_target\nPASS 1000_operations_conserve_each_kind\nPASS 1000_operations_valid_slots\nOPERATIONS checks=40 passed=true\n"
+}
