@@ -57,6 +57,53 @@ func run() -> void:
 		for lateral in [-24, 0, 24]:
 			check("outside_range_%d_%d" % [depth, lateral], door.can_interact(door.position + door.entrance_normal * depth + Vector2(lateral, 0)))
 	check("outside_back_rejected", not door.can_interact(door.position - door.entrance_normal))
+	player.position = door.position + door.entrance_normal * 24
+	var outside_closed_hit = player.move_and_collide(-door.entrance_normal * 36)
+	check("outside_closed_leaf_blocks", outside_closed_hit != null and outside_closed_hit.get_collider() == door.body)
+	var outside_jambs = door.get_node_or_null("JambCollision")
+	check("outside_fixed_jambs", outside_jambs is StaticBody2D and outside_jambs.get_child_count() == 2)
+	door.set_pose(2)
+	await physics_frame
+	await physics_frame
+	player.position = door.position + door.entrance_normal * 24
+	check("outside_open_center_walkable", player.move_and_collide(-door.entrance_normal * 36) == null)
+	for lateral in [-8, 8]:
+		player.position = door.position + door.entrance_normal * 24 + Vector2(lateral, 0)
+		var outside_jamb_hit = player.move_and_collide(-door.entrance_normal * 36)
+		check("outside_open_jamb_blocks_%d" % lateral, outside_jamb_hit != null and outside_jamb_hit.get_collider() == outside_jambs)
+	if DisplayServer.get_name() != "headless": await check_registered_leaf_render()
 	print("SOUTH_DOOR failures=", failures)
 	scene.queue_free()
 	quit(1 if failures else 0)
+
+func check_registered_leaf_render() -> void:
+	var viewport := SubViewport.new()
+	viewport.size = Vector2i(96, 96)
+	viewport.transparent_bg = true
+	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	root.add_child(viewport)
+	var leaf = Node2D.new()
+	leaf.set_script(preload("res://scripts/interactive_door.gd"))
+	leaf.inside = true
+	leaf.position = Vector2(48, 48)
+	viewport.add_child(leaf)
+	await process_frame
+	await RenderingServer.frame_post_draw
+	var before: Color = viewport.get_texture().get_image().get_pixel(48, 44)
+	var image := Image.create(30, 59, false, Image.FORMAT_RGBA8)
+	image.fill(Color.MAGENTA)
+	leaf.pilot_frames[0] = ImageTexture.create_from_image(image)
+	leaf.queue_redraw()
+	await process_frame
+	await RenderingServer.frame_post_draw
+	var after: Color = viewport.get_texture().get_image().get_pixel(48, 44)
+	check("registered_leaf_texture_used", before != after and after.r > 0.8 and after.b > 0.8 and after.g < 0.3)
+	leaf.pilot_frames[0] = preload("res://assets/house-interior/door-closed.png")
+	if OS.get_cmdline_user_args().has("--capture-door-poses"):
+		for pose in [0, 1, 2]:
+			leaf.set_pose(pose)
+			await process_frame
+			await RenderingServer.frame_post_draw
+			var path := "/private/tmp/coastal-south-door-pose-%d.png" % pose
+			check("capture_pose_%d" % pose, viewport.get_texture().get_image().save_png(path) == OK)
+	viewport.queue_free()
