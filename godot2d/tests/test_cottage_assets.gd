@@ -123,5 +123,13 @@ func _initialize() -> void:
 		printerr("FAIL door pose widths or closed leaf")
 		quit(1)
 		return
+	var preview_script = load("res://tests/cottage_asset_preview.gd")
+	var atlas_script = load("res://scripts/atlas.gd")
+	var frame_width: float = atlas_script.player_frames().get_frame_texture("south", 0).get_width()
+	var preview_scale: float = preview_script.player_preview_scale(frame_width)
+	if not is_equal_approx(frame_width * preview_scale, 96.0) or not is_equal_approx(preview_scale, 2.0 * 48.0 / frame_width):
+		printerr("FAIL preview player scale")
+		quit(1)
+		return
 	print("PASS cottage pilot assets: 4")
 	quit(0)
