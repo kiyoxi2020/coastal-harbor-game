@@ -15,13 +15,15 @@ func _read(path: String):
 
 func read_save() -> Dictionary:
 	var main = _read(directory.path_join("progress.json"))
-	if main is Dictionary and main.get("version",1) != 1:
+	if main is Dictionary and main.get("version",1) != 1 and main.get("version",1) != State.SAVE_VERSION:
 		return {"ok":false, "future":true, "message":"存档版本不兼容，已保护原文件。"}
-	if State.valid_data(main):
-		return {"ok":true, "recovered":false, "data":main, "message":""}
+	var migrated: Dictionary = State.migrate_data(main)
+	if not migrated.is_empty():
+		return {"ok":true, "recovered":false, "data":migrated, "message":""}
 	var backup = _read(directory.path_join("progress.backup.json"))
-	if State.valid_data(backup):
-		return {"ok":true, "recovered":true, "data":backup, "message":"主存档异常，已恢复上一份备份。"}
+	migrated = State.migrate_data(backup)
+	if not migrated.is_empty():
+		return {"ok":true, "recovered":true, "data":migrated, "message":"主存档异常，已恢复上一份备份。"}
 	return {"ok":false, "future":false, "message":"尚无有效存档。" if not has_files() else "存档与备份均无法读取，原文件已保留。"}
 
 func has_files() -> bool:
@@ -29,7 +31,8 @@ func has_files() -> bool:
 
 func write_save(value: Dictionary) -> bool:
 	last_error = ""
-	if not State.valid_data(value):
+	value = State.migrate_data(value)
+	if value.is_empty():
 		last_error = "进度校验失败，尚未保存。"
 		return false
 	if read_save().get("future",false):
