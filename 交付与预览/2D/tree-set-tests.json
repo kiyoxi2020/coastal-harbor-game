@@ -8,7 +8,6 @@
 		"canvas_1": true,
 		"canvas_2": true,
 		"canvas_3": true,
-		"collisions": true,
 		"exists_0": true,
 		"exists_1": true,
 		"exists_2": true,
@@ -46,6 +45,11 @@
 		"size_2": true,
 		"size_3": true,
 		"spawn": true,
+		"tree_collision_(308.0, 110.0)": true,
+		"tree_collision_(40.0, 225.0)": true,
+		"tree_collision_(46.0, 128.0)": true,
+		"tree_collision_(568.0, 184.0)": true,
+		"tree_collision_(614.0, 114.0)": true,
 		"y_sort": true
 	},
 	"passed": true

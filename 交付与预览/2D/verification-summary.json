@@ -1,0 +1,16 @@
+{
+  "version": "0.4.0",
+  "date": "2026-10-13",
+  "clean_source_checks": 247,
+  "clean_source_passed": true,
+  "export_render_checks": 51,
+  "export_render_passed": true,
+  "method": "Git-index-matched source only, empty import cache; exported macOS app real rendered foraging harness",
+  "visual_review": "source before/after screenshots inspected; final export screenshots delivered",
+  "limitations": [
+    "No saving, trading, timed tides or day cycle",
+    "M4 macOS only tested; no Windows or Intel validation",
+    "No Apple notarization"
+  ],
+  "environment_note": "Restricted headless process logs a macOS system-certificate warning; tests pass. Log-file explicitly targets /private/tmp to avoid user-log crash."
+}

@@ -4,7 +4,7 @@
 
 ## 开发与查看
 
-- [当前2D工程](godot2d/project.godot)：Godot4.7.1，v0.3.1功能基线，E查看／再次E关闭，统一树木美术。
+- [当前2D工程](godot2d/project.godot)：Godot4.7.1，v0.4.0低潮赶海，E拾取／查看／再次E关闭，三种海产与背包计数。
 - [最新2D交付](交付与预览/2D/README.md)：Mac试玩、源码包、截图和报告。
 - [最新3D交付](交付与预览/3D/README.md)：Unity动画试玩与最新Blender建模，二者阶段不同，不混称已集成。
 - [设计简稿](沿海小镇复兴-游戏设计简稿.md) · [目录与Git约定](docs/目录与Git约定.md)。

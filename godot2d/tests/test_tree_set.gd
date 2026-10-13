@@ -42,7 +42,9 @@ func run() -> void:
 		check("root_%d"%i,node.position==scene.data.TREES[i])
 		check("native_%d"%i,sprite.scale==Vector2.ONE and sprite.position==Vector2(0,-46))
 	check("y_sort",scene.sort_layer.y_sort_enabled)
-	check("collisions",scene.data.blockers().size()==18)
+	# Tree blockers stay present even though the beach adds two water segments.
+	for at in scene.data.TREES:
+		check("tree_collision_"+str(at),scene.data.blockers().has(Rect2(at-Vector2(5,5),Vector2(10,8))))
 	check("spawn",scene.data.SPAWN==Vector2(330,250))
 	DirAccess.make_dir_recursive_absolute("res://verification-tree-v4")
 	var f := FileAccess.open("res://verification-tree-v4/tests.json",FileAccess.WRITE)

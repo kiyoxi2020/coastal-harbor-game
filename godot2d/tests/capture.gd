@@ -60,6 +60,19 @@ func run() -> void:
 	await walk_to(Vector2(296,250))
 	await walk_to(Vector2(296,302))
 	await shot("04-tidal-steps")
+	await walk_to(Vector2(296,330))
+	await walk_to(Vector2(244,330))
+	await shot("09-foraging-before")
+	for entry in scene.data.pickups():
+		await walk_to(entry.point)
+		Input.action_press("inspect")
+		for i in range(3):
+			await physics_frame
+		Input.action_release("inspect")
+		for i in range(3):
+			await physics_frame
+	await shot("10-foraging-complete")
+	await walk_to(Vector2(296,330))
 	await walk_to(Vector2(296,250))
 	await walk_to(Vector2(296,194))
 	await walk_to(Vector2(226,194))
@@ -80,5 +93,5 @@ func run() -> void:
 	for result in route_results:
 		passed = passed and result.reached
 	var report = FileAccess.open(output_dir.path_join("render-route.json"),FileAccess.WRITE)
-	report.store_string(JSON.stringify({"passed":passed,"route":route_results,"screenshots":8,"occlusion_positions":"controlled teleport for visual review","renderer":RenderingServer.get_current_rendering_method()},"\t"))
+	report.store_string(JSON.stringify({"passed":passed,"route":route_results,"screenshots":10,"occlusion_positions":"controlled teleport for visual review","renderer":RenderingServer.get_current_rendering_method()},"\t"))
 	quit(0 if passed else 1)

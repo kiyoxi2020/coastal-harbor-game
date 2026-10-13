@@ -55,6 +55,69 @@
 		{
 			"destination": [
 				296.0,
+				330.0
+			],
+			"reached": true
+		},
+		{
+			"destination": [
+				244.0,
+				330.0
+			],
+			"reached": true
+		},
+		{
+			"destination": [
+				244.0,
+				330.0
+			],
+			"reached": true
+		},
+		{
+			"destination": [
+				294.0,
+				330.0
+			],
+			"reached": true
+		},
+		{
+			"destination": [
+				344.0,
+				330.0
+			],
+			"reached": true
+		},
+		{
+			"destination": [
+				244.0,
+				353.0
+			],
+			"reached": true
+		},
+		{
+			"destination": [
+				294.0,
+				353.0
+			],
+			"reached": true
+		},
+		{
+			"destination": [
+				344.0,
+				353.0
+			],
+			"reached": true
+		},
+		{
+			"destination": [
+				296.0,
+				330.0
+			],
+			"reached": true
+		},
+		{
+			"destination": [
+				296.0,
 				250.0
 			],
 			"reached": true
@@ -102,5 +165,5 @@
 			"reached": true
 		}
 	],
-	"screenshots": 8
+	"screenshots": 10
 }
