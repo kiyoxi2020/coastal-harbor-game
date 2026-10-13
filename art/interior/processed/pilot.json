@@ -1,0 +1,179 @@
+{
+  "bed": {
+    "alpha_threshold": 128,
+    "fit_size": [
+      48,
+      75
+    ],
+    "logical_size": [
+      48,
+      80
+    ],
+    "path": "res://assets/house-interior/bed.png",
+    "pivot": [
+      24,
+      79
+    ],
+    "registration": {
+      "origin": [
+        0,
+        5
+      ],
+      "scale": 0.07250755287009064
+    },
+    "source": "art/interior/source/bed.png",
+    "source_region": [
+      181,
+      196,
+      843,
+      1231
+    ]
+  },
+  "door_closed": {
+    "alpha_threshold": 128,
+    "closed_leaf_size": [
+      26,
+      49
+    ],
+    "floor_anchor": [
+      15,
+      54
+    ],
+    "hinge_points": [
+      [
+        3,
+        15
+      ],
+      [
+        3,
+        45
+      ]
+    ],
+    "logical_size": [
+      30,
+      59
+    ],
+    "path": "res://assets/house-interior/door-closed.png",
+    "pivot": [
+      3,
+      45
+    ],
+    "registration": {
+      "origin": [
+        236,
+        196
+      ],
+      "padding": 2,
+      "scale": 0.048
+    },
+    "source": "art/interior/source/door-closed.png",
+    "source_region": [
+      239,
+      263,
+      788,
+      1284
+    ],
+    "visible_leaf_size": [
+      26,
+      49
+    ]
+  },
+  "door_half": {
+    "alpha_threshold": 128,
+    "closed_leaf_size": [
+      26,
+      49
+    ],
+    "floor_anchor": [
+      15,
+      54
+    ],
+    "hinge_points": [
+      [
+        3,
+        15
+      ],
+      [
+        3,
+        45
+      ]
+    ],
+    "logical_size": [
+      30,
+      59
+    ],
+    "path": "res://assets/house-interior/door-half.png",
+    "pivot": [
+      3,
+      45
+    ],
+    "registration": {
+      "origin": [
+        236,
+        196
+      ],
+      "padding": 2,
+      "scale": 0.048
+    },
+    "source": "art/interior/source/door-half.png",
+    "source_region": [
+      238,
+      197,
+      628,
+      1325
+    ],
+    "visible_leaf_size": [
+      18,
+      54
+    ]
+  },
+  "door_open": {
+    "alpha_threshold": 128,
+    "closed_leaf_size": [
+      26,
+      49
+    ],
+    "floor_anchor": [
+      15,
+      54
+    ],
+    "hinge_points": [
+      [
+        3,
+        15
+      ],
+      [
+        3,
+        45
+      ]
+    ],
+    "logical_size": [
+      30,
+      59
+    ],
+    "path": "res://assets/house-interior/door-open.png",
+    "pivot": [
+      3,
+      45
+    ],
+    "registration": {
+      "origin": [
+        236,
+        196
+      ],
+      "padding": 2,
+      "scale": 0.048
+    },
+    "source": "art/interior/source/door-open.png",
+    "source_region": [
+      236,
+      196,
+      424,
+      1337
+    ],
+    "visible_leaf_size": [
+      9,
+      55
+    ]
+  }
+}
