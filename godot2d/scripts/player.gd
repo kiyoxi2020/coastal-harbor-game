@@ -6,6 +6,8 @@ var sprite: AnimatedSprite2D
 var walking := false
 var facing := "south"
 var world: Node
+var doorway_hidden := 0.0
+var doorway_material: ShaderMaterial
 
 func _ready() -> void:
 	motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
@@ -21,10 +23,31 @@ func _ready() -> void:
 	sprite.position = Vector2(0,-22)
 	sprite.animation = facing
 	add_child(sprite)
+	doorway_material=ShaderMaterial.new()
+	doorway_material.shader=preload("res://scripts/doorway_clip.gdshader")
+	doorway_material.set_shader_parameter("frame_height",float(sprite.sprite_frames.get_frame_texture("south",0).get_height()))
+	sprite.material=doorway_material
 	queue_redraw()
 
+func set_doorway_hidden(value: float) -> void:
+	doorway_hidden=clampf(value,0,1)
+	# The visual occupies the aperture plane, below the fixed foreground jamb (2).
+	# Physics/root sorting stays untouched; this also avoids aperture-darkness overdraw.
+	sprite.z_index=1
+	doorway_material.set_shader_parameter("hidden_fraction",doorway_hidden)
+	queue_redraw()
+
+func reset_doorway_visual() -> void:
+	set_doorway_hidden(0)
+	sprite.z_index=0
+	modulate=Color.WHITE
+	sprite.modulate=Color.WHITE
+	visible=true
+	z_index=0
+
 func _draw() -> void:
-	draw_rect(Rect2(-6,-3,12,4),Color(0.08,0.22,0.22,0.24))
+	if doorway_hidden==0:
+		draw_rect(Rect2(-6,-3,12,4),Color(0.08,0.22,0.22,0.24))
 
 func _physics_process(_delta: float) -> void:
 	if is_instance_valid(world) and world.get("home") != null and world.home.transition.busy:
