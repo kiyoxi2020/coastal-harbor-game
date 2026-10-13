@@ -72,6 +72,39 @@ class PrepareCottageAssetsTest(unittest.TestCase):
         self.assertEqual(before, {path.name: path.read_bytes() for path in (self.root / "assets").iterdir()})
         self.assertEqual(before, {path.name: path.read_bytes() for path in (self.root / "processed").iterdir()})
 
+    def test_full_atlas_registers_every_generated_subject_with_provenance(self):
+        self.valid_sources()
+        repository = Path(__file__).resolve().parents[1]
+        atlas = repository / "art/interior/source/furnishings-atlas.png"
+        regions = repository / "art/interior/source/furnishings-regions.json"
+        (self.source / atlas.name).write_bytes(atlas.read_bytes())
+        (self.source / regions.name).write_bytes(regions.read_bytes())
+        manifest = self.run_prepare()
+        registration = json.loads(regions.read_text())["regions"]
+        self.assertEqual(set(manifest), {"bed", "door_closed", "door_half", "door_open"} | set(registration))
+        for name, region in registration.items():
+            with self.subTest(name=name):
+                entry = manifest[name]
+                self.assertEqual(entry["source"], "art/interior/source/furnishings-atlas.png")
+                self.assertEqual(entry["source_region"], region["box"])
+                self.assertEqual(entry["logical_size"], region["logical_size"])
+                self.assertEqual(entry["floor_anchor"], [region["logical_size"][0] // 2, region["logical_size"][1]])
+                self.assertIn("collision_footprint", entry)
+                self.assertEqual(entry["alpha_threshold"], 128)
+                for folder in ("assets", "processed"):
+                    sprite = Image.open(self.root / folder / f"{name}.png").convert("RGBA")
+                    self.assertEqual(sprite.size, tuple(region["logical_size"]))
+                    self.assertEqual(set(sprite.getchannel("A").get_flattened_data()) - {0, 255}, set())
+                    self.assertIsNotNone(sprite.getchannel("A").getbbox())
+                self.assertEqual((self.root / "assets" / f"{name}.png").read_bytes(), (self.root / "processed" / f"{name}.png").read_bytes())
+        for name in ("floor", "wall"):
+            sprite = Image.open(self.root / "assets" / f"{name}.png").convert("RGBA")
+            self.assertEqual(sprite.getchannel("A").getextrema(), (255, 255))
+        self.assertEqual(manifest["bed"].get("interaction_point"), [216, 240])
+        self.assertEqual(manifest["kitchen"].get("interaction_point"), [400, 192])
+        self.assertEqual(manifest["photo"].get("interaction_point"), [280, 142])
+        self.assertEqual(manifest["chest"].get("interaction_point"), [416, 306])
+
 
 if __name__ == "__main__":
     unittest.main()

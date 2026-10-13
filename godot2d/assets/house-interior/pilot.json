@@ -1,9 +1,23 @@
 {
   "bed": {
     "alpha_threshold": 128,
+    "collision_footprint": [
+      0,
+      0,
+      48,
+      80
+    ],
     "fit_size": [
       48,
       75
+    ],
+    "floor_anchor": [
+      24,
+      80
+    ],
+    "interaction_point": [
+      216,
+      240
     ],
     "logical_size": [
       48,
@@ -29,12 +43,111 @@
       1231
     ]
   },
+  "bed_rug": {
+    "alpha_threshold": 128,
+    "collision_footprint": null,
+    "floor_anchor": [
+      24,
+      24
+    ],
+    "logical_size": [
+      48,
+      24
+    ],
+    "path": "res://assets/house-interior/bed_rug.png",
+    "pivot": [
+      24,
+      24
+    ],
+    "registration": {
+      "mode": "largest_component_nearest",
+      "opaque_texture": false
+    },
+    "source": "art/interior/source/furnishings-atlas.png",
+    "source_region": [
+      705,
+      758,
+      950,
+      883
+    ]
+  },
+  "chair": {
+    "alpha_threshold": 128,
+    "collision_footprint": [
+      3,
+      21,
+      12,
+      8
+    ],
+    "floor_anchor": [
+      9,
+      29
+    ],
+    "logical_size": [
+      18,
+      29
+    ],
+    "path": "res://assets/house-interior/chair.png",
+    "pivot": [
+      9,
+      29
+    ],
+    "registration": {
+      "mode": "largest_component_nearest",
+      "opaque_texture": false
+    },
+    "source": "art/interior/source/furnishings-atlas.png",
+    "source_region": [
+      1045,
+      105,
+      1185,
+      317
+    ]
+  },
+  "chest": {
+    "alpha_threshold": 128,
+    "collision_footprint": [
+      2,
+      15,
+      28,
+      9
+    ],
+    "floor_anchor": [
+      16,
+      24
+    ],
+    "interaction_point": [
+      416,
+      306
+    ],
+    "logical_size": [
+      32,
+      24
+    ],
+    "path": "res://assets/house-interior/chest.png",
+    "pivot": [
+      16,
+      24
+    ],
+    "registration": {
+      "mode": "largest_component_nearest",
+      "opaque_texture": false
+    },
+    "source": "art/interior/source/furnishings-atlas.png",
+    "source_region": [
+      40,
+      444,
+      297,
+      635
+    ]
+  },
   "door_closed": {
     "alpha_threshold": 128,
     "closed_leaf_size": [
       26,
       49
     ],
+    "collision_footprint": null,
     "floor_anchor": [
       15,
       54
@@ -84,6 +197,7 @@
       26,
       49
     ],
+    "collision_footprint": null,
     "floor_anchor": [
       15,
       54
@@ -133,6 +247,7 @@
       26,
       49
     ],
+    "collision_footprint": null,
     "floor_anchor": [
       15,
       54
@@ -174,6 +289,314 @@
     "visible_leaf_size": [
       9,
       55
+    ]
+  },
+  "floor": {
+    "alpha_threshold": 128,
+    "collision_footprint": null,
+    "floor_anchor": [
+      32,
+      64
+    ],
+    "logical_size": [
+      64,
+      64
+    ],
+    "path": "res://assets/house-interior/floor.png",
+    "pivot": [
+      32,
+      64
+    ],
+    "registration": {
+      "mode": "largest_component_nearest",
+      "opaque_texture": true
+    },
+    "source": "art/interior/source/furnishings-atlas.png",
+    "source_region": [
+      48,
+      940,
+      300,
+      1190
+    ]
+  },
+  "kitchen": {
+    "alpha_threshold": 128,
+    "collision_footprint": [
+      2,
+      32,
+      76,
+      16
+    ],
+    "floor_anchor": [
+      40,
+      48
+    ],
+    "interaction_point": [
+      400,
+      192
+    ],
+    "logical_size": [
+      80,
+      48
+    ],
+    "path": "res://assets/house-interior/kitchen.png",
+    "pivot": [
+      40,
+      48
+    ],
+    "registration": {
+      "mode": "largest_component_nearest",
+      "opaque_texture": false
+    },
+    "source": "art/interior/source/furnishings-atlas.png",
+    "source_region": [
+      315,
+      75,
+      730,
+      325
+    ]
+  },
+  "nightstand": {
+    "alpha_threshold": 128,
+    "collision_footprint": [
+      2,
+      31,
+      20,
+      11
+    ],
+    "floor_anchor": [
+      12,
+      42
+    ],
+    "logical_size": [
+      24,
+      42
+    ],
+    "path": "res://assets/house-interior/nightstand.png",
+    "pivot": [
+      12,
+      42
+    ],
+    "registration": {
+      "mode": "largest_component_nearest",
+      "opaque_texture": false
+    },
+    "source": "art/interior/source/furnishings-atlas.png",
+    "source_region": [
+      85,
+      60,
+      240,
+      325
+    ]
+  },
+  "photo": {
+    "alpha_threshold": 128,
+    "collision_footprint": null,
+    "floor_anchor": [
+      10,
+      18
+    ],
+    "interaction_point": [
+      280,
+      142
+    ],
+    "logical_size": [
+      20,
+      18
+    ],
+    "path": "res://assets/house-interior/photo.png",
+    "pivot": [
+      10,
+      18
+    ],
+    "registration": {
+      "mode": "largest_component_nearest",
+      "opaque_texture": false
+    },
+    "source": "art/interior/source/furnishings-atlas.png",
+    "source_region": [
+      735,
+      475,
+      915,
+      625
+    ]
+  },
+  "plant": {
+    "alpha_threshold": 128,
+    "collision_footprint": [
+      6,
+      31,
+      12,
+      9
+    ],
+    "floor_anchor": [
+      12,
+      40
+    ],
+    "logical_size": [
+      24,
+      40
+    ],
+    "path": "res://assets/house-interior/plant.png",
+    "pivot": [
+      12,
+      40
+    ],
+    "registration": {
+      "mode": "largest_component_nearest",
+      "opaque_texture": false
+    },
+    "source": "art/interior/source/furnishings-atlas.png",
+    "source_region": [
+      1000,
+      365,
+      1204,
+      655
+    ]
+  },
+  "rug": {
+    "alpha_threshold": 128,
+    "collision_footprint": null,
+    "floor_anchor": [
+      36,
+      48
+    ],
+    "logical_size": [
+      72,
+      48
+    ],
+    "path": "res://assets/house-interior/rug.png",
+    "pivot": [
+      36,
+      48
+    ],
+    "registration": {
+      "mode": "largest_component_nearest",
+      "opaque_texture": false
+    },
+    "source": "art/interior/source/furnishings-atlas.png",
+    "source_region": [
+      320,
+      705,
+      688,
+      915
+    ]
+  },
+  "shelf": {
+    "alpha_threshold": 128,
+    "collision_footprint": null,
+    "floor_anchor": [
+      20,
+      22
+    ],
+    "logical_size": [
+      40,
+      22
+    ],
+    "path": "res://assets/house-interior/shelf.png",
+    "pivot": [
+      20,
+      22
+    ],
+    "registration": {
+      "mode": "largest_component_nearest",
+      "opaque_texture": false
+    },
+    "source": "art/interior/source/furnishings-atlas.png",
+    "source_region": [
+      330,
+      455,
+      653,
+      635
+    ]
+  },
+  "table": {
+    "alpha_threshold": 128,
+    "collision_footprint": [
+      4,
+      27,
+      40,
+      11
+    ],
+    "floor_anchor": [
+      24,
+      38
+    ],
+    "logical_size": [
+      48,
+      38
+    ],
+    "path": "res://assets/house-interior/table.png",
+    "pivot": [
+      24,
+      38
+    ],
+    "registration": {
+      "mode": "largest_component_nearest",
+      "opaque_texture": false
+    },
+    "source": "art/interior/source/furnishings-atlas.png",
+    "source_region": [
+      749,
+      120,
+      998,
+      319
+    ]
+  },
+  "wall": {
+    "alpha_threshold": 128,
+    "collision_footprint": null,
+    "floor_anchor": [
+      32,
+      64
+    ],
+    "logical_size": [
+      64,
+      64
+    ],
+    "path": "res://assets/house-interior/wall.png",
+    "pivot": [
+      32,
+      64
+    ],
+    "registration": {
+      "mode": "largest_component_nearest",
+      "opaque_texture": true
+    },
+    "source": "art/interior/source/furnishings-atlas.png",
+    "source_region": [
+      362,
+      940,
+      616,
+      1188
+    ]
+  },
+  "window": {
+    "alpha_threshold": 128,
+    "collision_footprint": null,
+    "floor_anchor": [
+      24,
+      42
+    ],
+    "logical_size": [
+      48,
+      42
+    ],
+    "path": "res://assets/house-interior/window.png",
+    "pivot": [
+      24,
+      42
+    ],
+    "registration": {
+      "mode": "largest_component_nearest",
+      "opaque_texture": false
+    },
+    "source": "art/interior/source/furnishings-atlas.png",
+    "source_region": [
+      33,
+      674,
+      309,
+      912
     ]
   }
 }

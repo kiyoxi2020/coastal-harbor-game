@@ -13,6 +13,95 @@ BED_SIZE = (48, 80)
 DOOR_SCALE = 0.048
 DOOR_PADDING = 2
 HINGE_SOURCE = ((255, 470), (255, 1090))
+ATLAS_NAME = "furnishings-atlas.png"
+REGIONS_NAME = "furnishings-regions.json"
+BASES = {
+    "nightstand": [2, 31, 20, 11], "kitchen": [2, 32, 76, 16],
+    "table": [4, 27, 40, 11], "chair": [3, 21, 12, 8],
+    "chest": [2, 15, 28, 9], "plant": [6, 31, 12, 9],
+}
+INTERACTION_POINTS = {
+    "bed": [216, 240], "kitchen": [400, 192],
+    "photo": [280, 142], "chest": [416, 306],
+}
+
+
+def largest_component(alpha):
+    """Keep the connected subject and drop detached generation debris."""
+    width, height = alpha.size
+    pixels = bytearray(alpha.tobytes())
+    seen = bytearray(width * height)
+    best = []
+    for start, value in enumerate(pixels):
+        if not value or seen[start]:
+            continue
+        stack = [start]
+        seen[start] = 1
+        component = []
+        while stack:
+            index = stack.pop()
+            component.append(index)
+            x, y = index % width, index // width
+            for adjacent in (index - 1 if x else -1, index + 1 if x + 1 < width else -1,
+                             index - width if y else -1, index + width if y + 1 < height else -1):
+                if adjacent >= 0 and pixels[adjacent] and not seen[adjacent]:
+                    seen[adjacent] = 1
+                    stack.append(adjacent)
+        if len(component) > len(best):
+            best = component
+    if not best:
+        raise ValueError("empty atlas region")
+    output = bytearray(width * height)
+    for index in best:
+        output[index] = 255
+    return Image.frombytes("L", (width, height), bytes(output))
+
+
+def prepare_atlas(source_dir, manifest, images):
+    config_path = source_dir / REGIONS_NAME
+    atlas_path = source_dir / ATLAS_NAME
+    if not config_path.exists() and not atlas_path.exists():
+        return
+    if not config_path.exists() or not atlas_path.exists():
+        raise ValueError("atlas and region registration must be supplied together")
+    config = json.loads(config_path.read_text(encoding="utf-8"))
+    atlas = Image.open(atlas_path).convert("RGBA")
+    if list(atlas.size) != config["source_size"]:
+        raise ValueError("atlas size does not match registration")
+    for name, registered in config["regions"].items():
+        box = registered["box"]
+        size = tuple(registered["logical_size"])
+        source = atlas.crop(tuple(box))
+        if registered.get("opaque_texture"):
+            # The measured boxes lie inside the painted patches. Inset once more
+            # to avoid source outline/glow while retaining an opaque tile.
+            margin = max(4, round(min(source.size) * 0.08))
+            source = source.crop((margin, margin, source.width - margin, source.height - margin))
+            if source.getchannel("A").getextrema()[0] < ALPHA_THRESHOLD:
+                raise ValueError(f"texture interior is not opaque: {name}")
+            source.putalpha(Image.new("L", source.size, 255))
+            sprite = source.resize(size, Image.Resampling.NEAREST)
+        else:
+            alpha = source.getchannel("A").point(lambda value: 255 if value >= ALPHA_THRESHOLD else 0)
+            alpha = largest_component(alpha)
+            source.putalpha(alpha)
+            occupied = alpha.getbbox()
+            source = source.crop(occupied)
+            sprite = source.resize(size, Image.Resampling.NEAREST)
+        manifest[name] = {
+            "path": f"res://assets/house-interior/{name}.png",
+            "logical_size": list(size),
+            "source": f"art/interior/source/{ATLAS_NAME}",
+            "source_region": box,
+            "pivot": [size[0] // 2, size[1]],
+            "floor_anchor": [size[0] // 2, size[1]],
+            "collision_footprint": BASES.get(name),
+            "alpha_threshold": ALPHA_THRESHOLD,
+            "registration": {"mode": "largest_component_nearest", "opaque_texture": bool(registered.get("opaque_texture"))},
+        }
+        if name in INTERACTION_POINTS:
+            manifest[name]["interaction_point"] = INTERACTION_POINTS[name]
+        images[name] = sprite
 
 
 def clean_source(path):
@@ -97,6 +186,12 @@ def prepare_assets(source_dir, output_dir, duplicate_dir):
     for name in ("door_closed", "door_half", "door_open"):
         manifest[name]["closed_leaf_size"] = closed_size
         manifest[name]["floor_anchor"] = floor_anchor
+    manifest["bed"]["floor_anchor"] = [BED_SIZE[0] // 2, BED_SIZE[1]]
+    manifest["bed"]["collision_footprint"] = [0, 0, BED_SIZE[0], BED_SIZE[1]]
+    manifest["bed"]["interaction_point"] = INTERACTION_POINTS["bed"]
+    for name in ("door_closed", "door_half", "door_open"):
+        manifest[name]["collision_footprint"] = None
+    prepare_atlas(source_dir, manifest, images)
     for name, image in images.items():
         for folder in (output_dir, duplicate_dir):
             image.save(folder / f"{name}.png", optimize=False)
