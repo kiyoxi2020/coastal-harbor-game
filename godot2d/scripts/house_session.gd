@@ -70,7 +70,9 @@ func safe_position(location: String,point: Vector2) -> Vector2:
 	for rect in blocks:
 		if rect.grow(6).has_point(point): return fallback
 	var door_position: Vector2=Room.DOOR if inside else Room.OUTSIDE_DOOR
-	if Rect2(door_position-Vector2(24,10),Vector2(48,20)).has_point(point): return fallback
+	if inside:
+		if Rect2(Vector2(300,308),Vector2(40,52)).grow(6).has_point(point): return fallback
+	elif Rect2(door_position-Vector2(24,10),Vector2(48,20)).has_point(point): return fallback
 	return point
 func storage_point() -> Vector2:
 	return Room.STORAGE+Vector2(0,24) if world.foraging.location=="house" else world.STORAGE_POINT

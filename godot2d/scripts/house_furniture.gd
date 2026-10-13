@@ -1,9 +1,21 @@
 extends Node2D
+const CottageArt=preload("res://scripts/cottage_art.gd")
 var kind := "bed"
 var extent := Vector2(80,112)
+var pilot_texture: Texture2D
+var pilot_pivot := Vector2.ZERO
+func _ready() -> void:
+	if kind=="bed":
+		var data:=CottageArt.entry("bed")
+		pilot_texture=CottageArt.texture_for("bed")
+		if data.has("pivot"): pilot_pivot=Vector2(data.pivot[0],data.pivot[1])
+		texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
 func block(x: float,y: float,w: float,h: float,c: String) -> void:
 	draw_rect(Rect2(x,y,w,h),Color(c))
 func _draw() -> void:
+	if kind=="bed" and pilot_texture:
+		draw_texture(pilot_texture,-pilot_pivot)
+		return
 	var w:=extent.x
 	var h:=extent.y
 	# Local origin is the object's feet; all highlights use hard pixel rectangles.

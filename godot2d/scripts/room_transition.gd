@@ -45,6 +45,8 @@ func walk_to(point: Vector2,duration: float) -> void:
 	tween.tween_property(player,"position",point,duration)
 	await tween.finished
 	player.sprite.stop()
+func travel_duration(point: Vector2) -> float:
+	return maxf(0.05,home.world.player.position.distance_to(point)/home.world.player.SPEED)
 func animate_door(door,opening: bool) -> void:
 	for pose in ([0,1,2] if opening else [2,1,0]):
 		door.set_pose(pose)
@@ -63,7 +65,8 @@ func run() -> void:
 	set_phase("Opening")
 	await animate_door(door,true)
 	set_phase("Crossing")
-	await walk_to(door.position+Vector2(0,2 if door.inside else -2),0.2)
+	var crossing_point: Vector2=door.position+Vector2(0,2 if door.inside else -2)
+	await walk_to(crossing_point,travel_duration(crossing_point))
 	set_phase("FadeOut")
 	await opacity(1)
 	set_phase("Swap")
@@ -82,7 +85,7 @@ func run() -> void:
 	set_phase("FadeIn")
 	await opacity(0)
 	set_phase("Arrival")
-	await walk_to(door.approach,0.2)
+	await walk_to(door.approach,travel_duration(door.approach))
 	set_phase("Closing")
 	await animate_door(door,false)
 	world.player.velocity=Vector2.ZERO
