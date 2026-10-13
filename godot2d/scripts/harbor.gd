@@ -87,8 +87,6 @@ func _ready() -> void:
 		pickup.name = entry.id
 		sort_layer.add_child(pickup)
 		pickup_nodes[entry.id] = pickup
-	foraging.changed.connect(func(): hud.update_inventory(foraging.counts))
-	hud.update_inventory(foraging.counts)
 	hud.show_toast("低潮赶海：沿台阶下沙滩。暂不保存，重开重置。",8.0)
 	var args := OS.get_cmdline_user_args()
 	var old_verification: bool = get_meta("skip_verification",false)
@@ -108,6 +106,11 @@ func _ready() -> void:
 	journal.set_script(preload("res://scripts/ui/journal.gd"))
 	journal.world = self
 	add_child(journal)
+	hud.bag_requested.connect(func():
+		if persistence_enabled and session_started and not hud.panel.visible and journal.mode == "":
+			journal.selected_side = "bag"
+			journal.selected_index = 0
+			journal.show_page("bag"))
 	if persistence_enabled:
 		add_prop("crates",STORAGE_POINT,22)
 		get_tree().auto_accept_quit = false
@@ -233,11 +236,9 @@ func _process(_delta: float) -> void:
 func refresh_pickups() -> void:
 	for id in pickup_nodes:
 		pickup_nodes[id].visible = not foraging.collected.has(id)
-	hud.update_inventory(foraging.counts)
 
 func _set_state(value) -> void:
 	foraging = value
-	foraging.changed.connect(func(): hud.update_inventory(foraging.counts))
 	refresh_pickups()
 
 func start_new_game(chosen_name: String) -> bool:

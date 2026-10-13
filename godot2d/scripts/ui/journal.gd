@@ -2,6 +2,7 @@ extends CanvasLayer
 
 const Catalog = preload("res://scripts/inventory/item_catalog.gd")
 const Art = preload("res://scripts/atlas.gd")
+const PixelSkin = preload("res://scripts/ui/pixel_style.gd")
 var world
 var mode := ""
 var last_page := "bag"
@@ -34,11 +35,7 @@ func _ready() -> void:
 	for type in ["Label", "Button", "LineEdit", "CheckButton", "SpinBox"]:
 		theme.set_color("font_color",type,Color("264e55"))
 	for state in ["normal","hover","pressed","focus","disabled"]:
-		var box := StyleBoxFlat.new()
-		box.bg_color = Color("f6e6c7") if state == "normal" else Color("c5ded7")
-		box.border_color = Color("e28b65") if state == "focus" else Color("4b7c7c")
-		box.set_border_width_all(3 if state == "focus" else 2)
-		box.set_content_margin_all(8)
+		var box = PixelSkin.new({"normal":"button","hover":"hover","pressed":"active","focus":"focus","disabled":"button"}[state])
 		theme.set_stylebox(state,"Button",box)
 		theme.set_color("font_"+state+"_color","Button",Color("264e55"))
 	for state in ["normal","focus","read_only"]:
@@ -54,6 +51,10 @@ func _button(parent: Control, text: String, rect: Rect2, action: Callable, id: S
 	button.text = text
 	button.position = rect.position
 	button.size = rect.size
+	if id.begins_with("tab_"):
+		button.add_theme_stylebox_override("normal",PixelSkin.new("active" if id == "tab_"+mode else "paper"))
+	elif id in ["move","transfer","continue"]:
+		button.add_theme_stylebox_override("normal",PixelSkin.new("teal"))
 	if id != "":
 		button.name = id
 	button.pressed.connect(action)
@@ -66,6 +67,10 @@ func _label(parent: Control, text: String, rect: Rect2, font_size: int = 24) -> 
 	label.position = rect.position
 	label.size = rect.size
 	label.add_theme_font_size_override("font_size",font_size)
+	if parent == surface and rect.position.y >= 575:
+		label.add_theme_color_override("font_color",Color("f5e8c7"))
+	elif parent == surface and rect.position.y >= 60 and rect.position.y < 120:
+		label.add_theme_color_override("font_color",Color("f5e8c7"))
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	parent.add_child(label)
 	return label
@@ -74,11 +79,9 @@ func _panel(parent: Control, rect: Rect2) -> Panel:
 	var panel := Panel.new()
 	panel.position = rect.position
 	panel.size = rect.size
-	var box := StyleBoxFlat.new()
-	box.bg_color = Color("fff0d1")
-	box.border_color = Color("315c63")
-	box.set_border_width_all(4)
+	var box = PixelSkin.new("paper")
 	panel.add_theme_stylebox_override("panel",box)
+	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	parent.add_child(panel)
 	return panel
 
@@ -114,7 +117,14 @@ func render() -> void:
 	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	root.add_child(shade)
 	surface = _panel(root, Rect2(80,48,1120,624))
-	_label(surface,"潮港旧屋  /  海边生活手账",Rect2(28,16,820,42),30)
+	surface.add_theme_stylebox_override("panel",PixelSkin.new("canvas"))
+	_panel(surface,Rect2(16,8,730,58))
+	if mode == "bag":
+		_panel(surface,Rect2(16,122,608,444))
+		_panel(surface,Rect2(636,122,468,444))
+	else:
+		_panel(surface,Rect2(16,122,1088,444))
+	_label(surface,"海边生活手账  ≋",Rect2(46,16,660,42),30)
 	_label(surface,note if note != "" else "方向键选择 · E 确认 · B / Tab 返回",Rect2(28,575,1050,40),22)
 	slots_count = 0
 	if mode == "title":
@@ -126,7 +136,7 @@ func render() -> void:
 			var page: String = ["bag","profile","settings"][i]
 			var title: String = ["背包","个人","设置"][i]
 			if not from_title or page == "settings":
-				_button(surface,("● " if mode == page else "")+title,Rect2(28+i*180,70,164,44),show_page.bind(page),"tab_"+page)
+				_button(surface,title,Rect2(28+i*180,70,164,44),show_page.bind(page),"tab_"+page)
 		_button(surface,"返回",Rect2(970,20,120,42),close_menu,"close")
 		match mode:
 			"bag": _bag()
@@ -152,7 +162,7 @@ func _title() -> void:
 	new_button.disabled = status.get("future",false)
 	_button(surface,"设置",Rect2(76,456,142,50),show_page.bind("settings"),"settings")
 	_button(surface,"退出",Rect2(232,456,144,50),world.request_exit,"quit")
-	_label(surface,status.message+"\n\n单人原型 · v0.5.0\n自动保存 / 单存档槽\n交易、种植和日循环尚未开放",Rect2(580,320,470,208),24)
+	_label(surface,status.message+"\n\n单人原型 · v0.5.1\n自动保存 / 单存档槽\n交易、种植和日循环尚未开放",Rect2(580,320,470,208),24)
 	_portrait(surface,Vector2(860,154),144)
 
 func new_game_dialog() -> void:
@@ -193,13 +203,14 @@ func _grid(parent: Control, side: String, cell: Vector2) -> void:
 		var slot: Dictionary = slots[i]
 		var item: Dictionary = catalog.get_item(slot.id)
 		var button := _button(parent,"",Rect2(Vector2(i%6, i/6)*cell,cell-Vector2(6,6)),select_slot.bind(side,i),side+"_"+str(i))
+		button.add_theme_stylebox_override("normal",PixelSkin.new("slot"))
 		slots_count += 1
 		button.tooltip_text = "空格" if slot.id == "" else item.name+" ×"+str(slot.amount)
 		if category != "" and mode == "bag" and slot.id != "" and item.category != category:
 			button.modulate.a = 0.32
 			button.disabled = true
 		if selected_side == side and selected_index == i:
-			button.add_theme_stylebox_override("normal",theme.get_stylebox("focus","Button"))
+			button.add_theme_stylebox_override("normal",PixelSkin.new("selected_slot"))
 		if slot.id != "":
 			var icon := Node2D.new()
 			icon.set_script(load("res://scripts/forage_pickup.gd"))

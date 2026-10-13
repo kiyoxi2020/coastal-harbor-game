@@ -1,6 +1,7 @@
 {
 	"checks": {
 		"24_slots": true,
+		"bag_icon_exists": true,
 		"bag_opens": true,
 		"cancel_child_keeps_menu": true,
 		"cancel_new_keeps_title": true,
@@ -14,10 +15,12 @@
 		"default_cancel_safe": true,
 		"discard_confirmation": true,
 		"discard_quantity": true,
+		"icon_opens_bag": true,
 		"keyboard_split_applied": true,
 		"keyboard_split_pending": true,
 		"menu_blocks_world": true,
 		"new_game": true,
+		"pixel_skin": true,
 		"profile_real_data": true,
 		"restored_stats": true,
 		"restored_storage": true,
