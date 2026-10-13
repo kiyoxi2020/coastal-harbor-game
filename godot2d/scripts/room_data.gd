@@ -1,8 +1,9 @@
 extends RefCounted
 const FLOOR := Rect2(176,112,288,208)
-const SPAWN := Vector2(320,160)
-const DOOR := Vector2(320,128)
-const ENTRANCE_NORMAL := Vector2.DOWN
+const SPAWN := Vector2(320,288)
+const DOOR := Vector2(320,320)
+const ENTRANCE_NORMAL := Vector2.UP
+const OUTSIDE_ENTRANCE_NORMAL := Vector2.DOWN
 const STORAGE := Vector2(416,282)
 const OUTSIDE_APPROACH := Vector2(209,194)
 const OUTSIDE_DOOR := Vector2(209,165)
@@ -23,8 +24,9 @@ static func furniture() -> Array[Dictionary]:
 
 static func blockers() -> Array[Rect2]:
 	var result: Array[Rect2]=[
-		Rect2(160,96,140,32),Rect2(340,96,140,32),
-		Rect2(160,112,16,224),Rect2(464,112,16,224),Rect2(176,320,288,16)]
+		Rect2(160,96,320,32),
+		Rect2(160,112,16,224),Rect2(464,112,16,224),
+		Rect2(176,320,124,16),Rect2(340,320,124,16)]
 	for item in furniture():
 		if item.has("base"): result.append(item.base)
 	return result

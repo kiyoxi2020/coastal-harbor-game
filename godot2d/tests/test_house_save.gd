@@ -10,8 +10,8 @@ func put(path: String, value: Dictionary) -> void:
 	f.store_string(JSON.stringify(value))
 	f.close()
 func finish() -> void:
-	DirAccess.make_dir_recursive_absolute("res://verification-house-save")
-	var f := FileAccess.open("res://verification-house-save/tests.json",FileAccess.WRITE)
+	DirAccess.make_dir_recursive_absolute("/private/tmp/coastal-house-save-verification")
+	var f := FileAccess.open("/private/tmp/coastal-house-save-verification/tests.json",FileAccess.WRITE)
 	f.store_string(JSON.stringify({"passed":not checks.values().has(false),"checks":checks},"\t"))
 	f.close()
 	print("HOUSE_SAVE ",checks.size()," passed=",not checks.values().has(false))
