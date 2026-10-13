@@ -1,14 +1,14 @@
 # 潮港旧屋 Godot2D · 当前工程
 
-开发中：住宅的分场景存档基础已接入源码，存档格式升级为 v2，可读取 v1。室内与门动画尚未接入，最新已发布试玩仍为 v0.5.1。请勿用旧试玩读取开发版新写入的 v2 存档（旧版会保护并拒绝读取）；本轮只使用临时测试存档，没有迁移玩家正式进度。详细进展见 docs/superpowers/plans/2026-10-13-house-save-result.md（项目根目录下）。
+当前住宅版 v0.5.2：旧屋门前 E 开门进入，室内出口 E 走出，包含独立门扇动画、床/厨房/桌椅/书架/箱子等家具。室内外箱子共享原 48 格仓储；室内 R 回入口；在屋内保存可继续回到屋内。执行结果见项目根目录 docs/superpowers/plans/2026-10-13-house-release-result.md。
 
-运行基线v0.5.1，Godot4.7.1。启动为标题页，可新游戏或继续进度。默认居中普通窗口，面积约占可用桌面的50%，内部1280×720，地图640×416，镜头2倍。导入project.godot后F5。WASD/方向键移动，E拾取/查看/确认，B或Tab打开/关闭手账，R回路口且保留收获。提示仍用E继续/关闭，不要求Esc。
+运行基线v0.5.2，Godot4.7.1。启动为标题页，可新游戏或继续进度。默认居中普通窗口，面积约占可用桌面的50%，内部1280×720，室外地图640×416，镜头2倍；室内固定镜头。导入project.godot后F5。WASD/方向键移动，E拾取/查看/开门/确认，B或Tab打开/关闭手账，R回当前场景安全入口且保留收获。提示仍用E继续/关闭，不要求Esc。
 
 当前树木assets/tree-set-v4，当前地形/水面assets/environment-v2。新增台阶下低潮沙滩，六个固定拾取点，蛤蜊/海螺/海带各二；右上方为可点击的像素背包图标。人物、建筑与树木风格沿用原版，碰撞围绕可通行沙滩更新。
 
 新增24格背包、48格旧屋仓储、个人记录、独立音量设置和单槽自动存档。旧屋东侧小木箱附近E打开仓储。支持拆分、移动、合并、整理和丢弃确认。采集统计不会因存箱或丢弃而减少。当前海产不可直接使用。
 
-存档位于Godot user://coastal-progress，Mac默认为~/Library/Application Support/Godot/app_userdata/潮港旧屋 · 低潮赶海/coastal-progress/。progress.json为当前进度，progress.backup.json为上一份有效备份，settings.cfg单独保存设置。失败提示不会自动退出；强制结束进程仍可能丢失尚未落盘操作。v0.5.0存档格式保持兼容；更早的无存档版本需新游戏。
+存档位于Godot user://coastal-progress，Mac默认为~/Library/Application Support/Godot/app_userdata/潮港旧屋 · 低潮赶海/coastal-progress/。progress.json为当前进度，progress.backup.json为上一份有效备份，settings.cfg单独保存设置。失败提示不会自动退出；强制结束进程仍可能丢失尚未落盘操作。新版本读取旧v1并在保存时写v2；旧应用不能读取v2，请勿交替运行。测试使用临时进度，未改玩家真实存档。
 
 最新交付在项目交付与预览/2D/，历史在archive，不进Git。原六组回归260项保留，新增库存、保存及手账测试见tests/test_item_catalog.gd、test_inventory_container.gd、test_inventory_operations.gd、test_save_state.gd、test_journal.gd。使用Godot --headless --log-file /private/tmp/coastal-test.log --path . --script res://tests/相应脚本运行。测试使用临时存档；旧赶海测试故意禁用持久化以检查原始场景，新手账测试覆盖保存恢复。
 

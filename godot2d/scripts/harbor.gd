@@ -15,6 +15,7 @@ var persistence_enabled := false
 var session_started := false
 var release_input := false
 var save_message := ""
+var home
 
 func _ready() -> void:
 	# Size the native window once per launch, preserving manual resizing thereafter.
@@ -68,6 +69,7 @@ func _ready() -> void:
 		add_child(body)
 	player = CharacterBody2D.new()
 	player.set_script(load("res://scripts/player.gd"))
+	player.world=self
 	player.name = "Returnee"
 	player.position = data.SPAWN
 	sort_layer.add_child(player)
@@ -91,11 +93,11 @@ func _ready() -> void:
 	var args := OS.get_cmdline_user_args()
 	var old_verification: bool = get_meta("skip_verification",false)
 	for arg in args:
-		if arg.begins_with("--verify-") and arg != "--verify-journal":
+		if arg.begins_with("--verify-") and arg not in ["--verify-journal","--verify-house"]:
 			old_verification = true
-	persistence_enabled = (DisplayServer.get_name() != "headless" and not old_verification) or get_meta("journal_test",false) or args.has("--verify-journal")
+	persistence_enabled = (DisplayServer.get_name() != "headless" and not old_verification) or get_meta("journal_test",false) or args.has("--verify-journal") or args.has("--verify-house")
 	var save_directory: String = get_meta("save_directory","user://coastal-progress")
-	if args.has("--verify-journal"):
+	if args.has("--verify-journal") or args.has("--verify-house"):
 		save_directory = "/private/tmp/coastal-export-journal-"+str(Time.get_unix_time_from_system())
 		for arg in args:
 			if arg.begins_with("--test-save-directory=/private/tmp/coastal-"):
@@ -107,7 +109,7 @@ func _ready() -> void:
 	journal.world = self
 	add_child(journal)
 	hud.bag_requested.connect(func():
-		if persistence_enabled and session_started and not hud.panel.visible and journal.mode == "":
+		if persistence_enabled and session_started and not hud.panel.visible and journal.mode == "" and not home.transition.busy:
 			journal.selected_side = "bag"
 			journal.selected_index = 0
 			journal.show_page("bag"))
@@ -117,6 +119,15 @@ func _ready() -> void:
 		hud.controls.text = "WASD / 方向键 移动   E 拾取 / 查看   B / Tab 手账   R 回路口"
 		hud.show_toast("沿台阶赶海；旧屋东侧木箱可存放收获。",8)
 		journal.show_page("title")
+	home=Node.new()
+	home.set_script(preload("res://scripts/house_session.gd"))
+	home.world=self
+	add_child(home)
+	if args.has("--verify-house"):
+		var runner:=Node.new()
+		runner.set_script(load("res://tests/house_driver.gd"))
+		add_child(runner)
+		return
 	if args.has("--verify-journal"):
 		var runner := Node.new()
 		runner.set_script(load("res://tests/journal_driver.gd"))
@@ -168,7 +179,8 @@ func configure_input() -> void:
 func nearest_location(point: Vector2) -> Dictionary:
 	var nearest: Dictionary = {}
 	var distance := 28.0
-	for location in data.locations():
+	var locations: Array=preload("res://scripts/room_data.gd").locations() if foraging.location=="house" else data.locations()
+	for location in locations:
 		var gap := point.distance_to(location.point)
 		if gap < distance:
 			distance = gap
@@ -176,7 +188,7 @@ func nearest_location(point: Vector2) -> Dictionary:
 	return nearest
 
 func nearest_pickup(point: Vector2) -> Dictionary:
-	if not data.BEACH.has_point(point):
+	if foraging.location=="house" or not data.BEACH.has_point(point):
 		return {}
 	var nearest: Dictionary = {}
 	var distance := 24.0
@@ -190,6 +202,7 @@ func nearest_pickup(point: Vector2) -> Dictionary:
 	return nearest
 
 func _process(_delta: float) -> void:
+	if home != null and home.transition.busy: return
 	if release_input:
 		for action in ["inspect","reset","journal","left","right","up","down"]:
 			if Input.is_action_pressed(action):
@@ -202,7 +215,10 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("inspect"):
 		if hud.panel.visible:
 			hud.dismiss()
-		elif persistence_enabled and player.position.distance_to(STORAGE_POINT) <= 28:
+		elif persistence_enabled and home.active_door().can_interact(player.position):
+			home.transition.begin()
+			return
+		elif persistence_enabled and player.position.distance_to(home.storage_point()) <= 28:
 			journal.selected_side = "bag"
 			journal.selected_index = 0
 			journal.show_page("storage")
@@ -219,17 +235,19 @@ func _process(_delta: float) -> void:
 			else:
 				hud.show_location(nearest_location(player.position))
 	if Input.is_action_just_pressed("reset"):
-		player.position = data.SPAWN
-		player.velocity = Vector2.ZERO
-		hud.dismiss()
+		home.reset_player()
 	hud.update_location(nearest_location(player.position))
 	var target := nearest_pickup(player.position)
 	for id in pickup_nodes:
 		pickup_nodes[id].highlighted = not hud.panel.visible and target.get("id","") == id
 	if not target.is_empty():
 		hud.prompt.text = "[ E ] 拾取" + data.ITEM_NAMES[target.kind]
-	elif persistence_enabled and player.position.distance_to(STORAGE_POINT) <= 28:
+	elif persistence_enabled and home.active_door().can_interact(player.position):
+		hud.prompt.text="[ E ] 走出小屋" if foraging.location=="house" else "[ E ] 进入小屋"
+	elif persistence_enabled and player.position.distance_to(home.storage_point()) <= 28:
 		hud.prompt.text = "[ E ] 打开旧屋储物箱"
+	elif foraging.location=="house" and nearest_location(player.position).is_empty():
+		hud.prompt.text="回到熟悉的屋子；床、厨房和旧照片可查看。"
 	elif foraging.collected.size() == data.pickups().size() and nearest_location(player.position).is_empty():
 		hud.prompt.text = "今日赶海收获已集齐；市集交易将在后续版本开放。"
 
@@ -249,7 +267,7 @@ func start_new_game(chosen_name: String) -> bool:
 		journal.render()
 		return false
 	_set_state(state)
-	player.position = data.SPAWN
+	home.switch_room("harbor",data.SPAWN)
 	session_started = true
 	journal.dismiss()
 	hud.show_toast("欢迎回来，"+foraging.player_name+"。E 赶海，B 打开手账。",8)
@@ -265,10 +283,8 @@ func continue_game() -> bool:
 	if not state.restore(result.data): return false
 	_set_state(state)
 	var position := Vector2(result.data.position[0],result.data.position[1])
-	var safe := data.WORLD_BOUNDS.has_point(position)
-	for block in data.blockers():
-		if block.grow(6).has_point(position): safe = false
-	player.position = position if safe else data.SPAWN
+	var safe: bool=home.safe_position(state.location,position)==position
+	home.switch_room(state.location,position)
 	session_started = true
 	journal.dismiss()
 	hud.show_toast(result.message if result.message != "" else ("已继续上次的生活。" if safe else "已回到安全路口。"),8)
@@ -276,7 +292,8 @@ func continue_game() -> bool:
 
 func save_progress() -> bool:
 	if not persistence_enabled or not session_started: return true
-	var ok: bool = save_service.write_save(foraging.to_data(player.position))
+	var snapshot: Dictionary=home.transition.stable_snapshot if home.transition.busy else foraging.to_data(home.safe_position(foraging.location,player.position))
+	var ok: bool = save_service.write_save(snapshot)
 	save_message = "进度已保存。" if ok else save_service.last_error
 	if not ok:
 		hud.show_toast(save_message,10)
@@ -292,6 +309,9 @@ func return_to_title() -> void:
 	journal.show_page("title")
 
 func request_exit() -> void:
+	if home != null and home.transition.busy:
+		home.transition.exit_pending=true
+		return
 	if save_progress():
 		get_tree().quit()
 	else:

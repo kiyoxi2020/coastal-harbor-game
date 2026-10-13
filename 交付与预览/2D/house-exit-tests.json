@@ -1,0 +1,10 @@
+{
+	"checks": {
+		"exit_begin": true,
+		"exit_deferred": true,
+		"exit_saved_destination": true,
+		"exit_saved_safe_point": true,
+		"new_game": true
+	},
+	"passed": true
+}
