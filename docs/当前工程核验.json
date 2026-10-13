@@ -1,16 +1,38 @@
 {
-  "version": "0.4.0",
-  "date": "2026-10-13",
-  "clean_source_checks": 247,
-  "clean_source_passed": true,
-  "export_render_checks": 51,
-  "export_render_passed": true,
-  "method": "Git-index-matched source only, empty import cache; exported macOS app real rendered foraging harness",
-  "visual_review": "source before/after screenshots inspected; final export screenshots delivered",
-  "limitations": [
-    "No saving, trading, timed tides or day cycle",
-    "M4 macOS only tested; no Windows or Intel validation",
-    "No Apple notarization"
+  "version": "0.5.0",
+  "internal_resolution": [
+    1280,
+    720
   ],
-  "environment_note": "Restricted headless process logs a macOS system-certificate warning; tests pass. Log-file explicitly targets /private/tmp to avoid user-log crash."
+  "camera_zoom": 2,
+  "world_bounds": [
+    0,
+    0,
+    640,
+    416
+  ],
+  "source_checks": 382,
+  "source_passed": true,
+  "export_checks": 49,
+  "restart_checks": 8,
+  "export_passed": true,
+  "restart_passed": true,
+  "window_measurement": {
+    "area_ratio": 0.499936281028369,
+    "mode": 0,
+    "size": [
+      3620,
+      1994
+    ]
+  },
+  "tested_platform": "macOS Apple M4",
+  "apple_notarized": false,
+  "windows_intel_tested": false,
+  "player_save_untouched": true,
+  "screenshots_scope": "v0.5.0 exported Mac app; all 1280x720",
+  "limitations": [
+    "No trading, planting, daily refresh, quests or music tracks",
+    "Legacy scene tests deliberately run without persistence; journal tests use isolated temporary saves",
+    "Headless sandbox emits existing macOS certificate warning; write-failure test intentionally logs directory error"
+  ]
 }

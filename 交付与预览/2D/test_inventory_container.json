@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "count": 17,
+  "scope": "source headless tests",
+  "log": "Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org\n\nERROR: Condition \"ret != noErr\" is true. Returning: \"\"\n   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)\nPASS initial_add\nPASS overflow_to_empty_slot\nPASS fill_existing_first\nPASS no_slot_for_other_kind\nPASS atomic_reject\nPASS rejection_preserves_state\nPASS partial_accept\nPASS full_capacity\nPASS unknown_rejected\nPASS invalid_amount_rejected\nPASS one_signal_per_success\nPASS snapshot_isolated\nPASS default_24_empty\nPASS chest_capacity\nPASS containers_isolated\nPASS tools_accepted\nPASS tools_unstacked\nINVENTORY checks=17 passed=true\n"
+}

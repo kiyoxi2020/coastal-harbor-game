@@ -1,6 +1,7 @@
 extends RefCounted
 
 const SPAWN = Vector2(330,250)
+const WORLD_BOUNDS = Rect2(0,0,640,416)
 const BEACH = Rect2(224,317,144,51)
 const ITEM_NAMES = {"clam":"蛤蜊", "snail":"海螺", "kelp":"海带"}
 

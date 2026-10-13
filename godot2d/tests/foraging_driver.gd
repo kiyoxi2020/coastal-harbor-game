@@ -2,6 +2,7 @@ extends Node
 
 var results: Dictionary = {}
 var output_dir := "res://verification-foraging"
+var window_measurement: Dictionary = {}
 
 func check(label: String, value: bool) -> void:
 	results[label] = value
@@ -57,6 +58,17 @@ func integration() -> void:
 	for i in range(5):
 		await get_tree().physics_frame
 	check("scene_pickup_api", scene.has_method("nearest_pickup"))
+	if DisplayServer.get_name() != "headless":
+		var window := get_window()
+		var available := DisplayServer.screen_get_usable_rect(window.current_screen)
+		var actual_size := DisplayServer.window_get_size(window.get_window_id())
+		window_measurement = {"mode":window.mode,"window_size":[actual_size.x,actual_size.y],"desktop_usable_size":[available.size.x,available.size.y]}
+		var area_ratio := float(actual_size.x)*actual_size.y/(float(available.size.x)*available.size.y)
+		window_measurement["desktop_area_ratio"] = area_ratio
+		check("startup_windowed",window.mode == Window.MODE_WINDOWED)
+		check("half_desktop_area",area_ratio >= 0.45 and area_ratio <= 0.55)
+		check("window_centered",Vector2(window.position+actual_size/2-available.get_center()).length() < 80)
+		print("WINDOW ",window_measurement)
 	if not results.scene_pickup_api:
 		return
 	check("six_visuals", scene.pickup_nodes.size() == 6)
@@ -126,6 +138,6 @@ func finish() -> void:
 	var passed := not results.values().has(false)
 	DirAccess.make_dir_recursive_absolute(output_dir)
 	var report = FileAccess.open(output_dir.path_join("tests.json"), FileAccess.WRITE)
-	report.store_string(JSON.stringify({"passed":passed,"checks":results},"\t"))
+	report.store_string(JSON.stringify({"passed":passed,"checks":results,"window":window_measurement},"\t"))
 	print("RESULT ",results.size()," checks, passed=",passed)
 	get_tree().quit(0 if passed else 1)

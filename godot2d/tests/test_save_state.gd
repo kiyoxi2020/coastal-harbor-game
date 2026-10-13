@@ -1,0 +1,67 @@
+extends SceneTree
+var checks: Dictionary = {}
+func check(id: String, ok: bool) -> void:
+	checks[id] = ok
+	print(("PASS " if ok else "FAIL ")+id)
+func _initialize() -> void:
+	if not ResourceLoader.exists("res://scripts/player_state.gd") or not ResourceLoader.exists("res://scripts/save_service.gd"):
+		push_error("Missing player state / save service")
+		quit(1)
+		return
+	var State = load("res://scripts/player_state.gd")
+	var Save = load("res://scripts/save_service.gd")
+	var s = State.new()
+	s.player_name = State.clean_name("  海风\n  ")
+	check("name_clean", s.player_name == "海风")
+	check("empty_name", State.clean_name("  ") == "归乡人")
+	check("name_limit", State.clean_name("abcdefghijklmnop").length() == 12)
+	check("collect", s.collect("clam_a", "clam"))
+	check("repeat_rejected", not s.collect("clam_a", "clam"))
+	check("stats", s.total_collected == 1 and s.discovered == {"clam":true})
+	check("store", s.bag.transfer_to(s.chest, 0, 1) == 1 and s.total_collected == 1)
+	var snapshot: Dictionary = s.to_data(Vector2(330,250))
+	check("validate", State.valid_data(snapshot))
+	var restored = State.new()
+	check("restore", restored.restore(snapshot) and restored.chest.count_item("clam") == 1 and restored.counts.clam == 0)
+	var invalid: Dictionary = snapshot.duplicate(true)
+	invalid.bag[0] = {"id":"clam", "amount":100}
+	check("bad_stack", not State.valid_data(invalid))
+	check("restore_atomic", not restored.restore(invalid) and restored.chest.count_item("clam") == 1)
+	invalid = snapshot.duplicate(true)
+	invalid.collected["made_up"] = true
+	check("unknown_point", not State.valid_data(invalid))
+	invalid = snapshot.duplicate(true)
+	invalid.bag[0] = {"id":"unknown", "amount":1}
+	check("unknown_item", not State.valid_data(invalid))
+	invalid = snapshot.duplicate(true)
+	invalid.total_collected = 6
+	check("bad_statistics", not State.valid_data(invalid))
+	var full = State.new()
+	full.bag.add("snail", 24*99)
+	check("full_not_collected", not full.collect("clam_a", "clam") and full.collected.is_empty())
+	var path := "/private/tmp/coastal-save-tests-"+str(Time.get_ticks_usec())
+	var save = Save.new(path)
+	check("missing", not save.read_save().ok)
+	check("write", save.write_save(snapshot))
+	check("roundtrip", save.read_save().ok and save.read_save().data.player_name == "海风")
+	s.collect("kelp_a", "kelp")
+	check("second_write", save.write_save(s.to_data(Vector2(294,330))))
+	var f = FileAccess.open(path+"/progress.json", FileAccess.WRITE)
+	f.store_string("broken")
+	f.close()
+	var recovered: Dictionary = save.read_save()
+	check("backup_recovery", recovered.ok and recovered.recovered and recovered.data.total_collected == 1)
+	check("repair_keeps_backup", save.write_save(recovered.data) and save.read_save().ok)
+	var future: Dictionary = snapshot.duplicate(true)
+	future.version = 999
+	f = FileAccess.open(path+"/progress.json", FileAccess.WRITE)
+	f.store_string(JSON.stringify(future))
+	f.close()
+	check("future_blocks", save.read_save().get("future",false) and not save.write_save(snapshot))
+	var impossible = Save.new(path+"/progress.json/not_a_directory")
+	check("write_failure", not impossible.write_save(snapshot))
+	DirAccess.make_dir_recursive_absolute("res://verification-journal-unit")
+	f = FileAccess.open("res://verification-journal-unit/tests.json", FileAccess.WRITE)
+	f.store_string(JSON.stringify({"passed":not checks.values().has(false),"checks":checks},"\t"))
+	print("STATE_SAVE ", checks.size(), " passed=", not checks.values().has(false))
+	quit(1 if checks.values().has(false) else 0)

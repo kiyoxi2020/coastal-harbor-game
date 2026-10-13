@@ -1,19 +1,16 @@
 {
-  "version": "0.4.0",
+  "version": "0.5.0",
   "codesign_verified": true,
   "apple_notarized": false,
   "zip_crc_passed": true,
-  "utf8_names": true,
-  "executable_mode_preserved": true,
-  "mac_files_matched": 7,
-  "CoastalHarbor2D-v0.4.0-macOS.zip": {
-    "bytes": 75912186,
-    "sha256": "ab476d3d0b39fb4520df39dbc07f1c3f9d60ba31466a68bd7ff9ccf213b5ce50"
+  "CoastalHarbor2D-v0.5.0-macOS.zip": {
+    "bytes": 75970278,
+    "sha256": "4200e5830be1373c1da4ccabd8fce45d6e288bae7f8541cde93669427e1bd3ef"
   },
-  "source_files_matched": 91,
-  "source_scope": "current Git-tracked 2D sources only; retired tree studies removed",
-  "CoastalHarbor2D-v0.4.0-source.zip": {
-    "bytes": 21347952,
-    "sha256": "97358c6a7ae57b8a107ec29d3cef6daba79be6841c1bfd7b15a5382f3872fb6b"
+  "source_files_matched": 126,
+  "source_scope": "current non-ignored 2D working sources, including new unstaged files",
+  "CoastalHarbor2D-v0.5.0-source.zip": {
+    "bytes": 21394618,
+    "sha256": "e31588c09298fb7732a3cd021e24dc1565a9cba05e9ebbd66634ee0fec8ab822"
   }
 }

@@ -50,5 +50,6 @@
 		"west_sea_blocked": true,
 		"within_24": true
 	},
-	"passed": true
+	"passed": true,
+	"window": {}
 }
