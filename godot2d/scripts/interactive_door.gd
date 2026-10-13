@@ -11,7 +11,7 @@ var texture: Texture2D
 var pilot_frames: Array[Texture2D]=[]
 var pilot_anchor := Vector2(15,54)
 var pilot_leaf_height := 0
-var pilot_frame_top := -54.0
+var pilot_frame_top := -9.0
 var render_size := Vector2(22,29)
 
 func _ready() -> void:
@@ -24,21 +24,32 @@ func _ready() -> void:
 			pilot_leaf_height=int(data.closed_leaf_size[1])
 		for id in ["door_closed","door_half","door_open"]:
 			pilot_frames.append(CottageArt.texture_for(id))
-		render_size=Vector2(30,59)
+		render_size=Vector2(38,12)
 	texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
 	body=StaticBody2D.new()
 	body.name="DoorCollision"
 	collision=CollisionShape2D.new()
 	var shape:=RectangleShape2D.new()
-	shape.size=Vector2(38 if inside else 26,8)
+	shape.size=Vector2(30 if inside else 20,8)
 	collision.shape=shape
 	body.add_child(collision)
 	add_child(body)
+	var jamb_body:=StaticBody2D.new()
+	jamb_body.name="JambCollision"
+	var jamb_center:=17.0 if inside else 12.0
+	for side in [-1.0,1.0]:
+		var jamb_shape:=CollisionShape2D.new()
+		var jamb_box:=RectangleShape2D.new()
+		jamb_box.size=Vector2(4,8)
+		jamb_shape.shape=jamb_box
+		jamb_shape.position=Vector2(side*jamb_center,0)
+		jamb_body.add_child(jamb_shape)
+	add_child(jamb_body)
 	var jamb:=Node2D.new()
 	jamb.set_script(preload("res://scripts/door_jamb.gd"))
 	jamb.width=38.0 if inside else 28.0
-	jamb.height=54.0 if inside else 32.0
-	jamb.z_index=2
+	jamb.height=9.0 if inside else 32.0
+	jamb.z_index=0 if inside else 2
 	add_child(jamb)
 	set_pose(0)
 
@@ -57,12 +68,13 @@ func set_pose(value: int) -> void:
 	queue_redraw()
 
 func _draw() -> void:
-	if inside and pilot_frames.size()==3 and pilot_frames.all(func(t): return t != null):
-		# Aperture and jamb are fixed; only the registered leaf pose changes.
-		draw_rect(Rect2(-19,pilot_frame_top,38,55),Color("264d51"))
-		draw_rect(Rect2(-17,pilot_frame_top+2,34,52),Color("769185"))
-		draw_rect(Rect2(-15,pilot_frame_top+4,30,50),Color("172e34"))
-		draw_texture(pilot_frames[pose],-pilot_anchor)
+	if inside:
+		# A low south-wall cutaway: the source leaf tint is reused, not its tall silhouette.
+		draw_rect(Rect2(-19,-9,38,12),Color("264d51"))
+		draw_rect(Rect2(-15,-7,30,8),Color("172e34"))
+		var leaf_width: float=[30.0,15.0,3.0][pose]
+		if texture:
+			draw_texture_rect_region(texture,Rect2(-15,-7,leaf_width,8),Rect2(348,383,61,81))
 		draw_rect(Rect2(-19,0,38,3),Color("d6c7a0"))
 		return
 	var width:=32.0 if inside else 22.0

@@ -24,7 +24,7 @@ func _ready() -> void:
 	exterior_door.name="ExteriorDoor"
 	exterior_door.position=Room.OUTSIDE_DOOR
 	exterior_door.approach=Room.OUTSIDE_APPROACH
-	exterior_door.entrance_normal=Room.ENTRANCE_NORMAL
+	exterior_door.entrance_normal=Room.OUTSIDE_ENTRANCE_NORMAL
 	exterior_door.z_index=0
 	world.sort_layer.add_child(exterior_door)
 	interior=Node2D.new()

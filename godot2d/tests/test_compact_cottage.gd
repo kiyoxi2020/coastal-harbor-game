@@ -19,23 +19,23 @@ func run() -> void:
 		var all_depths:=true
 		for depth in range(57):
 			for lateral in [-24,0,24]:
-				all_depths=door.can_interact(door.position+Vector2(lateral,depth)) and all_depths
+				all_depths=door.can_interact(door.position+door.entrance_normal*depth+Vector2(lateral,0)) and all_depths
 		check(location+"_continuous_depth_0_56_lateral_24",all_depths)
-		check(location+"_back_rejected",not door.can_interact(door.position+Vector2(0,-1)))
-		check(location+"_far_rejected",not door.can_interact(door.position+Vector2(0,57)))
-		check(location+"_side_rejected",not door.can_interact(door.position+Vector2(25,24)))
+		check(location+"_back_rejected",not door.can_interact(door.position-door.entrance_normal))
+		check(location+"_far_rejected",not door.can_interact(door.position+door.entrance_normal*57))
+		check(location+"_side_rejected",not door.can_interact(door.position+door.entrance_normal*24+Vector2(25,0)))
 	check("compact_floor",Room.FLOOR==Rect2(176,112,288,208))
-	check("north_entry",Room.DOOR==Vector2(320,128) and Room.SPAWN==Vector2(320,160))
+	check("south_entry",Room.DOOR==Vector2(320,320) and Room.SPAWN==Vector2(320,288))
 	check("valid_old_save_preserved",scene.home.safe_position("house",Vector2(320,300))==Vector2(320,300))
-	check("old_south_save_reset",scene.home.safe_position("house",Vector2(320,328))==Vector2(320,160))
-	check("new_door_save_reset",scene.home.safe_position("house",Vector2(320,128))==Vector2(320,160))
-	check("new_bed_blocks_save",scene.home.safe_position("house",Vector2(216,190))==Vector2(320,160))
+	check("old_north_save_reset",scene.home.safe_position("house",Vector2(320,128))==Room.SPAWN)
+	check("new_door_save_reset",scene.home.safe_position("house",Room.DOOR)==Room.SPAWN)
+	check("new_bed_blocks_save",scene.home.safe_position("house",Vector2(216,190))==Room.SPAWN)
 	scene.home.switch_room("house",Room.SPAWN)
-	scene.player.position=Room.DOOR+Vector2(12,12)
+	scene.player.position=Room.DOOR+Vector2(12,-12)
 	check("near_begin",scene.home.transition.begin())
 	var initial_y: float=scene.player.position.y
 	await create_timer(0.08).timeout
-	check("near_does_not_retreat",scene.player.position.y<=initial_y+0.1)
+	check("near_does_not_retreat",scene.player.position.y>=initial_y-0.1)
 	check("no_forced_player_layer",scene.player.z_index==0)
 	var started:=Time.get_ticks_msec()
 	var partial:=false
@@ -59,13 +59,13 @@ func run() -> void:
 	check("aperture_cleanup",scene.player.doorway_material.get_shader_parameter("aperture_top")< -999999)
 	scene.home.switch_room("house",Room.SPAWN)
 	await physics_frame
-	scene.player.position=Room.DOOR+Vector2(20,28)
+	scene.player.position=Room.DOOR+Vector2(20,-28)
 	var blocker:=StaticBody2D.new()
 	var collision:=CollisionShape2D.new()
 	var box:=RectangleShape2D.new()
 	box.size=Vector2(4,14)
 	collision.shape=box
-	blocker.position=Room.DOOR+Vector2(10,28)
+	blocker.position=Room.DOOR+Vector2(10,-28)
 	blocker.add_child(collision)
 	scene.home.interior.add_child(blocker)
 	await physics_frame
@@ -73,7 +73,7 @@ func run() -> void:
 	var before: Vector2=scene.player.position
 	check("blocked_alignment_rejected",not scene.home.transition.begin())
 	check("blocked_alignment_control_and_position",not scene.home.transition.busy and scene.player.position==before)
-	blocker.position=Room.DOOR+Vector2(0,20)
+	blocker.position=Room.DOOR+Vector2(0,-20)
 	scene.player.position=Room.SPAWN
 	await physics_frame
 	await physics_frame
@@ -103,7 +103,7 @@ func run() -> void:
 	scene.player.set_doorway_hidden(0.5)
 	scene.player.doorway_material.set_shader_parameter("aperture_top",136.0)
 	scene.home.reset_player()
-	check("reset_clears_visual_to_north_spawn",scene.player.doorway_hidden==0 and scene.player.position==Room.SPAWN)
+	check("reset_clears_visual_to_south_spawn",scene.player.doorway_hidden==0 and scene.player.position==Room.SPAWN)
 	check("reset_clears_aperture",scene.player.doorway_material.get_shader_parameter("aperture_top")< -999999)
 	if DisplayServer.get_name()!="headless":
 		await render_clipping(scene)
