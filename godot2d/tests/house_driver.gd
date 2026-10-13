@@ -169,6 +169,7 @@ func run() -> void:
 	check("failure_restores_source",scene.foraging.location=="harbor" and scene.player.position==home.exterior_door.approach)
 	check("failure_clears_fade",home.transition.fade.modulate.a==0 and home.exterior_door.pose==0)
 	check("failure_clears_visual",scene.player.doorway_hidden==0 and scene.player.modulate.a==1 and scene.player.z_index==0)
+	check("failure_clears_aperture",scene.player.doorway_material.get_shader_parameter("aperture_top")< -999999)
 	home.interior=saved_interior
 	for i in range(3): await get_tree().process_frame
 	var nodes_before:=get_tree().get_node_count()
@@ -179,6 +180,7 @@ func run() -> void:
 	check("20_crossings_no_nodes_leaked",get_tree().get_node_count()==nodes_before)
 	check("20_crossings_inventory",scene.foraging.chest.count_item("clam")==1 and scene.foraging.total_collected==1)
 	check("20_crossings_visual_restored",scene.player.doorway_hidden==0 and scene.player.modulate.a==1 and scene.player.z_index==0)
+	check("20_crossings_aperture_restored",scene.player.doorway_material.get_shader_parameter("aperture_top")< -999999)
 	# Real physics: indoor furniture and wall contacts, not only rectangle math.
 	home.switch_room("house",Vector2(216,240))
 	Input.action_press("up")

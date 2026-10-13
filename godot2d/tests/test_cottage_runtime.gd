@@ -18,6 +18,16 @@ func run() -> void:
 	check("spawn_clear_of_tall_leaf",Room.SPAWN==Vector2(320,160))
 	check("legacy_door_save_normalized",scene.home.safe_position("house",Vector2(320,328))==Room.SPAWN)
 	check("bed_footprint",Room.furniture()[0].rect==Rect2(192,144,48,80))
+	for item in Room.furniture():
+		var entry=preload("res://scripts/cottage_art.gd").entry(item.get("art",item.id))
+		var footprint=entry.get("collision_footprint")
+		if item.has("base"):
+			var matches: bool=footprint is Array and footprint.size()==4
+			if matches:
+				matches=Rect2(item.rect.position+Vector2(footprint[0],footprint[1]),Vector2(footprint[2],footprint[3]))==item.base
+			check("manifest_matches_physical_base_"+item.id,matches)
+		else:
+			check("manifest_has_no_air_blocker_"+item.id,footprint==null)
 	var bed=scene.home.interior.sort_layer.get_node("Bed")
 	check("bed_texture_loaded",bed.pilot_texture is Texture2D and bed.pilot_texture.get_size()==Vector2(48,80))
 	var expected_art := ["nightstand", "kitchen", "table", "chair", "chest", "shelf", "photo", "plant", "window_left", "window_right"]

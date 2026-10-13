@@ -52,7 +52,8 @@ func path_clear(from: Vector2,to: Vector2,door) -> bool:
 	if not space.intersect_shape(query,1).is_empty(): return false
 	var result: PackedFloat32Array=space.cast_motion(query)
 	return result[0]>=0.999
-func walk_to(point: Vector2,_duration: float) -> bool:
+func walk_to(point: Vector2) -> bool:
+	# Physics moves at SPEED (72 units/s); duration follows distance, never a tween.
 	var player=home.world.player
 	var delta: Vector2=point-player.position
 	player.facing="south" if delta.y>=0 else "north"
@@ -76,6 +77,8 @@ func update_clip() -> void:
 	var depth: float=(player.position-clipping_door.position).dot(clipping_door.entrance_normal)
 	# Keep the full figure on the floor. Conceal only after feet enter the aperture.
 	player.set_doorway_hidden(-depth/APERTURE_DEPTH)
+	# Local progressive hiding cannot cover hair above the fixed exterior awning.
+	player.doorway_material.set_shader_parameter("aperture_top",clipping_door.aperture_top())
 func restore_source(source: String) -> void:
 	clipping_door=null
 	home.switch_room(source,Vector2(stable_snapshot.position[0],stable_snapshot.position[1]))
@@ -103,7 +106,7 @@ func run() -> void:
 	var door=home.active_door()
 	set_phase("Approach")
 	var alignment:=Vector2(door.position.x,world.player.position.y)
-	if not await walk_to(alignment,travel_duration(alignment)):
+	if not await walk_to(alignment):
 		await restore_source(source)
 		return
 	set_phase("Opening")
@@ -111,7 +114,7 @@ func run() -> void:
 	clipping_door=door
 	set_phase("Crossing")
 	var crossing_point: Vector2=door.position-door.entrance_normal*APERTURE_DEPTH
-	if not await walk_to(crossing_point,travel_duration(crossing_point)):
+	if not await walk_to(crossing_point):
 		await restore_source(source)
 		return
 	set_phase("FadeOut")
@@ -128,7 +131,7 @@ func run() -> void:
 	set_phase("FadeIn")
 	await opacity(0)
 	set_phase("Arrival")
-	if not await walk_to(door.approach,travel_duration(door.approach)):
+	if not await walk_to(door.approach):
 		await restore_source(source)
 		return
 	clipping_door=null
