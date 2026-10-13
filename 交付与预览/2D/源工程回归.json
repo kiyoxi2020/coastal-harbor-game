@@ -1,0 +1,26 @@
+{
+  "scope": "Existing gameplay regression suites",
+  "passed": true,
+  "checks": {
+    "item_catalog": 8,
+    "inventory_container": 17,
+    "inventory_operations": 40,
+    "save_state": 23,
+    "journal": 37,
+    "display": 13,
+    "environment": 67,
+    "tree_set": 51,
+    "interaction": 36,
+    "world": 45,
+    "foraging": 49
+  },
+  "total": 386,
+  "python_asset_tests": 5,
+  "log_prefix": "/private/tmp/compact-final-",
+  "save_isolation": "/private/tmp test directories; real player save untouched",
+  "notes": [
+    "macOS headless sandbox prints certificate-store error; each process exited0 and assertions passed.",
+    "save_state deliberately attempts impossible directory and verifies explicit failure.",
+    "Final native clipping tests and exported application verification are recorded separately."
+  ]
+}

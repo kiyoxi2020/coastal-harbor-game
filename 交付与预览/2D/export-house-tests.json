@@ -1,7 +1,9 @@
 {
 	"checks": {
+		"20_crossings_aperture_restored": true,
 		"20_crossings_inventory": true,
 		"20_crossings_no_nodes_leaked": true,
+		"20_crossings_visual_restored": true,
 		"back_rejected": true,
 		"bad_house_continue": true,
 		"bad_house_written": true,
@@ -25,7 +27,9 @@
 		"entered": true,
 		"exited": true,
 		"failure_begin": true,
+		"failure_clears_aperture": true,
 		"failure_clears_fade": true,
+		"failure_clears_visual": true,
 		"failure_restores_source": true,
 		"far_rejected": true,
 		"final_indoor_save": true,
@@ -85,7 +89,6 @@
 		"transition_finishes_35": true,
 		"transition_finishes_44": true,
 		"transition_finishes_46": true,
-		"transition_finishes_50": true,
 		"transition_finishes_52": true,
 		"transition_finishes_54": true,
 		"transition_finishes_56": true,
@@ -105,6 +108,7 @@
 		"transition_finishes_84": true,
 		"transition_finishes_86": true,
 		"transition_finishes_88": true,
+		"transition_finishes_90": true,
 		"wall_blocks": true
 	},
 	"passed": true

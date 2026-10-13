@@ -1,29 +1,46 @@
 {
-  "version": "0.5.3",
-  "scope": "First verified bed and indoor door pixel-art pilot; other room furniture remains in its prior art style",
-  "source_commit_at_export": "347505d",
-  "build_time_utc": "2026-10-13T15:10:27Z",
+  "version": "0.5.4",
+  "scope": "Compact north-entry cottage with all 17 generated art resources and progressive doorway occlusion",
+  "runtime_commit": "9eff3fa",
   "tested_platform": "macOS Apple M4",
-  "export_house_checks": 106,
-  "export_house_passed": true,
+  "legacy_source_checks": 386,
+  "python_asset_tests": 5,
+  "python_staging_package_tests": 1,
+  "cottage_runtime_checks": 42,
+  "house_save_checks": 29,
+  "focused_headless_checks": 37,
+  "focused_native_render_checks": 45,
+  "native_house_checks": 110,
+  "export_house_checks": 110,
   "export_restart_checks": 6,
-  "export_restart_passed": true,
   "export_journal_checks": 52,
-  "export_journal_passed": true,
-  "all_export_checks": 164,
+  "export_exit_during_transition_checks": 5,
+  "all_export_driver_checks": 173,
+  "all_passed": true,
   "test_save_directories": [
-    "/private/tmp/coastal-pilot-export-H1Pfsl",
-    "/private/tmp/coastal-pilot-journal-Voh4O6"
+    "/private/tmp/coastal-compact-source-house",
+    "/private/tmp/coastal-compact-app-house",
+    "/private/tmp/coastal-compact-app-journal",
+    "/private/tmp/coastal-compact-app-exit"
   ],
-  "screenshots_scope": "v0.5.3 exported Mac app; interior screenshot is 1280x720",
+  "visual_evidence": {
+    "hero": "10-interior-saved.png",
+    "five_phase_capture": "door-stages/ (native source renderer, both directions)",
+    "export_video": "doorway-in-out.mp4",
+    "export_video_source_frames": 46,
+    "capture_sampling": "approximately 10 Hz; encoded at 30 fps with repeated frames",
+    "export_contact_sheet": "doorway-contact.png",
+    "independently_reviewed": true
+  },
   "codesign_verified": true,
   "zip_crc_passed": true,
-  "player_save_untouched": true,
+  "player_save_not_written": true,
   "apple_notarized": false,
   "windows_intel_tested": false,
   "limitations": [
-    "Bed and indoor door art only; remaining room furniture awaits a later art pass",
-    "No trading, planting, daily refresh, quests or music tracks",
-    "The intentional save-write-failure case emits a directory error and passes its assertion"
+    "Release template does not support --script; the attempted focused script launch opened title only and was stopped, not counted as passed",
+    "No planting, trading, cooking, sleeping, daily refresh or music tracks",
+    "Intentional impossible save path emits an error and passes its failure-handling assertion",
+    "Some headless sandbox tests emit a macOS certificate-store error but exit 0"
   ]
 }
