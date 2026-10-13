@@ -1,11 +1,16 @@
-# 潮港旧屋 v0.5.3 · 室内床与门扇像素试玩
+# 潮港旧屋 v0.5.4 · 紧凑小屋与北墙入口
 
-这是最新的 Mac 试玩版及其对应源码。打开「潮港旧屋 · 低潮赶海.app」，选择新游戏或继续进度。本次只更新了室内床与门扇的像素美术；厨房、桌椅、书架、箱子等仍沿用原画面，整间屋子的美术翻新尚未完成。
+打开「潮港旧屋 · 低潮赶海.app」，选择新游戏或继续。旧屋门前按E进入，在室内上方北墙门前按E走出。WASD/方向键移动，E拾取/查看/开门/继续，B或Tab打开手账，R回当前场景安全入口。床、厨房与照片可查看；室内外箱子共享48格仓储。
 
-从旧屋门前按 E 进入；在室内走近床按 E 查看，在下方门前按 E 离开。室内外箱子共享 48 格仓储。在屋内保存并重新启动后可回到屋内。WASD 或方向键移动，B / Tab 打开手账，R 回当前场景安全入口。
+房间缩为288×208，人物大小与2倍镜头不变。床、门三态及13项新室内素材已全部接入；两方向穿门逐步遮挡，外门雨篷会遮住人物头部。窗口默认约占可用桌面50%，内部画面1280×720。
 
-源码包 `CoastalHarbor2D-v0.5.3-source.zip` 包含 Godot 工程、室内原图与处理图、生成工具及其测试。运行工程需要 Godot 4.7.1。`04-interior.png` 是本版导出应用的实际画面；核验结果见 `verification-summary.json`、`package-verification.json` 和各测试 JSON。
+- `CoastalHarbor2D-v0.5.4-macOS.zip`：Mac试玩包，解压后打开应用。
+- `CoastalHarbor2D-v0.5.4-source.zip`：可编辑Godot4.7.1工程、原图/处理图、提示词、工具与测试。
+- `10-interior-saved.png`：导出应用的干净室内画面。
+- `doorway-in-out.mp4`：导出应用连续进出门录像；约10Hz采样、30fps编码，并非30Hz原始录像。
+- `doorway-contact.png`及`door-stages/`：连续画面总览与原生两方向五阶段图。
+- 各JSON：原有386项回归、导出173项流程、素材/门交互测试及包完整性证据。
 
-Mac 存档目录通常为 `~/Library/Application Support/Godot/app_userdata/潮港旧屋 · 低潮赶海/coastal-progress/`。本轮自验全部使用 `/private/tmp` 下的专用目录，没有写入玩家存档。Mac Apple M4 已验证，应用未 Apple 公证；Windows 与 Intel Mac 未验证。种植、交易、睡觉、潮汐计时与每日刷新尚未实现。
+Mac Apple M4已测试，本机ad-hoc代码签名通过，未Apple公证。Windows与Intel Mac未测试。种植、交易、料理、睡觉、换日、每日刷新和音乐轨尚未实现。存档仍为v2，兼容旧v1；不要用旧应用回写v2存档。
 
-上一版完整保存在项目根目录 `archive/2026-10-13-before-v0.5.3/2D/`。
+验收流程使用/private/tmp专用存档，没有写入玩家进度。旧版可从项目`archive/2026-10-14-before-v0.5.4/2D/`恢复，3D交付保持原样。
