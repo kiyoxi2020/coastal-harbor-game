@@ -41,6 +41,7 @@
 		"new_game": true,
 		"no_menu_during_transition": true,
 		"no_outdoor_pickups": true,
+		"old_bed_side_walkable": true,
 		"old_save_continues_outside": true,
 		"old_save_keeps_inventory": true,
 		"outdoor_disabled": true,

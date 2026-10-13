@@ -1,47 +1,29 @@
 {
-  "version": "0.5.2",
-  "internal_resolution": [
-    1280,
-    720
-  ],
-  "camera_zoom": 2,
-  "world_bounds": [
-    0,
-    0,
-    640,
-    416
-  ],
-  "source_checks": 513,
-  "source_passed": true,
-  "export_checks": 52,
-  "restart_checks": 8,
-  "export_passed": true,
-  "restart_passed": true,
-  "house_export_checks": 105,
-  "house_restart_checks": 6,
-  "house_transition_exit_checks": 5,
-  "house_export_passed": true,
-  "house_restart_passed": true,
-  "house_transition_exit_passed": true,
-  "all_export_run_checks": 176,
-  "save_format": 2,
-  "reads_legacy_save_format": 1,
-  "window_measurement": {
-    "area_ratio": 0.499936281028369,
-    "mode": 0,
-    "size": [
-      3620,
-      1994
-    ]
-  },
+  "version": "0.5.3",
+  "scope": "First verified bed and indoor door pixel-art pilot; other room furniture remains in its prior art style",
+  "source_commit_at_export": "347505d",
+  "build_time_utc": "2026-10-13T15:10:27Z",
   "tested_platform": "macOS Apple M4",
+  "export_house_checks": 106,
+  "export_house_passed": true,
+  "export_restart_checks": 6,
+  "export_restart_passed": true,
+  "export_journal_checks": 52,
+  "export_journal_passed": true,
+  "all_export_checks": 164,
+  "test_save_directories": [
+    "/private/tmp/coastal-pilot-export-H1Pfsl",
+    "/private/tmp/coastal-pilot-journal-Voh4O6"
+  ],
+  "screenshots_scope": "v0.5.3 exported Mac app; interior screenshot is 1280x720",
+  "codesign_verified": true,
+  "zip_crc_passed": true,
+  "player_save_untouched": true,
   "apple_notarized": false,
   "windows_intel_tested": false,
-  "player_save_untouched": true,
-  "screenshots_scope": "v0.5.2 exported Mac app; all 1280x720",
   "limitations": [
+    "Bed and indoor door art only; remaining room furniture awaits a later art pass",
     "No trading, planting, daily refresh, quests or music tracks",
-    "Legacy scene tests deliberately run without persistence; journal tests use isolated temporary saves",
-    "Headless sandbox emits existing macOS certificate warning; write-failure test intentionally logs directory error"
+    "The intentional save-write-failure case emits a directory error and passes its assertion"
   ]
 }
