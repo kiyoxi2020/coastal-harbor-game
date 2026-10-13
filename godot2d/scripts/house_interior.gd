@@ -6,6 +6,7 @@ func _ready() -> void:
 	texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
 	sort_layer=Node2D.new()
 	sort_layer.y_sort_enabled=true
+	sort_layer.z_index=1
 	add_child(sort_layer)
 	for item in Data.furniture():
 		var node:=Node2D.new()
@@ -30,9 +31,8 @@ func _ready() -> void:
 	door.position=Data.DOOR
 	door.approach=Data.SPAWN
 	door.inside=true
-	# Cutaway southern wall: the leaf is behind the actor, never hiding their feet.
+	# Draw after the painted room, while the actor and furniture remain above it.
 	add_child(door)
-	move_child(door,0)
 
 func block(r: Rect2,c: String) -> void:
 	draw_rect(r,Color(c))
@@ -61,7 +61,6 @@ func _draw() -> void:
 		block(Rect2(x-5,85,70,5),"d4b17c")
 	block(Rect2(84,84,5,264),"65796a");block(Rect2(551,84,5,264),"65796a")
 	block(Rect2(80,348,220,7),"6b5c44");block(Rect2(340,348,220,7),"6b5c44")
-	block(Rect2(298,346,44,9),"d2b88b")
 	block(Rect2(252,179,136,92),"547e7e");block(Rect2(256,183,128,84),"92ada0")
 	block(Rect2(260,187,120,76),"6c9690")
 	for x in range(262,380,10):

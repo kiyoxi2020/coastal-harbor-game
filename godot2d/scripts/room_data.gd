@@ -1,6 +1,6 @@
 extends RefCounted
 const FLOOR := Rect2(80,64,480,288)
-const SPAWN := Vector2(320,328)
+const SPAWN := Vector2(320,300)
 const DOOR := Vector2(320,352)
 const STORAGE := Vector2(448,288)
 const OUTSIDE_APPROACH := Vector2(209,194)
@@ -8,7 +8,7 @@ const OUTSIDE_DOOR := Vector2(209,165)
 
 static func furniture() -> Array[Dictionary]:
 	return [
-		{"id":"bed","rect":Rect2(112,96,80,112)},
+		{"id":"bed","rect":Rect2(128,128,48,80)},
 		{"id":"nightstand","rect":Rect2(200,112,32,32)},
 		{"id":"kitchen","rect":Rect2(400,88,128,56)},
 		{"id":"table","rect":Rect2(128,250,80,40)},
