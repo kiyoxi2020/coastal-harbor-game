@@ -1,12 +1,14 @@
 extends RefCounted
 
 signal changed
+const SAVE_VERSION := 2
 const Inventory = preload("res://scripts/inventory/inventory_container.gd")
 const Data = preload("res://scripts/harbor_data.gd")
 const Catalog = preload("res://scripts/inventory/item_catalog.gd")
 var bag = Inventory.new(24)
 var chest = Inventory.new(48)
 var player_name := "归乡人"
+var location := "harbor"
 var collected: Dictionary = {}
 var discovered: Dictionary = {}
 var total_collected := 0
@@ -45,7 +47,7 @@ func collect(id: String, kind: String) -> bool:
 	return true
 
 func to_data(position: Vector2) -> Dictionary:
-	return {"version":1, "player_name":player_name, "bag":bag.snapshot(), "chest":chest.snapshot(),
+	return {"version":SAVE_VERSION, "location":location, "player_name":player_name, "bag":bag.snapshot(), "chest":chest.snapshot(),
 		"collected":collected.duplicate(), "discovered":discovered.duplicate(), "total_collected":total_collected,
 		"position":[position.x,position.y]}
 
@@ -53,7 +55,9 @@ static func _integer(value) -> bool:
 	return (value is int or value is float) and is_finite(float(value)) and float(value) == floor(float(value))
 
 static func valid_data(value) -> bool:
-	if not value is Dictionary or value.get("version") != 1:
+	if not value is Dictionary or (value.get("version") != 1 and value.get("version") != SAVE_VERSION):
+		return false
+	if value.version == SAVE_VERSION and value.get("location") not in ["harbor","house"]:
 		return false
 	if not value.get("player_name") is String or clean_name(value.player_name) != value.player_name:
 		return false
@@ -96,9 +100,19 @@ static func valid_data(value) -> bool:
 			return false
 	return true
 
+static func migrate_data(value) -> Dictionary:
+	if not valid_data(value):
+		return {}
+	var migrated: Dictionary = value.duplicate(true)
+	if migrated.version == 1:
+		migrated.location = "harbor"
+	migrated.version = SAVE_VERSION
+	return migrated
+
 func restore(value: Dictionary) -> bool:
 	if not valid_data(value):
 		return false
+	location = "harbor" if value.version == 1 else value.location
 	bag = Inventory.new(24)
 	chest = Inventory.new(48)
 	bag._slots = value.bag.duplicate(true)
