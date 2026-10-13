@@ -20,6 +20,13 @@ func run() -> void:
 	check("bed_footprint",Room.furniture()[0].rect==Rect2(192,144,48,80))
 	var bed=scene.home.interior.sort_layer.get_node("Bed")
 	check("bed_texture_loaded",bed.pilot_texture is Texture2D and bed.pilot_texture.get_size()==Vector2(48,80))
+	var expected_art := ["nightstand", "kitchen", "table", "chair", "chest", "shelf", "photo", "plant", "window_left", "window_right"]
+	for art_id in expected_art:
+		var furniture_node=scene.home.interior.sort_layer.get_node_or_null(art_id)
+		check("generated_furniture_"+art_id,furniture_node!=null and furniture_node.pilot_texture is Texture2D)
+	check("generated_floor",scene.home.interior.get("floor_texture") is Texture2D)
+	check("generated_wall",scene.home.interior.get("wall_texture") is Texture2D)
+	check("generated_rugs",scene.home.interior.get("rug_texture") is Texture2D and scene.home.interior.get("bed_rug_texture") is Texture2D)
 	var door=scene.home.interior.door
 	check("indoor_three_shared_frames",door.pilot_frames.size()==3 and door.pilot_frames.all(func(t): return t is Texture2D and t.get_size()==Vector2(30,59)))
 	check("indoor_closed_leaf_height",door.pilot_leaf_height>=44)
