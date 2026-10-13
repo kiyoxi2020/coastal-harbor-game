@@ -47,6 +47,8 @@
 
 **Files:** test drivers if needed, export_presets.cfg, latest2D release, docs result, source packaging tool if new asset paths need selection.
 
+- [ ] Before final regression, fix root-observed exterior hair-over-awning defect in /private/tmp/compact-door-stages/harbor-partial.png. Add a real rendered regression that opening-plane actor pixels above the exterior aperture top are occluded. Use explicit door aperture top/world-coordinate clipping or equivalent foreground mask, preserving the art and character pixels below the opening. Keep indoor actor fully visible on floor. Restore this additional mask on every transition/load/failure cleanup. Follow RED/GREEN, capture both doors again. Own scripts/player.gd, doorway_clip.gdshader, interactive_door.gd, room_transition.gd and test_compact_cottage.gd for this fix.
+- [ ] Resolve Task1 test minor: explicitly assert FadeOut was observed and transition completed at expected destination. Clarify ignored walk_to duration argument without adding unrelated movement features. Existing distance/72 behavior must remain.
 - [ ] Run all existing test suites plus new focused cases with isolated saves. Validate near-door center/lateral, blocked alignment, twenty crossings, old saves, failure cleanup, journal/storage and exit/restart.
 - [ ] Capture continuous in/out animation and five phases each; inspect visually for no feet-on-leaf, no sudden premature disappearance, normal destination emergence. Fix visual defects with failing regression first.
 - [ ] Export v0.5.4 into staging, run actual app house/journal/restart tests. Verify source ZIP matches current selected files byte-for-byte and ZIP CRC; verify app signature.
