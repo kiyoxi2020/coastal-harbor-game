@@ -24,7 +24,7 @@ process_mode = 4
 visible = false
 
 [node name="WorldCamera" type="Camera2D" parent="." node_paths=PackedStringArray("exterior")]
-zoom = Vector2(2, 2)
+zoom = Vector2(4, 4)
 position_smoothing_enabled = false
 script = ExtResource("2_camera")
 exterior = NodePath("../HarborExterior")
