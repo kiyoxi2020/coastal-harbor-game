@@ -110,4 +110,3 @@ layout_mode = 1
 
 [node name="SaveErrorDialog" parent="Root/Dialogs" instance=ExtResource("8_save")]
 layout_mode = 1
-
