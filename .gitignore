@@ -1,15 +1,6 @@
 .DS_Store
 .superpowers/
-work/
-unity/Library/
-unity/Temp/
-unity/Obj/
-unity/Logs/
-unity/UserSettings/
-unity/Builds/
-*.blend1
-
-# Local history and generated artifacts are never versioned.
+/work/
 /archive/
 /builds/
 **/.godot/
@@ -17,32 +8,9 @@ unity/Builds/
 *.pyc
 *.zip
 *.app/
+*.blend1
 .env
 .env.*
 !.env.example
 /godot2d/verification*/
-/unity/Verification/
-/unity/Assets/Scenes/Harbor-StaticArchive.unity*
-
-# Latest source assets only; version numbers below describe active assets.
-/art/godot2d/tree-study-v3/
-/art/godot2d/environment-v2/trees-source.png
-/art/godot2d/environment-v2/prepare_assets.gd
-/art/prototype/*
-!/art/prototype/v3/
-!/art/prototype/engine-ready/
-/art/prototype/v3/comparison-v2-same-camera.png
-/art/prototype/v3/draft-*
-/art/characters/returnee/*
-!/art/characters/returnee/v1/
-!/art/characters/returnee/engine-ready/
-/art/characters/returnee/v1/*
-!/art/characters/returnee/v1/returnee.blend
-!/art/characters/returnee/v1/README.md
-!/art/characters/returnee/v1/validation.json
-
-# Deliverables stay on disk; track only their current instructions/manifests.
-/交付与预览/**
-!/交付与预览/**/
-!/交付与预览/**/*.md
-!/交付与预览/**/*.json
+/art/interior/processed/

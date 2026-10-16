@@ -11,6 +11,7 @@ func _initialize() -> void:
 
 func run() -> void:
 	var scene = load("res://scenes/harbor.tscn").instantiate()
+	scene.set_meta("save_directory", "/private/tmp/coastal-display-" + str(Time.get_ticks_usec()))
 	root.add_child(scene)
 	await process_frame
 	var camera = scene.get_node("WorldCamera")

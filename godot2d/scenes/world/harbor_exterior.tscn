@@ -1,0 +1,299 @@
+[gd_scene load_steps=21 format=3]
+
+[ext_resource type="Script" path="res://scripts/harbor_exterior.gd" id="1_exterior"]
+[ext_resource type="PackedScene" path="res://scenes/world/terrain.tscn" id="2_terrain"]
+[ext_resource type="PackedScene" path="res://scenes/world/tree.tscn" id="3_tree"]
+[ext_resource type="PackedScene" path="res://scenes/world/prop.tscn" id="4_prop"]
+[ext_resource type="PackedScene" path="res://scenes/world/forage_pickup.tscn" id="5_pickup"]
+[ext_resource type="Texture2D" path="res://assets/environment.png" id="6_atlas"]
+[ext_resource type="Texture2D" path="res://assets/tree-set-v4/tree-0.png" id="7_tree0"]
+[ext_resource type="Texture2D" path="res://assets/tree-set-v4/tree-1.png" id="8_tree1"]
+[ext_resource type="Texture2D" path="res://assets/tree-set-v4/tree-2.png" id="9_tree2"]
+[ext_resource type="Texture2D" path="res://assets/tree-set-v4/tree-3.png" id="10_tree3"]
+[ext_resource type="PackedScene" path="res://scenes/world/house_exterior_art.tscn" id="11_house"]
+[ext_resource type="PackedScene" path="res://scenes/world/outdoor_door.tscn" id="12_door"]
+[sub_resource type="AtlasTexture" id="MarketTexture"]
+atlas = ExtResource("6_atlas")
+region = Rect2(592, 138, 504, 394)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="GardenTexture"]
+atlas = ExtResource("6_atlas")
+region = Rect2(592, 672, 388, 230)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="CratesTexture"]
+atlas = ExtResource("6_atlas")
+region = Rect2(1123, 694, 313, 221)
+filter_clip = true
+[sub_resource type="AtlasTexture" id="BoatTexture"]
+atlas = ExtResource("6_atlas")
+region = Rect2(67, 616, 419, 313)
+filter_clip = true
+
+[sub_resource type="RectangleShape2D" id="BoundaryTop"]
+size = Vector2(704, 64)
+[sub_resource type="RectangleShape2D" id="BoundaryLeft"]
+size = Vector2(48, 448)
+[sub_resource type="RectangleShape2D" id="BoundaryRight"]
+size = Vector2(48, 448)
+[sub_resource type="RectangleShape2D" id="HouseWest"]
+size = Vector2(104, 60)
+[sub_resource type="RectangleShape2D" id="HouseMiddle"]
+size = Vector2(34, 60)
+[sub_resource type="RectangleShape2D" id="HouseLintel"]
+size = Vector2(26, 8)
+[sub_resource type="RectangleShape2D" id="MarketBlocker"]
+size = Vector2(128, 27)
+[sub_resource type="RectangleShape2D" id="GardenWest"]
+size = Vector2(76, 23)
+[sub_resource type="RectangleShape2D" id="GardenEast"]
+size = Vector2(76, 23)
+[sub_resource type="RectangleShape2D" id="CrateBlocker"]
+size = Vector2(23, 16)
+[sub_resource type="RectangleShape2D" id="WaterWest"]
+size = Vector2(272, 45)
+[sub_resource type="RectangleShape2D" id="WaterWestBeach"]
+size = Vector2(224, 131)
+[sub_resource type="RectangleShape2D" id="WaterStepsRight"]
+size = Vector2(88, 45)
+[sub_resource type="RectangleShape2D" id="WaterBeachRight"]
+size = Vector2(40, 131)
+[sub_resource type="RectangleShape2D" id="WaterEast"]
+size = Vector2(168, 176)
+[sub_resource type="RectangleShape2D" id="WaterBeachEnd"]
+size = Vector2(144, 80)
+[sub_resource type="RectangleShape2D" id="WaterPierEnd"]
+size = Vector2(64, 56)
+
+[node name="HarborExterior" type="Node2D"]
+script = ExtResource("1_exterior")
+world_bounds = Rect2(0, 0, 640, 416)
+foraging_area = Rect2(224, 317, 144, 51)
+
+[node name="Terrain" parent="." instance=ExtResource("2_terrain")]
+
+[node name="DepthSortedObjects" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="House" parent="DepthSortedObjects" instance=ExtResource("11_house")]
+
+[node name="ExteriorDoor" parent="DepthSortedObjects" instance=ExtResource("12_door")]
+position = Vector2(209, 165)
+
+[node name="Market" parent="DepthSortedObjects" instance=ExtResource("4_prop")]
+position = Vector2(442, 218)
+[node name="Sprite2D" parent="DepthSortedObjects/Market" index="0"]
+texture = SubResource("MarketTexture")
+scale = Vector2(0.285714, 0.285714)
+position = Vector2(0, -56.2857)
+
+[node name="GardenA" parent="DepthSortedObjects" instance=ExtResource("4_prop")]
+position = Vector2(126, 224)
+[node name="Sprite2D" parent="DepthSortedObjects/GardenA" index="0"]
+texture = SubResource("GardenTexture")
+scale = Vector2(0.201031, 0.201031)
+position = Vector2(0, -23.119)
+
+[node name="GardenB" parent="DepthSortedObjects" instance=ExtResource("4_prop")]
+position = Vector2(212, 224)
+[node name="Sprite2D" parent="DepthSortedObjects/GardenB" index="0"]
+texture = SubResource("GardenTexture")
+scale = Vector2(0.201031, 0.201031)
+position = Vector2(0, -23.119)
+
+[node name="Crates" parent="DepthSortedObjects" instance=ExtResource("4_prop")]
+position = Vector2(523, 233)
+[node name="Sprite2D" parent="DepthSortedObjects/Crates" index="0"]
+texture = SubResource("CratesTexture")
+scale = Vector2(0.0926528, 0.0926528)
+position = Vector2(0, -10.2399)
+
+[node name="Boat" parent="DepthSortedObjects" instance=ExtResource("4_prop")]
+position = Vector2(532, 370)
+[node name="Sprite2D" parent="DepthSortedObjects/Boat" index="0"]
+texture = SubResource("BoatTexture")
+scale = Vector2(0.272076, 0.272076)
+position = Vector2(0, -42.5799)
+
+[node name="StorageCrates" parent="DepthSortedObjects" instance=ExtResource("4_prop")]
+position = Vector2(274, 194)
+visible = false
+[node name="Sprite2D" parent="DepthSortedObjects/StorageCrates" index="0"]
+texture = SubResource("CratesTexture")
+scale = Vector2(0.0702875, 0.0702875)
+position = Vector2(0, -7.765)
+
+[node name="InteractPoint" type="Marker2D" parent="DepthSortedObjects/StorageCrates"]
+
+[node name="CoastalTree0" parent="DepthSortedObjects" instance=ExtResource("3_tree")]
+position = Vector2(46, 128)
+metadata/tree_variant = 0
+[node name="Sprite2D" parent="DepthSortedObjects/CoastalTree0" index="0"]
+texture = ExtResource("7_tree0")
+[node name="TerrainShadowFollower" type="RemoteTransform2D" parent="DepthSortedObjects/CoastalTree0"]
+remote_path = NodePath("../../../Terrain/TreeShadows/CoastalTree0Shadow")
+update_rotation = false
+update_scale = false
+[node name="CoastalTree1" parent="DepthSortedObjects" instance=ExtResource("3_tree")]
+position = Vector2(308, 110)
+metadata/tree_variant = 1
+[node name="Sprite2D" parent="DepthSortedObjects/CoastalTree1" index="0"]
+texture = ExtResource("8_tree1")
+[node name="TerrainShadowFollower" type="RemoteTransform2D" parent="DepthSortedObjects/CoastalTree1"]
+remote_path = NodePath("../../../Terrain/TreeShadows/CoastalTree1Shadow")
+update_rotation = false
+update_scale = false
+[node name="CoastalTree2" parent="DepthSortedObjects" instance=ExtResource("3_tree")]
+position = Vector2(568, 184)
+metadata/tree_variant = 0
+[node name="Sprite2D" parent="DepthSortedObjects/CoastalTree2" index="0"]
+texture = ExtResource("7_tree0")
+[node name="TerrainShadowFollower" type="RemoteTransform2D" parent="DepthSortedObjects/CoastalTree2"]
+remote_path = NodePath("../../../Terrain/TreeShadows/CoastalTree2Shadow")
+update_rotation = false
+update_scale = false
+[node name="CoastalTree3" parent="DepthSortedObjects" instance=ExtResource("3_tree")]
+position = Vector2(614, 114)
+metadata/tree_variant = 2
+[node name="Sprite2D" parent="DepthSortedObjects/CoastalTree3" index="0"]
+texture = ExtResource("9_tree2")
+[node name="TerrainShadowFollower" type="RemoteTransform2D" parent="DepthSortedObjects/CoastalTree3"]
+remote_path = NodePath("../../../Terrain/TreeShadows/CoastalTree3Shadow")
+update_rotation = false
+update_scale = false
+[node name="CoastalTree4" parent="DepthSortedObjects" instance=ExtResource("3_tree")]
+position = Vector2(40, 225)
+metadata/tree_variant = 3
+[node name="Sprite2D" parent="DepthSortedObjects/CoastalTree4" index="0"]
+texture = ExtResource("10_tree3")
+[node name="TerrainShadowFollower" type="RemoteTransform2D" parent="DepthSortedObjects/CoastalTree4"]
+remote_path = NodePath("../../../Terrain/TreeShadows/CoastalTree4Shadow")
+update_rotation = false
+update_scale = false
+
+[node name="ForagePickups" type="Node2D" parent="DepthSortedObjects"]
+[node name="clam_a" parent="DepthSortedObjects/ForagePickups" instance=ExtResource("5_pickup")]
+position = Vector2(244, 330)
+kind = "clam"
+[node name="snail_a" parent="DepthSortedObjects/ForagePickups" instance=ExtResource("5_pickup")]
+position = Vector2(294, 330)
+kind = "snail"
+[node name="kelp_a" parent="DepthSortedObjects/ForagePickups" instance=ExtResource("5_pickup")]
+position = Vector2(344, 330)
+kind = "kelp"
+[node name="clam_b" parent="DepthSortedObjects/ForagePickups" instance=ExtResource("5_pickup")]
+position = Vector2(244, 353)
+kind = "clam"
+[node name="snail_b" parent="DepthSortedObjects/ForagePickups" instance=ExtResource("5_pickup")]
+position = Vector2(294, 353)
+kind = "snail"
+[node name="kelp_b" parent="DepthSortedObjects/ForagePickups" instance=ExtResource("5_pickup")]
+position = Vector2(344, 353)
+kind = "kelp"
+
+[node name="Spawn" type="Marker2D" parent="."]
+position = Vector2(330, 250)
+
+[node name="InteractPoints" type="Node2D" parent="."]
+[node name="house" type="Marker2D" parent="InteractPoints"]
+position = Vector2(209, 194)
+metadata/title = "祖辈的旧屋"
+metadata/body = "青绿门廊还留着旧船板的纹路。\n靠近门口按 E 开门，回家歇一歇。"
+[node name="garden" type="Marker2D" parent="InteractPoints"]
+position = Vector2(168, 234)
+metadata/title = "门前小菜园"
+metadata/body = "两畦蔬菜挨着海风生长。\n本版可查看场景，种植和收获尚未开放。"
+[node name="market" type="Marker2D" parent="InteractPoints"]
+position = Vector2(442, 236)
+metadata/title = "补帆海鲜摊"
+metadata/body = "旧帆布又缝上了一块新的补丁。\n鱼摊陈列已就位，交易系统尚未开放。"
+[node name="pier" type="Marker2D" parent="InteractPoints"]
+position = Vector2(440, 364)
+metadata/title = "归航的小码头"
+metadata/body = "浪花轻拍木桩，渔船停在岸旁。\n沿着台阶看看潮位，今天不必急着出海。"
+[node name="tide" type="Marker2D" parent="InteractPoints"]
+position = Vector2(296, 302)
+metadata/title = "潮汐台阶"
+metadata/body = "现在是低潮，沿台阶走下沙滩。\n靠近海产按E拾取；本版暂不模拟涨落潮。"
+
+[node name="StaticCollisions" type="Node2D" parent="."]
+
+[node name="BoundaryTop" type="StaticBody2D" parent="StaticCollisions"]
+position = Vector2(320, 0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticCollisions/BoundaryTop"]
+shape = SubResource("BoundaryTop")
+[node name="BoundaryLeft" type="StaticBody2D" parent="StaticCollisions"]
+position = Vector2(-8, 224)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticCollisions/BoundaryLeft"]
+shape = SubResource("BoundaryLeft")
+[node name="BoundaryRight" type="StaticBody2D" parent="StaticCollisions"]
+position = Vector2(648, 224)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticCollisions/BoundaryRight"]
+shape = SubResource("BoundaryRight")
+[node name="HouseWest" type="StaticBody2D" parent="DepthSortedObjects/House"]
+position = Vector2(-30, -9)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DepthSortedObjects/House/HouseWest"]
+shape = SubResource("HouseWest")
+[node name="HouseMiddle" type="StaticBody2D" parent="DepthSortedObjects/House"]
+position = Vector2(65, -9)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DepthSortedObjects/House/HouseMiddle"]
+shape = SubResource("HouseMiddle")
+[node name="HouseLintel" type="StaticBody2D" parent="DepthSortedObjects/House"]
+position = Vector2(35, -35)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DepthSortedObjects/House/HouseLintel"]
+shape = SubResource("HouseLintel")
+[node name="MarketBlocker" type="StaticBody2D" parent="DepthSortedObjects/Market"]
+position = Vector2(0, -13.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DepthSortedObjects/Market/MarketBlocker"]
+shape = SubResource("MarketBlocker")
+[node name="GardenWest" type="StaticBody2D" parent="DepthSortedObjects/GardenA"]
+position = Vector2(0, -11.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DepthSortedObjects/GardenA/GardenWest"]
+shape = SubResource("GardenWest")
+[node name="GardenEast" type="StaticBody2D" parent="DepthSortedObjects/GardenB"]
+position = Vector2(0, -11.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DepthSortedObjects/GardenB/GardenEast"]
+shape = SubResource("GardenEast")
+[node name="CrateBlocker" type="StaticBody2D" parent="DepthSortedObjects/Crates"]
+position = Vector2(-1.5, -8)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DepthSortedObjects/Crates/CrateBlocker"]
+shape = SubResource("CrateBlocker")
+[node name="WaterWest" type="StaticBody2D" parent="StaticCollisions"]
+position = Vector2(136, 294.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticCollisions/WaterWest"]
+shape = SubResource("WaterWest")
+[node name="WaterWestBeach" type="StaticBody2D" parent="StaticCollisions"]
+position = Vector2(112, 382.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticCollisions/WaterWestBeach"]
+shape = SubResource("WaterWestBeach")
+[node name="WaterStepsRight" type="StaticBody2D" parent="StaticCollisions"]
+position = Vector2(364, 294.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticCollisions/WaterStepsRight"]
+shape = SubResource("WaterStepsRight")
+[node name="WaterBeachRight" type="StaticBody2D" parent="StaticCollisions"]
+position = Vector2(388, 382.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticCollisions/WaterBeachRight"]
+shape = SubResource("WaterBeachRight")
+[node name="WaterEast" type="StaticBody2D" parent="StaticCollisions"]
+position = Vector2(556, 360)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticCollisions/WaterEast"]
+shape = SubResource("WaterEast")
+[node name="WaterBeachEnd" type="StaticBody2D" parent="StaticCollisions"]
+position = Vector2(296, 408)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticCollisions/WaterBeachEnd"]
+shape = SubResource("WaterBeachEnd")
+[node name="WaterPierEnd" type="StaticBody2D" parent="StaticCollisions"]
+position = Vector2(440, 420)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticCollisions/WaterPierEnd"]
+shape = SubResource("WaterPierEnd")
+
+[editable path="DepthSortedObjects/Market"]
+[editable path="DepthSortedObjects/GardenA"]
+[editable path="DepthSortedObjects/GardenB"]
+[editable path="DepthSortedObjects/Crates"]
+[editable path="DepthSortedObjects/Boat"]
+[editable path="DepthSortedObjects/StorageCrates"]
+[editable path="DepthSortedObjects/CoastalTree0"]
+[editable path="DepthSortedObjects/CoastalTree1"]
+[editable path="DepthSortedObjects/CoastalTree2"]
+[editable path="DepthSortedObjects/CoastalTree3"]
+[editable path="DepthSortedObjects/CoastalTree4"]

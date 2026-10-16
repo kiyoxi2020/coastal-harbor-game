@@ -32,6 +32,7 @@ func run() -> void:
 		signatures[hash(pic.get_data())] = true
 	check("four_distinct_assets",signatures.size()==4)
 	var scene = load("res://scenes/harbor.tscn").instantiate()
+	scene.set_meta("save_directory", "/private/tmp/coastal-tree-set-" + str(Time.get_ticks_usec()))
 	root.add_child(scene)
 	await process_frame
 	var variants := [0,1,0,2,3]

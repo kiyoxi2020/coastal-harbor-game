@@ -51,6 +51,11 @@ func to_data(position: Vector2) -> Dictionary:
 		"collected":collected.duplicate(), "discovered":discovered.duplicate(), "total_collected":total_collected,
 		"position":[position.x,position.y]}
 
+static func safe_position(location_name: String, point: Vector2, location_scene: Node2D) -> Vector2:
+	if location_name not in ["harbor", "house"] or location_scene == null or not location_scene.has_method("safe_position"):
+		return point
+	return location_scene.safe_position(point)
+
 static func _integer(value) -> bool:
 	return (value is int or value is float) and is_finite(float(value)) and float(value) == floor(float(value))
 

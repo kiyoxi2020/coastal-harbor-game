@@ -1,4 +1,4 @@
-extends Node
+extends CanvasLayer
 signal phase_changed(phase: String)
 var home
 var busy := false
@@ -7,17 +7,12 @@ var stable_snapshot: Dictionary = {}
 var exit_pending := false
 var fade: ColorRect
 var clipping_door
-const APERTURE_DEPTH:=16.0
+const EXTERIOR_THRESHOLD_DEPTH := 8.0
 func _ready() -> void:
-	var layer:=CanvasLayer.new()
-	layer.layer=40
-	add_child(layer)
-	fade=ColorRect.new()
-	fade.color=Color(0.06,0.12,0.14,1)
-	fade.modulate.a=0
-	fade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	fade.mouse_filter=Control.MOUSE_FILTER_IGNORE
-	layer.add_child(fade)
+	fade = $Fade
+
+func initialize(home_ref) -> void:
+	home = home_ref
 func set_phase(value: String) -> void:
 	phase=value
 	phase_changed.emit(value)
@@ -75,10 +70,15 @@ func update_clip() -> void:
 	if not is_instance_valid(clipping_door): return
 	var player=home.world.player
 	var depth: float=(player.position-clipping_door.position).dot(clipping_door.entrance_normal)
-	# Keep the full figure on the floor. Conceal only after feet enter the aperture.
-	player.set_doorway_hidden(-depth/APERTURE_DEPTH)
-	# Local progressive hiding cannot cover hair above the fixed exterior awning.
-	player.doorway_material.set_shader_parameter("aperture_top",clipping_door.aperture_top())
+	var boundary: float = clipping_door.aperture_top()
+	var visible_side: float = clipping_door.entrance_normal.y
+	var enabled: bool = visible_side < 0 or depth <= 0
+	player.doorway_material.set_shader_parameter("clip_enabled", enabled)
+	player.doorway_material.set_shader_parameter("boundary_y", boundary)
+	player.doorway_material.set_shader_parameter("visible_side", visible_side)
+	var height: float = player.visual_bottom - player.visual_top
+	var hidden: float = (boundary - player.position.y - player.visual_top) / height if visible_side > 0 else (player.position.y + player.visual_bottom - boundary) / height
+	player.set_doorway_hidden(hidden if enabled else 0.0)
 func restore_source(source: String) -> void:
 	clipping_door=null
 	home.switch_room(source,Vector2(stable_snapshot.position[0],stable_snapshot.position[1]))
@@ -111,12 +111,15 @@ func run() -> void:
 		return
 	set_phase("Opening")
 	await animate_door(door,true)
-	clipping_door=door
+	clipping_door=door if source=="house" else null
 	set_phase("Crossing")
-	var crossing_point: Vector2=door.position-door.entrance_normal*APERTURE_DEPTH
+	var crossing_point: Vector2=door.crossing_point(world.player) if source=="house" else door.position-door.entrance_normal*EXTERIOR_THRESHOLD_DEPTH
 	if not await walk_to(crossing_point):
 		await restore_source(source)
 		return
+	if source=="harbor":
+		set_phase("Closing")
+		await animate_door(door,false)
 	set_phase("FadeOut")
 	await opacity(1)
 	set_phase("Swap")
@@ -124,12 +127,20 @@ func run() -> void:
 		await restore_source(source)
 		return
 	door=home.active_door()
-	door.set_pose(2)
-	clipping_door=door
-	world.player.position=door.position-door.entrance_normal*APERTURE_DEPTH
-	update_clip()
+	if destination=="harbor":
+		door.set_pose(0)
+		clipping_door=null
+		world.player.position=door.position-door.entrance_normal*EXTERIOR_THRESHOLD_DEPTH
+	else:
+		door.set_pose(2)
+		clipping_door=door
+		world.player.position=door.crossing_point(world.player)
+		update_clip()
 	set_phase("FadeIn")
 	await opacity(0)
+	if destination=="harbor":
+		set_phase("Opening")
+		await animate_door(door,true)
 	set_phase("Arrival")
 	if not await walk_to(door.approach):
 		await restore_source(source)

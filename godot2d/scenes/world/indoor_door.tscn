@@ -1,0 +1,72 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/world/interactive_door.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://assets/house-interior/door-closed.png" id="2_closed"]
+[ext_resource type="Texture2D" path="res://assets/house-interior/door-half.png" id="3_half"]
+[ext_resource type="Texture2D" path="res://assets/house-interior/door-open.png" id="4_open"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_closed"]
+atlas = ExtResource("2_closed")
+region = Rect2(0, 29, 30, 8)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_half"]
+atlas = ExtResource("3_half")
+region = Rect2(0, 29, 30, 8)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_open"]
+atlas = ExtResource("4_open")
+region = Rect2(0, 29, 30, 8)
+filter_clip = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_indoor_channel"]
+size = Vector2(30, 8)
+
+[node name="InteriorDoor" instance=ExtResource("1_base")]
+inside = true
+entrance_normal = Vector2(0, -1)
+pilot_frames = Array[Texture2D]([ExtResource("2_closed"), ExtResource("3_half"), ExtResource("4_open")])
+leaf_textures = Array[Texture2D]([SubResource("AtlasTexture_closed"), SubResource("AtlasTexture_half"), SubResource("AtlasTexture_open")])
+pose_sizes = Array[Vector2]([Vector2(30, 8), Vector2(30, 8), Vector2(30, 8)])
+aperture_offset = 3.0
+pilot_leaf_height = 49
+render_size = Vector2(38, 12)
+
+[node name="Recess" parent="." index="0"]
+polygon = PackedVector2Array(-15, -7, 15, -7, 15, 1, -15, 1)
+
+[node name="CollisionShape2D" parent="DoorCollision" index="0"]
+shape = SubResource("RectangleShape2D_indoor_channel")
+
+[node name="Left" parent="JambCollision" index="0"]
+position = Vector2(-17, 0)
+
+[node name="Right" parent="JambCollision" index="1"]
+position = Vector2(17, 0)
+
+[node name="Left" parent="Frame" index="0"]
+polygon = PackedVector2Array(-19, -9, -15, -9, -15, 0, -19, 0)
+
+[node name="Right" parent="Frame" index="1"]
+polygon = PackedVector2Array(15, -9, 19, -9, 19, 0, 15, 0)
+
+[node name="Top" parent="Frame" index="2"]
+polygon = PackedVector2Array(-19, -9, 19, -9, 19, -7, -19, -7)
+
+[node name="DoorLeaf" parent="." index="4"]
+position = Vector2(-15, -7)
+
+[node name="Threshold" parent="." index="5"]
+polygon = PackedVector2Array(-19, 0, 19, 0, 19, 3, -19, 3)
+
+[node name="Approach" parent="." index="6"]
+position = Vector2(0, -32)
+
+[editable path="Recess"]
+[editable path="DoorCollision"]
+[editable path="JambCollision"]
+[editable path="Frame"]
+[editable path="DoorLeaf"]
+[editable path="Threshold"]
+[editable path="Approach"]

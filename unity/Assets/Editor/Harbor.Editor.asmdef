@@ -1,6 +1,0 @@
-{
-  "name": "Harbor.Editor",
-  "references": ["Harbor.Runtime", "Unity.RenderPipelines.Universal.Runtime", "Unity.RenderPipelines.Core.Runtime"],
-  "includePlatforms": ["Editor"],
-  "autoReferenced": true
-}

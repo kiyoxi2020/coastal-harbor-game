@@ -58,6 +58,7 @@ func run() -> void:
 		signatures.append(hash(tree.get_data()))
 	check("four_unique_sprites",signatures.size() == 4 and signatures[0] != signatures[1] and signatures[1] != signatures[2] and signatures[2] != signatures[3] and signatures[0] != signatures[2] and signatures[0] != signatures[3] and signatures[1] != signatures[3])
 	var scene = load("res://scenes/harbor.tscn").instantiate()
+	scene.set_meta("save_directory", "/private/tmp/coastal-environment-" + str(Time.get_ticks_usec()))
 	root.add_child(scene)
 	await process_frame
 	var trees: Array = []

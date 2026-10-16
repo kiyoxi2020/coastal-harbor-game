@@ -1,57 +1,35 @@
 extends Node2D
-# Separate interactive body, frame, darkness and leaf. No rotated smooth sprites.
-const CottageArt=preload("res://scripts/cottage_art.gd")
-var inside := false
-var entrance_normal := Vector2.DOWN
-var approach := Vector2.ZERO
-var pose := 0
-var collision: CollisionShape2D
+
+@export var inside := false
+@export var entrance_normal := Vector2.DOWN
+@export var pilot_frames: Array[Texture2D] = []
+@export var leaf_textures: Array[Texture2D] = []
+@export var pose_sizes: Array[Vector2] = [Vector2(22, 29), Vector2(11, 29), Vector2(3, 29)]
+@export var leaf_visual_offset := Vector2.ZERO
+@export var aperture_offset := -29.065574
+@export var pilot_anchor := Vector2(15, 54)
+@export var pilot_leaf_height := 0
+@export var pilot_frame_top := -9.0
+@export var render_size := Vector2(22, 29)
+@export var pose := 0
+
 var body: StaticBody2D
-var texture: Texture2D
-var pilot_frames: Array[Texture2D]=[]
-var pilot_anchor := Vector2(15,54)
-var pilot_leaf_height := 0
-var pilot_frame_top := -9.0
-var render_size := Vector2(22,29)
+var collision: CollisionShape2D
+var _approach_fallback := Vector2.ZERO
+var approach: Vector2:
+	get:
+		var marker := get_node_or_null("Approach") as Marker2D
+		return position + marker.position if marker != null else _approach_fallback
+	set(value):
+		_approach_fallback = value
+		var marker := get_node_or_null("Approach") as Marker2D
+		if marker != null:
+			marker.position = value - position
 
 func _ready() -> void:
-	texture=load("res://assets/environment.png")
-	if inside:
-		var data:=CottageArt.entry("door_closed")
-		if data.has("floor_anchor"):
-			pilot_anchor=Vector2(data.floor_anchor[0],data.floor_anchor[1])
-		if data.has("closed_leaf_size"):
-			pilot_leaf_height=int(data.closed_leaf_size[1])
-		for id in ["door_closed","door_half","door_open"]:
-			pilot_frames.append(CottageArt.texture_for(id))
-		render_size=Vector2(38,12)
-	texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
-	body=StaticBody2D.new()
-	body.name="DoorCollision"
-	collision=CollisionShape2D.new()
-	var shape:=RectangleShape2D.new()
-	shape.size=Vector2(30 if inside else 20,8)
-	collision.shape=shape
-	body.add_child(collision)
-	add_child(body)
-	var jamb_body:=StaticBody2D.new()
-	jamb_body.name="JambCollision"
-	var jamb_center:=17.0 if inside else 12.0
-	for side in [-1.0,1.0]:
-		var jamb_shape:=CollisionShape2D.new()
-		var jamb_box:=RectangleShape2D.new()
-		jamb_box.size=Vector2(4,8)
-		jamb_shape.shape=jamb_box
-		jamb_shape.position=Vector2(side*jamb_center,0)
-		jamb_body.add_child(jamb_shape)
-	add_child(jamb_body)
-	var jamb:=Node2D.new()
-	jamb.set_script(preload("res://scripts/door_jamb.gd"))
-	jamb.width=38.0 if inside else 28.0
-	jamb.height=9.0 if inside else 32.0
-	jamb.z_index=0 if inside else 2
-	add_child(jamb)
-	set_pose(0)
+	body = $DoorCollision
+	collision = $DoorCollision/CollisionShape2D
+	set_pose(pose)
 
 func can_interact(point: Vector2) -> bool:
 	var offset:=point-position
@@ -60,33 +38,35 @@ func can_interact(point: Vector2) -> bool:
 	return depth>=0 and depth<=56 and absf(lateral)<=24
 
 func aperture_top() -> float:
-	return global_position.y+(pilot_frame_top+4 if inside else -29.0)
+	return global_position.y + aperture_offset
+
+func crossing_point(player) -> Vector2:
+	# South cutaway conceals below the threshold; exterior above the actual awning.
+	var y: float = aperture_top() - (player.visual_top if entrance_normal.y < 0 else player.visual_bottom)
+	return Vector2(position.x, y - entrance_normal.y * 0.75)
 
 func set_pose(value: int) -> void:
-	pose=clampi(value,0,2)
-	if is_instance_valid(collision): collision.set_deferred("disabled",pose==2)
-	queue_redraw()
-
-func _draw() -> void:
-	if inside:
-		# Use the same registered waist-height strip in each pose, at native pixel scale.
-		# It retains the rail and handle without laying a tall front-facing door on the floor.
-		draw_rect(Rect2(-19,-9,38,12),Color("264d51"))
-		draw_rect(Rect2(-15,-7,30,8),Color("172e34"))
-		if pilot_frames.size()==3 and pilot_frames[pose]:
-			draw_texture_rect_region(pilot_frames[pose],Rect2(-15,-7,30,8),Rect2(0,29,30,8))
-		draw_rect(Rect2(-19,0,38,3),Color("d6c7a0"))
-		return
-	var width:=32.0 if inside else 22.0
-	var height:=16.0 if inside else 29.0
-	var r:=Rect2(-width/2,-8.0 if inside else -height,width,height)
-	draw_rect(r.grow(3),Color("264d51"))
-	draw_rect(r.grow(1),Color("769185"))
-	draw_rect(r,Color("172e34"))
-	# Hinged leaf uses three integer widths, reusing the exact original teal leaf.
-	var leaf_width: float=[width,roundf(width*0.5),3.0][pose]
-	if texture:
-		draw_texture_rect_region(texture,Rect2(r.position,Vector2(leaf_width,height)),Rect2(348,383,61,81))
-	if pose>0:
-		draw_rect(Rect2(r.position+Vector2(leaf_width-2,0),Vector2(2,height)),Color("38747b"))
-	draw_rect(Rect2(-width/2-3,8 if inside else 0,width+6,3),Color("d6c7a0"))
+	pose = clampi(value, 0, 2)
+	var channel := get_node_or_null("DoorCollision/CollisionShape2D") as CollisionShape2D
+	if channel != null:
+		channel.set_deferred("disabled", pose == 2)
+	var leaf := get_node_or_null("DoorLeaf") as Sprite2D
+	var frames := leaf_textures if leaf_textures.size() == 3 else pilot_frames
+	if leaf != null and frames.size() == 3 and pose_sizes.size() == 3:
+		leaf.texture = frames[pose]
+		if leaf.texture != null:
+			leaf.scale = pose_sizes[pose] / leaf.texture.get_size()
+			if leaf_visual_offset != Vector2.ZERO:
+				leaf.offset = Vector2(
+					leaf_visual_offset.x / leaf.scale.x,
+					leaf_visual_offset.y / leaf.scale.y)
+	var edge := get_node_or_null("LeafEdge") as Polygon2D
+	if edge != null:
+		edge.visible = not inside and pose > 0
+		var edge_left := leaf_visual_offset.x + pose_sizes[pose].x - 2.0
+		edge.polygon = PackedVector2Array([
+			Vector2(edge_left, leaf_visual_offset.y),
+			Vector2(edge_left + 2.0, leaf_visual_offset.y),
+			Vector2(edge_left + 2.0, leaf_visual_offset.y + pose_sizes[pose].y),
+			Vector2(edge_left, leaf_visual_offset.y + pose_sizes[pose].y),
+		])

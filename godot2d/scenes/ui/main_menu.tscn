@@ -1,0 +1,145 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="StyleBox" path="res://resources/ui/pixel_canvas.tres" id="2_canvas"]
+[ext_resource type="PackedScene" path="res://scenes/ui/components/portrait.tscn" id="3_portrait"]
+[ext_resource type="Script" path="res://scripts/ui/pixel_style.gd" id="4_style"]
+[ext_resource type="StyleBox" path="res://resources/ui/pixel_teal.tres" id="5_teal"]
+
+[sub_resource type="StyleBox" id="StyleBox_paper"]
+script = ExtResource("4_style")
+kind = "paper"
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+
+[node name="MainMenu" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Surface" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 48.0
+offset_right = 1200.0
+offset_bottom = 672.0
+theme_override_styles/panel = ExtResource("2_canvas")
+
+[node name="Header" type="Panel" parent="Surface"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 746.0
+offset_bottom = 66.0
+theme_override_styles/panel = SubResource("StyleBox_paper")
+mouse_filter = 2
+
+[node name="JournalTitle" type="Label" parent="Surface"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 16.0
+offset_right = 706.0
+offset_bottom = 58.0
+theme_override_font_sizes/font_size = 30
+text = "海边生活手账  ≋"
+
+[node name="Body" type="Panel" parent="Surface"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 122.0
+offset_right = 1104.0
+offset_bottom = 566.0
+theme_override_styles/panel = SubResource("StyleBox_paper")
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Surface"]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 126.0
+offset_right = 874.0
+offset_bottom = 186.0
+theme_override_font_sizes/font_size = 42
+text = "把海风带回旧屋"
+
+[node name="Subtitle" type="Label" parent="Surface"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 202.0
+offset_right = 706.0
+offset_bottom = 292.0
+theme_override_font_sizes/font_size = 26
+text = "赶海、收纳、记录生活。\n海鲜市集的故事，从这一天开始。"
+
+[node name="continue" type="Button" parent="Surface"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 320.0
+offset_right = 376.0
+offset_bottom = 372.0
+text = "继续游戏"
+theme_override_styles/normal = ExtResource("5_teal")
+
+[node name="new_game" type="Button" parent="Surface"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 388.0
+offset_right = 376.0
+offset_bottom = 440.0
+text = "新游戏"
+
+[node name="settings" type="Button" parent="Surface"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 456.0
+offset_right = 218.0
+offset_bottom = 506.0
+text = "设置"
+
+[node name="quit" type="Button" parent="Surface"]
+layout_mode = 0
+offset_left = 232.0
+offset_top = 456.0
+offset_right = 376.0
+offset_bottom = 506.0
+text = "退出"
+
+[node name="Status" type="Label" parent="Surface"]
+layout_mode = 0
+offset_left = 580.0
+offset_top = 320.0
+offset_right = 1050.0
+offset_bottom = 528.0
+autowrap_mode = 2
+
+[node name="Portrait" parent="Surface" instance=ExtResource("3_portrait")]
+layout_mode = 0
+offset_left = 860.0
+offset_top = 154.0
+offset_right = 1004.0
+offset_bottom = 334.0
+
+[node name="Note" type="Label" parent="Surface"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 575.0
+offset_right = 1078.0
+offset_bottom = 615.0
+theme_override_colors/font_color = Color(0.960784, 0.909804, 0.780392, 1)
+theme_override_font_sizes/font_size = 22
+text = "方向键选择 · E 确认 · B / Tab 返回"
+
+[node name="DynamicNote" type="Label" parent="Surface"]
+visible = false
+layout_mode = 0
+offset_left = 28.0
+offset_top = 575.0
+offset_right = 1078.0
+offset_bottom = 615.0
+theme_override_colors/font_color = Color(0.960784, 0.909804, 0.780392, 1)
+theme_override_font_sizes/font_size = 22
+

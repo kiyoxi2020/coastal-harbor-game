@@ -1,6 +1,7 @@
 extends SceneTree
 var State = load("res://scripts/player_state.gd")
 var Save = load("res://scripts/save_service.gd")
+var Room = load("res://scripts/room_data.gd")
 var checks: Dictionary = {}
 func check(id: String, value: bool) -> void:
 	checks[id] = value
@@ -17,6 +18,8 @@ func finish() -> void:
 	print("HOUSE_SAVE ",checks.size()," passed=",not checks.values().has(false))
 	quit(1 if checks.values().has(false) else 0)
 func _initialize() -> void:
+	call_deferred("run")
+func run() -> void:
 	var state = State.new()
 	var first: Dictionary = state.to_data(Vector2(330,250))
 	check("new_format",first.get("version")==2 and first.get("location")=="harbor")
@@ -89,4 +92,13 @@ func _initialize() -> void:
 	check("write_legacy",service.write_save(legacy))
 	var disk: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(main))
 	check("write_normalizes",disk.version==2 and disk.location=="harbor")
+	var scene = load("res://scenes/harbor.tscn").instantiate()
+	scene.set_meta("journal_test",true)
+	scene.set_meta("save_directory","/private/tmp/coastal-house-save-scene-"+str(Time.get_ticks_usec()))
+	root.add_child(scene)
+	await process_frame
+	check("outdoor_doorway_save_fallback",scene.home.safe_position("harbor",Room.OUTSIDE_DOOR)==scene.data.SPAWN)
+	check("outdoor_approach_save_preserved",scene.home.safe_position("harbor",Room.OUTSIDE_APPROACH)==Room.OUTSIDE_APPROACH)
+	check("outdoor_scene_collision_fallback",scene.home.safe_position("harbor",Vector2(100,150))==scene.data.SPAWN)
+	scene.queue_free()
 	finish()

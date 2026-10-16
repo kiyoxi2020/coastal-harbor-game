@@ -1,21 +1,25 @@
 extends Node2D
 
+const DEFAULT_CONFIG = preload("res://resources/world/default_water_clip.tres")
+
+@export var clip_config: Resource
 var elapsed := 0.0
 var last_frame := -1
 
 static func frame_at(seconds: float, phase: int) -> int:
 	return (floori(seconds*4.0)+phase)%4
 
-static func is_open_water(point: Vector2) -> bool:
-	if preload("res://scripts/harbor_data.gd").BEACH.has_point(point):
+static func is_open_water(point: Vector2, config: Resource = DEFAULT_CONFIG) -> bool:
+	var resolved := config if config != null else DEFAULT_CONFIG
+	if not resolved.open_water_rect.has_point(point):
 		return false
-	if point.x < 0 or point.x >= 640 or point.y < 292 or point.y >= 416:
-		return false
-	if Rect2(403,272,74,128).has_point(point):
-		return false
-	if Rect2(271,272,50,49).has_point(point):
-		return false
+	for excluded: Rect2 in resolved.excluded_rects:
+		if excluded.has_point(point):
+			return false
 	return true
+
+func contains_open_water(point: Vector2) -> bool:
+	return is_open_water(point, clip_config)
 
 func _process(delta: float) -> void:
 	elapsed += delta
@@ -25,7 +29,7 @@ func _process(delta: float) -> void:
 		queue_redraw()
 
 func pixel(point: Vector2, color: Color) -> void:
-	if is_open_water(point):
+	if contains_open_water(point):
 		draw_rect(Rect2(point,Vector2.ONE),color)
 
 func _draw() -> void:

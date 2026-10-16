@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/house_furniture.gd" id="1_furniture"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_base"]
+size = Vector2(1, 1)
+
+[node name="Furniture" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_furniture")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+centered = false
+
+[node name="BaseCollision" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseCollision"]
+shape = SubResource("RectangleShape2D_base")
+disabled = true

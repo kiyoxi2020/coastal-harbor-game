@@ -1,0 +1,72 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/pixel_style.gd" id="2_style"]
+
+[sub_resource type="StyleBox" id="StyleBox_paper"]
+script = ExtResource("2_style")
+kind = "paper"
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+
+[node name="NameDialog" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Shade" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.55)
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 380.0
+offset_top = 224.0
+offset_right = 900.0
+offset_bottom = 496.0
+theme_override_styles/panel = SubResource("StyleBox_paper")
+
+[node name="Title" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 20.0
+offset_right = 492.0
+offset_bottom = 74.0
+text = "返乡人的名字"
+autowrap_mode = 2
+
+[node name="player_name" type="LineEdit" parent="Panel"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 74.0
+offset_right = 488.0
+offset_bottom = 126.0
+text = "归乡人"
+max_length = 12
+
+[node name="cancel" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 176.0
+offset_right = 238.0
+offset_bottom = 224.0
+text = "取消"
+
+[node name="start" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 264.0
+offset_top = 176.0
+offset_right = 488.0
+offset_bottom = 224.0
+text = "开始"
+

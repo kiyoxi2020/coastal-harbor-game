@@ -76,11 +76,8 @@ func run() -> void:
 	await frames()
 	check("reset_closes_panel",not scene.hud.panel.visible and scene.player.position==scene.data.SPAWN)
 	check("no_escape_binding",not InputMap.has_action("dismiss"))
-	var labels := ""
-	for child in scene.hud.get_children():
-		if child is Label:
-			labels+=child.text
-	check("footer_e_continue","E  拾取 / 查看 / 继续" in labels and not "Esc" in labels)
+	var controls_text: String = scene.hud.controls.text
+	check("footer_e_continue","E  拾取 / 查看 / 继续" in controls_text and not "Esc" in controls_text)
 	var passed := not checks.values().has(false)
 	var f := FileAccess.open(output_dir.path_join("interaction-tests.json"),FileAccess.WRITE)
 	f.store_string(JSON.stringify({"passed":passed,"checks":checks,"scope":"physical E press/release and keyboard echo events; current single-page flow; "+DisplayServer.get_name()},"\t"))

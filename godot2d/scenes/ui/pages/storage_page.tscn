@@ -1,0 +1,966 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/components/inventory_slot.tscn" id="2_slot"]
+[ext_resource type="StyleBox" path="res://resources/ui/pixel_canvas.tres" id="3_canvas"]
+[ext_resource type="Script" path="res://scripts/ui/pixel_style.gd" id="4_style"]
+[ext_resource type="StyleBox" path="res://resources/ui/pixel_teal.tres" id="5_teal"]
+
+[sub_resource type="StyleBox" id="StyleBox_paper"]
+script = ExtResource("4_style")
+kind = "paper"
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+
+[node name="StoragePage" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Surface" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 48.0
+offset_right = 1200.0
+offset_bottom = 672.0
+theme_override_styles/panel = ExtResource("3_canvas")
+
+[node name="Header" type="Panel" parent="Surface"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 746.0
+offset_bottom = 66.0
+theme_override_styles/panel = SubResource("StyleBox_paper")
+mouse_filter = 2
+
+[node name="Body" type="Panel" parent="Surface"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 122.0
+offset_right = 1104.0
+offset_bottom = 566.0
+theme_override_styles/panel = SubResource("StyleBox_paper")
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Surface"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 16.0
+offset_right = 706.0
+offset_bottom = 58.0
+theme_override_font_sizes/font_size = 30
+text = "海边生活手账  ≋"
+
+[node name="StorageTitle" type="Label" parent="Surface"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 72.0
+offset_right = 488.0
+offset_bottom = 116.0
+theme_override_colors/font_color = Color(0.960784, 0.909804, 0.780392, 1)
+theme_override_font_sizes/font_size = 30
+text = "旧屋储物箱"
+
+[node name="close" type="Button" parent="Surface"]
+layout_mode = 0
+offset_left = 970.0
+offset_top = 20.0
+offset_right = 1090.0
+offset_bottom = 62.0
+text = "关闭"
+
+[node name="BagLabel" type="Label" parent="Surface"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 120.0
+offset_right = 488.0
+offset_bottom = 152.0
+text = "随身背包 · 24 格"
+
+[node name="ChestLabel" type="Label" parent="Surface"]
+layout_mode = 0
+offset_left = 586.0
+offset_top = 120.0
+offset_right = 1086.0
+offset_bottom = 152.0
+text = "旧屋仓储 · 48 格（可滚动）"
+
+[node name="BagGrid" type="Control" parent="Surface"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 162.0
+offset_right = 532.0
+offset_bottom = 458.0
+
+[node name="bag_0" parent="Surface/BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 78.0
+offset_bottom = 68.0
+
+[node name="bag_1" parent="Surface/BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 0.0
+offset_right = 162.0
+offset_bottom = 68.0
+
+[node name="bag_2" parent="Surface/BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 0.0
+offset_right = 246.0
+offset_bottom = 68.0
+
+[node name="bag_3" parent="Surface/BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 252.0
+offset_top = 0.0
+offset_right = 330.0
+offset_bottom = 68.0
+
+[node name="bag_4" parent="Surface/BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 0.0
+offset_right = 414.0
+offset_bottom = 68.0
+
+[node name="bag_5" parent="Surface/BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 420.0
+offset_top = 0.0
+offset_right = 498.0
+offset_bottom = 68.0
+
+[node name="bag_6" parent="Surface/BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 74.0
+offset_right = 78.0
+offset_bottom = 142.0
+
+[node name="bag_7" parent="Surface/BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 74.0
+offset_right = 162.0
+offset_bottom = 142.0
+
+[node name="bag_8" parent="Surface/BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 74.0
+offset_right = 246.0
+offset_bottom = 142.0
+
+[node name="bag_9" parent="Surface/BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 252.0
+offset_top = 74.0
+offset_right = 330.0
+offset_bottom = 142.0
+
+[node name="bag_10" parent="Surface/BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 74.0
+offset_right = 414.0
+offset_bottom = 142.0
+
+[node name="bag_11" parent="Surface/BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 420.0
+offset_top = 74.0
+offset_right = 498.0
+offset_bottom = 142.0
+
+[node name="bag_12" parent="Surface/BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 148.0
+offset_right = 78.0
+offset_bottom = 216.0
+
+[node name="bag_13" parent="Surface/BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 148.0
+offset_right = 162.0
+offset_bottom = 216.0
+
+[node name="bag_14" parent="Surface/BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 148.0
+offset_right = 246.0
+offset_bottom = 216.0
+
+[node name="bag_15" parent="Surface/BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 252.0
+offset_top = 148.0
+offset_right = 330.0
+offset_bottom = 216.0
+
+[node name="bag_16" parent="Surface/BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 148.0
+offset_right = 414.0
+offset_bottom = 216.0
+
+[node name="bag_17" parent="Surface/BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 420.0
+offset_top = 148.0
+offset_right = 498.0
+offset_bottom = 216.0
+
+[node name="bag_18" parent="Surface/BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 222.0
+offset_right = 78.0
+offset_bottom = 290.0
+
+[node name="bag_19" parent="Surface/BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 222.0
+offset_right = 162.0
+offset_bottom = 290.0
+
+[node name="bag_20" parent="Surface/BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 222.0
+offset_right = 246.0
+offset_bottom = 290.0
+
+[node name="bag_21" parent="Surface/BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 252.0
+offset_top = 222.0
+offset_right = 330.0
+offset_bottom = 290.0
+
+[node name="bag_22" parent="Surface/BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 222.0
+offset_right = 414.0
+offset_bottom = 290.0
+
+[node name="bag_23" parent="Surface/BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 420.0
+offset_top = 222.0
+offset_right = 498.0
+offset_bottom = 290.0
+
+[node name="ChestScroll" type="ScrollContainer" parent="Surface"]
+layout_mode = 0
+offset_left = 586.0
+offset_top = 162.0
+offset_right = 1102.0
+offset_bottom = 458.0
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="ChestGrid" type="Control" parent="Surface/ChestScroll"]
+custom_minimum_size = Vector2(492, 592)
+layout_mode = 2
+
+[node name="chest_0" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 76.0
+offset_bottom = 68.0
+
+[node name="chest_1" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 82.0
+offset_top = 0.0
+offset_right = 158.0
+offset_bottom = 68.0
+
+[node name="chest_2" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 0.0
+offset_right = 240.0
+offset_bottom = 68.0
+
+[node name="chest_3" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 0.0
+offset_right = 322.0
+offset_bottom = 68.0
+
+[node name="chest_4" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 328.0
+offset_top = 0.0
+offset_right = 404.0
+offset_bottom = 68.0
+
+[node name="chest_5" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 0.0
+offset_right = 486.0
+offset_bottom = 68.0
+
+[node name="chest_6" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 74.0
+offset_right = 76.0
+offset_bottom = 142.0
+
+[node name="chest_7" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 82.0
+offset_top = 74.0
+offset_right = 158.0
+offset_bottom = 142.0
+
+[node name="chest_8" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 74.0
+offset_right = 240.0
+offset_bottom = 142.0
+
+[node name="chest_9" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 74.0
+offset_right = 322.0
+offset_bottom = 142.0
+
+[node name="chest_10" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 328.0
+offset_top = 74.0
+offset_right = 404.0
+offset_bottom = 142.0
+
+[node name="chest_11" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 74.0
+offset_right = 486.0
+offset_bottom = 142.0
+
+[node name="chest_12" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 148.0
+offset_right = 76.0
+offset_bottom = 216.0
+
+[node name="chest_13" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 82.0
+offset_top = 148.0
+offset_right = 158.0
+offset_bottom = 216.0
+
+[node name="chest_14" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 148.0
+offset_right = 240.0
+offset_bottom = 216.0
+
+[node name="chest_15" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 148.0
+offset_right = 322.0
+offset_bottom = 216.0
+
+[node name="chest_16" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 328.0
+offset_top = 148.0
+offset_right = 404.0
+offset_bottom = 216.0
+
+[node name="chest_17" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 148.0
+offset_right = 486.0
+offset_bottom = 216.0
+
+[node name="chest_18" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 222.0
+offset_right = 76.0
+offset_bottom = 290.0
+
+[node name="chest_19" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 82.0
+offset_top = 222.0
+offset_right = 158.0
+offset_bottom = 290.0
+
+[node name="chest_20" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 222.0
+offset_right = 240.0
+offset_bottom = 290.0
+
+[node name="chest_21" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 222.0
+offset_right = 322.0
+offset_bottom = 290.0
+
+[node name="chest_22" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 328.0
+offset_top = 222.0
+offset_right = 404.0
+offset_bottom = 290.0
+
+[node name="chest_23" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 222.0
+offset_right = 486.0
+offset_bottom = 290.0
+
+[node name="chest_24" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 296.0
+offset_right = 76.0
+offset_bottom = 364.0
+
+[node name="chest_25" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 82.0
+offset_top = 296.0
+offset_right = 158.0
+offset_bottom = 364.0
+
+[node name="chest_26" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 296.0
+offset_right = 240.0
+offset_bottom = 364.0
+
+[node name="chest_27" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 296.0
+offset_right = 322.0
+offset_bottom = 364.0
+
+[node name="chest_28" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 328.0
+offset_top = 296.0
+offset_right = 404.0
+offset_bottom = 364.0
+
+[node name="chest_29" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 296.0
+offset_right = 486.0
+offset_bottom = 364.0
+
+[node name="chest_30" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 370.0
+offset_right = 76.0
+offset_bottom = 438.0
+
+[node name="chest_31" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 82.0
+offset_top = 370.0
+offset_right = 158.0
+offset_bottom = 438.0
+
+[node name="chest_32" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 370.0
+offset_right = 240.0
+offset_bottom = 438.0
+
+[node name="chest_33" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 370.0
+offset_right = 322.0
+offset_bottom = 438.0
+
+[node name="chest_34" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 328.0
+offset_top = 370.0
+offset_right = 404.0
+offset_bottom = 438.0
+
+[node name="chest_35" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 370.0
+offset_right = 486.0
+offset_bottom = 438.0
+
+[node name="chest_36" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 444.0
+offset_right = 76.0
+offset_bottom = 512.0
+
+[node name="chest_37" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 82.0
+offset_top = 444.0
+offset_right = 158.0
+offset_bottom = 512.0
+
+[node name="chest_38" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 444.0
+offset_right = 240.0
+offset_bottom = 512.0
+
+[node name="chest_39" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 444.0
+offset_right = 322.0
+offset_bottom = 512.0
+
+[node name="chest_40" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 328.0
+offset_top = 444.0
+offset_right = 404.0
+offset_bottom = 512.0
+
+[node name="chest_41" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 444.0
+offset_right = 486.0
+offset_bottom = 512.0
+
+[node name="chest_42" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 518.0
+offset_right = 76.0
+offset_bottom = 586.0
+
+[node name="chest_43" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 82.0
+offset_top = 518.0
+offset_right = 158.0
+offset_bottom = 586.0
+
+[node name="chest_44" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 518.0
+offset_right = 240.0
+offset_bottom = 586.0
+
+[node name="chest_45" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 518.0
+offset_right = 322.0
+offset_bottom = 586.0
+
+[node name="chest_46" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 328.0
+offset_top = 518.0
+offset_right = 404.0
+offset_bottom = 586.0
+
+[node name="chest_47" parent="Surface/ChestScroll/ChestGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 518.0
+offset_right = 486.0
+offset_bottom = 586.0
+
+[node name="Selection" type="Label" parent="Surface"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 464.0
+offset_right = 678.0
+offset_bottom = 498.0
+text = "背包 / 空格"
+
+[node name="transfer" type="Button" parent="Surface"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 514.0
+offset_right = 228.0
+offset_bottom = 562.0
+text = "存入 →"
+theme_override_styles/normal = ExtResource("5_teal")
+
+[node name="deposit" type="Button" parent="Surface"]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 514.0
+offset_right = 470.0
+offset_bottom = 562.0
+text = "存入同类"
+
+[node name="sort_bag" type="Button" parent="Surface"]
+layout_mode = 0
+offset_left = 586.0
+offset_top = 514.0
+offset_right = 810.0
+offset_bottom = 562.0
+text = "整理背包"
+
+[node name="sort_chest" type="Button" parent="Surface"]
+layout_mode = 0
+offset_left = 836.0
+offset_top = 514.0
+offset_right = 1076.0
+offset_bottom = 562.0
+text = "整理仓储"
+
+[node name="Note" type="Label" parent="Surface"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 575.0
+offset_right = 1078.0
+offset_bottom = 615.0
+theme_override_colors/font_color = Color(0.960784, 0.909804, 0.780392, 1)
+theme_override_font_sizes/font_size = 22
+text = "方向键选择 · E 确认 · B / Tab 返回"
+
+[node name="DynamicNote" type="Label" parent="Surface"]
+visible = false
+layout_mode = 0
+offset_left = 28.0
+offset_top = 575.0
+offset_right = 1078.0
+offset_bottom = 615.0
+theme_override_colors/font_color = Color(0.960784, 0.909804, 0.780392, 1)
+theme_override_font_sizes/font_size = 22
+
+[node name="Icon" parent="Surface/BagGrid/bag_0"]
+position = Vector2(39, 29)
+
+[node name="Icon" parent="Surface/BagGrid/bag_1"]
+position = Vector2(39, 29)
+
+[node name="Icon" parent="Surface/BagGrid/bag_2"]
+position = Vector2(39, 29)
+
+[node name="Icon" parent="Surface/BagGrid/bag_3"]
+position = Vector2(39, 29)
+
+[node name="Icon" parent="Surface/BagGrid/bag_4"]
+position = Vector2(39, 29)
+
+[node name="Icon" parent="Surface/BagGrid/bag_5"]
+position = Vector2(39, 29)
+
+[node name="Icon" parent="Surface/BagGrid/bag_6"]
+position = Vector2(39, 29)
+
+[node name="Icon" parent="Surface/BagGrid/bag_7"]
+position = Vector2(39, 29)
+
+[node name="Icon" parent="Surface/BagGrid/bag_8"]
+position = Vector2(39, 29)
+
+[node name="Icon" parent="Surface/BagGrid/bag_9"]
+position = Vector2(39, 29)
+
+[node name="Icon" parent="Surface/BagGrid/bag_10"]
+position = Vector2(39, 29)
+
+[node name="Icon" parent="Surface/BagGrid/bag_11"]
+position = Vector2(39, 29)
+
+[node name="Icon" parent="Surface/BagGrid/bag_12"]
+position = Vector2(39, 29)
+
+[node name="Icon" parent="Surface/BagGrid/bag_13"]
+position = Vector2(39, 29)
+
+[node name="Icon" parent="Surface/BagGrid/bag_14"]
+position = Vector2(39, 29)
+
+[node name="Icon" parent="Surface/BagGrid/bag_15"]
+position = Vector2(39, 29)
+
+[node name="Icon" parent="Surface/BagGrid/bag_16"]
+position = Vector2(39, 29)
+
+[node name="Icon" parent="Surface/BagGrid/bag_17"]
+position = Vector2(39, 29)
+
+[node name="Icon" parent="Surface/BagGrid/bag_18"]
+position = Vector2(39, 29)
+
+[node name="Icon" parent="Surface/BagGrid/bag_19"]
+position = Vector2(39, 29)
+
+[node name="Icon" parent="Surface/BagGrid/bag_20"]
+position = Vector2(39, 29)
+
+[node name="Icon" parent="Surface/BagGrid/bag_21"]
+position = Vector2(39, 29)
+
+[node name="Icon" parent="Surface/BagGrid/bag_22"]
+position = Vector2(39, 29)
+
+[node name="Icon" parent="Surface/BagGrid/bag_23"]
+position = Vector2(39, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_0"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_1"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_2"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_3"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_4"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_5"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_6"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_7"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_8"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_9"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_10"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_11"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_12"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_13"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_14"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_15"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_16"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_17"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_18"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_19"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_20"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_21"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_22"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_23"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_24"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_25"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_26"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_27"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_28"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_29"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_30"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_31"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_32"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_33"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_34"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_35"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_36"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_37"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_38"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_39"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_40"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_41"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_42"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_43"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_44"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_45"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_46"]
+position = Vector2(38, 29)
+
+[node name="Icon" parent="Surface/ChestScroll/ChestGrid/chest_47"]
+position = Vector2(38, 29)
+
+[editable path="Surface/BagGrid/bag_0"]
+[editable path="Surface/BagGrid/bag_1"]
+[editable path="Surface/BagGrid/bag_2"]
+[editable path="Surface/BagGrid/bag_3"]
+[editable path="Surface/BagGrid/bag_4"]
+[editable path="Surface/BagGrid/bag_5"]
+[editable path="Surface/BagGrid/bag_6"]
+[editable path="Surface/BagGrid/bag_7"]
+[editable path="Surface/BagGrid/bag_8"]
+[editable path="Surface/BagGrid/bag_9"]
+[editable path="Surface/BagGrid/bag_10"]
+[editable path="Surface/BagGrid/bag_11"]
+[editable path="Surface/BagGrid/bag_12"]
+[editable path="Surface/BagGrid/bag_13"]
+[editable path="Surface/BagGrid/bag_14"]
+[editable path="Surface/BagGrid/bag_15"]
+[editable path="Surface/BagGrid/bag_16"]
+[editable path="Surface/BagGrid/bag_17"]
+[editable path="Surface/BagGrid/bag_18"]
+[editable path="Surface/BagGrid/bag_19"]
+[editable path="Surface/BagGrid/bag_20"]
+[editable path="Surface/BagGrid/bag_21"]
+[editable path="Surface/BagGrid/bag_22"]
+[editable path="Surface/BagGrid/bag_23"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_0"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_1"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_2"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_3"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_4"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_5"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_6"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_7"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_8"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_9"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_10"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_11"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_12"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_13"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_14"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_15"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_16"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_17"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_18"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_19"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_20"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_21"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_22"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_23"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_24"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_25"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_26"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_27"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_28"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_29"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_30"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_31"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_32"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_33"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_34"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_35"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_36"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_37"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_38"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_39"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_40"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_41"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_42"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_43"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_44"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_45"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_46"]
+[editable path="Surface/ChestScroll/ChestGrid/chest_47"]
+

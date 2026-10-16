@@ -17,9 +17,8 @@ func capture() -> void:
 	background.size = Vector2(root.size)
 	root.add_child(background)
 	var baseline := 520.0
-	var atlas_script = load("res://scripts/atlas.gd")
 	var player := AnimatedSprite2D.new()
-	player.sprite_frames = atlas_script.player_frames()
+	player.sprite_frames = load("res://resources/player_frames.tres")
 	player.animation = "south"
 	player.frame = 0
 	var frame_width: float = player.sprite_frames.get_frame_texture("south", 0).get_width()

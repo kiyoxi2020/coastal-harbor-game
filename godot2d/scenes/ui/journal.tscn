@@ -1,0 +1,113 @@
+[gd_scene load_steps=17 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/journal.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scenes/ui/main_menu.tscn" id="2_main"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="3_pause"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pages/storage_page.tscn" id="4_storage"]
+[ext_resource type="PackedScene" path="res://scenes/ui/dialogs/name_dialog.tscn" id="5_name"]
+[ext_resource type="PackedScene" path="res://scenes/ui/dialogs/quantity_dialog.tscn" id="6_quantity"]
+[ext_resource type="PackedScene" path="res://scenes/ui/dialogs/confirm_dialog.tscn" id="7_confirm"]
+[ext_resource type="PackedScene" path="res://scenes/ui/dialogs/save_error_dialog.tscn" id="8_save"]
+[ext_resource type="FontFile" path="res://assets/NotoSansCJKsc-Regular.otf" id="9_font"]
+[ext_resource type="Script" path="res://scripts/ui/pixel_style.gd" id="10_style"]
+[ext_resource type="StyleBox" path="res://resources/ui/pixel_teal.tres" id="11_hover"]
+[ext_resource type="StyleBox" path="res://resources/ui/pixel_active.tres" id="12_pressed"]
+[ext_resource type="StyleBox" path="res://resources/ui/pixel_focus.tres" id="13_focus"]
+
+[sub_resource type="StyleBox" id="StyleBox_paper"]
+script = ExtResource("10_style")
+kind = "paper"
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_input"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 0.968627, 0.898039, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.294118, 0.486275, 0.486275, 1)
+
+[sub_resource type="Theme" id="Theme_journal"]
+default_font = ExtResource("9_font")
+default_font_size = 24
+Button/colors/font_color = Color(0.14902, 0.305882, 0.333333, 1)
+Button/colors/font_disabled_color = Color(0.14902, 0.305882, 0.333333, 0.5)
+Button/colors/font_focus_color = Color(0.14902, 0.305882, 0.333333, 1)
+Button/colors/font_hover_color = Color(0.14902, 0.305882, 0.333333, 1)
+Button/colors/font_pressed_color = Color(0.14902, 0.305882, 0.333333, 1)
+Button/styles/disabled = SubResource("StyleBox_paper")
+Button/styles/focus = ExtResource("13_focus")
+Button/styles/hover = ExtResource("11_hover")
+Button/styles/normal = SubResource("StyleBox_paper")
+Button/styles/pressed = ExtResource("12_pressed")
+CheckButton/colors/font_color = Color(0.14902, 0.305882, 0.333333, 1)
+Label/colors/font_color = Color(0.14902, 0.305882, 0.333333, 1)
+LineEdit/colors/font_color = Color(0.14902, 0.305882, 0.333333, 1)
+LineEdit/colors/font_uneditable_color = Color(0.14902, 0.305882, 0.333333, 1)
+LineEdit/styles/focus = SubResource("StyleBox_input")
+LineEdit/styles/normal = SubResource("StyleBox_input")
+LineEdit/styles/read_only = SubResource("StyleBox_input")
+SpinBox/colors/font_color = Color(0.14902, 0.305882, 0.333333, 1)
+
+[node name="Journal" type="CanvasLayer"]
+layer = 20
+process_mode = 3
+script = ExtResource("1_script")
+
+[node name="Root" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_journal")
+
+[node name="Shade" type="ColorRect" parent="Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07, 0.18, 0.21, 0.76)
+
+[node name="MainMenu" parent="Root" instance=ExtResource("2_main")]
+layout_mode = 1
+
+[node name="PauseMenu" parent="Root" instance=ExtResource("3_pause")]
+layout_mode = 1
+
+[node name="StoragePage" parent="Root" instance=ExtResource("4_storage")]
+visible = false
+layout_mode = 1
+
+[node name="Dialogs" type="Control" parent="Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="NameDialog" parent="Root/Dialogs" instance=ExtResource("5_name")]
+layout_mode = 1
+
+[node name="QuantityDialog" parent="Root/Dialogs" instance=ExtResource("6_quantity")]
+layout_mode = 1
+
+[node name="ConfirmDialog" parent="Root/Dialogs" instance=ExtResource("7_confirm")]
+layout_mode = 1
+
+[node name="SaveErrorDialog" parent="Root/Dialogs" instance=ExtResource("8_save")]
+layout_mode = 1
+

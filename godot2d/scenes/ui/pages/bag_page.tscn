@@ -1,0 +1,250 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/components/inventory_slot.tscn" id="2_slot"]
+[ext_resource type="PackedScene" path="res://scenes/ui/components/item_details.tscn" id="3_details"]
+
+[node name="BagPage" type="Control"]
+layout_mode = 0
+offset_right = 1088.0
+offset_bottom = 444.0
+
+[node name="Filter" type="Control" parent="."]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 602.0
+offset_bottom = 50.0
+
+[node name="filter_0" type="Button" parent="Filter"]
+layout_mode = 0
+offset_right = 110.0
+offset_bottom = 40.0
+text = "全部"
+
+[node name="filter_1" type="Button" parent="Filter"]
+layout_mode = 0
+offset_left = 119.0
+offset_right = 229.0
+offset_bottom = 40.0
+text = "海产"
+
+[node name="filter_2" type="Button" parent="Filter"]
+layout_mode = 0
+offset_left = 238.0
+offset_right = 348.0
+offset_bottom = 40.0
+text = "食材"
+
+[node name="filter_3" type="Button" parent="Filter"]
+layout_mode = 0
+offset_left = 357.0
+offset_right = 467.0
+offset_bottom = 40.0
+text = "材料"
+
+[node name="filter_4" type="Button" parent="Filter"]
+layout_mode = 0
+offset_left = 476.0
+offset_right = 586.0
+offset_bottom = 40.0
+text = "工具"
+
+[node name="BagGrid" type="Control" parent="."]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 68.0
+offset_right = 604.0
+offset_bottom = 404.0
+
+[node name="bag_0" parent="BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 92.0
+offset_bottom = 78.0
+
+[node name="bag_1" parent="BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 98.0
+offset_top = 0.0
+offset_right = 190.0
+offset_bottom = 78.0
+
+[node name="bag_2" parent="BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 196.0
+offset_top = 0.0
+offset_right = 288.0
+offset_bottom = 78.0
+
+[node name="bag_3" parent="BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 294.0
+offset_top = 0.0
+offset_right = 386.0
+offset_bottom = 78.0
+
+[node name="bag_4" parent="BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 392.0
+offset_top = 0.0
+offset_right = 484.0
+offset_bottom = 78.0
+
+[node name="bag_5" parent="BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 0.0
+offset_right = 582.0
+offset_bottom = 78.0
+
+[node name="bag_6" parent="BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 84.0
+offset_right = 92.0
+offset_bottom = 162.0
+
+[node name="bag_7" parent="BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 98.0
+offset_top = 84.0
+offset_right = 190.0
+offset_bottom = 162.0
+
+[node name="bag_8" parent="BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 196.0
+offset_top = 84.0
+offset_right = 288.0
+offset_bottom = 162.0
+
+[node name="bag_9" parent="BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 294.0
+offset_top = 84.0
+offset_right = 386.0
+offset_bottom = 162.0
+
+[node name="bag_10" parent="BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 392.0
+offset_top = 84.0
+offset_right = 484.0
+offset_bottom = 162.0
+
+[node name="bag_11" parent="BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 84.0
+offset_right = 582.0
+offset_bottom = 162.0
+
+[node name="bag_12" parent="BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 168.0
+offset_right = 92.0
+offset_bottom = 246.0
+
+[node name="bag_13" parent="BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 98.0
+offset_top = 168.0
+offset_right = 190.0
+offset_bottom = 246.0
+
+[node name="bag_14" parent="BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 196.0
+offset_top = 168.0
+offset_right = 288.0
+offset_bottom = 246.0
+
+[node name="bag_15" parent="BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 294.0
+offset_top = 168.0
+offset_right = 386.0
+offset_bottom = 246.0
+
+[node name="bag_16" parent="BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 392.0
+offset_top = 168.0
+offset_right = 484.0
+offset_bottom = 246.0
+
+[node name="bag_17" parent="BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 168.0
+offset_right = 582.0
+offset_bottom = 246.0
+
+[node name="bag_18" parent="BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 252.0
+offset_right = 92.0
+offset_bottom = 330.0
+
+[node name="bag_19" parent="BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 98.0
+offset_top = 252.0
+offset_right = 190.0
+offset_bottom = 330.0
+
+[node name="bag_20" parent="BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 196.0
+offset_top = 252.0
+offset_right = 288.0
+offset_bottom = 330.0
+
+[node name="bag_21" parent="BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 294.0
+offset_top = 252.0
+offset_right = 386.0
+offset_bottom = 330.0
+
+[node name="bag_22" parent="BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 392.0
+offset_top = 252.0
+offset_right = 484.0
+offset_bottom = 330.0
+
+[node name="bag_23" parent="BagGrid" instance=ExtResource("2_slot")]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 252.0
+offset_right = 582.0
+offset_bottom = 330.0
+
+[node name="Capacity" type="Label" parent="."]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 408.0
+offset_right = 602.0
+offset_bottom = 438.0
+theme_override_font_sizes/font_size = 22
+text = "24 格 · 每格最多 99 个"
+
+[node name="Details" parent="." instance=ExtResource("3_details")]
+layout_mode = 0
+offset_left = 634.0
+offset_top = 62.0
+offset_right = 1058.0
+offset_bottom = 402.0
+
+[node name="sort" type="Button" parent="."]
+layout_mode = 0
+offset_left = 826.0
+offset_top = 394.0
+offset_right = 1066.0
+offset_bottom = 440.0
+text = "整理全部"
+
