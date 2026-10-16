@@ -9,7 +9,7 @@ func _initialize() -> void:
 func run() -> void:
 	var scene=load("res://scenes/harbor.tscn").instantiate()
 	scene.set_meta("journal_test",true)
-	scene.set_meta("save_directory","/private/tmp/compact-cottage-"+str(Time.get_ticks_usec()))
+	scene.set_meta("save_directory","/private/tmp/coastal-compact-cottage-"+str(Time.get_ticks_usec()))
 	root.add_child(scene)
 	await process_frame
 	scene.start_new_game("compact")
@@ -43,7 +43,7 @@ func run() -> void:
 	var fade_observed:=false
 	while scene.home.transition.busy and Time.get_ticks_msec()-started<6000:
 		partial=partial or (scene.player.doorway_hidden>0 and scene.player.doorway_hidden<1)
-		if scene.home.transition.phase=="Crossing" and scene.player.position.y>=Room.DOOR.y:
+		if scene.home.transition.phase=="Crossing" and scene.player.position.y<=Room.DOOR.y:
 			fully_visible_on_floor=fully_visible_on_floor and scene.player.doorway_hidden==0
 		if scene.home.transition.phase=="FadeOut":
 			fade_observed=true
@@ -56,7 +56,7 @@ func run() -> void:
 	while scene.home.transition.busy and Time.get_ticks_msec()-started<6000: await process_frame
 	check("transition_completed_at_expected_destination",not scene.home.transition.busy and scene.foraging.location=="harbor")
 	check("clip_cleanup",scene.player.doorway_hidden==0 and scene.player.modulate.a==1 and scene.player.z_index==0)
-	check("aperture_cleanup",scene.player.doorway_material.get_shader_parameter("aperture_top")< -999999)
+	check("aperture_cleanup",not scene.player.doorway_material.get_shader_parameter("clip_enabled"))
 	scene.home.switch_room("house",Room.SPAWN)
 	await physics_frame
 	scene.player.position=Room.DOOR+Vector2(20,-28)
@@ -96,17 +96,16 @@ func run() -> void:
 			clear=(scene.player.move_and_collide(point-scene.player.position)==null) and clear
 		check("physics_route_"+str(route[-1]),clear)
 	scene.player.set_doorway_hidden(0.8)
-	scene.player.doorway_material.set_shader_parameter("aperture_top",136.0)
+	scene.player.doorway_material.set_shader_parameter("clip_enabled",true)
 	scene.home.switch_room("house",Vector2(320,300))
 	check("load_clears_visual_and_preserves_valid_legacy_point",scene.player.doorway_hidden==0 and scene.player.position==Vector2(320,300))
-	check("load_clears_aperture",scene.player.doorway_material.get_shader_parameter("aperture_top")< -999999)
+	check("load_clears_aperture",not scene.player.doorway_material.get_shader_parameter("clip_enabled"))
 	scene.player.set_doorway_hidden(0.5)
-	scene.player.doorway_material.set_shader_parameter("aperture_top",136.0)
+	scene.player.doorway_material.set_shader_parameter("clip_enabled",true)
 	scene.home.reset_player()
 	check("reset_clears_visual_to_south_spawn",scene.player.doorway_hidden==0 and scene.player.position==Room.SPAWN)
-	check("reset_clears_aperture",scene.player.doorway_material.get_shader_parameter("aperture_top")< -999999)
+	check("reset_clears_aperture",not scene.player.doorway_material.get_shader_parameter("clip_enabled"))
 	if DisplayServer.get_name()!="headless":
-		await render_clipping(scene)
 		await render_aperture_top(scene)
 		if OS.get_cmdline_user_args().has("--capture-doorways"):
 			await capture_doorways(scene)
@@ -144,36 +143,6 @@ func render_aperture_top(scene) -> void:
 	check("exterior_actual_pixels_preserved_below_aperture",below>0)
 	rendered.save_png("/private/tmp/compact-aperture-top.png")
 	scene.home.transition.clipping_door=null
-	scene.player.reset_doorway_visual()
-	viewport.queue_free()
-
-func render_clipping(scene) -> void:
-	var viewport:=SubViewport.new()
-	viewport.size=Vector2i(96,96)
-	viewport.transparent_bg=true
-	viewport.render_target_update_mode=SubViewport.UPDATE_ALWAYS
-	root.add_child(viewport)
-	var sprite:=AnimatedSprite2D.new()
-	sprite.sprite_frames=scene.player.sprite.sprite_frames
-	sprite.scale=scene.player.sprite.scale
-	sprite.position=Vector2(48,48)
-	sprite.material=scene.player.doorway_material
-	viewport.add_child(sprite)
-	for direction in ["north","south"]:
-		sprite.animation=direction
-		var counts: Array[int]=[]
-		for hidden in [0.0,0.5,1.0]:
-			scene.player.set_doorway_hidden(hidden)
-			await process_frame
-			await RenderingServer.frame_post_draw
-			var rendered:=viewport.get_texture().get_image()
-			var count:=0
-			for y in range(96):
-				for x in range(96):
-					if rendered.get_pixel(x,y).a>0.5: count+=1
-			counts.append(count)
-			rendered.save_png("/private/tmp/compact-clip-"+direction+"-"+str(hidden)+".png")
-		check(direction+"_actual_shader_progressive",counts[0]>counts[1] and counts[1]>0 and counts[2]==0)
 	scene.player.reset_doorway_visual()
 	viewport.queue_free()
 

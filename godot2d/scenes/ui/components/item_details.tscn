@@ -1,0 +1,55 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="StyleBox" path="res://resources/ui/pixel_teal.tres" id="2_teal"]
+
+[node name="ItemDetails" type="Control"]
+layout_mode = 0
+offset_right = 424.0
+offset_bottom = 340.0
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_right = 424.0
+offset_bottom = 44.0
+theme_override_font_sizes/font_size = 30
+text = "选择一个格子"
+
+[node name="Description" type="Label" parent="."]
+layout_mode = 0
+offset_top = 54.0
+offset_right = 424.0
+offset_bottom = 202.0
+text = "选中物品可查看用途和操作。\n\n整理不会改变物品总数。"
+autowrap_mode = 2
+
+[node name="Pending" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_top = 208.0
+offset_right = 424.0
+offset_bottom = 298.0
+autowrap_mode = 2
+
+[node name="move" type="Button" parent="."]
+layout_mode = 0
+offset_top = 210.0
+offset_right = 210.0
+offset_bottom = 254.0
+text = "移动 / 合并"
+theme_override_styles/normal = ExtResource("2_teal")
+
+[node name="split" type="Button" parent="."]
+layout_mode = 0
+offset_left = 222.0
+offset_top = 210.0
+offset_right = 424.0
+offset_bottom = 254.0
+text = "拆分"
+
+[node name="discard" type="Button" parent="."]
+layout_mode = 0
+offset_top = 266.0
+offset_right = 210.0
+offset_bottom = 310.0
+text = "丢弃…"
+

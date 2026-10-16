@@ -1,6 +1,10 @@
+@tool
 extends Node2D
 
-var kind := "clam"
+@export_enum("clam", "snail", "kelp") var kind := "clam":
+	set(value):
+		kind = value
+		queue_redraw()
 var highlighted := false:
 	set(value):
 		if highlighted != value:

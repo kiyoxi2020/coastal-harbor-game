@@ -19,26 +19,32 @@ func run() -> void:
 	var scene = get_parent()
 	scene.player.set_physics_process(false)
 	scene.player.sprite.stop()
-	var water = scene.get_node("Terrain/WaterDetail")
+	scene.set_process(false)
+	scene.hud.set_process(false)
+	(scene.get_node("WorldCamera") as Camera2D).set_process(false)
+	var water = scene.get_node("HarborExterior/Terrain/WaterDetail")
 	water.set_process(false)
 	var frames: Array[Image] = []
+	var water_transforms: Array[Transform2D] = []
 	for i in range(5):
 		water.elapsed = i*0.25
 		water.queue_redraw()
 		var frame: Image = await snap()
 		frames.append(frame)
+		water_transforms.append(water.get_global_transform_with_canvas())
 		if i < 4:
 			frame.save_png(output_dir.path_join("water-frame-%d.png" % i))
 	var land_still := true
 	var changes: Array = []
 	for i in range(1,5):
 		var delta := 0
-		for y in range(416):
-			for x in range(640):
-				var p := Vector2(x,y)
+		var screen_to_water: Transform2D = water_transforms[i].affine_inverse()
+		for y in range(frames[0].get_height()):
+			for x in range(frames[0].get_width()):
 				if frames[0].get_pixel(x,y) != frames[i].get_pixel(x,y):
 					delta += 1
-					if not water.is_open_water(p):
+					var pixel_center := Vector2(x+0.5,y+0.5)
+					if not water.contains_open_water(screen_to_water*pixel_center):
 						land_still = false
 		changes.append(delta)
 	checks["only_open_water_changes"] = land_still
@@ -46,7 +52,6 @@ func run() -> void:
 	checks["one_second_seamless_loop"] = changes[3] == 0
 	var report := FileAccess.open(output_dir.path_join("water-render-tests.json"),FileAccess.WRITE)
 	var passed := not checks.values().has(false)
-	report.store_string(JSON.stringify({"passed":passed,"checks":checks,"changed_pixels_from_frame_0":changes,"scope":"actual 640x416 renderer frames; not a hardware performance benchmark"}, "\t"))
+	report.store_string(JSON.stringify({"passed":passed,"checks":checks,"changed_pixels_from_frame_0":changes,"scope":"unscaled viewport framebuffer pixels inverse-projected through the captured WaterDetail canvas transform; not a hardware performance benchmark"}, "\t"))
 	print("WATER RENDER ",checks," changes=",changes)
 	get_tree().quit(0 if passed else 1)
-

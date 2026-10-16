@@ -1,0 +1,297 @@
+[gd_scene load_steps=31 format=3]
+
+[ext_resource type="Script" path="res://scripts/house_interior.gd" id="1_interior"]
+[ext_resource type="PackedScene" path="res://scenes/world/furniture.tscn" id="2_furniture"]
+[ext_resource type="PackedScene" path="res://scenes/world/indoor_door.tscn" id="3_door"]
+[ext_resource type="Texture2D" path="res://assets/house-interior/floor.png" id="4_floor"]
+[ext_resource type="Texture2D" path="res://assets/house-interior/wall.png" id="5_wall"]
+[ext_resource type="Texture2D" path="res://assets/house-interior/rug.png" id="6_rug"]
+[ext_resource type="Texture2D" path="res://assets/house-interior/bed_rug.png" id="7_bed_rug"]
+[ext_resource type="Texture2D" path="res://assets/house-interior/bed.png" id="8_bed"]
+[ext_resource type="Texture2D" path="res://assets/house-interior/nightstand.png" id="9_nightstand"]
+[ext_resource type="Texture2D" path="res://assets/house-interior/kitchen.png" id="10_kitchen"]
+[ext_resource type="Texture2D" path="res://assets/house-interior/table.png" id="11_table"]
+[ext_resource type="Texture2D" path="res://assets/house-interior/chair.png" id="12_chair"]
+[ext_resource type="Texture2D" path="res://assets/house-interior/chest.png" id="13_chest"]
+[ext_resource type="Texture2D" path="res://assets/house-interior/shelf.png" id="14_shelf"]
+[ext_resource type="Texture2D" path="res://assets/house-interior/photo.png" id="15_photo"]
+[ext_resource type="Texture2D" path="res://assets/house-interior/window.png" id="16_window"]
+[ext_resource type="Texture2D" path="res://assets/house-interior/plant.png" id="17_plant"]
+
+[sub_resource type="RectangleShape2D" id="Shape_north"]
+size = Vector2(320, 32)
+[sub_resource type="RectangleShape2D" id="Shape_side"]
+size = Vector2(16, 224)
+[sub_resource type="RectangleShape2D" id="Shape_south"]
+size = Vector2(124, 16)
+[sub_resource type="RectangleShape2D" id="Shape_bed"]
+size = Vector2(48, 80)
+[sub_resource type="RectangleShape2D" id="Shape_nightstand"]
+size = Vector2(20, 11)
+[sub_resource type="RectangleShape2D" id="Shape_kitchen"]
+size = Vector2(76, 16)
+[sub_resource type="RectangleShape2D" id="Shape_table"]
+size = Vector2(40, 11)
+[sub_resource type="RectangleShape2D" id="Shape_chair"]
+size = Vector2(12, 8)
+[sub_resource type="RectangleShape2D" id="Shape_chest"]
+size = Vector2(28, 9)
+[sub_resource type="RectangleShape2D" id="Shape_plant"]
+size = Vector2(12, 9)
+
+[node name="HouseInterior" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_interior")
+floor_rect = Rect2(176, 112, 288, 208)
+
+[node name="StaticArt" type="Node2D" parent="."]
+
+[node name="Backdrop" type="Polygon2D" parent="StaticArt"]
+color = Color(0.0941176, 0.188235, 0.223529, 1)
+polygon = PackedVector2Array(-200, -200, 840, -200, 840, 700, -200, 700)
+
+[node name="FloorBorder" type="Polygon2D" parent="StaticArt"]
+color = Color(0.286275, 0.243137, 0.207843, 1)
+polygon = PackedVector2Array(168, 104, 472, 104, 472, 328, 168, 328)
+
+[node name="Floor" type="Sprite2D" parent="StaticArt"]
+texture_repeat = 2
+position = Vector2(176, 112)
+texture = ExtResource("4_floor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 288, 208)
+
+[node name="NorthWall" type="Sprite2D" parent="StaticArt"]
+texture_repeat = 2
+position = Vector2(176, 64)
+texture = ExtResource("5_wall")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 288, 64)
+
+[node name="LeftEdge" type="Polygon2D" parent="StaticArt"]
+color = Color(0.396078, 0.47451, 0.415686, 1)
+polygon = PackedVector2Array(172, 112, 176, 112, 176, 320, 172, 320)
+
+[node name="RightEdge" type="Polygon2D" parent="StaticArt"]
+color = Color(0.396078, 0.47451, 0.415686, 1)
+polygon = PackedVector2Array(464, 112, 468, 112, 468, 320, 464, 320)
+
+[node name="SouthWest" type="Polygon2D" parent="StaticArt"]
+color = Color(0.419608, 0.360784, 0.266667, 1)
+polygon = PackedVector2Array(176, 320, 300, 320, 300, 327, 176, 327)
+
+[node name="SouthEast" type="Polygon2D" parent="StaticArt"]
+color = Color(0.419608, 0.360784, 0.266667, 1)
+polygon = PackedVector2Array(340, 320, 464, 320, 464, 327, 340, 327)
+
+[node name="Rug" type="Sprite2D" parent="StaticArt"]
+position = Vector2(280, 212)
+texture = ExtResource("6_rug")
+centered = false
+
+[node name="BedRug" type="Sprite2D" parent="StaticArt"]
+position = Vector2(192, 228)
+texture = ExtResource("7_bed_rug")
+centered = false
+
+[node name="Furniture" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Bed" parent="Furniture" instance=ExtResource("2_furniture")]
+position = Vector2(216, 224)
+kind = "bed"
+art_id = "bed"
+layout_rect = Rect2(192, 144, 48, 80)
+[node name="Sprite2D" parent="Furniture/Bed" index="0"]
+position = Vector2(-24, -79)
+texture = ExtResource("8_bed")
+[node name="BaseCollision" parent="Furniture/Bed" index="1"]
+position = Vector2(0, -40)
+[node name="CollisionShape2D" parent="Furniture/Bed/BaseCollision" index="0"]
+shape = SubResource("Shape_bed")
+disabled = false
+
+[node name="nightstand" parent="Furniture" instance=ExtResource("2_furniture")]
+position = Vector2(260, 168)
+kind = "nightstand"
+art_id = "nightstand"
+layout_rect = Rect2(248, 126, 24, 42)
+[node name="Sprite2D" parent="Furniture/nightstand" index="0"]
+position = Vector2(-12, -42)
+texture = ExtResource("9_nightstand")
+[node name="BaseCollision" parent="Furniture/nightstand" index="1"]
+position = Vector2(0, -5.5)
+[node name="CollisionShape2D" parent="Furniture/nightstand/BaseCollision" index="0"]
+shape = SubResource("Shape_nightstand")
+disabled = false
+
+[node name="kitchen" parent="Furniture" instance=ExtResource("2_furniture")]
+position = Vector2(400, 176)
+kind = "kitchen"
+art_id = "kitchen"
+layout_rect = Rect2(360, 128, 80, 48)
+[node name="Sprite2D" parent="Furniture/kitchen" index="0"]
+position = Vector2(-40, -48)
+texture = ExtResource("10_kitchen")
+[node name="BaseCollision" parent="Furniture/kitchen" index="1"]
+position = Vector2(0, -8)
+[node name="CollisionShape2D" parent="Furniture/kitchen/BaseCollision" index="0"]
+shape = SubResource("Shape_kitchen")
+disabled = false
+
+[node name="table" parent="Furniture" instance=ExtResource("2_furniture")]
+position = Vector2(232, 296)
+kind = "table"
+art_id = "table"
+layout_rect = Rect2(208, 258, 48, 38)
+[node name="Sprite2D" parent="Furniture/table" index="0"]
+position = Vector2(-24, -38)
+texture = ExtResource("11_table")
+[node name="BaseCollision" parent="Furniture/table" index="1"]
+position = Vector2(0, -5.5)
+[node name="CollisionShape2D" parent="Furniture/table/BaseCollision" index="0"]
+shape = SubResource("Shape_table")
+disabled = false
+
+[node name="chair" parent="Furniture" instance=ExtResource("2_furniture")]
+position = Vector2(193, 292)
+kind = "chair"
+art_id = "chair"
+layout_rect = Rect2(184, 263, 18, 29)
+[node name="Sprite2D" parent="Furniture/chair" index="0"]
+position = Vector2(-9, -29)
+texture = ExtResource("12_chair")
+[node name="BaseCollision" parent="Furniture/chair" index="1"]
+position = Vector2(0, -4)
+[node name="CollisionShape2D" parent="Furniture/chair/BaseCollision" index="0"]
+shape = SubResource("Shape_chair")
+disabled = false
+
+[node name="chest" parent="Furniture" instance=ExtResource("2_furniture")]
+position = Vector2(416, 288)
+kind = "chest"
+art_id = "chest"
+layout_rect = Rect2(400, 264, 32, 24)
+[node name="Sprite2D" parent="Furniture/chest" index="0"]
+position = Vector2(-16, -24)
+texture = ExtResource("13_chest")
+[node name="BaseCollision" parent="Furniture/chest" index="1"]
+position = Vector2(0, -4.5)
+[node name="CollisionShape2D" parent="Furniture/chest/BaseCollision" index="0"]
+shape = SubResource("Shape_chest")
+disabled = false
+
+[node name="shelf" parent="Furniture" instance=ExtResource("2_furniture")]
+position = Vector2(276, 112)
+kind = "shelf"
+art_id = "shelf"
+layout_rect = Rect2(256, 90, 40, 22)
+[node name="Sprite2D" parent="Furniture/shelf" index="0"]
+position = Vector2(-20, -22)
+texture = ExtResource("14_shelf")
+
+[node name="photo" parent="Furniture" instance=ExtResource("2_furniture")]
+position = Vector2(276, 91)
+kind = "photo"
+art_id = "photo"
+layout_rect = Rect2(266, 73, 20, 18)
+[node name="Sprite2D" parent="Furniture/photo" index="0"]
+position = Vector2(-10, -18)
+texture = ExtResource("15_photo")
+
+[node name="window_left" parent="Furniture" instance=ExtResource("2_furniture")]
+position = Vector2(208, 114)
+kind = "window_left"
+art_id = "window"
+layout_rect = Rect2(184, 72, 48, 42)
+[node name="Sprite2D" parent="Furniture/window_left" index="0"]
+position = Vector2(-24, -42)
+texture = ExtResource("16_window")
+
+[node name="window_right" parent="Furniture" instance=ExtResource("2_furniture")]
+position = Vector2(432, 114)
+kind = "window_right"
+art_id = "window"
+layout_rect = Rect2(408, 72, 48, 42)
+[node name="Sprite2D" parent="Furniture/window_right" index="0"]
+position = Vector2(-24, -42)
+texture = ExtResource("16_window")
+
+[node name="plant" parent="Furniture" instance=ExtResource("2_furniture")]
+position = Vector2(448, 312)
+kind = "plant"
+art_id = "plant"
+layout_rect = Rect2(436, 272, 24, 40)
+[node name="Sprite2D" parent="Furniture/plant" index="0"]
+position = Vector2(-12, -40)
+texture = ExtResource("17_plant")
+[node name="BaseCollision" parent="Furniture/plant" index="1"]
+position = Vector2(0, -4.5)
+[node name="CollisionShape2D" parent="Furniture/plant/BaseCollision" index="0"]
+shape = SubResource("Shape_plant")
+disabled = false
+
+[node name="InteriorDoor" parent="Furniture" instance=ExtResource("3_door")]
+position = Vector2(320, 320)
+
+[node name="StaticCollisions" type="Node2D" parent="."]
+
+[node name="NorthWall" type="StaticBody2D" parent="StaticCollisions"]
+position = Vector2(320, 112)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticCollisions/NorthWall"]
+shape = SubResource("Shape_north")
+
+[node name="WestWall" type="StaticBody2D" parent="StaticCollisions"]
+position = Vector2(168, 224)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticCollisions/WestWall"]
+shape = SubResource("Shape_side")
+
+[node name="EastWall" type="StaticBody2D" parent="StaticCollisions"]
+position = Vector2(472, 224)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticCollisions/EastWall"]
+shape = SubResource("Shape_side")
+
+[node name="SouthWest" type="StaticBody2D" parent="StaticCollisions"]
+position = Vector2(238, 328)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticCollisions/SouthWest"]
+shape = SubResource("Shape_south")
+
+[node name="SouthEast" type="StaticBody2D" parent="StaticCollisions"]
+position = Vector2(402, 328)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticCollisions/SouthEast"]
+shape = SubResource("Shape_south")
+
+[node name="Spawn" type="Marker2D" parent="."]
+position = Vector2(320, 288)
+
+[node name="Storage" type="Marker2D" parent="."]
+position = Vector2(416, 306)
+
+[node name="InteractPoints" type="Node2D" parent="."]
+[node name="bed" type="Marker2D" parent="InteractPoints"]
+position = Vector2(216, 240)
+metadata/title = "祖辈留下的床"
+metadata/body = "洗晒过的被子还带着阳光的味道。\n休息换日将在后续版本开放。"
+[node name="kitchen" type="Marker2D" parent="InteractPoints"]
+position = Vector2(400, 192)
+metadata/title = "旧屋的小厨房"
+metadata/body = "旧瓷碗与铜壶已经摆好。\n料理功能尚未开放。"
+[node name="photo" type="Marker2D" parent="InteractPoints"]
+position = Vector2(280, 142)
+metadata/title = "一张旧合照"
+metadata/body = "照片里的人站在热闹的渔港前。\n你把它放回了原来的位置。"
+
+[editable path="Furniture/Bed"]
+[editable path="Furniture/nightstand"]
+[editable path="Furniture/kitchen"]
+[editable path="Furniture/table"]
+[editable path="Furniture/chair"]
+[editable path="Furniture/chest"]
+[editable path="Furniture/shelf"]
+[editable path="Furniture/photo"]
+[editable path="Furniture/window_left"]
+[editable path="Furniture/window_right"]
+[editable path="Furniture/plant"]
+[editable path="Furniture/InteriorDoor"]

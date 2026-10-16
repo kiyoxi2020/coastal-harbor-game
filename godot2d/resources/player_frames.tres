@@ -1,0 +1,138 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://cyyp5mjgjref7"]
+
+[ext_resource type="Texture2D" uid="uid://2unhi2p4v30q" path="res://assets/player.png" id="1_player"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_east_0"]
+atlas = ExtResource("1_player")
+region = Rect2(0, 627, 313, 313)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_east_1"]
+atlas = ExtResource("1_player")
+region = Rect2(313, 627, 314, 313)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_east_2"]
+atlas = ExtResource("1_player")
+region = Rect2(627, 627, 313, 313)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_east_3"]
+atlas = ExtResource("1_player")
+region = Rect2(940, 627, 314, 313)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_north_0"]
+atlas = ExtResource("1_player")
+region = Rect2(0, 940, 313, 314)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_north_1"]
+atlas = ExtResource("1_player")
+region = Rect2(313, 940, 314, 314)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_north_2"]
+atlas = ExtResource("1_player")
+region = Rect2(627, 940, 313, 314)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_north_3"]
+atlas = ExtResource("1_player")
+region = Rect2(940, 940, 314, 314)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_south_0"]
+atlas = ExtResource("1_player")
+region = Rect2(0, 0, 313, 313)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_south_1"]
+atlas = ExtResource("1_player")
+region = Rect2(313, 0, 314, 313)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_south_2"]
+atlas = ExtResource("1_player")
+region = Rect2(627, 0, 313, 313)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_south_3"]
+atlas = ExtResource("1_player")
+region = Rect2(940, 0, 314, 313)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_west_0"]
+atlas = ExtResource("1_player")
+region = Rect2(0, 313, 313, 314)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_west_1"]
+atlas = ExtResource("1_player")
+region = Rect2(313, 313, 314, 314)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_west_2"]
+atlas = ExtResource("1_player")
+region = Rect2(627, 313, 313, 314)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_west_3"]
+atlas = ExtResource("1_player")
+region = Rect2(940, 313, 314, 314)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_east_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_east_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_east_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_east_3")
+}],
+"loop": 1,
+"name": &"east",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_north_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_north_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_north_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_north_3")
+}],
+"loop": 1,
+"name": &"north",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_south_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_south_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_south_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_south_3")
+}],
+"loop": 1,
+"name": &"south",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_west_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_west_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_west_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_west_3")
+}],
+"loop": 1,
+"name": &"west",
+"speed": 7.0
+}]

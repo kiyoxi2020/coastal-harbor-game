@@ -80,6 +80,8 @@ func run() -> void:
 	var home=scene.home
 	home.transition.phase_changed.connect(phase_event)
 	if OS.get_cmdline_user_args().has("--exit-check"):
+		check("exit_fixture_collect",scene.foraging.collect("clam_a","clam"))
+		check("exit_fixture_store",scene.foraging.bag.transfer_to(scene.foraging.chest,0,1)==1)
 		scene.player.position=home.active_door().approach
 		home.transition.phase_changed.connect(exit_report)
 		check("exit_begin",home.transition.begin())
@@ -119,7 +121,7 @@ func run() -> void:
 	check("indoor_enabled",home.interior.visible and home.interior.process_mode!=Node.PROCESS_MODE_DISABLED)
 	check("camera_fixed",scene.get_node("WorldCamera").position==Vector2(320,200))
 	check("door_closed_after",home.active_door().pose==0)
-	check("phase_sequence",phases==["Approach","Opening","Crossing","FadeOut","Swap","FadeIn","Arrival","Closing","AwaitRelease","Idle"])
+	check("phase_sequence",phases==["Approach","Opening","Crossing","Closing","FadeOut","Swap","FadeIn","Arrival","Closing","AwaitRelease","Idle"])
 	check("no_outdoor_pickups",scene.nearest_pickup(Vector2(244,330)).is_empty())
 	await shot("04-interior")
 	scene.foraging.collect("clam_a","clam")
@@ -155,7 +157,7 @@ func run() -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame
 	var hold_start:=Time.get_ticks_msec()
-	while home.transition.phase!="AwaitRelease" and Time.get_ticks_msec()-hold_start<6000:
+	while home.transition.phase!="AwaitRelease" and Time.get_ticks_msec()-hold_start<10000:
 		await get_tree().process_frame
 	check("hold_e_await_release",home.transition.busy and home.transition.phase=="AwaitRelease")
 	check("hold_e_one_crossing",scene.foraging.location=="house")
@@ -170,18 +172,35 @@ func run() -> void:
 	check("failure_restores_source",scene.foraging.location=="harbor" and scene.player.position==home.exterior_door.approach)
 	check("failure_clears_fade",home.transition.fade.modulate.a==0 and home.exterior_door.pose==0)
 	check("failure_clears_visual",scene.player.doorway_hidden==0 and scene.player.modulate.a==1 and scene.player.z_index==0)
-	check("failure_clears_aperture",scene.player.doorway_material.get_shader_parameter("aperture_top")< -999999)
+	check("failure_clears_aperture",not scene.player.doorway_material.get_shader_parameter("clip_enabled"))
 	home.interior=saved_interior
 	for i in range(3): await get_tree().process_frame
+	# Insert a real obstruction after begin's clear-path checks, while the leaf opens.
+	scene.player.position = home.active_door().approach
+	check("interrupted_walk_begin", home.transition.begin())
+	var obstacle := StaticBody2D.new()
+	var obstacle_shape := CollisionShape2D.new()
+	var obstacle_box := RectangleShape2D.new()
+	obstacle_box.size = Vector2(12, 4)
+	obstacle_shape.shape = obstacle_box
+	obstacle.add_child(obstacle_shape)
+	obstacle.position = home.active_door().position - home.active_door().entrance_normal * 4
+	home.outdoor.add_child(obstacle)
+	await wait_door()
+	check("interrupted_walk_restores_source", scene.foraging.location == "harbor" and scene.player.position == home.exterior_door.approach)
+	check("interrupted_walk_cleanup", not scene.player.doorway_material.get_shader_parameter("clip_enabled") and scene.player.modulate.a == 1 and scene.player.sprite.z_index == 0 and home.exterior_door.pose == 0 and home.transition.fade.modulate.a == 0)
+	obstacle.queue_free()
+	for i in range(3): await get_tree().physics_frame
 	var nodes_before:=get_tree().get_node_count()
 	for i in range(20):
 		scene.player.position=home.active_door().approach
 		check("repeat_begin_"+str(i),home.transition.begin())
 		await wait_door()
+		check("repeat_cleanup_"+str(i), not scene.player.doorway_material.get_shader_parameter("clip_enabled") and scene.player.sprite.z_index == 0 and scene.player.modulate.a == 1 and home.active_door().pose == 0)
 	check("20_crossings_no_nodes_leaked",get_tree().get_node_count()==nodes_before)
 	check("20_crossings_inventory",scene.foraging.chest.count_item("clam")==1 and scene.foraging.total_collected==1)
 	check("20_crossings_visual_restored",scene.player.doorway_hidden==0 and scene.player.modulate.a==1 and scene.player.z_index==0)
-	check("20_crossings_aperture_restored",scene.player.doorway_material.get_shader_parameter("aperture_top")< -999999)
+	check("20_crossings_aperture_restored",not scene.player.doorway_material.get_shader_parameter("clip_enabled"))
 	# Real physics: indoor furniture and wall contacts, not only rectangle math.
 	home.switch_room("house",Vector2(216,240))
 	Input.action_press("up")

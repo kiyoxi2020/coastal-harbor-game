@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/world/water_clip_config.gd" id="1_clip"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_clip")
+open_water_rect = Rect2(0, 292, 640, 124)
+excluded_rects = Array[Rect2]([Rect2(224, 317, 144, 51), Rect2(403, 272, 74, 128), Rect2(271, 272, 50, 49)])

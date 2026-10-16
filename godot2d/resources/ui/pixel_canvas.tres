@@ -1,0 +1,18 @@
+[gd_resource type="StyleBox" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/pixel_style.gd" id="1"]
+
+[resource]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+script = ExtResource("1")
+kind = "canvas"
+dark_color = Color(0.0901961, 0.247059, 0.286275, 1)
+mid_color = Color(0.239216, 0.447059, 0.466667, 1)
+fill_color = Color(0.156863, 0.34902, 0.4, 1)
+light_color = Color(0.431373, 0.611765, 0.596078, 1)
+shadow_color = Color(0.141176, 0.262745, 0.298039, 1)
+stitch_color = Color(0.654902, 0.72549, 0.584314, 1)
+focus_color = Color(0.835294, 0.419608, 0.270588, 1)

@@ -1,21 +1,27 @@
 extends Node2D
-const CottageArt=preload("res://scripts/cottage_art.gd")
-var kind := "bed"
-var art_id := ""
-var extent := Vector2(48,80)
-var pilot_texture: Texture2D
-var pilot_pivot := Vector2.ZERO
 
-func _ready() -> void:
-	var id := art_id if not art_id.is_empty() else kind
-	var data := CottageArt.entry(id)
-	pilot_texture = CottageArt.texture_for(id)
-	if data.has("pivot"):
-		pilot_pivot=Vector2(data.pivot[0],data.pivot[1])
-	texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
-	if pilot_texture == null:
-		push_error("Cottage furniture texture missing: "+id)
+@export var kind := "bed"
+@export var art_id := ""
+@export var layout_rect := Rect2()
 
-func _draw() -> void:
-	if pilot_texture:
-		draw_texture(pilot_texture,-pilot_pivot)
+var pilot_texture: Texture2D:
+	get:
+		var sprite := get_node_or_null("Sprite2D") as Sprite2D
+		return sprite.texture if sprite != null else null
+
+var pilot_pivot: Vector2:
+	get:
+		var sprite := get_node_or_null("Sprite2D") as Sprite2D
+		return -sprite.position if sprite != null else Vector2.ZERO
+
+func layout_entry() -> Dictionary:
+	var result := {"id": kind, "rect": layout_rect}
+	if not art_id.is_empty() and art_id != kind:
+		result.art = art_id
+	var shape := get_node_or_null("BaseCollision/CollisionShape2D") as CollisionShape2D
+	if shape != null and not shape.disabled and shape.shape is RectangleShape2D:
+		var size := (shape.shape as RectangleShape2D).size
+		var interior := get_parent().get_parent() as Node2D
+		var center := interior.to_local(shape.to_global(Vector2.ZERO))
+		result.base = Rect2(center - size / 2.0, size)
+	return result

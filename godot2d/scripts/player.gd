@@ -1,54 +1,54 @@
 extends CharacterBody2D
 
-const Art = preload("res://scripts/atlas.gd")
 const SPEED = 72.0
-var sprite: AnimatedSprite2D
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var shadow: Polygon2D = $Shadow
 var walking := false
 var facing := "south"
 var world: Node
 var doorway_hidden := 0.0
 var doorway_material: ShaderMaterial
+var visual_top := 0.0
+var visual_bottom := 0.0
+var initial_modulate := Color.WHITE
+var initial_z_index := 0
+var initial_visible := true
+var initial_sprite_modulate := Color.WHITE
+var initial_sprite_z_index := 0
+var initial_shadow_visible := true
 
 func _ready() -> void:
 	motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
-	var shape := CollisionShape2D.new()
-	var rectangle := RectangleShape2D.new()
-	rectangle.size = Vector2(10,6)
-	shape.shape = rectangle
-	add_child(shape)
-	sprite = AnimatedSprite2D.new()
-	sprite.sprite_frames = Art.player_frames()
-	var frame_size: float = sprite.sprite_frames.get_frame_texture("south",0).get_width()
-	sprite.scale = Vector2.ONE * 48.0 / frame_size
-	sprite.position = Vector2(0,-22)
-	sprite.animation = facing
-	add_child(sprite)
-	doorway_material=ShaderMaterial.new()
-	doorway_material.shader=preload("res://scripts/doorway_clip.gdshader")
-	doorway_material.set_shader_parameter("frame_height",float(sprite.sprite_frames.get_frame_texture("south",0).get_height()))
-	sprite.material=doorway_material
+	doorway_material = sprite.material as ShaderMaterial
+	initial_modulate = modulate
+	initial_z_index = z_index
+	initial_visible = visible
+	initial_sprite_modulate = sprite.modulate
+	initial_sprite_z_index = sprite.z_index
+	initial_shadow_visible = shadow.visible
+	# Include every walking frame so fade starts only after the last opaque pixel.
+	for direction in ["north", "south"]:
+		for frame in range(sprite.sprite_frames.get_frame_count(direction)):
+			var texture := sprite.sprite_frames.get_frame_texture(direction, frame)
+			var bounds := texture.get_image().get_used_rect()
+			visual_top = minf(visual_top, sprite.position.y + (bounds.position.y - texture.get_height() * 0.5) * sprite.scale.y)
+			visual_bottom = maxf(visual_bottom, sprite.position.y + (bounds.end.y - texture.get_height() * 0.5) * sprite.scale.y)
 	queue_redraw()
 
 func set_doorway_hidden(value: float) -> void:
 	doorway_hidden=clampf(value,0,1)
-	# The visual occupies the aperture plane, below the fixed foreground jamb (2).
-	# Physics/root sorting stays untouched; this also avoids aperture-darkness overdraw.
-	sprite.z_index=1
-	doorway_material.set_shader_parameter("hidden_fraction",doorway_hidden)
-	queue_redraw()
+	shadow.visible = initial_shadow_visible and doorway_hidden == 0.0
+	# Diagnostic progress only; the shader clips fixed world geometry.
 
 func reset_doorway_visual() -> void:
 	set_doorway_hidden(0)
-	doorway_material.set_shader_parameter("aperture_top",-1000000.0)
-	sprite.z_index=0
-	modulate=Color.WHITE
-	sprite.modulate=Color.WHITE
-	visible=true
-	z_index=0
-
-func _draw() -> void:
-	if doorway_hidden==0:
-		draw_rect(Rect2(-6,-3,12,4),Color(0.08,0.22,0.22,0.24))
+	doorway_material.set_shader_parameter("clip_enabled",false)
+	sprite.z_index = initial_sprite_z_index
+	modulate = initial_modulate
+	sprite.modulate = initial_sprite_modulate
+	visible = initial_visible
+	z_index = initial_z_index
+	shadow.visible = initial_shadow_visible
 
 func _physics_process(_delta: float) -> void:
 	if is_instance_valid(world) and world.get("home") != null and world.home.transition.busy:

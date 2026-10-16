@@ -1,7 +1,41 @@
-[gd_scene format=3 uid="uid://dwjkccutgf7r4"]
+[gd_scene load_steps=9 format=3 uid="uid://dwjkccutgf7r4"]
 
 [ext_resource type="Script" uid="uid://cwukmhnqtsk1u" path="res://scripts/harbor.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/world_camera.gd" id="2_camera"]
+[ext_resource type="PackedScene" path="res://scenes/world/harbor_exterior.tscn" id="3_exterior"]
+[ext_resource type="PackedScene" path="res://scenes/world/house_interior.tscn" id="4_interior"]
+[ext_resource type="PackedScene" path="res://scenes/actors/player.tscn" id="5_player"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="6_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/journal.tscn" id="7_journal"]
+[ext_resource type="Script" path="res://scripts/house_session.gd" id="8_session"]
+[ext_resource type="PackedScene" path="res://scenes/ui/transition_overlay.tscn" id="9_transition"]
 
 [node name="Harbor" type="Node2D" unique_id=149206743]
 texture_filter = 1
 script = ExtResource("1")
+
+[node name="HarborExterior" parent="." instance=ExtResource("3_exterior")]
+
+[node name="Returnee" parent="HarborExterior/DepthSortedObjects" instance=ExtResource("5_player")]
+position = Vector2(330, 250)
+
+[node name="HouseInterior" parent="." instance=ExtResource("4_interior")]
+process_mode = 4
+visible = false
+
+[node name="WorldCamera" type="Camera2D" parent="." node_paths=PackedStringArray("exterior")]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = false
+script = ExtResource("2_camera")
+exterior = NodePath("../HarborExterior")
+
+[node name="HUD" parent="." instance=ExtResource("6_hud")]
+
+[node name="Journal" parent="." instance=ExtResource("7_journal")]
+
+[node name="HouseSession" type="Node" parent="."]
+script = ExtResource("8_session")
+
+[node name="RoomTransition" parent="HouseSession" instance=ExtResource("9_transition")]
+
+[editable path="HarborExterior"]

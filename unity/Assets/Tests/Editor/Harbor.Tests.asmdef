@@ -1,7 +1,0 @@
-{
-  "name": "Harbor.Tests",
-  "references": ["Harbor.Runtime", "Harbor.Editor"],
-  "includePlatforms": ["Editor"],
-  "optionalUnityReferences": ["TestAssemblies"],
-  "autoReferenced": false
-}

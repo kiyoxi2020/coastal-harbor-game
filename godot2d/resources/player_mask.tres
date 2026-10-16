@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3]
+
+[ext_resource type="Shader" path="res://scripts/doorway_clip.gdshader" id="1_mask"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_mask")
+shader_parameter/clip_enabled = false
+shader_parameter/boundary_y = 0.0
+shader_parameter/visible_side = 1.0

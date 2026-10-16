@@ -58,6 +58,7 @@ func run() -> void:
 		return
 	scene.hud.bag_button.pressed.emit()
 	check("icon_opens_bag", ui.mode == "bag" and get_tree().paused)
+	check("empty_bag_reuses_hidden_icons", not ui.root.get_node("PauseMenu/Surface/BagPage/BagGrid/bag_0/Icon").visible)
 	ui.close_menu()
 	for entry in scene.data.pickups():
 		check("collect_"+entry.id, scene.foraging.collect(entry.id, entry.kind))
@@ -66,6 +67,25 @@ func run() -> void:
 	await key(KEY_B)
 	check("bag_opens", ui.mode == "bag" and get_tree().paused)
 	check("24_slots", ui.slots_count == 24)
+	var persistent_root_id: int = ui.root.get_instance_id()
+	var persistent_slot_ids: Array[int] = []
+	for slot in ui.root.get_node("PauseMenu/Surface/BagPage/BagGrid").find_children("bag_*","Button",false,false):
+		persistent_slot_ids.append(slot.get_instance_id())
+	for iteration in range(20):
+		ui.select_slot("bag",iteration%24)
+		ui.show_page("profile")
+		ui.show_page("settings")
+		ui.show_page("bag")
+	var current_slot_ids: Array[int] = []
+	for slot in ui.root.get_node("PauseMenu/Surface/BagPage/BagGrid").find_children("bag_*","Button",false,false):
+		current_slot_ids.append(slot.get_instance_id())
+	check("persistent_pages_20_switches", ui.root.get_instance_id() == persistent_root_id and current_slot_ids == persistent_slot_ids)
+	var press_count := [0]
+	var sort_button := ui.root.get_node("PauseMenu/Surface/BagPage/sort") as Button
+	sort_button.pressed.connect(func(): press_count[0] += 1)
+	sort_button.grab_focus()
+	await key(KEY_E)
+	check("one_key_one_operation", press_count[0] == 1)
 	var position: Vector2 = scene.player.position
 	await key(KEY_R)
 	check("menu_blocks_world", scene.player.position == position)
@@ -100,14 +120,20 @@ func run() -> void:
 	await shot("03-profile")
 	await key(KEY_TAB)
 	check("tab_closes", ui.mode == "" and not get_tree().paused)
-	scene.player.position = scene.STORAGE_POINT+Vector2(0,18)
+	scene.player.position = scene.home.storage_point()+Vector2(0,18)
 	await key(KEY_E)
 	check("storage_interaction", ui.mode == "storage" and get_tree().paused)
+	var chest_scroll := ui.root.get_node("StoragePage/Surface/ChestScroll") as ScrollContainer
+	ui.root.get_node("StoragePage/Surface/ChestScroll/ChestGrid/chest_47").grab_focus()
+	await get_tree().process_frame
+	await get_tree().process_frame
+	check("storage_focus_scrolls", chest_scroll.scroll_vertical > 0)
 	ui.select_slot("bag",0)
 	ui.action_transfer()
 	ui.accept_quantity()
 	check("storage_transfer", scene.foraging.chest.count_item("clam") == 2 and scene.foraging.counts.clam == 0)
 	check("stored_stats_unchanged", scene.foraging.total_collected == 6)
+	check("storage_empty_and_occupied_icons", not ui.root.get_node("StoragePage/Surface/BagGrid/bag_0/Icon").visible and ui.root.get_node("StoragePage/Surface/ChestScroll/ChestGrid/chest_0/Icon").visible)
 	await shot("04-storage")
 	await key(KEY_B)
 	check("storage_closes", ui.mode == "")
@@ -124,6 +150,37 @@ func run() -> void:
 	var Settings = load("res://scripts/settings_service.gd")
 	var reloaded = Settings.new(scene.save_service.directory)
 	check("settings_persist", is_equal_approx(reloaded.volumes.Music,0.35))
+	var gameplay_state = scene.foraging
+	var State = load("res://scripts/player_state.gd")
+	var full_state = State.new()
+	full_state.bag.add("snail",24*99)
+	scene.foraging = full_state
+	ui.show_page("bag")
+	var visible_icons := 0
+	for slot in ui.root.get_node("PauseMenu/Surface/BagPage/BagGrid").find_children("bag_*","Button",false,false):
+		if slot.get_node("Icon").visible:
+			visible_icons += 1
+	check("full_bag_renders_24_occupied", visible_icons == 24)
+	await shot("13-full-bag")
+	scene.foraging = gameplay_state
+	var original_save = scene.save_service
+	var blocked_root := "/private/tmp/coastal-journal-failure-"+str(Time.get_ticks_usec())
+	DirAccess.make_dir_recursive_absolute(blocked_root)
+	var blocker := FileAccess.open(blocked_root+"/blocker",FileAccess.WRITE)
+	blocker.store_string("not a directory")
+	blocker.close()
+	var Save = load("res://scripts/save_service.gd")
+	scene.save_service = Save.new(blocked_root+"/blocker/child")
+	check("save_failure_detected", not scene.save_progress())
+	scene.show_save_error(false)
+	check("save_error_dialog", ui.modal_kind == "save_error" and is_instance_valid(ui.modal))
+	await shot("14-save-error")
+	await key(KEY_B)
+	check("save_error_cancel_keeps_menu", ui.modal == null and ui.mode == "bag")
+	scene.save_service = original_save
+	ui.dismiss()
+	await get_tree().process_frame
+	check("world_visible_after_dialogs", ui.mode == "" and not get_tree().paused)
 	await shot("06-world")
 	var window_info: Dictionary = {}
 	if DisplayServer.get_name() != "headless":

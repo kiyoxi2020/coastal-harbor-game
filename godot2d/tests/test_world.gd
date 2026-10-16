@@ -23,6 +23,7 @@ func run() -> void:
 		quit(1)
 		return
 	var scene = load("res://scenes/harbor.tscn").instantiate()
+	scene.set_meta("save_directory", "/private/tmp/coastal-world-" + str(Time.get_ticks_usec()))
 	root.add_child(scene)
 	for i in range(5):
 		await physics_frame
@@ -64,8 +65,7 @@ func run() -> void:
 	check("fit_window_scaling", ProjectSettings.get_setting("display/window/stretch/scale_mode") == "fractional")
 	check("independent_props", scene.sort_layer.get_child_count() >= 9)
 	var house = scene.sort_layer.get_node("House")
-	var house_sprite = house.get_child(0)
-	var house_top: float = house.position.y - house_sprite.texture.get_height() * house_sprite.scale.y
+	var house_top: float = house.position.y - house.REGION.size.y * house.FACTOR
 	check("house_clear_of_header", house_top >= 32)
 	check("player_readable_scale", player.sprite.sprite_frames.get_frame_texture("south",0).get_width() * player.sprite.scale.x >= 47.5)
 	player.position = Vector2(442,236)

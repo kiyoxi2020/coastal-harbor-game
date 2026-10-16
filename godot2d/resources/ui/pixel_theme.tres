@@ -1,0 +1,19 @@
+[gd_resource type="Theme" load_steps=6 format=3]
+
+[ext_resource type="FontFile" path="res://assets/NotoSansCJKsc-Regular.otf" id="1_font"]
+[ext_resource type="StyleBox" path="res://resources/ui/pixel_canvas.tres" id="2_normal"]
+[ext_resource type="StyleBox" path="res://resources/ui/pixel_teal.tres" id="3_hover"]
+[ext_resource type="StyleBox" path="res://resources/ui/pixel_active.tres" id="4_pressed"]
+[ext_resource type="StyleBox" path="res://resources/ui/pixel_focus.tres" id="5_focus"]
+
+[resource]
+default_font = ExtResource("1_font")
+default_font_size = 24
+Button/colors/font_color = Color(1, 0.941176, 0.796078, 1)
+Button/colors/font_focus_color = Color(1, 0.941176, 0.796078, 1)
+Button/colors/font_hover_color = Color(0.14902, 0.305882, 0.333333, 1)
+Button/colors/font_pressed_color = Color(0.14902, 0.305882, 0.333333, 1)
+Button/styles/focus = ExtResource("5_focus")
+Button/styles/hover = ExtResource("3_hover")
+Button/styles/normal = ExtResource("2_normal")
+Button/styles/pressed = ExtResource("4_pressed")

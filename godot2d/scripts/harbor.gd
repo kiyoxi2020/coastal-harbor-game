@@ -7,7 +7,6 @@ var sort_layer: Node2D
 var hud: CanvasLayer
 var foraging = preload("res://scripts/foraging_state.gd").new()
 var pickup_nodes: Dictionary = {}
-const STORAGE_POINT = Vector2(274,194)
 var journal
 var save_service
 var settings
@@ -16,6 +15,7 @@ var session_started := false
 var release_input := false
 var save_message := ""
 var home
+var exterior: Node2D
 
 func _ready() -> void:
 	# Size the native window once per launch, preserving manual resizing thereafter.
@@ -28,67 +28,23 @@ func _ready() -> void:
 		window.set_meta("startup_window_sized",true)
 	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	configure_input()
-	var terrain := Node2D.new()
-	terrain.name = "Terrain"
-	terrain.set_script(load("res://scripts/terrain.gd"))
-	add_child(terrain)
-	var water_detail := Node2D.new()
-	water_detail.name = "WaterDetail"
-	water_detail.set_script(load("res://scripts/water_detail.gd"))
-	terrain.add_child(water_detail)
-	sort_layer = Node2D.new()
-	sort_layer.name = "DepthSortedObjects"
-	sort_layer.y_sort_enabled = true
-	add_child(sort_layer)
-	add_prop("house",Vector2(174,190),168)
-	add_prop("market",Vector2(442,218),144)
-	add_prop("garden",Vector2(126,224),78)
-	add_prop("garden",Vector2(212,224),78)
-	add_prop("crates",Vector2(523,233),29)
-	add_prop("boat",Vector2(532,370),114)
-	var tree_variants := [0,1,0,2,3]
-	for i in range(data.TREES.size()):
-		var tree := Node2D.new()
-		tree.name = "CoastalTree%d" % i
-		tree.position = data.TREES[i]
-		tree.set_meta("tree_variant",tree_variants[i])
-		var sprite := Sprite2D.new()
-		sprite.texture = load("res://assets/tree-set-v4/tree-%d.png" % tree_variants[i])
-		# Native-size 96px canvas, with trunk anchor (48,94).
-		sprite.position = Vector2(0,-46)
-		tree.add_child(sprite)
-		sort_layer.add_child(tree)
-	for rectangle in data.blockers():
-		var body := StaticBody2D.new()
-		body.position = rectangle.get_center()
-		var collision := CollisionShape2D.new()
-		var shape := RectangleShape2D.new()
-		shape.size = rectangle.size
-		collision.shape = shape
-		body.add_child(collision)
-		add_child(body)
-	player = CharacterBody2D.new()
-	player.set_script(load("res://scripts/player.gd"))
+	exterior = $HarborExterior
+	sort_layer = exterior.get_node("DepthSortedObjects") as Node2D
+	player = sort_layer.get_node("Returnee") as CharacterBody2D
 	player.world=self
-	player.name = "Returnee"
-	player.position = data.SPAWN
-	sort_layer.add_child(player)
-	var camera := Camera2D.new()
-	camera.name = "WorldCamera"
-	camera.set_script(preload("res://scripts/world_camera.gd"))
+	var camera := get_node("WorldCamera") as Camera2D
 	camera.target = player
-	add_child(camera)
-	hud = CanvasLayer.new()
-	hud.set_script(load("res://scripts/hud.gd"))
-	add_child(hud)
-	for entry in data.pickups():
-		var pickup := Node2D.new()
-		pickup.set_script(preload("res://scripts/forage_pickup.gd"))
-		pickup.kind = entry.kind
-		pickup.position = entry.point
-		pickup.name = entry.id
-		sort_layer.add_child(pickup)
-		pickup_nodes[entry.id] = pickup
+	camera.update_position()
+	camera.reset_smoothing()
+	camera.force_update_scroll()
+	hud = $HUD
+	journal = $Journal
+	var interior := $HouseInterior
+	home = $HouseSession
+	var transition := $HouseSession/RoomTransition
+	home.initialize(self, exterior, interior, exterior.get_node("DepthSortedObjects/ExteriorDoor"), transition)
+	for pickup in exterior.get_node("DepthSortedObjects/ForagePickups").get_children():
+		pickup_nodes[pickup.name] = pickup
 	hud.show_toast("低潮赶海：沿台阶下沙滩。暂不保存，重开重置。",8.0)
 	var args := OS.get_cmdline_user_args()
 	var old_verification: bool = get_meta("skip_verification",false)
@@ -104,25 +60,18 @@ func _ready() -> void:
 				save_directory = arg.trim_prefix("--test-save-directory=")
 	save_service = preload("res://scripts/save_service.gd").new(save_directory)
 	settings = preload("res://scripts/settings_service.gd").new(save_service.directory)
-	journal = CanvasLayer.new()
-	journal.set_script(preload("res://scripts/ui/journal.gd"))
-	journal.world = self
-	add_child(journal)
+	journal.initialize(self)
 	hud.bag_requested.connect(func():
 		if persistence_enabled and session_started and not hud.panel.visible and journal.mode == "" and not home.transition.busy:
 			journal.selected_side = "bag"
 			journal.selected_index = 0
 			journal.show_page("bag"))
 	if persistence_enabled:
-		add_prop("crates",STORAGE_POINT,22)
+		exterior.get_node("DepthSortedObjects/StorageCrates").show()
 		get_tree().auto_accept_quit = false
 		hud.controls.text = "WASD / 方向键 移动   E 拾取 / 查看   B / Tab 手账   R 回路口"
 		hud.show_toast("沿台阶赶海；旧屋东侧木箱可存放收获。",8)
 		journal.show_page("title")
-	home=Node.new()
-	home.set_script(preload("res://scripts/house_session.gd"))
-	home.world=self
-	add_child(home)
 	if args.has("--verify-house"):
 		var runner:=Node.new()
 		runner.set_script(load("res://tests/house_driver.gd"))
@@ -153,18 +102,6 @@ func _ready() -> void:
 		runner.set_script(load("res://tests/verify_environment_render.gd"))
 		add_child(runner)
 
-func add_prop(id: String, feet: Vector2, width: float) -> void:
-	var root := Node2D.new()
-	root.name = id.capitalize()
-	root.position = feet
-	var sprite := Sprite2D.new()
-	sprite.texture = Art.region(id)
-	var factor := width / sprite.texture.get_width()
-	sprite.scale = Vector2.ONE * factor
-	sprite.position = Vector2(0,-sprite.texture.get_height()*factor/2)
-	root.add_child(sprite)
-	sort_layer.add_child(root)
-
 func configure_input() -> void:
 	var keys = {"left":[KEY_A,KEY_LEFT],"right":[KEY_D,KEY_RIGHT],"up":[KEY_W,KEY_UP],"down":[KEY_S,KEY_DOWN],"inspect":[KEY_E],"reset":[KEY_R],"journal":[KEY_B,KEY_TAB]}
 	for action in keys:
@@ -179,7 +116,7 @@ func configure_input() -> void:
 func nearest_location(point: Vector2) -> Dictionary:
 	var nearest: Dictionary = {}
 	var distance := 28.0
-	var locations: Array=preload("res://scripts/room_data.gd").locations() if foraging.location=="house" else data.locations()
+	var locations: Array=home.interior.locations() if foraging.location=="house" else exterior.locations()
 	for location in locations:
 		var gap := point.distance_to(location.point)
 		if gap < distance:
@@ -188,11 +125,11 @@ func nearest_location(point: Vector2) -> Dictionary:
 	return nearest
 
 func nearest_pickup(point: Vector2) -> Dictionary:
-	if foraging.location=="house" or not data.BEACH.has_point(point):
+	if foraging.location=="house" or not exterior.foraging_area.has_point(point):
 		return {}
 	var nearest: Dictionary = {}
 	var distance := 24.0
-	for entry in data.pickups():
+	for entry in exterior.pickups():
 		if foraging.collected.has(entry.id):
 			continue
 		var gap := point.distance_to(entry.point)
@@ -248,7 +185,7 @@ func _process(_delta: float) -> void:
 		hud.prompt.text = "[ E ] 打开旧屋储物箱"
 	elif foraging.location=="house" and nearest_location(player.position).is_empty():
 		hud.prompt.text="回到熟悉的屋子；床、厨房和旧照片可查看。"
-	elif foraging.collected.size() == data.pickups().size() and nearest_location(player.position).is_empty():
+	elif foraging.collected.size() == exterior.pickups().size() and nearest_location(player.position).is_empty():
 		hud.prompt.text = "今日赶海收获已集齐；市集交易将在后续版本开放。"
 
 func refresh_pickups() -> void:
@@ -262,12 +199,13 @@ func _set_state(value) -> void:
 func start_new_game(chosen_name: String) -> bool:
 	var state = preload("res://scripts/player_state.gd").new()
 	state.player_name = state.clean_name(chosen_name)
-	if persistence_enabled and not save_service.write_save(state.to_data(data.SPAWN)):
+	var spawn: Vector2 = exterior.spawn_point()
+	if persistence_enabled and not save_service.write_save(state.to_data(spawn)):
 		journal.note = save_service.last_error
 		journal.render()
 		return false
 	_set_state(state)
-	home.switch_room("harbor",data.SPAWN)
+	home.switch_room("harbor",spawn)
 	session_started = true
 	journal.dismiss()
 	hud.show_toast("欢迎回来，"+foraging.player_name+"。E 赶海，B 打开手账。",8)

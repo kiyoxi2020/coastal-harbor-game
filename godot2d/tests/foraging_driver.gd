@@ -120,6 +120,7 @@ func integration() -> void:
 	await shot("12-export-complete")
 	var fresh_scene = load("res://scenes/harbor.tscn").instantiate()
 	fresh_scene.set_meta("skip_verification",true)
+	fresh_scene.set_meta("save_directory", "/private/tmp/coastal-foraging-restart-" + str(Time.get_ticks_usec()))
 	get_tree().root.add_child(fresh_scene)
 	await get_tree().process_frame
 	check("restart_empty", fresh_scene.foraging.counts == {"clam":0,"snail":0,"kelp":0})

@@ -1,28 +1,18 @@
-# 潮港旧屋 · 当前项目
+# 潮港旧屋
 
-唯一工作目录：`/Users/wyq/Documents/code/coastal-harbor-game/`。
+Godot 4.7.1 / GDScript 的 2D 像素沿海生活模拟原型。
 
-## 开发与查看
-
-- [当前2D工程](godot2d/project.godot)：Godot4.7.1，v0.5.2小屋版；独立门扇开关动画、可走动室内、共享仓储与场景存档。保留24格背包、个人页及设置。默认居中半桌面窗口，室外镜头不变。E开门/交互，B/Tab手账。
-- [最新2D交付](交付与预览/2D/README.md)：Mac试玩、源码包、截图和报告。
-- [最新3D交付](交付与预览/3D/README.md)：Unity动画试玩与最新Blender建模，二者阶段不同，不混称已集成。
-- [设计简稿](沿海小镇复兴-游戏设计简稿.md) · [目录与Git约定](docs/目录与Git约定.md)。
+打开 [godot2d/project.godot](godot2d/project.godot)，按 F5 运行；入口为 `scenes/harbor.tscn`。
+WASD/方向键移动，E 交互，B/Tab 打开手账，R 返回安全点。
 
 ## 目录
 
-```text
- godot2d/        当前2D代码、场景、运行素材、测试
- unity/          当前3D Unity工程
- art/            美术源资产（Git只跟踪当前使用部分）
- docs/           当前维护文档、迁移记录
- 交付与预览/
-   2D/           仅最新2D交付
-   3D/试玩/      仅最新3D可玩版
-   3D/建模/      仅最新3D建模预览（未接入试玩）
- archive/        本地历史归档，不进Git
- builds/         构建中间文件，不进Git
- work/           临时验证和脚本，不进Git
-```
+- `godot2d/`：唯一游戏工程，含场景、脚本、运行素材、许可与回归测试。
+- `art/`：2D 美术原图、生成提示与处理脚本；运行资源位于工程 assets 中。
+- `tools/`、`tests/`：小屋素材处理工具及 Python 测试。
+- `docs/`：当前设计约束与最近验收结论。
+- `PROJECT_STATE.md`、`HANDOFF.md`：当前状态与交接；`AGENTS.md`：开发约定。
+- `沿海小镇复兴-游戏设计简稿.md`：现有游戏设计简稿。
 
-原编号交付目录和历史实施记录已归档至`archive/2026-10-12-reorganization/`，未删除。Git不跟踪历史快照；工作代码今后的正常修改仍由Git提交记录追踪。当前交付二进制不进Git，需另外备份或分享。
+当前源码包含 v0.5.5 后的编辑器场景迁移，尚未重新导出。已知限制见项目状态。
+仅维护当前 2D 源码；旧版本由 Git 提交记录追溯，不在仓库内保留历史副本、Unity/3D 工程、试玩包和验证输出。尚未提交的改动不属于 Git 历史。

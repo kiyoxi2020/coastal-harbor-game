@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/pixel_style.gd" id="2_style"]
+[ext_resource type="Script" path="res://scripts/forage_pickup.gd" id="3_icon"]
+
+[sub_resource type="StyleBox" id="StyleBox_slot"]
+script = ExtResource("2_style")
+kind = "slot"
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+fill_color = Color(0.858824, 0.807843, 0.666667, 1)
+mid_color = Color(0.631373, 0.552941, 0.427451, 1)
+light_color = Color(0.972549, 0.921569, 0.780392, 1)
+
+[sub_resource type="StyleBox" id="StyleBox_selected_slot"]
+script = ExtResource("2_style")
+kind = "selected_slot"
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+fill_color = Color(0.858824, 0.807843, 0.666667, 1)
+mid_color = Color(0.87451, 0.501961, 0.341176, 1)
+light_color = Color(0.972549, 0.921569, 0.780392, 1)
+
+[node name="InventorySlot" type="Button"]
+custom_minimum_size = Vector2(92, 78)
+layout_mode = 0
+offset_right = 92.0
+offset_bottom = 78.0
+theme_override_styles/normal = SubResource("StyleBox_slot")
+theme_override_styles/pressed = SubResource("StyleBox_selected_slot")
+focus_mode = 2
+toggle_mode = true
+
+[node name="Icon" type="Node2D" parent="."]
+visible = false
+position = Vector2(46, 34)
+scale = Vector2(2.4, 2.4)
+script = ExtResource("3_icon")
+
+[node name="Amount" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 8.0
+offset_top = 43.0
+offset_right = 76.0
+offset_bottom = 71.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 20
+text = "0"
+horizontal_alignment = 2
+

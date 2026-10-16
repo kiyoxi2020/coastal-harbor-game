@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/house_exterior.gd" id="1_house"]
+[ext_resource type="Texture2D" path="res://assets/environment.png" id="2_atlas"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_top"]
+atlas = ExtResource("2_atlas")
+region = Rect2(34, 91, 488, 291)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_left"]
+atlas = ExtResource("2_atlas")
+region = Rect2(34, 382, 313, 84)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_right"]
+atlas = ExtResource("2_atlas")
+region = Rect2(410, 382, 112, 84)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bottom"]
+atlas = ExtResource("2_atlas")
+region = Rect2(34, 466, 488, 73)
+filter_clip = true
+
+[node name="HouseExteriorArt" type="Node2D"]
+position = Vector2(174, 165)
+texture_filter = 1
+script = ExtResource("1_house")
+metadata/door_cutout = true
+
+[node name="AtlasParts" type="Node2D" parent="."]
+
+[node name="Top" type="Sprite2D" parent="AtlasParts"]
+texture = SubResource("AtlasTexture_top")
+position = Vector2(-84, -129.2295)
+scale = Vector2(0.344262, 0.344262)
+centered = false
+
+[node name="Left" type="Sprite2D" parent="AtlasParts"]
+texture = SubResource("AtlasTexture_left")
+position = Vector2(-84, -29.04918)
+scale = Vector2(0.344262, 0.344262)
+centered = false
+
+[node name="Right" type="Sprite2D" parent="AtlasParts"]
+texture = SubResource("AtlasTexture_right")
+position = Vector2(45.44262, -29.04918)
+scale = Vector2(0.344262, 0.344262)
+centered = false
+
+[node name="Bottom" type="Sprite2D" parent="AtlasParts"]
+texture = SubResource("AtlasTexture_bottom")
+position = Vector2(-84, -0.131148)
+scale = Vector2(0.344262, 0.344262)
+centered = false

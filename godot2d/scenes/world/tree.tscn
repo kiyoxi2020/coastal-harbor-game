@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3]
+
+[sub_resource type="RectangleShape2D" id="TreeBase"]
+size = Vector2(10, 8)
+
+[node name="Tree" type="Node2D"]
+metadata/tree_anchor = Vector2(48, 94)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -46)
+
+[node name="Base" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Base"]
+shape = SubResource("TreeBase")
