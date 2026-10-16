@@ -129,7 +129,7 @@ func run_batch_1() -> void:
 	check("batch1_title_override_survives_resize", title.text == "Inspector 自定义标题")
 	check("batch1_top_offset_survives_resize", is_equal_approx(top.offset_bottom, 74.0))
 	check("batch1_theme_color_survives_resize", prompt.get_theme_color("font_color") == Color("7ad7ff"))
-	check("batch1_root_full_rect", root_control.anchor_right == 1.0 and root_control.anchor_bottom == 1.0)
+	check("batch1_root_covers_render_viewport", root_control.size * hud.scale == Vector2(2560, 1440))
 	hud.free()
 
 func node_ids(nodes: Array[Node]) -> Array[int]:
