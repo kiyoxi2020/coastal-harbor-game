@@ -257,7 +257,7 @@ func _refresh_slots(grid: Control, side: String) -> void:
 		amount.visible = occupied
 		if occupied:
 			var item: Dictionary = catalog.get_item(slot.id)
-			icon.kind = slot.id
+			icon.kind = item.icon_key
 			icon.queue_redraw()
 			amount.text = str(slot.amount)
 			button.tooltip_text = item.name + " ×" + str(slot.amount)
@@ -287,7 +287,12 @@ func _refresh_details() -> void:
 	if slot.id != "":
 		var item: Dictionary = catalog.get_item(slot.id)
 		title = item.name + "  ×" + str(slot.amount)
-		description = "海产 / 赶海收获\n" + item.description + "\n用途：后续交易与料理。\n当前不可直接使用。"
+		var source := "赶海收获"
+		if slot.id.ends_with("_seed"):
+			source = "市场种子"
+		elif item.category == "ingredients":
+			source = "种植收获"
+		description = ("海产" if item.category == "seafood" else "食材") + " / " + source + "\n" + item.description + "\n用途：后续交易与料理。\n当前不可直接使用。"
 	var details := bag_page.get_node("Details")
 	details.get_node("Title").text = title
 	details.get_node("Description").text = description

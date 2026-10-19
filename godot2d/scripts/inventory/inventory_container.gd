@@ -14,6 +14,40 @@ func _init(capacity: int = 24, catalog: RefCounted = null) -> void:
 func snapshot() -> Array:
 	return _slots.duplicate(true)
 
+func restore_slots(slots: Array) -> bool:
+	if slots.size() != _slots.size():
+		return false
+	for slot in slots:
+		if not slot is Dictionary or slot.keys().size() != 2 or not slot.has("id") or not slot.has("amount"):
+			return false
+		if not slot.id is String or not (slot.amount is int or slot.amount is float) or slot.amount is bool or not is_finite(float(slot.amount)) or float(slot.amount) != floor(float(slot.amount)):
+			return false
+		if slot.id == "":
+			if slot.amount != 0:
+				return false
+		elif _catalog.stack_limit(slot.id) <= 0 or slot.amount < 1 or slot.amount > _catalog.stack_limit(slot.id):
+			return false
+	var normalized := slots.duplicate(true)
+	for slot in normalized:
+		slot.amount = int(slot.amount)
+	_slots = normalized
+	changed.emit()
+	return true
+
+func remove_item(id: String, amount: int) -> bool:
+	if amount <= 0 or _catalog.stack_limit(id) <= 0 or count_item(id) < amount:
+		return false
+	var remaining := amount
+	for index in range(_slots.size()):
+		if _slots[index].id == id:
+			var removed := mini(remaining, int(_slots[index].amount))
+			_remove(index, removed)
+			remaining -= removed
+			if remaining == 0:
+				break
+	changed.emit()
+	return true
+
 func count_item(id: String) -> int:
 	var result := 0
 	for slot in _slots:

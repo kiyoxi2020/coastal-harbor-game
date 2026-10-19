@@ -34,7 +34,7 @@ func _initialize() -> void:
 	invalid.bag[0] = {"id":"unknown", "amount":1}
 	check("unknown_item", not State.valid_data(invalid))
 	invalid = snapshot.duplicate(true)
-	invalid.total_collected = 6
+	invalid.total_collected = 0
 	check("bad_statistics", not State.valid_data(invalid))
 	var full = State.new()
 	full.bag.add("snail", 24*99)
