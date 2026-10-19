@@ -22,23 +22,19 @@ func _initialize() -> void:
 func run() -> void:
 	var state = State.new()
 	var first: Dictionary = state.to_data(Vector2(330,250))
-	check("new_format",first.get("version")==2 and first.get("location")=="harbor")
+	check("new_format",first.get("version")==3 and first.get("location")=="harbor" and first.has("life"))
 	check("migration_api",state.has_method("migrate_data"))
 	if checks.values().has(false):
 		finish()
 		return
-	state.collect("clam_a","clam")
-	state.bag.transfer_to(state.chest,0,1)
-	var legacy: Dictionary = state.to_data(Vector2(330,250))
-	legacy.version = 1
-	legacy.erase("location")
+	var legacy: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://tests/fixtures/life_save_v1.json"))
 	var original := JSON.stringify(legacy)
 	var migrated: Dictionary = State.migrate_data(legacy)
 	check("legacy_valid",State.valid_data(legacy))
-	check("legacy_migrates",migrated.version==2 and migrated.location=="harbor")
+	check("legacy_migrates",migrated.version==3 and migrated.location=="harbor" and migrated.has("life"))
 	check("legacy_unchanged",JSON.stringify(legacy)==original)
-	migrated.chest[0].amount = 0
-	check("migration_deep_copy",legacy.chest[0].amount==1)
+	migrated.bag[0].amount = 0
+	check("migration_deep_copy",legacy.bag[0].amount==1)
 	var home: Dictionary = State.migrate_data(legacy)
 	home.location = "house"
 	home.position = [320,328]
@@ -46,12 +42,12 @@ func run() -> void:
 	var loaded = State.new()
 	check("house_restore",loaded.restore(home) and loaded.location=="house")
 	check("house_snapshot",loaded.to_data(Vector2(320,328)).location=="house")
-	check("inventory_preserved",loaded.chest.count_item("clam")==1 and loaded.total_collected==1)
+	check("inventory_preserved",loaded.bag.count_item("clam")==1 and loaded.total_collected==1)
 	var invalid: Dictionary = home.duplicate(true)
 	invalid.location = "unknown"
 	check("unknown_location",not State.valid_data(invalid))
 	check("invalid_migration",State.migrate_data(invalid).is_empty())
-	check("failed_restore_atomic",not loaded.restore(invalid) and loaded.location=="house" and loaded.chest.count_item("clam")==1)
+	check("failed_restore_atomic",not loaded.restore(invalid) and loaded.location=="house" and loaded.bag.count_item("clam")==1)
 	invalid = home.duplicate(true)
 	invalid.erase("location")
 	check("missing_location",not State.valid_data(invalid))
@@ -72,7 +68,7 @@ func run() -> void:
 	var before := FileAccess.get_file_as_string(main)
 	var service = Save.new(path)
 	var result: Dictionary = service.read_save()
-	check("read_legacy",result.ok and result.data.version==2 and result.data.location=="harbor")
+	check("read_legacy",result.ok and result.data.version==3 and result.data.location=="harbor")
 	check("read_does_not_write",FileAccess.get_file_as_string(main)==before)
 	check("write_house",service.write_save(home))
 	check("house_roundtrip",service.read_save().ok and service.read_save().data.location=="house")
@@ -91,7 +87,7 @@ func run() -> void:
 	put(main,legacy)
 	check("write_legacy",service.write_save(legacy))
 	var disk: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(main))
-	check("write_normalizes",disk.version==2 and disk.location=="harbor")
+	check("write_normalizes",disk.version==3 and disk.location=="harbor" and disk.has("life"))
 	var scene = load("res://scenes/harbor.tscn").instantiate()
 	scene.set_meta("journal_test",true)
 	scene.set_meta("save_directory","/private/tmp/coastal-house-save-scene-"+str(Time.get_ticks_usec()))

@@ -15,7 +15,7 @@ func _read(path: String):
 
 func read_save() -> Dictionary:
 	var main = _read(directory.path_join("progress.json"))
-	if main is Dictionary and main.get("version",1) != 1 and main.get("version",1) != State.SAVE_VERSION:
+	if main is Dictionary and State._integer(main.get("version")) and main.version > State.SAVE_VERSION:
 		return {"ok":false, "future":true, "message":"存档版本不兼容，已保护原文件。"}
 	var migrated: Dictionary = State.migrate_data(main)
 	if not migrated.is_empty():

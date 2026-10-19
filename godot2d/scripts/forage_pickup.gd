@@ -1,7 +1,7 @@
 @tool
 extends Node2D
 
-@export_enum("clam", "snail", "kelp") var kind := "clam":
+@export_enum("clam", "snail", "kelp", "生种", "番种", "生菜", "番茄") var kind := "clam":
 	set(value):
 		kind = value
 		queue_redraw()
@@ -34,3 +34,6 @@ func _draw() -> void:
 				draw_rect(Rect2(x,-8+i,3,9-i),Color("38695b"))
 				draw_rect(Rect2(x-1,-5+i,2,4),Color("689473"))
 				draw_rect(Rect2(x,-8+i,2,2),Color("91b38a"))
+		_:
+			draw_rect(Rect2(-10,-10,20,12), Color("f7e7c4"))
+			draw_string(ThemeDB.fallback_font, Vector2(-9,-1), kind, HORIZONTAL_ALIGNMENT_CENTER, 18, 8, Color("4b3b32"))
