@@ -1,6 +1,16 @@
 extends Node2D
 
 const data = preload("res://scripts/harbor_data.gd")
+const ActionService = preload("res://scripts/simulation/action_service.gd")
+const ACTION_MESSAGES := {
+	"unknown_action":"此操作尚未开放。", "unknown_item":"无法识别该物品。",
+	"invalid_amount":"数量须为1至99的整数。", "invalid_request":"操作请求无效，请重新选择。",
+	"stale_request":"此操作已过期，请重新选择。", "unknown_account":"无法找到该商户。",
+	"not_allowed":"当前无法进行此操作。", "insufficient_funds":"买方金币不足，交易未完成。",
+	"insufficient_stock":"可出售的物品数量不足。", "inventory_full":"接收方容器已满，交易未完成。",
+	"quota_exceeded":"商户今日收购额度不足。", "invalid_state":"进度校验失败，操作未完成。",
+	"save_failed":"尚未保存，请重试；本次操作未生效。"
+}
 const Art = preload("res://scripts/atlas.gd")
 var player: CharacterBody2D
 var sort_layer: Node2D
@@ -9,6 +19,7 @@ var foraging = preload("res://scripts/foraging_state.gd").new()
 var pickup_nodes: Dictionary = {}
 var journal
 var save_service
+var action_service
 var settings
 var persistence_enabled := false
 var session_started := false
@@ -59,6 +70,7 @@ func _ready() -> void:
 			if arg.begins_with("--test-save-directory=/private/tmp/coastal-"):
 				save_directory = arg.trim_prefix("--test-save-directory=")
 	save_service = preload("res://scripts/save_service.gd").new(save_directory)
+	action_service = ActionService.new(save_service)
 	settings = preload("res://scripts/settings_service.gd").new(save_service.directory)
 	journal.initialize(self)
 	hud.bag_requested.connect(func():
@@ -192,9 +204,43 @@ func refresh_pickups() -> void:
 	for id in pickup_nodes:
 		pickup_nodes[id].visible = not foraging.collected.has(id)
 
+func refresh_life_views() -> void:
+	refresh_pickups()
+	if hud != null:
+		hud.update_location(nearest_location(player.position))
+	if journal != null:
+		journal.render()
+
 func _set_state(value) -> void:
 	foraging = value
-	refresh_pickups()
+	refresh_life_views()
+
+func perform_action(kind: String, args: Dictionary, request_id: int) -> Dictionary:
+	var result: Dictionary
+	if not _can_perform_action(kind):
+		result = ActionService.failure("not_allowed")
+	else:
+		result = action_service.execute(foraging, home.safe_position(foraging.location, player.position), kind, args, request_id)
+	if result.ok:
+		if not result.duplicate:
+			_set_state(result.next_state)
+	else:
+		var message: String = ACTION_MESSAGES.get(result.code, "操作未完成，请重试。")
+		hud.show_toast(message, 6)
+		journal.note = message
+		journal.render()
+	return result
+
+func _can_perform_action(kind: String) -> bool:
+	if not persistence_enabled or not session_started or release_input or home.transition.busy or hud.panel.visible:
+		return false
+	# P06 provides the trade page; an inspection marker alone never opens trading.
+	if kind != "trade" or foraging.location != "harbor" or journal.mode != "trade" or journal.pending != "":
+		return false
+	var page := journal.get_node_or_null("Root/TradePage") as Control
+	var target := exterior.get_node_or_null("InteractPoints/market") as Node2D
+	return page != null and page.is_visible_in_tree() and target != null and player.position.distance_to(player.get_parent().to_local(target.global_position)) <= 28
+
 
 func start_new_game(chosen_name: String) -> bool:
 	var state = preload("res://scripts/player_state.gd").new()
