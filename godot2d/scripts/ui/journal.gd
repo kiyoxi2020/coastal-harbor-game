@@ -5,7 +5,7 @@ const Crops = preload("res://scripts/simulation/crop_catalog.gd")
 const Catalog = preload("res://scripts/inventory/item_catalog.gd")
 const Art = preload("res://scripts/atlas.gd")
 
-@export_multiline var title_status_template := "{status}\n\n单人原型 · v0.5.2\n自动保存 / 单存档槽\n可在旧屋床边休息换日；可照料菜畦；可在鱼摊买种、出售收获；日记记录每天的收支"
+@export_multiline var title_status_template := "{status}\n\n单人生活原型\n自动保存 / 单存档槽\n可在旧屋床边休息换日；可照料菜畦；可在鱼摊买种、出售收获；日记记录每天的收支"
 @export_multiline var profile_template := "{name}\n居住地：临海旧屋\n\n累计采集：{total} 个\n发现海产：{discovered} / 3 种"
 @export_multiline var save_failure_template := "{message}\n请选择重试或返回，不会自动退出。"
 

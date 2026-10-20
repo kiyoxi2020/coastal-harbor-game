@@ -1,0 +1,633 @@
+{
+	"bag": [
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		}
+	],
+	"chest": [
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		},
+		{
+			"amount": 0,
+			"id": ""
+		}
+	],
+	"collected": {},
+	"discovered": {},
+	"life": {
+		"accounts": {
+			"market": {
+				"buy_quota": {
+					"clam": 12,
+					"kelp": 12,
+					"lettuce": 12,
+					"snail": 12,
+					"tomato": 12
+				},
+				"cash": 1000,
+				"slots": [
+					{
+						"amount": 20,
+						"id": "lettuce_seed"
+					},
+					{
+						"amount": 20,
+						"id": "tomato_seed"
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					},
+					{
+						"amount": 0,
+						"id": ""
+					}
+				]
+			}
+		},
+		"action_seq": 0,
+		"daily_reports": [],
+		"day_id": 1,
+		"events": [],
+		"last_receipt": {},
+		"last_settled_day": 0,
+		"plots": {
+			"garden_a:0:0": {
+				"crop_id": "",
+				"fertilized": false,
+				"growth": 0,
+				"tilled": false,
+				"watered": false
+			},
+			"garden_a:0:1": {
+				"crop_id": "",
+				"fertilized": false,
+				"growth": 0,
+				"tilled": false,
+				"watered": false
+			},
+			"garden_a:1:0": {
+				"crop_id": "",
+				"fertilized": false,
+				"growth": 0,
+				"tilled": false,
+				"watered": false
+			},
+			"garden_a:1:1": {
+				"crop_id": "",
+				"fertilized": false,
+				"growth": 0,
+				"tilled": false,
+				"watered": false
+			},
+			"garden_a:2:0": {
+				"crop_id": "",
+				"fertilized": false,
+				"growth": 0,
+				"tilled": false,
+				"watered": false
+			},
+			"garden_a:2:1": {
+				"crop_id": "",
+				"fertilized": false,
+				"growth": 0,
+				"tilled": false,
+				"watered": false
+			},
+			"garden_a:3:0": {
+				"crop_id": "",
+				"fertilized": false,
+				"growth": 0,
+				"tilled": false,
+				"watered": false
+			},
+			"garden_a:3:1": {
+				"crop_id": "",
+				"fertilized": false,
+				"growth": 0,
+				"tilled": false,
+				"watered": false
+			},
+			"garden_b:0:0": {
+				"crop_id": "",
+				"fertilized": false,
+				"growth": 0,
+				"tilled": false,
+				"watered": false
+			},
+			"garden_b:0:1": {
+				"crop_id": "",
+				"fertilized": false,
+				"growth": 0,
+				"tilled": false,
+				"watered": false
+			},
+			"garden_b:1:0": {
+				"crop_id": "",
+				"fertilized": false,
+				"growth": 0,
+				"tilled": false,
+				"watered": false
+			},
+			"garden_b:1:1": {
+				"crop_id": "",
+				"fertilized": false,
+				"growth": 0,
+				"tilled": false,
+				"watered": false
+			},
+			"garden_b:2:0": {
+				"crop_id": "",
+				"fertilized": false,
+				"growth": 0,
+				"tilled": false,
+				"watered": false
+			},
+			"garden_b:2:1": {
+				"crop_id": "",
+				"fertilized": false,
+				"growth": 0,
+				"tilled": false,
+				"watered": false
+			},
+			"garden_b:3:0": {
+				"crop_id": "",
+				"fertilized": false,
+				"growth": 0,
+				"tilled": false,
+				"watered": false
+			},
+			"garden_b:3:1": {
+				"crop_id": "",
+				"fertilized": false,
+				"growth": 0,
+				"tilled": false,
+				"watered": false
+			}
+		},
+		"wallet": 100
+	},
+	"location": "harbor",
+	"player_name": "归乡人",
+	"position": [
+		330.0,
+		250.0
+	],
+	"total_collected": 0,
+	"version": 4
+}

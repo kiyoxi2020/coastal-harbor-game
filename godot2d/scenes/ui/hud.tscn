@@ -60,7 +60,7 @@ offset_bottom = 45.0
 theme_override_colors/font_color = Color(0.772549, 0.85098, 0.772549, 1)
 theme_override_fonts/font = ExtResource("4_font")
 theme_override_font_sizes/font_size = 18
-text = "海盐像素 · 赶海原型"
+text = "海盐像素 · 生活原型"
 
 [node name="Region" type="Label" parent="Root/Top"]
 layout_mode = 1

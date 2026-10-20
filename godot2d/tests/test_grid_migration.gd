@@ -16,7 +16,7 @@ func _initialize() -> void:
 	old.life.daily_reports = [{"day_id":2,"cash_in":12,"cash_out":5,"pickups":1,"mature_plots":["plot_b"],"summary":["旧记录"]}]
 	s.check("frozen_v3_valid",V3.validate_v3(old))
 	var migrated := State.migrate_data(old)
-	s.check("v3_upgraded",migrated.get("version")==4 and State.valid_data(migrated))
+	s.check("v3_upgraded",migrated.get("version")==State.SAVE_VERSION and State.valid_data(migrated))
 	if not migrated.is_empty():
 		var occupied := 0
 		for cell in migrated.life.plots.values():

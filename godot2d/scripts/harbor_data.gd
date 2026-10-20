@@ -14,7 +14,7 @@ static func pickups() -> Array[Dictionary]:
 		{"id":"snail_b", "kind":"snail", "point":Vector2(294,353)},
 		{"id":"kelp_b", "kind":"kelp", "point":Vector2(344,353)}
 	]
-const TREES = [Vector2(46,128), Vector2(308,110), Vector2(568,184), Vector2(614,114), Vector2(40,225)]
+const TREES = [Vector2(46,128), Vector2(308,110), Vector2(568,184), Vector2(614,114), Vector2(40,184)]
 
 static func blockers() -> Array[Rect2]:
 	var out: Array[Rect2] = [

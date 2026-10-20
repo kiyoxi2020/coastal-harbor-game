@@ -25,10 +25,10 @@ func _refresh() -> void:
 	$Panel/Seeds/Tomato.button_pressed=crop_id=="tomato"
 	$Panel/Seeds/Counts.text="种子 %d / %d" % [world.foraging.bag.count_item("lettuce_seed"),world.foraging.bag.count_item("tomato_seed")]
 func _process(_delta: float) -> void:
-	visible=world.session_started and world.foraging.location=="harbor" and world.journal.mode=="" and not world.home.transition.busy and not world.hud.panel.visible
+	visible=not world.world_map.visible and world.session_started and world.foraging.location=="harbor" and world.journal.mode=="" and not world.home.transition.busy and not world.hud.panel.visible
 	_refresh()
 func _unhandled_input(event: InputEvent) -> void:
-	if not visible or world.release_input or world.journal.mode!="" or world.home.transition.busy or world.hud.panel.visible or world.player.action_busy: return
+	if world.world_map.visible or not visible or world.release_input or world.journal.mode!="" or world.home.transition.busy or world.hud.panel.visible or world.player.action_busy: return
 	if event is InputEventMouseMotion:
 		pointer_position=event.position
 		mouse_target=true

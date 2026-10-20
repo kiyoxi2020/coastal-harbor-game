@@ -19,7 +19,8 @@ func update_position() -> void:
 		position=Vector2(320,200)
 		return
 	var half_view := get_viewport_rect().size / zoom / 2.0
-	var bounds: Rect2 = exterior.world_bounds
+	var area:Node2D=target.world.regions.active_scene() if target.get("world")!=null and target.world.get("regions")!=null else exterior
+	var bounds: Rect2 = area.world_bounds
 	var desired := target.position + Vector2(0,-40)
 	for axis in range(2):
 		if bounds.size[axis] <= half_view[axis]*2.0:

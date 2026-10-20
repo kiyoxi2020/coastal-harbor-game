@@ -17,7 +17,7 @@ func write_json(path: String, value: Dictionary) -> void:
 
 func _initialize() -> void:
 	var state = State.new()
-	support.check("save_version_4", State.SAVE_VERSION == 4)
+	support.check("save_version_current", State.SAVE_VERSION == 5)
 	var all_new_items := true
 	for id in ["lettuce_seed", "tomato_seed", "lettuce", "tomato"]:
 		all_new_items = all_new_items and state.bag.add(id, 2) == 2
@@ -40,10 +40,10 @@ func _initialize() -> void:
 
 	var v1 := fixture("res://tests/fixtures/life_save_v1.json")
 	var migrated_v1 := State.migrate_data(v1)
-	support.check("migration_v1", migrated_v1.get("version") == 4 and migrated_v1.get("location") == "harbor" and migrated_v1.bag == v1.bag and migrated_v1.total_collected == 1 and migrated_v1.has("life"))
+	support.check("migration_v1", migrated_v1.get("version") == State.SAVE_VERSION and migrated_v1.get("location") == "harbor" and migrated_v1.bag == v1.bag and migrated_v1.total_collected == 1 and migrated_v1.has("life"))
 	var v2 := fixture("res://tests/fixtures/life_save_v2.json")
 	var migrated_v2 := State.migrate_data(v2)
-	support.check("migration_v2", migrated_v2.get("version") == 4 and migrated_v2.get("location") == "house" and Vector2(migrated_v2.position[0], migrated_v2.position[1]) == Vector2(320, 328) and migrated_v2.chest == v2.chest and migrated_v2.collected == v2.collected)
+	support.check("migration_v2", migrated_v2.get("version") == State.SAVE_VERSION and migrated_v2.get("location") == "house" and Vector2(migrated_v2.position[0], migrated_v2.position[1]) == Vector2(320, 328) and migrated_v2.chest == v2.chest and migrated_v2.collected == v2.collected)
 	var tampered := v2.duplicate(true)
 	tampered.chest[1] = {"id":"clam", "amount":1}
 	support.check("legacy_tamper", State.migrate_data(tampered).is_empty())

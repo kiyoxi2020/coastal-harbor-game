@@ -1,0 +1,20 @@
+{
+  "capture_07-bed-sleep": true,
+  "capture_08-interior-door": true,
+  "door_enter_day1": true,
+  "door_exit_day1": true,
+  "isolated": true,
+  "native_renderer": true,
+  "new_game": true,
+  "sleep_day1": true,
+  "sleep_page_day1": true,
+  "walk_bed_day1": true,
+  "walk_bed_row_day1": true,
+  "walk_door_day1": true,
+  "walk_east_day1": true,
+  "walk_east_return_day1": true,
+  "walk_inside_door_day1": true,
+  "walk_north_day1": true,
+  "walk_return_row_day1": true,
+  "walk_south_return_day1": true
+}

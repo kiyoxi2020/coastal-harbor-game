@@ -154,7 +154,7 @@ remote_path = NodePath("../../../Terrain/TreeShadows/CoastalTree3Shadow")
 update_rotation = false
 update_scale = false
 [node name="CoastalTree4" parent="DepthSortedObjects" instance=ExtResource("3_tree")]
-position = Vector2(40, 225)
+position = Vector2(40, 184)
 metadata/tree_variant = 3
 [node name="Sprite2D" parent="DepthSortedObjects/CoastalTree4" index="0"]
 texture = ExtResource("10_tree3")
@@ -366,3 +366,17 @@ texture = ExtResource("decor13")
 [editable path="DepthSortedObjects/CoastalTree2"]
 [editable path="DepthSortedObjects/CoastalTree3"]
 [editable path="DepthSortedObjects/CoastalTree4"]
+
+[node name="Exits" type="Node2D" parent="."]
+[node name="ToDistrict" type="Marker2D" parent="Exits"]
+position = Vector2(320,64)
+[node name="DistrictArrival" type="Marker2D" parent="Exits"]
+position = Vector2(320,94)
+[node name="DistrictSign" type="Label" parent="Exits"]
+offset_left = 282.0
+offset_top = 35.0
+offset_right = 358.0
+offset_bottom = 56.0
+theme_override_fonts/font = ExtResource("14_font")
+theme_override_font_sizes/font_size = 8
+text = "↑ 港口街区 · E"

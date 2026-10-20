@@ -1,8 +1,8 @@
 extends RefCounted
 
 signal changed
-const SAVE_VERSION := 4
-const SUPPORTED_VERSIONS := [1, 2, 3, 4]
+const SAVE_VERSION := 5
+const SUPPORTED_VERSIONS := [1, 2, 3, 4, 5]
 const Inventory = preload("res://scripts/inventory/inventory_container.gd")
 const Data = preload("res://scripts/harbor_data.gd")
 const Schema = preload("res://scripts/simulation/state_schema.gd")
@@ -61,7 +61,7 @@ func to_data(position: Vector2) -> Dictionary:
 		"position":[position.x,position.y], "life":life.duplicate(true)}
 
 static func safe_position(location_name: String, point: Vector2, location_scene: Node2D) -> Vector2:
-	if location_name not in ["harbor", "house"] or location_scene == null or not location_scene.has_method("safe_position"):
+	if location_name not in ["harbor", "house", "harbor_district"] or location_scene == null or not location_scene.has_method("safe_position"):
 		return point
 	return location_scene.safe_position(point)
 
@@ -73,15 +73,18 @@ static func valid_data(value) -> bool:
 		return false
 	if not value.get("player_name") is String or clean_name(value.player_name) != value.player_name:
 		return false
+	if int(value.version) == 5: return Schema.validate_v5(value)
 	if int(value.version) == 4: return Schema.validate_v4(value)
 	return Schema.validate_v3(value) if int(value.version) == 3 else Schema.validate_legacy(value)
 
 static func migrate_data(value) -> Dictionary:
 	if not valid_data(value):
 		return {}
-	if int(value.version) in [1, 2]:
-		return Schema.migrate_legacy(value)
-	return Schema.migrate_v3(value) if int(value.version) == 3 else value.duplicate(true)
+	var result: Dictionary = value.duplicate(true)
+	if int(result.version) in [1, 2]: result = Schema.migrate_legacy(result)
+	elif int(result.version) == 3: result = Schema.migrate_v3(result)
+	if int(result.version) == 4: result = Schema.migrate_v4(result)
+	return result
 
 func restore(value: Dictionary) -> bool:
 	var migrated := migrate_data(value)

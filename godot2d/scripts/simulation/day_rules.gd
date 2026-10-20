@@ -7,7 +7,7 @@ static func _failure(code: String) -> Dictionary:
 	return {"ok":false, "code":code, "state":{}, "events":[]}
 
 static func advance(data: Dictionary, expected_day: int) -> Dictionary:
-	if not Schema.validate_v4(data):
+	if not Schema.validate_current(data):
 		return _failure("invalid_state")
 	if expected_day != data.life.day_id:
 		return _failure("invalid_day")
@@ -55,6 +55,6 @@ static func advance(data: Dictionary, expected_day: int) -> Dictionary:
 	life.day_id = expected_day + 1
 	life.last_settled_day = expected_day
 	events.append({"day_id":expected_day, "kind":"sleep", "source":"player", "target":"player", "items":{}, "cash":0, "reason":"sleep"})
-	if not Schema.validate_v4(candidate):
+	if not Schema.validate_current(candidate):
 		return _failure("invalid_state")
 	return {"ok":true, "code":"ok", "state":candidate, "events":events}

@@ -282,3 +282,23 @@ static func migrate_v3(data: Dictionary) -> Dictionary:
 			report.mature_plots[index] = mapping[report.mature_plots[index]]
 	# Keep historical events and last_receipt byte-equivalent for audit and retries.
 	return result if validate_v4(result) else {}
+
+
+# v4 remains strict and independently usable by frozen M1 rule tests.
+# v5 changes only the permitted region set; all inventory/life checks are shared.
+static func validate_v5(data: Dictionary) -> bool:
+	if not _integer(data.get("version")) or data.version != 5 or data.get("location") not in ["harbor","house","harbor_district"]:
+		return false
+	var base: Dictionary = data.duplicate(true)
+	base.version = 4
+	base.location = "harbor" if data.location == "harbor_district" else data.location
+	return validate_v4(base)
+
+static func validate_current(data: Dictionary) -> bool:
+	return validate_v5(data) if data.get("version") == 5 else validate_v4(data)
+
+static func migrate_v4(data: Dictionary) -> Dictionary:
+	if not validate_v4(data): return {}
+	var result: Dictionary=data.duplicate(true)
+	result.version=5
+	return result if validate_v5(result) else {}

@@ -1,0 +1,465 @@
+[gd_scene load_steps=24 format=3]
+
+[ext_resource type="Script" path="res://scripts/harbor_district.gd" id="script"]
+
+[ext_resource type="Texture2D" path="res://assets/environment-v2/deep.png" id="sea"]
+
+[ext_resource type="Texture2D" path="res://assets/environment-v2/grass.png" id="grass"]
+
+[ext_resource type="Texture2D" path="res://assets/environment-v2/stone.png" id="stone"]
+
+[ext_resource type="Texture2D" path="res://assets/harbor-district-v1/restaurant.png" id="restaurant"]
+
+[ext_resource type="Texture2D" path="res://assets/harbor-district-v1/workshop.png" id="workshop"]
+
+[ext_resource type="Texture2D" path="res://assets/tree-set-v4/tree-0.png" id="tree"]
+
+[ext_resource type="Texture2D" path="res://assets/flowers-v7/48/flowers_white.png" id="flowers"]
+
+[ext_resource type="Texture2D" path="res://assets/flowers-v7/48/flowers_yellow.png" id="flowers_yellow"]
+
+[ext_resource type="Texture2D" path="res://assets/flowers-v7/48/flowers_pink.png" id="flowers_pink"]
+
+[ext_resource type="FontFile" path="res://assets/NotoSansCJKsc-Regular.otf" id="font"]
+
+[sub_resource type="RectangleShape2D" id="North"]
+size = Vector2(640, 40)
+
+[sub_resource type="RectangleShape2D" id="West"]
+size = Vector2(44, 416)
+
+[sub_resource type="RectangleShape2D" id="East"]
+size = Vector2(44, 416)
+
+[sub_resource type="RectangleShape2D" id="SeaWest"]
+size = Vector2(284, 100)
+
+[sub_resource type="RectangleShape2D" id="SeaEast"]
+size = Vector2(284, 100)
+
+[sub_resource type="RectangleShape2D" id="PierEnd"]
+size = Vector2(72, 16)
+
+[sub_resource type="RectangleShape2D" id="Restaurant"]
+size = Vector2(110, 42)
+
+[sub_resource type="RectangleShape2D" id="Workshop"]
+size = Vector2(102, 40)
+
+[sub_resource type="RectangleShape2D" id="TreeWest"]
+size = Vector2(14, 12)
+
+[sub_resource type="RectangleShape2D" id="TreeNorth"]
+size = Vector2(14, 12)
+
+[sub_resource type="RectangleShape2D" id="TreeEast"]
+size = Vector2(14, 12)
+
+[sub_resource type="RectangleShape2D" id="NorthGate"]
+size = Vector2(72, 16)
+
+[node name="HarborDistrict" type="Node2D"]
+texture_filter = 1
+script = ExtResource("script")
+world_bounds = Rect2(0, 0, 640, 416)
+
+[node name="Terrain" type="Node2D" parent="."]
+z_index = -10
+
+[node name="Sea" type="Sprite2D" parent="Terrain"]
+position = Vector2(0, 0)
+texture = ExtResource("sea")
+texture_repeat = 2
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 640, 416)
+
+[node name="GrassyBank" type="Sprite2D" parent="Terrain"]
+position = Vector2(24, 20)
+texture = ExtResource("grass")
+texture_repeat = 2
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 580, 296)
+
+[node name="Plaza" type="Sprite2D" parent="Terrain"]
+position = Vector2(86, 166)
+texture = ExtResource("stone")
+texture_repeat = 2
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 488, 164)
+
+[node name="NorthLane" type="Sprite2D" parent="Terrain"]
+position = Vector2(286, 28)
+texture = ExtResource("stone")
+texture_repeat = 2
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 68, 164)
+
+[node name="WestLane" type="Sprite2D" parent="Terrain"]
+position = Vector2(24, 224)
+texture = ExtResource("stone")
+texture_repeat = 2
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 108, 48)
+
+[node name="EastLane" type="Sprite2D" parent="Terrain"]
+position = Vector2(540, 224)
+texture = ExtResource("stone")
+texture_repeat = 2
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 70, 48)
+
+[node name="SouthLane" type="Sprite2D" parent="Terrain"]
+position = Vector2(284, 298)
+texture = ExtResource("stone")
+texture_repeat = 2
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 72, 118)
+
+[node name="WestSeaWall" type="Polygon2D" parent="Terrain"]
+polygon = PackedVector2Array(24, 326, 284, 326, 284, 350, 24, 350)
+color = Color(0.31, 0.40, 0.41, 1)
+
+[node name="WestCoping" type="Line2D" parent="Terrain"]
+points = PackedVector2Array(24, 326, 284, 326)
+width = 6.0
+default_color = Color(0.71, 0.72, 0.62, 1)
+
+[node name="EastSeaWall" type="Polygon2D" parent="Terrain"]
+polygon = PackedVector2Array(356, 326, 604, 326, 604, 350, 356, 350)
+color = Color(0.31, 0.40, 0.41, 1)
+
+[node name="EastCoping" type="Line2D" parent="Terrain"]
+points = PackedVector2Array(356, 326, 604, 326)
+width = 6.0
+default_color = Color(0.71, 0.72, 0.62, 1)
+
+[node name="DepthSortedObjects" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Restaurant" type="Node2D" parent="DepthSortedObjects"]
+position = Vector2(180, 174)
+
+[node name="Sprite" type="Sprite2D" parent="DepthSortedObjects/Restaurant"]
+position = Vector2(0, -53.2)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("restaurant")
+
+[node name="Workshop" type="Node2D" parent="DepthSortedObjects"]
+position = Vector2(460, 174)
+
+[node name="Sprite" type="Sprite2D" parent="DepthSortedObjects/Workshop"]
+position = Vector2(0, -49.0)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("workshop")
+
+[node name="TreeWest" type="Sprite2D" parent="DepthSortedObjects"]
+position = Vector2(65, 112)
+offset = Vector2(0, -39)
+texture = ExtResource("tree")
+
+[node name="TreeNorth" type="Sprite2D" parent="DepthSortedObjects"]
+position = Vector2(250, 52)
+offset = Vector2(0, -39)
+texture = ExtResource("tree")
+
+[node name="TreeEast" type="Sprite2D" parent="DepthSortedObjects"]
+position = Vector2(567, 112)
+offset = Vector2(0, -39)
+texture = ExtResource("tree")
+
+[node name="Flowers0" type="Sprite2D" parent="DepthSortedObjects"]
+position = Vector2(62, 185)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("flowers")
+
+[node name="Flowers1" type="Sprite2D" parent="DepthSortedObjects"]
+position = Vector2(267, 151)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("flowers_yellow")
+
+[node name="Flowers2" type="Sprite2D" parent="DepthSortedObjects"]
+position = Vector2(588, 294)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("flowers_pink")
+
+[node name="Railings" type="Node2D" parent="."]
+
+
+[node name="SouthWest" type="Line2D" parent="Railings"]
+points = PackedVector2Array(42, 314, 278, 314)
+width = 3.0
+default_color = Color(0.46, 0.31, 0.17, 1)
+
+[node name="SouthWestPost0" type="Polygon2D" parent="Railings"]
+polygon = PackedVector2Array(39, 307, 45, 307, 45, 322, 39, 322)
+color = Color(0.57, 0.39, 0.21, 1)
+
+[node name="SouthWestPost1" type="Polygon2D" parent="Railings"]
+polygon = PackedVector2Array(78, 307, 84, 307, 84, 322, 78, 322)
+color = Color(0.57, 0.39, 0.21, 1)
+
+[node name="SouthWestPost2" type="Polygon2D" parent="Railings"]
+polygon = PackedVector2Array(118, 307, 124, 307, 124, 322, 118, 322)
+color = Color(0.57, 0.39, 0.21, 1)
+
+[node name="SouthWestPost3" type="Polygon2D" parent="Railings"]
+polygon = PackedVector2Array(157, 307, 163, 307, 163, 322, 157, 322)
+color = Color(0.57, 0.39, 0.21, 1)
+
+[node name="SouthWestPost4" type="Polygon2D" parent="Railings"]
+polygon = PackedVector2Array(196, 307, 202, 307, 202, 322, 196, 322)
+color = Color(0.57, 0.39, 0.21, 1)
+
+[node name="SouthWestPost5" type="Polygon2D" parent="Railings"]
+polygon = PackedVector2Array(236, 307, 242, 307, 242, 322, 236, 322)
+color = Color(0.57, 0.39, 0.21, 1)
+
+[node name="SouthWestPost6" type="Polygon2D" parent="Railings"]
+polygon = PackedVector2Array(275, 307, 281, 307, 281, 322, 275, 322)
+color = Color(0.57, 0.39, 0.21, 1)
+
+[node name="SouthEast" type="Line2D" parent="Railings"]
+points = PackedVector2Array(362, 314, 592, 314)
+width = 3.0
+default_color = Color(0.46, 0.31, 0.17, 1)
+
+[node name="SouthEastPost0" type="Polygon2D" parent="Railings"]
+polygon = PackedVector2Array(359, 307, 365, 307, 365, 322, 359, 322)
+color = Color(0.57, 0.39, 0.21, 1)
+
+[node name="SouthEastPost1" type="Polygon2D" parent="Railings"]
+polygon = PackedVector2Array(397, 307, 403, 307, 403, 322, 397, 322)
+color = Color(0.57, 0.39, 0.21, 1)
+
+[node name="SouthEastPost2" type="Polygon2D" parent="Railings"]
+polygon = PackedVector2Array(436, 307, 442, 307, 442, 322, 436, 322)
+color = Color(0.57, 0.39, 0.21, 1)
+
+[node name="SouthEastPost3" type="Polygon2D" parent="Railings"]
+polygon = PackedVector2Array(474, 307, 480, 307, 480, 322, 474, 322)
+color = Color(0.57, 0.39, 0.21, 1)
+
+[node name="SouthEastPost4" type="Polygon2D" parent="Railings"]
+polygon = PackedVector2Array(512, 307, 518, 307, 518, 322, 512, 322)
+color = Color(0.57, 0.39, 0.21, 1)
+
+[node name="SouthEastPost5" type="Polygon2D" parent="Railings"]
+polygon = PackedVector2Array(551, 307, 557, 307, 557, 322, 551, 322)
+color = Color(0.57, 0.39, 0.21, 1)
+
+[node name="SouthEastPost6" type="Polygon2D" parent="Railings"]
+polygon = PackedVector2Array(589, 307, 595, 307, 595, 322, 589, 322)
+color = Color(0.57, 0.39, 0.21, 1)
+
+[node name="North" type="Line2D" parent="Railings"]
+points = PackedVector2Array(290, 52, 350, 52)
+width = 3.0
+default_color = Color(0.46, 0.31, 0.17, 1)
+
+[node name="NorthPost0" type="Polygon2D" parent="Railings"]
+polygon = PackedVector2Array(287, 45, 293, 45, 293, 60, 287, 60)
+color = Color(0.57, 0.39, 0.21, 1)
+
+[node name="NorthPost1" type="Polygon2D" parent="Railings"]
+polygon = PackedVector2Array(347, 45, 353, 45, 353, 60, 347, 60)
+color = Color(0.57, 0.39, 0.21, 1)
+
+[node name="West" type="Line2D" parent="Railings"]
+points = PackedVector2Array(44, 224, 44, 272)
+width = 3.0
+default_color = Color(0.46, 0.31, 0.17, 1)
+
+[node name="WestPost0" type="Polygon2D" parent="Railings"]
+polygon = PackedVector2Array(41, 217, 47, 217, 47, 232, 41, 232)
+color = Color(0.57, 0.39, 0.21, 1)
+
+[node name="WestPost1" type="Polygon2D" parent="Railings"]
+polygon = PackedVector2Array(41, 265, 47, 265, 47, 280, 41, 280)
+color = Color(0.57, 0.39, 0.21, 1)
+
+[node name="East" type="Line2D" parent="Railings"]
+points = PackedVector2Array(594, 224, 594, 272)
+width = 3.0
+default_color = Color(0.46, 0.31, 0.17, 1)
+
+[node name="EastPost0" type="Polygon2D" parent="Railings"]
+polygon = PackedVector2Array(591, 217, 597, 217, 597, 232, 591, 232)
+color = Color(0.57, 0.39, 0.21, 1)
+
+[node name="EastPost1" type="Polygon2D" parent="Railings"]
+polygon = PackedVector2Array(591, 265, 597, 265, 597, 280, 591, 280)
+color = Color(0.57, 0.39, 0.21, 1)
+
+[node name="Boundaries" type="StaticBody2D" parent="."]
+
+
+[node name="North" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2(320, 20)
+shape = SubResource("North")
+
+[node name="West" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2(22, 208)
+shape = SubResource("West")
+
+[node name="East" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2(618, 208)
+shape = SubResource("East")
+
+[node name="SeaWest" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2(142, 384)
+shape = SubResource("SeaWest")
+
+[node name="SeaEast" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2(498, 384)
+shape = SubResource("SeaEast")
+
+[node name="PierEnd" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2(320, 423)
+shape = SubResource("PierEnd")
+
+[node name="Restaurant" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2(180, 153)
+shape = SubResource("Restaurant")
+
+[node name="Workshop" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2(460, 154)
+shape = SubResource("Workshop")
+
+[node name="TreeWest" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2(65, 112)
+shape = SubResource("TreeWest")
+
+[node name="TreeNorth" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2(250, 52)
+shape = SubResource("TreeNorth")
+
+[node name="TreeEast" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2(567, 112)
+shape = SubResource("TreeEast")
+
+[node name="NorthGate" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2(320, 56)
+shape = SubResource("NorthGate")
+
+[node name="Spawn" type="Marker2D" parent="."]
+position = Vector2(320, 350)
+
+[node name="InteractPoints" type="Node2D" parent="."]
+
+
+[node name="restaurant" type="Marker2D" parent="InteractPoints"]
+position = Vector2(180, 190)
+metadata/title = "海风小餐馆"
+metadata/body = "南向出餐窗与候客凹位已预留。\n暂未营业，餐馆经营将在后续开放。"
+
+[node name="workshop" type="Marker2D" parent="InteractPoints"]
+position = Vector2(460, 190)
+metadata/title = "关闭的加工铺"
+metadata/body = "门扉紧闭；这里暂不提供加工服务。"
+
+[node name="north_reserve" type="Marker2D" parent="InteractPoints"]
+position = Vector2(320, 78)
+metadata/title = "住宅坡巷 · 未开放"
+metadata/body = "北侧道路尚未开放。"
+
+[node name="west_reserve" type="Marker2D" parent="InteractPoints"]
+position = Vector2(68, 248)
+metadata/title = "山坡林地 · 未开放"
+metadata/body = "西侧道路尚未开放。"
+
+[node name="east_reserve" type="Marker2D" parent="InteractPoints"]
+position = Vector2(568, 248)
+metadata/title = "岬角海岸 · 未开放"
+metadata/body = "东侧道路尚未开放。"
+
+[node name="Signs" type="Node2D" parent="."]
+
+
+[node name="Restaurant" type="Label" parent="Signs"]
+offset_left = 108.0
+offset_top = 49.0
+offset_right = 252.0
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("font")
+theme_override_font_sizes/font_size = 9
+theme_override_colors/font_color = Color(0.13, 0.29, 0.30, 1)
+theme_override_colors/font_outline_color = Color(0.95, 0.91, 0.75, 1)
+theme_override_constants/outline_size = 3
+text = "海风小餐馆 · 筹备中"
+horizontal_alignment = 1
+
+[node name="Workshop" type="Label" parent="Signs"]
+offset_left = 392.0
+offset_top = 58.0
+offset_right = 528.0
+offset_bottom = 73.0
+theme_override_fonts/font = ExtResource("font")
+theme_override_font_sizes/font_size = 9
+theme_override_colors/font_color = Color(0.13, 0.29, 0.30, 1)
+theme_override_colors/font_outline_color = Color(0.95, 0.91, 0.75, 1)
+theme_override_constants/outline_size = 3
+text = "加工铺 · 未开放"
+horizontal_alignment = 1
+
+[node name="North" type="Label" parent="Signs"]
+offset_left = 272.0
+offset_top = 25.0
+offset_right = 368.0
+offset_bottom = 41.0
+theme_override_fonts/font = ExtResource("font")
+theme_override_font_sizes/font_size = 9
+theme_override_colors/font_color = Color(0.13, 0.29, 0.30, 1)
+theme_override_colors/font_outline_color = Color(0.95, 0.91, 0.75, 1)
+theme_override_constants/outline_size = 3
+text = "住宅坡巷 · 未开放"
+horizontal_alignment = 1
+
+[node name="West" type="Label" parent="Signs"]
+offset_left = 46.0
+offset_top = 268.0
+offset_right = 152.0
+offset_bottom = 284.0
+theme_override_fonts/font = ExtResource("font")
+theme_override_font_sizes/font_size = 9
+theme_override_colors/font_color = Color(0.13, 0.29, 0.30, 1)
+theme_override_colors/font_outline_color = Color(0.95, 0.91, 0.75, 1)
+theme_override_constants/outline_size = 3
+text = "山坡林地 · 未开放"
+horizontal_alignment = 1
+
+[node name="East" type="Label" parent="Signs"]
+offset_left = 474.0
+offset_top = 268.0
+offset_right = 590.0
+offset_bottom = 284.0
+theme_override_fonts/font = ExtResource("font")
+theme_override_font_sizes/font_size = 9
+theme_override_colors/font_color = Color(0.13, 0.29, 0.30, 1)
+theme_override_colors/font_outline_color = Color(0.95, 0.91, 0.75, 1)
+theme_override_constants/outline_size = 3
+text = "岬角海岸 · 未开放"
+horizontal_alignment = 1
+
+[node name="South" type="Label" parent="Signs"]
+offset_left = 280.0
+offset_top = 389.0
+offset_right = 360.0
+offset_bottom = 405.0
+theme_override_fonts/font = ExtResource("font")
+theme_override_font_sizes/font_size = 9
+theme_override_colors/font_color = Color(0.13, 0.29, 0.30, 1)
+theme_override_colors/font_outline_color = Color(0.95, 0.91, 0.75, 1)
+theme_override_constants/outline_size = 3
+text = "↓ 旧屋海港"
+horizontal_alignment = 1
+
+[node name="Exits" type="Node2D" parent="."]
+[node name="ToHarbor" type="Marker2D" parent="Exits"]
+position = Vector2(320,380)

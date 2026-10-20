@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://scripts/ui/world_map.gd" id="1"]
+[ext_resource type="FontFile" path="res://assets/NotoSansCJKsc-Regular.otf" id="2"]
+[sub_resource type="Theme" id="Theme"]
+default_font = ExtResource("2")
+default_font_size = 18
+Label/colors/font_color = Color(0.08,0.29,0.34,1)
+CheckButton/colors/font_color = Color(0.08,0.29,0.34,1)
+[node name="WorldMap" type="CanvasLayer"]
+process_mode = 3
+layer = 15
+visible = false
+scale = Vector2(2,2)
+script = ExtResource("1")
+[node name="Root" type="Control" parent="."]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+theme = SubResource("Theme")
+[node name="Shade" type="ColorRect" parent="Root"]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.025,0.10,0.12,0.93)
+[node name="Panel" type="ColorRect" parent="Root"]
+offset_left = 55.0
+offset_top = 30.0
+offset_right = 1225.0
+offset_bottom = 690.0
+color = Color(0.96,0.93,0.83,1)
+[node name="Date" type="Label" parent="Root/Panel"]
+offset_left = 30.0
+offset_top = 12.0
+offset_right = 600.0
+offset_bottom = 48.0
+theme_override_colors/font_color = Color(0.08,0.29,0.34,1)
+theme_override_font_sizes/font_size = 27
+text = "全镇总览"
+[node name="Close" type="Button" parent="Root/Panel"]
+offset_left = 1030.0
+offset_top = 12.0
+offset_right = 1145.0
+offset_bottom = 50.0
+text = "返回 M / Esc"
+[node name="Resources" type="CheckButton" parent="Root/Panel"]
+offset_left = 795.0
+offset_top = 12.0
+offset_right = 1020.0
+offset_bottom = 50.0
+button_pressed = true
+text = "显示赶海点"
+[node name="Map" type="Control" parent="Root/Panel"]
+offset_left = 15.0
+offset_top = 60.0
+offset_right = 1135.0
+offset_bottom = 620.0
+mouse_filter = 2
+[node name="Info" type="Label" parent="Root/Panel"]
+offset_left = 30.0
+offset_top = 620.0
+offset_right = 1130.0
+offset_bottom = 659.0
+theme_override_colors/font_color = Color(0.12,0.3,0.33,1)
+theme_override_font_sizes/font_size = 14
+text = "建筑 / 菜地可点选 · ● 可采 / · 已采 · ↕ 区域出口 · 预留区域未开放 · M / Esc 返回"
