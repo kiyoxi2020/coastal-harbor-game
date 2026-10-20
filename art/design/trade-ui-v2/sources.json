@@ -1,0 +1,11 @@
+{
+  "generator": "built-in GPT image generation",
+  "date": "2026-10-19",
+  "output": "buy-sell-concept-original.png",
+  "role": "design reference, not runtime screenshot or final atlas",
+  "reference_layouts": [
+    "https://store.steampowered.com/app/413150/Stardew_Valley/",
+    "https://wiki.stardewvalley.net/Inventory"
+  ],
+  "status": "awaiting design review; existing game unchanged"
+}

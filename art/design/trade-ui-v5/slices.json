@@ -1,0 +1,95 @@
+{
+  "generator": "built-in GPT imagegen",
+  "processing": "RGBA crop only; original pixels preserved, no redraw, no resize",
+  "background_frame_rect": [
+    112,
+    48,
+    1306,
+    912
+  ],
+  "controls": {
+    "slot": {
+      "source": "controls-original.png",
+      "rect_xyxy": [
+        96,
+        74,
+        468,
+        448
+      ]
+    },
+    "selected": {
+      "source": "controls-original.png",
+      "rect_xyxy": [
+        578,
+        74,
+        960,
+        448
+      ]
+    },
+    "hover": {
+      "source": "controls-original.png",
+      "rect_xyxy": [
+        1068,
+        74,
+        1442,
+        448
+      ]
+    },
+    "tab": {
+      "source": "controls-original.png",
+      "rect_xyxy": [
+        66,
+        544,
+        506,
+        690
+      ]
+    },
+    "active": {
+      "source": "controls-original.png",
+      "rect_xyxy": [
+        550,
+        542,
+        986,
+        692
+      ]
+    },
+    "confirm": {
+      "source": "controls-original.png",
+      "rect_xyxy": [
+        1030,
+        542,
+        1472,
+        694
+      ]
+    },
+    "square": {
+      "source": "controls-original.png",
+      "rect_xyxy": [
+        174,
+        770,
+        358,
+        940
+      ]
+    },
+    "input": {
+      "source": "controls-original.png",
+      "rect_xyxy": [
+        530,
+        784,
+        1008,
+        934
+      ]
+    },
+    "coin": {
+      "source": "controls-original.png",
+      "rect_xyxy": [
+        1180,
+        782,
+        1330,
+        934
+      ]
+    }
+  },
+  "filter": "nearest",
+  "design": "v4 layout, texture replacement v5"
+}

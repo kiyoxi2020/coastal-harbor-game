@@ -9,8 +9,6 @@ const EXPECTED = {
 	"HouseMiddle": [Vector2(239, 156), Vector2(34, 60)],
 	"HouseLintel": [Vector2(209, 130), Vector2(26, 8)],
 	"MarketBlocker": [Vector2(442, 204.5), Vector2(128, 27)],
-	"GardenWest": [Vector2(126, 212.5), Vector2(76, 23)],
-	"GardenEast": [Vector2(212, 212.5), Vector2(76, 23)],
 	"CrateBlocker": [Vector2(521.5, 225), Vector2(23, 16)],
 	"TreeBlocker0": [Vector2(46, 128), Vector2(10, 8)],
 	"TreeBlocker1": [Vector2(308, 110), Vector2(10, 8)],

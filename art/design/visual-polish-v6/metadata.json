@@ -1,0 +1,281 @@
+{
+  "source_size": [
+    1774,
+    887
+  ],
+  "processing": "crop alpha bounds then nearest fit; no repainting",
+  "sprites": {
+    "clam": {
+      "cell": [
+        0,
+        0,
+        444,
+        514
+      ],
+      "trim": [
+        54,
+        124,
+        427,
+        453
+      ],
+      "size": [
+        64,
+        64
+      ],
+      "fit_size": [
+        58,
+        51
+      ],
+      "offset": [
+        3,
+        10
+      ],
+      "world_size": [
+        12,
+        11
+      ],
+      "world_anchor": [
+        6,
+        9
+      ]
+    },
+    "snail": {
+      "cell": [
+        444,
+        0,
+        887,
+        514
+      ],
+      "trim": [
+        54,
+        138,
+        418,
+        444
+      ],
+      "size": [
+        64,
+        64
+      ],
+      "fit_size": [
+        58,
+        49
+      ],
+      "offset": [
+        3,
+        12
+      ],
+      "world_size": [
+        12,
+        11
+      ],
+      "world_anchor": [
+        6,
+        9
+      ]
+    },
+    "kelp": {
+      "cell": [
+        887,
+        0,
+        1330,
+        514
+      ],
+      "trim": [
+        89,
+        52,
+        370,
+        481
+      ],
+      "size": [
+        64,
+        64
+      ],
+      "fit_size": [
+        38,
+        58
+      ],
+      "offset": [
+        13,
+        3
+      ],
+      "world_size": [
+        12,
+        11
+      ],
+      "world_anchor": [
+        6,
+        9
+      ]
+    },
+    "grass": {
+      "cell": [
+        1330,
+        0,
+        1774,
+        514
+      ],
+      "trim": [
+        130,
+        250,
+        318,
+        438
+      ],
+      "size": [
+        16,
+        14
+      ],
+      "fit_size": [
+        12,
+        12
+      ],
+      "offset": [
+        2,
+        1
+      ],
+      "world_size": [
+        16,
+        14
+      ],
+      "world_anchor": [
+        8,
+        14
+      ]
+    },
+    "flowers_white": {
+      "cell": [
+        0,
+        550,
+        444,
+        887
+      ],
+      "trim": [
+        126,
+        88,
+        342,
+        270
+      ],
+      "size": [
+        16,
+        14
+      ],
+      "fit_size": [
+        14,
+        12
+      ],
+      "offset": [
+        1,
+        1
+      ],
+      "world_size": [
+        16,
+        14
+      ],
+      "world_anchor": [
+        8,
+        14
+      ]
+    },
+    "flowers_yellow": {
+      "cell": [
+        444,
+        550,
+        887,
+        887
+      ],
+      "trim": [
+        121,
+        93,
+        313,
+        285
+      ],
+      "size": [
+        16,
+        14
+      ],
+      "fit_size": [
+        12,
+        12
+      ],
+      "offset": [
+        2,
+        1
+      ],
+      "world_size": [
+        16,
+        14
+      ],
+      "world_anchor": [
+        8,
+        14
+      ]
+    },
+    "flowers_pink": {
+      "cell": [
+        887,
+        550,
+        1330,
+        887
+      ],
+      "trim": [
+        128,
+        89,
+        316,
+        276
+      ],
+      "size": [
+        16,
+        14
+      ],
+      "fit_size": [
+        12,
+        12
+      ],
+      "offset": [
+        2,
+        1
+      ],
+      "world_size": [
+        16,
+        14
+      ],
+      "world_anchor": [
+        8,
+        14
+      ]
+    },
+    "flower_edge": {
+      "cell": [
+        1330,
+        550,
+        1774,
+        887
+      ],
+      "trim": [
+        119,
+        108,
+        347,
+        275
+      ],
+      "size": [
+        16,
+        14
+      ],
+      "fit_size": [
+        14,
+        10
+      ],
+      "offset": [
+        1,
+        3
+      ],
+      "world_size": [
+        16,
+        14
+      ],
+      "world_anchor": [
+        8,
+        14
+      ]
+    }
+  }
+}

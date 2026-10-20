@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/ui/trade_item.gd" id="icon"]
+[ext_resource type="Script" path="res://scripts/forage_pickup.gd" id="forage"]
+[node name="Icon" type="Control"]
+texture_filter = 1
+mouse_filter = 2
+script = ExtResource("icon")
+[node name="Forage" type="Node2D" parent="."]
+scale = Vector2(5.25,5.25)
+script = ExtResource("forage")

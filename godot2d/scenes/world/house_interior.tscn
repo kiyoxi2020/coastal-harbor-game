@@ -273,7 +273,7 @@ position = Vector2(416, 306)
 [node name="bed" type="Marker2D" parent="InteractPoints"]
 position = Vector2(216, 240)
 metadata/title = "祖辈留下的床"
-metadata/body = "洗晒过的被子还带着阳光的味道。\n休息换日将在后续版本开放。"
+metadata/body = "洗晒过的被子还带着阳光的味道。\n靠近按 E，可休息到明天。"
 [node name="kitchen" type="Marker2D" parent="InteractPoints"]
 position = Vector2(400, 192)
 metadata/title = "旧屋的小厨房"

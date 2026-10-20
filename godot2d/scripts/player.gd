@@ -1,8 +1,12 @@
 extends CharacterBody2D
 
 const SPEED = 72.0
+const RUN_SPEED = 108.0
+var running := false
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var shadow: Polygon2D = $Shadow
+var action_busy: bool:
+	get: return $ToolAction.active
 var walking := false
 var facing := "south"
 var world: Node
@@ -50,7 +54,13 @@ func reset_doorway_visual() -> void:
 	z_index = initial_z_index
 	shadow.visible = initial_shadow_visible
 
+func play_tool_action(kind: String, target: Vector2) -> void:
+	$ToolAction.begin(kind,target)
+
 func _physics_process(_delta: float) -> void:
+	if action_busy:
+		velocity=Vector2.ZERO
+		return
 	if is_instance_valid(world) and world.get("home") != null and world.home.transition.busy:
 		velocity=Vector2.ZERO
 		return
@@ -64,11 +74,12 @@ func _physics_process(_delta: float) -> void:
 			facing = "east" if direction.x > 0 else "west"
 		else:
 			facing = "south" if direction.y > 0 else "north"
-	velocity = direction * SPEED
+	running=direction!=Vector2.ZERO and Input.is_action_pressed("run")
+	velocity = direction * (RUN_SPEED if running else SPEED)
 	move_and_slide()
 	walking = get_real_velocity().length() > 2.0
 	if walking:
-		sprite.play(facing)
+		sprite.play("run_"+facing if running else facing)
 	else:
 		sprite.stop()
 		sprite.animation = facing

@@ -82,7 +82,8 @@ offset_left = 614.0
 offset_top = 26.0
 offset_right = 1054.0
 offset_bottom = 254.0
-text = "WASD / 方向键：移动\nE：查看、拾取、确认\nB / Tab：手账、返回\nR：回到路口（保留收获）\n窗口大小可自由拖动调整。"
+text = "WASD / 方向键：移动、菜单导航\nE：查看、拾取、确认\nB：手账 / 返回；Tab：切换工具\nR：回到路口（保留收获）\n菜单边缘可切换区域，E确认。
+窗口大小可自由拖动调整。"
 autowrap_mode = 2
 
 [node name="save_title" type="Button" parent="."]

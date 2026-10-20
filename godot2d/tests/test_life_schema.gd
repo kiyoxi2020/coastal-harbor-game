@@ -17,7 +17,7 @@ func write_json(path: String, value: Dictionary) -> void:
 
 func _initialize() -> void:
 	var state = State.new()
-	support.check("save_version_3", State.SAVE_VERSION == 3)
+	support.check("save_version_4", State.SAVE_VERSION == 4)
 	var all_new_items := true
 	for id in ["lettuce_seed", "tomato_seed", "lettuce", "tomato"]:
 		all_new_items = all_new_items and state.bag.add(id, 2) == 2
@@ -40,10 +40,10 @@ func _initialize() -> void:
 
 	var v1 := fixture("res://tests/fixtures/life_save_v1.json")
 	var migrated_v1 := State.migrate_data(v1)
-	support.check("migration_v1", migrated_v1.get("version") == 3 and migrated_v1.get("location") == "harbor" and migrated_v1.bag == v1.bag and migrated_v1.total_collected == 1 and migrated_v1.has("life"))
+	support.check("migration_v1", migrated_v1.get("version") == 4 and migrated_v1.get("location") == "harbor" and migrated_v1.bag == v1.bag and migrated_v1.total_collected == 1 and migrated_v1.has("life"))
 	var v2 := fixture("res://tests/fixtures/life_save_v2.json")
 	var migrated_v2 := State.migrate_data(v2)
-	support.check("migration_v2", migrated_v2.get("version") == 3 and migrated_v2.get("location") == "house" and Vector2(migrated_v2.position[0], migrated_v2.position[1]) == Vector2(320, 328) and migrated_v2.chest == v2.chest and migrated_v2.collected == v2.collected)
+	support.check("migration_v2", migrated_v2.get("version") == 4 and migrated_v2.get("location") == "house" and Vector2(migrated_v2.position[0], migrated_v2.position[1]) == Vector2(320, 328) and migrated_v2.chest == v2.chest and migrated_v2.collected == v2.collected)
 	var tampered := v2.duplicate(true)
 	tampered.chest[1] = {"id":"clam", "amount":1}
 	support.check("legacy_tamper", State.migrate_data(tampered).is_empty())
@@ -86,27 +86,27 @@ func _initialize() -> void:
 	var Schema = load("res://scripts/simulation/state_schema.gd")
 	var bool_collected := daily.duplicate(true)
 	bool_collected.collected.clam_a = 1
-	support.check("collected_bool", not Schema.validate_v3(bool_collected))
+	support.check("collected_bool", not Schema.validate_v4(bool_collected))
 	var bool_discovered := daily.duplicate(true)
 	bool_discovered.discovered.clam = 1
-	support.check("discovered_bool", not Schema.validate_v3(bool_discovered))
+	support.check("discovered_bool", not Schema.validate_v4(bool_discovered))
 	var bool_settled := daily.duplicate(true)
 	bool_settled.life.last_settled_day = false
-	support.check("settled_integer", not Schema.validate_v3(bool_settled))
+	support.check("settled_integer", not Schema.validate_v4(bool_settled))
 	var bad_name := daily.duplicate(true)
 	bad_name.player_name = "  海风  "
-	support.check("schema_clean_name", not Schema.validate_v3(bad_name))
+	support.check("schema_clean_name", not Schema.validate_v4(bad_name))
 	var report_state := daily.duplicate(true)
 	report_state.life.day_id = 2
 	report_state.life.last_settled_day = 1
 	report_state.life.daily_reports = [{"day_id":1,"cash_in":0,"cash_out":0,"pickups":7,"mature_plots":[],"summary":[]}]
-	support.check("report_pickups_limit", not Schema.validate_v3(report_state))
+	support.check("report_pickups_limit", not Schema.validate_v4(report_state))
 	report_state.life.daily_reports[0].pickups = 1
-	report_state.life.daily_reports[0].mature_plots = ["plot_a", "plot_a"]
-	support.check("report_unique_plots", not Schema.validate_v3(report_state))
+	report_state.life.daily_reports[0].mature_plots = ["garden_a:0:0", "garden_a:0:0"]
+	support.check("report_unique_plots", not Schema.validate_v4(report_state))
 	var bad_event := daily.duplicate(true)
 	bad_event.life.events = [{"event_id":"a:1:0", "day_id":1, "kind":"transfer", "source":"player", "target":"market", "items":{"wood":1}, "cash":8, "reason":"trade"}]
-	support.check("event_unknown_item", not Schema.validate_v3(bad_event))
+	support.check("event_unknown_item", not Schema.validate_v4(bad_event))
 
 	var schema_exists := ResourceLoader.exists("res://scripts/simulation/state_schema.gd")
 	support.check("schema_exists", schema_exists)

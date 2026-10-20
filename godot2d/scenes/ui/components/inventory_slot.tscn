@@ -1,30 +1,11 @@
-[gd_scene load_steps=5 format=3]
-
-[ext_resource type="Script" path="res://scripts/ui/pixel_style.gd" id="2_style"]
-[ext_resource type="Script" path="res://scripts/forage_pickup.gd" id="3_icon"]
-
-[sub_resource type="StyleBox" id="StyleBox_slot"]
-script = ExtResource("2_style")
-kind = "slot"
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-fill_color = Color(0.858824, 0.807843, 0.666667, 1)
-mid_color = Color(0.631373, 0.552941, 0.427451, 1)
-light_color = Color(0.972549, 0.921569, 0.780392, 1)
-
-[sub_resource type="StyleBox" id="StyleBox_selected_slot"]
-script = ExtResource("2_style")
-kind = "selected_slot"
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-fill_color = Color(0.858824, 0.807843, 0.666667, 1)
-mid_color = Color(0.87451, 0.501961, 0.341176, 1)
-light_color = Color(0.972549, 0.921569, 0.780392, 1)
-
+[gd_scene load_steps=6 format=3]
+[ext_resource type="PackedScene" path="res://scenes/ui/components/trade_item.tscn" id="item"]
+[ext_resource type="Texture2D" path="res://assets/ui/trade-v5/slot.png" id="slot"]
+[ext_resource type="Texture2D" path="res://assets/ui/trade-v5/selected.png" id="selected"]
+[sub_resource type="StyleBoxTexture" id="StyleBox_slot"]
+texture = ExtResource("slot")
+[sub_resource type="StyleBoxTexture" id="StyleBox_selected_slot"]
+texture = ExtResource("selected")
 [node name="InventorySlot" type="Button"]
 custom_minimum_size = Vector2(92, 78)
 layout_mode = 0
@@ -32,14 +13,19 @@ offset_right = 92.0
 offset_bottom = 78.0
 theme_override_styles/normal = SubResource("StyleBox_slot")
 theme_override_styles/pressed = SubResource("StyleBox_selected_slot")
+theme_override_styles/hover_pressed = SubResource("StyleBox_selected_slot")
+theme_override_styles/hover = SubResource("StyleBox_slot")
 focus_mode = 2
 toggle_mode = true
 
-[node name="Icon" type="Node2D" parent="."]
+[node name="Icon" parent="." instance=ExtResource("item")]
 visible = false
-position = Vector2(46, 34)
-scale = Vector2(2.4, 2.4)
-script = ExtResource("3_icon")
+layout_mode = 0
+offset_left = 12.0
+offset_top = 2.0
+offset_right = 108.0
+offset_bottom = 74.0
+scale = Vector2(0.7,0.7)
 
 [node name="Amount" type="Label" parent="."]
 visible = false

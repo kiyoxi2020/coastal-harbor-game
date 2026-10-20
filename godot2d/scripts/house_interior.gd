@@ -45,7 +45,7 @@ func blockers() -> Array[Rect2]:
 	for root_node in [$StaticCollisions, $Furniture]:
 		for node in root_node.find_children("*", "CollisionShape2D", true, false):
 			var shape := node as CollisionShape2D
-			if shape != null and not shape.disabled and shape.shape is RectangleShape2D:
+			if shape != null and shape.get_parent() is StaticBody2D and not shape.disabled and shape.shape is RectangleShape2D:
 				result.append(_rect_for(shape))
 	return result
 

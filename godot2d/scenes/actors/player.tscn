@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_player"]
-[ext_resource type="SpriteFrames" path="res://resources/player_frames.tres" id="2_frames"]
+[ext_resource type="SpriteFrames" path="res://resources/player_unified_frames.tres" id="2_frames"]
 [ext_resource type="Material" path="res://resources/player_mask.tres" id="3_mask"]
+
+[ext_resource type="PackedScene" path="res://scenes/actors/player_tool_action.tscn" id="4_action"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_player"]
 size = Vector2(10, 6)
@@ -20,7 +22,9 @@ polygon = PackedVector2Array(-6, -3, 6, -3, 6, 1, -6, 1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = ExtResource("3_mask")
-position = Vector2(0, -22)
-scale = Vector2(0.153355, 0.153355)
+position = Vector2(0, -21.6)
+scale = Vector2(0.15, 0.15)
 sprite_frames = ExtResource("2_frames")
 animation = &"south"
+
+[node name="ToolAction" parent="." instance=ExtResource("4_action")]

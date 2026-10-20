@@ -33,7 +33,7 @@ func switch_room(location: String,point: Vector2,transient: bool=false) -> bool:
 	world.player.reset_doorway_visual()
 	world.hud.dismiss()
 	world.hud.region.text="旧屋 / 海风入窗" if inside else "晴 / 渔港的一天"
-	world.hud.controls.text="WASD / 方向键 移动   E 查看 / 开门   B / Tab 手账   R 回入口" if inside else "WASD / 方向键 移动   E 拾取 / 查看   B / Tab 手账   R 回路口"
+	world.hud.controls.text="WASD 移动   Shift 跑步   E 查看 / 开门   B 手账   R 回入口" if inside else "WASD 移动   Shift 跑步   Tab 换工具   E 操作   B 手账   R 回路口"
 	world.get_node("WorldCamera").update_position()
 	world.get_node("WorldCamera").force_update_scroll()
 	world.refresh_pickups()

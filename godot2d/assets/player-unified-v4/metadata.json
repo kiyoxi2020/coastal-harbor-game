@@ -1,0 +1,3862 @@
+{
+  "canvas": [
+    384,
+    384
+  ],
+  "anchor": [
+    192,
+    336
+  ],
+  "world_scale": 0.15,
+  "directions": [
+    "south",
+    "west",
+    "east",
+    "north"
+  ],
+  "frames": {
+    "walk_south_0": {
+      "source": "art/design/player-unified-v4/walk-original.png",
+      "source_column": 0,
+      "source_bounds": [
+        95,
+        44,
+        208,
+        274
+      ],
+      "head_bounds": [
+        108,
+        48,
+        193,
+        107
+      ],
+      "boot_bounds": [
+        100,
+        128,
+        203,
+        268
+      ],
+      "source_anchor": [
+        150.5,
+        272
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "walk_south_1": {
+      "source": "art/design/player-unified-v4/walk-original.png",
+      "source_column": 1,
+      "source_bounds": [
+        72,
+        44,
+        189,
+        274
+      ],
+      "head_bounds": [
+        85,
+        48,
+        173,
+        107
+      ],
+      "boot_bounds": [
+        82,
+        128,
+        184,
+        268
+      ],
+      "source_anchor": [
+        129.0,
+        272
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "walk_south_2": {
+      "source": "art/design/player-unified-v4/walk-original.png",
+      "source_column": 2,
+      "source_bounds": [
+        63,
+        44,
+        177,
+        277
+      ],
+      "head_bounds": [
+        75,
+        48,
+        161,
+        107
+      ],
+      "boot_bounds": [
+        68,
+        128,
+        173,
+        272
+      ],
+      "source_anchor": [
+        118.0,
+        272
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "walk_south_3": {
+      "source": "art/design/player-unified-v4/walk-original.png",
+      "source_column": 3,
+      "source_bounds": [
+        61,
+        44,
+        177,
+        274
+      ],
+      "head_bounds": [
+        74,
+        48,
+        163,
+        107
+      ],
+      "boot_bounds": [
+        67,
+        128,
+        173,
+        268
+      ],
+      "source_anchor": [
+        118.5,
+        272
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "walk_south_4": {
+      "source": "art/design/player-unified-v4/walk-original.png",
+      "source_column": 4,
+      "source_bounds": [
+        65,
+        44,
+        175,
+        277
+      ],
+      "head_bounds": [
+        74,
+        48,
+        164,
+        108
+      ],
+      "boot_bounds": [
+        70,
+        129,
+        164,
+        272
+      ],
+      "source_anchor": [
+        119.0,
+        272
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "walk_south_5": {
+      "source": "art/design/player-unified-v4/walk-original.png",
+      "source_column": 5,
+      "source_bounds": [
+        50,
+        44,
+        166,
+        273
+      ],
+      "head_bounds": [
+        60,
+        48,
+        151,
+        107
+      ],
+      "boot_bounds": [
+        55,
+        128,
+        161,
+        268
+      ],
+      "source_anchor": [
+        105.5,
+        272
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "walk_west_0": {
+      "source": "art/design/player-unified-v4/walk-original.png",
+      "source_column": 0,
+      "source_bounds": [
+        93,
+        292,
+        201,
+        520
+      ],
+      "head_bounds": [
+        96,
+        297,
+        187,
+        362
+      ],
+      "boot_bounds": [
+        116,
+        383,
+        176,
+        514
+      ],
+      "source_anchor": [
+        141.5,
+        516
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "walk_west_1": {
+      "source": "art/design/player-unified-v4/walk-original.png",
+      "source_column": 1,
+      "source_bounds": [
+        71,
+        292,
+        187,
+        520
+      ],
+      "head_bounds": [
+        75,
+        297,
+        169,
+        363
+      ],
+      "boot_bounds": [
+        77,
+        384,
+        181,
+        514
+      ],
+      "source_anchor": [
+        122.0,
+        516
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "walk_west_2": {
+      "source": "art/design/player-unified-v4/walk-original.png",
+      "source_column": 2,
+      "source_bounds": [
+        58,
+        292,
+        174,
+        520
+      ],
+      "head_bounds": [
+        65,
+        297,
+        159,
+        362
+      ],
+      "boot_bounds": [
+        63,
+        383,
+        159,
+        514
+      ],
+      "source_anchor": [
+        112.0,
+        516
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "walk_west_3": {
+      "source": "art/design/player-unified-v4/walk-original.png",
+      "source_column": 3,
+      "source_bounds": [
+        59,
+        292,
+        171,
+        520
+      ],
+      "head_bounds": [
+        63,
+        297,
+        158,
+        362
+      ],
+      "boot_bounds": [
+        80,
+        383,
+        151,
+        514
+      ],
+      "source_anchor": [
+        110.5,
+        516
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "walk_west_4": {
+      "source": "art/design/player-unified-v4/walk-original.png",
+      "source_column": 4,
+      "source_bounds": [
+        59,
+        292,
+        175,
+        521
+      ],
+      "head_bounds": [
+        63,
+        297,
+        157,
+        363
+      ],
+      "boot_bounds": [
+        67,
+        384,
+        169,
+        516
+      ],
+      "source_anchor": [
+        110.0,
+        516
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "walk_west_5": {
+      "source": "art/design/player-unified-v4/walk-original.png",
+      "source_column": 5,
+      "source_bounds": [
+        54,
+        292,
+        164,
+        520
+      ],
+      "head_bounds": [
+        57,
+        296,
+        150,
+        362
+      ],
+      "boot_bounds": [
+        81,
+        383,
+        143,
+        514
+      ],
+      "source_anchor": [
+        103.5,
+        516
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "walk_east_0": {
+      "source": "art/design/player-unified-v4/walk-original.png",
+      "source_column": 0,
+      "source_bounds": [
+        96,
+        536,
+        210,
+        767
+      ],
+      "head_bounds": [
+        106,
+        541,
+        202,
+        607
+      ],
+      "boot_bounds": [
+        117,
+        628,
+        179,
+        760
+      ],
+      "source_anchor": [
+        154.0,
+        760
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "walk_east_1": {
+      "source": "art/design/player-unified-v4/walk-original.png",
+      "source_column": 1,
+      "source_bounds": [
+        72,
+        537,
+        193,
+        766
+      ],
+      "head_bounds": [
+        89,
+        541,
+        189,
+        610
+      ],
+      "boot_bounds": [
+        78,
+        631,
+        188,
+        760
+      ],
+      "source_anchor": [
+        139.0,
+        760
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "walk_east_2": {
+      "source": "art/design/player-unified-v4/walk-original.png",
+      "source_column": 2,
+      "source_bounds": [
+        68,
+        537,
+        181,
+        766
+      ],
+      "head_bounds": [
+        77,
+        542,
+        175,
+        609
+      ],
+      "boot_bounds": [
+        75,
+        630,
+        173,
+        760
+      ],
+      "source_anchor": [
+        126.0,
+        760
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "walk_east_3": {
+      "source": "art/design/player-unified-v4/walk-original.png",
+      "source_column": 3,
+      "source_bounds": [
+        63,
+        536,
+        177,
+        766
+      ],
+      "head_bounds": [
+        69,
+        541,
+        173,
+        611
+      ],
+      "boot_bounds": [
+        81,
+        632,
+        154,
+        760
+      ],
+      "source_anchor": [
+        121.0,
+        760
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "walk_east_4": {
+      "source": "art/design/player-unified-v4/walk-original.png",
+      "source_column": 4,
+      "source_bounds": [
+        58,
+        538,
+        180,
+        767
+      ],
+      "head_bounds": [
+        74,
+        542,
+        171,
+        610
+      ],
+      "boot_bounds": [
+        64,
+        631,
+        174,
+        760
+      ],
+      "source_anchor": [
+        122.5,
+        760
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "walk_east_5": {
+      "source": "art/design/player-unified-v4/walk-original.png",
+      "source_column": 5,
+      "source_bounds": [
+        53,
+        536,
+        167,
+        767
+      ],
+      "head_bounds": [
+        65,
+        541,
+        159,
+        609
+      ],
+      "boot_bounds": [
+        74,
+        630,
+        136,
+        760
+      ],
+      "source_anchor": [
+        112.0,
+        760
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "walk_north_0": {
+      "source": "art/design/player-unified-v4/walk-original.png",
+      "source_column": 0,
+      "source_bounds": [
+        92,
+        777,
+        206,
+        995
+      ],
+      "head_bounds": [
+        102,
+        781,
+        187,
+        848
+      ],
+      "boot_bounds": [
+        97,
+        869,
+        201,
+        990
+      ],
+      "source_anchor": [
+        144.5,
+        992
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "walk_north_1": {
+      "source": "art/design/player-unified-v4/walk-original.png",
+      "source_column": 1,
+      "source_bounds": [
+        74,
+        777,
+        189,
+        997
+      ],
+      "head_bounds": [
+        86,
+        781,
+        170,
+        847
+      ],
+      "boot_bounds": [
+        89,
+        868,
+        184,
+        992
+      ],
+      "source_anchor": [
+        128.0,
+        992
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "walk_north_2": {
+      "source": "art/design/player-unified-v4/walk-original.png",
+      "source_column": 2,
+      "source_bounds": [
+        64,
+        777,
+        179,
+        997
+      ],
+      "head_bounds": [
+        70,
+        781,
+        161,
+        852
+      ],
+      "boot_bounds": [
+        68,
+        873,
+        174,
+        992
+      ],
+      "source_anchor": [
+        115.5,
+        992
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "walk_north_3": {
+      "source": "art/design/player-unified-v4/walk-original.png",
+      "source_column": 3,
+      "source_bounds": [
+        55,
+        777,
+        170,
+        995
+      ],
+      "head_bounds": [
+        68,
+        781,
+        153,
+        851
+      ],
+      "boot_bounds": [
+        61,
+        872,
+        165,
+        990
+      ],
+      "source_anchor": [
+        110.5,
+        992
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "walk_north_4": {
+      "source": "art/design/player-unified-v4/walk-original.png",
+      "source_column": 4,
+      "source_bounds": [
+        56,
+        777,
+        174,
+        997
+      ],
+      "head_bounds": [
+        68,
+        781,
+        155,
+        848
+      ],
+      "boot_bounds": [
+        61,
+        869,
+        168,
+        992
+      ],
+      "source_anchor": [
+        111.5,
+        992
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "walk_north_5": {
+      "source": "art/design/player-unified-v4/walk-original.png",
+      "source_column": 5,
+      "source_bounds": [
+        48,
+        777,
+        161,
+        995
+      ],
+      "head_bounds": [
+        59,
+        781,
+        143,
+        854
+      ],
+      "boot_bounds": [
+        52,
+        875,
+        157,
+        990
+      ],
+      "source_anchor": [
+        101.0,
+        992
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "run_south_0": {
+      "source": "art/design/player-unified-v4/run-original.png",
+      "source_column": 0,
+      "source_bounds": [
+        96,
+        42,
+        215,
+        269
+      ],
+      "head_bounds": [
+        106,
+        47,
+        197,
+        106
+      ],
+      "boot_bounds": [
+        113,
+        127,
+        210,
+        260
+      ],
+      "source_anchor": [
+        151.5,
+        265
+      ],
+      "normalization": 0.9315789473684211,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "run_south_1": {
+      "source": "art/design/player-unified-v4/run-original.png",
+      "source_column": 1,
+      "source_bounds": [
+        69,
+        42,
+        200,
+        270
+      ],
+      "head_bounds": [
+        81,
+        48,
+        169,
+        107
+      ],
+      "boot_bounds": [
+        75,
+        128,
+        195,
+        265
+      ],
+      "source_anchor": [
+        125.0,
+        265
+      ],
+      "normalization": 0.9315789473684211,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "run_south_2": {
+      "source": "art/design/player-unified-v4/run-original.png",
+      "source_column": 2,
+      "source_bounds": [
+        72,
+        42,
+        198,
+        270
+      ],
+      "head_bounds": [
+        76,
+        49,
+        172,
+        107
+      ],
+      "boot_bounds": [
+        86,
+        128,
+        194,
+        262
+      ],
+      "source_anchor": [
+        124.0,
+        265
+      ],
+      "normalization": 0.9315789473684211,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "run_south_3": {
+      "source": "art/design/player-unified-v4/run-original.png",
+      "source_column": 3,
+      "source_bounds": [
+        63,
+        42,
+        189,
+        256
+      ],
+      "head_bounds": [
+        75,
+        48,
+        173,
+        107
+      ],
+      "boot_bounds": [
+        70,
+        128,
+        183,
+        252
+      ],
+      "source_anchor": [
+        124.0,
+        265
+      ],
+      "normalization": 0.9315789473684211,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "run_south_4": {
+      "source": "art/design/player-unified-v4/run-original.png",
+      "source_column": 4,
+      "source_bounds": [
+        63,
+        42,
+        199,
+        271
+      ],
+      "head_bounds": [
+        75,
+        48,
+        169,
+        101
+      ],
+      "boot_bounds": [
+        74,
+        122,
+        194,
+        262
+      ],
+      "source_anchor": [
+        122.0,
+        265
+      ],
+      "normalization": 0.9315789473684211,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "run_south_5": {
+      "source": "art/design/player-unified-v4/run-original.png",
+      "source_column": 5,
+      "source_bounds": [
+        62,
+        42,
+        180,
+        270
+      ],
+      "head_bounds": [
+        67,
+        48,
+        164,
+        106
+      ],
+      "boot_bounds": [
+        69,
+        127,
+        175,
+        265
+      ],
+      "source_anchor": [
+        115.5,
+        265
+      ],
+      "normalization": 0.9315789473684211,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "run_west_0": {
+      "source": "art/design/player-unified-v4/run-original.png",
+      "source_column": 0,
+      "source_bounds": [
+        88,
+        290,
+        215,
+        512
+      ],
+      "head_bounds": [
+        93,
+        294,
+        189,
+        365
+      ],
+      "boot_bounds": [
+        96,
+        386,
+        210,
+        507
+      ],
+      "source_anchor": [
+        141.0,
+        510
+      ],
+      "normalization": 0.9543147208121827,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "run_west_1": {
+      "source": "art/design/player-unified-v4/run-original.png",
+      "source_column": 1,
+      "source_bounds": [
+        64,
+        290,
+        210,
+        504
+      ],
+      "head_bounds": [
+        73,
+        294,
+        168,
+        372
+      ],
+      "boot_bounds": [
+        68,
+        396,
+        206,
+        499
+      ],
+      "source_anchor": [
+        120.5,
+        510
+      ],
+      "normalization": 0.9543147208121827,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "run_west_2": {
+      "source": "art/design/player-unified-v4/run-original.png",
+      "source_column": 2,
+      "source_bounds": [
+        58,
+        290,
+        189,
+        515
+      ],
+      "head_bounds": [
+        62,
+        294,
+        160,
+        363
+      ],
+      "boot_bounds": [
+        63,
+        384,
+        184,
+        509
+      ],
+      "source_anchor": [
+        111.0,
+        510
+      ],
+      "normalization": 0.9543147208121827,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "run_west_3": {
+      "source": "art/design/player-unified-v4/run-original.png",
+      "source_column": 3,
+      "source_bounds": [
+        56,
+        290,
+        202,
+        507
+      ],
+      "head_bounds": [
+        60,
+        294,
+        160,
+        365
+      ],
+      "boot_bounds": [
+        69,
+        386,
+        197,
+        502
+      ],
+      "source_anchor": [
+        110.0,
+        510
+      ],
+      "normalization": 0.9543147208121827,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "run_west_4": {
+      "source": "art/design/player-unified-v4/run-original.png",
+      "source_column": 4,
+      "source_bounds": [
+        54,
+        290,
+        204,
+        515
+      ],
+      "head_bounds": [
+        59,
+        294,
+        158,
+        365
+      ],
+      "boot_bounds": [
+        66,
+        386,
+        198,
+        510
+      ],
+      "source_anchor": [
+        108.5,
+        510
+      ],
+      "normalization": 0.9543147208121827,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "run_west_5": {
+      "source": "art/design/player-unified-v4/run-original.png",
+      "source_column": 5,
+      "source_bounds": [
+        55,
+        289,
+        179,
+        515
+      ],
+      "head_bounds": [
+        58,
+        293,
+        158,
+        367
+      ],
+      "boot_bounds": [
+        68,
+        388,
+        174,
+        510
+      ],
+      "source_anchor": [
+        108.0,
+        510
+      ],
+      "normalization": 0.9543147208121827,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "run_east_0": {
+      "source": "art/design/player-unified-v4/run-original.png",
+      "source_column": 0,
+      "source_bounds": [
+        86,
+        535,
+        212,
+        763
+      ],
+      "head_bounds": [
+        103,
+        538,
+        203,
+        612
+      ],
+      "boot_bounds": [
+        91,
+        633,
+        193,
+        758
+      ],
+      "source_anchor": [
+        153.0,
+        758
+      ],
+      "normalization": 0.9701492537313433,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "run_east_1": {
+      "source": "art/design/player-unified-v4/run-original.png",
+      "source_column": 1,
+      "source_bounds": [
+        48,
+        535,
+        196,
+        752
+      ],
+      "head_bounds": [
+        86,
+        539,
+        186,
+        615
+      ],
+      "boot_bounds": [
+        52,
+        636,
+        187,
+        745
+      ],
+      "source_anchor": [
+        136.0,
+        758
+      ],
+      "normalization": 0.9701492537313433,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "run_east_2": {
+      "source": "art/design/player-unified-v4/run-original.png",
+      "source_column": 2,
+      "source_bounds": [
+        58,
+        535,
+        188,
+        760
+      ],
+      "head_bounds": [
+        77,
+        539,
+        178,
+        613
+      ],
+      "boot_bounds": [
+        63,
+        634,
+        177,
+        755
+      ],
+      "source_anchor": [
+        127.5,
+        758
+      ],
+      "normalization": 0.9701492537313433,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "run_east_3": {
+      "source": "art/design/player-unified-v4/run-original.png",
+      "source_column": 3,
+      "source_bounds": [
+        64,
+        535,
+        187,
+        763
+      ],
+      "head_bounds": [
+        76,
+        539,
+        175,
+        613
+      ],
+      "boot_bounds": [
+        69,
+        634,
+        165,
+        758
+      ],
+      "source_anchor": [
+        125.5,
+        758
+      ],
+      "normalization": 0.9701492537313433,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "run_east_4": {
+      "source": "art/design/player-unified-v4/run-original.png",
+      "source_column": 4,
+      "source_bounds": [
+        48,
+        535,
+        185,
+        756
+      ],
+      "head_bounds": [
+        72,
+        539,
+        174,
+        613
+      ],
+      "boot_bounds": [
+        53,
+        634,
+        180,
+        749
+      ],
+      "source_anchor": [
+        123.0,
+        758
+      ],
+      "normalization": 0.9701492537313433,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "run_east_5": {
+      "source": "art/design/player-unified-v4/run-original.png",
+      "source_column": 5,
+      "source_bounds": [
+        55,
+        535,
+        180,
+        763
+      ],
+      "head_bounds": [
+        66,
+        541,
+        173,
+        611
+      ],
+      "boot_bounds": [
+        60,
+        632,
+        164,
+        758
+      ],
+      "source_anchor": [
+        119.5,
+        758
+      ],
+      "normalization": 0.9701492537313433,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "run_north_0": {
+      "source": "art/design/player-unified-v4/run-original.png",
+      "source_column": 0,
+      "source_bounds": [
+        86,
+        774,
+        209,
+        998
+      ],
+      "head_bounds": [
+        103,
+        781,
+        190,
+        852
+      ],
+      "boot_bounds": [
+        91,
+        878,
+        205,
+        990
+      ],
+      "source_anchor": [
+        146.5,
+        994
+      ],
+      "normalization": 0.9714285714285714,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "run_north_1": {
+      "source": "art/design/player-unified-v4/run-original.png",
+      "source_column": 1,
+      "source_bounds": [
+        67,
+        774,
+        191,
+        988
+      ],
+      "head_bounds": [
+        81,
+        778,
+        171,
+        847
+      ],
+      "boot_bounds": [
+        72,
+        892,
+        186,
+        974
+      ],
+      "source_anchor": [
+        126.0,
+        994
+      ],
+      "normalization": 0.9714285714285714,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "run_north_2": {
+      "source": "art/design/player-unified-v4/run-original.png",
+      "source_column": 2,
+      "source_bounds": [
+        60,
+        774,
+        185,
+        997
+      ],
+      "head_bounds": [
+        81,
+        781,
+        166,
+        851
+      ],
+      "boot_bounds": [
+        65,
+        872,
+        180,
+        986
+      ],
+      "source_anchor": [
+        123.5,
+        994
+      ],
+      "normalization": 0.9714285714285714,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "run_north_3": {
+      "source": "art/design/player-unified-v4/run-original.png",
+      "source_column": 3,
+      "source_bounds": [
+        54,
+        774,
+        181,
+        994
+      ],
+      "head_bounds": [
+        72,
+        780,
+        159,
+        851
+      ],
+      "boot_bounds": [
+        59,
+        893,
+        176,
+        989
+      ],
+      "source_anchor": [
+        115.5,
+        994
+      ],
+      "normalization": 0.9714285714285714,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "run_north_4": {
+      "source": "art/design/player-unified-v4/run-original.png",
+      "source_column": 4,
+      "source_bounds": [
+        55,
+        774,
+        184,
+        998
+      ],
+      "head_bounds": [
+        74,
+        778,
+        162,
+        844
+      ],
+      "boot_bounds": [
+        60,
+        869,
+        180,
+        994
+      ],
+      "source_anchor": [
+        118.0,
+        994
+      ],
+      "normalization": 0.9714285714285714,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "run_north_5": {
+      "source": "art/design/player-unified-v4/run-original.png",
+      "source_column": 5,
+      "source_bounds": [
+        48,
+        774,
+        172,
+        998
+      ],
+      "head_bounds": [
+        65,
+        778,
+        153,
+        852
+      ],
+      "boot_bounds": [
+        52,
+        873,
+        167,
+        994
+      ],
+      "source_anchor": [
+        109.0,
+        994
+      ],
+      "normalization": 0.9714285714285714,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "hoe_south_0": {
+      "source": "art/design/player-unified-v4/hoe-original.png",
+      "source_column": 0,
+      "source_bounds": [
+        68,
+        44,
+        202,
+        275
+      ],
+      "head_bounds": [
+        108,
+        49,
+        197,
+        105
+      ],
+      "boot_bounds": [
+        101,
+        126,
+        191,
+        264
+      ],
+      "source_anchor": [
+        146.0,
+        264
+      ],
+      "normalization": 0.9619565217391305,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "hoe_south_1": {
+      "source": "art/design/player-unified-v4/hoe-original.png",
+      "source_column": 1,
+      "source_bounds": [
+        72,
+        9,
+        215,
+        269
+      ],
+      "head_bounds": [
+        115,
+        47,
+        209,
+        107
+      ],
+      "boot_bounds": [
+        110,
+        128,
+        198,
+        264
+      ],
+      "source_anchor": [
+        154.0,
+        264
+      ],
+      "normalization": 0.9619565217391305,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "hoe_south_2": {
+      "source": "art/design/player-unified-v4/hoe-original.png",
+      "source_column": 2,
+      "source_bounds": [
+        55,
+        9,
+        198,
+        269
+      ],
+      "head_bounds": [
+        123,
+        47,
+        191,
+        106
+      ],
+      "boot_bounds": [
+        92,
+        127,
+        182,
+        264
+      ],
+      "source_anchor": [
+        137.0,
+        264
+      ],
+      "normalization": 0.9619565217391305,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "hoe_south_3": {
+      "source": "art/design/player-unified-v4/hoe-original.png",
+      "source_column": 3,
+      "source_bounds": [
+        61,
+        65,
+        181,
+        278
+      ],
+      "head_bounds": [
+        71,
+        71,
+        163,
+        127
+      ],
+      "boot_bounds": [
+        65,
+        148,
+        163,
+        264
+      ],
+      "source_anchor": [
+        114.0,
+        264
+      ],
+      "normalization": 0.9619565217391305,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "hoe_south_4": {
+      "source": "art/design/player-unified-v4/hoe-original.png",
+      "source_column": 4,
+      "source_bounds": [
+        56,
+        82,
+        176,
+        280
+      ],
+      "head_bounds": [
+        65,
+        86,
+        157,
+        148
+      ],
+      "boot_bounds": [
+        60,
+        169,
+        171,
+        264
+      ],
+      "source_anchor": [
+        115.5,
+        264
+      ],
+      "normalization": 0.9619565217391305,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "hoe_south_5": {
+      "source": "art/design/player-unified-v4/hoe-original.png",
+      "source_column": 5,
+      "source_bounds": [
+        28,
+        44,
+        161,
+        275
+      ],
+      "head_bounds": [
+        61,
+        47,
+        155,
+        107
+      ],
+      "boot_bounds": [
+        56,
+        128,
+        151,
+        264
+      ],
+      "source_anchor": [
+        103.5,
+        264
+      ],
+      "normalization": 0.9619565217391305,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "hoe_west_0": {
+      "source": "art/design/player-unified-v4/hoe-original.png",
+      "source_column": 0,
+      "source_bounds": [
+        61,
+        293,
+        210,
+        513
+      ],
+      "head_bounds": [
+        101,
+        296,
+        199,
+        365
+      ],
+      "boot_bounds": [
+        90,
+        386,
+        180,
+        509
+      ],
+      "source_anchor": [
+        135.0,
+        509
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "hoe_west_1": {
+      "source": "art/design/player-unified-v4/hoe-original.png",
+      "source_column": 1,
+      "source_bounds": [
+        74,
+        275,
+        226,
+        513
+      ],
+      "head_bounds": [
+        123,
+        296,
+        217,
+        371
+      ],
+      "boot_bounds": [
+        117,
+        393,
+        201,
+        508
+      ],
+      "source_anchor": [
+        159.0,
+        508
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "hoe_west_2": {
+      "source": "art/design/player-unified-v4/hoe-original.png",
+      "source_column": 2,
+      "source_bounds": [
+        51,
+        267,
+        208,
+        513
+      ],
+      "head_bounds": [
+        128,
+        296,
+        195,
+        362
+      ],
+      "boot_bounds": [
+        98,
+        392,
+        189,
+        508
+      ],
+      "source_anchor": [
+        143.5,
+        508
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "hoe_west_3": {
+      "source": "art/design/player-unified-v4/hoe-original.png",
+      "source_column": 3,
+      "source_bounds": [
+        32,
+        311,
+        204,
+        514
+      ],
+      "head_bounds": [
+        71,
+        315,
+        164,
+        389
+      ],
+      "boot_bounds": [
+        60,
+        410,
+        199,
+        508
+      ],
+      "source_anchor": [
+        129.5,
+        508
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "hoe_west_4": {
+      "source": "art/design/player-unified-v4/hoe-original.png",
+      "source_column": 4,
+      "source_bounds": [
+        49,
+        331,
+        210,
+        515
+      ],
+      "head_bounds": [
+        66,
+        334,
+        160,
+        402
+      ],
+      "boot_bounds": [
+        84,
+        423,
+        205,
+        508
+      ],
+      "source_anchor": [
+        144.5,
+        508
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "hoe_west_5": {
+      "source": "art/design/player-unified-v4/hoe-original.png",
+      "source_column": 5,
+      "source_bounds": [
+        25,
+        293,
+        173,
+        513
+      ],
+      "head_bounds": [
+        63,
+        296,
+        158,
+        374
+      ],
+      "boot_bounds": [
+        52,
+        396,
+        141,
+        509
+      ],
+      "source_anchor": [
+        96.5,
+        509
+      ],
+      "normalization": 1.0,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "hoe_east_0": {
+      "source": "art/design/player-unified-v4/hoe-original.png",
+      "source_column": 0,
+      "source_bounds": [
+        88,
+        536,
+        233,
+        757
+      ],
+      "head_bounds": [
+        94,
+        539,
+        199,
+        611
+      ],
+      "boot_bounds": [
+        116,
+        632,
+        202,
+        752
+      ],
+      "source_anchor": [
+        159.0,
+        752
+      ],
+      "normalization": 0.9420289855072463,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "hoe_east_1": {
+      "source": "art/design/player-unified-v4/hoe-original.png",
+      "source_column": 1,
+      "source_bounds": [
+        80,
+        513,
+        243,
+        756
+      ],
+      "head_bounds": [
+        89,
+        539,
+        215,
+        611
+      ],
+      "boot_bounds": [
+        94,
+        650,
+        190,
+        752
+      ],
+      "source_anchor": [
+        142.0,
+        752
+      ],
+      "normalization": 0.9420289855072463,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "hoe_east_2": {
+      "source": "art/design/player-unified-v4/hoe-original.png",
+      "source_column": 2,
+      "source_bounds": [
+        70,
+        511,
+        231,
+        756
+      ],
+      "head_bounds": [
+        79,
+        542,
+        155,
+        615
+      ],
+      "boot_bounds": [
+        84,
+        640,
+        181,
+        752
+      ],
+      "source_anchor": [
+        132.5,
+        752
+      ],
+      "normalization": 0.9420289855072463,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "hoe_east_3": {
+      "source": "art/design/player-unified-v4/hoe-original.png",
+      "source_column": 3,
+      "source_bounds": [
+        46,
+        557,
+        223,
+        757
+      ],
+      "head_bounds": [
+        90,
+        560,
+        186,
+        631
+      ],
+      "boot_bounds": [
+        50,
+        655,
+        191,
+        752
+      ],
+      "source_anchor": [
+        120.5,
+        752
+      ],
+      "normalization": 0.9420289855072463,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "hoe_east_4": {
+      "source": "art/design/player-unified-v4/hoe-original.png",
+      "source_column": 4,
+      "source_bounds": [
+        43,
+        573,
+        215,
+        758
+      ],
+      "head_bounds": [
+        91,
+        574,
+        193,
+        645
+      ],
+      "boot_bounds": [
+        47,
+        666,
+        185,
+        752
+      ],
+      "source_anchor": [
+        116.0,
+        752
+      ],
+      "normalization": 0.9420289855072463,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "hoe_east_5": {
+      "source": "art/design/player-unified-v4/hoe-original.png",
+      "source_column": 5,
+      "source_bounds": [
+        54,
+        536,
+        200,
+        757
+      ],
+      "head_bounds": [
+        61,
+        540,
+        168,
+        618
+      ],
+      "boot_bounds": [
+        82,
+        640,
+        173,
+        753
+      ],
+      "source_anchor": [
+        127.5,
+        753
+      ],
+      "normalization": 0.9420289855072463,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "hoe_north_0": {
+      "source": "art/design/player-unified-v4/hoe-original.png",
+      "source_column": 0,
+      "source_bounds": [
+        94,
+        776,
+        248,
+        991
+      ],
+      "head_bounds": [
+        97,
+        780,
+        194,
+        853
+      ],
+      "boot_bounds": [
+        104,
+        874,
+        198,
+        987
+      ],
+      "source_anchor": [
+        151.0,
+        987
+      ],
+      "normalization": 0.9392265193370166,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "hoe_north_1": {
+      "source": "art/design/player-unified-v4/hoe-original.png",
+      "source_column": 1,
+      "source_bounds": [
+        81,
+        758,
+        238,
+        991
+      ],
+      "head_bounds": [
+        85,
+        780,
+        183,
+        851
+      ],
+      "boot_bounds": [
+        88,
+        875,
+        183,
+        987
+      ],
+      "source_anchor": [
+        135.5,
+        987
+      ],
+      "normalization": 0.9392265193370166,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "hoe_north_2": {
+      "source": "art/design/player-unified-v4/hoe-original.png",
+      "source_column": 2,
+      "source_bounds": [
+        41,
+        752,
+        203,
+        991
+      ],
+      "head_bounds": [
+        107,
+        777,
+        192,
+        851
+      ],
+      "boot_bounds": [
+        99,
+        875,
+        190,
+        987
+      ],
+      "source_anchor": [
+        144.5,
+        987
+      ],
+      "normalization": 0.9392265193370166,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "hoe_north_3": {
+      "source": "art/design/player-unified-v4/hoe-original.png",
+      "source_column": 3,
+      "source_bounds": [
+        15,
+        798,
+        186,
+        991
+      ],
+      "head_bounds": [
+        72,
+        801,
+        163,
+        862
+      ],
+      "boot_bounds": [
+        44,
+        888,
+        181,
+        987
+      ],
+      "source_anchor": [
+        112.5,
+        987
+      ],
+      "normalization": 0.9392265193370166,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "hoe_north_4": {
+      "source": "art/design/player-unified-v4/hoe-original.png",
+      "source_column": 4,
+      "source_bounds": [
+        37,
+        810,
+        190,
+        991
+      ],
+      "head_bounds": [
+        79,
+        813,
+        169,
+        877
+      ],
+      "boot_bounds": [
+        66,
+        919,
+        185,
+        987
+      ],
+      "source_anchor": [
+        125.5,
+        987
+      ],
+      "normalization": 0.9392265193370166,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "hoe_north_5": {
+      "source": "art/design/player-unified-v4/hoe-original.png",
+      "source_column": 5,
+      "source_bounds": [
+        55,
+        776,
+        209,
+        991
+      ],
+      "head_bounds": [
+        60,
+        779,
+        150,
+        851
+      ],
+      "boot_bounds": [
+        66,
+        872,
+        176,
+        987
+      ],
+      "source_anchor": [
+        121.0,
+        987
+      ],
+      "normalization": 0.9392265193370166,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "water_south_0": {
+      "source": "art/design/player-unified-v4/water-original.png",
+      "source_column": 0,
+      "source_bounds": [
+        78,
+        43,
+        209,
+        272
+      ],
+      "head_bounds": [
+        103,
+        46,
+        197,
+        107
+      ],
+      "boot_bounds": [
+        94,
+        128,
+        204,
+        267
+      ],
+      "source_anchor": [
+        149.0,
+        267
+      ],
+      "normalization": 0.9414893617021277,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "water_south_1": {
+      "source": "art/design/player-unified-v4/water-original.png",
+      "source_column": 1,
+      "source_bounds": [
+        75,
+        43,
+        181,
+        272
+      ],
+      "head_bounds": [
+        78,
+        46,
+        174,
+        107
+      ],
+      "boot_bounds": [
+        89,
+        128,
+        166,
+        267
+      ],
+      "source_anchor": [
+        127.5,
+        267
+      ],
+      "normalization": 0.9414893617021277,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "water_south_2": {
+      "source": "art/design/player-unified-v4/water-original.png",
+      "source_column": 2,
+      "source_bounds": [
+        68,
+        43,
+        208,
+        272
+      ],
+      "head_bounds": [
+        72,
+        46,
+        165,
+        106
+      ],
+      "boot_bounds": [
+        87,
+        127,
+        168,
+        267
+      ],
+      "source_anchor": [
+        127.5,
+        267
+      ],
+      "normalization": 0.9414893617021277,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "water_south_3": {
+      "source": "art/design/player-unified-v4/water-original.png",
+      "source_column": 3,
+      "source_bounds": [
+        70,
+        43,
+        216,
+        272
+      ],
+      "head_bounds": [
+        76,
+        49,
+        167,
+        110
+      ],
+      "boot_bounds": [
+        86,
+        131,
+        168,
+        267
+      ],
+      "source_anchor": [
+        127.0,
+        267
+      ],
+      "normalization": 0.9414893617021277,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "water_south_4": {
+      "source": "art/design/player-unified-v4/water-original.png",
+      "source_column": 4,
+      "source_bounds": [
+        69,
+        43,
+        175,
+        272
+      ],
+      "head_bounds": [
+        73,
+        46,
+        167,
+        107
+      ],
+      "boot_bounds": [
+        83,
+        128,
+        160,
+        267
+      ],
+      "source_anchor": [
+        121.5,
+        267
+      ],
+      "normalization": 0.9414893617021277,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "water_south_5": {
+      "source": "art/design/player-unified-v4/water-original.png",
+      "source_column": 5,
+      "source_bounds": [
+        50,
+        43,
+        179,
+        272
+      ],
+      "head_bounds": [
+        59,
+        46,
+        154,
+        107
+      ],
+      "boot_bounds": [
+        55,
+        128,
+        163,
+        267
+      ],
+      "source_anchor": [
+        109.0,
+        267
+      ],
+      "normalization": 0.9414893617021277,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "water_west_0": {
+      "source": "art/design/player-unified-v4/water-original.png",
+      "source_column": 0,
+      "source_bounds": [
+        91,
+        289,
+        205,
+        519
+      ],
+      "head_bounds": [
+        94,
+        294,
+        191,
+        363
+      ],
+      "boot_bounds": [
+        115,
+        384,
+        180,
+        514
+      ],
+      "source_anchor": [
+        147.5,
+        514
+      ],
+      "normalization": 0.9494949494949495,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "water_west_1": {
+      "source": "art/design/player-unified-v4/water-original.png",
+      "source_column": 1,
+      "source_bounds": [
+        56,
+        289,
+        186,
+        519
+      ],
+      "head_bounds": [
+        75,
+        293,
+        174,
+        370
+      ],
+      "boot_bounds": [
+        98,
+        400,
+        158,
+        514
+      ],
+      "source_anchor": [
+        128.0,
+        514
+      ],
+      "normalization": 0.9494949494949495,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "water_west_2": {
+      "source": "art/design/player-unified-v4/water-original.png",
+      "source_column": 2,
+      "source_bounds": [
+        33,
+        289,
+        178,
+        519
+      ],
+      "head_bounds": [
+        66,
+        294,
+        164,
+        367
+      ],
+      "boot_bounds": [
+        83,
+        390,
+        155,
+        514
+      ],
+      "source_anchor": [
+        119.0,
+        514
+      ],
+      "normalization": 0.9494949494949495,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "water_west_3": {
+      "source": "art/design/player-unified-v4/water-original.png",
+      "source_column": 3,
+      "source_bounds": [
+        25,
+        289,
+        182,
+        519
+      ],
+      "head_bounds": [
+        68,
+        294,
+        168,
+        372
+      ],
+      "boot_bounds": [
+        85,
+        398,
+        162,
+        514
+      ],
+      "source_anchor": [
+        123.5,
+        514
+      ],
+      "normalization": 0.9494949494949495,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "water_west_4": {
+      "source": "art/design/player-unified-v4/water-original.png",
+      "source_column": 4,
+      "source_bounds": [
+        49,
+        289,
+        183,
+        519
+      ],
+      "head_bounds": [
+        67,
+        293,
+        169,
+        363
+      ],
+      "boot_bounds": [
+        100,
+        384,
+        158,
+        514
+      ],
+      "source_anchor": [
+        129.0,
+        514
+      ],
+      "normalization": 0.9494949494949495,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "water_west_5": {
+      "source": "art/design/player-unified-v4/water-original.png",
+      "source_column": 5,
+      "source_bounds": [
+        54,
+        289,
+        171,
+        519
+      ],
+      "head_bounds": [
+        57,
+        290,
+        156,
+        368
+      ],
+      "boot_bounds": [
+        79,
+        389,
+        146,
+        514
+      ],
+      "source_anchor": [
+        112.5,
+        514
+      ],
+      "normalization": 0.9494949494949495,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "water_east_0": {
+      "source": "art/design/player-unified-v4/water-original.png",
+      "source_column": 0,
+      "source_bounds": [
+        91,
+        534,
+        211,
+        765
+      ],
+      "head_bounds": [
+        94,
+        538,
+        205,
+        617
+      ],
+      "boot_bounds": [
+        114,
+        638,
+        180,
+        759
+      ],
+      "source_anchor": [
+        147.0,
+        759
+      ],
+      "normalization": 0.9027777777777778,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "water_east_1": {
+      "source": "art/design/player-unified-v4/water-original.png",
+      "source_column": 1,
+      "source_bounds": [
+        74,
+        534,
+        208,
+        765
+      ],
+      "head_bounds": [
+        84,
+        538,
+        191,
+        611
+      ],
+      "boot_bounds": [
+        94,
+        632,
+        159,
+        759
+      ],
+      "source_anchor": [
+        126.5,
+        759
+      ],
+      "normalization": 0.9027777777777778,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "water_east_2": {
+      "source": "art/design/player-unified-v4/water-original.png",
+      "source_column": 2,
+      "source_bounds": [
+        66,
+        535,
+        222,
+        765
+      ],
+      "head_bounds": [
+        74,
+        538,
+        179,
+        611
+      ],
+      "boot_bounds": [
+        87,
+        632,
+        167,
+        759
+      ],
+      "source_anchor": [
+        127.0,
+        759
+      ],
+      "normalization": 0.9027777777777778,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "water_east_3": {
+      "source": "art/design/player-unified-v4/water-original.png",
+      "source_column": 3,
+      "source_bounds": [
+        71,
+        535,
+        238,
+        766
+      ],
+      "head_bounds": [
+        81,
+        538,
+        189,
+        613
+      ],
+      "boot_bounds": [
+        85,
+        637,
+        170,
+        760
+      ],
+      "source_anchor": [
+        127.5,
+        760
+      ],
+      "normalization": 0.9027777777777778,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "water_east_4": {
+      "source": "art/design/player-unified-v4/water-original.png",
+      "source_column": 4,
+      "source_bounds": [
+        68,
+        534,
+        204,
+        765
+      ],
+      "head_bounds": [
+        76,
+        537,
+        184,
+        610
+      ],
+      "boot_bounds": [
+        87,
+        631,
+        155,
+        759
+      ],
+      "source_anchor": [
+        121.0,
+        759
+      ],
+      "normalization": 0.9027777777777778,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "water_east_5": {
+      "source": "art/design/player-unified-v4/water-original.png",
+      "source_column": 5,
+      "source_bounds": [
+        52,
+        535,
+        173,
+        765
+      ],
+      "head_bounds": [
+        59,
+        538,
+        169,
+        615
+      ],
+      "boot_bounds": [
+        79,
+        637,
+        143,
+        759
+      ],
+      "source_anchor": [
+        111.0,
+        759
+      ],
+      "normalization": 0.9027777777777778,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "water_north_0": {
+      "source": "art/design/player-unified-v4/water-original.png",
+      "source_column": 0,
+      "source_bounds": [
+        91,
+        776,
+        215,
+        998
+      ],
+      "head_bounds": [
+        99,
+        780,
+        189,
+        854
+      ],
+      "boot_bounds": [
+        96,
+        875,
+        201,
+        993
+      ],
+      "source_anchor": [
+        148.5,
+        993
+      ],
+      "normalization": 0.9392265193370166,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "water_north_1": {
+      "source": "art/design/player-unified-v4/water-original.png",
+      "source_column": 1,
+      "source_bounds": [
+        74,
+        776,
+        182,
+        997
+      ],
+      "head_bounds": [
+        80,
+        780,
+        173,
+        852
+      ],
+      "boot_bounds": [
+        90,
+        873,
+        163,
+        993
+      ],
+      "source_anchor": [
+        126.5,
+        993
+      ],
+      "normalization": 0.9392265193370166,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "water_north_2": {
+      "source": "art/design/player-unified-v4/water-original.png",
+      "source_column": 2,
+      "source_bounds": [
+        66,
+        776,
+        206,
+        997
+      ],
+      "head_bounds": [
+        72,
+        777,
+        163,
+        854
+      ],
+      "boot_bounds": [
+        85,
+        875,
+        176,
+        993
+      ],
+      "source_anchor": [
+        130.5,
+        993
+      ],
+      "normalization": 0.9392265193370166,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "water_north_3": {
+      "source": "art/design/player-unified-v4/water-original.png",
+      "source_column": 3,
+      "source_bounds": [
+        61,
+        776,
+        218,
+        997
+      ],
+      "head_bounds": [
+        64,
+        780,
+        157,
+        849
+      ],
+      "boot_bounds": [
+        77,
+        870,
+        171,
+        993
+      ],
+      "source_anchor": [
+        124.0,
+        993
+      ],
+      "normalization": 0.9392265193370166,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "water_north_4": {
+      "source": "art/design/player-unified-v4/water-original.png",
+      "source_column": 4,
+      "source_bounds": [
+        63,
+        776,
+        172,
+        997
+      ],
+      "head_bounds": [
+        73,
+        780,
+        158,
+        848
+      ],
+      "boot_bounds": [
+        84,
+        870,
+        153,
+        993
+      ],
+      "source_anchor": [
+        118.5,
+        993
+      ],
+      "normalization": 0.9392265193370166,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "water_north_5": {
+      "source": "art/design/player-unified-v4/water-original.png",
+      "source_column": 5,
+      "source_bounds": [
+        50,
+        776,
+        179,
+        997
+      ],
+      "head_bounds": [
+        57,
+        780,
+        145,
+        852
+      ],
+      "boot_bounds": [
+        54,
+        873,
+        162,
+        993
+      ],
+      "source_anchor": [
+        108.0,
+        993
+      ],
+      "normalization": 0.9392265193370166,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "harvest_south_0": {
+      "source": "art/design/player-unified-v4/harvest-original.png",
+      "source_column": 0,
+      "source_bounds": [
+        93,
+        43,
+        209,
+        266
+      ],
+      "head_bounds": [
+        106,
+        46,
+        196,
+        107
+      ],
+      "boot_bounds": [
+        98,
+        128,
+        204,
+        261
+      ],
+      "source_anchor": [
+        151.0,
+        261
+      ],
+      "normalization": 0.917098445595855,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "harvest_south_1": {
+      "source": "art/design/player-unified-v4/harvest-original.png",
+      "source_column": 1,
+      "source_bounds": [
+        78,
+        63,
+        201,
+        265
+      ],
+      "head_bounds": [
+        81,
+        67,
+        177,
+        137
+      ],
+      "boot_bounds": [
+        95,
+        158,
+        196,
+        260
+      ],
+      "source_anchor": [
+        145.5,
+        260
+      ],
+      "normalization": 0.917098445595855,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "harvest_south_2": {
+      "source": "art/design/player-unified-v4/harvest-original.png",
+      "source_column": 2,
+      "source_bounds": [
+        71,
+        103,
+        202,
+        266
+      ],
+      "head_bounds": [
+        76,
+        107,
+        170,
+        174
+      ],
+      "boot_bounds": [
+        107,
+        195,
+        188,
+        259
+      ],
+      "source_anchor": [
+        147.5,
+        259
+      ],
+      "normalization": 0.917098445595855,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "harvest_south_3": {
+      "source": "art/design/player-unified-v4/harvest-original.png",
+      "source_column": 3,
+      "source_bounds": [
+        70,
+        59,
+        184,
+        266
+      ],
+      "head_bounds": [
+        73,
+        65,
+        170,
+        128
+      ],
+      "boot_bounds": [
+        88,
+        149,
+        168,
+        261
+      ],
+      "source_anchor": [
+        128.0,
+        261
+      ],
+      "normalization": 0.917098445595855,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "harvest_south_4": {
+      "source": "art/design/player-unified-v4/harvest-original.png",
+      "source_column": 4,
+      "source_bounds": [
+        68,
+        36,
+        175,
+        266
+      ],
+      "head_bounds": [
+        72,
+        43,
+        169,
+        103
+      ],
+      "boot_bounds": [
+        84,
+        124,
+        158,
+        261
+      ],
+      "source_anchor": [
+        121.0,
+        261
+      ],
+      "normalization": 0.917098445595855,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "harvest_south_5": {
+      "source": "art/design/player-unified-v4/harvest-original.png",
+      "source_column": 5,
+      "source_bounds": [
+        49,
+        43,
+        167,
+        266
+      ],
+      "head_bounds": [
+        56,
+        46,
+        153,
+        107
+      ],
+      "boot_bounds": [
+        54,
+        128,
+        162,
+        261
+      ],
+      "source_anchor": [
+        108.0,
+        261
+      ],
+      "normalization": 0.917098445595855,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "harvest_west_0": {
+      "source": "art/design/player-unified-v4/harvest-original.png",
+      "source_column": 0,
+      "source_bounds": [
+        90,
+        287,
+        205,
+        513
+      ],
+      "head_bounds": [
+        94,
+        291,
+        191,
+        362
+      ],
+      "boot_bounds": [
+        115,
+        383,
+        179,
+        507
+      ],
+      "source_anchor": [
+        147.0,
+        507
+      ],
+      "normalization": 0.9215686274509803,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "harvest_west_1": {
+      "source": "art/design/player-unified-v4/harvest-original.png",
+      "source_column": 1,
+      "source_bounds": [
+        62,
+        297,
+        210,
+        510
+      ],
+      "head_bounds": [
+        65,
+        300,
+        167,
+        377
+      ],
+      "boot_bounds": [
+        86,
+        398,
+        203,
+        505
+      ],
+      "source_anchor": [
+        144.5,
+        505
+      ],
+      "normalization": 0.9215686274509803,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "harvest_west_2": {
+      "source": "art/design/player-unified-v4/harvest-original.png",
+      "source_column": 2,
+      "source_bounds": [
+        48,
+        340,
+        194,
+        506
+      ],
+      "head_bounds": [
+        51,
+        344,
+        153,
+        429
+      ],
+      "boot_bounds": [
+        103,
+        470,
+        179,
+        498
+      ],
+      "source_anchor": [
+        141.0,
+        498
+      ],
+      "normalization": 0.9215686274509803,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "harvest_west_3": {
+      "source": "art/design/player-unified-v4/harvest-original.png",
+      "source_column": 3,
+      "source_bounds": [
+        62,
+        297,
+        184,
+        512
+      ],
+      "head_bounds": [
+        65,
+        300,
+        168,
+        379
+      ],
+      "boot_bounds": [
+        86,
+        400,
+        175,
+        507
+      ],
+      "source_anchor": [
+        130.5,
+        507
+      ],
+      "normalization": 0.9215686274509803,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "harvest_west_4": {
+      "source": "art/design/player-unified-v4/harvest-original.png",
+      "source_column": 4,
+      "source_bounds": [
+        62,
+        289,
+        181,
+        513
+      ],
+      "head_bounds": [
+        65,
+        293,
+        169,
+        363
+      ],
+      "boot_bounds": [
+        79,
+        384,
+        155,
+        507
+      ],
+      "source_anchor": [
+        117.0,
+        507
+      ],
+      "normalization": 0.9215686274509803,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "harvest_west_5": {
+      "source": "art/design/player-unified-v4/harvest-original.png",
+      "source_column": 5,
+      "source_bounds": [
+        49,
+        287,
+        166,
+        512
+      ],
+      "head_bounds": [
+        52,
+        291,
+        154,
+        363
+      ],
+      "boot_bounds": [
+        79,
+        384,
+        143,
+        507
+      ],
+      "source_anchor": [
+        111.0,
+        507
+      ],
+      "normalization": 0.9215686274509803,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "harvest_east_0": {
+      "source": "art/design/player-unified-v4/harvest-original.png",
+      "source_column": 0,
+      "source_bounds": [
+        94,
+        535,
+        210,
+        757
+      ],
+      "head_bounds": [
+        99,
+        538,
+        208,
+        622
+      ],
+      "boot_bounds": [
+        116,
+        643,
+        177,
+        752
+      ],
+      "source_anchor": [
+        146.5,
+        752
+      ],
+      "normalization": 0.9069767441860465,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "harvest_east_1": {
+      "source": "art/design/player-unified-v4/harvest-original.png",
+      "source_column": 1,
+      "source_bounds": [
+        64,
+        541,
+        205,
+        755
+      ],
+      "head_bounds": [
+        97,
+        544,
+        201,
+        623
+      ],
+      "boot_bounds": [
+        70,
+        645,
+        176,
+        750
+      ],
+      "source_anchor": [
+        123.0,
+        750
+      ],
+      "normalization": 0.9069767441860465,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "harvest_east_2": {
+      "source": "art/design/player-unified-v4/harvest-original.png",
+      "source_column": 2,
+      "source_bounds": [
+        62,
+        582,
+        213,
+        752
+      ],
+      "head_bounds": [
+        102,
+        586,
+        210,
+        665
+      ],
+      "boot_bounds": [
+        79,
+        689,
+        161,
+        747
+      ],
+      "source_anchor": [
+        120.0,
+        747
+      ],
+      "normalization": 0.9069767441860465,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "harvest_east_3": {
+      "source": "art/design/player-unified-v4/harvest-original.png",
+      "source_column": 3,
+      "source_bounds": [
+        70,
+        541,
+        191,
+        752
+      ],
+      "head_bounds": [
+        78,
+        544,
+        187,
+        622
+      ],
+      "boot_bounds": [
+        83,
+        646,
+        162,
+        747
+      ],
+      "source_anchor": [
+        122.5,
+        747
+      ],
+      "normalization": 0.9069767441860465,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "harvest_east_4": {
+      "source": "art/design/player-unified-v4/harvest-original.png",
+      "source_column": 4,
+      "source_bounds": [
+        62,
+        533,
+        182,
+        755
+      ],
+      "head_bounds": [
+        72,
+        537,
+        179,
+        615
+      ],
+      "boot_bounds": [
+        84,
+        636,
+        158,
+        750
+      ],
+      "source_anchor": [
+        121.0,
+        750
+      ],
+      "normalization": 0.9069767441860465,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "harvest_east_5": {
+      "source": "art/design/player-unified-v4/harvest-original.png",
+      "source_column": 5,
+      "source_bounds": [
+        51,
+        535,
+        168,
+        757
+      ],
+      "head_bounds": [
+        58,
+        539,
+        159,
+        615
+      ],
+      "boot_bounds": [
+        74,
+        636,
+        137,
+        752
+      ],
+      "source_anchor": [
+        105.5,
+        752
+      ],
+      "normalization": 0.9069767441860465,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "harvest_north_0": {
+      "source": "art/design/player-unified-v4/harvest-original.png",
+      "source_column": 0,
+      "source_bounds": [
+        90,
+        772,
+        209,
+        986
+      ],
+      "head_bounds": [
+        99,
+        776,
+        193,
+        854
+      ],
+      "boot_bounds": [
+        95,
+        875,
+        204,
+        981
+      ],
+      "source_anchor": [
+        149.5,
+        981
+      ],
+      "normalization": 0.9340659340659341,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "harvest_north_1": {
+      "source": "art/design/player-unified-v4/harvest-original.png",
+      "source_column": 1,
+      "source_bounds": [
+        83,
+        790,
+        195,
+        981
+      ],
+      "head_bounds": [
+        91,
+        794,
+        178,
+        859
+      ],
+      "boot_bounds": [
+        96,
+        888,
+        190,
+        976
+      ],
+      "source_anchor": [
+        143.0,
+        976
+      ],
+      "normalization": 0.9340659340659341,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "harvest_north_2": {
+      "source": "art/design/player-unified-v4/harvest-original.png",
+      "source_column": 2,
+      "source_bounds": [
+        71,
+        801,
+        193,
+        980
+      ],
+      "head_bounds": [
+        83,
+        805,
+        169,
+        866
+      ],
+      "boot_bounds": [
+        81,
+        887,
+        172,
+        974
+      ],
+      "source_anchor": [
+        126.5,
+        974
+      ],
+      "normalization": 0.9340659340659341,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "harvest_north_3": {
+      "source": "art/design/player-unified-v4/harvest-original.png",
+      "source_column": 3,
+      "source_bounds": [
+        65,
+        775,
+        172,
+        980
+      ],
+      "head_bounds": [
+        69,
+        779,
+        165,
+        854
+      ],
+      "boot_bounds": [
+        79,
+        875,
+        162,
+        975
+      ],
+      "source_anchor": [
+        120.5,
+        975
+      ],
+      "normalization": 0.9340659340659341,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "harvest_north_4": {
+      "source": "art/design/player-unified-v4/harvest-original.png",
+      "source_column": 4,
+      "source_bounds": [
+        64,
+        772,
+        171,
+        983
+      ],
+      "head_bounds": [
+        65,
+        776,
+        158,
+        852
+      ],
+      "boot_bounds": [
+        81,
+        873,
+        151,
+        978
+      ],
+      "source_anchor": [
+        116.0,
+        978
+      ],
+      "normalization": 0.9340659340659341,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    },
+    "harvest_north_5": {
+      "source": "art/design/player-unified-v4/harvest-original.png",
+      "source_column": 5,
+      "source_bounds": [
+        47,
+        772,
+        165,
+        986
+      ],
+      "head_bounds": [
+        56,
+        776,
+        145,
+        852
+      ],
+      "boot_bounds": [
+        52,
+        873,
+        160,
+        981
+      ],
+      "source_anchor": [
+        106.0,
+        981
+      ],
+      "normalization": 0.9340659340659341,
+      "canvas_anchor": [
+        192,
+        336
+      ]
+    }
+  },
+  "groups": {
+    "walk_south": {
+      "source_head_width": 88.5,
+      "reference_head_width": 88.5,
+      "normalization": 1.0,
+      "source_floor": 272
+    },
+    "walk_west": {
+      "source_head_width": 94.0,
+      "reference_head_width": 94.0,
+      "normalization": 1.0,
+      "source_floor": 516
+    },
+    "walk_east": {
+      "source_head_width": 97.5,
+      "reference_head_width": 97.5,
+      "normalization": 1.0,
+      "source_floor": 760
+    },
+    "walk_north": {
+      "source_head_width": 85.0,
+      "reference_head_width": 85.0,
+      "normalization": 1.0,
+      "source_floor": 992
+    },
+    "run_south": {
+      "source_head_width": 95.0,
+      "reference_head_width": 88.5,
+      "normalization": 0.9315789473684211,
+      "source_floor": 265
+    },
+    "run_west": {
+      "source_head_width": 98.5,
+      "reference_head_width": 94.0,
+      "normalization": 0.9543147208121827,
+      "source_floor": 510
+    },
+    "run_east": {
+      "source_head_width": 100.5,
+      "reference_head_width": 97.5,
+      "normalization": 0.9701492537313433,
+      "source_floor": 758
+    },
+    "run_north": {
+      "source_head_width": 87.5,
+      "reference_head_width": 85.0,
+      "normalization": 0.9714285714285714,
+      "source_floor": 994
+    },
+    "hoe_south": {
+      "source_head_width": 92.0,
+      "reference_head_width": 88.5,
+      "normalization": 0.9619565217391305,
+      "source_floor": 264
+    },
+    "hoe_west": {
+      "source_head_width": 94.0,
+      "reference_head_width": 94.0,
+      "normalization": 1.0,
+      "source_floor": 509
+    },
+    "hoe_east": {
+      "source_head_width": 103.5,
+      "reference_head_width": 97.5,
+      "normalization": 0.9420289855072463,
+      "source_floor": 753
+    },
+    "hoe_north": {
+      "source_head_width": 90.5,
+      "reference_head_width": 85.0,
+      "normalization": 0.9392265193370166,
+      "source_floor": 987
+    },
+    "water_south": {
+      "source_head_width": 94.0,
+      "reference_head_width": 88.5,
+      "normalization": 0.9414893617021277,
+      "source_floor": 267
+    },
+    "water_west": {
+      "source_head_width": 99.0,
+      "reference_head_width": 94.0,
+      "normalization": 0.9494949494949495,
+      "source_floor": 514
+    },
+    "water_east": {
+      "source_head_width": 108.0,
+      "reference_head_width": 97.5,
+      "normalization": 0.9027777777777778,
+      "source_floor": 760
+    },
+    "water_north": {
+      "source_head_width": 90.5,
+      "reference_head_width": 85.0,
+      "normalization": 0.9392265193370166,
+      "source_floor": 993
+    },
+    "harvest_south": {
+      "source_head_width": 96.5,
+      "reference_head_width": 88.5,
+      "normalization": 0.917098445595855,
+      "source_floor": 261
+    },
+    "harvest_west": {
+      "source_head_width": 102.0,
+      "reference_head_width": 94.0,
+      "normalization": 0.9215686274509803,
+      "source_floor": 507
+    },
+    "harvest_east": {
+      "source_head_width": 107.5,
+      "reference_head_width": 97.5,
+      "normalization": 0.9069767441860465,
+      "source_floor": 752
+    },
+    "harvest_north": {
+      "source_head_width": 91.0,
+      "reference_head_width": 85.0,
+      "normalization": 0.9340659340659341,
+      "source_floor": 981
+    }
+  },
+  "tool": "built-in GPT imagegen"
+}

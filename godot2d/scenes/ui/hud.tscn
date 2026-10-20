@@ -77,6 +77,28 @@ theme_override_fonts/font = ExtResource("4_font")
 theme_override_font_sizes/font_size = 20
 text = "晴  /  渔港的一天"
 
+[node name="Date" type="Label" parent="Root/Top"]
+layout_mode = 0
+offset_left = 640.0
+offset_top = 16.0
+offset_right = 790.0
+offset_bottom = 48.0
+text = "第1日"
+theme_override_font_sizes/font_size = 22
+mouse_filter = 2
+theme_override_colors/font_color = Color(1,0.94,0.8,1)
+theme_override_fonts/font = ExtResource("4_font")
+[node name="Wallet" type="Label" parent="Root/Top"]
+layout_mode = 0
+offset_left = 810.0
+offset_top = 16.0
+offset_right = 990.0
+offset_bottom = 48.0
+text = "100 G"
+theme_override_font_sizes/font_size = 22
+mouse_filter = 2
+theme_override_colors/font_color = Color(1,0.86,0.44,1)
+theme_override_fonts/font = ExtResource("4_font")
 [node name="Bottom" type="ColorRect" parent="Root"]
 layout_mode = 1
 anchors_preset = 12

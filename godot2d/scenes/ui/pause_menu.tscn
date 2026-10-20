@@ -1,21 +1,22 @@
-[gd_scene load_steps=8 format=3]
-
-[ext_resource type="StyleBox" path="res://resources/ui/pixel_canvas.tres" id="2_canvas"]
+[gd_scene load_steps=11 format=3]
 [ext_resource type="PackedScene" path="res://scenes/ui/pages/bag_page.tscn" id="3_bag"]
 [ext_resource type="PackedScene" path="res://scenes/ui/pages/profile_page.tscn" id="4_profile"]
 [ext_resource type="PackedScene" path="res://scenes/ui/pages/settings_page.tscn" id="5_settings"]
-[ext_resource type="Script" path="res://scripts/ui/pixel_style.gd" id="6_style"]
-[ext_resource type="StyleBox" path="res://resources/ui/pixel_active.tres" id="7_active"]
-
-[sub_resource type="StyleBox" id="StyleBox_paper"]
-script = ExtResource("6_style")
-kind = "paper"
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-
+[ext_resource type="Texture2D" path="res://assets/ui/bag-v1/background.png" id="background"]
+[ext_resource type="Texture2D" path="res://assets/ui/trade-v5/slot.png" id="panel"]
+[ext_resource type="Texture2D" path="res://assets/ui/trade-v5/active.png" id="active"]
+[ext_resource type="Theme" path="res://resources/ui/bag_texture_theme.tres" id="theme"]
+[sub_resource type="StyleBoxEmpty" id="clear"]
+[sub_resource type="StyleBoxTexture" id="StyleBox_paper"]
+texture = ExtResource("panel")
+texture_margin_left = 18.0
+texture_margin_top = 18.0
+texture_margin_right = 18.0
+texture_margin_bottom = 18.0
+[sub_resource type="StyleBoxTexture" id="active_style"]
+texture = ExtResource("active")
 [node name="PauseMenu" type="Control"]
+theme = ExtResource("theme")
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -30,7 +31,17 @@ offset_left = 80.0
 offset_top = 48.0
 offset_right = 1200.0
 offset_bottom = 672.0
-theme_override_styles/panel = ExtResource("2_canvas")
+theme_override_styles/panel = SubResource("clear")
+
+[node name="Background" type="TextureRect" parent="Surface"]
+offset_left = -70.0
+offset_top = -61.0
+offset_right = 1178.0
+offset_bottom = 692.0
+mouse_filter = 2
+texture = ExtResource("background")
+expand_mode = 1
+stretch_mode = 0
 
 [node name="Header" type="Panel" parent="Surface"]
 layout_mode = 0
@@ -38,7 +49,7 @@ offset_left = 16.0
 offset_top = 8.0
 offset_right = 746.0
 offset_bottom = 66.0
-theme_override_styles/panel = SubResource("StyleBox_paper")
+theme_override_styles/panel = SubResource("clear")
 mouse_filter = 2
 
 [node name="BagBody" type="Panel" parent="Surface"]
@@ -47,7 +58,7 @@ offset_left = 16.0
 offset_top = 122.0
 offset_right = 624.0
 offset_bottom = 566.0
-theme_override_styles/panel = SubResource("StyleBox_paper")
+theme_override_styles/panel = SubResource("clear")
 mouse_filter = 2
 
 [node name="DetailsBody" type="Panel" parent="Surface"]
@@ -56,7 +67,7 @@ offset_left = 636.0
 offset_top = 122.0
 offset_right = 1104.0
 offset_bottom = 566.0
-theme_override_styles/panel = SubResource("StyleBox_paper")
+theme_override_styles/panel = SubResource("clear")
 mouse_filter = 2
 
 [node name="WideBody" type="Panel" parent="Surface"]
@@ -66,12 +77,12 @@ offset_left = 16.0
 offset_top = 122.0
 offset_right = 1104.0
 offset_bottom = 566.0
-theme_override_styles/panel = SubResource("StyleBox_paper")
+theme_override_styles/panel = SubResource("clear")
 mouse_filter = 2
 
 [node name="JournalTitle" type="Label" parent="Surface"]
 layout_mode = 0
-offset_left = 46.0
+offset_left = 112.0
 offset_top = 16.0
 offset_right = 706.0
 offset_bottom = 58.0
@@ -82,7 +93,7 @@ text = "海边生活手账  ≋"
 layout_mode = 0
 offset_left = 28.0
 offset_top = 70.0
-offset_right = 552.0
+offset_right = 732.0
 offset_bottom = 114.0
 
 [node name="tab_bag" type="Button" parent="Surface/Tabs"]
@@ -90,7 +101,7 @@ layout_mode = 0
 offset_right = 164.0
 offset_bottom = 44.0
 toggle_mode = true
-theme_override_styles/pressed = ExtResource("7_active")
+theme_override_styles/pressed = SubResource("active_style")
 text = "背包"
 
 [node name="tab_profile" type="Button" parent="Surface/Tabs"]
@@ -99,7 +110,7 @@ offset_left = 180.0
 offset_right = 344.0
 offset_bottom = 44.0
 toggle_mode = true
-theme_override_styles/pressed = ExtResource("7_active")
+theme_override_styles/pressed = SubResource("active_style")
 text = "个人"
 
 [node name="tab_settings" type="Button" parent="Surface/Tabs"]
@@ -108,8 +119,17 @@ offset_left = 360.0
 offset_right = 524.0
 offset_bottom = 44.0
 toggle_mode = true
-theme_override_styles/pressed = ExtResource("7_active")
+theme_override_styles/pressed = SubResource("active_style")
 text = "设置"
+
+[node name="tab_daily" type="Button" parent="Surface/Tabs"]
+layout_mode = 0
+offset_left = 540.0
+offset_top = 0.0
+offset_right = 704.0
+offset_bottom = 44.0
+text = "日记"
+theme_override_font_sizes/font_size = 24
 
 [node name="close" type="Button" parent="Surface"]
 layout_mode = 0
@@ -117,7 +137,7 @@ offset_left = 970.0
 offset_top = 20.0
 offset_right = 1090.0
 offset_bottom = 62.0
-text = "返回"
+text = "关闭背包"
 
 [node name="BagPage" parent="Surface" instance=ExtResource("3_bag")]
 layout_mode = 0
@@ -148,9 +168,9 @@ offset_left = 28.0
 offset_top = 575.0
 offset_right = 1078.0
 offset_bottom = 615.0
-theme_override_colors/font_color = Color(0.960784, 0.909804, 0.780392, 1)
+theme_override_colors/font_color = Color(0.13,0.31,0.33,1)
 theme_override_font_sizes/font_size = 22
-text = "方向键选择 · E 确认 · B / Tab 返回"
+text = "WASD / 方向键选择 · E 确认 · B / Esc 返回"
 
 [node name="DynamicNote" type="Label" parent="Surface"]
 visible = false
@@ -159,5 +179,5 @@ offset_left = 28.0
 offset_top = 575.0
 offset_right = 1078.0
 offset_bottom = 615.0
-theme_override_colors/font_color = Color(0.960784, 0.909804, 0.780392, 1)
+theme_override_colors/font_color = Color(0.13,0.31,0.33,1)
 theme_override_font_sizes/font_size = 22

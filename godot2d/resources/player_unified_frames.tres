@@ -1,0 +1,264 @@
+[gd_resource type="SpriteFrames" load_steps=121 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/walk_south_0.png" id="f0"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/walk_south_1.png" id="f1"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/walk_south_2.png" id="f2"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/walk_south_3.png" id="f3"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/walk_south_4.png" id="f4"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/walk_south_5.png" id="f5"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/walk_west_0.png" id="f6"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/walk_west_1.png" id="f7"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/walk_west_2.png" id="f8"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/walk_west_3.png" id="f9"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/walk_west_4.png" id="f10"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/walk_west_5.png" id="f11"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/walk_east_0.png" id="f12"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/walk_east_1.png" id="f13"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/walk_east_2.png" id="f14"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/walk_east_3.png" id="f15"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/walk_east_4.png" id="f16"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/walk_east_5.png" id="f17"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/walk_north_0.png" id="f18"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/walk_north_1.png" id="f19"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/walk_north_2.png" id="f20"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/walk_north_3.png" id="f21"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/walk_north_4.png" id="f22"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/walk_north_5.png" id="f23"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/run_south_0.png" id="f24"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/run_south_1.png" id="f25"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/run_south_2.png" id="f26"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/run_south_3.png" id="f27"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/run_south_4.png" id="f28"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/run_south_5.png" id="f29"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/run_west_0.png" id="f30"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/run_west_1.png" id="f31"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/run_west_2.png" id="f32"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/run_west_3.png" id="f33"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/run_west_4.png" id="f34"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/run_west_5.png" id="f35"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/run_east_0.png" id="f36"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/run_east_1.png" id="f37"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/run_east_2.png" id="f38"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/run_east_3.png" id="f39"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/run_east_4.png" id="f40"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/run_east_5.png" id="f41"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/run_north_0.png" id="f42"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/run_north_1.png" id="f43"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/run_north_2.png" id="f44"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/run_north_3.png" id="f45"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/run_north_4.png" id="f46"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/run_north_5.png" id="f47"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/hoe_south_0.png" id="f48"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/hoe_south_1.png" id="f49"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/hoe_south_2.png" id="f50"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/hoe_south_3.png" id="f51"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/hoe_south_4.png" id="f52"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/hoe_south_5.png" id="f53"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/hoe_west_0.png" id="f54"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/hoe_west_1.png" id="f55"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/hoe_west_2.png" id="f56"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/hoe_west_3.png" id="f57"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/hoe_west_4.png" id="f58"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/hoe_west_5.png" id="f59"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/hoe_east_0.png" id="f60"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/hoe_east_1.png" id="f61"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/hoe_east_2.png" id="f62"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/hoe_east_3.png" id="f63"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/hoe_east_4.png" id="f64"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/hoe_east_5.png" id="f65"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/hoe_north_0.png" id="f66"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/hoe_north_1.png" id="f67"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/hoe_north_2.png" id="f68"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/hoe_north_3.png" id="f69"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/hoe_north_4.png" id="f70"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/hoe_north_5.png" id="f71"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/water_south_0.png" id="f72"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/water_south_1.png" id="f73"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/water_south_2.png" id="f74"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/water_south_3.png" id="f75"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/water_south_4.png" id="f76"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/water_south_5.png" id="f77"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/water_west_0.png" id="f78"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/water_west_1.png" id="f79"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/water_west_2.png" id="f80"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/water_west_3.png" id="f81"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/water_west_4.png" id="f82"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/water_west_5.png" id="f83"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/water_east_0.png" id="f84"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/water_east_1.png" id="f85"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/water_east_2.png" id="f86"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/water_east_3.png" id="f87"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/water_east_4.png" id="f88"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/water_east_5.png" id="f89"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/water_north_0.png" id="f90"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/water_north_1.png" id="f91"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/water_north_2.png" id="f92"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/water_north_3.png" id="f93"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/water_north_4.png" id="f94"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/water_north_5.png" id="f95"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/harvest_south_0.png" id="f96"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/harvest_south_1.png" id="f97"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/harvest_south_2.png" id="f98"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/harvest_south_3.png" id="f99"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/harvest_south_4.png" id="f100"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/harvest_south_5.png" id="f101"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/harvest_west_0.png" id="f102"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/harvest_west_1.png" id="f103"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/harvest_west_2.png" id="f104"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/harvest_west_3.png" id="f105"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/harvest_west_4.png" id="f106"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/harvest_west_5.png" id="f107"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/harvest_east_0.png" id="f108"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/harvest_east_1.png" id="f109"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/harvest_east_2.png" id="f110"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/harvest_east_3.png" id="f111"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/harvest_east_4.png" id="f112"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/harvest_east_5.png" id="f113"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/harvest_north_0.png" id="f114"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/harvest_north_1.png" id="f115"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/harvest_north_2.png" id="f116"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/harvest_north_3.png" id="f117"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/harvest_north_4.png" id="f118"]
+
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/harvest_north_5.png" id="f119"]
+
+[resource]
+
+animations = [{"frames":[{"duration":1.0,"texture":ExtResource("f0")}, {"duration":1.0,"texture":ExtResource("f1")}, {"duration":1.0,"texture":ExtResource("f2")}, {"duration":1.0,"texture":ExtResource("f3")}, {"duration":1.0,"texture":ExtResource("f4")}, {"duration":1.0,"texture":ExtResource("f5")}],"loop":true,"name":&"south","speed":9.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("f6")}, {"duration":1.0,"texture":ExtResource("f7")}, {"duration":1.0,"texture":ExtResource("f8")}, {"duration":1.0,"texture":ExtResource("f9")}, {"duration":1.0,"texture":ExtResource("f10")}, {"duration":1.0,"texture":ExtResource("f11")}],"loop":true,"name":&"west","speed":9.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("f12")}, {"duration":1.0,"texture":ExtResource("f13")}, {"duration":1.0,"texture":ExtResource("f14")}, {"duration":1.0,"texture":ExtResource("f15")}, {"duration":1.0,"texture":ExtResource("f16")}, {"duration":1.0,"texture":ExtResource("f17")}],"loop":true,"name":&"east","speed":9.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("f18")}, {"duration":1.0,"texture":ExtResource("f19")}, {"duration":1.0,"texture":ExtResource("f20")}, {"duration":1.0,"texture":ExtResource("f21")}, {"duration":1.0,"texture":ExtResource("f22")}, {"duration":1.0,"texture":ExtResource("f23")}],"loop":true,"name":&"north","speed":9.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("f24")}, {"duration":1.0,"texture":ExtResource("f25")}, {"duration":1.0,"texture":ExtResource("f26")}, {"duration":1.0,"texture":ExtResource("f27")}, {"duration":1.0,"texture":ExtResource("f28")}, {"duration":1.0,"texture":ExtResource("f29")}],"loop":true,"name":&"run_south","speed":12.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("f30")}, {"duration":1.0,"texture":ExtResource("f31")}, {"duration":1.0,"texture":ExtResource("f32")}, {"duration":1.0,"texture":ExtResource("f33")}, {"duration":1.0,"texture":ExtResource("f34")}, {"duration":1.0,"texture":ExtResource("f35")}],"loop":true,"name":&"run_west","speed":12.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("f36")}, {"duration":1.0,"texture":ExtResource("f37")}, {"duration":1.0,"texture":ExtResource("f38")}, {"duration":1.0,"texture":ExtResource("f39")}, {"duration":1.0,"texture":ExtResource("f40")}, {"duration":1.0,"texture":ExtResource("f41")}],"loop":true,"name":&"run_east","speed":12.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("f42")}, {"duration":1.0,"texture":ExtResource("f43")}, {"duration":1.0,"texture":ExtResource("f44")}, {"duration":1.0,"texture":ExtResource("f45")}, {"duration":1.0,"texture":ExtResource("f46")}, {"duration":1.0,"texture":ExtResource("f47")}],"loop":true,"name":&"run_north","speed":12.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("f48")}, {"duration":1.0,"texture":ExtResource("f49")}, {"duration":1.0,"texture":ExtResource("f50")}, {"duration":1.0,"texture":ExtResource("f51")}, {"duration":1.0,"texture":ExtResource("f52")}, {"duration":1.0,"texture":ExtResource("f53")}],"loop":false,"name":&"hoe_south","speed":9.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("f54")}, {"duration":1.0,"texture":ExtResource("f55")}, {"duration":1.0,"texture":ExtResource("f56")}, {"duration":1.0,"texture":ExtResource("f57")}, {"duration":1.0,"texture":ExtResource("f58")}, {"duration":1.0,"texture":ExtResource("f59")}],"loop":false,"name":&"hoe_west","speed":9.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("f60")}, {"duration":1.0,"texture":ExtResource("f61")}, {"duration":1.0,"texture":ExtResource("f62")}, {"duration":1.0,"texture":ExtResource("f63")}, {"duration":1.0,"texture":ExtResource("f64")}, {"duration":1.0,"texture":ExtResource("f65")}],"loop":false,"name":&"hoe_east","speed":9.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("f66")}, {"duration":1.0,"texture":ExtResource("f67")}, {"duration":1.0,"texture":ExtResource("f68")}, {"duration":1.0,"texture":ExtResource("f69")}, {"duration":1.0,"texture":ExtResource("f70")}, {"duration":1.0,"texture":ExtResource("f71")}],"loop":false,"name":&"hoe_north","speed":9.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("f72")}, {"duration":1.0,"texture":ExtResource("f73")}, {"duration":1.0,"texture":ExtResource("f74")}, {"duration":1.0,"texture":ExtResource("f75")}, {"duration":1.0,"texture":ExtResource("f76")}, {"duration":1.0,"texture":ExtResource("f77")}],"loop":false,"name":&"water_south","speed":9.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("f78")}, {"duration":1.0,"texture":ExtResource("f79")}, {"duration":1.0,"texture":ExtResource("f80")}, {"duration":1.0,"texture":ExtResource("f81")}, {"duration":1.0,"texture":ExtResource("f82")}, {"duration":1.0,"texture":ExtResource("f83")}],"loop":false,"name":&"water_west","speed":9.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("f84")}, {"duration":1.0,"texture":ExtResource("f85")}, {"duration":1.0,"texture":ExtResource("f86")}, {"duration":1.0,"texture":ExtResource("f87")}, {"duration":1.0,"texture":ExtResource("f88")}, {"duration":1.0,"texture":ExtResource("f89")}],"loop":false,"name":&"water_east","speed":9.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("f90")}, {"duration":1.0,"texture":ExtResource("f91")}, {"duration":1.0,"texture":ExtResource("f92")}, {"duration":1.0,"texture":ExtResource("f93")}, {"duration":1.0,"texture":ExtResource("f94")}, {"duration":1.0,"texture":ExtResource("f95")}],"loop":false,"name":&"water_north","speed":9.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("f96")}, {"duration":1.0,"texture":ExtResource("f97")}, {"duration":1.0,"texture":ExtResource("f98")}, {"duration":1.0,"texture":ExtResource("f99")}, {"duration":1.0,"texture":ExtResource("f100")}, {"duration":1.0,"texture":ExtResource("f101")}],"loop":false,"name":&"harvest_south","speed":9.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("f102")}, {"duration":1.0,"texture":ExtResource("f103")}, {"duration":1.0,"texture":ExtResource("f104")}, {"duration":1.0,"texture":ExtResource("f105")}, {"duration":1.0,"texture":ExtResource("f106")}, {"duration":1.0,"texture":ExtResource("f107")}],"loop":false,"name":&"harvest_west","speed":9.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("f108")}, {"duration":1.0,"texture":ExtResource("f109")}, {"duration":1.0,"texture":ExtResource("f110")}, {"duration":1.0,"texture":ExtResource("f111")}, {"duration":1.0,"texture":ExtResource("f112")}, {"duration":1.0,"texture":ExtResource("f113")}],"loop":false,"name":&"harvest_east","speed":9.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("f114")}, {"duration":1.0,"texture":ExtResource("f115")}, {"duration":1.0,"texture":ExtResource("f116")}, {"duration":1.0,"texture":ExtResource("f117")}, {"duration":1.0,"texture":ExtResource("f118")}, {"duration":1.0,"texture":ExtResource("f119")}],"loop":false,"name":&"harvest_north","speed":9.0}]

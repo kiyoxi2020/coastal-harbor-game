@@ -135,9 +135,9 @@ func run() -> void:
 	check("indoor_reset",scene.player.position.distance_to(Room.SPAWN)<1)
 	scene.player.position=Vector2(216,240)
 	await key("inspect")
-	check("bed_view",scene.hud.panel.visible and "休息" in scene.hud.description.text)
+	check("bed_view",scene.journal.mode=="sleep" and scene.journal.get_node("Root/SleepPage").visible)
 	await key("inspect")
-	check("e_closes_view",not scene.hud.panel.visible)
+	check("e_closes_view",scene.journal.mode=="" and not scene.hud.panel.visible and scene.foraging.life.day_id==1)
 	scene.player.position=home.active_door().approach
 	await key("inspect")
 	await wait_door()
@@ -228,9 +228,7 @@ func run() -> void:
 	# Returning to title autosaves: inject the bad fixture after that save.
 	scene.save_service.write_save(bad)
 	check("bad_house_continue",scene.continue_game() and scene.player.position==Room.SPAWN)
-	var legacy: Dictionary=scene.foraging.to_data(Vector2(330,250))
-	legacy.version=1
-	legacy.erase("location")
+	var legacy := legacy_v1_fixture()
 	scene.return_to_title()
 	var fixture:=FileAccess.open(scene.save_service.directory+"/progress.json",FileAccess.WRITE)
 	fixture.store_string(JSON.stringify(legacy))
@@ -248,6 +246,17 @@ func run() -> void:
 	check("bad_outdoor_fallback",home.safe_position("harbor",Vector2(-50,-50))==scene.data.SPAWN)
 	await shot("10-interior-saved")
 	finish()
+# Frozen v1 shape, independent of the current serializer and packaged JSON filters.
+func legacy_v1_fixture() -> Dictionary:
+	var legacy := {"version":1, "player_name":"旧港客", "bag":[], "chest":[],
+		"collected":{"clam_a":true}, "discovered":{"clam":true}, "total_collected":1, "position":[330,250]}
+	for index in range(24):
+		legacy.bag.append({"id":"", "amount":0})
+	for index in range(48):
+		legacy.chest.append({"id":"", "amount":0})
+	legacy.chest[0] = {"id":"clam", "amount":1}
+	return legacy
+
 func finish() -> void:
 	write_report()
 	get_tree().quit(1 if checks.values().has(false) else 0)

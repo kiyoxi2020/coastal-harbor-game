@@ -1,0 +1,20 @@
+{
+  "generator": "built-in GPT imagegen",
+  "background": "background-original.png",
+  "reference": "../trade-ui-v5/background-original.png",
+  "frame_rect": [
+    94,
+    76,
+    1500,
+    780
+  ],
+  "background_control_rect": [
+    -70,
+    -61,
+    1248,
+    753
+  ],
+  "controls_source": "../trade-ui-v5/controls-original.png",
+  "controls_slices": "../trade-ui-v5/slices.json",
+  "processing": "original RGBA background, existing cropped GPT controls reused"
+}

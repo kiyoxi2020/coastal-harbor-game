@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3]
+[gd_scene load_steps=20 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/journal.gd" id="1_script"]
 [ext_resource type="PackedScene" path="res://scenes/ui/main_menu.tscn" id="2_main"]
@@ -9,11 +9,14 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/dialogs/confirm_dialog.tscn" id="7_confirm"]
 [ext_resource type="PackedScene" path="res://scenes/ui/dialogs/save_error_dialog.tscn" id="8_save"]
 [ext_resource type="FontFile" path="res://assets/NotoSansCJKsc-Regular.otf" id="9_font"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pages/sleep_page.tscn" id="14_sleep"]
 [ext_resource type="Script" path="res://scripts/ui/pixel_style.gd" id="10_style"]
 [ext_resource type="StyleBox" path="res://resources/ui/pixel_teal.tres" id="11_hover"]
 [ext_resource type="StyleBox" path="res://resources/ui/pixel_active.tres" id="12_pressed"]
 [ext_resource type="StyleBox" path="res://resources/ui/pixel_focus.tres" id="13_focus"]
 
+[ext_resource type="PackedScene" path="res://scenes/ui/pages/trade_page.tscn" id="15_trade"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pages/daily_page.tscn" id="16_daily"]
 [sub_resource type="StyleBox" id="StyleBox_paper"]
 script = ExtResource("10_style")
 kind = "paper"
@@ -91,6 +94,10 @@ layout_mode = 1
 visible = false
 layout_mode = 1
 
+[node name="SleepPage" parent="Root" instance=ExtResource("14_sleep")]
+
+[node name="TradePage" parent="Root" instance=ExtResource("15_trade")]
+[node name="DailyPage" parent="Root" instance=ExtResource("16_daily")]
 [node name="Dialogs" type="Control" parent="Root"]
 layout_mode = 1
 anchors_preset = 15
