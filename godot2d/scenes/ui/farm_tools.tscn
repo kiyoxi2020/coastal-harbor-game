@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=11 format=3]
 [ext_resource type="Script" path="res://scripts/ui/farm_tools.gd" id="1"]
 [ext_resource type="Theme" path="res://resources/ui/pixel_theme.tres" id="2"]
 [ext_resource type="Texture2D" path="res://assets/farming-polish-v3/icon_hoe.png" id="icon0"]
 [ext_resource type="Texture2D" path="res://assets/farming-polish-v3/icon_water.png" id="icon1"]
 [ext_resource type="Texture2D" path="res://assets/farming-polish-v3/icon_plant.png" id="icon2"]
 [ext_resource type="Texture2D" path="res://assets/farming-polish-v3/icon_harvest.png" id="icon3"]
+[ext_resource type="Texture2D" path="res://assets/ui/crafting-v1/marine_fertilizer.png" id="fertilizer"]
 [sub_resource type="StyleBoxFlat" id="panel"]
 bg_color = Color(1,0.95,0.82,1)
 border_width_left = 3
@@ -34,20 +35,20 @@ layer = 2
 scale = Vector2(2,2)
 script = ExtResource("1")
 [node name="Panel" type="Panel" parent="."]
-offset_left = 460.0
+offset_left = 400.0
 offset_top = 558.0
-offset_right = 820.0
+offset_right = 880.0
 offset_bottom = 628.0
 theme = ExtResource("2")
 theme_override_styles/panel = SubResource("panel")
 [node name="Tools" type="HBoxContainer" parent="Panel"]
 offset_left = 5.0
 offset_top = 4.0
-offset_right = 355.0
+offset_right = 475.0
 offset_bottom = 64.0
 theme_override_constants/separation = 0
 [node name="Hoe" type="Button" parent="Panel/Tools"]
-custom_minimum_size = Vector2(87,60)
+custom_minimum_size = Vector2(94,60)
 layout_mode = 2
 focus_mode = 0
 toggle_mode = true
@@ -60,7 +61,7 @@ theme_override_styles/hover = SubResource("pressed")
 theme_override_styles/pressed = SubResource("pressed")
 tooltip_text = "1 锄头 · Tab切换"
 [node name="Water" type="Button" parent="Panel/Tools"]
-custom_minimum_size = Vector2(87,60)
+custom_minimum_size = Vector2(94,60)
 layout_mode = 2
 focus_mode = 0
 toggle_mode = true
@@ -73,7 +74,7 @@ theme_override_styles/hover = SubResource("pressed")
 theme_override_styles/pressed = SubResource("pressed")
 tooltip_text = "2 水壶 · Tab切换"
 [node name="Seeds" type="Button" parent="Panel/Tools"]
-custom_minimum_size = Vector2(87,60)
+custom_minimum_size = Vector2(94,60)
 layout_mode = 2
 focus_mode = 0
 toggle_mode = true
@@ -86,7 +87,7 @@ theme_override_styles/hover = SubResource("pressed")
 theme_override_styles/pressed = SubResource("pressed")
 tooltip_text = "3 种子 · Tab切换"
 [node name="Hand" type="Button" parent="Panel/Tools"]
-custom_minimum_size = Vector2(87,60)
+custom_minimum_size = Vector2(94,60)
 layout_mode = 2
 focus_mode = 0
 toggle_mode = true
@@ -98,15 +99,49 @@ theme_override_styles/normal = SubResource("normal")
 theme_override_styles/hover = SubResource("pressed")
 theme_override_styles/pressed = SubResource("pressed")
 tooltip_text = "4 收获 · Tab切换"
+[node name="Fertilize" type="Button" parent="Panel/Tools"]
+custom_minimum_size = Vector2(94,60)
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+icon = ExtResource("fertilizer")
+expand_icon = true
+icon_alignment = 1
+theme_override_constants/icon_max_width = 48
+theme_override_colors/font_color = Color(0.2,0.3,0.26,1)
+theme_override_colors/font_hover_color = Color(0.2,0.3,0.26,1)
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("normal")
+theme_override_styles/hover = SubResource("pressed")
+theme_override_styles/pressed = SubResource("pressed")
+tooltip_text = "5 处理海藻肥 · 下次有效浇水日额外生长1"
+[node name="Count" type="Label" parent="Panel/Tools/Fertilize"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -42.0
+offset_top = -25.0
+offset_right = -6.0
+offset_bottom = -3.0
+mouse_filter = 2
+horizontal_alignment = 2
+theme_override_colors/font_color = Color(1,0.95,0.82,1)
+theme_override_colors/font_outline_color = Color(0.38,0.25,0.12,1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 14
+text = "0"
 [node name="Seeds" type="HBoxContainer" parent="Panel"]
 offset_left = 0.0
-offset_top = -38.0
+offset_top = -50.0
 offset_right = 360.0
 offset_bottom = -4.0
 visible = false
 [node name="Lettuce" type="Button" parent="Panel/Seeds"]
 layout_mode = 2
-custom_minimum_size = Vector2(92,32)
+custom_minimum_size = Vector2(110,44)
 focus_mode = 0
 toggle_mode = true
 theme_override_font_sizes/font_size = 18
@@ -117,7 +152,7 @@ theme_override_styles/pressed = SubResource("pressed")
 text = "生菜"
 [node name="Tomato" type="Button" parent="Panel/Seeds"]
 layout_mode = 2
-custom_minimum_size = Vector2(92,32)
+custom_minimum_size = Vector2(110,44)
 focus_mode = 0
 toggle_mode = true
 theme_override_font_sizes/font_size = 18
@@ -126,12 +161,47 @@ theme_override_styles/normal = SubResource("normal")
 theme_override_styles/hover = SubResource("pressed")
 theme_override_styles/pressed = SubResource("pressed")
 text = "番茄"
-[node name="Counts" type="Label" parent="Panel/Seeds"]
+[node name="Hint" type="Label" parent="Panel/Seeds"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_colors/font_color = Color(1,0.95,0.82,1)
-theme_override_colors/font_shadow_color = Color(0.1,0.2,0.15,1)
-theme_override_constants/shadow_offset_x = 1
-theme_override_constants/shadow_offset_y = 1
-theme_override_font_sizes/font_size = 18
-text = "种子 0 / 0"
+theme_override_colors/font_outline_color = Color(0.1,0.2,0.15,1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 14
+text = "Q 切换种子"
+[node name="Count" type="Label" parent="Panel/Seeds/Lettuce"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -34.0
+offset_top = -21.0
+offset_right = -5.0
+offset_bottom = -2.0
+mouse_filter = 2
+horizontal_alignment = 2
+theme_override_colors/font_color = Color(1,0.95,0.82,1)
+theme_override_colors/font_outline_color = Color(0.38,0.25,0.12,1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 12
+text = "0"
+[node name="Count" type="Label" parent="Panel/Seeds/Tomato"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -34.0
+offset_top = -21.0
+offset_right = -5.0
+offset_bottom = -2.0
+mouse_filter = 2
+horizontal_alignment = 2
+theme_override_colors/font_color = Color(1,0.95,0.82,1)
+theme_override_colors/font_outline_color = Color(0.38,0.25,0.12,1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 12
+text = "0"

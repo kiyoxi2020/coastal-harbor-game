@@ -1,0 +1,98 @@
+extends SceneTree
+const Support=preload("res://tests/life_test_support.gd")
+const State=preload("res://scripts/player_state.gd")
+const Rules=preload("res://scripts/simulation/life_rules.gd")
+const Service=preload("res://scripts/simulation/action_service.gd")
+const Schema=preload("res://scripts/simulation/state_schema.gd")
+const Save=preload("res://scripts/save_service.gd")
+var s=Support.new()
+class FailedSave extends RefCounted:
+	func write_save(_data):return false
+func _initialize():call_deferred("run")
+func check(id,ok):s.check(id,ok)
+func craft(data,id="clam_salad",batches=1):return Rules.plan(data,"craft",{"recipe_id":id,"batches":batches},int(data.life.action_seq)+1)
+func run():
+	var state=State.new()
+	state.bag.add("clam",1);state.bag.add("lettuce",1)
+	var data=state.to_data(Vector2(330,250))
+	var result=craft(data)
+	check("salad",result.ok)
+	if not result.ok:finish();return
+	check("salad_counts",result.state.bag[0]=={"id":"clam_salad","amount":1})
+	check("source_unchanged",state.to_data(Vector2(330,250))==data)
+	check("craft_event",result.events[0].kind=="craft" and result.events[0].inputs=={"clam":1,"lettuce":1} and result.events[0].outputs=={"clam_salad":1})
+	check("duplicate",Rules.plan(result.state,"craft",{"recipe_id":"clam_salad","batches":1},1).events==[])
+	for args in [{"recipe_id":"clam_salad","batches":true},{"recipe_id":2,"batches":1},{"recipe_id":"clam_salad","batches":1,"extra":0}]:
+		check("invalid_"+str(args),Rules.plan(data,"craft",args,1).code=="invalid_request")
+	for amount in [0,-1,1.5,21,INF,NAN]:check("amount_"+str(amount),craft(data,"clam_salad",amount).code=="invalid_amount")
+	check("unknown",craft(data,"unknown").code=="unknown_recipe")
+	check("short",craft(data,"clam_salad",2).code=="insufficient_stock")
+	for recipe in ["snail_stew","marine_fertilizer"]:
+		state=State.new()
+		state.bag.add("snail" if recipe=="snail_stew" else "kelp",40)
+		if recipe=="snail_stew":state.bag.add("tomato",20)
+		var r=craft(state.to_data(Vector2(330,250)),recipe,20)
+		check("batch20_"+recipe,r.ok and State.valid_data(r.state))
+	# A full bag can craft using exactly the slots consumed by the recipe.
+	for free in [true,false]:
+		var full=data.duplicate(true)
+		for i in range(24):full.bag[i]={"id":"tomato_seed","amount":99}
+		full.bag[0]={"id":"clam","amount":1 if free else 99}
+		full.bag[1]={"id":"lettuce","amount":1 if free else 99}
+		var before=full.duplicate(true)
+		var r=craft(full)
+		check("full_bag_"+str(free),r.ok if free else r.code=="inventory_full")
+		check("full_atomic_"+str(free),full==before)
+	state=State.new();state.restore(data)
+	var failed=Service.new(FailedSave.new()).execute(state,Vector2(330,250),"craft",{"recipe_id":"clam_salad","batches":1},1)
+	check("save_failed",failed.code=="save_failed" and state.to_data(Vector2(330,250))==data)
+	var save=Save.new(s.temporary_directory("P09"))
+	var saved=Service.new(save).execute(state,Vector2(330,250),"craft",{"recipe_id":"clam_salad","batches":1},1)
+	check("saved",saved.ok)
+	var parsed=JSON.parse_string(FileAccess.get_file_as_string(save.directory+"/progress.json"))
+	check("disk_roundtrip",parsed is Dictionary and State.valid_data(parsed))
+	var restored=State.new()
+	check("restore_crafted",restored.restore(parsed) and restored.bag.count_item("clam_salad")==1)
+	var replay=Service.new(save).execute(restored,Vector2(330,250),"craft",{"recipe_id":"clam_salad","batches":1},1)
+	check("reload_duplicate",replay.ok and replay.duplicate and replay.events==[] and restored.bag.count_item("clam_salad")==1)
+	var old=parsed.duplicate(true);old.version=4
+	check("v4_products_rejected",not Schema.validate_v4(old))
+	check("craft_event_required_inputs",_bad_event(parsed))
+	var cell="garden_a:0:0"
+	state=State.new();state.bag.add("marine_fertilizer",3)
+	data=state.to_data(Vector2(330,250))
+	data.life.plots[cell]={"tilled":true,"crop_id":"tomato","growth":0,"watered":false,"fertilized":false}
+	result=Rules.plan(data,"fertilize",{"cell_id":cell},1)
+	check("fertilize",result.ok)
+	if not result.ok:finish();return
+	var empty_bag=data.duplicate(true)
+	empty_bag.bag=Schema._empty_slots(24)
+	check("fertilize_no_stock",Rules.plan(empty_bag,"fertilize",{"cell_id":cell},1).code=="insufficient_stock")
+	check("fertilize_bad_cell",Rules.plan(data,"fertilize",{"cell_id":"none"},1).code=="invalid_request")
+	var fs=State.new();fs.restore(data)
+	check("fertilize_save_failed",Service.new(FailedSave.new()).execute(fs,Vector2(330,250),"fertilize",{"cell_id":cell},1).code=="save_failed" and fs.to_data(Vector2(330,250))==data)
+	var fsave=Save.new(s.temporary_directory("P09-fertilizer"))
+	var fr=Service.new(fsave).execute(fs,Vector2(330,250),"fertilize",{"cell_id":cell},1)
+	var reload=State.new()
+	check("pending_fertilizer_restore",fr.ok and reload.restore(fsave.read_save().data) and reload.life.plots[cell].fertilized and reload.bag.count_item("marine_fertilizer")==2)
+	check("no_stack",Rules.plan(result.state,"fertilize",{"cell_id":cell},2).code=="already_fertilized")
+	var dry=Rules.plan(result.state,"sleep",{"expected_day":1},2)
+	check("dry_retains",dry.ok and dry.state.life.plots[cell].growth==0 and dry.state.life.plots[cell].fertilized)
+	var wet=Rules.plan(dry.state,"water",{"cell_id":cell},3)
+	var grown=Rules.plan(wet.state,"sleep",{"expected_day":2},4)
+	check("wet_growth2",grown.ok and grown.state.life.plots[cell].growth==2 and not grown.state.life.plots[cell].fertilized)
+	var again=Rules.plan(grown.state,"fertilize",{"cell_id":cell},5)
+	check("can_reapply",again.ok)
+	wet=Rules.plan(again.state,"water",{"cell_id":cell},6)
+	grown=Rules.plan(wet.state,"sleep",{"expected_day":3},7)
+	check("maturity_cap",grown.ok and grown.state.life.plots[cell].growth==4 and not grown.state.life.plots[cell].fertilized)
+	check("mature_reject",Rules.plan(grown.state,"fertilize",{"cell_id":cell},8).code=="not_allowed")
+	check("empty_reject",Rules.plan(data,"fertilize",{"cell_id":"garden_a:1:0"},1).code=="plot_empty")
+	finish()
+func _bad_event(data:Dictionary) -> bool:
+	var bad=data.duplicate(true)
+	bad.life.events[0].erase("inputs")
+	return not State.valid_data(bad)
+func finish():
+	print("P09 checks=",s.checks.size()," failures=",s.checks.values().count(false))
+	quit(0 if s.passed() else 1)

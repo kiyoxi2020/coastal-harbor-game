@@ -225,6 +225,7 @@ func show_page(page: String) -> void:
 		sleep_wait_release = Input.is_action_pressed("inspect")
 		note = ""
 	if page=="trade" and mode!="trade": $Root/TradePage.open()
+	if page=="craft" and mode!="craft": $Root/CraftPage.open()
 	mode = page
 	if page in ["bag", "profile", "settings"] and not from_title:
 		last_page = page
@@ -243,6 +244,7 @@ func render() -> void:
 	pause_menu.visible = mode in ["bag", "profile", "settings"]
 	storage_page.visible = mode == "storage"
 	sleep_page.visible = mode == "sleep"
+	$Root/CraftPage.visible=mode=="craft"
 	$Root/TradePage.visible=mode=="trade"
 	$Root/DailyPage.visible=mode=="daily"
 	bag_page.visible = mode == "bag"
@@ -255,6 +257,9 @@ func render() -> void:
 	if mode == "title":
 		surface = $Root/MainMenu/Surface
 		_refresh_title()
+	elif mode=="craft":
+		surface=$Root/CraftPage/Surface
+		$Root/CraftPage.render()
 	elif mode=="trade":
 		surface=$Root/TradePage/Surface
 		$Root/TradePage.render()
@@ -398,7 +403,18 @@ func _refresh_details() -> void:
 			source = "市场种子"
 		elif item.category == "ingredients":
 			source = "种植收获"
-		description = ("海产" if item.category == "seafood" else "食材") + " / " + source + "\n" + item.description + "\n用途：可在鱼摊出售；料理将在后续开放。\n当前不可直接使用。"
+		var category := "海产" if item.category == "seafood" else "食材"
+		var usage := "用途：鱼摊出售，或到旧屋厨房加工。"
+		if slot.id.ends_with("_seed"):
+			usage="用途：选择种子工具，在已翻土的空格播种。"
+		elif slot.id in ["clam_salad","snail_stew"]:
+			source="厨房制作"
+			usage="用途：厨房成品，可暂存；餐馆供货待开放。"
+		elif slot.id=="marine_fertilizer":
+			category="材料"
+			source="厨房处理"
+			usage="用途：按 5 选择施肥工具，对未成熟作物使用。"
+		description = category + " / " + source + "\n" + item.description + "\n" + usage + "\n当前不可在背包直接使用。"
 	var details := bag_page.get_node("Details")
 	details.get_node("Title").text = title
 	details.get_node("Description").text = description
@@ -559,6 +575,9 @@ func _close_pause_menu() -> void:
 	dismiss()
 
 func close_menu() -> void:
+	if mode=="craft":
+		$Root/CraftPage.back()
+		return
 	if mode=="trade":
 		if is_instance_valid(modal):cancel_modal()
 		else:$Root/TradePage.back()
@@ -596,6 +615,7 @@ func dismiss() -> void:
 	pause_menu.visible = false
 	storage_page.visible = false
 	sleep_page.visible = false
+	$Root/CraftPage.hide()
 	$Root/TradePage.hide()
 	$Root/DailyPage.hide()
 	get_tree().paused = false
@@ -608,6 +628,9 @@ const NAV_KEYS={KEY_LEFT:Vector2i.LEFT,KEY_A:Vector2i.LEFT,KEY_RIGHT:Vector2i.RI
 func _focus_default() -> void:
 	if not is_inside_tree() or mode == "" or is_instance_valid(modal):
 		return
+		return
+	if mode=="craft":
+		$Root/CraftPage.focus_default()
 		return
 	if mode=="trade":
 		if $Root/TradePage.submitting:return
@@ -724,6 +747,9 @@ func _input(event: InputEvent) -> void:
 	if mode == "" or not event is InputEventKey or not event.pressed:
 		return
 	var key: int = event.physical_keycode if event.physical_keycode != 0 else event.keycode
+	if mode=="craft":
+		if $Root/CraftPage.handle_key(event):get_viewport().set_input_as_handled()
+		return
 	if event.echo and key not in NAV_KEYS:return
 	var focus := get_viewport().gui_get_focus_owner()
 	if focus is LineEdit and not focus.get_parent() is SpinBox and key not in [KEY_TAB, KEY_ESCAPE]:

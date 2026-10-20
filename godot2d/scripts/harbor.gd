@@ -3,6 +3,8 @@ extends Node2D
 const data = preload("res://scripts/harbor_data.gd")
 const ActionService = preload("res://scripts/simulation/action_service.gd")
 const ACTION_MESSAGES := {
+	"already_fertilized":"已有待生效肥料，浇水换日后才能再次施用。",
+	"unknown_recipe":"配方不存在。",
 	"unknown_action":"此操作尚未开放。", "unknown_item":"无法识别该物品。",
 	"invalid_amount":"数量须为1至99的整数。", "invalid_request":"操作请求无效，请重新选择。",
 	"stale_request":"此操作已过期，请重新选择。", "unknown_account":"无法找到该商户。",
@@ -79,6 +81,9 @@ func _ready() -> void:
 	action_service = ActionService.new(save_service)
 	settings = preload("res://scripts/settings_service.gd").new(save_service.directory)
 	journal.initialize(self)
+	hud.map_requested.connect(func():
+		if persistence_enabled and session_started and not hud.panel.visible and journal.mode == "" and not release_input and not home.transition.busy:
+			world_map.open())
 	hud.bag_requested.connect(func():
 		if persistence_enabled and session_started and not hud.panel.visible and journal.mode == "" and not home.transition.busy:
 			journal.selected_side = "bag"
@@ -213,7 +218,7 @@ func use_farm_tool(target: Dictionary) -> void:
 	var result := perform_action(tools.tool,args,int(foraging.life.action_seq)+1)
 	if result.ok and not result.duplicate:
 		if tools.tool in ["hoe","water","harvest"]: player.play_tool_action(tools.tool,target.point)
-		hud.show_toast({"hoe":"已翻土", "water":"已浇水", "plant":"已播种", "harvest":"收获 +3"}[tools.tool],1.5)
+		hud.show_toast({"hoe":"已翻土", "water":"已浇水", "plant":"已播种", "harvest":"收获 +3", "fertilize":"已施肥 · 下次浇水日生效"}[tools.tool],1.5)
 
 func _process(_delta: float) -> void:
 	if world_map!=null and world_map.visible:return
@@ -250,6 +255,9 @@ func _process(_delta: float) -> void:
 		elif persistence_enabled and can_open_sleep():
 			journal.show_page("sleep")
 			return
+		elif can_open_craft():
+			journal.show_page("craft")
+			return
 		elif can_open_trade():
 			journal.show_page("trade")
 			return
@@ -280,6 +288,7 @@ func _process(_delta: float) -> void:
 		var cell: Dictionary=foraging.life.plots[plot_target.id]
 		var stage := "未开垦" if not cell.tilled else ("空土" if cell.crop_id=="" else ("生菜" if cell.crop_id=="lettuce" else "番茄"))
 		if cell.crop_id!="": stage+=" %d/%d" % [cell.growth,preload("res://scripts/simulation/crop_catalog.gd").get_crop(cell.crop_id).growth_days]
+		if cell.fertilized:stage+=" · 待生效肥料"
 		hud.prompt.text="[ E / 点击 ] %s · %s%s" % [stage,"已浇水" if cell.watered else "干燥","" if can_reach_cell(plot_target) else " · 请靠近"]
 	elif not target.is_empty():
 		hud.prompt.text = "[ E ] 拾取" + data.ITEM_NAMES[target.kind]
@@ -289,12 +298,14 @@ func _process(_delta: float) -> void:
 		hud.prompt.text = "[ E ] 打开旧屋储物箱"
 	elif persistence_enabled and can_open_sleep():
 		hud.prompt.text = "[ E ] 休息到明天"
+	elif can_open_craft():
+		hud.prompt.text="[ E ] 厨房 · 制作料理 / 海藻肥"
 	elif can_open_trade():
 		hud.prompt.text="[ E ] 买种子 / 出售收获"
 	elif not regions.nearby_exit().is_empty():
 		hud.prompt.text="[ E ] "+str(regions.nearby_exit().name)
 	elif foraging.location=="harbor_district":
-		hud.prompt.text="港口小食铺待复业 · M 全镇地图 · 南口返回旧屋海港"
+		hud.prompt.text="港口小食铺待复业 · 南口返回旧屋海港"
 	elif foraging.location=="house" and nearest_location(player.position).is_empty():
 		hud.prompt.text="回到熟悉的屋子；床、厨房和旧照片可查看。"
 	elif foraging.collected.size() == exterior.pickups().size() and nearest_location(player.position).is_empty():
@@ -343,10 +354,13 @@ func _can_perform_action(kind: String, args: Dictionary) -> bool:
 	if kind == "sleep":
 		var sleep_page := journal.get_node("Root/SleepPage") as Control
 		return journal.mode == "sleep" and sleep_page.is_visible_in_tree() and can_open_sleep()
-	if kind in ["hoe", "plant", "water", "harvest"]:
+	if kind in ["hoe", "plant", "water", "harvest", "fertilize"]:
 		if journal.mode!="" or foraging.location!="harbor" or not args.get("cell_id") is String: return false
 		var target := farm_cell(args.cell_id)
 		return can_reach_cell(target) and exterior.can_cultivate(target.point)
+	if kind == "craft":
+		var craft_page:=journal.get_node("Root/CraftPage") as Control
+		return journal.mode=="craft" and craft_page.is_visible_in_tree() and can_open_craft()
 	if kind == "collect":
 		if journal.mode != "" or foraging.location != "harbor" or not exterior.foraging_area.has_point(player.position):
 			return false
@@ -370,6 +384,11 @@ func can_open_sleep() -> bool:
 		return false
 	var bed := home.interior.get_node_or_null("InteractPoints/bed") as Node2D
 	return bed != null and player.position.distance_to(player.get_parent().to_local(bed.global_position)) <= 28
+
+func can_open_craft() -> bool:
+	if not persistence_enabled or not session_started or foraging.location!="house":return false
+	var point:=home.interior.get_node_or_null("InteractPoints/kitchen") as Node2D
+	return point!=null and player.global_position.distance_to(point.global_position)<=28
 
 func can_open_trade() -> bool:
 	if not persistence_enabled or not session_started or foraging.location!="harbor":return false

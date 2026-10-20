@@ -277,7 +277,7 @@ metadata/body = "洗晒过的被子还带着阳光的味道。\n靠近按 E，�
 [node name="kitchen" type="Marker2D" parent="InteractPoints"]
 position = Vector2(400, 192)
 metadata/title = "旧屋的小厨房"
-metadata/body = "旧瓷碗与铜壶已经摆好。\n料理功能尚未开放。"
+metadata/body = "旧瓷碗与铜壶已经摆好。\n靠近按 E 制作料理与处理海藻肥。"
 [node name="photo" type="Marker2D" parent="InteractPoints"]
 position = Vector2(280, 142)
 metadata/title = "一张旧合照"

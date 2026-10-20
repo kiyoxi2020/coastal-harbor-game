@@ -1,0 +1,20 @@
+{
+  "checks": {
+    "crafting": 41,
+    "craft_ui": 7,
+    "farming": 401,
+    "transactions": 121,
+    "schema": 37,
+    "migration": 15,
+    "day": 75,
+    "save": 23,
+    "house_save": 32,
+    "scene_contracts": 132,
+    "keyboard_menu": 20,
+    "grid_scene": 16,
+    "catalog": 12,
+    "journal": 47
+  },
+  "total": 979,
+  "passed": true
+}

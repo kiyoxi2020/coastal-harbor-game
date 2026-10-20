@@ -1,0 +1,12 @@
+{
+  "source": "original.png",
+  "rect": [
+    332,
+    176,
+    1206,
+    850
+  ],
+  "alpha_min": 128,
+  "resampled": false,
+  "filter": "nearest"
+}

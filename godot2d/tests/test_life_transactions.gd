@@ -141,7 +141,7 @@ func run() -> void:
 	reject("buy_seafood", state, args("buy", "clam", 1), "not_allowed")
 	reject("sell_seed", state, args("sell", "lettuce_seed", 1), "not_allowed")
 	reject("invalid_direction", state, args("gift"), "not_allowed")
-	reject("unknown_action", state, {}, "unknown_action", 1, "craft")
+	reject("unknown_action", state, {}, "unknown_action", 1, "unimplemented_action")
 	state.life.wallet = -1
 	reject("invalid_current", state, args(), "invalid_state")
 	state = State.new()

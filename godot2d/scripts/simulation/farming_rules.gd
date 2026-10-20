@@ -9,7 +9,7 @@ static func _failure(code: String) -> Dictionary:
 static func act(data: Dictionary, kind: String, args: Dictionary) -> Dictionary:
 	if not Schema.validate_current(data):
 		return _failure("invalid_state")
-	if kind not in ["hoe", "plant", "water", "harvest"]:
+	if kind not in ["hoe", "plant", "water", "harvest", "fertilize"]:
 		return _failure("unknown_action")
 	var fields := ["cell_id", "crop_id"] if kind == "plant" else ["cell_id"]
 	if not Schema._exact_keys(args, fields) or not args.cell_id is String or not data.life.plots.has(args.cell_id):
@@ -27,7 +27,16 @@ static func act(data: Dictionary, kind: String, args: Dictionary) -> Dictionary:
 	if not bag.restore_slots(candidate.bag):
 		return _failure("invalid_state")
 	var event := {"day_id":int(candidate.life.day_id), "kind":kind, "source":"player", "target":args.cell_id, "items":{}, "cash":0, "reason":kind}
-	if kind == "hoe":
+	if kind == "fertilize":
+		if plot.crop_id=="":return _failure("plot_empty")
+		if plot.growth>=Crops.get_crop(plot.crop_id).growth_days:return _failure("not_allowed")
+		if plot.fertilized:return _failure("already_fertilized")
+		if not bag.remove_item("marine_fertilizer",1):return _failure("insufficient_stock")
+		plot.fertilized=true
+		event.kind="consume"
+		event.target="consumed"
+		event.items={"marine_fertilizer":1}
+	elif kind == "hoe":
 		if plot.tilled: return _failure("already_tilled")
 		plot.tilled = true
 	elif kind == "plant":
@@ -80,7 +89,8 @@ static func grow(data: Dictionary) -> Dictionary:
 			continue
 		var definition := Crops.get_crop(plot.crop_id)
 		if plot.watered and plot.growth < definition.growth_days:
-			plot.growth = mini(int(plot.growth) + 1, int(definition.growth_days))
+			plot.growth = mini(int(plot.growth) + (2 if plot.fertilized else 1), int(definition.growth_days))
+			plot.fertilized = false
 			events.append({"day_id":int(candidate.life.day_id), "kind":"growth", "source":id, "target":id, "items":{}, "cash":0, "reason":"mature" if plot.growth == definition.growth_days else "growth"})
 		plot.watered = false
 		if plot.growth == definition.growth_days:

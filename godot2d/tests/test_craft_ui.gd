@@ -1,0 +1,28 @@
+extends SceneTree
+const Support=preload("res://tests/life_test_support.gd")
+var s=Support.new()
+func _initialize():call_deferred("run")
+func run():
+ var w=load("res://scenes/harbor.tscn").instantiate()
+ w.set_meta("save_directory",s.temporary_directory("P09-ui"))
+ w.set_meta("journal_test",true)
+ root.add_child(w)
+ w.start_new_game("厨房测试")
+ s.check("remote_blocked",not w.perform_action("craft",{"recipe_id":"marine_fertilizer","batches":1},1).ok)
+ w.journal.dismiss()
+ w.home.switch_room("house",Vector2(400,216))
+ w.release_input=false
+ w.foraging.bag.add("kelp",2)
+ s.check("kitchen_reachable",w.can_open_craft() and w.home.safe_position("house",Vector2(400,216))==Vector2(400,216))
+ w.journal.show_page("craft")
+ var page=w.journal.get_node("Root/CraftPage")
+ page.select_recipe("marine_fertilizer")
+ s.check("preview",page.get_node("Surface/IngredientScroll/Rows").get_child(0).get_node("Icon").item_id=="kelp" and page.get_node("Surface/Submit").text=="制作 1 份")
+ page.submit()
+ s.check("craft_published",w.foraging.bag.count_item("marine_fertilizer")==1 and w.foraging.bag.count_item("kelp")==0 and w.journal.mode=="craft")
+ s.check("short_disabled",page.get_node("Surface/Submit").disabled)
+ s.check("five_tools",w.get_node("FarmTools").TOOLS.size()==5 and w.get_node("FarmTools/Panel/Tools").get_child_count()==5)
+ s.check("fertilizer_unselected_readable",w.get_node("FarmTools/Panel/Tools/Fertilize").get_theme_color("font_color").get_luminance()<0.6)
+ print("P09 UI checks=",s.checks.size()," failures=",s.checks.values().count(false))
+ w.queue_free();await process_frame
+ quit(0 if s.passed() else 1)

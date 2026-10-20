@@ -1,0 +1,74 @@
+[
+  {
+    "suite": "test_kitchen_feedback",
+    "exit": 0,
+    "pass_lines": 10,
+    "errors": []
+  },
+  {
+    "suite": "test_kitchen_v2",
+    "exit": 0,
+    "pass_lines": 28,
+    "errors": []
+  },
+  {
+    "suite": "test_craft_browser",
+    "exit": 0,
+    "pass_lines": 11,
+    "errors": []
+  },
+  {
+    "suite": "test_life_crafting",
+    "exit": 0,
+    "pass_lines": 41,
+    "errors": []
+  },
+  {
+    "suite": "test_craft_ui",
+    "exit": 0,
+    "pass_lines": 7,
+    "errors": []
+  },
+  {
+    "suite": "test_crafting_art",
+    "exit": 0,
+    "pass_lines": 3,
+    "errors": []
+  },
+  {
+    "suite": "test_life_transactions",
+    "exit": 0,
+    "pass_lines": 121,
+    "errors": []
+  },
+  {
+    "suite": "test_journal",
+    "exit": 0,
+    "pass_lines": 47,
+    "errors": []
+  },
+  {
+    "suite": "test_menu_keyboard",
+    "exit": 0,
+    "pass_lines": 20,
+    "errors": []
+  },
+  {
+    "suite": "test_trade_grid",
+    "exit": 0,
+    "pass_lines": 29,
+    "errors": []
+  },
+  {
+    "suite": "test_life_ui",
+    "exit": 0,
+    "pass_lines": 18,
+    "errors": []
+  },
+  {
+    "suite": "test_editor_scene_contracts",
+    "exit": 0,
+    "pass_lines": 132,
+    "errors": []
+  }
+]

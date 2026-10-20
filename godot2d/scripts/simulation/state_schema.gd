@@ -5,6 +5,7 @@ const Crops = preload("res://scripts/simulation/crop_catalog.gd")
 const Catalog = preload("res://scripts/inventory/item_catalog.gd")
 const Data = preload("res://scripts/harbor_data.gd")
 const INVENTORY_ITEMS := ["clam", "snail", "kelp", "lettuce_seed", "tomato_seed", "lettuce", "tomato"]
+const CURRENT_ITEMS := INVENTORY_ITEMS + ["clam_salad", "snail_stew", "marine_fertilizer"]
 const SEAFOOD := ["clam", "snail", "kelp"]
 const RECEIPT_KINDS := ["hoe", "trade", "sleep", "plant", "water", "harvest", "collect", "craft", "fertilize", "supply", "open_restaurant"]
 
@@ -179,7 +180,7 @@ static func _valid_reports(reports: Array, current_day: int) -> bool:
 		previous_day = report.day_id
 	return true
 
-static func _valid_events(events: Array, current_day: int) -> bool:
+static func _valid_events(events: Array, current_day: int, allowed: Array = INVENTORY_ITEMS) -> bool:
 	if events.size() > 256:
 		return false
 	var ids: Dictionary = {}
@@ -187,7 +188,7 @@ static func _valid_events(events: Array, current_day: int) -> bool:
 		if not event is Dictionary:
 			return false
 		var fields := ["event_id", "day_id", "kind", "source", "target", "items", "cash", "reason"]
-		if event.get("kind") == "production":
+		if event.get("kind") in ["production", "craft"]:
 			fields.append_array(["inputs", "outputs"])
 		if not _exact_keys(event, fields):
 			return false
@@ -202,18 +203,18 @@ static func _valid_events(events: Array, current_day: int) -> bool:
 		if not event.items is Dictionary:
 			return false
 		var item_maps: Array = [event.items]
-		if event.kind == "production":
+		if event.kind in ["production", "craft"]:
 			if not event.inputs is Dictionary or not event.outputs is Dictionary or event.outputs.is_empty() or event.items != event.outputs:
 				return false
 			item_maps.append_array([event.inputs, event.outputs])
 		for items in item_maps:
 			for id in items:
-				if not id is String or id not in INVENTORY_ITEMS or not _bounded_integer(items[id], 1, 1000000):
+				if not id is String or id not in allowed or not _bounded_integer(items[id], 1, 1000000):
 					return false
 	return true
 
-static func validate_v4(data: Dictionary) -> bool:
-	if not _valid_common(data, 4, INVENTORY_ITEMS):
+static func validate_v4(data: Dictionary, allowed: Array = INVENTORY_ITEMS) -> bool:
+	if not _valid_common(data, 4, allowed):
 		return false
 	if not _exact_keys(data, ["version", "location", "player_name", "bag", "chest", "collected", "discovered", "total_collected", "position", "life"]):
 		return false
@@ -242,7 +243,7 @@ static func validate_v4(data: Dictionary) -> bool:
 	if not life.accounts is Dictionary or not _exact_keys(life.accounts, ["market"]) or not life.accounts.market is Dictionary:
 		return false
 	var market: Dictionary = life.accounts.market
-	if not _exact_keys(market, ["cash", "slots", "buy_quota"]) or not _bounded_integer(market.cash, 0, 1000000000) or not _valid_slots(market.slots, 48):
+	if not _exact_keys(market, ["cash", "slots", "buy_quota"]) or not _bounded_integer(market.cash, 0, 1000000000) or not _valid_slots(market.slots, 48, allowed):
 		return false
 	if not market.buy_quota is Dictionary or not _exact_keys(market.buy_quota, ["clam", "snail", "kelp", "lettuce", "tomato"]):
 		return false
@@ -254,7 +255,7 @@ static func validate_v4(data: Dictionary) -> bool:
 	for plot in life.plots.values():
 		if not plot is Dictionary or not _valid_plot(plot):
 			return false
-	if not life.events is Array or not _valid_events(life.events, int(life.day_id)):
+	if not life.events is Array or not _valid_events(life.events, int(life.day_id), allowed):
 		return false
 	if not life.daily_reports is Array or not _valid_reports(life.daily_reports, int(life.day_id)):
 		return false
@@ -285,14 +286,14 @@ static func migrate_v3(data: Dictionary) -> Dictionary:
 
 
 # v4 remains strict and independently usable by frozen M1 rule tests.
-# v5 changes only the permitted region set; all inventory/life checks are shared.
+# v5 permits regions and P09 products; v4 retains its original item allowlist.
 static func validate_v5(data: Dictionary) -> bool:
 	if not _integer(data.get("version")) or data.version != 5 or data.get("location") not in ["harbor","house","harbor_district"]:
 		return false
 	var base: Dictionary = data.duplicate(true)
 	base.version = 4
 	base.location = "harbor" if data.location == "harbor_district" else data.location
-	return validate_v4(base)
+	return validate_v4(base, CURRENT_ITEMS)
 
 static func validate_current(data: Dictionary) -> bool:
 	return validate_v5(data) if data.get("version") == 5 else validate_v4(data)

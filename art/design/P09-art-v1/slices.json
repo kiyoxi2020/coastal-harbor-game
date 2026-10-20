@@ -1,0 +1,172 @@
+{
+  "generator": "built-in GPT image_gen",
+  "filter": "nearest",
+  "items": {
+    "marine_fertilizer": {
+      "source": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "trim": [
+        104,
+        113,
+        585,
+        595
+      ],
+      "size": [
+        514,
+        514
+      ],
+      "anchor": "center",
+      "world_collision": "unchanged; inventory/UI asset"
+    },
+    "clam_salad": {
+      "source": [
+        627,
+        0,
+        1254,
+        627
+      ],
+      "trim": [
+        21,
+        160,
+        570,
+        582
+      ],
+      "size": [
+        581,
+        581
+      ],
+      "anchor": "center",
+      "world_collision": "unchanged; inventory/UI asset"
+    },
+    "snail_stew": {
+      "source": [
+        0,
+        627,
+        690,
+        1254
+      ],
+      "trim": [
+        60,
+        88,
+        639,
+        533
+      ],
+      "size": [
+        611,
+        611
+      ],
+      "anchor": "center",
+      "world_collision": "unchanged; inventory/UI asset"
+    },
+    "kitchen_badge": {
+      "source": [
+        690,
+        627,
+        1254,
+        1254
+      ],
+      "trim": [
+        42,
+        46,
+        497,
+        546
+      ],
+      "size": [
+        532,
+        532
+      ],
+      "anchor": "center",
+      "world_collision": "unchanged; inventory/UI asset"
+    }
+  },
+  "ui": {
+    "background": {
+      "source": [
+        32,
+        28,
+        1508,
+        644
+      ],
+      "size": [
+        1476,
+        616
+      ]
+    },
+    "recipe_normal": {
+      "source": [
+        43,
+        677,
+        514,
+        811
+      ],
+      "size": [
+        471,
+        134
+      ]
+    },
+    "recipe_selected": {
+      "source": [
+        538,
+        676,
+        1000,
+        811
+      ],
+      "size": [
+        462,
+        135
+      ]
+    },
+    "confirm": {
+      "source": [
+        1028,
+        676,
+        1498,
+        811
+      ],
+      "size": [
+        470,
+        135
+      ]
+    },
+    "utility": {
+      "source": [
+        42,
+        838,
+        515,
+        976
+      ],
+      "size": [
+        473,
+        138
+      ]
+    },
+    "quantity": {
+      "source": [
+        538,
+        838,
+        999,
+        976
+      ],
+      "size": [
+        461,
+        138
+      ]
+    },
+    "disabled": {
+      "source": [
+        1028,
+        838,
+        1497,
+        976
+      ],
+      "size": [
+        469,
+        138
+      ]
+    }
+  }
+}

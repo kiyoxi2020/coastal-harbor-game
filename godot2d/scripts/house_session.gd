@@ -37,7 +37,7 @@ func switch_room(location: String,point: Vector2,transient: bool=false) -> bool:
 	world.player.reset_doorway_visual()
 	world.hud.dismiss()
 	world.hud.region.text="旧屋 / 海风入窗" if inside else ("港口街区 / 海风石巷" if district else "晴 / 渔港的一天")
-	world.hud.controls.text="WASD 移动   Shift 跑步   E 查看 / 开门   M 地图   B 手账   R 回入口" if inside else ("WASD 移动   Shift 跑步   E 查看   M 地图   B 手账   R 回街口" if district else "WASD 移动   Shift 跑步   Tab 换工具   E 操作   M 地图   B 手账   R 回路口")
+	world.hud.controls.text="WASD 移动   Shift 跑步   E 查看 / 开门   B 手账   R 回入口" if inside else ("WASD 移动   Shift 跑步   E 查看   B 手账   R 回街口" if district else "WASD 移动   Shift 跑步   Tab 换工具   E 操作   B 手账   R 回路口")
 	world.get_node("FarmTools").visible=location=="harbor"
 	world.get_node("WorldCamera").update_position()
 	world.get_node("WorldCamera").force_update_scroll()

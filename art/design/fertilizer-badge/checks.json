@@ -1,0 +1,9 @@
+{
+  "badge_inside": true,
+  "capture_01-zero-badge": true,
+  "capture_02-quantity-badge": true,
+  "no_shortcut_text": true,
+  "quantity_updates": true,
+  "same_tool_width": true,
+  "zero_badge": true
+}

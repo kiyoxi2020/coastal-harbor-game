@@ -1,0 +1,17 @@
+{
+  "bag_blocks_map": true,
+  "buttons_separate": true,
+  "capture_01-map-and-bag": true,
+  "capture_02-map-open": true,
+  "click_opens_map": true,
+  "location_blocks_map": true,
+  "m_closes_map": true,
+  "m_opens_map": true,
+  "map_button_exists": true,
+  "map_key_hint": true,
+  "no_bottom_map_harbor": true,
+  "no_bottom_map_harbor_district": true,
+  "no_bottom_map_house": true,
+  "release_blocks_map": true,
+  "same_size": true
+}

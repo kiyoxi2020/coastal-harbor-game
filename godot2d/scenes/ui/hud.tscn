@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_hud"]
 [ext_resource type="Theme" path="res://resources/ui/pixel_theme.tres" id="2_theme"]
 [ext_resource type="PackedScene" path="res://scenes/ui/components/backpack_button.tscn" id="3_bag"]
 [ext_resource type="FontFile" path="res://assets/NotoSansCJKsc-Regular.otf" id="4_font"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/components/map_button.tscn" id="5_map"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_location"]
 content_margin_left = 28.0
@@ -184,5 +186,16 @@ anchor_right = 1.0
 offset_left = -88.0
 offset_top = 72.0
 offset_right = -20.0
+offset_bottom = 140.0
+grow_horizontal = 0
+
+[node name="MapButton" parent="Root" instance=ExtResource("5_map")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -168.0
+offset_top = 72.0
+offset_right = -100.0
 offset_bottom = 140.0
 grow_horizontal = 0

@@ -8,6 +8,12 @@ extends Control
 	set(value):
 		unavailable=value
 		if is_node_ready():refresh()
+@export var art_size:=Vector2(62,66)
+const PRODUCTS={
+	"clam_salad":preload("res://assets/ui/crafting-v1/clam_salad.png"),
+	"snail_stew":preload("res://assets/ui/crafting-v1/snail_stew.png"),
+	"marine_fertilizer":preload("res://assets/ui/crafting-v1/marine_fertilizer.png")
+}
 const LETTUCE=preload("res://assets/farming-polish-v3/lettuce_mature.png")
 const TOMATO=preload("res://assets/farming-polish-v3/tomato_mature.png")
 func _ready():
@@ -19,18 +25,20 @@ func refresh():
 	var forage=$Forage
 	forage.visible=item_id in ["clam","snail","kelp"]
 	if forage.visible:forage.kind=item_id
-	forage.position=(size/2+Vector2(0,16)).round()
+	var factor:=minf(art_size.x/62.0,art_size.y/66.0)
+	forage.scale=Vector2.ONE*5.25*factor
+	forage.position=(size/2+Vector2(0,16*factor)).round()
 	modulate=Color(1,1,1,0.4) if unavailable else Color.WHITE
 	queue_redraw()
 func _draw():
 	if item_id=="" or item_id in ["clam","snail","kelp"]:return
-	var area=Rect2((size-Vector2(62,66))/2,Vector2(62,66))
+	var area=Rect2((size-art_size)/2,art_size)
 	if item_id.ends_with("_seed"):
 		draw_rect(area,Color("605640"))
 		draw_rect(area.grow(-3),Color("d7b786"))
 		draw_rect(Rect2(area.position+Vector2(3,4),Vector2(56,5)),Color("f4dfb1"))
 		area=area.grow(-11)
-	var texture=crop_texture()
+	var texture=PRODUCTS[item_id] if PRODUCTS.has(item_id) else crop_texture()
 	var ratio=minf(area.size.x/texture.get_width(),area.size.y/texture.get_height())
 	var target=Vector2(texture.get_size())*ratio
 	draw_texture_rect(texture,Rect2((size-target)/2,target),false)

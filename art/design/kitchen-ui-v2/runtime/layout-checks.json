@@ -1,0 +1,14 @@
+{
+  "blank_scroll": true,
+  "capture_09-final-color-gray-and-header": true,
+  "capture_10-final-search-focus": true,
+  "capture_11-final-empty-placeholders": true,
+  "capture_12-processing-available-filter": true,
+  "color_and_gray": true,
+  "empty_card_art": true,
+  "isolated": true,
+  "native": true,
+  "no_fake_output": true,
+  "no_status_text": true,
+  "pot_transparent": true
+}

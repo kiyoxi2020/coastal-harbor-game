@@ -1,0 +1,262 @@
+{
+  "background": {
+    "source": "background-original.png",
+    "rect": [
+      49,
+      20,
+      1626,
+      911
+    ],
+    "size": [
+      1577,
+      891
+    ],
+    "texture_margins": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "resampled": false
+  },
+  "card": {
+    "source": "controls-original.png",
+    "rect": [
+      37,
+      48,
+      403,
+      405
+    ],
+    "size": [
+      366,
+      357
+    ],
+    "texture_margins": [
+      12,
+      12,
+      12,
+      12
+    ],
+    "resampled": false
+  },
+  "card_selected": {
+    "source": "controls-original.png",
+    "rect": [
+      444,
+      48,
+      814,
+      406
+    ],
+    "size": [
+      370,
+      358
+    ],
+    "texture_margins": [
+      12,
+      12,
+      12,
+      12
+    ],
+    "resampled": false
+  },
+  "card_hover": {
+    "source": "controls-original.png",
+    "rect": [
+      854,
+      48,
+      1221,
+      406
+    ],
+    "size": [
+      367,
+      358
+    ],
+    "texture_margins": [
+      12,
+      12,
+      12,
+      12
+    ],
+    "resampled": false
+  },
+  "utility": {
+    "source": "controls-original.png",
+    "rect": [
+      34,
+      546,
+      405,
+      680
+    ],
+    "size": [
+      371,
+      134
+    ],
+    "texture_margins": [
+      12,
+      10,
+      12,
+      10
+    ],
+    "resampled": false
+  },
+  "active": {
+    "source": "controls-original.png",
+    "rect": [
+      444,
+      546,
+      812,
+      680
+    ],
+    "size": [
+      368,
+      134
+    ],
+    "texture_margins": [
+      12,
+      10,
+      12,
+      10
+    ],
+    "resampled": false
+  },
+  "disabled": {
+    "source": "controls-original.png",
+    "rect": [
+      856,
+      546,
+      1220,
+      680
+    ],
+    "size": [
+      364,
+      134
+    ],
+    "texture_margins": [
+      12,
+      10,
+      12,
+      10
+    ],
+    "resampled": false
+  },
+  "input": {
+    "source": "controls-original.png",
+    "rect": [
+      34,
+      932,
+      404,
+      1062
+    ],
+    "size": [
+      370,
+      130
+    ],
+    "texture_margins": [
+      12,
+      10,
+      12,
+      10
+    ],
+    "resampled": false
+  },
+  "scroll_track": {
+    "source": "controls-original.png",
+    "rect": [
+      601,
+      824,
+      653,
+      935
+    ],
+    "size": [
+      52,
+      111
+    ],
+    "texture_margins": [
+      12,
+      10,
+      12,
+      10
+    ],
+    "resampled": false
+  },
+  "scroll_thumb": {
+    "source": "controls-original.png",
+    "rect": [
+      599,
+      941,
+      656,
+      1052
+    ],
+    "size": [
+      57,
+      111
+    ],
+    "texture_margins": [
+      12,
+      10,
+      12,
+      10
+    ],
+    "resampled": false
+  },
+  "ingredient": {
+    "source": "controls-original.png",
+    "rect": [
+      855,
+      824,
+      1220,
+      1172
+    ],
+    "size": [
+      365,
+      348
+    ],
+    "texture_margins": [
+      12,
+      12,
+      12,
+      12
+    ],
+    "resampled": false
+  },
+  "pot": {
+    "source": "expandable-kitchen-concept.png",
+    "rect": [
+      122,
+      64,
+      197,
+      126
+    ],
+    "size": [
+      75,
+      62
+    ],
+    "texture_margins": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "resampled": false
+  },
+  "empty": {
+    "source": "controls-original.png",
+    "rect": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "size": [
+      1,
+      1
+    ],
+    "texture_margins": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "resampled": false
+  }
+}

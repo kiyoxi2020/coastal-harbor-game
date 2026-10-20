@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3]
+[gd_scene load_steps=21 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/journal.gd" id="1_script"]
 [ext_resource type="PackedScene" path="res://scenes/ui/main_menu.tscn" id="2_main"]
@@ -17,6 +17,7 @@
 
 [ext_resource type="PackedScene" path="res://scenes/ui/pages/trade_page.tscn" id="15_trade"]
 [ext_resource type="PackedScene" path="res://scenes/ui/pages/daily_page.tscn" id="16_daily"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pages/craft_page.tscn" id="17_craft"]
 [sub_resource type="StyleBox" id="StyleBox_paper"]
 script = ExtResource("10_style")
 kind = "paper"
@@ -118,3 +119,5 @@ layout_mode = 1
 
 [node name="SaveErrorDialog" parent="Root/Dialogs" instance=ExtResource("8_save")]
 layout_mode = 1
+
+[node name="CraftPage" parent="Root" instance=ExtResource("17_craft")]

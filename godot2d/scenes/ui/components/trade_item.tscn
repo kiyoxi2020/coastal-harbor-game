@@ -7,4 +7,5 @@ mouse_filter = 2
 script = ExtResource("icon")
 [node name="Forage" type="Node2D" parent="."]
 scale = Vector2(5.25,5.25)
+use_parent_material = true
 script = ExtResource("forage")

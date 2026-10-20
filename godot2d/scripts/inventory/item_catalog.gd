@@ -1,6 +1,9 @@
 extends RefCounted
 
 const ITEMS := {
+	"clam_salad":{"name":"蛤蜊蔬菜盘","icon_key":"蛤盘","category":"ingredients","description":"蛤蜊与生菜制作的料理。","max_stack":99,"discardable":true,"use_action":""},
+	"snail_stew":{"name":"海螺番茄煮","icon_key":"螺煮","category":"ingredients","description":"海螺与番茄制作的料理。","max_stack":99,"discardable":true,"use_action":""},
+	"marine_fertilizer":{"name":"处理海藻肥","icon_key":"藻肥","category":"materials","description":"对未成熟作物施用；下次浇水日额外增长1。","max_stack":99,"discardable":true,"use_action":""},
 	"clam": {"name":"蛤蜊", "icon_key":"clam", "category":"seafood", "description":"赶海拾得的蛤蜊。", "max_stack":99, "discardable":true, "use_action":""},
 	"snail": {"name":"海螺", "icon_key":"snail", "category":"seafood", "description":"赶海拾得的海螺。", "max_stack":99, "discardable":true, "use_action":""},
 	"kelp": {"name":"海带", "icon_key":"kelp", "category":"seafood", "description":"赶海拾得的海带。", "max_stack":99, "discardable":true, "use_action":""},

@@ -5,6 +5,7 @@ extends CanvasLayer
 @onready var description: Label = $Root/LocationPanel/Description
 @onready var region: Label = $Root/Top/Region
 signal bag_requested
+signal map_requested
 @onready var bag_button: Button = $Root/BackpackButton
 @onready var toast: Label = $Root/Toast
 var toast_remaining := 0.0
@@ -14,6 +15,7 @@ var toast_remaining := 0.0
 
 func _ready() -> void:
 	bag_button.pressed.connect(func(): bag_requested.emit())
+	$Root/MapButton.pressed.connect(func(): map_requested.emit())
 
 func update_location(location: Dictionary) -> void:
 	prompt.visible = not panel.visible

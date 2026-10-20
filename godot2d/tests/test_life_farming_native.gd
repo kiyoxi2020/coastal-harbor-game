@@ -27,6 +27,7 @@ func click(button: Button) -> void:
 	var motion := InputEventMouseMotion.new()
 	motion.position = point
 	root.push_input(motion, true)
+	await process_frame
 	for pressed in [true, false]:
 		var event := InputEventMouseButton.new()
 		event.position = point

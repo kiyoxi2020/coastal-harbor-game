@@ -3,6 +3,7 @@ extends RefCounted
 const Schema = preload("res://scripts/simulation/state_schema.gd")
 const Inventory = preload("res://scripts/inventory/inventory_container.gd")
 const Farming = preload("res://scripts/simulation/farming_rules.gd")
+const Crafting = preload("res://scripts/simulation/crafting_rules.gd")
 const Day = preload("res://scripts/simulation/day_rules.gd")
 const Data = preload("res://scripts/harbor_data.gd")
 const Catalog = preload("res://scripts/inventory/item_catalog.gd")
@@ -56,7 +57,14 @@ static func plan(data: Dictionary, kind: String, args: Dictionary, request_id: i
 		if not advanced.ok:
 			return advanced
 		return _finish(advanced.state, kind, args, request_id, advanced.events)
-	if kind in ["hoe", "plant", "water", "harvest"]:
+	if kind == "craft":
+		if not Schema._exact_keys(args,["recipe_id","batches"]) or not args.recipe_id is String or not (args.batches is int or args.batches is float) or args.batches is bool:
+			return _failure("invalid_request")
+		if not Schema._bounded_integer(args.batches,1,20):return _failure("invalid_amount")
+		var crafted:Dictionary=Crafting.craft(data,args.recipe_id,int(args.batches))
+		if not crafted.ok:return crafted
+		return _finish(crafted.state,kind,args,request_id,crafted.events)
+	if kind in ["hoe", "plant", "water", "harvest", "fertilize"]:
 		var farmed: Dictionary = Farming.act(data, kind, args)
 		if not farmed.ok:
 			return farmed

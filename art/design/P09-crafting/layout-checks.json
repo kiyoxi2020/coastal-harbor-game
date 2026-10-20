@@ -1,0 +1,14 @@
+{
+  "capture_07-readable-fifth-tool": true,
+  "capture_08-crafted-items-in-bag": true,
+  "clear_garden_a:0:0": true,
+  "clear_garden_a:3:1": true,
+  "clear_garden_b:0:0": true,
+  "clear_garden_b:3:1": true,
+  "continue": true,
+  "cooked_details": true,
+  "crafted_counts": true,
+  "isolated": true,
+  "native": true,
+  "unselected_text": true
+}

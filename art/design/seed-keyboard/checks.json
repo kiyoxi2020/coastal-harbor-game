@@ -1,0 +1,22 @@
+{
+  "badge_after_plant": true,
+  "capture_01-zero-lettuce": true,
+  "capture_02-tomato-selected": true,
+  "e_plants_selected_seed": true,
+  "echo_ignored": true,
+  "highlight_tomato": true,
+  "individual_counts": true,
+  "keyboard_targets_plot": true,
+  "menu_blocks_q": true,
+  "mouse_still_selects": true,
+  "no_combined_count": true,
+  "prepare_plot": true,
+  "q_next": true,
+  "q_other_tool_ignored": true,
+  "shift_q_previous": true,
+  "tab_leaves_seed_bar": true,
+  "tab_opens_plant": true,
+  "three_reopens": true,
+  "zero_seed_no_plant": true,
+  "zero_seed_selectable": true
+}
