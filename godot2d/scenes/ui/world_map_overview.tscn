@@ -1,0 +1,413 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/ui/world-map-v1/terrain.png" id="terrain"]
+[ext_resource type="Texture2D" path="res://assets/ui/world-map-c/coastal-infill.svg" id="infill"]
+[ext_resource type="Texture2D" path="res://assets/environment.png" id="atlas"]
+[ext_resource type="Texture2D" path="res://assets/harbor-district-v1/restaurant.png" id="restaurant"]
+[ext_resource type="Texture2D" path="res://assets/harbor-district-v1/workshop.png" id="workshop"]
+[ext_resource type="Texture2D" path="res://assets/tree-set-v4/tree-0.png" id="tree"]
+
+[sub_resource type="Shader" id="TerrainInk"]
+code = "shader_type canvas_item;
+void fragment() {
+ vec2 uv = (floor(UV * vec2(320.0, 160.0)) + 0.5) / vec2(320.0, 160.0);
+ vec3 ink = texture(TEXTURE, uv).rgb;
+ float luma = dot(ink, vec3(0.299, 0.587, 0.114));
+ ink = mix(vec3(luma), ink, 0.65);
+ ink = mix(vec3(0.955, 0.944, 0.855), ink, 0.48);
+ ink = mix(vec3(0.955, 0.944, 0.855), ink, smoothstep(0.0, 0.075, UV.y));
+ ink = mix(ink, vec3(0.665, 0.800, 0.785), smoothstep(0.90, 1.0, UV.y));
+ COLOR = vec4(ink, 1.0);
+}"
+
+[sub_resource type="ShaderMaterial" id="TerrainMaterial"]
+shader = SubResource("TerrainInk")
+
+[sub_resource type="AtlasTexture" id="Cottage"]
+atlas = ExtResource("atlas")
+region = Rect2(34, 91, 488, 448)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="FishMarket"]
+atlas = ExtResource("atlas")
+region = Rect2(592, 138, 504, 394)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Boat"]
+atlas = ExtResource("atlas")
+region = Rect2(67, 616, 419, 313)
+filter_clip = true
+
+[node name="WorldMapOverview" type="Control"]
+custom_minimum_size = Vector2(640, 520)
+offset_right = 640.0
+offset_bottom = 520.0
+mouse_filter = 2
+texture_filter = 1
+clip_contents = true
+
+[node name="Sea" type="ColorRect" parent="."]
+offset_right = 640.0
+offset_bottom = 520.0
+mouse_filter = 2
+color = Color(0.665, 0.8, 0.785, 1)
+
+[node name="PaperNorth" type="ColorRect" parent="."]
+offset_right = 640.0
+offset_bottom = 65.0
+mouse_filter = 2
+color = Color(0.955, 0.944, 0.855, 1)
+
+[node name="ContinuousCoast" type="TextureRect" parent="."]
+material = SubResource("TerrainMaterial")
+offset_top = 65.0
+offset_right = 640.0
+offset_bottom = 385.0
+mouse_filter = 2
+texture = ExtResource("terrain")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HarborPeninsula" type="TextureRect" parent="."]
+offset_right = 640.0
+offset_bottom = 520.0
+mouse_filter = 2
+texture = ExtResource("infill")
+expand_mode = 1
+
+[node name="HarborRoadEdge" type="Line2D" parent="."]
+points = PackedVector2Array(215, 359, 239, 328, 266, 300, 276, 273, 309, 247, 330, 220)
+width = 7.0
+default_color = Color(0.67, 0.69, 0.59, 0.45)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = false
+
+[node name="HarborRoadSand" type="Line2D" parent="."]
+points = PackedVector2Array(215, 359, 239, 328, 266, 300, 276, 273, 309, 247, 330, 220)
+width = 4.0
+default_color = Color(0.985, 0.955, 0.83, 0.9)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = false
+
+[node name="NorthLaneEdge" type="Line2D" parent="."]
+points = PackedVector2Array(330, 220, 349, 184, 359, 150, 380, 124, 390, 85)
+width = 7.0
+default_color = Color(0.67, 0.69, 0.59, 0.45)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = false
+
+[node name="NorthLaneSand" type="Line2D" parent="."]
+points = PackedVector2Array(330, 220, 349, 184, 359, 150, 380, 124, 390, 85)
+width = 4.0
+default_color = Color(0.96, 0.94, 0.83, 0.65)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = false
+
+[node name="WoodlandTrailEdge" type="Line2D" parent="."]
+points = PackedVector2Array(330, 220, 284, 218, 240, 189, 191, 180, 159, 157, 130, 130)
+width = 7.0
+default_color = Color(0.67, 0.69, 0.59, 0.45)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = false
+
+[node name="WoodlandTrailSand" type="Line2D" parent="."]
+points = PackedVector2Array(330, 220, 284, 218, 240, 189, 191, 180, 159, 157, 130, 130)
+width = 4.0
+default_color = Color(0.96, 0.94, 0.83, 0.65)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = false
+
+[node name="CoastWalkEdge" type="Line2D" parent="."]
+points = PackedVector2Array(330, 220, 379, 231, 425, 235, 465, 258, 498, 276, 535, 295)
+width = 7.0
+default_color = Color(0.67, 0.69, 0.59, 0.45)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = false
+
+[node name="CoastWalkSand" type="Line2D" parent="."]
+points = PackedVector2Array(330, 220, 379, 231, 425, 235, 465, 258, 498, 276, 535, 295)
+width = 4.0
+default_color = Color(0.96, 0.94, 0.83, 0.65)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = false
+
+[node name="Pier" type="Node2D" parent="."]
+position = Vector2(6, 221)
+scale = Vector2(0.62, 0.62)
+modulate = Color(0.94, 0.91, 0.84, 1)
+
+[node name="Foundation" type="Polygon2D" parent="Pier"]
+color = Color(0.36078432, 0.44313726, 0.40784314, 1)
+polygon = PackedVector2Array(408, 274, 472, 274, 472, 398, 408, 398)
+
+[node name="Plank00" type="Polygon2D" parent="Pier"]
+color = Color(0.7137255, 0.54509807, 0.36078432, 1)
+polygon = PackedVector2Array(408, 272, 472, 272, 472, 279, 408, 279)
+
+[node name="Plank01" type="Polygon2D" parent="Pier"]
+color = Color(0.7137255, 0.54509807, 0.36078432, 1)
+polygon = PackedVector2Array(408, 280, 472, 280, 472, 287, 408, 287)
+
+[node name="Plank02" type="Polygon2D" parent="Pier"]
+color = Color(0.7137255, 0.54509807, 0.36078432, 1)
+polygon = PackedVector2Array(408, 288, 472, 288, 472, 295, 408, 295)
+
+[node name="Plank03" type="Polygon2D" parent="Pier"]
+color = Color(0.7137255, 0.54509807, 0.36078432, 1)
+polygon = PackedVector2Array(408, 296, 472, 296, 472, 303, 408, 303)
+
+[node name="Plank04" type="Polygon2D" parent="Pier"]
+color = Color(0.7137255, 0.54509807, 0.36078432, 1)
+polygon = PackedVector2Array(408, 304, 472, 304, 472, 311, 408, 311)
+
+[node name="Plank05" type="Polygon2D" parent="Pier"]
+color = Color(0.7137255, 0.54509807, 0.36078432, 1)
+polygon = PackedVector2Array(408, 312, 472, 312, 472, 319, 408, 319)
+
+[node name="Plank06" type="Polygon2D" parent="Pier"]
+color = Color(0.7137255, 0.54509807, 0.36078432, 1)
+polygon = PackedVector2Array(408, 320, 472, 320, 472, 327, 408, 327)
+
+[node name="Plank07" type="Polygon2D" parent="Pier"]
+color = Color(0.7137255, 0.54509807, 0.36078432, 1)
+polygon = PackedVector2Array(408, 328, 472, 328, 472, 335, 408, 335)
+
+[node name="Plank08" type="Polygon2D" parent="Pier"]
+color = Color(0.7137255, 0.54509807, 0.36078432, 1)
+polygon = PackedVector2Array(408, 336, 472, 336, 472, 343, 408, 343)
+
+[node name="Plank09" type="Polygon2D" parent="Pier"]
+color = Color(0.7137255, 0.54509807, 0.36078432, 1)
+polygon = PackedVector2Array(408, 344, 472, 344, 472, 351, 408, 351)
+
+[node name="Plank10" type="Polygon2D" parent="Pier"]
+color = Color(0.7137255, 0.54509807, 0.36078432, 1)
+polygon = PackedVector2Array(408, 352, 472, 352, 472, 359, 408, 359)
+
+[node name="Plank11" type="Polygon2D" parent="Pier"]
+color = Color(0.7137255, 0.54509807, 0.36078432, 1)
+polygon = PackedVector2Array(408, 360, 472, 360, 472, 367, 408, 367)
+
+[node name="Plank12" type="Polygon2D" parent="Pier"]
+color = Color(0.7137255, 0.54509807, 0.36078432, 1)
+polygon = PackedVector2Array(408, 368, 472, 368, 472, 375, 408, 375)
+
+[node name="Plank13" type="Polygon2D" parent="Pier"]
+color = Color(0.7137255, 0.54509807, 0.36078432, 1)
+polygon = PackedVector2Array(408, 376, 472, 376, 472, 383, 408, 383)
+
+[node name="Plank14" type="Polygon2D" parent="Pier"]
+color = Color(0.7137255, 0.54509807, 0.36078432, 1)
+polygon = PackedVector2Array(408, 384, 472, 384, 472, 391, 408, 391)
+
+[node name="Post00Base" type="Polygon2D" parent="Pier"]
+color = Color(0.4509804, 0.37254903, 0.27450982, 1)
+polygon = PackedVector2Array(405, 271, 412, 271, 412, 286, 405, 286)
+
+[node name="Post00Cap" type="Polygon2D" parent="Pier"]
+color = Color(0.8745098, 0.73333335, 0.50980395, 1)
+polygon = PackedVector2Array(404, 270, 413, 270, 413, 274, 404, 274)
+
+[node name="Post01Base" type="Polygon2D" parent="Pier"]
+color = Color(0.4509804, 0.37254903, 0.27450982, 1)
+polygon = PackedVector2Array(464, 271, 471, 271, 471, 286, 464, 286)
+
+[node name="Post01Cap" type="Polygon2D" parent="Pier"]
+color = Color(0.8745098, 0.73333335, 0.50980395, 1)
+polygon = PackedVector2Array(463, 270, 472, 270, 472, 274, 463, 274)
+
+[node name="Post02Base" type="Polygon2D" parent="Pier"]
+color = Color(0.4509804, 0.37254903, 0.27450982, 1)
+polygon = PackedVector2Array(405, 319, 412, 319, 412, 334, 405, 334)
+
+[node name="Post02Cap" type="Polygon2D" parent="Pier"]
+color = Color(0.8745098, 0.73333335, 0.50980395, 1)
+polygon = PackedVector2Array(404, 318, 413, 318, 413, 322, 404, 322)
+
+[node name="Post03Base" type="Polygon2D" parent="Pier"]
+color = Color(0.4509804, 0.37254903, 0.27450982, 1)
+polygon = PackedVector2Array(464, 319, 471, 319, 471, 334, 464, 334)
+
+[node name="Post03Cap" type="Polygon2D" parent="Pier"]
+color = Color(0.8745098, 0.73333335, 0.50980395, 1)
+polygon = PackedVector2Array(463, 318, 472, 318, 472, 322, 463, 322)
+
+[node name="Post04Base" type="Polygon2D" parent="Pier"]
+color = Color(0.4509804, 0.37254903, 0.27450982, 1)
+polygon = PackedVector2Array(405, 377, 412, 377, 412, 392, 405, 392)
+
+[node name="Post04Cap" type="Polygon2D" parent="Pier"]
+color = Color(0.8745098, 0.73333335, 0.50980395, 1)
+polygon = PackedVector2Array(404, 376, 413, 376, 413, 380, 404, 380)
+
+[node name="Post05Base" type="Polygon2D" parent="Pier"]
+color = Color(0.4509804, 0.37254903, 0.27450982, 1)
+polygon = PackedVector2Array(464, 377, 471, 377, 471, 392, 464, 392)
+
+[node name="Post05Cap" type="Polygon2D" parent="Pier"]
+color = Color(0.8745098, 0.73333335, 0.50980395, 1)
+polygon = PackedVector2Array(463, 376, 472, 376, 472, 380, 463, 380)
+
+[node name="OldCottage" type="TextureRect" parent="."]
+offset_left = 167.0
+offset_top = 298.0
+offset_right = 247.0
+offset_bottom = 372.0
+mouse_filter = 2
+texture = SubResource("Cottage")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FishMarket" type="TextureRect" parent="."]
+offset_left = 253.0
+offset_top = 334.0
+offset_right = 310.0
+offset_bottom = 379.0
+mouse_filter = 2
+texture = SubResource("FishMarket")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HarborBoat" type="TextureRect" parent="."]
+offset_left = 305.0
+offset_top = 413.0
+offset_right = 350.0
+offset_bottom = 447.0
+mouse_filter = 2
+texture = SubResource("Boat")
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(0.91, 0.94, 0.88, 1)
+
+[node name="Restaurant" type="TextureRect" parent="."]
+offset_left = 282.0
+offset_top = 159.0
+offset_right = 370.0
+offset_bottom = 235.0
+mouse_filter = 2
+texture = ExtResource("restaurant")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ClosedWorkshop" type="TextureRect" parent="."]
+offset_left = 371.0
+offset_top = 184.0
+offset_right = 420.0
+offset_bottom = 227.0
+mouse_filter = 2
+texture = ExtResource("workshop")
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(0.80, 0.83, 0.75, 0.8)
+
+[node name="NorthernCottage" type="TextureRect" parent="."]
+offset_left = 363.0
+offset_top = 44.0
+offset_right = 418.0
+offset_bottom = 95.0
+mouse_filter = 2
+texture = SubResource("Cottage")
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(0.75, 0.78, 0.70, 0.48)
+
+[node name="NorthernNeighbor" type="TextureRect" parent="."]
+offset_left = 432.0
+offset_top = 62.0
+offset_right = 464.0
+offset_bottom = 92.0
+mouse_filter = 2
+texture = SubResource("Cottage")
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(0.75, 0.78, 0.70, 0.36)
+
+[node name="HillTree0" type="TextureRect" parent="."]
+offset_left = 85.0
+offset_top = 98.0
+offset_right = 119.0
+offset_bottom = 132.0
+mouse_filter = 2
+texture = ExtResource("tree")
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(0.79, 0.85, 0.71, 0.57)
+
+[node name="HillTree1" type="TextureRect" parent="."]
+offset_left = 118.0
+offset_top = 90.0
+offset_right = 158.0
+offset_bottom = 130.0
+mouse_filter = 2
+texture = ExtResource("tree")
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(0.79, 0.85, 0.71, 0.57)
+
+[node name="HillTree2" type="TextureRect" parent="."]
+offset_left = 145.0
+offset_top = 109.0
+offset_right = 177.0
+offset_bottom = 141.0
+mouse_filter = 2
+texture = ExtResource("tree")
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(0.79, 0.85, 0.71, 0.57)
+
+[node name="HillTree3" type="TextureRect" parent="."]
+offset_left = 111.0
+offset_top = 126.0
+offset_right = 142.0
+offset_bottom = 157.0
+mouse_filter = 2
+texture = ExtResource("tree")
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(0.79, 0.85, 0.71, 0.57)
+
+[node name="SeaBreeze0" type="Line2D" parent="."]
+points = PackedVector2Array(48, 423, 56, 425, 75, 425, 83, 423)
+width = 1.0
+default_color = Color(0.91, 0.94, 0.85, 0.45)
+
+[node name="SeaBreeze1" type="Line2D" parent="."]
+points = PackedVector2Array(85, 461, 93, 463, 98, 463, 106, 461)
+width = 1.0
+default_color = Color(0.91, 0.94, 0.85, 0.45)
+
+[node name="SeaBreeze2" type="Line2D" parent="."]
+points = PackedVector2Array(377, 469, 385, 471, 403, 471, 411, 469)
+width = 1.0
+default_color = Color(0.91, 0.94, 0.85, 0.45)
+
+[node name="SeaBreeze3" type="Line2D" parent="."]
+points = PackedVector2Array(453, 421, 461, 423, 469, 423, 477, 421)
+width = 1.0
+default_color = Color(0.91, 0.94, 0.85, 0.45)
+
+[node name="SeaBreeze4" type="Line2D" parent="."]
+points = PackedVector2Array(522, 459, 530, 461, 551, 461, 559, 459)
+width = 1.0
+default_color = Color(0.91, 0.94, 0.85, 0.45)
+
+[node name="SeaBreeze5" type="Line2D" parent="."]
+points = PackedVector2Array(568, 402, 576, 404, 582, 404, 590, 402)
+width = 1.0
+default_color = Color(0.91, 0.94, 0.85, 0.45)
