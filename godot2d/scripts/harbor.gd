@@ -30,6 +30,8 @@ var release_input := false
 var save_message := ""
 var startup_error := ""
 var home
+var regions
+var world_map
 var exterior: Node2D
 
 func _ready() -> void:
@@ -58,6 +60,9 @@ func _ready() -> void:
 	home = $HouseSession
 	var transition := $HouseSession/RoomTransition
 	home.initialize(self, exterior, interior, exterior.get_node("DepthSortedObjects/ExteriorDoor"), transition)
+	regions=$Regions
+	regions.initialize(self)
+	world_map=$WorldMap
 	for pickup in exterior.get_node("DepthSortedObjects/ForagePickups").get_children():
 		pickup_nodes[pickup.name] = pickup
 	hud.show_toast("低潮赶海：沿台阶下沙滩。暂不保存，重开重置。",8.0)
@@ -146,7 +151,7 @@ func configure_input() -> void:
 func nearest_location(point: Vector2) -> Dictionary:
 	var nearest: Dictionary = {}
 	var distance := 28.0
-	var locations: Array=home.interior.locations() if foraging.location=="house" else exterior.locations()
+	var locations: Array=home.interior.locations() if foraging.location=="house" else regions.active_scene().locations()
 	for location in locations:
 		var gap := point.distance_to(location.point)
 		if gap < distance:
@@ -155,7 +160,7 @@ func nearest_location(point: Vector2) -> Dictionary:
 	return nearest
 
 func nearest_pickup(point: Vector2) -> Dictionary:
-	if foraging.location=="house" or not exterior.foraging_area.has_point(point):
+	if foraging.location!="harbor" or not exterior.foraging_area.has_point(point):
 		return {}
 	var nearest: Dictionary = {}
 	var distance := 24.0
@@ -211,6 +216,7 @@ func use_farm_tool(target: Dictionary) -> void:
 		hud.show_toast({"hoe":"已翻土", "water":"已浇水", "plant":"已播种", "harvest":"收获 +3"}[tools.tool],1.5)
 
 func _process(_delta: float) -> void:
+	if world_map!=null and world_map.visible:return
 	if journal != null and journal.mode != "": return
 	if home != null and home.transition.busy: return
 	if player != null and player.action_busy: return
@@ -228,9 +234,12 @@ func _process(_delta: float) -> void:
 		journal.show_page(journal.last_page)
 		return
 	if Input.is_action_just_pressed("inspect"):
+		if not regions.nearby_exit().is_empty():
+			regions.travel()
+			return
 		if hud.panel.visible:
 			hud.dismiss()
-		elif persistence_enabled and home.active_door().can_interact(player.position):
+		elif persistence_enabled and foraging.location in ["harbor","house"] and home.active_door().can_interact(player.position):
 			home.transition.begin()
 			return
 		elif persistence_enabled and player.position.distance_to(home.storage_point()) <= 28:
@@ -274,7 +283,7 @@ func _process(_delta: float) -> void:
 		hud.prompt.text="[ E / 点击 ] %s · %s%s" % [stage,"已浇水" if cell.watered else "干燥","" if can_reach_cell(plot_target) else " · 请靠近"]
 	elif not target.is_empty():
 		hud.prompt.text = "[ E ] 拾取" + data.ITEM_NAMES[target.kind]
-	elif persistence_enabled and home.active_door().can_interact(player.position):
+	elif persistence_enabled and foraging.location in ["harbor","house"] and home.active_door().can_interact(player.position):
 		hud.prompt.text="[ E ] 走出小屋" if foraging.location=="house" else "[ E ] 进入小屋"
 	elif persistence_enabled and player.position.distance_to(home.storage_point()) <= 28:
 		hud.prompt.text = "[ E ] 打开旧屋储物箱"
@@ -282,6 +291,10 @@ func _process(_delta: float) -> void:
 		hud.prompt.text = "[ E ] 休息到明天"
 	elif can_open_trade():
 		hud.prompt.text="[ E ] 买种子 / 出售收获"
+	elif not regions.nearby_exit().is_empty():
+		hud.prompt.text="[ E ] "+str(regions.nearby_exit().name)
+	elif foraging.location=="harbor_district":
+		hud.prompt.text="港口小食铺待复业 · M 全镇地图 · 南口返回旧屋海港"
 	elif foraging.location=="house" and nearest_location(player.position).is_empty():
 		hud.prompt.text="回到熟悉的屋子；床、厨房和旧照片可查看。"
 	elif foraging.collected.size() == exterior.pickups().size() and nearest_location(player.position).is_empty():
@@ -323,7 +336,7 @@ func perform_action(kind: String, args: Dictionary, request_id: int) -> Dictiona
 	return result
 
 func _can_perform_action(kind: String, args: Dictionary) -> bool:
-	if not persistence_enabled or not session_started or release_input or home.transition.busy or hud.panel.visible or player.action_busy:
+	if world_map.visible or not persistence_enabled or not session_started or release_input or home.transition.busy or hud.panel.visible or player.action_busy:
 		return false
 	if journal.pending != "" or is_instance_valid(journal.modal):
 		return false

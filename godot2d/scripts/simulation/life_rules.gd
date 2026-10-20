@@ -37,7 +37,7 @@ static func _same_payload(left, right) -> bool:
 	return left == right
 
 static func plan(data: Dictionary, kind: String, args: Dictionary, request_id: int) -> Dictionary:
-	if not Schema.validate_v4(data):
+	if not Schema.validate_current(data):
 		return _failure("invalid_state")
 	var sequence: int = data.life.action_seq
 	if request_id <= sequence:
@@ -150,6 +150,6 @@ static func _finish(candidate: Dictionary, kind: String, args: Dictionary, reque
 		candidate.life.events.append(numbered[index].duplicate(true))
 	if candidate.life.events.size() > 256:
 		candidate.life.events = candidate.life.events.slice(candidate.life.events.size() - 256)
-	if not Schema.validate_v4(candidate):
+	if not Schema.validate_current(candidate):
 		return _failure("invalid_state")
 	return {"ok":true, "code":"ok", "state":candidate, "events":numbered}

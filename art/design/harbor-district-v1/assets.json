@@ -1,0 +1,190 @@
+{
+  "restaurant": {
+    "original_size": [
+      1350,
+      1165
+    ],
+    "crop_alpha_128": [
+      69,
+      77,
+      1281,
+      1074
+    ],
+    "production_size": [
+      176,
+      152
+    ],
+    "pivot": [
+      88.0,
+      152
+    ],
+    "world_anchor": [
+      180,
+      174
+    ],
+    "collision_rect": [
+      125,
+      132,
+      110,
+      42
+    ],
+    "filter": "nearest",
+    "processing": "alpha>=128 tight crop; nearest resize; binary alpha",
+    "source": "restaurant-single-storey-original.png",
+    "reference": "art/design/restaurant-concept-v1/restaurant-three-states.png, left closed kiosk",
+    "design": "single storey, horizontal shed roof, one closed teal service window, no upper windows or gable",
+    "scene_sprite_scale": [
+      0.7,
+      0.7
+    ],
+    "scene_sprite_offset": [
+      0,
+      -53.2
+    ],
+    "rendered_size": [
+      123.2,
+      106.4
+    ],
+    "cottage_width_ratio": 0.7333333333333334
+  },
+  "workshop": {
+    "original_size": [
+      1347,
+      1167
+    ],
+    "crop_alpha_128": [
+      137,
+      228,
+      1214,
+      993
+    ],
+    "production_size": [
+      160,
+      140
+    ],
+    "pivot": [
+      80.0,
+      140
+    ],
+    "world_anchor": [
+      460,
+      174
+    ],
+    "collision_rect": [
+      409,
+      134,
+      102,
+      40
+    ],
+    "filter": "nearest",
+    "processing": "alpha>=128 tight crop; nearest resize; binary alpha",
+    "scene_sprite_scale": [
+      0.7,
+      0.7
+    ],
+    "scene_sprite_offset": [
+      0,
+      -49
+    ],
+    "rendered_size": [
+      112,
+      98
+    ],
+    "cottage_width_ratio": 0.6666666666666666
+  },
+  "restaurant_superseded_v1": {
+    "original_size": [
+      1355,
+      1161
+    ],
+    "crop_alpha_128": [
+      290,
+      175,
+      1062,
+      967
+    ],
+    "production_size": [
+      176,
+      152
+    ],
+    "pivot": [
+      88.0,
+      152
+    ],
+    "world_anchor": [
+      180,
+      174
+    ],
+    "collision_rect": [
+      108,
+      113,
+      144,
+      60
+    ],
+    "filter": "nearest",
+    "processing": "alpha>=128 tight crop; nearest resize; binary alpha",
+    "source": "restaurant-original.png",
+    "status": "superseded: two-storey residential facade did not match approved kiosk"
+  },
+  "scale_reference": {
+    "source": "harbor_exterior.tscn DepthSortedObjects/House AtlasParts actual transform + source alpha bounds",
+    "cottage_rendered_bounds": [
+      90,
+      35.77049,
+      168,
+      154.2295
+    ],
+    "cottage_root_scale": [
+      1,
+      1
+    ],
+    "player_sprite_scale": [
+      0.15,
+      0.15
+    ],
+    "player_south_frame_0_opaque_height": 34.5,
+    "player_all_frame_opaque_height_range": [
+      22.35,
+      37.5
+    ],
+    "player_modified": false
+  },
+  "flowers": {
+    "count": 3,
+    "scale": [
+      0.5,
+      0.5
+    ],
+    "canvas_rendered_size": [
+      24,
+      21
+    ],
+    "entries": [
+      {
+        "name": "Flowers0",
+        "position": [
+          62,
+          185
+        ],
+        "color": "white"
+      },
+      {
+        "name": "Flowers1",
+        "position": [
+          267,
+          151
+        ],
+        "color": "yellow"
+      },
+      {
+        "name": "Flowers2",
+        "position": [
+          588,
+          294
+        ],
+        "color": "pink"
+      }
+    ],
+    "placement": "grass only; no StonePaths / plaza intersection; no new collision"
+  }
+}

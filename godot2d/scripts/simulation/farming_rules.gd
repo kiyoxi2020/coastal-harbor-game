@@ -7,7 +7,7 @@ static func _failure(code: String) -> Dictionary:
 	return {"ok":false, "code":code, "state":{}, "events":[]}
 
 static func act(data: Dictionary, kind: String, args: Dictionary) -> Dictionary:
-	if not Schema.validate_v4(data):
+	if not Schema.validate_current(data):
 		return _failure("invalid_state")
 	if kind not in ["hoe", "plant", "water", "harvest"]:
 		return _failure("unknown_action")
@@ -64,12 +64,12 @@ static func act(data: Dictionary, kind: String, args: Dictionary) -> Dictionary:
 			event.items = event.outputs.duplicate(true)
 			candidate.life.plots[args.cell_id] = {"tilled":true, "crop_id":"", "growth":0, "watered":plot.watered, "fertilized":false}
 	candidate.bag = bag.snapshot()
-	if not Schema.validate_v4(candidate):
+	if not Schema.validate_current(candidate):
 		return _failure("invalid_state")
 	return {"ok":true, "code":"ok", "state":candidate, "events":[event]}
 
 static func grow(data: Dictionary) -> Dictionary:
-	if not Schema.validate_v4(data):
+	if not Schema.validate_current(data):
 		return _failure("invalid_state")
 	var candidate := data.duplicate(true)
 	var events: Array = []
@@ -85,6 +85,6 @@ static func grow(data: Dictionary) -> Dictionary:
 		plot.watered = false
 		if plot.growth == definition.growth_days:
 			plot.fertilized = false
-	if not Schema.validate_v4(candidate):
+	if not Schema.validate_current(candidate):
 		return _failure("invalid_state")
 	return {"ok":true, "code":"ok", "state":candidate, "events":events}

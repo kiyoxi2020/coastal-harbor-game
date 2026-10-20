@@ -6,7 +6,7 @@ var s := Support.new()
 func _initialize() -> void:
 	var state = State.new()
 	var data: Dictionary = state.to_data(Vector2(330,250))
-	s.check("current_v4", data.version == 4)
+	s.check("current_v4", data.version == State.SAVE_VERSION)
 	s.check("sixteen_independent_cells", data.life.plots.size() == 16 and data.life.plots.has("garden_a:0:0") and data.life.plots.has("garden_b:3:1"))
 	var result := Rules.plan(data, "hoe", {"cell_id":"garden_a:0:0"}, 1)
 	s.check("hoe_single_cell", result.ok)

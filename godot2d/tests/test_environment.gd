@@ -89,7 +89,8 @@ func run() -> void:
 		check("water_beyond_beach",water.is_open_water(Vector2(296,375)))
 		check("no_foam_outside_canvas",not water.is_open_water(Vector2(640,340)) and not water.is_open_water(Vector2(-1,340)))
 	var before: Array = scene.data.blockers()
-	# The house rectangle is now split in three around a separately colliding door.
-	check("beach_blocker_count",before.size() == 22)
+	# Current compatibility query: 8 fixed boundaries/bases, 5 trees, 7 water segments.
+	# Production collision queries read the serialized exterior scene.
+	check("beach_blocker_count",before.size() == 20)
 	check("unchanged_spawn",scene.data.SPAWN == Vector2(330,250))
 	finish()
