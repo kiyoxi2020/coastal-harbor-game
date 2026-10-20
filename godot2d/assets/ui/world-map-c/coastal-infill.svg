@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="520" viewBox="0 0 640 520">
+  <!-- Continuous plateau and harbor peninsula. Coordinates are map art only. -->
+  <defs>
+    <path id="coast" d="M242 206 C258 192 277 183 301 185 C325 183 343 190 365 198 C386 205 409 210 420 227 C428 240 416 254 398 258 C377 265 355 257 337 263 C318 271 303 292 293 308 C285 323 292 332 305 342 C320 352 332 364 327 377 C322 390 303 397 283 397 C264 398 258 391 241 394 C219 399 199 397 184 386 C169 376 162 357 165 340 C169 320 187 311 207 310 C227 307 245 297 254 281 C267 261 276 243 272 230 C265 220 252 218 242 206 Z"/>
+  </defs>
+  <!-- Pale shore and low cliff retain a soft separation from the sea. -->
+  <use href="#coast" transform="translate(0 5)" fill="#aebcb0" stroke="#b1c9bf" stroke-width="9"/>
+  <use href="#coast" fill="#dfdfbf" stroke="#f4e7c5" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M250 208 C278 198 296 194 322 199 C349 203 373 213 397 222 L405 235 C385 245 359 235 338 245 C309 258 290 279 279 304 C270 326 271 339 284 350 C294 358 303 368 297 377 C280 383 259 374 240 381 C221 388 198 378 188 367 C179 353 182 337 200 331 C226 328 250 317 265 296 C279 275 292 251 287 232 C281 218 266 216 250 208 Z" fill="#d3d8b7" opacity=".72"/>
+  <path d="M178 351 C182 375 201 389 221 390 M258 390 Q274 391 286 391 M306 388 Q316 384 321 376 M348 256 Q370 251 387 255" fill="none" stroke="#f8efda" stroke-width="2"/>
+  <!-- Restrained grass tufts, stones, and cliff seams keep this land readable. -->
+  <g stroke="#b9c2a7" stroke-width="1.2" fill="none" opacity=".7">
+    <path d="M191 345 l2 -4 2 4 M198 348 l1 -3 M224 317 l3 -3 2 3 M302 266 l2 -4 2 4 M315 275 l2 -3 M365 241 l2 -4 2 4 M391 239 l2 -3 M315 369 l-3 -4 M231 383 l2 -3 M170 355 l4 -2 M296 394 v5 M303 392 v5 M198 388 v5 M391 256 v6"/>
+  </g>
+  <g fill="#bec8af" opacity=".6">
+    <ellipse cx="195" cy="363" rx="3" ry="1.5"/><ellipse cx="243" cy="324" rx="3" ry="1.2"/>
+    <ellipse cx="282" cy="315" rx="2" ry="1"/><ellipse cx="320" cy="256" rx="3" ry="1.2"/>
+    <ellipse cx="383" cy="245" rx="2" ry="1"/><ellipse cx="307" cy="381" rx="3" ry="1.2"/>
+  </g>
+</svg>

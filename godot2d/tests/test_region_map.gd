@@ -58,13 +58,10 @@ func run()->void:
 	t.check("no_travel_from_map",not world.regions.travel())
 	var snapshot:Dictionary=world.foraging.to_data(world.player.position)
 	t.check("no_action_from_map",not world.perform_action("hoe",{"cell_id":"garden_a:0:0"},1).ok and world.foraging.to_data(world.player.position)==snapshot)
-	t.check("map_all_points",world.world_map.markers.size()==15)
-	world.world_map.get_node("Root/Panel/Resources").button_pressed=false
-	t.check("resource_filter",world.world_map.markers.size()==9)
-	world.world_map.get_node("Root/Panel/Resources").button_pressed=true
-	world.foraging.collected["clam_a"]=true
-	world.world_map.render()
-	t.check("resource_live_state",world.world_map.markers.filter(func(p):return p.id=="clam_a")[0].collected)
+	t.check("map_regions",world.world_map.selected_region=="harbor" and world.world_map.region_buttons.size()==5)
+	world.world_map.select_region("hillside")
+	t.check("future_selection_no_travel",world.foraging.to_data(world.player.position)==snapshot and world.world_map.selected_region=="hillside")
+	t.check("no_detail_snapshot",world.world_map.find_children("*","SubViewport",true,false).is_empty())
 	var marker=world.get_node("HarborDistrict/InteractPoints/restaurant")
 	var point:Vector2=marker.position
 	marker.position+=Vector2(4,0)
