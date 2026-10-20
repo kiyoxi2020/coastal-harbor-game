@@ -1,9 +1,11 @@
 extends CanvasLayer
 
+const Reports=preload("res://scripts/simulation/report_builder.gd")
+const Crops = preload("res://scripts/simulation/crop_catalog.gd")
 const Catalog = preload("res://scripts/inventory/item_catalog.gd")
 const Art = preload("res://scripts/atlas.gd")
 
-@export_multiline var title_status_template := "{status}\n\n单人原型 · v0.5.2\n自动保存 / 单存档槽\n交易、种植和日循环尚未开放"
+@export_multiline var title_status_template := "{status}\n\n单人原型 · v0.5.2\n自动保存 / 单存档槽\n可在旧屋床边休息换日；可照料菜畦；可在鱼摊买种、出售收获；日记记录每天的收支"
 @export_multiline var profile_template := "{name}\n居住地：临海旧屋\n\n累计采集：{total} 个\n发现海产：{discovered} / 3 种"
 @export_multiline var save_failure_template := "{message}\n请选择重试或返回，不会自动退出。"
 
@@ -36,6 +38,14 @@ var storage_page: Control
 var bag_page: Control
 var profile_page: Control
 var settings_page: Control
+var sleep_page: Control
+var sleep_request_id := 0
+var sleep_expected_day := 0
+var sleep_submitting := false
+var sleep_wait_release := false
+var sleep_title_template := ""
+var sleep_body_template := ""
+var modal_return_focus: Control
 var dialogs: Control
 
 func _ready() -> void:
@@ -47,6 +57,9 @@ func _ready() -> void:
 	bag_page = $Root/PauseMenu/Surface/BagPage
 	profile_page = $Root/PauseMenu/Surface/ProfilePage
 	settings_page = $Root/PauseMenu/Surface/SettingsPage
+	sleep_page = $Root/SleepPage
+	sleep_title_template = $Root/SleepPage/Surface/Title.text
+	sleep_body_template = $Root/SleepPage/Surface/Body.text
 	dialogs = $Root/Dialogs
 	theme = root.theme
 	quantity = $Root/Dialogs/QuantityDialog/Panel/quantity
@@ -58,6 +71,10 @@ func initialize(owner_world) -> void:
 	world = owner_world
 
 func _bind_controls() -> void:
+	$Root/SleepPage/Surface/Confirm.pressed.connect(confirm_sleep)
+	$Root/SleepPage/Surface/Cancel.pressed.connect(close_menu)
+	$Root/DailyPage/Surface/Close.pressed.connect(close_menu)
+	$Root/PauseMenu/Surface/Tabs/tab_daily.pressed.connect(show_page.bind("daily"))
 	$Root/MainMenu/Surface/continue.pressed.connect(_continue_game)
 	$Root/MainMenu/Surface/new_game.pressed.connect(new_game_dialog)
 	$Root/MainMenu/Surface/settings.pressed.connect(show_page.bind("settings"))
@@ -65,7 +82,7 @@ func _bind_controls() -> void:
 	$Root/PauseMenu/Surface/Tabs/tab_bag.pressed.connect(show_page.bind("bag"))
 	$Root/PauseMenu/Surface/Tabs/tab_profile.pressed.connect(show_page.bind("profile"))
 	$Root/PauseMenu/Surface/Tabs/tab_settings.pressed.connect(show_page.bind("settings"))
-	$Root/PauseMenu/Surface/close.pressed.connect(close_menu)
+	$Root/PauseMenu/Surface/close.pressed.connect(_close_pause_menu)
 	$Root/StoragePage/Surface/close.pressed.connect(close_menu)
 	var cats := ["", "seafood", "ingredients", "materials", "tools"]
 	for i in range(cats.size()):
@@ -74,6 +91,7 @@ func _bind_controls() -> void:
 	bag_page.get_node("Details/split").pressed.connect(action_split)
 	bag_page.get_node("Details/discard").pressed.connect(action_discard)
 	bag_page.get_node("sort").pressed.connect(_sort_bag)
+	bag_page.get_node("return_item").pressed.connect(_return_to_item)
 	_bind_slot_grid(bag_page.get_node("BagGrid"), "bag")
 	_bind_slot_grid(storage_page.get_node("Surface/BagGrid"), "bag")
 	_bind_slot_grid(storage_page.get_node("Surface/ChestScroll/ChestGrid"), "chest")
@@ -126,12 +144,53 @@ func _setting_changed(value: float, bus: String) -> void:
 func _set_category(value: String) -> void:
 	category = value
 	selected_side = "bag"
+	if category!="" and world!=null:
+		var slots:Array=world.foraging.bag.snapshot()
+		var chosen:int=-1
+		for i in range(slots.size()):
+			if slots[i].id!="" and catalog.get_item(slots[i].id).category==category:
+				chosen=i;break
+		if chosen<0:
+			for i in range(slots.size()):
+				if slots[i].id=="":chosen=i;break
+		if chosen>=0:selected_index=chosen
 	render()
+
+func _return_to_item() -> void:
+	if pending != "":
+		selected_index = pending_source
+		pending = ""
+	render()
+	bag_page.get_node("BagGrid").get_child(selected_index).grab_focus()
+
+func _bag_actions() -> Array:
+	return [bag_page.get_node("Details/move"),bag_page.get_node("Details/split"),bag_page.get_node("Details/discard"),bag_page.get_node("return_item"),bag_page.get_node("sort")]
+
+func _in_bag_actions(focus: Control) -> bool:
+	return focus in _bag_actions()
+
+func _tab_bag(reverse: bool) -> void:
+	if pending != "": return
+	var focus = get_viewport().gui_get_focus_owner()
+	var groups = [bag_page.get_node("BagGrid").get_children(),_bag_actions(),pause_menu.get_node("Surface/Tabs").get_children(),bag_page.get_node("Filter").get_children()]
+	var current = 0
+	for i in range(groups.size()):
+		if focus in groups[i]:current=i
+	for step in range(1,5):
+		var next = posmod(current + step * (-1 if reverse else 1),4)
+		if next == 0:
+			_return_to_item()
+			return
+		for button in groups[next]:
+			if KeyboardNavigation.eligible(button):
+				button.grab_focus()
+				return
 
 func _start_move() -> void:
 	pending = "move"
 	pending_source = selected_index
 	render()
+	if mode=="bag":bag_page.get_node("BagGrid").get_child(selected_index).grab_focus()
 
 func _sort_bag() -> void:
 	if world == null:
@@ -160,6 +219,12 @@ func show_page(page: String) -> void:
 		from_title = true
 	elif page != "settings":
 		from_title = false
+	if page == "sleep" and mode != "sleep":
+		sleep_request_id = 0
+		sleep_expected_day = 0
+		sleep_wait_release = Input.is_action_pressed("inspect")
+		note = ""
+	if page=="trade" and mode!="trade": $Root/TradePage.open()
 	mode = page
 	if page in ["bag", "profile", "settings"] and not from_title:
 		last_page = page
@@ -177,6 +242,9 @@ func render() -> void:
 	main_menu.visible = mode == "title"
 	pause_menu.visible = mode in ["bag", "profile", "settings"]
 	storage_page.visible = mode == "storage"
+	sleep_page.visible = mode == "sleep"
+	$Root/TradePage.visible=mode=="trade"
+	$Root/DailyPage.visible=mode=="daily"
 	bag_page.visible = mode == "bag"
 	profile_page.visible = mode == "profile"
 	settings_page.visible = mode == "settings"
@@ -187,6 +255,17 @@ func render() -> void:
 	if mode == "title":
 		surface = $Root/MainMenu/Surface
 		_refresh_title()
+	elif mode=="trade":
+		surface=$Root/TradePage/Surface
+		$Root/TradePage.render()
+	elif mode=="daily":
+		surface=$Root/DailyPage/Surface
+		var report:Dictionary=Reports.daily(world.foraging.to_data(world.player.position))
+		$Root/DailyPage/Surface/Title.text="生活日记 · 尚未休息" if report.day_id==0 else "第%d日 日记 · 今天第%d日"%[report.day_id,report.current_day]
+		$Root/DailyPage/Surface/Body.text="\n".join(report.lines)
+	elif mode == "sleep":
+		surface = $Root/SleepPage/Surface
+		_refresh_sleep()
 	elif mode == "storage":
 		surface = $Root/StoragePage/Surface
 		_refresh_storage()
@@ -206,10 +285,36 @@ func render() -> void:
 		focus.release_focus()
 	call_deferred("_focus_default")
 
+func _refresh_sleep() -> void:
+	$Root/SleepPage/Surface/Title.text = sleep_title_template.format({"day": int(world.foraging.life.day_id)})
+	$Root/SleepPage/Surface/Body.text = sleep_body_template
+	if note != "":
+		$Root/SleepPage/Surface/Body.text += "\n" + note
+	$Root/SleepPage/Surface/Confirm.disabled = sleep_submitting
+	$Root/SleepPage/Surface/Cancel.disabled = sleep_submitting
+
+func confirm_sleep() -> void:
+	if mode != "sleep" or sleep_submitting or sleep_wait_release:
+		return
+	if sleep_request_id == 0:
+		sleep_request_id = int(world.foraging.life.action_seq) + 1
+		sleep_expected_day = int(world.foraging.life.day_id)
+	sleep_submitting = true
+	_refresh_sleep()
+	var result: Dictionary = world.perform_action("sleep", {"expected_day":sleep_expected_day}, sleep_request_id)
+	sleep_submitting = false
+	if result.ok:
+		dismiss()
+		world.show_daily_summary()
+	else:
+		_refresh_sleep()
+
 func _refresh_title() -> void:
 	var status: Dictionary = world.save_service.read_save()
-	$Root/MainMenu/Surface/continue.disabled = not status.ok
-	$Root/MainMenu/Surface/new_game.disabled = status.get("future", false)
+	if world.startup_error != "":
+		status.message = world.startup_error
+	$Root/MainMenu/Surface/continue.disabled = not status.ok or world.startup_error != ""
+	$Root/MainMenu/Surface/new_game.disabled = status.get("future", false) or world.startup_error != ""
 	$Root/MainMenu/Surface/Status.text = title_status_template.format({"status": status.message})
 	_update_portrait($Root/MainMenu/Surface/Portrait)
 
@@ -217,6 +322,7 @@ func _refresh_tabs() -> void:
 	$Root/PauseMenu/Surface/Tabs/tab_bag.visible = not from_title
 	$Root/PauseMenu/Surface/Tabs/tab_profile.visible = not from_title
 	$Root/PauseMenu/Surface/Tabs/tab_settings.visible = true
+	$Root/PauseMenu/Surface/Tabs/tab_daily.visible=not from_title
 	for page_name in ["bag", "profile", "settings"]:
 		var button := pause_menu.get_node("Surface/Tabs/tab_" + page_name) as Button
 		button.button_pressed = page_name == mode
@@ -246,7 +352,7 @@ func _refresh_slots(grid: Control, side: String) -> void:
 	for i in range(buttons.size()):
 		var button := buttons[i] as Button
 		var slot: Dictionary = snapshot[i]
-		var icon := button.get_node("Icon") as Node2D
+		var icon := button.get_node("Icon") as Control
 		var amount := button.get_node("Amount") as Label
 		var occupied: bool = slot.id != ""
 		button.tooltip_text = "空格"
@@ -254,11 +360,11 @@ func _refresh_slots(grid: Control, side: String) -> void:
 		button.modulate.a = 1.0
 		button.button_pressed = selected_side == side and selected_index == i
 		icon.visible = occupied
+		if not occupied: icon.item_id = ""
 		amount.visible = occupied
 		if occupied:
 			var item: Dictionary = catalog.get_item(slot.id)
-			icon.kind = item.icon_key
-			icon.queue_redraw()
+			icon.item_id = slot.id
 			amount.text = str(slot.amount)
 			button.tooltip_text = item.name + " ×" + str(slot.amount)
 			if category != "" and mode == "bag" and item.category != category:
@@ -292,7 +398,7 @@ func _refresh_details() -> void:
 			source = "市场种子"
 		elif item.category == "ingredients":
 			source = "种植收获"
-		description = ("海产" if item.category == "seafood" else "食材") + " / " + source + "\n" + item.description + "\n用途：后续交易与料理。\n当前不可直接使用。"
+		description = ("海产" if item.category == "seafood" else "食材") + " / " + source + "\n" + item.description + "\n用途：可在鱼摊出售；料理将在后续开放。\n当前不可直接使用。"
 	var details := bag_page.get_node("Details")
 	details.get_node("Title").text = title
 	details.get_node("Description").text = description
@@ -313,6 +419,9 @@ func select_slot(side: String, index: int) -> void:
 	selected_side = side
 	selected_index = index
 	render()
+	if mode=="bag":
+		var button=bag_page.get_node("BagGrid").get_child(index)
+		if not button.disabled:button.grab_focus()
 
 func action_split() -> void:
 	var slot := _selected_slot()
@@ -322,7 +431,8 @@ func action_split() -> void:
 		pending = "split"
 		pending_source = selected_index
 		pending_amount = amount
-		render())
+		render()
+		if mode=="bag":bag_page.get_node("BagGrid").get_child(selected_index).grab_focus())
 
 func action_discard() -> void:
 	var slot := _selected_slot()
@@ -420,6 +530,8 @@ func _accept_confirm() -> void:
 		action.call()
 
 func _show_modal(dialog: Control, kind: String) -> void:
+	var previous = get_viewport().gui_get_focus_owner()
+	if previous!=null and not dialogs.is_ancestor_of(previous):modal_return_focus=previous
 	for child in dialogs.get_children():
 		(child as Control).visible = false
 	modal = dialog
@@ -435,11 +547,30 @@ func cancel_modal() -> void:
 	quantity_action = Callable()
 	confirm_action = Callable()
 	dialogs.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	if is_instance_valid(modal_return_focus) and KeyboardNavigation.eligible(modal_return_focus):
+		modal_return_focus.grab_focus()
 	call_deferred("_focus_default")
 
-func close_menu() -> void:
+func _close_pause_menu() -> void:
 	if is_instance_valid(modal):
 		cancel_modal()
+		return
+	world.save_progress()
+	dismiss()
+
+func close_menu() -> void:
+	if mode=="trade":
+		if is_instance_valid(modal):cancel_modal()
+		else:$Root/TradePage.back()
+		return
+	if mode == "sleep":
+		if not sleep_submitting: dismiss()
+		return
+	if is_instance_valid(modal):
+		cancel_modal()
+		return
+	if mode=="bag" and (pending!="" or _in_bag_actions(get_viewport().gui_get_focus_owner())):
+		_return_to_item()
 		return
 	if pending != "":
 		pending = ""
@@ -464,40 +595,172 @@ func dismiss() -> void:
 	main_menu.visible = false
 	pause_menu.visible = false
 	storage_page.visible = false
+	sleep_page.visible = false
+	$Root/TradePage.hide()
+	$Root/DailyPage.hide()
 	get_tree().paused = false
 	if world != null:
 		world.release_input = true
 
+const KeyboardNavigation=preload("res://scripts/ui/keyboard_navigation.gd")
+const NAV_KEYS={KEY_LEFT:Vector2i.LEFT,KEY_A:Vector2i.LEFT,KEY_RIGHT:Vector2i.RIGHT,KEY_D:Vector2i.RIGHT,KEY_UP:Vector2i.UP,KEY_W:Vector2i.UP,KEY_DOWN:Vector2i.DOWN,KEY_S:Vector2i.DOWN}
+
 func _focus_default() -> void:
 	if not is_inside_tree() or mode == "" or is_instance_valid(modal):
 		return
+		return
+	if mode=="trade":
+		if $Root/TradePage.submitting:return
+		var current:=get_viewport().gui_get_focus_owner()
+		if current!=null and $Root/TradePage.is_ancestor_of(current) and KeyboardNavigation.eligible(current):return
+		var page=$Root/TradePage
+		var ids=page.BUY if page.direction=="buy" else page.SELL
+		page.get_node("Surface/Items").get_child(maxi(0,ids.find(page.item_id))).grab_focus()
+		return
+	if mode=="daily":
+		$Root/DailyPage/Surface/Close.grab_focus()
+		return
+	if mode == "sleep":
+		$Root/SleepPage/Surface/Cancel.grab_focus()
+		return
 	var focus := get_viewport().gui_get_focus_owner()
-	if focus is Button and focus.is_visible_in_tree() and not focus.disabled:
+	if focus!=null and KeyboardNavigation.eligible(focus):
 		return
 	if surface == null:
 		return
+	if mode=="bag":
+		var button=bag_page.get_node("BagGrid").get_child(selected_index)
+		if not button.disabled:
+			button.grab_focus()
+			return
 	for node in surface.find_children("*", "Button", true, false):
 		var button := node as Button
 		if button.is_visible_in_tree() and not button.disabled:
 			button.grab_focus()
 			return
 
+func _move_bag_cursor(direction: Vector2i) -> bool:
+	var grid := bag_page.get_node("BagGrid")
+	var cell := Vector2i(selected_index % 6,selected_index / 6)+direction
+	while cell.x>=0 and cell.x<6 and cell.y>=0 and cell.y<4:
+		var index := cell.y*6+cell.x
+		var button := grid.get_child(index) as Button
+		if not button.disabled:
+			# Moving the cursor only previews; select_slot would commit a pending move.
+			selected_side="bag"
+			selected_index=index
+			render()
+			button.grab_focus()
+			return true
+		cell+=direction
+	return false
+
+func _focus_navigation_target(target:Control) -> void:
+	if target==null:return
+	if mode=="bag" and bag_page.get_node("BagGrid").is_ancestor_of(target):
+		selected_side="bag"
+		selected_index=target.get_index()
+		render()
+	elif mode=="trade" and $Root/TradePage/Surface/Items.is_ancestor_of(target):
+		$Root/TradePage.select_slot(target.get_index())
+	target.grab_focus()
+
+func _navigate_menu(direction:Vector2i) -> void:
+	var focus:=get_viewport().gui_get_focus_owner()
+	var scope:Node=modal if is_instance_valid(modal) else surface
+	if scope==null:return
+	if focus is Slider and direction.x!=0:
+		focus.value+=direction.x*focus.step
+		return
+	if mode=="bag" and not is_instance_valid(modal):
+		if focus!=null and bag_page.get_node("BagGrid").is_ancestor_of(focus):
+			if _move_bag_cursor(direction):return
+			if pending!="":return
+		if direction==Vector2i.LEFT and focus in [bag_page.get_node("Details/move"),bag_page.get_node("Details/discard")]:
+			_return_to_item()
+			return
+		# Keep vertical action navigation in its column, rather than jumping into the grid.
+		var actions=bag_page.get_node("Details")
+		var target:Control=null
+		if direction.y>0:
+			if focus==actions.get_node("move"):target=actions.get_node("discard")
+			elif focus in [actions.get_node("split"),actions.get_node("discard")]:target=bag_page.get_node("sort")
+		elif direction.y<0 and focus==bag_page.get_node("sort"):
+			target=actions.get_node("discard")
+		if target!=null and KeyboardNavigation.eligible(target):
+			_focus_navigation_target(target)
+			return
+		# From the last filter, right enters actions without changing the selected item.
+		if direction==Vector2i.RIGHT and focus==bag_page.get_node("Filter/filter_4"):
+			for path in ["Details/move","Details/split","Details/discard","sort"]:
+				var button=bag_page.get_node(path)
+				if KeyboardNavigation.eligible(button):
+					_focus_navigation_target(button)
+					return
+	if mode=="trade" and not is_instance_valid(modal):
+		var page=$Root/TradePage
+		var grid=page.get_node("Surface/Items")
+		var ids=page.BUY if page.direction=="buy" else page.SELL
+		var item=grid.get_child(maxi(0,ids.find(page.item_id)))
+		if focus!=null and grid.is_ancestor_of(focus):
+			if direction.x!=0:
+				var index:int=focus.get_index()+direction.x
+				if index>=0 and index<ids.size():_focus_navigation_target(grid.get_child(index))
+			elif direction.y<0:
+				_focus_navigation_target(page.get_node("Surface/BuyTab" if page.direction=="buy" else "Surface/SellTab"))
+			else:
+				var plus=page.get_node("Surface/Plus")
+				_focus_navigation_target(plus if KeyboardNavigation.eligible(plus) else page.get_node("Surface/Minus"))
+			return
+		if direction.y>0 and focus in [page.get_node("Surface/BuyTab"),page.get_node("Surface/SellTab")]:
+			_focus_navigation_target(item)
+			return
+		if direction.y<0 and focus in [page.get_node("Surface/Plus"),page.get_node("Surface/Minus"),page.get_node("Surface/Submit"),page.get_node("Surface/Info")]:
+			_focus_navigation_target(item)
+			return
+	_focus_navigation_target(KeyboardNavigation.next(scope,focus,direction))
+
 func _input(event: InputEvent) -> void:
-	if mode == "" or not event is InputEventKey or not event.pressed or event.echo:
+	if mode == "" or not event is InputEventKey or not event.pressed:
 		return
 	var key: int = event.physical_keycode if event.physical_keycode != 0 else event.keycode
+	if event.echo and key not in NAV_KEYS:return
 	var focus := get_viewport().gui_get_focus_owner()
-	if focus is LineEdit and key not in [KEY_TAB, KEY_ESCAPE]:
+	if focus is LineEdit and not focus.get_parent() is SpinBox and key not in [KEY_TAB, KEY_ESCAPE]:
 		return
-	if key in [KEY_B, KEY_TAB]:
+	if key == KEY_TAB and mode=="trade" and not is_instance_valid(modal):
+		get_viewport().set_input_as_handled()
+		$Root/TradePage.cycle_region(event.shift_pressed)
+	elif key == KEY_TAB and mode in ["bag","profile","settings"] and not is_instance_valid(modal):
+		get_viewport().set_input_as_handled()
+		_tab_bag(event.shift_pressed)
+	elif key in [KEY_B, KEY_TAB, KEY_ESCAPE]:
 		get_viewport().set_input_as_handled()
 		close_menu()
-	elif key == KEY_E:
+	elif key in NAV_KEYS:
 		get_viewport().set_input_as_handled()
-		if focus is Button and not focus.disabled:
+		_navigate_menu(NAV_KEYS[key])
+	elif key == KEY_E:
+		if mode == "sleep" and sleep_wait_release:
+			get_viewport().set_input_as_handled()
+			return
+		get_viewport().set_input_as_handled()
+		if mode=="bag" and not is_instance_valid(modal) and pending=="" and focus!=null and bag_page.get_node("BagGrid").is_ancestor_of(focus):
+			if _selected_slot().id!="":bag_page.get_node("Details/move").grab_focus()
+		elif mode=="trade" and not is_instance_valid(modal) and focus!=null and $Root/TradePage/Surface/Items.is_ancestor_of(focus):
+			$Root/TradePage.enter_actions()
+		elif focus is Button and not focus.disabled:
 			focus.pressed.emit()
 
 func _process(_delta: float) -> void:
+	if mode=="bag" and pause_menu.get_node("Surface/Note").text.begins_with("WASD / 方向键"):
+		var hint="WASD / 方向键选择 · E 物品操作 · Tab 切区 · Esc / B 关闭"
+		if is_instance_valid(modal):hint="WASD / 方向键选择 · E 确认 · Esc / B 取消"
+		elif pending!="":hint="WASD / 方向键选目标 · E 放置 · Esc / B 取消"
+		elif _in_bag_actions(get_viewport().gui_get_focus_owner()):hint="WASD / 方向键选择 · E 确认 · Esc / B 返回物品"
+		pause_menu.get_node("Surface/Note").text=hint
+	if mode == "sleep" and not Input.is_action_pressed("inspect"):
+		sleep_wait_release = false
 	if is_instance_valid(modal):
 		var focus := get_viewport().gui_get_focus_owner()
 		if focus == null or not modal.is_ancestor_of(focus):

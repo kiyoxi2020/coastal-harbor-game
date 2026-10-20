@@ -1,0 +1,258 @@
+{
+  "source": "../visual-polish-v6/atlas-original.png",
+  "method": "crop original GPT pixels; nearest normalization, never upscale v6 16px output",
+  "variants": {
+    "32": {
+      "flowers_white": {
+        "source_cell": [
+          0,
+          550,
+          444,
+          887
+        ],
+        "trim": [
+          126,
+          88,
+          342,
+          270
+        ],
+        "size": [
+          32,
+          28
+        ],
+        "offset": [
+          2,
+          2
+        ],
+        "scale": 0.5,
+        "sprite_offset": [
+          0,
+          -14.0
+        ],
+        "world_size": [
+          16,
+          14
+        ]
+      },
+      "flowers_yellow": {
+        "source_cell": [
+          444,
+          550,
+          887,
+          887
+        ],
+        "trim": [
+          121,
+          93,
+          313,
+          285
+        ],
+        "size": [
+          32,
+          28
+        ],
+        "offset": [
+          4,
+          2
+        ],
+        "scale": 0.5,
+        "sprite_offset": [
+          0,
+          -14.0
+        ],
+        "world_size": [
+          16,
+          14
+        ]
+      },
+      "flowers_pink": {
+        "source_cell": [
+          887,
+          550,
+          1330,
+          887
+        ],
+        "trim": [
+          128,
+          89,
+          316,
+          276
+        ],
+        "size": [
+          32,
+          28
+        ],
+        "offset": [
+          4,
+          2
+        ],
+        "scale": 0.5,
+        "sprite_offset": [
+          0,
+          -14.0
+        ],
+        "world_size": [
+          16,
+          14
+        ]
+      },
+      "flower_edge": {
+        "source_cell": [
+          1330,
+          550,
+          1774,
+          887
+        ],
+        "trim": [
+          119,
+          108,
+          347,
+          275
+        ],
+        "size": [
+          32,
+          28
+        ],
+        "offset": [
+          2,
+          5
+        ],
+        "scale": 0.5,
+        "sprite_offset": [
+          0,
+          -14.0
+        ],
+        "world_size": [
+          16,
+          14
+        ]
+      }
+    },
+    "48": {
+      "flowers_white": {
+        "source_cell": [
+          0,
+          550,
+          444,
+          887
+        ],
+        "trim": [
+          126,
+          88,
+          342,
+          270
+        ],
+        "size": [
+          48,
+          42
+        ],
+        "offset": [
+          3,
+          4
+        ],
+        "scale": 0.3333333333333333,
+        "sprite_offset": [
+          0,
+          -21.0
+        ],
+        "world_size": [
+          16,
+          14
+        ]
+      },
+      "flowers_yellow": {
+        "source_cell": [
+          444,
+          550,
+          887,
+          887
+        ],
+        "trim": [
+          121,
+          93,
+          313,
+          285
+        ],
+        "size": [
+          48,
+          42
+        ],
+        "offset": [
+          6,
+          3
+        ],
+        "scale": 0.3333333333333333,
+        "sprite_offset": [
+          0,
+          -21.0
+        ],
+        "world_size": [
+          16,
+          14
+        ]
+      },
+      "flowers_pink": {
+        "source_cell": [
+          887,
+          550,
+          1330,
+          887
+        ],
+        "trim": [
+          128,
+          89,
+          316,
+          276
+        ],
+        "size": [
+          48,
+          42
+        ],
+        "offset": [
+          6,
+          3
+        ],
+        "scale": 0.3333333333333333,
+        "sprite_offset": [
+          0,
+          -21.0
+        ],
+        "world_size": [
+          16,
+          14
+        ]
+      },
+      "flower_edge": {
+        "source_cell": [
+          1330,
+          550,
+          1774,
+          887
+        ],
+        "trim": [
+          119,
+          108,
+          347,
+          275
+        ],
+        "size": [
+          48,
+          42
+        ],
+        "offset": [
+          3,
+          8
+        ],
+        "scale": 0.3333333333333333,
+        "sprite_offset": [
+          0,
+          -21.0
+        ],
+        "world_size": [
+          16,
+          14
+        ]
+      }
+    }
+  }
+}

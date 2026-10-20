@@ -1,9 +1,10 @@
 extends RefCounted
 
 signal changed
-const SAVE_VERSION := 3
-const SUPPORTED_VERSIONS := [1, 2, 3]
+const SAVE_VERSION := 4
+const SUPPORTED_VERSIONS := [1, 2, 3, 4]
 const Inventory = preload("res://scripts/inventory/inventory_container.gd")
+const Data = preload("res://scripts/harbor_data.gd")
 const Schema = preload("res://scripts/simulation/state_schema.gd")
 var bag = Inventory.new(24)
 var chest = Inventory.new(48)
@@ -39,6 +40,13 @@ func add_item(kind: String, amount: int) -> bool:
 	return amount > 0 and bag.add(kind, amount) == amount
 
 func collect(id: String, kind: String) -> bool:
+	var known := false
+	for pickup in Data.pickups():
+		if pickup.id == id and pickup.kind == kind:
+			known = true
+			break
+	if not known:
+		return false
 	if id.is_empty() or collected.has(id) or bag.space_for(kind) < 1:
 		return false
 	collected[id] = true
@@ -65,6 +73,7 @@ static func valid_data(value) -> bool:
 		return false
 	if not value.get("player_name") is String or clean_name(value.player_name) != value.player_name:
 		return false
+	if int(value.version) == 4: return Schema.validate_v4(value)
 	return Schema.validate_v3(value) if int(value.version) == 3 else Schema.validate_legacy(value)
 
 static func migrate_data(value) -> Dictionary:
@@ -72,7 +81,7 @@ static func migrate_data(value) -> Dictionary:
 		return {}
 	if int(value.version) in [1, 2]:
 		return Schema.migrate_legacy(value)
-	return value.duplicate(true)
+	return Schema.migrate_v3(value) if int(value.version) == 3 else value.duplicate(true)
 
 func restore(value: Dictionary) -> bool:
 	var migrated := migrate_data(value)

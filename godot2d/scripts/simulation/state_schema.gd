@@ -1,10 +1,12 @@
 extends RefCounted
 
+const V3 = preload("res://scripts/simulation/state_schema_v3.gd")
+const Crops = preload("res://scripts/simulation/crop_catalog.gd")
 const Catalog = preload("res://scripts/inventory/item_catalog.gd")
 const Data = preload("res://scripts/harbor_data.gd")
 const INVENTORY_ITEMS := ["clam", "snail", "kelp", "lettuce_seed", "tomato_seed", "lettuce", "tomato"]
 const SEAFOOD := ["clam", "snail", "kelp"]
-const RECEIPT_KINDS := ["trade", "sleep", "plant", "water", "harvest", "collect", "craft", "fertilize", "supply", "open_restaurant"]
+const RECEIPT_KINDS := ["hoe", "trade", "sleep", "plant", "water", "harvest", "collect", "craft", "fertilize", "supply", "open_restaurant"]
 
 static func _integer(value) -> bool:
 	return (value is int or value is float) and not value is bool and is_finite(float(value)) and float(value) == floor(float(value))
@@ -47,10 +49,7 @@ static func default_life() -> Dictionary:
 	return {
 		"day_id":1, "last_settled_day":0, "action_seq":0, "last_receipt":{}, "wallet":100,
 		"accounts":{"market":{"cash":1000, "slots":market_slots, "buy_quota":{"clam":12, "snail":12, "kelp":12, "lettuce":12, "tomato":12}}},
-		"plots":{
-			"plot_a":{"crop_id":"", "growth":0, "watered":false, "fertilized":false},
-			"plot_b":{"crop_id":"", "growth":0, "watered":false, "fertilized":false}
-		},
+		"plots":default_cells(),
 		"events":[], "daily_reports":[]
 	}.duplicate(true)
 
@@ -74,7 +73,7 @@ static func _valid_common(data: Dictionary, version: int, allowed_items: Array) 
 	var expected := ["version", "location", "player_name", "bag", "chest", "collected", "discovered", "total_collected", "position"]
 	if version == 1:
 		expected.erase("location")
-	elif version == 3:
+	elif version >= 3:
 		expected.append("life")
 	if not _exact_keys(data, expected) or data.version != version:
 		return false
@@ -127,17 +126,29 @@ static func _valid_receipt(receipt: Dictionary, sequence: int) -> bool:
 		return receipt.is_empty()
 	return _exact_keys(receipt, ["request_id", "kind", "args"]) and _integer(receipt.request_id) and receipt.request_id == sequence and receipt.kind is String and receipt.kind in RECEIPT_KINDS and receipt.args is Dictionary
 
+static func cell_ids() -> Array[String]:
+	var result: Array[String] = []
+	for region in ["garden_a", "garden_b"]:
+		for y in range(2):
+			for x in range(4):
+				result.append("%s:%d:%d" % [region, x, y])
+	return result
+
+static func default_cells() -> Dictionary:
+	var result := {}
+	for id in cell_ids():
+		result[id] = {"tilled":false, "crop_id":"", "growth":0, "watered":false, "fertilized":false}
+	return result
+
 static func _valid_plot(plot: Dictionary) -> bool:
-	if not _exact_keys(plot, ["crop_id", "growth", "watered", "fertilized"]):
-		return false
-	if not plot.crop_id is String or plot.crop_id not in ["", "lettuce", "tomato"] or not _bounded_integer(plot.growth, 0, 4):
-		return false
-	if not plot.watered is bool or not plot.fertilized is bool:
-		return false
-	if plot.crop_id == "":
-		return plot.growth == 0 and not plot.watered and not plot.fertilized
-	var mature_at := 2 if plot.crop_id == "lettuce" else 4
-	return plot.growth <= mature_at and (plot.growth < mature_at or (not plot.watered and not plot.fertilized))
+	if not _exact_keys(plot, ["tilled", "crop_id", "growth", "watered", "fertilized"]): return false
+	if not plot.tilled is bool or not plot.watered is bool or not plot.fertilized is bool: return false
+	if not plot.crop_id is String or plot.crop_id not in ["", "lettuce", "tomato"] or not _bounded_integer(plot.growth, 0, 4): return false
+	if not plot.tilled:
+		return plot.crop_id == "" and plot.growth == 0 and not plot.watered and not plot.fertilized
+	if plot.crop_id == "": return plot.growth == 0 and not plot.fertilized
+	var mature_at: int = Crops.get_crop(plot.crop_id).growth_days
+	return plot.growth <= mature_at and (plot.growth < mature_at or not plot.fertilized)
 
 static func _valid_reports(reports: Array, current_day: int) -> bool:
 	if reports.size() > 30:
@@ -157,7 +168,7 @@ static func _valid_reports(reports: Array, current_day: int) -> bool:
 			return false
 		var unique_plots: Dictionary = {}
 		for id in report.mature_plots:
-			if not id is String or id not in ["plot_a", "plot_b"]:
+			if not id is String or id not in cell_ids():
 				return false
 			if unique_plots.has(id):
 				return false
@@ -173,7 +184,12 @@ static func _valid_events(events: Array, current_day: int) -> bool:
 		return false
 	var ids: Dictionary = {}
 	for event in events:
-		if not event is Dictionary or not _exact_keys(event, ["event_id", "day_id", "kind", "source", "target", "items", "cash", "reason"]):
+		if not event is Dictionary:
+			return false
+		var fields := ["event_id", "day_id", "kind", "source", "target", "items", "cash", "reason"]
+		if event.get("kind") == "production":
+			fields.append_array(["inputs", "outputs"])
+		if not _exact_keys(event, fields):
 			return false
 		if not event.event_id is String or event.event_id.is_empty() or ids.has(event.event_id):
 			return false
@@ -185,13 +201,19 @@ static func _valid_events(events: Array, current_day: int) -> bool:
 				return false
 		if not event.items is Dictionary:
 			return false
-		for id in event.items:
-			if not id is String or id not in INVENTORY_ITEMS or not _bounded_integer(event.items[id], 1, 1000000):
+		var item_maps: Array = [event.items]
+		if event.kind == "production":
+			if not event.inputs is Dictionary or not event.outputs is Dictionary or event.outputs.is_empty() or event.items != event.outputs:
 				return false
+			item_maps.append_array([event.inputs, event.outputs])
+		for items in item_maps:
+			for id in items:
+				if not id is String or id not in INVENTORY_ITEMS or not _bounded_integer(items[id], 1, 1000000):
+					return false
 	return true
 
-static func validate_v3(data: Dictionary) -> bool:
-	if not _valid_common(data, 3, INVENTORY_ITEMS):
+static func validate_v4(data: Dictionary) -> bool:
+	if not _valid_common(data, 4, INVENTORY_ITEMS):
 		return false
 	if not _exact_keys(data, ["version", "location", "player_name", "bag", "chest", "collected", "discovered", "total_collected", "position", "life"]):
 		return false
@@ -227,7 +249,7 @@ static func validate_v3(data: Dictionary) -> bool:
 	for quota in market.buy_quota.values():
 		if not _bounded_integer(quota, 0, 12):
 			return false
-	if not life.plots is Dictionary or not _exact_keys(life.plots, ["plot_a", "plot_b"]):
+	if not life.plots is Dictionary or not _exact_keys(life.plots, cell_ids()):
 		return false
 	for plot in life.plots.values():
 		if not plot is Dictionary or not _valid_plot(plot):
@@ -238,12 +260,25 @@ static func validate_v3(data: Dictionary) -> bool:
 		return false
 	return true
 
+# The v3 contract is frozen and remains strict; never validate old bytes as v4.
+static func validate_v3(data: Dictionary) -> bool:
+	return V3.validate_v3(data)
+
 static func migrate_legacy(data: Dictionary) -> Dictionary:
-	if not validate_legacy(data):
-		return {}
+	return migrate_v3(V3.migrate_legacy(data))
+
+static func migrate_v3(data: Dictionary) -> Dictionary:
+	if not V3.validate_v3(data): return {}
 	var result := data.duplicate(true)
-	if result.version == 1:
-		result["location"] = "harbor"
-	result["version"] = 3
-	result["life"] = default_life()
-	return result if validate_v3(result) else {}
+	result.version = 4
+	result.life.plots = default_cells()
+	var mapping := {"plot_a":"garden_a:0:0", "plot_b":"garden_b:0:0"}
+	for old_id in mapping:
+		var cell: Dictionary = data.life.plots[old_id].duplicate(true)
+		cell["tilled"] = cell.crop_id != ""
+		result.life.plots[mapping[old_id]] = cell
+	for report in result.life.daily_reports:
+		for index in range(report.mature_plots.size()):
+			report.mature_plots[index] = mapping[report.mature_plots[index]]
+	# Keep historical events and last_receipt byte-equivalent for audit and retries.
+	return result if validate_v4(result) else {}

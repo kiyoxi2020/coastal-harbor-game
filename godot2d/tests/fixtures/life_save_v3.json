@@ -1,0 +1,537 @@
+{
+  "version": 3,
+  "location": "house",
+  "player_name": "屋中人",
+  "bag": [
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    }
+  ],
+  "chest": [
+    {
+      "id": "snail",
+      "amount": 1
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    },
+    {
+      "id": "",
+      "amount": 0
+    }
+  ],
+  "collected": {
+    "snail_a": true
+  },
+  "discovered": {
+    "snail": true
+  },
+  "total_collected": 1,
+  "position": [
+    320,
+    328
+  ],
+  "life": {
+    "day_id": 1,
+    "last_settled_day": 0,
+    "action_seq": 0,
+    "last_receipt": {},
+    "wallet": 100,
+    "accounts": {
+      "market": {
+        "cash": 1000,
+        "slots": [
+          {
+            "id": "lettuce_seed",
+            "amount": 20
+          },
+          {
+            "id": "tomato_seed",
+            "amount": 20
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          },
+          {
+            "id": "",
+            "amount": 0
+          }
+        ],
+        "buy_quota": {
+          "clam": 12,
+          "snail": 12,
+          "kelp": 12,
+          "lettuce": 12,
+          "tomato": 12
+        }
+      }
+    },
+    "plots": {
+      "plot_a": {
+        "crop_id": "",
+        "growth": 0,
+        "watered": false,
+        "fertilized": false
+      },
+      "plot_b": {
+        "crop_id": "",
+        "growth": 0,
+        "watered": false,
+        "fertilized": false
+      }
+    },
+    "events": [],
+    "daily_reports": []
+  }
+}

@@ -1,0 +1,379 @@
+{
+  "source": "art/design/farming-grid-v2/production-atlas-v1.png",
+  "source_size": [
+    1254,
+    1254
+  ],
+  "tool": "built-in GPT imagegen",
+  "processing": "Fixed 4x4 extraction, alpha bounding-box trim, nearest resize only. No hand-drawn replacements.",
+  "sprites": {
+    "soil_dry": {
+      "source_cell": [
+        0,
+        0,
+        314,
+        314
+      ],
+      "trim": [
+        76,
+        73,
+        294,
+        301
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "root_anchor": [
+        8.0,
+        16
+      ],
+      "collision": null
+    },
+    "soil_wet": {
+      "source_cell": [
+        314,
+        0,
+        627,
+        314
+      ],
+      "trim": [
+        58,
+        73,
+        285,
+        301
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "root_anchor": [
+        8.0,
+        16
+      ],
+      "collision": null
+    },
+    "seed": {
+      "source_cell": [
+        627,
+        0,
+        940,
+        314
+      ],
+      "trim": [
+        96,
+        165,
+        218,
+        259
+      ],
+      "size": [
+        6,
+        5
+      ],
+      "root_anchor": [
+        3.0,
+        5
+      ],
+      "collision": null
+    },
+    "sprout": {
+      "source_cell": [
+        940,
+        0,
+        1254,
+        314
+      ],
+      "trim": [
+        48,
+        160,
+        226,
+        284
+      ],
+      "size": [
+        8,
+        8
+      ],
+      "root_anchor": [
+        4.0,
+        8
+      ],
+      "collision": null
+    },
+    "lettuce_young": {
+      "source_cell": [
+        0,
+        314,
+        314,
+        627
+      ],
+      "trim": [
+        70,
+        99,
+        289,
+        313
+      ],
+      "size": [
+        14,
+        14
+      ],
+      "root_anchor": [
+        7.0,
+        14
+      ],
+      "collision": null
+    },
+    "lettuce_mature": {
+      "source_cell": [
+        314,
+        314,
+        627,
+        627
+      ],
+      "trim": [
+        29,
+        84,
+        299,
+        313
+      ],
+      "size": [
+        14,
+        14
+      ],
+      "root_anchor": [
+        7.0,
+        14
+      ],
+      "collision": null
+    },
+    "tomato_young": {
+      "source_cell": [
+        627,
+        314,
+        940,
+        627
+      ],
+      "trim": [
+        42,
+        56,
+        257,
+        313
+      ],
+      "size": [
+        14,
+        24
+      ],
+      "root_anchor": [
+        7.0,
+        24
+      ],
+      "collision": null
+    },
+    "tomato_mature": {
+      "source_cell": [
+        940,
+        314,
+        1254,
+        627
+      ],
+      "trim": [
+        22,
+        15,
+        266,
+        313
+      ],
+      "size": [
+        14,
+        24
+      ],
+      "root_anchor": [
+        7.0,
+        24
+      ],
+      "collision": null
+    },
+    "flowers_white": {
+      "source_cell": [
+        0,
+        627,
+        314,
+        940
+      ],
+      "trim": [
+        61,
+        0,
+        294,
+        312
+      ],
+      "size": [
+        16,
+        14
+      ],
+      "root_anchor": [
+        8.0,
+        14
+      ],
+      "collision": null
+    },
+    "flowers_yellow": {
+      "source_cell": [
+        314,
+        627,
+        627,
+        940
+      ],
+      "trim": [
+        33,
+        0,
+        289,
+        313
+      ],
+      "size": [
+        16,
+        14
+      ],
+      "root_anchor": [
+        8.0,
+        14
+      ],
+      "collision": null
+    },
+    "flowers_pink": {
+      "source_cell": [
+        627,
+        627,
+        940,
+        940
+      ],
+      "trim": [
+        32,
+        0,
+        282,
+        311
+      ],
+      "size": [
+        16,
+        14
+      ],
+      "root_anchor": [
+        8.0,
+        14
+      ],
+      "collision": null
+    },
+    "grass": {
+      "source_cell": [
+        940,
+        627,
+        1254,
+        940
+      ],
+      "trim": [
+        15,
+        0,
+        270,
+        313
+      ],
+      "size": [
+        16,
+        14
+      ],
+      "root_anchor": [
+        8.0,
+        14
+      ],
+      "collision": null
+    },
+    "pebbles": {
+      "source_cell": [
+        0,
+        940,
+        314,
+        1254
+      ],
+      "trim": [
+        86,
+        129,
+        257,
+        237
+      ],
+      "size": [
+        16,
+        14
+      ],
+      "root_anchor": [
+        8.0,
+        14
+      ],
+      "collision": null
+    },
+    "moss_rock": {
+      "source_cell": [
+        314,
+        940,
+        627,
+        1254
+      ],
+      "trim": [
+        42,
+        89,
+        258,
+        250
+      ],
+      "size": [
+        16,
+        14
+      ],
+      "root_anchor": [
+        8.0,
+        14
+      ],
+      "collision": null
+    },
+    "stone_chips": {
+      "source_cell": [
+        627,
+        940,
+        940,
+        1254
+      ],
+      "trim": [
+        56,
+        104,
+        254,
+        250
+      ],
+      "size": [
+        16,
+        14
+      ],
+      "root_anchor": [
+        8.0,
+        14
+      ],
+      "collision": null
+    },
+    "flower_edge": {
+      "source_cell": [
+        940,
+        940,
+        1254,
+        1254
+      ],
+      "trim": [
+        17,
+        0,
+        268,
+        263
+      ],
+      "size": [
+        16,
+        14
+      ],
+      "root_anchor": [
+        8.0,
+        14
+      ],
+      "collision": null
+    }
+  }
+}

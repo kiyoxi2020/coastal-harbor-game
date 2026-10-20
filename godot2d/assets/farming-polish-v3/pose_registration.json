@@ -1,0 +1,270 @@
+{
+  "reference": "res://resources/player_frames.tres",
+  "method": "Per-direction brown hair width, yellow boot center/baseline; tools and droplets excluded. No bitmap rescaling.",
+  "poses": {
+    "hoe_south": {
+      "head_bounds": [
+        107,
+        45,
+        214,
+        160
+      ],
+      "boots_bounds": [
+        90,
+        199,
+        238,
+        286
+      ],
+      "reference_head_world_width": 14.41537,
+      "scale": 0.13472308411214953,
+      "root_anchor": [
+        164.0,
+        286
+      ],
+      "baseline_world_y": -1.5271074999999996,
+      "pinned_from": 0.621875
+    },
+    "water_south": {
+      "head_bounds": [
+        99,
+        44,
+        211,
+        160
+      ],
+      "boots_bounds": [
+        116,
+        199,
+        225,
+        300
+      ],
+      "reference_head_world_width": 14.41537,
+      "scale": 0.12870866071428572,
+      "root_anchor": [
+        170.5,
+        300
+      ],
+      "baseline_world_y": -1.5271074999999996,
+      "pinned_from": 0.621875
+    },
+    "harvest_south": {
+      "head_bounds": [
+        102,
+        42,
+        218,
+        160
+      ],
+      "boots_bounds": [
+        91,
+        199,
+        231,
+        241
+      ],
+      "reference_head_world_width": 14.41537,
+      "scale": 0.12427043103448275,
+      "root_anchor": [
+        161.0,
+        241
+      ],
+      "baseline_world_y": -1.5271074999999996,
+      "pinned_from": 0.621875
+    },
+    "hoe_west": {
+      "head_bounds": [
+        81,
+        43,
+        194,
+        160
+      ],
+      "boots_bounds": [
+        74,
+        199,
+        247,
+        294
+      ],
+      "reference_head_world_width": 15.642209999999999,
+      "scale": 0.13842663716814158,
+      "root_anchor": [
+        160.5,
+        294
+      ],
+      "baseline_world_y": -1.603785000000002,
+      "pinned_from": 0.621875
+    },
+    "water_west": {
+      "head_bounds": [
+        88,
+        42,
+        210,
+        160
+      ],
+      "boots_bounds": [
+        130,
+        199,
+        243,
+        306
+      ],
+      "reference_head_world_width": 15.642209999999999,
+      "scale": 0.12821483606557377,
+      "root_anchor": [
+        186.5,
+        306
+      ],
+      "baseline_world_y": -1.603785000000002,
+      "pinned_from": 0.621875
+    },
+    "harvest_west": {
+      "head_bounds": [
+        74,
+        41,
+        200,
+        158
+      ],
+      "boots_bounds": [
+        100,
+        199,
+        240,
+        252
+      ],
+      "reference_head_world_width": 15.642209999999999,
+      "scale": 0.1241445238095238,
+      "root_anchor": [
+        170.0,
+        252
+      ],
+      "baseline_world_y": -1.603785000000002,
+      "pinned_from": 0.621875
+    },
+    "hoe_east": {
+      "head_bounds": [
+        124,
+        42,
+        234,
+        159
+      ],
+      "boots_bounds": [
+        74,
+        199,
+        247,
+        294
+      ],
+      "reference_head_world_width": 14.722079999999998,
+      "scale": 0.1338370909090909,
+      "root_anchor": [
+        160.5,
+        294
+      ],
+      "baseline_world_y": -1.6804625000000009,
+      "pinned_from": 0.621875
+    },
+    "water_east": {
+      "head_bounds": [
+        108,
+        42,
+        224,
+        160
+      ],
+      "boots_bounds": [
+        78,
+        199,
+        191,
+        306
+      ],
+      "reference_head_world_width": 14.722079999999998,
+      "scale": 0.12691448275862066,
+      "root_anchor": [
+        134.5,
+        306
+      ],
+      "baseline_world_y": -1.6804625000000009,
+      "pinned_from": 0.621875
+    },
+    "harvest_east": {
+      "head_bounds": [
+        118,
+        43,
+        245,
+        159
+      ],
+      "boots_bounds": [
+        80,
+        199,
+        220,
+        252
+      ],
+      "reference_head_world_width": 14.722079999999998,
+      "scale": 0.11592188976377951,
+      "root_anchor": [
+        150.0,
+        252
+      ],
+      "baseline_world_y": -1.6804625000000009,
+      "pinned_from": 0.621875
+    },
+    "hoe_north": {
+      "head_bounds": [
+        103,
+        46,
+        212,
+        140
+      ],
+      "boots_bounds": [
+        99,
+        213,
+        224,
+        294
+      ],
+      "reference_head_world_width": 14.108659999999999,
+      "scale": 0.129437247706422,
+      "root_anchor": [
+        161.5,
+        294
+      ],
+      "baseline_world_y": -4.82424,
+      "pinned_from": 0.665625
+    },
+    "water_north": {
+      "head_bounds": [
+        105,
+        42,
+        216,
+        136
+      ],
+      "boots_bounds": [
+        135,
+        199,
+        217,
+        306
+      ],
+      "reference_head_world_width": 14.108659999999999,
+      "scale": 0.12710504504504502,
+      "root_anchor": [
+        176.0,
+        306
+      ],
+      "baseline_world_y": -4.82424,
+      "pinned_from": 0.621875
+    },
+    "harvest_north": {
+      "head_bounds": [
+        109,
+        43,
+        226,
+        136
+      ],
+      "boots_bounds": [
+        99,
+        200,
+        228,
+        261
+      ],
+      "reference_head_world_width": 14.108659999999999,
+      "scale": 0.1205868376068376,
+      "root_anchor": [
+        163.5,
+        261
+      ],
+      "baseline_world_y": -4.82424,
+      "pinned_from": 0.625
+    }
+  }
+}

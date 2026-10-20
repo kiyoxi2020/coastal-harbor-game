@@ -198,7 +198,7 @@ func run_batch_2() -> void:
 	continue_button.add_theme_color_override("font_color", Color("7ad7ff"))
 	var tab_button := journal.get_node("Root/PauseMenu/Surface/Tabs/tab_bag") as Button
 	var slot_button := journal.get_node("Root/PauseMenu/Surface/BagPage/BagGrid/bag_0") as Button
-	var slot_icon := slot_button.get_node("Icon") as Node2D
+	var slot_icon := slot_button.get_node("Icon") as Control
 	var note_label := journal.get_node("Root/PauseMenu/Surface/Note") as Label
 	var close_button := journal.get_node("Root/PauseMenu/Surface/close") as Button
 	var tab_style := StyleBoxFlat.new()

@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="StyleBox" path="res://resources/ui/pixel_teal.tres" id="2_teal"]
+[ext_resource type="Texture2D" path="res://assets/ui/trade-v5/confirm.png" id="teal"]
+[sub_resource type="StyleBoxTexture" id="teal_style"]
+texture = ExtResource("teal")
 
 [node name="ItemDetails" type="Control"]
 layout_mode = 0
@@ -11,7 +13,7 @@ offset_bottom = 340.0
 layout_mode = 0
 offset_right = 424.0
 offset_bottom = 44.0
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 26
 text = "选择一个格子"
 
 [node name="Description" type="Label" parent="."]
@@ -19,6 +21,7 @@ layout_mode = 0
 offset_top = 54.0
 offset_right = 424.0
 offset_bottom = 202.0
+theme_override_font_sizes/font_size = 20
 text = "选中物品可查看用途和操作。\n\n整理不会改变物品总数。"
 autowrap_mode = 2
 
@@ -36,7 +39,9 @@ offset_top = 210.0
 offset_right = 210.0
 offset_bottom = 254.0
 text = "移动 / 合并"
-theme_override_styles/normal = ExtResource("2_teal")
+theme_override_styles/normal = SubResource("teal_style")
+theme_override_colors/font_color = Color(1,0.96,0.85,1)
+theme_override_colors/font_focus_color = Color(1,0.96,0.85,1)
 
 [node name="split" type="Button" parent="."]
 layout_mode = 0

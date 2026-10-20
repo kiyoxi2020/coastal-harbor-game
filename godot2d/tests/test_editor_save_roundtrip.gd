@@ -8,7 +8,7 @@ func _initialize() -> void:
 	var error := packed.pack(original)
 	var restored = packed.instantiate()
 	var failures := 0
-	for name in ["Market", "GardenA", "GardenB", "Crates", "Boat", "StorageCrates", "CoastalTree0", "CoastalTree1", "CoastalTree2", "CoastalTree3", "CoastalTree4"]:
+	for name in ["Market", "Crates", "Boat", "CoastalTree0", "CoastalTree1", "CoastalTree2", "CoastalTree3", "CoastalTree4"]:
 		var path: String = "DepthSortedObjects/" + name + "/Sprite2D"
 		var before: Sprite2D = original.get_node(path)
 		var after: Sprite2D = restored.get_node(path)

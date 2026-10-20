@@ -36,3 +36,7 @@ func show_toast(text: String, seconds: float = 2.0) -> void:
 func _process(delta: float) -> void:
 	toast_remaining = maxf(0.0,toast_remaining-delta)
 	toast.visible = toast_remaining > 0.0 and not panel.visible
+
+func update_life(life:Dictionary) -> void:
+	$Root/Top/Date.text="第%d日"%life.day_id
+	$Root/Top/Wallet.text="%d G"%life.wallet

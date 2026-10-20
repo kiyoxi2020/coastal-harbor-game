@@ -141,7 +141,7 @@ func run() -> void:
 	reject("buy_seafood", state, args("buy", "clam", 1), "not_allowed")
 	reject("sell_seed", state, args("sell", "lettuce_seed", 1), "not_allowed")
 	reject("invalid_direction", state, args("gift"), "not_allowed")
-	reject("unknown_action", state, {}, "unknown_action", 1, "sleep")
+	reject("unknown_action", state, {}, "unknown_action", 1, "craft")
 	state.life.wallet = -1
 	reject("invalid_current", state, args(), "invalid_state")
 	state = State.new()
@@ -236,10 +236,8 @@ func world_checks() -> void:
 		before = world.foraging.to_data(world.player.position)
 		result = world.perform_action("trade", args(), 1)
 		check("world_missing_market_guard", not result.ok and result.code == "not_allowed" and world.foraging.to_data(world.player.position) == before)
-		# A synthetic page enables command-boundary checks only; this is not P06 UI acceptance.
-		var page := Control.new()
-		page.name = "TradePage"
-		world.journal.get_node("Root").add_child(page)
+		# Use the production page for command-boundary checks.
+		var page = world.journal.get_node("Root/TradePage")
 		world.journal.mode = "trade"
 		world.journal.root.show()
 		page.show()

@@ -1,41 +1,234 @@
-[gd_scene load_steps=9 format=3 uid="uid://dwjkccutgf7r4"]
+[gd_scene format=3 uid="uid://dwjkccutgf7r4"]
 
 [ext_resource type="Script" uid="uid://cwukmhnqtsk1u" path="res://scripts/harbor.gd" id="1"]
-[ext_resource type="Script" path="res://scripts/world_camera.gd" id="2_camera"]
+[ext_resource type="Script" uid="uid://bkommfpitntwg" path="res://scripts/world_camera.gd" id="2_camera"]
+[ext_resource type="Shader" uid="uid://cj1uo6ahqspd1" path="res://resources/world/farm_soil.gdshader" id="3_d4hfs"]
 [ext_resource type="PackedScene" path="res://scenes/world/harbor_exterior.tscn" id="3_exterior"]
 [ext_resource type="PackedScene" path="res://scenes/world/house_interior.tscn" id="4_interior"]
 [ext_resource type="PackedScene" path="res://scenes/actors/player.tscn" id="5_player"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="6_hud"]
 [ext_resource type="PackedScene" path="res://scenes/ui/journal.tscn" id="7_journal"]
-[ext_resource type="Script" path="res://scripts/house_session.gd" id="8_session"]
+[ext_resource type="Script" uid="uid://lpdyhgvkd2dr" path="res://scripts/house_session.gd" id="8_session"]
 [ext_resource type="PackedScene" path="res://scenes/ui/transition_overlay.tscn" id="9_transition"]
+[ext_resource type="PackedScene" path="res://scenes/ui/farm_tools.tscn" id="10_farm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d4hfs"]
+resource_local_to_scene = true
+shader = ExtResource("3_d4hfs")
+shader_parameter/join_left = false
+shader_parameter/join_right = false
+shader_parameter/join_top = false
+shader_parameter/join_bottom = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ex2st"]
+resource_local_to_scene = true
+shader = ExtResource("3_d4hfs")
+shader_parameter/join_left = false
+shader_parameter/join_right = false
+shader_parameter/join_top = false
+shader_parameter/join_bottom = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pljfh"]
+resource_local_to_scene = true
+shader = ExtResource("3_d4hfs")
+shader_parameter/join_left = false
+shader_parameter/join_right = false
+shader_parameter/join_top = false
+shader_parameter/join_bottom = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qytud"]
+resource_local_to_scene = true
+shader = ExtResource("3_d4hfs")
+shader_parameter/join_left = false
+shader_parameter/join_right = false
+shader_parameter/join_top = false
+shader_parameter/join_bottom = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yuelf"]
+resource_local_to_scene = true
+shader = ExtResource("3_d4hfs")
+shader_parameter/join_left = false
+shader_parameter/join_right = false
+shader_parameter/join_top = false
+shader_parameter/join_bottom = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_06fma"]
+resource_local_to_scene = true
+shader = ExtResource("3_d4hfs")
+shader_parameter/join_left = false
+shader_parameter/join_right = false
+shader_parameter/join_top = false
+shader_parameter/join_bottom = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x8dif"]
+resource_local_to_scene = true
+shader = ExtResource("3_d4hfs")
+shader_parameter/join_left = false
+shader_parameter/join_right = false
+shader_parameter/join_top = false
+shader_parameter/join_bottom = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_to2tm"]
+resource_local_to_scene = true
+shader = ExtResource("3_d4hfs")
+shader_parameter/join_left = false
+shader_parameter/join_right = false
+shader_parameter/join_top = false
+shader_parameter/join_bottom = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x6xh0"]
+resource_local_to_scene = true
+shader = ExtResource("3_d4hfs")
+shader_parameter/join_left = false
+shader_parameter/join_right = false
+shader_parameter/join_top = false
+shader_parameter/join_bottom = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_amevc"]
+resource_local_to_scene = true
+shader = ExtResource("3_d4hfs")
+shader_parameter/join_left = false
+shader_parameter/join_right = false
+shader_parameter/join_top = false
+shader_parameter/join_bottom = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_le6ba"]
+resource_local_to_scene = true
+shader = ExtResource("3_d4hfs")
+shader_parameter/join_left = false
+shader_parameter/join_right = false
+shader_parameter/join_top = false
+shader_parameter/join_bottom = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_umck7"]
+resource_local_to_scene = true
+shader = ExtResource("3_d4hfs")
+shader_parameter/join_left = false
+shader_parameter/join_right = false
+shader_parameter/join_top = false
+shader_parameter/join_bottom = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_atapp"]
+resource_local_to_scene = true
+shader = ExtResource("3_d4hfs")
+shader_parameter/join_left = false
+shader_parameter/join_right = false
+shader_parameter/join_top = false
+shader_parameter/join_bottom = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ipob6"]
+resource_local_to_scene = true
+shader = ExtResource("3_d4hfs")
+shader_parameter/join_left = false
+shader_parameter/join_right = false
+shader_parameter/join_top = false
+shader_parameter/join_bottom = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6hbcu"]
+resource_local_to_scene = true
+shader = ExtResource("3_d4hfs")
+shader_parameter/join_left = false
+shader_parameter/join_right = false
+shader_parameter/join_top = false
+shader_parameter/join_bottom = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4n1ub"]
+resource_local_to_scene = true
+shader = ExtResource("3_d4hfs")
+shader_parameter/join_left = false
+shader_parameter/join_right = false
+shader_parameter/join_top = false
+shader_parameter/join_bottom = false
 
 [node name="Harbor" type="Node2D" unique_id=149206743]
 texture_filter = 1
 script = ExtResource("1")
 
-[node name="HarborExterior" parent="." instance=ExtResource("3_exterior")]
+[node name="HarborExterior" parent="." unique_id=1775228999 instance=ExtResource("3_exterior")]
 
-[node name="Returnee" parent="HarborExterior/DepthSortedObjects" instance=ExtResource("5_player")]
+[node name="Soil" parent="HarborExterior/DepthSortedObjects/GardenA/Cell00" index="0"]
+material = SubResource("ShaderMaterial_d4hfs")
+
+[node name="Soil" parent="HarborExterior/DepthSortedObjects/GardenA/Cell10" index="0"]
+material = SubResource("ShaderMaterial_ex2st")
+
+[node name="Soil" parent="HarborExterior/DepthSortedObjects/GardenA/Cell20" index="0"]
+material = SubResource("ShaderMaterial_pljfh")
+
+[node name="Soil" parent="HarborExterior/DepthSortedObjects/GardenA/Cell30" index="0"]
+material = SubResource("ShaderMaterial_qytud")
+
+[node name="Soil" parent="HarborExterior/DepthSortedObjects/GardenA/Cell01" index="0"]
+material = SubResource("ShaderMaterial_yuelf")
+
+[node name="Soil" parent="HarborExterior/DepthSortedObjects/GardenA/Cell11" index="0"]
+material = SubResource("ShaderMaterial_06fma")
+
+[node name="Soil" parent="HarborExterior/DepthSortedObjects/GardenA/Cell21" index="0"]
+material = SubResource("ShaderMaterial_x8dif")
+
+[node name="Soil" parent="HarborExterior/DepthSortedObjects/GardenA/Cell31" index="0"]
+material = SubResource("ShaderMaterial_to2tm")
+
+[node name="Soil" parent="HarborExterior/DepthSortedObjects/GardenB/Cell00" index="0"]
+material = SubResource("ShaderMaterial_x6xh0")
+
+[node name="Soil" parent="HarborExterior/DepthSortedObjects/GardenB/Cell10" index="0"]
+material = SubResource("ShaderMaterial_amevc")
+
+[node name="Soil" parent="HarborExterior/DepthSortedObjects/GardenB/Cell20" index="0"]
+material = SubResource("ShaderMaterial_le6ba")
+
+[node name="Soil" parent="HarborExterior/DepthSortedObjects/GardenB/Cell30" index="0"]
+material = SubResource("ShaderMaterial_umck7")
+
+[node name="Soil" parent="HarborExterior/DepthSortedObjects/GardenB/Cell01" index="0"]
+material = SubResource("ShaderMaterial_atapp")
+
+[node name="Soil" parent="HarborExterior/DepthSortedObjects/GardenB/Cell11" index="0"]
+material = SubResource("ShaderMaterial_ipob6")
+
+[node name="Soil" parent="HarborExterior/DepthSortedObjects/GardenB/Cell21" index="0"]
+material = SubResource("ShaderMaterial_6hbcu")
+
+[node name="Soil" parent="HarborExterior/DepthSortedObjects/GardenB/Cell31" index="0"]
+material = SubResource("ShaderMaterial_4n1ub")
+
+[node name="Returnee" parent="HarborExterior/DepthSortedObjects" index="27" unique_id=1635879996 instance=ExtResource("5_player")]
 position = Vector2(330, 250)
 
-[node name="HouseInterior" parent="." instance=ExtResource("4_interior")]
+[node name="HouseInterior" parent="." unique_id=1923490067 instance=ExtResource("4_interior")]
 process_mode = 4
 visible = false
 
-[node name="WorldCamera" type="Camera2D" parent="." node_paths=PackedStringArray("exterior")]
+[node name="WorldCamera" type="Camera2D" parent="." unique_id=1624107435 node_paths=PackedStringArray("exterior")]
 zoom = Vector2(4, 4)
-position_smoothing_enabled = false
 script = ExtResource("2_camera")
 exterior = NodePath("../HarborExterior")
 
-[node name="HUD" parent="." instance=ExtResource("6_hud")]
+[node name="HUD" parent="." unique_id=878807848 instance=ExtResource("6_hud")]
+transform = Transform2D(2, 0, 0, 2, 0, 0)
 
-[node name="Journal" parent="." instance=ExtResource("7_journal")]
+[node name="Journal" parent="." unique_id=154905069 instance=ExtResource("7_journal")]
+transform = Transform2D(2, 0, 0, 2, 0, 0)
 
-[node name="HouseSession" type="Node" parent="."]
+[node name="HouseSession" type="Node" parent="." unique_id=1843861517]
 script = ExtResource("8_session")
 
-[node name="RoomTransition" parent="HouseSession" instance=ExtResource("9_transition")]
+[node name="RoomTransition" parent="HouseSession" unique_id=183056868 instance=ExtResource("9_transition")]
+
+[node name="FarmTools" parent="." unique_id=415364724 instance=ExtResource("10_farm")]
+visible = true
+transform = Transform2D(2, 0, 0, 2, 0, 0)
 
 [editable path="HarborExterior"]
+[editable path="HarborExterior/DepthSortedObjects/Market"]
+[editable path="HarborExterior/DepthSortedObjects/GardenA"]
+[editable path="HarborExterior/DepthSortedObjects/GardenB"]
+[editable path="HarborExterior/DepthSortedObjects/Crates"]
+[editable path="HarborExterior/DepthSortedObjects/Boat"]
+[editable path="HarborExterior/DepthSortedObjects/CoastalTree0"]
+[editable path="HarborExterior/DepthSortedObjects/CoastalTree1"]
+[editable path="HarborExterior/DepthSortedObjects/CoastalTree2"]
+[editable path="HarborExterior/DepthSortedObjects/CoastalTree3"]
+[editable path="HarborExterior/DepthSortedObjects/CoastalTree4"]

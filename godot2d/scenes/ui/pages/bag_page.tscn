@@ -247,3 +247,11 @@ offset_top = 394.0
 offset_right = 1066.0
 offset_bottom = 440.0
 text = "整理全部"
+
+[node name="return_item" type="Button" parent="."]
+layout_mode = 0
+offset_left = 856.0
+offset_top = 328.0
+offset_right = 1058.0
+offset_bottom = 372.0
+text = "返回物品"

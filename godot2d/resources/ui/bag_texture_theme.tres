@@ -1,0 +1,30 @@
+[gd_resource type="Theme" format=3 uid="uid://d14570iaiqj4n"]
+
+[ext_resource type="Texture2D" uid="uid://drxlcstpxl4x7" path="res://assets/ui/trade-v5/active.png" id="active"]
+[ext_resource type="StyleBox" path="res://resources/ui/pixel_focus.tres" id="nav_focus"]
+[ext_resource type="Texture2D" uid="uid://cxg7e2rysee3t" path="res://assets/ui/trade-v5/tab.png" id="tab"]
+
+[sub_resource type="StyleBoxTexture" id="tab_style"]
+content_margin_left = 6.0
+content_margin_top = 2.0
+content_margin_right = 6.0
+content_margin_bottom = 2.0
+texture = ExtResource("tab")
+
+[sub_resource type="StyleBoxTexture" id="active_style"]
+content_margin_left = 6.0
+content_margin_top = 2.0
+content_margin_right = 6.0
+content_margin_bottom = 2.0
+texture = ExtResource("active")
+
+[resource]
+Button/colors/font_color = Color(0.13, 0.31, 0.33, 1)
+Button/colors/font_hover_color = Color(1, 0.96, 0.85, 1)
+Button/colors/font_pressed_color = Color(1, 0.96, 0.85, 1)
+Button/styles/disabled = SubResource("tab_style")
+Button/styles/focus = ExtResource("nav_focus")
+Button/styles/hover = SubResource("active_style")
+Button/styles/hover_pressed = SubResource("active_style")
+Button/styles/normal = SubResource("tab_style")
+Button/styles/pressed = SubResource("active_style")

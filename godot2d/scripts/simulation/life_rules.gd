@@ -2,6 +2,9 @@ extends RefCounted
 
 const Schema = preload("res://scripts/simulation/state_schema.gd")
 const Inventory = preload("res://scripts/inventory/inventory_container.gd")
+const Farming = preload("res://scripts/simulation/farming_rules.gd")
+const Day = preload("res://scripts/simulation/day_rules.gd")
+const Data = preload("res://scripts/harbor_data.gd")
 const Catalog = preload("res://scripts/inventory/item_catalog.gd")
 # Shared contract E: fixed prototype prices, never supplied by the caller.
 const BUY_PRICES := {"lettuce_seed":5, "tomato_seed":8}
@@ -34,7 +37,7 @@ static func _same_payload(left, right) -> bool:
 	return left == right
 
 static func plan(data: Dictionary, kind: String, args: Dictionary, request_id: int) -> Dictionary:
-	if not Schema.validate_v3(data):
+	if not Schema.validate_v4(data):
 		return _failure("invalid_state")
 	var sequence: int = data.life.action_seq
 	if request_id <= sequence:
@@ -44,6 +47,22 @@ static func plan(data: Dictionary, kind: String, args: Dictionary, request_id: i
 		return _failure("stale_request")
 	if request_id != sequence + 1:
 		return _failure("invalid_request")
+	if kind == "sleep":
+		if not Schema._exact_keys(args, ["expected_day"]) or not (args.expected_day is int or args.expected_day is float) or args.expected_day is bool:
+			return _failure("invalid_request")
+		if not Schema._bounded_integer(args.expected_day, 1, 1000000):
+			return _failure("invalid_day")
+		var advanced: Dictionary = Day.advance(data, int(args.expected_day))
+		if not advanced.ok:
+			return advanced
+		return _finish(advanced.state, kind, args, request_id, advanced.events)
+	if kind in ["hoe", "plant", "water", "harvest"]:
+		var farmed: Dictionary = Farming.act(data, kind, args)
+		if not farmed.ok:
+			return farmed
+		return _finish(farmed.state, kind, args, request_id, farmed.events)
+	if kind == "collect":
+		return _collect(data, args, request_id)
 	if kind != "trade":
 		return _failure("unknown_action")
 	if not Schema._exact_keys(args, ["direction", "account_id", "item_id", "amount"]):
@@ -92,15 +111,45 @@ static func plan(data: Dictionary, kind: String, args: Dictionary, request_id: i
 	market.cash += total if buy else -total
 	if not buy:
 		market.buy_quota[item] -= amount
+	# source/target follow cash; goods in this transfer move in the opposite direction.
+	var event := {"day_id":int(candidate.life.day_id), "kind":"transfer",
+		"source":"player" if buy else "market", "target":"market" if buy else "player",
+		"items":{item:amount}, "cash":total, "reason":"trade"}
+	return _finish(candidate, kind, args, request_id, [event])
+
+static func _collect(data: Dictionary, args: Dictionary, request_id: int) -> Dictionary:
+	if not Schema._exact_keys(args, ["pickup_id"]) or not args.pickup_id is String:
+		return _failure("invalid_request")
+	var item := ""
+	for pickup in Data.pickups():
+		if pickup.id == args.pickup_id:
+			item = pickup.kind
+			break
+	if item == "":
+		return _failure("invalid_request")
+	if data.collected.has(args.pickup_id):
+		return _failure("not_allowed")
+	var candidate := data.duplicate(true)
+	var bag = Inventory.new(24)
+	if not bag.restore_slots(candidate.bag):
+		return _failure("invalid_state")
+	if bag.add(item, 1) != 1:
+		return _failure("inventory_full")
+	candidate.bag = bag.snapshot()
+	candidate.collected[args.pickup_id] = true
+	candidate.discovered[item] = true
+	candidate.total_collected += 1
+	return _finish(candidate, "collect", args, request_id, [{"day_id":int(candidate.life.day_id), "kind":"collect", "source":"environment", "target":"player", "items":{item:1}, "cash":0, "reason":"collect"}])
+
+static func _finish(candidate: Dictionary, kind: String, args: Dictionary, request_id: int, events: Array) -> Dictionary:
 	candidate.life.action_seq = request_id
 	candidate.life.last_receipt = {"request_id":request_id, "kind":kind, "args":args.duplicate(true)}
-	# source/target follow cash; goods in this transfer move in the opposite direction.
-	var event := {"event_id":"a:%d:0" % request_id, "day_id":int(candidate.life.day_id),
-		"kind":"transfer", "source":"player" if buy else "market", "target":"market" if buy else "player",
-		"items":{item:amount}, "cash":total, "reason":"trade"}
-	candidate.life.events.append(event.duplicate(true))
+	var numbered := events.duplicate(true)
+	for index in range(numbered.size()):
+		numbered[index].event_id = "a:%d:%d" % [request_id, index]
+		candidate.life.events.append(numbered[index].duplicate(true))
 	if candidate.life.events.size() > 256:
 		candidate.life.events = candidate.life.events.slice(candidate.life.events.size() - 256)
-	if not Schema.validate_v3(candidate):
+	if not Schema.validate_v4(candidate):
 		return _failure("invalid_state")
-	return {"ok":true, "code":"ok", "state":candidate, "events":[event]}
+	return {"ok":true, "code":"ok", "state":candidate, "events":numbered}

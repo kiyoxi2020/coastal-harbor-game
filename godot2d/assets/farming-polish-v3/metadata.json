@@ -1,0 +1,763 @@
+{
+  "source": "art/design/farming-grid-v2/production-atlas-v1.png",
+  "source_size": [
+    1254,
+    1254
+  ],
+  "tool": "built-in GPT imagegen",
+  "processing": "Same original GPT atlas, alpha trim and nearest resize to eight texture pixels per logical world unit; world sizes unchanged.",
+  "sprites": {
+    "soil_dry": {
+      "source_cell": [
+        0,
+        0,
+        314,
+        314
+      ],
+      "trim": [
+        76,
+        73,
+        294,
+        301
+      ],
+      "size": [
+        128,
+        128
+      ],
+      "root_anchor": [
+        64.0,
+        128
+      ],
+      "collision": null,
+      "logical_size": [
+        16,
+        16
+      ],
+      "world_scale": 0.125
+    },
+    "soil_wet": {
+      "source_cell": [
+        314,
+        0,
+        627,
+        314
+      ],
+      "trim": [
+        58,
+        73,
+        285,
+        301
+      ],
+      "size": [
+        128,
+        128
+      ],
+      "root_anchor": [
+        64.0,
+        128
+      ],
+      "collision": null,
+      "logical_size": [
+        16,
+        16
+      ],
+      "world_scale": 0.125
+    },
+    "seed": {
+      "source_cell": [
+        627,
+        0,
+        940,
+        314
+      ],
+      "trim": [
+        96,
+        165,
+        218,
+        259
+      ],
+      "size": [
+        48,
+        40
+      ],
+      "root_anchor": [
+        24.0,
+        40
+      ],
+      "collision": null,
+      "logical_size": [
+        6,
+        5
+      ],
+      "world_scale": 0.125
+    },
+    "sprout": {
+      "source_cell": [
+        940,
+        0,
+        1254,
+        314
+      ],
+      "trim": [
+        48,
+        160,
+        226,
+        284
+      ],
+      "size": [
+        64,
+        64
+      ],
+      "root_anchor": [
+        32.0,
+        64
+      ],
+      "collision": null,
+      "logical_size": [
+        8,
+        8
+      ],
+      "world_scale": 0.125
+    },
+    "lettuce_young": {
+      "source_cell": [
+        0,
+        314,
+        314,
+        627
+      ],
+      "trim": [
+        70,
+        99,
+        289,
+        313
+      ],
+      "size": [
+        112,
+        112
+      ],
+      "root_anchor": [
+        56.0,
+        112
+      ],
+      "collision": null,
+      "logical_size": [
+        14,
+        14
+      ],
+      "world_scale": 0.125
+    },
+    "lettuce_mature": {
+      "source_cell": [
+        314,
+        314,
+        627,
+        627
+      ],
+      "trim": [
+        29,
+        84,
+        299,
+        313
+      ],
+      "size": [
+        112,
+        112
+      ],
+      "root_anchor": [
+        56.0,
+        112
+      ],
+      "collision": null,
+      "logical_size": [
+        14,
+        14
+      ],
+      "world_scale": 0.125
+    },
+    "tomato_young": {
+      "source_cell": [
+        627,
+        314,
+        940,
+        627
+      ],
+      "trim": [
+        42,
+        56,
+        257,
+        313
+      ],
+      "size": [
+        112,
+        192
+      ],
+      "root_anchor": [
+        56.0,
+        192
+      ],
+      "collision": null,
+      "logical_size": [
+        14,
+        24
+      ],
+      "world_scale": 0.125
+    },
+    "tomato_mature": {
+      "source_cell": [
+        940,
+        314,
+        1254,
+        627
+      ],
+      "trim": [
+        22,
+        15,
+        266,
+        313
+      ],
+      "size": [
+        112,
+        192
+      ],
+      "root_anchor": [
+        56.0,
+        192
+      ],
+      "collision": null,
+      "logical_size": [
+        14,
+        24
+      ],
+      "world_scale": 0.125
+    },
+    "flowers_white": {
+      "source_cell": [
+        0,
+        627,
+        314,
+        940
+      ],
+      "trim": [
+        61,
+        0,
+        294,
+        312
+      ],
+      "size": [
+        128,
+        112
+      ],
+      "root_anchor": [
+        64.0,
+        112
+      ],
+      "collision": null,
+      "logical_size": [
+        16,
+        14
+      ],
+      "world_scale": 0.125
+    },
+    "flowers_yellow": {
+      "source_cell": [
+        314,
+        627,
+        627,
+        940
+      ],
+      "trim": [
+        33,
+        0,
+        289,
+        313
+      ],
+      "size": [
+        128,
+        112
+      ],
+      "root_anchor": [
+        64.0,
+        112
+      ],
+      "collision": null,
+      "logical_size": [
+        16,
+        14
+      ],
+      "world_scale": 0.125
+    },
+    "flowers_pink": {
+      "source_cell": [
+        627,
+        627,
+        940,
+        940
+      ],
+      "trim": [
+        32,
+        0,
+        282,
+        311
+      ],
+      "size": [
+        128,
+        112
+      ],
+      "root_anchor": [
+        64.0,
+        112
+      ],
+      "collision": null,
+      "logical_size": [
+        16,
+        14
+      ],
+      "world_scale": 0.125
+    },
+    "grass": {
+      "source_cell": [
+        940,
+        627,
+        1254,
+        940
+      ],
+      "trim": [
+        15,
+        0,
+        270,
+        313
+      ],
+      "size": [
+        128,
+        112
+      ],
+      "root_anchor": [
+        64.0,
+        112
+      ],
+      "collision": null,
+      "logical_size": [
+        16,
+        14
+      ],
+      "world_scale": 0.125
+    },
+    "pebbles": {
+      "source_cell": [
+        0,
+        940,
+        314,
+        1254
+      ],
+      "trim": [
+        86,
+        129,
+        257,
+        237
+      ],
+      "size": [
+        128,
+        112
+      ],
+      "root_anchor": [
+        64.0,
+        112
+      ],
+      "collision": null,
+      "logical_size": [
+        16,
+        14
+      ],
+      "world_scale": 0.125
+    },
+    "moss_rock": {
+      "source_cell": [
+        314,
+        940,
+        627,
+        1254
+      ],
+      "trim": [
+        42,
+        89,
+        258,
+        250
+      ],
+      "size": [
+        128,
+        112
+      ],
+      "root_anchor": [
+        64.0,
+        112
+      ],
+      "collision": null,
+      "logical_size": [
+        16,
+        14
+      ],
+      "world_scale": 0.125
+    },
+    "stone_chips": {
+      "source_cell": [
+        627,
+        940,
+        940,
+        1254
+      ],
+      "trim": [
+        56,
+        104,
+        254,
+        250
+      ],
+      "size": [
+        128,
+        112
+      ],
+      "root_anchor": [
+        64.0,
+        112
+      ],
+      "collision": null,
+      "logical_size": [
+        16,
+        14
+      ],
+      "world_scale": 0.125
+    },
+    "flower_edge": {
+      "source_cell": [
+        940,
+        940,
+        1254,
+        1254
+      ],
+      "trim": [
+        17,
+        0,
+        268,
+        263
+      ],
+      "size": [
+        128,
+        112
+      ],
+      "root_anchor": [
+        64.0,
+        112
+      ],
+      "collision": null,
+      "logical_size": [
+        16,
+        14
+      ],
+      "world_scale": 0.125
+    },
+    "icon_hoe": {
+      "size": [
+        96,
+        96
+      ],
+      "source_cell": [
+        0,
+        0,
+        314,
+        314
+      ],
+      "source": "art/design/farming-polish-v3/tools-actions-original.png",
+      "root_anchor": [
+        48,
+        48
+      ],
+      "world_scale": null,
+      "collision": null
+    },
+    "icon_water": {
+      "size": [
+        96,
+        96
+      ],
+      "source_cell": [
+        314,
+        0,
+        627,
+        314
+      ],
+      "source": "art/design/farming-polish-v3/tools-actions-original.png",
+      "root_anchor": [
+        48,
+        48
+      ],
+      "world_scale": null,
+      "collision": null
+    },
+    "icon_plant": {
+      "size": [
+        96,
+        96
+      ],
+      "source_cell": [
+        627,
+        0,
+        940,
+        314
+      ],
+      "source": "art/design/farming-polish-v3/tools-actions-original.png",
+      "root_anchor": [
+        48,
+        48
+      ],
+      "world_scale": null,
+      "collision": null
+    },
+    "icon_harvest": {
+      "size": [
+        96,
+        96
+      ],
+      "source_cell": [
+        940,
+        0,
+        1254,
+        314
+      ],
+      "source": "art/design/farming-polish-v3/tools-actions-original.png",
+      "root_anchor": [
+        48,
+        48
+      ],
+      "world_scale": null,
+      "collision": null
+    },
+    "hoe_south": {
+      "size": [
+        320,
+        320
+      ],
+      "source_cell": [
+        0,
+        314,
+        314,
+        627
+      ],
+      "source": "art/design/farming-polish-v3/tools-actions-original.png",
+      "root_anchor": [
+        160,
+        292
+      ],
+      "world_scale": 0.15,
+      "collision": null
+    },
+    "hoe_west": {
+      "size": [
+        320,
+        320
+      ],
+      "source_cell": [
+        314,
+        314,
+        627,
+        627
+      ],
+      "source": "art/design/farming-polish-v3/tools-actions-original.png",
+      "root_anchor": [
+        160,
+        292
+      ],
+      "world_scale": 0.15,
+      "collision": null
+    },
+    "hoe_east": {
+      "size": [
+        320,
+        320
+      ],
+      "source_cell": [
+        627,
+        314,
+        940,
+        627
+      ],
+      "source": "art/design/farming-polish-v3/tools-actions-original.png",
+      "root_anchor": [
+        160,
+        292
+      ],
+      "world_scale": 0.15,
+      "collision": null
+    },
+    "hoe_north": {
+      "size": [
+        320,
+        320
+      ],
+      "source_cell": [
+        940,
+        314,
+        1254,
+        627
+      ],
+      "source": "art/design/farming-polish-v3/tools-actions-original.png",
+      "root_anchor": [
+        160,
+        292
+      ],
+      "world_scale": 0.15,
+      "collision": null
+    },
+    "water_south": {
+      "size": [
+        320,
+        320
+      ],
+      "source_cell": [
+        0,
+        627,
+        314,
+        940
+      ],
+      "source": "art/design/farming-polish-v3/tools-actions-original.png",
+      "root_anchor": [
+        160,
+        292
+      ],
+      "world_scale": 0.15,
+      "collision": null
+    },
+    "water_west": {
+      "size": [
+        320,
+        320
+      ],
+      "source_cell": [
+        314,
+        627,
+        627,
+        940
+      ],
+      "source": "art/design/farming-polish-v3/tools-actions-original.png",
+      "root_anchor": [
+        160,
+        292
+      ],
+      "world_scale": 0.15,
+      "collision": null
+    },
+    "water_east": {
+      "size": [
+        320,
+        320
+      ],
+      "source_cell": [
+        627,
+        627,
+        940,
+        940
+      ],
+      "source": "art/design/farming-polish-v3/tools-actions-original.png",
+      "root_anchor": [
+        160,
+        292
+      ],
+      "world_scale": 0.15,
+      "collision": null
+    },
+    "water_north": {
+      "size": [
+        320,
+        320
+      ],
+      "source_cell": [
+        940,
+        627,
+        1254,
+        940
+      ],
+      "source": "art/design/farming-polish-v3/tools-actions-original.png",
+      "root_anchor": [
+        160,
+        292
+      ],
+      "world_scale": 0.15,
+      "collision": null
+    },
+    "harvest_south": {
+      "size": [
+        320,
+        320
+      ],
+      "source_cell": [
+        0,
+        940,
+        314,
+        1254
+      ],
+      "source": "art/design/farming-polish-v3/tools-actions-original.png",
+      "root_anchor": [
+        160,
+        292
+      ],
+      "world_scale": 0.15,
+      "collision": null
+    },
+    "harvest_west": {
+      "size": [
+        320,
+        320
+      ],
+      "source_cell": [
+        314,
+        940,
+        627,
+        1254
+      ],
+      "source": "art/design/farming-polish-v3/tools-actions-original.png",
+      "root_anchor": [
+        160,
+        292
+      ],
+      "world_scale": 0.15,
+      "collision": null
+    },
+    "harvest_east": {
+      "size": [
+        320,
+        320
+      ],
+      "source_cell": [
+        627,
+        940,
+        940,
+        1254
+      ],
+      "source": "art/design/farming-polish-v3/tools-actions-original.png",
+      "root_anchor": [
+        160,
+        292
+      ],
+      "world_scale": 0.15,
+      "collision": null
+    },
+    "harvest_north": {
+      "size": [
+        320,
+        320
+      ],
+      "source_cell": [
+        940,
+        940,
+        1254,
+        1254
+      ],
+      "source": "art/design/farming-polish-v3/tools-actions-original.png",
+      "root_anchor": [
+        160,
+        292
+      ],
+      "world_scale": 0.15,
+      "collision": null
+    }
+  }
+}

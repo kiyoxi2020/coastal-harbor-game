@@ -1,0 +1,1184 @@
+[gd_scene load_steps=26 format=3]
+[ext_resource type="Texture2D" path="res://assets/ui/trade-v5/background.png" id="tex_background"]
+[ext_resource type="Texture2D" path="res://assets/ui/trade-v5/slot.png" id="tex_slot"]
+[ext_resource type="Texture2D" path="res://assets/ui/trade-v5/selected.png" id="tex_selected"]
+[ext_resource type="Texture2D" path="res://assets/ui/trade-v5/hover.png" id="tex_hover"]
+[ext_resource type="Texture2D" path="res://assets/ui/trade-v5/tab.png" id="tex_tab"]
+[ext_resource type="Texture2D" path="res://assets/ui/trade-v5/active.png" id="tex_active"]
+[ext_resource type="Texture2D" path="res://assets/ui/trade-v5/confirm.png" id="tex_confirm"]
+[ext_resource type="Texture2D" path="res://assets/ui/trade-v5/square.png" id="tex_square"]
+[ext_resource type="Texture2D" path="res://assets/ui/trade-v5/input.png" id="tex_input"]
+[ext_resource type="Texture2D" path="res://assets/ui/trade-v5/coin.png" id="tex_coin"]
+[ext_resource type="Script" path="res://scripts/ui/trade_page.gd" id="logic"]
+[ext_resource type="PackedScene" path="res://scenes/ui/components/trade_item.tscn" id="icon"]
+[ext_resource type="StyleBox" path="res://resources/ui/pixel_focus.tres" id="nav_focus"]
+[sub_resource type="StyleBoxTexture" id="slot"]
+texture = ExtResource("tex_slot")
+content_margin_left = 2.0
+content_margin_right = 2.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+[sub_resource type="StyleBoxTexture" id="selected"]
+texture = ExtResource("tex_selected")
+content_margin_left = 2.0
+content_margin_right = 2.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+[sub_resource type="StyleBoxTexture" id="hover"]
+texture = ExtResource("tex_hover")
+content_margin_left = 2.0
+content_margin_right = 2.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+[sub_resource type="StyleBoxTexture" id="focus"]
+texture = ExtResource("tex_hover")
+content_margin_left = 2.0
+content_margin_right = 2.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+[sub_resource type="StyleBoxTexture" id="tab"]
+texture = ExtResource("tex_tab")
+content_margin_left = 2.0
+content_margin_right = 2.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+[sub_resource type="StyleBoxTexture" id="active"]
+texture = ExtResource("tex_active")
+content_margin_left = 2.0
+content_margin_right = 2.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+[sub_resource type="StyleBoxTexture" id="confirm"]
+texture = ExtResource("tex_confirm")
+content_margin_left = 2.0
+content_margin_right = 2.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+[sub_resource type="StyleBoxTexture" id="square"]
+texture = ExtResource("tex_square")
+content_margin_left = 2.0
+content_margin_right = 2.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+[sub_resource type="StyleBoxTexture" id="input"]
+texture = ExtResource("tex_input")
+content_margin_left = 2.0
+content_margin_right = 2.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+[sub_resource type="StyleBoxTexture" id="confirm_disabled"]
+texture = ExtResource("tex_confirm")
+modulate_color = Color(0.55,0.55,0.55,1)
+
+[sub_resource type="StyleBoxEmpty" id="clear"]
+[sub_resource type="Theme" id="quantity_theme"]
+LineEdit/styles/normal = SubResource("input")
+LineEdit/styles/read_only = SubResource("input")
+LineEdit/styles/focus = SubResource("clear")
+
+[node name="TradePage" type="Control"]
+visible = false
+offset_right = 1280.0
+offset_bottom = 720.0
+script = ExtResource("logic")
+[node name="Surface" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 40.0
+offset_right = 1100.0
+offset_bottom = 680.0
+theme_override_styles/panel = SubResource("clear")
+[node name="Background" type="TextureRect" parent="Surface"]
+offset_left = -79.0
+offset_top = -34.0
+offset_right = 1003.0
+offset_bottom = 685.0
+mouse_filter = 2
+texture = ExtResource("tex_background")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Title" type="Label" parent="Surface"]
+layout_mode = 0
+offset_left = 116.0
+offset_top = 12.0
+offset_right = 524.0
+offset_bottom = 54.0
+text = "补帆鱼摊"
+theme_override_font_sizes/font_size = 26
+mouse_filter = 2
+
+
+[node name="Wallet" type="Label" parent="Surface"]
+layout_mode = 0
+offset_left = 690.0
+offset_top = 12.0
+offset_right = 818.0
+offset_bottom = 54.0
+text = "● 100"
+theme_override_font_sizes/font_size = 24
+mouse_filter = 2
+
+
+[node name="Close" type="Button" parent="Surface"]
+theme_override_styles/normal = SubResource("square")
+theme_override_styles/hover = SubResource("square")
+theme_override_styles/pressed = SubResource("square")
+theme_override_styles/hover_pressed = SubResource("square")
+theme_override_styles/disabled = SubResource("square")
+theme_override_styles/focus = ExtResource("nav_focus")
+layout_mode = 0
+offset_left = 830.0
+offset_top = 12.0
+offset_right = 878.0
+offset_bottom = 54.0
+text = "×"
+tooltip_text = "关闭买卖界面"
+theme_override_font_sizes/font_size = 26
+
+
+[node name="BuyTab" type="Button" parent="Surface"]
+theme_override_styles/normal = SubResource("tab")
+theme_override_styles/hover = SubResource("active")
+theme_override_styles/pressed = SubResource("active")
+theme_override_styles/hover_pressed = SubResource("active")
+theme_override_styles/disabled = SubResource("tab")
+theme_override_styles/focus = ExtResource("nav_focus")
+layout_mode = 0
+offset_left = 44.0
+offset_top = 64.0
+offset_right = 188.0
+offset_bottom = 108.0
+text = "买入"
+theme_override_font_sizes/font_size = 22
+toggle_mode = true
+
+[node name="SellTab" type="Button" parent="Surface"]
+theme_override_styles/normal = SubResource("tab")
+theme_override_styles/hover = SubResource("active")
+theme_override_styles/pressed = SubResource("active")
+theme_override_styles/hover_pressed = SubResource("active")
+theme_override_styles/disabled = SubResource("tab")
+theme_override_styles/focus = ExtResource("nav_focus")
+layout_mode = 0
+offset_left = 196.0
+offset_top = 64.0
+offset_right = 340.0
+offset_bottom = 108.0
+text = "卖出"
+theme_override_font_sizes/font_size = 22
+toggle_mode = true
+
+[node name="Items" type="GridContainer" parent="Surface"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 122.0
+offset_right = 832.0
+offset_bottom = 462.0
+columns = 6
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+
+[node name="Item0" type="Button" parent="Surface/Items"]
+custom_minimum_size = Vector2(124,108)
+layout_mode = 2
+toggle_mode = true
+theme_override_styles/normal = SubResource("slot")
+theme_override_styles/disabled = SubResource("slot")
+theme_override_styles/hover = SubResource("hover")
+theme_override_styles/pressed = SubResource("selected")
+theme_override_styles/hover_pressed = SubResource("selected")
+theme_override_styles/focus = ExtResource("nav_focus")
+[node name="Icon" parent="Surface/Items/Item0" instance=ExtResource("icon")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 4.0
+offset_right = 114.0
+offset_bottom = 82.0
+[node name="Count" type="Label" parent="Surface/Items/Item0"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 3.0
+offset_right = 116.0
+offset_bottom = 27.0
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+[node name="Price" type="Label" parent="Surface/Items/Item0"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 80.0
+offset_right = 112.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+
+[node name="Item1" type="Button" parent="Surface/Items"]
+custom_minimum_size = Vector2(124,108)
+layout_mode = 2
+toggle_mode = true
+theme_override_styles/normal = SubResource("slot")
+theme_override_styles/disabled = SubResource("slot")
+theme_override_styles/hover = SubResource("hover")
+theme_override_styles/pressed = SubResource("selected")
+theme_override_styles/hover_pressed = SubResource("selected")
+theme_override_styles/focus = ExtResource("nav_focus")
+[node name="Icon" parent="Surface/Items/Item1" instance=ExtResource("icon")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 4.0
+offset_right = 114.0
+offset_bottom = 82.0
+[node name="Count" type="Label" parent="Surface/Items/Item1"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 3.0
+offset_right = 116.0
+offset_bottom = 27.0
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+[node name="Price" type="Label" parent="Surface/Items/Item1"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 80.0
+offset_right = 112.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+
+[node name="Item2" type="Button" parent="Surface/Items"]
+custom_minimum_size = Vector2(124,108)
+layout_mode = 2
+toggle_mode = true
+theme_override_styles/normal = SubResource("slot")
+theme_override_styles/disabled = SubResource("slot")
+theme_override_styles/hover = SubResource("hover")
+theme_override_styles/pressed = SubResource("selected")
+theme_override_styles/hover_pressed = SubResource("selected")
+theme_override_styles/focus = ExtResource("nav_focus")
+[node name="Icon" parent="Surface/Items/Item2" instance=ExtResource("icon")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 4.0
+offset_right = 114.0
+offset_bottom = 82.0
+[node name="Count" type="Label" parent="Surface/Items/Item2"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 3.0
+offset_right = 116.0
+offset_bottom = 27.0
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+[node name="Price" type="Label" parent="Surface/Items/Item2"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 80.0
+offset_right = 112.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+
+[node name="Item3" type="Button" parent="Surface/Items"]
+custom_minimum_size = Vector2(124,108)
+layout_mode = 2
+toggle_mode = true
+theme_override_styles/normal = SubResource("slot")
+theme_override_styles/disabled = SubResource("slot")
+theme_override_styles/hover = SubResource("hover")
+theme_override_styles/pressed = SubResource("selected")
+theme_override_styles/hover_pressed = SubResource("selected")
+theme_override_styles/focus = ExtResource("nav_focus")
+[node name="Icon" parent="Surface/Items/Item3" instance=ExtResource("icon")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 4.0
+offset_right = 114.0
+offset_bottom = 82.0
+[node name="Count" type="Label" parent="Surface/Items/Item3"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 3.0
+offset_right = 116.0
+offset_bottom = 27.0
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+[node name="Price" type="Label" parent="Surface/Items/Item3"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 80.0
+offset_right = 112.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+
+[node name="Item4" type="Button" parent="Surface/Items"]
+custom_minimum_size = Vector2(124,108)
+layout_mode = 2
+toggle_mode = true
+theme_override_styles/normal = SubResource("slot")
+theme_override_styles/disabled = SubResource("slot")
+theme_override_styles/hover = SubResource("hover")
+theme_override_styles/pressed = SubResource("selected")
+theme_override_styles/hover_pressed = SubResource("selected")
+theme_override_styles/focus = ExtResource("nav_focus")
+[node name="Icon" parent="Surface/Items/Item4" instance=ExtResource("icon")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 4.0
+offset_right = 114.0
+offset_bottom = 82.0
+[node name="Count" type="Label" parent="Surface/Items/Item4"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 3.0
+offset_right = 116.0
+offset_bottom = 27.0
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+[node name="Price" type="Label" parent="Surface/Items/Item4"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 80.0
+offset_right = 112.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+
+[node name="Item5" type="Button" parent="Surface/Items"]
+custom_minimum_size = Vector2(124,108)
+layout_mode = 2
+toggle_mode = true
+theme_override_styles/normal = SubResource("slot")
+theme_override_styles/disabled = SubResource("slot")
+theme_override_styles/hover = SubResource("hover")
+theme_override_styles/pressed = SubResource("selected")
+theme_override_styles/hover_pressed = SubResource("selected")
+theme_override_styles/focus = ExtResource("nav_focus")
+[node name="Icon" parent="Surface/Items/Item5" instance=ExtResource("icon")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 4.0
+offset_right = 114.0
+offset_bottom = 82.0
+[node name="Count" type="Label" parent="Surface/Items/Item5"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 3.0
+offset_right = 116.0
+offset_bottom = 27.0
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+[node name="Price" type="Label" parent="Surface/Items/Item5"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 80.0
+offset_right = 112.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+
+[node name="Item6" type="Button" parent="Surface/Items"]
+custom_minimum_size = Vector2(124,108)
+layout_mode = 2
+toggle_mode = true
+theme_override_styles/normal = SubResource("slot")
+theme_override_styles/disabled = SubResource("slot")
+theme_override_styles/hover = SubResource("hover")
+theme_override_styles/pressed = SubResource("selected")
+theme_override_styles/hover_pressed = SubResource("selected")
+theme_override_styles/focus = ExtResource("nav_focus")
+[node name="Icon" parent="Surface/Items/Item6" instance=ExtResource("icon")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 4.0
+offset_right = 114.0
+offset_bottom = 82.0
+[node name="Count" type="Label" parent="Surface/Items/Item6"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 3.0
+offset_right = 116.0
+offset_bottom = 27.0
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+[node name="Price" type="Label" parent="Surface/Items/Item6"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 80.0
+offset_right = 112.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+
+[node name="Item7" type="Button" parent="Surface/Items"]
+custom_minimum_size = Vector2(124,108)
+layout_mode = 2
+toggle_mode = true
+theme_override_styles/normal = SubResource("slot")
+theme_override_styles/disabled = SubResource("slot")
+theme_override_styles/hover = SubResource("hover")
+theme_override_styles/pressed = SubResource("selected")
+theme_override_styles/hover_pressed = SubResource("selected")
+theme_override_styles/focus = ExtResource("nav_focus")
+[node name="Icon" parent="Surface/Items/Item7" instance=ExtResource("icon")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 4.0
+offset_right = 114.0
+offset_bottom = 82.0
+[node name="Count" type="Label" parent="Surface/Items/Item7"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 3.0
+offset_right = 116.0
+offset_bottom = 27.0
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+[node name="Price" type="Label" parent="Surface/Items/Item7"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 80.0
+offset_right = 112.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+
+[node name="Item8" type="Button" parent="Surface/Items"]
+custom_minimum_size = Vector2(124,108)
+layout_mode = 2
+toggle_mode = true
+theme_override_styles/normal = SubResource("slot")
+theme_override_styles/disabled = SubResource("slot")
+theme_override_styles/hover = SubResource("hover")
+theme_override_styles/pressed = SubResource("selected")
+theme_override_styles/hover_pressed = SubResource("selected")
+theme_override_styles/focus = ExtResource("nav_focus")
+[node name="Icon" parent="Surface/Items/Item8" instance=ExtResource("icon")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 4.0
+offset_right = 114.0
+offset_bottom = 82.0
+[node name="Count" type="Label" parent="Surface/Items/Item8"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 3.0
+offset_right = 116.0
+offset_bottom = 27.0
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+[node name="Price" type="Label" parent="Surface/Items/Item8"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 80.0
+offset_right = 112.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+
+[node name="Item9" type="Button" parent="Surface/Items"]
+custom_minimum_size = Vector2(124,108)
+layout_mode = 2
+toggle_mode = true
+theme_override_styles/normal = SubResource("slot")
+theme_override_styles/disabled = SubResource("slot")
+theme_override_styles/hover = SubResource("hover")
+theme_override_styles/pressed = SubResource("selected")
+theme_override_styles/hover_pressed = SubResource("selected")
+theme_override_styles/focus = ExtResource("nav_focus")
+[node name="Icon" parent="Surface/Items/Item9" instance=ExtResource("icon")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 4.0
+offset_right = 114.0
+offset_bottom = 82.0
+[node name="Count" type="Label" parent="Surface/Items/Item9"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 3.0
+offset_right = 116.0
+offset_bottom = 27.0
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+[node name="Price" type="Label" parent="Surface/Items/Item9"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 80.0
+offset_right = 112.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+
+[node name="Item10" type="Button" parent="Surface/Items"]
+custom_minimum_size = Vector2(124,108)
+layout_mode = 2
+toggle_mode = true
+theme_override_styles/normal = SubResource("slot")
+theme_override_styles/disabled = SubResource("slot")
+theme_override_styles/hover = SubResource("hover")
+theme_override_styles/pressed = SubResource("selected")
+theme_override_styles/hover_pressed = SubResource("selected")
+theme_override_styles/focus = ExtResource("nav_focus")
+[node name="Icon" parent="Surface/Items/Item10" instance=ExtResource("icon")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 4.0
+offset_right = 114.0
+offset_bottom = 82.0
+[node name="Count" type="Label" parent="Surface/Items/Item10"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 3.0
+offset_right = 116.0
+offset_bottom = 27.0
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+[node name="Price" type="Label" parent="Surface/Items/Item10"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 80.0
+offset_right = 112.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+
+[node name="Item11" type="Button" parent="Surface/Items"]
+custom_minimum_size = Vector2(124,108)
+layout_mode = 2
+toggle_mode = true
+theme_override_styles/normal = SubResource("slot")
+theme_override_styles/disabled = SubResource("slot")
+theme_override_styles/hover = SubResource("hover")
+theme_override_styles/pressed = SubResource("selected")
+theme_override_styles/hover_pressed = SubResource("selected")
+theme_override_styles/focus = ExtResource("nav_focus")
+[node name="Icon" parent="Surface/Items/Item11" instance=ExtResource("icon")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 4.0
+offset_right = 114.0
+offset_bottom = 82.0
+[node name="Count" type="Label" parent="Surface/Items/Item11"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 3.0
+offset_right = 116.0
+offset_bottom = 27.0
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+[node name="Price" type="Label" parent="Surface/Items/Item11"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 80.0
+offset_right = 112.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+
+[node name="Item12" type="Button" parent="Surface/Items"]
+custom_minimum_size = Vector2(124,108)
+layout_mode = 2
+toggle_mode = true
+theme_override_styles/normal = SubResource("slot")
+theme_override_styles/disabled = SubResource("slot")
+theme_override_styles/hover = SubResource("hover")
+theme_override_styles/pressed = SubResource("selected")
+theme_override_styles/hover_pressed = SubResource("selected")
+theme_override_styles/focus = ExtResource("nav_focus")
+[node name="Icon" parent="Surface/Items/Item12" instance=ExtResource("icon")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 4.0
+offset_right = 114.0
+offset_bottom = 82.0
+[node name="Count" type="Label" parent="Surface/Items/Item12"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 3.0
+offset_right = 116.0
+offset_bottom = 27.0
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+[node name="Price" type="Label" parent="Surface/Items/Item12"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 80.0
+offset_right = 112.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+
+[node name="Item13" type="Button" parent="Surface/Items"]
+custom_minimum_size = Vector2(124,108)
+layout_mode = 2
+toggle_mode = true
+theme_override_styles/normal = SubResource("slot")
+theme_override_styles/disabled = SubResource("slot")
+theme_override_styles/hover = SubResource("hover")
+theme_override_styles/pressed = SubResource("selected")
+theme_override_styles/hover_pressed = SubResource("selected")
+theme_override_styles/focus = ExtResource("nav_focus")
+[node name="Icon" parent="Surface/Items/Item13" instance=ExtResource("icon")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 4.0
+offset_right = 114.0
+offset_bottom = 82.0
+[node name="Count" type="Label" parent="Surface/Items/Item13"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 3.0
+offset_right = 116.0
+offset_bottom = 27.0
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+[node name="Price" type="Label" parent="Surface/Items/Item13"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 80.0
+offset_right = 112.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+
+[node name="Item14" type="Button" parent="Surface/Items"]
+custom_minimum_size = Vector2(124,108)
+layout_mode = 2
+toggle_mode = true
+theme_override_styles/normal = SubResource("slot")
+theme_override_styles/disabled = SubResource("slot")
+theme_override_styles/hover = SubResource("hover")
+theme_override_styles/pressed = SubResource("selected")
+theme_override_styles/hover_pressed = SubResource("selected")
+theme_override_styles/focus = ExtResource("nav_focus")
+[node name="Icon" parent="Surface/Items/Item14" instance=ExtResource("icon")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 4.0
+offset_right = 114.0
+offset_bottom = 82.0
+[node name="Count" type="Label" parent="Surface/Items/Item14"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 3.0
+offset_right = 116.0
+offset_bottom = 27.0
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+[node name="Price" type="Label" parent="Surface/Items/Item14"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 80.0
+offset_right = 112.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+
+[node name="Item15" type="Button" parent="Surface/Items"]
+custom_minimum_size = Vector2(124,108)
+layout_mode = 2
+toggle_mode = true
+theme_override_styles/normal = SubResource("slot")
+theme_override_styles/disabled = SubResource("slot")
+theme_override_styles/hover = SubResource("hover")
+theme_override_styles/pressed = SubResource("selected")
+theme_override_styles/hover_pressed = SubResource("selected")
+theme_override_styles/focus = ExtResource("nav_focus")
+[node name="Icon" parent="Surface/Items/Item15" instance=ExtResource("icon")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 4.0
+offset_right = 114.0
+offset_bottom = 82.0
+[node name="Count" type="Label" parent="Surface/Items/Item15"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 3.0
+offset_right = 116.0
+offset_bottom = 27.0
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+[node name="Price" type="Label" parent="Surface/Items/Item15"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 80.0
+offset_right = 112.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+
+[node name="Item16" type="Button" parent="Surface/Items"]
+custom_minimum_size = Vector2(124,108)
+layout_mode = 2
+toggle_mode = true
+theme_override_styles/normal = SubResource("slot")
+theme_override_styles/disabled = SubResource("slot")
+theme_override_styles/hover = SubResource("hover")
+theme_override_styles/pressed = SubResource("selected")
+theme_override_styles/hover_pressed = SubResource("selected")
+theme_override_styles/focus = ExtResource("nav_focus")
+[node name="Icon" parent="Surface/Items/Item16" instance=ExtResource("icon")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 4.0
+offset_right = 114.0
+offset_bottom = 82.0
+[node name="Count" type="Label" parent="Surface/Items/Item16"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 3.0
+offset_right = 116.0
+offset_bottom = 27.0
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+[node name="Price" type="Label" parent="Surface/Items/Item16"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 80.0
+offset_right = 112.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+
+[node name="Item17" type="Button" parent="Surface/Items"]
+custom_minimum_size = Vector2(124,108)
+layout_mode = 2
+toggle_mode = true
+theme_override_styles/normal = SubResource("slot")
+theme_override_styles/disabled = SubResource("slot")
+theme_override_styles/hover = SubResource("hover")
+theme_override_styles/pressed = SubResource("selected")
+theme_override_styles/hover_pressed = SubResource("selected")
+theme_override_styles/focus = ExtResource("nav_focus")
+[node name="Icon" parent="Surface/Items/Item17" instance=ExtResource("icon")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 4.0
+offset_right = 114.0
+offset_bottom = 82.0
+[node name="Count" type="Label" parent="Surface/Items/Item17"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 3.0
+offset_right = 116.0
+offset_bottom = 27.0
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+[node name="Price" type="Label" parent="Surface/Items/Item17"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 80.0
+offset_right = 112.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+
+[node name="SelectedName" type="Label" parent="Surface"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 482.0
+offset_right = 264.0
+offset_bottom = 528.0
+text = "生菜"
+theme_override_font_sizes/font_size = 24
+mouse_filter = 2
+
+
+[node name="Minus" type="Button" parent="Surface"]
+theme_override_styles/normal = SubResource("square")
+theme_override_styles/hover = SubResource("square")
+theme_override_styles/pressed = SubResource("square")
+theme_override_styles/hover_pressed = SubResource("square")
+theme_override_styles/disabled = SubResource("square")
+theme_override_styles/focus = ExtResource("nav_focus")
+layout_mode = 0
+offset_left = 282.0
+offset_top = 482.0
+offset_right = 326.0
+offset_bottom = 528.0
+text = "−"
+theme_override_font_sizes/font_size = 26
+
+
+[node name="Quantity" type="SpinBox" parent="Surface"]
+theme = SubResource("quantity_theme")
+layout_mode = 0
+offset_left = 334.0
+offset_top = 482.0
+offset_right = 434.0
+offset_bottom = 528.0
+min_value = 1.0
+max_value = 99.0
+step = 1.0
+value = 1.0
+theme_override_font_sizes/font_size = 24
+
+[node name="Plus" type="Button" parent="Surface"]
+theme_override_styles/normal = SubResource("square")
+theme_override_styles/hover = SubResource("square")
+theme_override_styles/pressed = SubResource("square")
+theme_override_styles/hover_pressed = SubResource("square")
+theme_override_styles/disabled = SubResource("square")
+theme_override_styles/focus = ExtResource("nav_focus")
+layout_mode = 0
+offset_left = 442.0
+offset_top = 482.0
+offset_right = 486.0
+offset_bottom = 528.0
+text = "+"
+theme_override_font_sizes/font_size = 26
+
+
+[node name="Total" type="Label" parent="Surface"]
+layout_mode = 0
+offset_left = 526.0
+offset_top = 482.0
+offset_right = 694.0
+offset_bottom = 528.0
+text = "● 5"
+theme_override_font_sizes/font_size = 26
+mouse_filter = 2
+
+
+[node name="Submit" type="Button" parent="Surface"]
+theme_override_styles/normal = SubResource("confirm")
+theme_override_styles/hover = SubResource("confirm")
+theme_override_styles/pressed = SubResource("confirm")
+theme_override_styles/hover_pressed = SubResource("confirm")
+theme_override_styles/disabled = SubResource("confirm_disabled")
+theme_override_styles/focus = ExtResource("nav_focus")
+theme_override_colors/font_color = Color(1,0.96,0.85,1)
+theme_override_colors/font_focus_color = Color(1,0.96,0.85,1)
+theme_override_colors/font_hover_color = Color(1,1,0.94,1)
+theme_override_colors/font_pressed_color = Color(1,0.96,0.85,1)
+theme_override_colors/font_disabled_color = Color(0.85,0.84,0.73,1)
+layout_mode = 0
+offset_left = 710.0
+offset_top = 482.0
+offset_right = 878.0
+offset_bottom = 528.0
+text = "购买"
+theme_override_font_sizes/font_size = 24
+
+
+[node name="Note" type="Label" parent="Surface"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 540.0
+offset_right = 868.0
+offset_bottom = 562.0
+text = ""
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+autowrap_mode = 2
+
+[node name="MerchantCash" type="Label" parent="Surface"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 586.0
+offset_right = 444.0
+offset_bottom = 616.0
+text = "鱼摊 ● 1000"
+theme_override_font_sizes/font_size = 18
+mouse_filter = 2
+
+
+[node name="Info" type="Button" parent="Surface"]
+theme_override_styles/normal = SubResource("square")
+theme_override_styles/hover = SubResource("square")
+theme_override_styles/pressed = SubResource("square")
+theme_override_styles/hover_pressed = SubResource("square")
+theme_override_styles/disabled = SubResource("square")
+theme_override_styles/focus = ExtResource("nav_focus")
+layout_mode = 0
+offset_left = 818.0
+offset_top = 584.0
+offset_right = 866.0
+offset_bottom = 620.0
+text = "i"
+theme_override_font_sizes/font_size = 20
+tooltip_text = "只交易背包物品；箱内物品需先取出。种子每日补足20颗，收购额度每天恢复。"
+
+[node name="UnitPrice" type="Label" parent="Surface"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 1.0
+offset_bottom = 1.0
+text = ""
+theme_override_font_sizes/font_size = 22
+mouse_filter = 2
+visible = false
+
+[node name="Stock" type="Label" parent="Surface"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 1.0
+offset_bottom = 1.0
+text = ""
+theme_override_font_sizes/font_size = 22
+mouse_filter = 2
+visible = false
+
+[node name="Quota" type="Label" parent="Surface"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 1.0
+offset_bottom = 1.0
+text = ""
+theme_override_font_sizes/font_size = 22
+mouse_filter = 2
+visible = false
+
+[node name="Coin" type="TextureRect" parent="Surface/Wallet"]
+offset_left = 0.0
+offset_top = 14.0
+offset_right = 14.0
+offset_bottom = 28.0
+mouse_filter = 2
+texture = ExtResource("tex_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Coin" type="TextureRect" parent="Surface/Total"]
+offset_left = 0.0
+offset_top = 14.0
+offset_right = 14.0
+offset_bottom = 28.0
+mouse_filter = 2
+texture = ExtResource("tex_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Coin" type="TextureRect" parent="Surface/MerchantCash"]
+offset_left = 44.0
+offset_top = 8.0
+offset_right = 58.0
+offset_bottom = 22.0
+mouse_filter = 2
+texture = ExtResource("tex_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Coin" type="TextureRect" parent="Surface/Items/Item0/Price"]
+offset_left = -20.0
+offset_top = 5.0
+offset_right = -6.0
+offset_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource("tex_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Coin" type="TextureRect" parent="Surface/Items/Item1/Price"]
+offset_left = -20.0
+offset_top = 5.0
+offset_right = -6.0
+offset_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource("tex_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Coin" type="TextureRect" parent="Surface/Items/Item2/Price"]
+offset_left = -20.0
+offset_top = 5.0
+offset_right = -6.0
+offset_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource("tex_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Coin" type="TextureRect" parent="Surface/Items/Item3/Price"]
+offset_left = -20.0
+offset_top = 5.0
+offset_right = -6.0
+offset_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource("tex_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Coin" type="TextureRect" parent="Surface/Items/Item4/Price"]
+offset_left = -20.0
+offset_top = 5.0
+offset_right = -6.0
+offset_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource("tex_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Coin" type="TextureRect" parent="Surface/Items/Item5/Price"]
+offset_left = -20.0
+offset_top = 5.0
+offset_right = -6.0
+offset_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource("tex_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Coin" type="TextureRect" parent="Surface/Items/Item6/Price"]
+offset_left = -20.0
+offset_top = 5.0
+offset_right = -6.0
+offset_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource("tex_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Coin" type="TextureRect" parent="Surface/Items/Item7/Price"]
+offset_left = -20.0
+offset_top = 5.0
+offset_right = -6.0
+offset_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource("tex_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Coin" type="TextureRect" parent="Surface/Items/Item8/Price"]
+offset_left = -20.0
+offset_top = 5.0
+offset_right = -6.0
+offset_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource("tex_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Coin" type="TextureRect" parent="Surface/Items/Item9/Price"]
+offset_left = -20.0
+offset_top = 5.0
+offset_right = -6.0
+offset_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource("tex_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Coin" type="TextureRect" parent="Surface/Items/Item10/Price"]
+offset_left = -20.0
+offset_top = 5.0
+offset_right = -6.0
+offset_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource("tex_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Coin" type="TextureRect" parent="Surface/Items/Item11/Price"]
+offset_left = -20.0
+offset_top = 5.0
+offset_right = -6.0
+offset_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource("tex_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Coin" type="TextureRect" parent="Surface/Items/Item12/Price"]
+offset_left = -20.0
+offset_top = 5.0
+offset_right = -6.0
+offset_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource("tex_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Coin" type="TextureRect" parent="Surface/Items/Item13/Price"]
+offset_left = -20.0
+offset_top = 5.0
+offset_right = -6.0
+offset_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource("tex_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Coin" type="TextureRect" parent="Surface/Items/Item14/Price"]
+offset_left = -20.0
+offset_top = 5.0
+offset_right = -6.0
+offset_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource("tex_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Coin" type="TextureRect" parent="Surface/Items/Item15/Price"]
+offset_left = -20.0
+offset_top = 5.0
+offset_right = -6.0
+offset_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource("tex_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Coin" type="TextureRect" parent="Surface/Items/Item16/Price"]
+offset_left = -20.0
+offset_top = 5.0
+offset_right = -6.0
+offset_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource("tex_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Coin" type="TextureRect" parent="Surface/Items/Item17/Price"]
+offset_left = -20.0
+offset_top = 5.0
+offset_right = -6.0
+offset_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource("tex_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ReturnItem" type="Button" parent="Surface"]
+layout_mode = 0
+offset_left = 620.0
+offset_top = 584.0
+offset_right = 800.0
+offset_bottom = 620.0
+theme_override_styles/normal = SubResource("tab")
+theme_override_styles/hover = SubResource("tab")
+theme_override_styles/pressed = SubResource("tab")
+theme_override_styles/focus = ExtResource("nav_focus")
+theme_override_font_sizes/font_size = 20
+text = "返回商品"
+
+[node name="Hint" type="Label" parent="Surface"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 562.0
+offset_right = 880.0
+offset_bottom = 584.0
+theme_override_font_sizes/font_size = 16
+mouse_filter = 2
+text = "WASD / 方向键选择 · E 交易操作 · Tab 切区 · Esc / B 关闭"
