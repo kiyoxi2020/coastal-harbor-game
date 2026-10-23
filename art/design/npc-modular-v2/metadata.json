@@ -1,0 +1,236 @@
+{
+  "master": "player-proportion-master.png",
+  "canvas": [
+    768,
+    768
+  ],
+  "anchor": [
+    384,
+    672
+  ],
+  "world_scale": 0.075,
+  "uniform_scale": 1.0,
+  "registration": "whole-figure translation only; no per-part or nonuniform transform",
+  "frames": {
+    "resident_a": {
+      "south": {
+        "source": "resident-a-master-edit.png",
+        "source_box": [
+          0,
+          0,
+          512,
+          768
+        ],
+        "alpha_bbox": [
+          144,
+          203,
+          360,
+          644
+        ],
+        "source_sole_x": 252.5,
+        "position": [
+          132,
+          28
+        ],
+        "scale": 1.0,
+        "output_bbox": [
+          276,
+          231,
+          492,
+          672
+        ]
+      },
+      "west": {
+        "source": "resident-a-master-edit.png",
+        "source_box": [
+          512,
+          0,
+          1024,
+          768
+        ],
+        "alpha_bbox": [
+          155,
+          212,
+          359,
+          649
+        ],
+        "source_sole_x": 246.0,
+        "position": [
+          138,
+          23
+        ],
+        "scale": 1.0,
+        "output_bbox": [
+          293,
+          235,
+          497,
+          672
+        ]
+      },
+      "east": {
+        "source": "resident-a-master-edit.png",
+        "source_box": [
+          1024,
+          0,
+          1536,
+          768
+        ],
+        "alpha_bbox": [
+          144,
+          208,
+          354,
+          649
+        ],
+        "source_sole_x": 253.0,
+        "position": [
+          131,
+          23
+        ],
+        "scale": 1.0,
+        "output_bbox": [
+          275,
+          231,
+          485,
+          672
+        ]
+      },
+      "north": {
+        "source": "resident-a-master-edit.png",
+        "source_box": [
+          1536,
+          0,
+          2048,
+          768
+        ],
+        "alpha_bbox": [
+          149,
+          218,
+          365,
+          646
+        ],
+        "source_sole_x": 256.5,
+        "position": [
+          128,
+          26
+        ],
+        "scale": 1.0,
+        "output_bbox": [
+          277,
+          244,
+          493,
+          672
+        ]
+      }
+    },
+    "resident_b": {
+      "south": {
+        "source": "resident-b-master-edit.png",
+        "source_box": [
+          0,
+          0,
+          512,
+          768
+        ],
+        "alpha_bbox": [
+          141,
+          214,
+          361,
+          659
+        ],
+        "source_sole_x": 250.5,
+        "position": [
+          134,
+          13
+        ],
+        "scale": 1.0,
+        "output_bbox": [
+          275,
+          227,
+          495,
+          672
+        ]
+      },
+      "west": {
+        "source": "resident-b-master-edit.png",
+        "source_box": [
+          512,
+          0,
+          1024,
+          768
+        ],
+        "alpha_bbox": [
+          131,
+          214,
+          362,
+          659
+        ],
+        "source_sole_x": 254.0,
+        "position": [
+          130,
+          13
+        ],
+        "scale": 1.0,
+        "output_bbox": [
+          261,
+          227,
+          492,
+          672
+        ]
+      },
+      "east": {
+        "source": "resident-b-master-edit.png",
+        "source_box": [
+          1024,
+          0,
+          1536,
+          768
+        ],
+        "alpha_bbox": [
+          151,
+          214,
+          382,
+          659
+        ],
+        "source_sole_x": 258.5,
+        "position": [
+          126,
+          13
+        ],
+        "scale": 1.0,
+        "output_bbox": [
+          277,
+          227,
+          508,
+          672
+        ]
+      },
+      "north": {
+        "source": "resident-b-master-edit.png",
+        "source_box": [
+          1536,
+          0,
+          2048,
+          768
+        ],
+        "alpha_bbox": [
+          151,
+          233,
+          371,
+          659
+        ],
+        "source_sole_x": 261.0,
+        "position": [
+          123,
+          13
+        ],
+        "scale": 1.0,
+        "output_bbox": [
+          274,
+          246,
+          494,
+          672
+        ]
+      }
+    }
+  }
+}

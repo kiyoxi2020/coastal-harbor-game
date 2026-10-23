@@ -1,0 +1,531 @@
+{
+  "date": "2026-10-23",
+  "authorization": "User requested workspace organization, unused asset cleanup, progress update and local commit",
+  "archive": "art/archive/2026-10-23-unused-assets.zip",
+  "archive_sha256": "45692ad02e0d21e4aff29137ef7155b82b41b167737d89841398ff1fc5baa6ea",
+  "archive_git_policy": "local recovery ZIP excluded by .gitignore; manifest tracked",
+  "files": [
+    {
+      "path": "art/design/character-candidates-v2/body/body03/rejected/generation.json",
+      "bytes": 744,
+      "sha256": "7e128e0a06bf49292cee9e13b9e2853ab08c76f5e2d71ee58551b58520ae7364"
+    },
+    {
+      "path": "art/design/character-candidates-v2/body/body03/rejected/prompt.txt",
+      "bytes": 1363,
+      "sha256": "f359da42e9a6fdcff315ed09eeaaf1155c8394ebdd134d6d538459f8fa9df76b"
+    },
+    {
+      "path": "art/design/character-candidates-v2/body/body03/rejected/second-long-legs/generation.json",
+      "bytes": 744,
+      "sha256": "30337d4ef317c222c8a097e2a62e3c757b91d39064ba4787905a392724250d51"
+    },
+    {
+      "path": "art/design/character-candidates-v2/body/body03/rejected/second-long-legs/prompt.txt",
+      "bytes": 1274,
+      "sha256": "14a39b7c76301c72c239ec321505b88f21a92825ade6548d76cef439f4064494"
+    },
+    {
+      "path": "art/design/character-candidates-v2/body/body03/rejected/second-long-legs/source.png",
+      "bytes": 1497649,
+      "sha256": "2b466d98e1363eee2a31938bfa4aabd0051215595b34ce18daacab3d1cea0764"
+    },
+    {
+      "path": "art/design/character-candidates-v2/body/body03/rejected/source.png",
+      "bytes": 1492624,
+      "sha256": "0a272083ce5b0e4e1c5d1f69c98810231719e8b442711acb17ebb7df3b11f799"
+    },
+    {
+      "path": "art/design/character-candidates-v2/body/body05/rejected/generation.json",
+      "bytes": 744,
+      "sha256": "bdb91efee199a89c5ff468c863b9effac7a42a9e162a56d1557ba4275119c924"
+    },
+    {
+      "path": "art/design/character-candidates-v2/body/body05/rejected/prompt.txt",
+      "bytes": 1330,
+      "sha256": "41e331aedb0e684b9116947d06e78cf526b613e1277ce4bb752c7efce08238d8"
+    },
+    {
+      "path": "art/design/character-candidates-v2/body/body05/rejected/source.png",
+      "bytes": 1479675,
+      "sha256": "115d47f6031c97215b7df5b2557c4d078947714ccdf7b85d796d72b8d294e888"
+    },
+    {
+      "path": "art/design/character-candidates-v2/body/body09/rejected/generation.json",
+      "bytes": 732,
+      "sha256": "d11fb2980c81384702d2b15041bbdd002777169bbdf2a7f7eee0d03e7b9df642"
+    },
+    {
+      "path": "art/design/character-candidates-v2/body/body09/rejected/prompt.txt",
+      "bytes": 1374,
+      "sha256": "289080c970112efd633a871787977ef08e4598f8eae006d8c1f8bee14a7aa7cf"
+    },
+    {
+      "path": "art/design/character-candidates-v2/body/body09/rejected/source.png",
+      "bytes": 827827,
+      "sha256": "20df9b6ad3e6704593ad4bd0ce182e7ef88f682738c6474e60ca41cc0217c532"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants02/rejected/waist-too-high-generation.json",
+      "bytes": 626,
+      "sha256": "899c6560f18fee2ff757848952a6a9c659eb44cbb16e29eea7c016438a0becf8"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants02/rejected/waist-too-high-prompt.txt",
+      "bytes": 1076,
+      "sha256": "68fcd0b7fdd1bfc336378d1a230a0148af6aab87a6e6d474de5c01de0bcf582e"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants02/rejected/waist-too-high.png",
+      "bytes": 1577005,
+      "sha256": "0e992e5ae6225346a83c2ca68bf18953d19a2c745663e4f50754f2101ca47b3d"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants03/rejected/raised-waist/generation.json",
+      "bytes": 623,
+      "sha256": "00f23a46b98fb8715a27279203e9f3fd0e05735854b06128a625d8762067533d"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants03/rejected/raised-waist/prompt.txt",
+      "bytes": 1057,
+      "sha256": "ceb14746d09fc5575c599647e96e7811e7f5a14f39f43d2746ff554b9e61cbc5"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants03/rejected/raised-waist/source.png",
+      "bytes": 1473112,
+      "sha256": "d821cd231257f468b289d0b499a7a9336c9a1a9661c13fe18de8ee59802de413"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants04/rejected/raised-waist/generation.json",
+      "bytes": 626,
+      "sha256": "ceba065a41866eb5dc309e6853afa0ada07ea7cb84d0e17bb7324545e0aed641"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants04/rejected/raised-waist/prompt.txt",
+      "bytes": 1075,
+      "sha256": "e962a2e6dab59ea4a062521ac58914d6d55dc63f21d334a16a9d58f802b1777a"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants04/rejected/raised-waist/source.png",
+      "bytes": 1423283,
+      "sha256": "f46748778e5d557a1127001960b2b870b76da31df27ad623d02d8971409e576a"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants05/rejected/raised-waist/generation.json",
+      "bytes": 623,
+      "sha256": "13fc82e8acda94538586c2c657cb7a86c31595cbda000280ce27e9f442b864b6"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants05/rejected/raised-waist/prompt.txt",
+      "bytes": 1052,
+      "sha256": "aa676422246f5847719e6e9c7fd85d2d3b426d5fab768a24ea21e511d3033eb5"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants05/rejected/raised-waist/source.png",
+      "bytes": 1430946,
+      "sha256": "7148d758c523401df78b057750b77216f4375c2ac3c9653e535dda6fd56f9a4e"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants06/rejected/raised-waist/generation.json",
+      "bytes": 620,
+      "sha256": "968324104badde7cd8c7fc2ec7c3b8b92d65b837d882711245e0d0a152724bc1"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants06/rejected/raised-waist/prompt.txt",
+      "bytes": 1051,
+      "sha256": "2f0462ff192a8c9c11af4b9a1d5fb1f4242f73bbf6ae9535e396026cd223191c"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants06/rejected/raised-waist/source.png",
+      "bytes": 1438363,
+      "sha256": "cab49458bc2314ba84d1978da02ca8e08cce117ca5c0b8587ddeb4c9f84303f8"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants07/rejected/raised-waist/generation.json",
+      "bytes": 626,
+      "sha256": "8dc5050d9d277d5c33944e33bcd573603400831df296ce5edc9acc0a27ac7fe6"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants07/rejected/raised-waist/prompt.txt",
+      "bytes": 1095,
+      "sha256": "c9171cdf8355174191624ecfa70e2ae394073208b216782686867f198f399476"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants07/rejected/raised-waist/source.png",
+      "bytes": 1444559,
+      "sha256": "c379ca3581b6c883936669dcb2dfde1e2faa2be687f2d0e1db48a6d69a1de7d6"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants08/rejected/raised-waist/generation.json",
+      "bytes": 623,
+      "sha256": "bc95b3ece74b0453e42a6ed20952472297db200a6e72e241051c3dec801ae99d"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants08/rejected/raised-waist/prompt.txt",
+      "bytes": 1089,
+      "sha256": "eb8d9691bc1dc278de6c35a82f635ac5a1ddca1adb7c187865d23c311738ddae"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants08/rejected/raised-waist/source.png",
+      "bytes": 1433610,
+      "sha256": "8bb060ae580b4329f15cb69fd04c01e6d75687cf24b6695e3f31cde97633e8cf"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants08/rejected/second-west-waist/generation.json",
+      "bytes": 595,
+      "sha256": "7cad7e5070df761c5ba9011ab873d3cab3b8f6bedca160ef22b7f5afea0768b0"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants08/rejected/second-west-waist/prompt.txt",
+      "bytes": 1091,
+      "sha256": "4ed7b017593cad00e6858e2421463205b3a95a293419b6c186fb75b3d73fe00a"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants08/rejected/second-west-waist/source.png",
+      "bytes": 1466903,
+      "sha256": "944baa161d0f4a34c41530445a5e2446ea83e6a6bbe9e4987dc75aac59e3e85a"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants09/rejected/raised-waist/generation.json",
+      "bytes": 623,
+      "sha256": "1f74814f2d5307b0a85634619e31043ffaae3c851c7d6b115b1a30657b952633"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants09/rejected/raised-waist/prompt.txt",
+      "bytes": 1072,
+      "sha256": "8a7a2e5e2a41527971b6672ea0dc273391dd9ef5a2deb2af05568fe83fe439cb"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants09/rejected/raised-waist/source.png",
+      "bytes": 1434263,
+      "sha256": "fa7d1e32495cb47af4b0191495688a394cf2b2a31cffa7b1b34bf792f884ebd7"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants10/rejected/raised-waist/generation.json",
+      "bytes": 626,
+      "sha256": "a1c15d63fa3e8daa3424beb55775647225291e4f1bbac25029c166154b64f276"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants10/rejected/raised-waist/prompt.txt",
+      "bytes": 1063,
+      "sha256": "76abe85934830f0774f7607425ea8f3fe20f75938f80e07bfffa25fce68e8756"
+    },
+    {
+      "path": "art/design/character-candidates-v2/pants/pants10/rejected/raised-waist/source.png",
+      "bytes": 1441563,
+      "sha256": "2b274c0d66802a7895e33b61984eaa183135a205c0e403ee825f00d541bf5eff"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/adult_woman_east.png",
+      "bytes": 77924,
+      "sha256": "6ad6edb73d7b190d7c09bfdaa9864a5cd99d40c2a7a0b45dece74839d4c3c528"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/adult_woman_east.png.import",
+      "bytes": 992,
+      "sha256": "b9584556ec67b6550b182f224a49c5bcdbd3b6abc7c477d176afed6ab0e4b1c2"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/adult_woman_north.png",
+      "bytes": 82614,
+      "sha256": "7006eafc412a9c5f4e43c863974065e243879d0aafbeab3bd72ba30671a24c13"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/adult_woman_north.png.import",
+      "bytes": 995,
+      "sha256": "47db07d5dd28acead58f0426d10eb8e5b6af107d48b432cf423b85c7102e6b5a"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/adult_woman_south.png",
+      "bytes": 86691,
+      "sha256": "6d7bca19ddfc1b4f11ebf504caae33189253dc74f28cbffc22f20d1fde2c3850"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/adult_woman_south.png.import",
+      "bytes": 995,
+      "sha256": "6814423a75d9e6eaa185664e1bbe5a6f5e73f3e2c5e2c57eec886ddb6dc4a59c"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/adult_woman_west.png",
+      "bytes": 78240,
+      "sha256": "4c12beef3ece8dc7ea7352c4718bb1a838f2fb82a571c073033dfb96e9ad867b"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/adult_woman_west.png.import",
+      "bytes": 992,
+      "sha256": "4a178011edaebea4223f2ad092943cc7ae8e8180bd94f5432d52716538a9b80a"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/boy_east.png",
+      "bytes": 62117,
+      "sha256": "1fc0e82284f8e636e96ea051511c2c0e2e61c135734d7f5cb4b175daec51d9b2"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/boy_east.png.import",
+      "bytes": 968,
+      "sha256": "a352ce45acff409b208f58f18d75ec5baffea685ed4af1ed66f603020c16b652"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/boy_north.png",
+      "bytes": 69780,
+      "sha256": "c912882a716409cf1a57f673754fd9d27648ca457e141a145b37594b42459fcf"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/boy_north.png.import",
+      "bytes": 970,
+      "sha256": "e67274f5111a0de8ae1050e85a3b43b35ecf9157a86c1f1f9c042769989022ef"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/boy_south.png",
+      "bytes": 74211,
+      "sha256": "bc97dcad296556968664dabad422c183b3288463e225eda04621becbaf6fc646"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/boy_south.png.import",
+      "bytes": 971,
+      "sha256": "a9803fe71f74a1c694b99ef0d8f2e1cafff12f143f1b0e5e7c020f8b21e57001"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/boy_west.png",
+      "bytes": 63180,
+      "sha256": "32c5031918d7c3d478523b5adb804b9370a25a3adf3450f6c2d0f51bf7df3f9d"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/boy_west.png.import",
+      "bytes": 968,
+      "sha256": "9f14ccc587bc3b0e685816bf637eca33647a16e82ee279508d9e7565e3902afa"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/elder_man_east.png",
+      "bytes": 79745,
+      "sha256": "d59610bba691f53db26b9db01a662174cc8cbf673d4e72b5a2ee49834f1118d2"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/elder_man_east.png.import",
+      "bytes": 986,
+      "sha256": "60998411f4ac97b458ba73a41eba16276dd382754817c9506aeb51cb1560b011"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/elder_man_north.png",
+      "bytes": 88408,
+      "sha256": "ae66385da646b42b5f800d1ddb668517f8b8c2339d6686e78fd969e43e512198"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/elder_man_north.png.import",
+      "bytes": 989,
+      "sha256": "af387546e28a5f2fabafd61b3a90fa47f57f25222c36eb664ba9392ebb0f3bf9"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/elder_man_south.png",
+      "bytes": 91896,
+      "sha256": "629450c7d9469f7e312f98aa6b3a6f5b50a56a790bd2fdd9b0df0e8a8f5e4701"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/elder_man_south.png.import",
+      "bytes": 989,
+      "sha256": "35e9efc4d15312b8128d0ad70c8f2b9e16e32f724bdbfd24b6a960e1cbccc982"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/elder_man_west.png",
+      "bytes": 79978,
+      "sha256": "97c8363e7eaf594b97e1c70d8535dfe8799ed061da4514d985d83b60951b0f75"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/elder_man_west.png.import",
+      "bytes": 986,
+      "sha256": "3288a662e8bec6dfa4b6b95e86a8e2dee56d8b022689c0ce6d544a0683fb447b"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/elder_woman_east.png",
+      "bytes": 86190,
+      "sha256": "802326e6ff7b931abc2bf3c0810d72e6ef4c31c499d8c72e97586ae8d8b6183d"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/elder_woman_east.png.import",
+      "bytes": 991,
+      "sha256": "2a0ef57e9cab9a489c06771906ea4df7108f3e9af9c2dec74b2f43ee3c6726ab"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/elder_woman_north.png",
+      "bytes": 91857,
+      "sha256": "3f62b0dded79898c668ec8650710a65494e5c0dfbb6b06ddb31ff8968b1e1b01"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/elder_woman_north.png.import",
+      "bytes": 995,
+      "sha256": "4b8914c31fa77ff0dc84a18276b3518a594ca6b266d02230b0e6d9376f89ccac"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/elder_woman_south.png",
+      "bytes": 98366,
+      "sha256": "58c650b0152cf723f0872fc48f509751b16eee8508f71285ddc6df0db6c16ca1"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/elder_woman_south.png.import",
+      "bytes": 995,
+      "sha256": "d517308488fbb43c4e4614ac78059c60d71643684f59c6edf280a4b780261ba6"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/elder_woman_west.png",
+      "bytes": 86029,
+      "sha256": "3c4a1583546fddc36edf3a53f3bee44799bbc523275205af6971b31c97d00819"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/elder_woman_west.png.import",
+      "bytes": 991,
+      "sha256": "0e7207d36b3cad76883c59151bec5bd26d8041b09110698f7b076bee92bcbe71"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/girl_east.png",
+      "bytes": 58806,
+      "sha256": "c57a212b8801f727cfff02cebe2ec57241d9a8d12aeae96da4bc2afa59b00fdf"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/girl_east.png.import",
+      "bytes": 970,
+      "sha256": "4e8e54c5b1599e8873e8cb9e95a7b51c86c05a48b1bd2959d947fbdaacdda758"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/girl_north.png",
+      "bytes": 62963,
+      "sha256": "a9d9f35d2a8212e85cdbe37dff5fd1a7fce54be55e57a99e305246e407fcb36f"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/girl_north.png.import",
+      "bytes": 974,
+      "sha256": "0e0ec36902d58d8f40cfc8a86ce28ddef18bd39d28ae9efa36cc1aa4d2e47aae"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/girl_south.png",
+      "bytes": 69120,
+      "sha256": "c8ae7e0d0aba1ef605ef58fb891dbe62b2117052ffe3bc8f4332f55f7dc902cf"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/girl_south.png.import",
+      "bytes": 974,
+      "sha256": "35902c318ecaa90ddc639607925fcae2ffbb0015231a9a194b2fb81d6429971c"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/girl_west.png",
+      "bytes": 58442,
+      "sha256": "c16034ab2dfa2703b125c255c31ab893448dc7b20be344de78ca79c6e9f2d150"
+    },
+    {
+      "path": "godot2d/assets/character-library-v1/proportions/girl_west.png.import",
+      "bytes": 971,
+      "sha256": "b46ed5f1a0595d7b132f44131b62e35be7fd1d9048a6e84ee66b429446c6f70c"
+    },
+    {
+      "path": "godot2d/assets/npc-modular-v2/resident_a_east.png",
+      "bytes": 108235,
+      "sha256": "7d4518334193c547cb4ae84b353a6a5c649670dd2112fd68187c1cb9db36d00a"
+    },
+    {
+      "path": "godot2d/assets/npc-modular-v2/resident_a_east.png.import",
+      "bytes": 971,
+      "sha256": "2c015392a576569d7c9023dfcfcad62bee31c36c4ca9530e77efefd3beffbe94"
+    },
+    {
+      "path": "godot2d/assets/npc-modular-v2/resident_a_north.png",
+      "bytes": 117043,
+      "sha256": "063c3b7d1d8377961d34d8f8e597fdd254ca235a7d0797d4c078a39eea2ef4a9"
+    },
+    {
+      "path": "godot2d/assets/npc-modular-v2/resident_a_north.png.import",
+      "bytes": 974,
+      "sha256": "21263c653f0fcac45d4ba3095939393a0718b2aa68f8e34abec59324353d764a"
+    },
+    {
+      "path": "godot2d/assets/npc-modular-v2/resident_a_south.png",
+      "bytes": 130558,
+      "sha256": "e8e9cf8c2b03e89349e1d70daf64c4a2f15b196aff30104a380997680b1ebee0"
+    },
+    {
+      "path": "godot2d/assets/npc-modular-v2/resident_a_south.png.import",
+      "bytes": 974,
+      "sha256": "bcadcaa18bff94bff3eff46860cc5e16a6831f004ffe9676d6b15148787a021c"
+    },
+    {
+      "path": "godot2d/assets/npc-modular-v2/resident_a_west.png",
+      "bytes": 109067,
+      "sha256": "aec6a50e82e0ed6bf1df283ab5ada4da1f7f8416135e2097711a2ef3e7fac544"
+    },
+    {
+      "path": "godot2d/assets/npc-modular-v2/resident_a_west.png.import",
+      "bytes": 971,
+      "sha256": "786828ca3676ea239d016cc68d896ba7ac4b18e4f7c0cc5e11bcde44745ea4f0"
+    },
+    {
+      "path": "godot2d/assets/npc-modular-v2/resident_b_east.png",
+      "bytes": 124050,
+      "sha256": "fb5287720c43c6d160b46f0fc43b7ec3ec4f76c14175e4b81a6470ba7e347cc4"
+    },
+    {
+      "path": "godot2d/assets/npc-modular-v2/resident_b_east.png.import",
+      "bytes": 971,
+      "sha256": "a53dbff5be5232258e3cd6039d98d6887bbccf40a9dec9b96c9c4784688f094c"
+    },
+    {
+      "path": "godot2d/assets/npc-modular-v2/resident_b_north.png",
+      "bytes": 121203,
+      "sha256": "747045cffead95e22886bd4af6cfe726936d3dd76709d9fd3a89c83c0f3ea71e"
+    },
+    {
+      "path": "godot2d/assets/npc-modular-v2/resident_b_north.png.import",
+      "bytes": 974,
+      "sha256": "ae4763bda9752002eb39c5a79242374e5dbac450dab09fa51e12a1b6ec371582"
+    },
+    {
+      "path": "godot2d/assets/npc-modular-v2/resident_b_south.png",
+      "bytes": 141672,
+      "sha256": "5e4f86ad6b1924cc4e65725769c03622dd52aea35989aab5e8d4437e0f977198"
+    },
+    {
+      "path": "godot2d/assets/npc-modular-v2/resident_b_south.png.import",
+      "bytes": 973,
+      "sha256": "df88b484fda52af5a9cc3b3df6ceefbe4f969c571baced70c69e71b9e798cea3"
+    },
+    {
+      "path": "godot2d/assets/npc-modular-v2/resident_b_west.png",
+      "bytes": 124770,
+      "sha256": "4deff02e3ec414a7944d993798b88d3e4a7c7e2af323c3fb3c5c3ce3a36e12a7"
+    },
+    {
+      "path": "godot2d/assets/npc-modular-v2/resident_b_west.png.import",
+      "bytes": 971,
+      "sha256": "831382da9d8680990a2c210938bdff5640bc05508dc3f45f37cb62ad653a9cc6"
+    },
+    {
+      "path": "godot2d/scenes/reviews/character_family_review.tscn",
+      "bytes": 3642,
+      "sha256": "e4b4b88df1a3492d0532de5d12dab922be610113c9e8a9d17f0c7fa77bd0a91f"
+    },
+    {
+      "path": "godot2d/tests/test_character_families_native.gd",
+      "bytes": 1494,
+      "sha256": "5f7d7668733fd5762595890fc1dc28822c4a47431776a96243e23ed9245f9056"
+    },
+    {
+      "path": "godot2d/tests/test_character_families_native.gd.uid",
+      "bytes": 20,
+      "sha256": "5dbc6d1e0cf0521ff56a5fb646d5f29dd2fb56682a1f7230c3009711a1a0cea2"
+    },
+    {
+      "path": "godot2d/tests/test_npc_proportions_native.gd",
+      "bytes": 2036,
+      "sha256": "a28f1149b7d7d831b62dbe9246442954433168e5c06780201a278ed37354c77f"
+    },
+    {
+      "path": "godot2d/tests/test_npc_proportions_native.gd.uid",
+      "bytes": 20,
+      "sha256": "b358b0857f6f5f7bcaabfa99d0b4e37f609e71e7fffe36c08aad67a36c39a55f"
+    }
+  ],
+  "protected_current_generation_dependencies": [
+    "art/design/character-candidates-v2/pants/pants08/rejected/skirt-waist/generation.json",
+    "art/design/character-candidates-v2/pants/pants08/rejected/skirt-waist/prompt.txt",
+    "art/design/character-candidates-v2/pants/pants08/rejected/skirt-waist/source.png"
+  ],
+  "reason": "Rejected drafts not referenced by active catalog; retired standalone legacy character review runtime copies and their exclusive scenes/tests; approved originals and production player retained",
+  "verification": "every member sha256 matched before removal"
+}

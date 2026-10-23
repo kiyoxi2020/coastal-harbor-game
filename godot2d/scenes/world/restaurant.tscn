@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/restaurant_view.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/harbor-district-v1/restaurant.png" id="building"]
+[ext_resource type="Texture2D" path="res://assets/restaurant-v1/closed.png" id="closed"]
+[ext_resource type="Texture2D" path="res://assets/restaurant-v1/open.png" id="open"]
+[ext_resource type="Texture2D" path="res://assets/restaurant-v1/menu.png" id="menu"]
+[ext_resource type="Texture2D" path="res://assets/restaurant-v1/smoke.png" id="smoke"]
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/walk_north_0.png" id="customer1"]
+[ext_resource type="Texture2D" path="res://assets/player-unified-v4/walk_west_0.png" id="customer2"]
+[sub_resource type="RectangleShape2D" id="base"]
+size = Vector2(110,42)
+
+[node name="Restaurant" type="Node2D"]
+texture_filter = 1
+script = ExtResource("script")
+
+[node name="StaticArt" type="Sprite2D" parent="."]
+position = Vector2(0,-53.2)
+scale = Vector2(0.7,0.7)
+texture = ExtResource("building")
+
+[node name="ClosedSign" type="Sprite2D" parent="."]
+position = Vector2(0,-18)
+scale = Vector2(0.071428571,0.071428571)
+texture = ExtResource("closed")
+
+[node name="OpenSign" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0,-18)
+scale = Vector2(0.071428571,0.071428571)
+texture = ExtResource("open")
+
+[node name="MenuBoard" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(48,9)
+scale = Vector2(0.042553191,0.042553191)
+texture = ExtResource("menu")
+
+[node name="Smoke" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-35,-118)
+scale = Vector2(0.057142857,0.057142857)
+texture = ExtResource("smoke")
+
+[node name="Customers" type="Node2D" parent="."]
+
+[node name="Customer1" type="Sprite2D" parent="Customers"]
+visible = false
+position = Vector2(-40,-0.6)
+scale = Vector2(0.15,0.15)
+texture = ExtResource("customer1")
+modulate = Color(0.85,0.93,1,1)
+
+[node name="Customer2" type="Sprite2D" parent="Customers"]
+visible = false
+position = Vector2(26,6.4)
+scale = Vector2(0.15,0.15)
+texture = ExtResource("customer2")
+modulate = Color(1,0.88,0.76,1)
+
+[node name="InteractPoint" type="Marker2D" parent="."]
+position = Vector2(0,16)
+
+[node name="Base" type="StaticBody2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="Base"]
+position = Vector2(0,-21)
+shape = SubResource("base")

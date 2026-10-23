@@ -185,8 +185,9 @@ func run() -> void:
 			check("event_roll_step_" + str(request), false)
 			break
 		rolling = step.next_state
-	check("event_retention", rolling.life.action_seq == 260 and rolling.life.events.size() == 256 and rolling.life.events[0].event_id == "a:5:0" and rolling.life.last_receipt.request_id == 260)
+	check("event_retention", rolling.life.action_seq == 260 and rolling.life.events.size() == 256 and rolling.life.events[-1].event_id == "a:260:0" and State.valid_data(rolling.to_data(POINT)) and rolling.life.last_receipt.request_id == 260)
 
+	check("event_retention_money",rolling.life.events.filter(func(e):return e.source=="player").reduce(func(n,e):return n+e.cash,0)==1300 and rolling.life.events.filter(func(e):return e.source=="market").reduce(func(n,e):return n+e.cash,0)==780)
 	var real_save = Save.new(support.temporary_directory("P03-real"))
 	state = State.new()
 	result = attempt(state, real_save, args())

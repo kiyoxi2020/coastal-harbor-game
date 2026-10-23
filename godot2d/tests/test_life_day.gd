@@ -60,7 +60,7 @@ func run() -> void:
 	var next = r.next_state
 	check("day_fields", next.life.day_id == 2 and next.life.last_settled_day == 1 and next.life.action_seq == 1)
 	check("history_kept", next.collected == {} and next.total_collected == 2 and next.discovered == {"clam":true, "snail":true} and next.bag.snapshot() == s.bag.snapshot())
-	check("market_refresh", next.life.accounts.market.cash == 1010 and next.life.accounts.market.slots[0].amount == 20 and next.life.accounts.market.slots[1].amount == 20 and next.life.accounts.market.buy_quota.clam == 12)
+	check("market_refresh", next.life.accounts.market.cash == 910 and next.life.town.supply_depot.cash == 100 and next.life.accounts.market.slots[0].amount == 20 and next.life.accounts.market.slots[1].amount == 20 and next.life.accounts.market.buy_quota.clam == 12)
 	var restocks: Array = r.events.filter(func(e): return e.kind == "external_restock")
 	check("actual_restock_only", restocks.size() == 1 and restocks[0].items == {"lettuce_seed":2} and restocks[0].cash == 0 and restocks[0].source == "external" and restocks[0].target == "market")
 	check("source_day_events", r.events.all(func(e): return e.day_id == 1) and r.events[0].event_id == "a:1:0" and r.events[-1].kind == "sleep")

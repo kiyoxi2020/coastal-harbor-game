@@ -1,4 +1,5 @@
 extends RefCounted
+const Town = preload("res://scripts/simulation/town_rules.gd")
 const Farming = preload("res://scripts/simulation/farming_rules.gd")
 const Schema = preload("res://scripts/simulation/state_schema.gd")
 const Inventory = preload("res://scripts/inventory/inventory_container.gd")
@@ -37,10 +38,16 @@ static func advance(data: Dictionary, expected_day: int) -> Dictionary:
 	market.slots = stock.snapshot()
 	for item in market.buy_quota:
 		market.buy_quota[item] = 12
+	if life.has("town"):
+		var settled:Dictionary=Town.settle(candidate,expected_day)
+		if not settled.ok:return settled
+		candidate=settled.state
+		life=candidate.life
+		events.append_array(settled.events)
 	var cash_in := 0
 	var cash_out := 0
 	for event in life.events:
-		if event.day_id != expected_day or event.kind != "transfer":
+		if event.day_id != expected_day or event.kind not in ["transfer","transfer_summary"]:
 			continue
 		if event.target == "player":
 			cash_in += int(event.cash)

@@ -1,0 +1,111 @@
+{
+  "date": "2026-10-22",
+  "engine": "Godot 4.7.1",
+  "automatic_suites": [
+    {
+      "suite": "test_life_restaurant",
+      "checks": 65,
+      "failures": [],
+      "source_log": "/private/tmp/coastal-P11.log"
+    },
+    {
+      "suite": "test_life_fourteen_days",
+      "checks": 479,
+      "failures": [],
+      "source_log": "/private/tmp/coastal-P11-14days.log"
+    },
+    {
+      "suite": "test_restaurant_view",
+      "checks": 57,
+      "failures": [],
+      "source_log": "/private/tmp/coastal-P11-view-final-output.log"
+    },
+    {
+      "suite": "test_harbor_district",
+      "checks": 61,
+      "failures": [],
+      "source_log": "/private/tmp/coastal-P11-final-test_harbor_district.stdout"
+    },
+    {
+      "suite": "test_region_map",
+      "checks": 28,
+      "failures": [],
+      "source_log": "/private/tmp/coastal-P11-final-test_region_map.stdout"
+    },
+    {
+      "suite": "test_world_map_c",
+      "checks": 25,
+      "failures": [],
+      "source_log": "/private/tmp/coastal-P11-final-test_world_map_c.stdout"
+    },
+    {
+      "suite": "test_restaurant_ui",
+      "checks": 55,
+      "failures": [],
+      "source_log": "/private/tmp/coastal-P11-final-test_restaurant_ui.stdout"
+    },
+    {
+      "suite": "test_editor_scene_contracts",
+      "checks": 132,
+      "failures": [],
+      "source_log": "/private/tmp/coastal-P11-contracts.stdout"
+    },
+    {
+      "suite": "test_life_economy",
+      "checks": 237,
+      "failures": [],
+      "source_log": "/private/tmp/coastal-P11-regression-test_life_economy.stdout"
+    },
+    {
+      "suite": "test_town_schema",
+      "checks": 86,
+      "failures": [],
+      "source_log": "/private/tmp/coastal-P11-regression-test_town_schema.stdout"
+    },
+    {
+      "suite": "test_life_day",
+      "checks": 75,
+      "failures": [],
+      "source_log": "/private/tmp/coastal-P11-regression-test_life_day.stdout"
+    },
+    {
+      "suite": "test_life_transactions",
+      "checks": 122,
+      "failures": [],
+      "source_log": "/private/tmp/coastal-P11-regression-test_life_transactions.stdout"
+    },
+    {
+      "suite": "test_life_schema",
+      "checks": 37,
+      "failures": [],
+      "source_log": "/private/tmp/coastal-P11-regression-test_life_schema.stdout"
+    },
+    {
+      "suite": "test_life_seven_days",
+      "checks": 498,
+      "failures": [],
+      "source_log": "/private/tmp/coastal-P11-regression-test_life_seven_days.stdout"
+    }
+  ],
+  "automatic_checks": 1957,
+  "native_checks": 52,
+  "native_passed": true,
+  "native_platform": "Apple M4/macOS Compatibility OpenGL",
+  "boundaries": [
+    "No real player saves",
+    "No cross-platform/export or human long playtest",
+    "Existing CA certificate warning in sandbox headless startup"
+  ],
+  "subagents": [
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning": "high",
+      "role": "backend and persistence economic tests"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning": "high",
+      "role": "UI world integration and focused tests"
+    }
+  ]
+}

@@ -51,7 +51,7 @@ static func default_life() -> Dictionary:
 		"day_id":1, "last_settled_day":0, "action_seq":0, "last_receipt":{}, "wallet":100,
 		"accounts":{"market":{"cash":1000, "slots":market_slots, "buy_quota":{"clam":12, "snail":12, "kelp":12, "lettuce":12, "tomato":12}}},
 		"plots":default_cells(),
-		"events":[], "daily_reports":[]
+		"events":[], "daily_reports":[], "town":default_town(1)
 	}.duplicate(true)
 
 static func _valid_slots(slots, capacity: int, allowed: Array = INVENTORY_ITEMS) -> bool:
@@ -296,6 +296,7 @@ static func validate_v5(data: Dictionary) -> bool:
 	return validate_v4(base, CURRENT_ITEMS)
 
 static func validate_current(data: Dictionary) -> bool:
+	if data.get("version") == 6: return validate_v6(data)
 	return validate_v5(data) if data.get("version") == 5 else validate_v4(data)
 
 static func migrate_v4(data: Dictionary) -> Dictionary:
@@ -303,3 +304,147 @@ static func migrate_v4(data: Dictionary) -> Dictionary:
 	var result: Dictionary=data.duplicate(true)
 	result.version=5
 	return result if validate_v5(result) else {}
+
+
+const TOWN_RAW_ITEMS := ["clam", "snail", "lettuce", "tomato"]
+const TOWN_SUPPLY_ITEMS := TOWN_RAW_ITEMS + ["clam_salad", "snail_stew"]
+const TOWN_MEALS := ["clam_salad", "snail_stew"]
+const RESERVED_HOUSEHOLD_IDS := ["player", "market", "restaurant", "supply_depot", "external_fund"]
+const CASH_LIMIT := 1000000000
+const TOWN_METRIC_FIELDS := ["day_id", "paid_staff", "batches", "produced", "sold", "sales_cash", "purchase_cash", "wage_cash", "cash_profit", "households_served", "households_total", "unmet_households", "reasons"]
+
+static func default_town(current_day: int) -> Dictionary:
+	var households := {}
+	for index in range(1, 6):
+		households["hh_%02d" % index] = {"members":4, "workers":2, "cash":200, "eligible_from_day":1}
+	return {
+		"restaurant":{"cash":300, "slots":_empty_slots(48), "status":"closed", "good_days":0, "bad_days":0,
+			"enabled":false, "employee_households":["hh_01", "hh_02"],
+			"supply_quota":{"clam":4, "snail":4, "lettuce":4, "tomato":4, "clam_salad":4, "snail_stew":4}, "last_metrics":{}},
+		"households":households,
+		"supply_depot":{"cash":0, "stock":{"clam":60, "snail":60, "lettuce":60, "tomato":60}},
+		"external_fund":10000,
+		"initial_endowment":{"day_id":current_day,
+			"cash":{"restaurant":300, "households":1000, "supply_depot":0, "external_fund":10000},
+			"stock":{"clam":60, "snail":60, "lettuce":60, "tomato":60}},
+		"consumption_cursor":0, "food_history":[], "daily_metrics":[]
+	}.duplicate(true)
+
+static func _valid_town_item_counts(value, allowed: Array, maximum: int = 1000000) -> bool:
+	if not value is Dictionary: return false
+	for id in value:
+		if not id is String or id not in allowed or not _bounded_integer(value[id], 1, maximum): return false
+	return true
+
+static func _valid_town_metrics(metric, households: Dictionary, first_day: int, current_day: int) -> bool:
+	if not metric is Dictionary or not _exact_keys(metric, TOWN_METRIC_FIELDS): return false
+	if not _bounded_integer(metric.day_id, first_day, current_day): return false
+	if not _bounded_integer(metric.paid_staff, 0, 2) or not _bounded_integer(metric.batches, 0, int(metric.paid_staff) * 2): return false
+	if not _valid_town_item_counts(metric.produced, TOWN_MEALS, 4) or not _valid_town_item_counts(metric.sold, TOWN_MEALS, 1000): return false
+	for key in ["sales_cash", "purchase_cash", "wage_cash"]:
+		if not _bounded_integer(metric[key], 0, CASH_LIMIT): return false
+	if not _bounded_integer(metric.cash_profit, -CASH_LIMIT, CASH_LIMIT): return false
+	var produced_count := 0
+	for amount in metric.produced.values(): produced_count += int(amount)
+	var sold_count := 0
+	for amount in metric.sold.values(): sold_count += int(amount)
+	if produced_count != metric.batches or metric.wage_cash != metric.paid_staff * 4: return false
+	if sold_count != metric.households_served: return false
+	var expected_sales := int(metric.sold.get("clam_salad", 0)) * 30 + int(metric.sold.get("snail_stew", 0)) * 42
+	if metric.sales_cash != expected_sales or metric.cash_profit != metric.sales_cash - metric.purchase_cash - metric.wage_cash: return false
+	if not _bounded_integer(metric.households_total, 0, households.size()) or not _bounded_integer(metric.households_served, 0, int(metric.households_total)): return false
+	if not metric.unmet_households is Array or metric.unmet_households.size() != metric.households_total - metric.households_served: return false
+	var seen := {}
+	for id in metric.unmet_households:
+		if not id is String or not households.has(id) or seen.has(id): return false
+		seen[id] = true
+	if not metric.reasons is Array: return false
+	for reason in metric.reasons:
+		if not reason is String or reason.is_empty(): return false
+	return true
+
+static func _valid_town(town, current_day: int) -> bool:
+	if not town is Dictionary or not _exact_keys(town, ["restaurant", "households", "supply_depot", "external_fund", "initial_endowment", "consumption_cursor", "food_history", "daily_metrics"]): return false
+	if not town.households is Dictionary or town.households.is_empty() or town.households.size() > 1000: return false
+	for id in town.households:
+		if not id is String or id.is_empty() or id.length() > 64 or id in RESERVED_HOUSEHOLD_IDS: return false
+		var household = town.households[id]
+		if not household is Dictionary or not _exact_keys(household, ["members", "workers", "cash", "eligible_from_day"]): return false
+		if not _bounded_integer(household.members, 1, 1000) or not _bounded_integer(household.workers, 0, int(household.members)): return false
+		if not _bounded_integer(household.cash, 0, CASH_LIMIT) or not _bounded_integer(household.eligible_from_day, 1, 1000000): return false
+	if not _bounded_integer(town.external_fund, 0, CASH_LIMIT) or not _bounded_integer(town.consumption_cursor, 0, town.households.size() - 1): return false
+	var restaurant = town.restaurant
+	if not restaurant is Dictionary or not _exact_keys(restaurant, ["cash", "slots", "status", "good_days", "bad_days", "enabled", "employee_households", "supply_quota", "last_metrics"]): return false
+	if not _bounded_integer(restaurant.cash, 0, CASH_LIMIT) or not _valid_slots(restaurant.slots, 48, CURRENT_ITEMS): return false
+	if not restaurant.status is String or restaurant.status not in ["closed", "trial", "operating"] or not restaurant.enabled is bool: return false
+	if not _bounded_integer(restaurant.good_days, 0, 7) or not _bounded_integer(restaurant.bad_days, 0, 7): return false
+	if restaurant.enabled != (restaurant.status != "closed"): return false
+	if not restaurant.employee_households is Array or restaurant.employee_households.size() > 2: return false
+	var employees := {}
+	for id in restaurant.employee_households:
+		if not id is String or not town.households.has(id) or employees.has(id) or town.households[id].workers < 1: return false
+		employees[id] = true
+	if not restaurant.supply_quota is Dictionary or not _exact_keys(restaurant.supply_quota, TOWN_SUPPLY_ITEMS): return false
+	for quota in restaurant.supply_quota.values():
+		if not _bounded_integer(quota, 0, 4): return false
+	var depot = town.supply_depot
+	if not depot is Dictionary or not _exact_keys(depot, ["cash", "stock"]) or not _bounded_integer(depot.cash, 0, CASH_LIMIT): return false
+	if not depot.stock is Dictionary or not _exact_keys(depot.stock, TOWN_RAW_ITEMS): return false
+	for amount in depot.stock.values():
+		if not _bounded_integer(amount, 0, 1000000): return false
+	var endowment = town.initial_endowment
+	if not endowment is Dictionary or not _exact_keys(endowment, ["day_id", "cash", "stock"]) or not _bounded_integer(endowment.day_id, 1, current_day): return false
+	# This summary records the one-time P08 source, rather than a spendable account.
+	if not endowment.cash is Dictionary or not _exact_keys(endowment.cash, ["restaurant", "households", "supply_depot", "external_fund"]): return false
+	for key in endowment.cash:
+		var expected_cash: int = {"restaurant":300, "households":1000, "supply_depot":0, "external_fund":10000}[key]
+		if not _bounded_integer(endowment.cash[key], expected_cash, expected_cash): return false
+	if not endowment.stock is Dictionary or not _exact_keys(endowment.stock, TOWN_RAW_ITEMS): return false
+	for amount in endowment.stock.values():
+		if not _bounded_integer(amount, 60, 60): return false
+	if not town.food_history is Array or town.food_history.size() > 7 or not town.daily_metrics is Array or town.daily_metrics.size() > 30: return false
+	var previous_day := 0
+	for entry in town.food_history:
+		if not entry is Dictionary or not _exact_keys(entry, ["day_id", "served", "total"]): return false
+		if not _bounded_integer(entry.day_id, int(endowment.day_id), current_day) or entry.day_id <= previous_day: return false
+		if not _bounded_integer(entry.total, 0, town.households.size()) or not _bounded_integer(entry.served, 0, int(entry.total)): return false
+		previous_day = int(entry.day_id)
+	previous_day = 0
+	for entry in town.daily_metrics:
+		if not _valid_town_metrics(entry, town.households, int(endowment.day_id), current_day) or entry.day_id <= previous_day: return false
+		previous_day = int(entry.day_id)
+	if town.food_history.size() != mini(7, town.daily_metrics.size()): return false
+	for index in range(town.food_history.size()):
+		var history: Dictionary = town.food_history[index]
+		var metric: Dictionary = town.daily_metrics[town.daily_metrics.size() - town.food_history.size() + index]
+		if history.day_id != metric.day_id or history.served != metric.households_served or history.total != metric.households_total: return false
+	if not restaurant.last_metrics is Dictionary: return false
+	if town.daily_metrics.is_empty():
+		return restaurant.last_metrics.is_empty() and town.food_history.is_empty()
+	return _valid_town_metrics(restaurant.last_metrics, town.households, int(endowment.day_id), current_day) and restaurant.last_metrics == town.daily_metrics[-1]
+
+static func validate_v6(data: Dictionary) -> bool:
+	if not _integer(data.get("version")) or data.version != 6 or not data.get("life") is Dictionary or not data.life.has("town"): return false
+	var receipt=data.life.get("last_receipt")
+	if receipt is Dictionary and receipt.get("kind")=="open_restaurant" and (not receipt.get("args") is Dictionary or not receipt.args.is_empty()):return false
+	var base := data.duplicate(true)
+	base.version = 5
+	base.life.erase("town")
+	# New v6 receipts cannot silently become valid in the frozen v4/v5 contracts.
+	if base.life.get("last_receipt") is Dictionary and base.life.last_receipt.get("kind") == "fund_restaurant":
+		base.life.last_receipt.kind = "supply"
+	if not validate_v5(base) or not _valid_town(data.life.town, int(data.life.day_id)):return false
+	for event in data.life.events:
+		if event.kind!="restaurant_status":continue
+		if event.cash!=0 or not event.items.is_empty():return false
+		var transition:String=event.source+">"+event.target
+		var reasons={"closed>trial":"open_restaurant","trial>operating":"good_days","operating>trial":"bad_days","trial>closed":"bad_days"}
+		if not reasons.has(transition) or event.reason!=reasons[transition]:return false
+	return true
+
+static func migrate_v5(data: Dictionary) -> Dictionary:
+	if not validate_v5(data): return {}
+	var result := data.duplicate(true)
+	result.version = 6
+	result.life["town"] = default_town(int(result.life.day_id))
+	return result if validate_v6(result) else {}

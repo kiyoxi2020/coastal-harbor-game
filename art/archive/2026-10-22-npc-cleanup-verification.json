@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-22",
+  "backup_members_verified_before_removal": 1685,
+  "removed_original_files": 1599,
+  "retired_paths_absent": 1597,
+  "readmes_replaced_with_reference_only_text": [
+    "art/design/character-library-v1/README.md",
+    "art/design/npc-modular-v2/README.md"
+  ],
+  "local_markdown_links_checked": 96,
+  "master_identical_to_user_selected_attachment": true,
+  "archive_sha256_verified": "80f90b6e56dbcf27e5f78b4e29c72504afec920cbf4bb8e0ca768995384e66a3",
+  "godot_load": "2 PackedScenes and 28 retained reference textures loaded; scene trees were not instantiated",
+  "godot_log": "/private/tmp/coastal-character-cleanup-load.log",
+  "godot_limit": "macOS system CA certificate query warning in sandbox; no resource/script load errors",
+  "not_run": [
+    "new master registration",
+    "new modular sample generation",
+    "new art native visual or interaction acceptance",
+    "gameplay regression",
+    "commit/push/export"
+  ]
+}

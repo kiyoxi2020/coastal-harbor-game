@@ -1,0 +1,26 @@
+PASS new_game
+PASS right_detail_removed
+PASS resource_controls_removed
+PASS divider_removed
+PASS no_scene_snapshot
+PASS default_actual_region
+PASS paused
+PASS five_regions
+PASS harbor_district_selectable
+PASS hillside_selectable
+PASS residential_lane_selectable
+PASS cape_coast_selectable
+PASS actual_region_still_marked
+PASS invalid_region_ignored
+PASS tab_close
+PASS tab_wrap
+PASS reverse_tab_close
+PASS direction_selects_district
+PASS E_keeps_region_selected
+PASS pause_state_unchanged
+PASS escape_closes_directly
+PASS house_default_harbor
+PASS B_closes_directly
+PASS M_closes_directly
+PASS reopen_resets_current_region
+WORLD_MAP_SINGLE checks=25 passed=true

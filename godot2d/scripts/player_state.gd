@@ -1,8 +1,8 @@
 extends RefCounted
 
 signal changed
-const SAVE_VERSION := 5
-const SUPPORTED_VERSIONS := [1, 2, 3, 4, 5]
+const SAVE_VERSION := 6
+const SUPPORTED_VERSIONS := [1, 2, 3, 4, 5, 6]
 const Inventory = preload("res://scripts/inventory/inventory_container.gd")
 const Data = preload("res://scripts/harbor_data.gd")
 const Schema = preload("res://scripts/simulation/state_schema.gd")
@@ -73,6 +73,7 @@ static func valid_data(value) -> bool:
 		return false
 	if not value.get("player_name") is String or clean_name(value.player_name) != value.player_name:
 		return false
+	if int(value.version) == 6: return Schema.validate_v6(value)
 	if int(value.version) == 5: return Schema.validate_v5(value)
 	if int(value.version) == 4: return Schema.validate_v4(value)
 	return Schema.validate_v3(value) if int(value.version) == 3 else Schema.validate_legacy(value)
@@ -84,7 +85,9 @@ static func migrate_data(value) -> Dictionary:
 	if int(result.version) in [1, 2]: result = Schema.migrate_legacy(result)
 	elif int(result.version) == 3: result = Schema.migrate_v3(result)
 	if int(result.version) == 4: result = Schema.migrate_v4(result)
-	return result
+	if result.is_empty(): return {}
+	if int(result.version) == 5: result = Schema.migrate_v5(result)
+	return result if valid_data(result) else {}
 
 func restore(value: Dictionary) -> bool:
 	var migrated := migrate_data(value)

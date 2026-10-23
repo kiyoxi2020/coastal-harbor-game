@@ -226,6 +226,7 @@ func show_page(page: String) -> void:
 		note = ""
 	if page=="trade" and mode!="trade": $Root/TradePage.open()
 	if page=="craft" and mode!="craft": $Root/CraftPage.open()
+	if page=="restaurant" and mode!="restaurant": $Root/RestaurantPage.open()
 	mode = page
 	if page in ["bag", "profile", "settings"] and not from_title:
 		last_page = page
@@ -244,6 +245,7 @@ func render() -> void:
 	pause_menu.visible = mode in ["bag", "profile", "settings"]
 	storage_page.visible = mode == "storage"
 	sleep_page.visible = mode == "sleep"
+	$Root/RestaurantPage.visible=mode=="restaurant"
 	$Root/CraftPage.visible=mode=="craft"
 	$Root/TradePage.visible=mode=="trade"
 	$Root/DailyPage.visible=mode=="daily"
@@ -257,6 +259,9 @@ func render() -> void:
 	if mode == "title":
 		surface = $Root/MainMenu/Surface
 		_refresh_title()
+	elif mode=="restaurant":
+		surface=$Root/RestaurantPage/Surface
+		$Root/RestaurantPage.render()
 	elif mode=="craft":
 		surface=$Root/CraftPage/Surface
 		$Root/CraftPage.render()
@@ -409,7 +414,7 @@ func _refresh_details() -> void:
 			usage="用途：选择种子工具，在已翻土的空格播种。"
 		elif slot.id in ["clam_salad","snail_stew"]:
 			source="厨房制作"
-			usage="用途：厨房成品，可暂存；餐馆供货待开放。"
+			usage="用途：厨房成品，可暂存；到港口街区餐馆窗口供货。"
 		elif slot.id=="marine_fertilizer":
 			category="材料"
 			source="厨房处理"
@@ -575,6 +580,9 @@ func _close_pause_menu() -> void:
 	dismiss()
 
 func close_menu() -> void:
+	if mode=="restaurant":
+		$Root/RestaurantPage.back()
+		return
 	if mode=="craft":
 		$Root/CraftPage.back()
 		return
@@ -615,6 +623,7 @@ func dismiss() -> void:
 	pause_menu.visible = false
 	storage_page.visible = false
 	sleep_page.visible = false
+	$Root/RestaurantPage.hide()
 	$Root/CraftPage.hide()
 	$Root/TradePage.hide()
 	$Root/DailyPage.hide()
@@ -628,6 +637,9 @@ const NAV_KEYS={KEY_LEFT:Vector2i.LEFT,KEY_A:Vector2i.LEFT,KEY_RIGHT:Vector2i.RI
 func _focus_default() -> void:
 	if not is_inside_tree() or mode == "" or is_instance_valid(modal):
 		return
+		return
+	if mode=="restaurant":
+		$Root/RestaurantPage.focus_default()
 		return
 	if mode=="craft":
 		$Root/CraftPage.focus_default()
@@ -747,6 +759,9 @@ func _input(event: InputEvent) -> void:
 	if mode == "" or not event is InputEventKey or not event.pressed:
 		return
 	var key: int = event.physical_keycode if event.physical_keycode != 0 else event.keycode
+	if mode=="restaurant":
+		if $Root/RestaurantPage.handle_key(event):get_viewport().set_input_as_handled()
+		return
 	if mode=="craft":
 		if $Root/CraftPage.handle_key(event):get_viewport().set_input_as_handled()
 		return

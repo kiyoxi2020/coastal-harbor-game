@@ -1,8 +1,8 @@
 extends SceneTree
 const State = preload("res://scripts/player_state.gd")
 const Rules = preload("res://scripts/simulation/life_rules.gd")
-const Service = preload("res://scripts/simulation/action_service.gd")
-const Save = preload("res://scripts/save_service.gd")
+const Schema = preload("res://scripts/simulation/state_schema.gd")
+
 const Data = preload("res://scripts/harbor_data.gd")
 const Inventory = preload("res://scripts/inventory/inventory_container.gd")
 const Support = preload("res://tests/life_test_support.gd")
@@ -11,22 +11,49 @@ var t = Support.new()
 var state
 var save
 var operations := {}
+# Frozen M1 regression: no PlayerState migration, ActionService or production Save.
+class FrozenState extends RefCounted:
+	var raw:Dictionary={}
+	var life:Dictionary={}
+	var bag=Inventory.new(24)
+	var total_collected:int:
+		get:return int(raw.total_collected)
+	var collected:Dictionary:
+		get:return raw.collected
+	var discovered:Dictionary:
+		get:return raw.discovered
+	func restore(data:Dictionary) -> bool:
+		if not Schema.validate_v4(data):return false
+		raw=data.duplicate(true);life=raw.life
+		return bag.restore_slots(raw.bag)
+	func to_data(_point:Vector2) -> Dictionary:
+		var d=raw.duplicate(true);d.life=life.duplicate(true);d.bag=bag.snapshot();return d
+class FrozenStore extends RefCounted:
+	var data:Dictionary={}
+	func write_save(d:Dictionary) -> bool:
+		if not Schema.validate_v4(d):return false
+		data=d.duplicate(true);return true
+	func read_save() -> Dictionary:
+		return {"data":JSON.parse_string(JSON.stringify(data))}
 func _initialize() -> void:
 	call_deferred("run")
 func act(kind: String, args: Dictionary) -> bool:
-	var result: Dictionary = Service.new(save).execute(state,POINT,kind,args,int(state.life.action_seq)+1)
+	var result: Dictionary = Rules.plan(state.to_data(POINT),kind,args,int(state.life.action_seq)+1)
 	t.check("action_%s_%s" % [state.life.action_seq+1,kind],result.ok)
 	if not result.ok:
 		print("ACTION_ERROR ",result.code," ",args)
 		return false
-	state = result.next_state
+	t.check("v4_candidate_%d"%int(result.state.life.action_seq),Schema.validate_v4(result.state))
+	state=FrozenState.new()
+	state.restore(result.state)
+	save.write_save(result.state)
 	operations[kind] = operations.get(kind,0)+1
 	return true
 func trade(direction: String, item: String, amount: int) -> bool:
 	return act("trade",{"direction":direction,"account_id":"market","item_id":item,"amount":amount})
 func reload_state(label: String) -> void:
 	var before: Dictionary = state.to_data(POINT)
-	var next = State.new()
+	var next = FrozenState.new()
 	t.check(label,next.restore(save.read_save().data) and Rules._same_payload(next.to_data(POINT),before))
 	state = next
 func stock(item: String) -> int:
@@ -34,10 +61,10 @@ func stock(item: String) -> int:
 	inventory.restore_slots(state.life.accounts.market.slots)
 	return inventory.count_item(item)
 func start(label: String) -> void:
-	state = State.new()
+	state = FrozenState.new()
 	var fixture = JSON.parse_string(FileAccess.get_file_as_string("res://tests/fixtures/life_save_v4.json"))
 	t.check(label+"_fixture",fixture is Dictionary and state.restore(fixture))
-	save = Save.new(t.temporary_directory("P07-"+label))
+	save = FrozenStore.new()
 	operations = {}
 func collect_all() -> void:
 	for pickup in Data.pickups():
@@ -48,9 +75,9 @@ func sell_sea() -> void:
 		if n>0: trade("sell",item,n)
 func reject(kind: String,args: Dictionary,code: String,label: String) -> void:
 	var before: Dictionary = state.to_data(POINT)
-	var bytes := FileAccess.get_file_as_string(save.directory+"/progress.json")
-	var r: Dictionary = Service.new(save).execute(state,POINT,kind,args,int(state.life.action_seq)+1)
-	t.check(label,not r.ok and r.code==code and state.to_data(POINT)==before and FileAccess.get_file_as_string(save.directory+"/progress.json")==bytes)
+	var bytes := JSON.stringify(save.data)
+	var r: Dictionary = Rules.plan(state.to_data(POINT),kind,args,int(state.life.action_seq)+1)
+	t.check(label,not r.ok and r.code==code and state.to_data(POINT)==before and JSON.stringify(save.data)==bytes)
 func run() -> void:
 	start("baseline")
 	trade("buy","lettuce_seed",1)
@@ -129,6 +156,11 @@ func boundaries() -> void:
 		var raw = JSON.parse_string(FileAccess.get_file_as_string("res://tests/fixtures/life_save_v%d.json" % version))
 		state=State.new()
 		t.check("legacy_restore_%d" % version,state.restore(raw) and state.player_name==raw.player_name and state.location==raw.get("location","harbor") and Rules._same_payload(state.bag.snapshot(),raw.bag) and Rules._same_payload(state.chest.snapshot(),raw.chest))
-		save=Save.new(t.temporary_directory("P07-legacy"))
+		var frozen:Dictionary=state.to_data(POINT)
+		frozen.version=4
+		frozen.life.erase("town")
+		state=FrozenState.new()
+		t.check("legacy_frozen_%d"%version,state.restore(frozen))
+		save=FrozenStore.new()
 		act("sleep",{"expected_day":1})
 		reload_state("legacy_continue_%d" % version)

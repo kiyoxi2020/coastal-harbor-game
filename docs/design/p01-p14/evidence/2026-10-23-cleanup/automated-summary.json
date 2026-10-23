@@ -1,0 +1,153 @@
+{
+  "scope": "Headless precommit regression; prior native evidence not rerun",
+  "suites": [
+    {
+      "suite": "test_life_restaurant",
+      "exit_code": 0,
+      "pass_lines": 65,
+      "failures": [],
+      "elapsed_seconds": 0.72,
+      "output": "/private/tmp/coastal-precommit-20261023/test_life_restaurant.txt",
+      "script_sha256": "b703e411069b017627689f7f4f20bbddfc2f32abcd18d7d9de866d8e38e6133f"
+    },
+    {
+      "suite": "test_life_fourteen_days",
+      "exit_code": 0,
+      "pass_lines": 479,
+      "failures": [],
+      "elapsed_seconds": 1.79,
+      "output": "/private/tmp/coastal-precommit-20261023/test_life_fourteen_days.txt",
+      "script_sha256": "0d9123907bd98e25084d8a081f91f9abab08158bfb64b8abbf9cae69f1d2b5d6"
+    },
+    {
+      "suite": "test_restaurant_view",
+      "exit_code": 0,
+      "pass_lines": 57,
+      "failures": [],
+      "elapsed_seconds": 0.24,
+      "output": "/private/tmp/coastal-precommit-20261023/test_restaurant_view.txt",
+      "script_sha256": "241c37c6d9d2fa392096d2415b04d6c6209f5f31b8d896e306aec99385cb5aec"
+    },
+    {
+      "suite": "test_harbor_district",
+      "exit_code": 0,
+      "pass_lines": 61,
+      "failures": [],
+      "elapsed_seconds": 0.24,
+      "output": "/private/tmp/coastal-precommit-20261023/test_harbor_district.txt",
+      "script_sha256": "359b2ad87d326e28f75502daaf564af8c1210ddfe87dd0ca785ba0e3c904df54"
+    },
+    {
+      "suite": "test_region_map",
+      "exit_code": 0,
+      "pass_lines": 28,
+      "failures": [],
+      "elapsed_seconds": 0.82,
+      "output": "/private/tmp/coastal-precommit-20261023/test_region_map.txt",
+      "script_sha256": "c9458c7148fe78d996636791e5e517e0b310a6749398bd089d874e7b988582a0"
+    },
+    {
+      "suite": "test_world_map_c",
+      "exit_code": 0,
+      "pass_lines": 25,
+      "failures": [],
+      "elapsed_seconds": 0.62,
+      "output": "/private/tmp/coastal-precommit-20261023/test_world_map_c.txt",
+      "script_sha256": "de6c5677c21906e2205aa0c026fd0839296b70a3c06d125e646fd33d7710867b"
+    },
+    {
+      "suite": "test_restaurant_ui",
+      "exit_code": 0,
+      "pass_lines": 55,
+      "failures": [],
+      "elapsed_seconds": 0.82,
+      "output": "/private/tmp/coastal-precommit-20261023/test_restaurant_ui.txt",
+      "script_sha256": "634b1090a0768b045721556de3424e01093ea109bf3ba78d1b238ebcf84ca413"
+    },
+    {
+      "suite": "test_editor_scene_contracts",
+      "exit_code": 0,
+      "pass_lines": 132,
+      "failures": [],
+      "output": "/private/tmp/coastal-precommit-20261023/test_editor_scene_contracts.txt",
+      "script_sha256": "dec58dcf7a3d34321d76a30e7c3577c9065f9a8f412be46895a4b97a7799e7cd",
+      "user_args": [
+        "--batch=6"
+      ]
+    },
+    {
+      "suite": "test_life_economy",
+      "exit_code": 0,
+      "pass_lines": 237,
+      "failures": [],
+      "elapsed_seconds": 1.6,
+      "output": "/private/tmp/coastal-precommit-20261023/test_life_economy.txt",
+      "script_sha256": "855d17875e7e033fa9cd0efbf10e328249c6d813971615f8b1a1120d8c984228"
+    },
+    {
+      "suite": "test_town_schema",
+      "exit_code": 0,
+      "pass_lines": 86,
+      "failures": [],
+      "elapsed_seconds": 0.23,
+      "output": "/private/tmp/coastal-precommit-20261023/test_town_schema.txt",
+      "script_sha256": "bbfcde00890c87e60a9a0cca2c9162ca5d7c38b9aceac566b2bc88f7c4c261d3"
+    },
+    {
+      "suite": "test_life_day",
+      "exit_code": 0,
+      "pass_lines": 75,
+      "failures": [],
+      "elapsed_seconds": 1.11,
+      "output": "/private/tmp/coastal-precommit-20261023/test_life_day.txt",
+      "script_sha256": "18b7bebf79102c023977341e26c221fc71da4ef2069801c3a913bf3eca27b362"
+    },
+    {
+      "suite": "test_life_transactions",
+      "exit_code": 0,
+      "pass_lines": 122,
+      "failures": [],
+      "elapsed_seconds": 2.38,
+      "output": "/private/tmp/coastal-precommit-20261023/test_life_transactions.txt",
+      "script_sha256": "1a7da0356ca6d9b7bc0fcf2907f7ce990543805aa917ad9aaa8c66b69c644466"
+    },
+    {
+      "suite": "test_life_schema",
+      "exit_code": 0,
+      "pass_lines": 37,
+      "failures": [],
+      "elapsed_seconds": 0.14,
+      "output": "/private/tmp/coastal-precommit-20261023/test_life_schema.txt",
+      "script_sha256": "5d145e69c0f75d312c679563d55c0a6004c3fb987505cd836a39be44fa009c39"
+    },
+    {
+      "suite": "test_life_seven_days",
+      "exit_code": 0,
+      "pass_lines": 601,
+      "failures": [],
+      "elapsed_seconds": 1.31,
+      "output": "/private/tmp/coastal-precommit-20261023/test_life_seven_days.txt",
+      "script_sha256": "f0394decd0163fac9da4e34d185fc22ef2058923ed145cf2d5e1a5cb314d5ca2"
+    }
+  ],
+  "total_checks": 2060,
+  "date": "2026-10-23",
+  "save_scope": "/private/tmp/coastal-*",
+  "native_rerun": false,
+  "limitations": [
+    "Headless checks do not validate appearance or animation.",
+    "macOS certificate query emitted a sandbox warning; no test failure."
+  ],
+  "asset_validation": {
+    "catalog_errors": 0,
+    "catalog_pending_review_warnings": 60,
+    "compositor_tests_passed": 15,
+    "timeline_boundary_check": "passed; engine default userdata directory creation denied by sandbox; not native acceptance"
+  },
+  "staged_hygiene": {
+    "credential_patterns_found": 0,
+    "cache_files_staged": 0,
+    "whitespace_exception": "36 original prompt.txt files retain trailing spaces to preserve generation provenance/hash; all other staged text passes diff check",
+    "native_logs": "5 small historical native evidence logs intentionally preserved"
+  }
+}

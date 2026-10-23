@@ -1,0 +1,76 @@
+PASS unknown_pickup_memory
+PASS mismatched_pickup_memory
+PASS day_rules_available
+PASS path_resolver_available
+PASS next_day_refresh
+PASS day_fields
+PASS history_kept
+PASS market_refresh
+PASS actual_restock_only
+PASS source_day_events
+PASS source_day_report
+PASS sleep_original_unchanged
+PASS duplicate_sleep
+PASS stale_day
+PASS future_day
+PASS sleep_args_{  }
+PASS sleep_args_{ "expected_day": "2" }
+PASS sleep_args_{ "expected_day": true }
+PASS sleep_args_{ "expected_day": 2, "extra": 1 }
+PASS sleep_day_0
+PASS sleep_day_2.5
+PASS sleep_day_nan
+PASS sleep_day_inf
+PASS new_pickup
+PASS collect_event
+PASS already_collected
+PASS collect_args_{  }
+PASS collect_args_{ "pickup_id": 1 }
+PASS collect_args_{ "pickup_id": "clam_a", "kind": "kelp" }
+PASS unknown_pickup
+PASS collect_full
+PASS sleep_save_failure
+PASS sleep_same_id_retry
+PASS collect_save_failure
+PASS collect_same_id_retry
+PASS report_cash
+PASS report_not_recounted
+PASS day_rule_pure
+PASS day_rule_no_alias
+PASS no_restock_at_target
+PASS no_seed_removal
+PASS restock_capacity_atomic
+PASS reports_retained_30
+PASS real_reload
+PASS no_offline_progress
+PASS reload_duplicate_sleep
+PASS path_cli
+PASS path_metadata
+PASS path_meta_priority
+PASS path_default
+PASS path_old_verify
+PASS path_reject_
+PASS path_reject_user://coastal-progress
+PASS path_reject_/tmp/wrong
+PASS path_reject_/private/tmp/coastal-x/../../outside
+PASS path_reject_/private/tmp/coastal-
+PASS path_missing_value
+PASS sleep_page_exists
+PASS start
+PASS scene_collect_failure_visible
+PASS scene_kind_mismatch_rejected
+PASS scene_collect_distance
+PASS scene_outdoor_sleep_denied
+PASS scene_collect_success_hidden
+PASS scene_panel_blocks_collect
+PASS bedside_safe_excludes_player
+PASS sleep_inspector_template
+PASS scene_sleep_distance
+PASS scene_sleep_missing_target
+PASS cancel_sleep_no_effect
+PASS scene_sleep_failure_stays
+PASS scene_sleep_success
+PASS bedside_saved_position
+PASS scene_report_visible
+PASS double_confirm_once
+LIFE_DAY 75/75 failures=0

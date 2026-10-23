@@ -8,7 +8,7 @@
 
 [ext_resource type="Texture2D" path="res://assets/environment-v2/stone.png" id="stone"]
 
-[ext_resource type="Texture2D" path="res://assets/harbor-district-v1/restaurant.png" id="restaurant"]
+[ext_resource type="PackedScene" path="res://scenes/world/restaurant.tscn" id="restaurant_scene"]
 
 [ext_resource type="Texture2D" path="res://assets/harbor-district-v1/workshop.png" id="workshop"]
 
@@ -143,13 +143,8 @@ default_color = Color(0.71, 0.72, 0.62, 1)
 [node name="DepthSortedObjects" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="Restaurant" type="Node2D" parent="DepthSortedObjects"]
-position = Vector2(180, 174)
-
-[node name="Sprite" type="Sprite2D" parent="DepthSortedObjects/Restaurant"]
-position = Vector2(0, -53.2)
-scale = Vector2(0.7, 0.7)
-texture = ExtResource("restaurant")
+[node name="Restaurant" parent="DepthSortedObjects" instance=ExtResource("restaurant_scene")]
+position = Vector2(180,174)
 
 [node name="Workshop" type="Node2D" parent="DepthSortedObjects"]
 position = Vector2(460, 174)
@@ -324,10 +319,6 @@ shape = SubResource("SeaEast")
 position = Vector2(320, 423)
 shape = SubResource("PierEnd")
 
-[node name="Restaurant" type="CollisionShape2D" parent="Boundaries"]
-position = Vector2(180, 153)
-shape = SubResource("Restaurant")
-
 [node name="Workshop" type="CollisionShape2D" parent="Boundaries"]
 position = Vector2(460, 154)
 shape = SubResource("Workshop")
@@ -357,7 +348,7 @@ position = Vector2(320, 350)
 [node name="restaurant" type="Marker2D" parent="InteractPoints"]
 position = Vector2(180, 190)
 metadata/title = "海风小餐馆"
-metadata/body = "南向出餐窗与候客凹位已预留。\n暂未营业，餐馆经营将在后续开放。"
+metadata/body = "南向出餐窗。\n靠近按 E 查看供货、开业与餐馆收支。"
 
 [node name="workshop" type="Marker2D" parent="InteractPoints"]
 position = Vector2(460, 190)
@@ -392,7 +383,7 @@ theme_override_font_sizes/font_size = 9
 theme_override_colors/font_color = Color(0.13, 0.29, 0.30, 1)
 theme_override_colors/font_outline_color = Color(0.95, 0.91, 0.75, 1)
 theme_override_constants/outline_size = 3
-text = "海风小餐馆 · 筹备中"
+text = "海风小餐馆"
 horizontal_alignment = 1
 
 [node name="Workshop" type="Label" parent="Signs"]

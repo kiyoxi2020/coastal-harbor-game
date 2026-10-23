@@ -1,0 +1,618 @@
+[
+  {
+    "balances": [
+      115,
+      965,
+      332,
+      1068,
+      100,
+      9820
+    ],
+    "day": 3,
+    "destroyed": {
+      "clam_salad": 4,
+      "lettuce_seed": 1
+    },
+    "inputs": {
+      "clam": 4,
+      "lettuce": 4
+    },
+    "metric": {
+      "batches": 4,
+      "cash_profit": 32,
+      "day_id": 3,
+      "households_served": 4,
+      "households_total": 5,
+      "paid_staff": 2,
+      "produced": {
+        "clam_salad": 4
+      },
+      "purchase_cash": 80,
+      "reasons": [],
+      "sales_cash": 120,
+      "sold": {
+        "clam_salad": 4
+      },
+      "unmet_households": [
+        "hh_02"
+      ],
+      "wage_cash": 8
+    },
+    "outputs": {
+      "clam_salad": 4,
+      "lettuce": 3
+    }
+  },
+  {
+    "balances": [
+      115,
+      1015,
+      364,
+      1016,
+      130,
+      9760
+    ],
+    "day": 4,
+    "destroyed": {
+      "clam_salad": 8,
+      "lettuce_seed": 1
+    },
+    "inputs": {
+      "clam": 8,
+      "lettuce": 8
+    },
+    "metric": {
+      "batches": 4,
+      "cash_profit": 32,
+      "day_id": 4,
+      "households_served": 4,
+      "households_total": 5,
+      "paid_staff": 2,
+      "produced": {
+        "clam_salad": 4
+      },
+      "purchase_cash": 80,
+      "reasons": [],
+      "sales_cash": 120,
+      "sold": {
+        "clam_salad": 4
+      },
+      "unmet_households": [
+        "hh_03"
+      ],
+      "wage_cash": 8
+    },
+    "outputs": {
+      "clam_salad": 8,
+      "lettuce": 3
+    }
+  },
+  {
+    "balances": [
+      115,
+      1055,
+      396,
+      964,
+      170,
+      9700
+    ],
+    "day": 5,
+    "destroyed": {
+      "clam_salad": 12,
+      "lettuce_seed": 1
+    },
+    "inputs": {
+      "clam": 12,
+      "lettuce": 12
+    },
+    "metric": {
+      "batches": 4,
+      "cash_profit": 32,
+      "day_id": 5,
+      "households_served": 4,
+      "households_total": 5,
+      "paid_staff": 2,
+      "produced": {
+        "clam_salad": 4
+      },
+      "purchase_cash": 80,
+      "reasons": [],
+      "sales_cash": 120,
+      "sold": {
+        "clam_salad": 4
+      },
+      "unmet_households": [
+        "hh_04"
+      ],
+      "wage_cash": 8
+    },
+    "outputs": {
+      "clam_salad": 12,
+      "lettuce": 3
+    }
+  },
+  {
+    "balances": [
+      115,
+      1095,
+      428,
+      912,
+      210,
+      9640
+    ],
+    "day": 6,
+    "destroyed": {
+      "clam_salad": 16,
+      "lettuce_seed": 1
+    },
+    "inputs": {
+      "clam": 16,
+      "lettuce": 16
+    },
+    "metric": {
+      "batches": 4,
+      "cash_profit": 32,
+      "day_id": 6,
+      "households_served": 4,
+      "households_total": 5,
+      "paid_staff": 2,
+      "produced": {
+        "clam_salad": 4
+      },
+      "purchase_cash": 80,
+      "reasons": [],
+      "sales_cash": 120,
+      "sold": {
+        "clam_salad": 4
+      },
+      "unmet_households": [
+        "hh_05"
+      ],
+      "wage_cash": 8
+    },
+    "outputs": {
+      "clam_salad": 16,
+      "lettuce": 3
+    }
+  },
+  {
+    "balances": [
+      115,
+      1135,
+      460,
+      860,
+      250,
+      9580
+    ],
+    "day": 7,
+    "destroyed": {
+      "clam_salad": 20,
+      "lettuce_seed": 1
+    },
+    "inputs": {
+      "clam": 20,
+      "lettuce": 20
+    },
+    "metric": {
+      "batches": 4,
+      "cash_profit": 32,
+      "day_id": 7,
+      "households_served": 4,
+      "households_total": 5,
+      "paid_staff": 2,
+      "produced": {
+        "clam_salad": 4
+      },
+      "purchase_cash": 80,
+      "reasons": [],
+      "sales_cash": 120,
+      "sold": {
+        "clam_salad": 4
+      },
+      "unmet_households": [
+        "hh_01"
+      ],
+      "wage_cash": 8
+    },
+    "outputs": {
+      "clam_salad": 20,
+      "lettuce": 3
+    }
+  },
+  {
+    "balances": [
+      115,
+      1175,
+      492,
+      808,
+      290,
+      9520
+    ],
+    "day": 8,
+    "destroyed": {
+      "clam_salad": 24,
+      "lettuce_seed": 1
+    },
+    "inputs": {
+      "clam": 24,
+      "lettuce": 24
+    },
+    "metric": {
+      "batches": 4,
+      "cash_profit": 32,
+      "day_id": 8,
+      "households_served": 4,
+      "households_total": 5,
+      "paid_staff": 2,
+      "produced": {
+        "clam_salad": 4
+      },
+      "purchase_cash": 80,
+      "reasons": [],
+      "sales_cash": 120,
+      "sold": {
+        "clam_salad": 4
+      },
+      "unmet_households": [
+        "hh_02"
+      ],
+      "wage_cash": 8
+    },
+    "outputs": {
+      "clam_salad": 24,
+      "lettuce": 3
+    }
+  },
+  {
+    "balances": [
+      115,
+      1215,
+      524,
+      756,
+      330,
+      9460
+    ],
+    "day": 9,
+    "destroyed": {
+      "clam_salad": 28,
+      "lettuce_seed": 1
+    },
+    "inputs": {
+      "clam": 28,
+      "lettuce": 28
+    },
+    "metric": {
+      "batches": 4,
+      "cash_profit": 32,
+      "day_id": 9,
+      "households_served": 4,
+      "households_total": 5,
+      "paid_staff": 2,
+      "produced": {
+        "clam_salad": 4
+      },
+      "purchase_cash": 80,
+      "reasons": [],
+      "sales_cash": 120,
+      "sold": {
+        "clam_salad": 4
+      },
+      "unmet_households": [
+        "hh_03"
+      ],
+      "wage_cash": 8
+    },
+    "outputs": {
+      "clam_salad": 28,
+      "lettuce": 3
+    }
+  },
+  {
+    "balances": [
+      115,
+      1255,
+      556,
+      704,
+      370,
+      9400
+    ],
+    "day": 10,
+    "destroyed": {
+      "clam_salad": 32,
+      "lettuce_seed": 1
+    },
+    "inputs": {
+      "clam": 32,
+      "lettuce": 32
+    },
+    "metric": {
+      "batches": 4,
+      "cash_profit": 32,
+      "day_id": 10,
+      "households_served": 4,
+      "households_total": 5,
+      "paid_staff": 2,
+      "produced": {
+        "clam_salad": 4
+      },
+      "purchase_cash": 80,
+      "reasons": [],
+      "sales_cash": 120,
+      "sold": {
+        "clam_salad": 4
+      },
+      "unmet_households": [
+        "hh_04"
+      ],
+      "wage_cash": 8
+    },
+    "outputs": {
+      "clam_salad": 32,
+      "lettuce": 3
+    }
+  },
+  {
+    "balances": [
+      115,
+      1295,
+      588,
+      652,
+      410,
+      9340
+    ],
+    "day": 11,
+    "destroyed": {
+      "clam_salad": 36,
+      "lettuce_seed": 1
+    },
+    "inputs": {
+      "clam": 36,
+      "lettuce": 36
+    },
+    "metric": {
+      "batches": 4,
+      "cash_profit": 32,
+      "day_id": 11,
+      "households_served": 4,
+      "households_total": 5,
+      "paid_staff": 2,
+      "produced": {
+        "clam_salad": 4
+      },
+      "purchase_cash": 80,
+      "reasons": [],
+      "sales_cash": 120,
+      "sold": {
+        "clam_salad": 4
+      },
+      "unmet_households": [
+        "hh_05"
+      ],
+      "wage_cash": 8
+    },
+    "outputs": {
+      "clam_salad": 36,
+      "lettuce": 3
+    }
+  },
+  {
+    "balances": [
+      115,
+      1335,
+      620,
+      600,
+      450,
+      9280
+    ],
+    "day": 12,
+    "destroyed": {
+      "clam_salad": 40,
+      "lettuce_seed": 1
+    },
+    "inputs": {
+      "clam": 40,
+      "lettuce": 40
+    },
+    "metric": {
+      "batches": 4,
+      "cash_profit": 32,
+      "day_id": 12,
+      "households_served": 4,
+      "households_total": 5,
+      "paid_staff": 2,
+      "produced": {
+        "clam_salad": 4
+      },
+      "purchase_cash": 80,
+      "reasons": [],
+      "sales_cash": 120,
+      "sold": {
+        "clam_salad": 4
+      },
+      "unmet_households": [
+        "hh_01"
+      ],
+      "wage_cash": 8
+    },
+    "outputs": {
+      "clam_salad": 40,
+      "lettuce": 3
+    }
+  },
+  {
+    "balances": [
+      115,
+      1375,
+      652,
+      548,
+      490,
+      9220
+    ],
+    "day": 13,
+    "destroyed": {
+      "clam_salad": 44,
+      "lettuce_seed": 1
+    },
+    "inputs": {
+      "clam": 44,
+      "lettuce": 44
+    },
+    "metric": {
+      "batches": 4,
+      "cash_profit": 32,
+      "day_id": 13,
+      "households_served": 4,
+      "households_total": 5,
+      "paid_staff": 2,
+      "produced": {
+        "clam_salad": 4
+      },
+      "purchase_cash": 80,
+      "reasons": [],
+      "sales_cash": 120,
+      "sold": {
+        "clam_salad": 4
+      },
+      "unmet_households": [
+        "hh_02"
+      ],
+      "wage_cash": 8
+    },
+    "outputs": {
+      "clam_salad": 44,
+      "lettuce": 3
+    }
+  },
+  {
+    "balances": [
+      115,
+      1415,
+      684,
+      496,
+      530,
+      9160
+    ],
+    "day": 14,
+    "destroyed": {
+      "clam_salad": 48,
+      "lettuce_seed": 1
+    },
+    "inputs": {
+      "clam": 48,
+      "lettuce": 48
+    },
+    "metric": {
+      "batches": 4,
+      "cash_profit": 32,
+      "day_id": 14,
+      "households_served": 4,
+      "households_total": 5,
+      "paid_staff": 2,
+      "produced": {
+        "clam_salad": 4
+      },
+      "purchase_cash": 80,
+      "reasons": [],
+      "sales_cash": 120,
+      "sold": {
+        "clam_salad": 4
+      },
+      "unmet_households": [
+        "hh_03"
+      ],
+      "wage_cash": 8
+    },
+    "outputs": {
+      "clam_salad": 48,
+      "lettuce": 3
+    }
+  },
+  {
+    "balances": [
+      115,
+      1455,
+      716,
+      444,
+      570,
+      9100
+    ],
+    "day": 15,
+    "destroyed": {
+      "clam_salad": 52,
+      "lettuce_seed": 1
+    },
+    "inputs": {
+      "clam": 52,
+      "lettuce": 52
+    },
+    "metric": {
+      "batches": 4,
+      "cash_profit": 32,
+      "day_id": 15,
+      "households_served": 4,
+      "households_total": 5,
+      "paid_staff": 2,
+      "produced": {
+        "clam_salad": 4
+      },
+      "purchase_cash": 80,
+      "reasons": [],
+      "sales_cash": 120,
+      "sold": {
+        "clam_salad": 4
+      },
+      "unmet_households": [
+        "hh_04"
+      ],
+      "wage_cash": 8
+    },
+    "outputs": {
+      "clam_salad": 52,
+      "lettuce": 3
+    }
+  },
+  {
+    "balances": [
+      115,
+      1495,
+      748,
+      392,
+      610,
+      9040
+    ],
+    "day": 16,
+    "destroyed": {
+      "clam_salad": 56,
+      "lettuce_seed": 1
+    },
+    "inputs": {
+      "clam": 56,
+      "lettuce": 56
+    },
+    "metric": {
+      "batches": 4,
+      "cash_profit": 32,
+      "day_id": 16,
+      "households_served": 4,
+      "households_total": 5,
+      "paid_staff": 2,
+      "produced": {
+        "clam_salad": 4
+      },
+      "purchase_cash": 80,
+      "reasons": [],
+      "sales_cash": 120,
+      "sold": {
+        "clam_salad": 4
+      },
+      "unmet_households": [
+        "hh_05"
+      ],
+      "wage_cash": 8
+    },
+    "outputs": {
+      "clam_salad": 56,
+      "lettuce": 3
+    }
+  }
+]

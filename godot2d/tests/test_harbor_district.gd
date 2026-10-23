@@ -33,8 +33,8 @@ func run() -> void:
 	var restaurant_found := false
 	for item in scene.locations():
 		if item.id == "restaurant":
-			restaurant_found = item.title != "" and item.body.contains("暂未营业")
-	check("restaurant_information_only", restaurant_found)
+			restaurant_found = item.title != "" and item.body.contains("供货")
+	check("restaurant_service_information", restaurant_found)
 	# Scale acceptance is relative to the actual existing cottage (168px wide).
 	var house = load("res://scenes/world/house_exterior_art.tscn").instantiate()
 	var cottage_top: Sprite2D = house.get_node("AtlasParts/Top")
@@ -42,14 +42,14 @@ func run() -> void:
 	check("cottage_measurement_168", is_equal_approx(cottage_width, 168.0))
 	for pair in [["Restaurant", 0.65, 0.75], ["Workshop", 0.60, 0.70]]:
 		var building: Node2D = scene.get_node("DepthSortedObjects/" + pair[0])
-		var art: Sprite2D = building.get_node("Sprite")
+		var art: Sprite2D = building.get_node("StaticArt" if building.name=="Restaurant" else "Sprite")
 		var art_width: float = art.texture.get_width() * art.scale.x * building.scale.x
 		var ratio: float = art_width / cottage_width
 		check("scale_ratio_" + pair[0], ratio >= pair[1] and ratio <= pair[2])
 		var base_y: float = art.position.y + art.texture.get_height() * art.scale.y / 2.0
 		check("bottom_pivot_" + pair[0], is_zero_approx(base_y))
-		var collider: CollisionShape2D = scene.get_node("Boundaries/" + pair[0])
-		var footprint: Rect2 = Rect2(collider.position - collider.shape.size / 2.0, collider.shape.size)
+		var collider: CollisionShape2D = scene.get_node("DepthSortedObjects/Restaurant/Base/Collision" if pair[0]=="Restaurant" else "Boundaries/" + pair[0])
+		var footprint: Rect2 = Rect2(scene.to_local(collider.global_position) - collider.shape.size / 2.0, collider.shape.size)
 		check("footprint_width_" + pair[0], footprint.size.x <= art_width and footprint.size.x >= art_width * 0.8)
 		check("footprint_bottom_" + pair[0], is_equal_approx(footprint.end.y, building.position.y))
 		var marker: Vector2 = scene.get_node("InteractPoints/" + pair[0].to_lower()).position
@@ -80,7 +80,7 @@ func run() -> void:
 		var overlaps := tree_bounds.intersects(Rect2(304,190,32,200))
 		for building_name in ["Restaurant", "Workshop"]:
 			var building: Node2D = scene.get_node("DepthSortedObjects/" + building_name)
-			var art: Sprite2D = building.get_node("Sprite")
+			var art: Sprite2D = building.get_node("StaticArt" if building.name=="Restaurant" else "Sprite")
 			var bounds: Rect2 = building.transform * art.transform * art.get_rect()
 			overlaps = overlaps or tree_bounds.intersects(bounds)
 		check("tree_clear_" + tree_name, not overlaps)

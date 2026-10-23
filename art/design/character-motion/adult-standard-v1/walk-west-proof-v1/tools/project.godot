@@ -1,0 +1,17 @@
+config_version=5
+
+[application]
+config/name="Coastal motion review tool"
+; No review scene yet. Tests run explicitly with --script and never access user://.
+
+[display]
+window/size/viewport_width=1280
+window/size/viewport_height=800
+window/size/window_width_override=1280
+window/size/window_height_override=800
+window/stretch/mode="canvas_items"
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+textures/default_filters/use_nearest_mipmap_filter=false
+textures/canvas_textures/default_texture_filter=0

@@ -1,0 +1,106 @@
+{
+  "source": "props-original.png",
+  "size": [
+    1254,
+    1254
+  ],
+  "filter": "nearest",
+  "props": {
+    "closed": {
+      "source_box": [
+        70,
+        90,
+        590,
+        550
+      ],
+      "alpha_bbox": [
+        8,
+        10,
+        512,
+        453
+      ],
+      "output_size": [
+        504,
+        443
+      ],
+      "logical_max_size": [
+        36,
+        32
+      ],
+      "scale": 0.07142857142857142,
+      "anchor": "center; scene offsets are authoritative"
+    },
+    "open": {
+      "source_box": [
+        665,
+        90,
+        1190,
+        550
+      ],
+      "alpha_bbox": [
+        8,
+        10,
+        512,
+        453
+      ],
+      "output_size": [
+        504,
+        443
+      ],
+      "logical_max_size": [
+        36,
+        32
+      ],
+      "scale": 0.07142857142857142,
+      "anchor": "center; scene offsets are authoritative"
+    },
+    "menu": {
+      "source_box": [
+        100,
+        615,
+        600,
+        1190
+      ],
+      "alpha_bbox": [
+        15,
+        10,
+        485,
+        563
+      ],
+      "output_size": [
+        470,
+        553
+      ],
+      "logical_max_size": [
+        20,
+        26
+      ],
+      "scale": 0.0425531914893617,
+      "anchor": "center; scene offsets are authoritative"
+    },
+    "smoke": {
+      "source_box": [
+        780,
+        650,
+        1120,
+        1220
+      ],
+      "alpha_bbox": [
+        10,
+        12,
+        325,
+        533
+      ],
+      "output_size": [
+        315,
+        521
+      ],
+      "logical_max_size": [
+        18,
+        30
+      ],
+      "scale": 0.05714285714285714,
+      "anchor": "center; scene offsets are authoritative"
+    }
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "date": "2026-10-21",
+  "head": "36bf6aa",
+  "status": "passed",
+  "checks": 1765,
+  "groups": [
+    {
+      "script": "test_life_economy.gd",
+      "checks": 237,
+      "summary": "P10 checks=237 failures=0",
+      "log": "/private/tmp/coastal-P10-accept-test_life_economy.log",
+      "command": "godot --headless --path godot2d --log-file /private/tmp/coastal-P10-accept-test_life_economy.log --script res://tests/test_life_economy.gd"
+    },
+    {
+      "script": "test_town_schema.gd",
+      "checks": 86,
+      "summary": "TOWN_SCHEMA checks=86 passed=true",
+      "log": "/private/tmp/coastal-P10-accept-test_town_schema.log",
+      "command": "godot --headless --path godot2d --log-file /private/tmp/coastal-P10-accept-test_town_schema.log --script res://tests/test_town_schema.gd"
+    },
+    {
+      "script": "test_life_transactions.gd",
+      "checks": 122,
+      "summary": "LIFE_TRANSACTIONS 122/122 failures=0",
+      "log": "/private/tmp/coastal-P10-accept-test_life_transactions.log",
+      "command": "godot --headless --path godot2d --log-file /private/tmp/coastal-P10-accept-test_life_transactions.log --script res://tests/test_life_transactions.gd"
+    },
+    {
+      "script": "test_life_day.gd",
+      "checks": 75,
+      "summary": "LIFE_DAY 75/75 failures=0",
+      "log": "/private/tmp/coastal-P10-accept-test_life_day.log",
+      "command": "godot --headless --path godot2d --log-file /private/tmp/coastal-P10-accept-test_life_day.log --script res://tests/test_life_day.gd"
+    },
+    {
+      "script": "test_life_crafting.gd",
+      "checks": 41,
+      "summary": "P09 checks=41 failures=0",
+      "log": "/private/tmp/coastal-P10-accept-test_life_crafting.log",
+      "command": "godot --headless --path godot2d --log-file /private/tmp/coastal-P10-accept-test_life_crafting.log --script res://tests/test_life_crafting.gd"
+    },
+    {
+      "script": "test_save_state.gd",
+      "checks": 23,
+      "summary": "STATE_SAVE 23 passed=true",
+      "log": "/private/tmp/coastal-P10-accept-test_save_state.log",
+      "command": "godot --headless --path godot2d --log-file /private/tmp/coastal-P10-accept-test_save_state.log --script res://tests/test_save_state.gd"
+    },
+    {
+      "script": "test_house_save.gd",
+      "checks": 32,
+      "summary": "HOUSE_SAVE 32 passed=true",
+      "log": "/private/tmp/coastal-P10-accept-test_house_save.log",
+      "command": "godot --headless --path godot2d --log-file /private/tmp/coastal-P10-accept-test_house_save.log --script res://tests/test_house_save.gd"
+    },
+    {
+      "script": "test_life_farming.gd",
+      "checks": 401,
+      "summary": "GRID_RULES checks=401 passed=true",
+      "log": "/private/tmp/coastal-P10-accept-test_life_farming.log",
+      "command": "godot --headless --path godot2d --log-file /private/tmp/coastal-P10-accept-test_life_farming.log --script res://tests/test_life_farming.gd"
+    },
+    {
+      "script": "test_life_seven_days.gd",
+      "checks": 498,
+      "summary": "P07 checks=498 passed=true",
+      "log": "/private/tmp/coastal-P10-accept-test_life_seven_days.log",
+      "command": "godot --headless --path godot2d --log-file /private/tmp/coastal-P10-accept-test_life_seven_days.log --script res://tests/test_life_seven_days.gd"
+    },
+    {
+      "script": "test_life_schema.gd",
+      "checks": 37,
+      "summary": "LIFE_SCHEMA checks=37 passed=true",
+      "log": "/private/tmp/coastal-P10-final-test_life_schema.log",
+      "command": "godot --headless --path godot2d --log-file /private/tmp/coastal-P10-final-test_life_schema.log --script res://tests/test_life_schema.gd"
+    },
+    {
+      "script": "test_grid_migration.gd",
+      "checks": 15,
+      "summary": "GRID_MIGRATION checks=15 passed=true",
+      "log": "/private/tmp/coastal-P10-final-test_grid_migration.log",
+      "command": "godot --headless --path godot2d --log-file /private/tmp/coastal-P10-final-test_grid_migration.log --script res://tests/test_grid_migration.gd"
+    },
+    {
+      "script": "test_region_map.gd",
+      "checks": 28,
+      "summary": "REGION_MAP checks=28 passed=true",
+      "log": "/private/tmp/coastal-P10-final-test_region_map.log",
+      "command": "godot --headless --path godot2d --log-file /private/tmp/coastal-P10-final-test_region_map.log --script res://tests/test_region_map.gd"
+    },
+    {
+      "script": "test_editor_scene_contracts.gd",
+      "checks": 132,
+      "summary": "EDITOR_SCENE_CONTRACTS 132 passed=true",
+      "log": "/private/tmp/coastal-P10-final-test_editor_scene_contracts.log",
+      "command": "godot --headless --path godot2d --log-file /private/tmp/coastal-P10-final-test_editor_scene_contracts.log --script res://tests/test_editor_scene_contracts.gd -- --batch=6"
+    },
+    {
+      "script": "test_menu_keyboard.gd",
+      "checks": 20,
+      "summary": "MENU_KEYBOARD 20 passed=true",
+      "log": "/private/tmp/coastal-P10-final-test_menu_keyboard.log",
+      "command": "godot --headless --path godot2d --log-file /private/tmp/coastal-P10-final-test_menu_keyboard.log --script res://tests/test_menu_keyboard.gd"
+    },
+    {
+      "script": "test_life_ui.gd",
+      "checks": 18,
+      "summary": "LIFE_UI checks=18 passed=true",
+      "log": "/private/tmp/coastal-P10-final-test_life_ui.log",
+      "command": "godot --headless --path godot2d --log-file /private/tmp/coastal-P10-final-test_life_ui.log --script res://tests/test_life_ui.gd"
+    }
+  ],
+  "scope": "P10 backend; P11 enabled fixture only, no open command or native restaurant visual validation",
+  "expected_environment_errors": [
+    "macOS get_system_ca_certificates ret != noErr",
+    "intentional invalid save directory in test_save_state"
+  ],
+  "money": {
+    "independent14": [
+      100,
+      1480,
+      788,
+      272,
+      600,
+      9160
+    ],
+    "default14": [
+      115,
+      1495,
+      748,
+      392,
+      610,
+      9040
+    ]
+  },
+  "not_verified": [
+    "P11 open/status/UI",
+    "native restaurant visuals",
+    "human long play",
+    "Windows/Intel Mac",
+    "export"
+  ]
+}

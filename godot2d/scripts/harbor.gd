@@ -258,6 +258,9 @@ func _process(_delta: float) -> void:
 		elif can_open_craft():
 			journal.show_page("craft")
 			return
+		elif can_open_restaurant():
+			journal.show_page("restaurant")
+			return
 		elif can_open_trade():
 			journal.show_page("trade")
 			return
@@ -300,12 +303,14 @@ func _process(_delta: float) -> void:
 		hud.prompt.text = "[ E ] 休息到明天"
 	elif can_open_craft():
 		hud.prompt.text="[ E ] 厨房 · 制作料理 / 海藻肥"
+	elif can_open_restaurant():
+		hud.prompt.text="[ E ] 餐馆 · 供货 / 复业"
 	elif can_open_trade():
 		hud.prompt.text="[ E ] 买种子 / 出售收获"
 	elif not regions.nearby_exit().is_empty():
 		hud.prompt.text="[ E ] "+str(regions.nearby_exit().name)
 	elif foraging.location=="harbor_district":
-		hud.prompt.text="港口小食铺待复业 · 南口返回旧屋海港"
+		hud.prompt.text="靠近小食铺窗口供货 / 复业 · 南口返回旧屋海港"
 	elif foraging.location=="house" and nearest_location(player.position).is_empty():
 		hud.prompt.text="回到熟悉的屋子；床、厨房和旧照片可查看。"
 	elif foraging.collected.size() == exterior.pickups().size() and nearest_location(player.position).is_empty():
@@ -319,6 +324,9 @@ func refresh_life_views() -> void:
 	refresh_pickups()
 	for plot in farm_plots():
 		plot.refresh(foraging.life.plots)
+	var restaurant:=get_node_or_null("HarborDistrict/DepthSortedObjects/Restaurant")
+	if restaurant!=null and foraging.life.has("town"):
+		restaurant.refresh(foraging.life.town.restaurant)
 	if hud != null:
 		hud.update_location(nearest_location(player.position))
 		hud.update_life(foraging.life)
@@ -361,6 +369,9 @@ func _can_perform_action(kind: String, args: Dictionary) -> bool:
 	if kind == "craft":
 		var craft_page:=journal.get_node("Root/CraftPage") as Control
 		return journal.mode=="craft" and craft_page.is_visible_in_tree() and can_open_craft()
+	if kind in ["supply","fund_restaurant","open_restaurant"]:
+		var restaurant_page:=journal.get_node_or_null("Root/RestaurantPage") as Control
+		return journal.mode=="restaurant" and restaurant_page!=null and restaurant_page.is_visible_in_tree() and can_open_restaurant()
 	if kind == "collect":
 		if journal.mode != "" or foraging.location != "harbor" or not exterior.foraging_area.has_point(player.position):
 			return false
@@ -393,6 +404,12 @@ func can_open_craft() -> bool:
 func can_open_trade() -> bool:
 	if not persistence_enabled or not session_started or foraging.location!="harbor":return false
 	var point:=exterior.get_node_or_null("InteractPoints/market") as Node2D
+	return point!=null and player.global_position.distance_to(point.global_position)<=28
+
+func can_open_restaurant() -> bool:
+	if not persistence_enabled or not session_started or foraging.location!="harbor_district" or release_input or home.transition.busy or hud.panel.visible or player.action_busy or world_map.visible:return false
+	if journal.mode not in ["","restaurant"] or journal.pending!="" or is_instance_valid(journal.modal):return false
+	var point:=get_node_or_null("HarborDistrict/DepthSortedObjects/Restaurant/InteractPoint") as Node2D
 	return point!=null and player.global_position.distance_to(point.global_position)<=28
 
 func show_daily_summary() -> void:

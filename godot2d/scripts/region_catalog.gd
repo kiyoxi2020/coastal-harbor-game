@@ -4,7 +4,7 @@ static func open_regions()->Array[String]:return ["harbor","harbor_district"]
 static func regions()->Array[Dictionary]:
 	return [
 		{"id":"harbor","name":"旧屋海港","open":true,"map":Vector2(215,360),"description":"旧屋、菜地与鱼摊相邻，沿海小路通往潮汐台阶和码头。","route":"北侧出口 → 港口街区"},
-		{"id":"harbor_district","name":"港口街区","open":true,"map":Vector2(330,220),"description":"石板主巷连接小食铺与海堤。小食铺待复业，加工铺仅作预留。","route":"南侧出口 → 旧屋海港"},
+		{"id":"harbor_district","name":"港口街区","open":true,"map":Vector2(330,220),"description":"石板主巷连接小食铺与海堤。餐馆可供货、复业与查看经营，加工铺仅作预留。","route":"南侧出口 → 旧屋海港"},
 		{"id":"residential_lane","name":"住宅坡巷","open":false,"map":Vector2(390,85),"description":"沿坡向上的邻里住宅区，未来将从港口街区北侧连接。","route":"规划连接：街区北侧 · 暂不可通行"},
 		{"id":"hillside","name":"山坡林地","open":false,"map":Vector2(130,130),"description":"海湾西北的树木与自然步道。区域与资源内容仍待规划。","route":"规划连接：街区西侧 · 暂不可通行"},
 		{"id":"cape_coast","name":"岬角海岸","open":false,"map":Vector2(535,295),"description":"海湾东侧的岬角与潮池，尚未开放探索。","route":"规划连接：街区沿海道路 · 暂不可通行"}]
@@ -41,7 +41,7 @@ static func points(world:Node=null)->Array[Dictionary]:
 		{"id":"garden_b","region":"harbor","point":Vector2(164,224),"name":"菜地B · 8格","kind":"farm"},
 		{"id":"market","region":"harbor","point":Vector2(442,218),"name":"鱼摊 · 买种 / 售货","kind":"building"},
 		{"id":"pier","region":"harbor","point":Vector2(440,364),"name":"码头","kind":"building"},
-		{"id":"restaurant","region":"harbor_district","point":Vector2(180,170),"name":"港口小食铺 · 待复业","kind":"building"},
+		{"id":"restaurant","region":"harbor_district","point":Vector2(180,170),"name":"海风小餐馆 · 供货 / 经营","kind":"building"},
 		{"id":"workshop","region":"harbor_district","point":Vector2(455,170),"name":"加工铺 · 预留","kind":"reserved"}]
 	for pickup in preload("res://scripts/harbor_data.gd").pickups():
 		result.append({"id":pickup.id,"region":"harbor","point":pickup.point,"name":preload("res://scripts/harbor_data.gd").ITEM_NAMES[pickup.kind],"kind":"resource"})
@@ -49,7 +49,7 @@ static func points(world:Node=null)->Array[Dictionary]:
 		var e:=exit_for(region)
 		result.append({"id":e.id,"region":region,"point":e.point,"name":e.name,"kind":"exit"})
 	if world!=null:
-		var sources={"house":"HarborExterior/InteractPoints/house","garden_a":"HarborExterior/DepthSortedObjects/GardenA","garden_b":"HarborExterior/DepthSortedObjects/GardenB","market":"HarborExterior/InteractPoints/market","pier":"HarborExterior/InteractPoints/pier","restaurant":"HarborDistrict/InteractPoints/restaurant","workshop":"HarborDistrict/InteractPoints/workshop","harbor_north":"HarborExterior/Exits/ToDistrict","district_south":"HarborDistrict/Exits/ToHarbor"}
+		var sources={"house":"HarborExterior/InteractPoints/house","garden_a":"HarborExterior/DepthSortedObjects/GardenA","garden_b":"HarborExterior/DepthSortedObjects/GardenB","market":"HarborExterior/InteractPoints/market","pier":"HarborExterior/InteractPoints/pier","restaurant":"HarborDistrict/DepthSortedObjects/Restaurant/InteractPoint","workshop":"HarborDistrict/InteractPoints/workshop","harbor_north":"HarborExterior/Exits/ToDistrict","district_south":"HarborDistrict/Exits/ToHarbor"}
 		for mark in result:
 			var source:Node2D=world.get_node("HarborExterior/DepthSortedObjects/ForagePickups/"+mark.id) if mark.kind=="resource" else world.get_node(sources[mark.id])
 			var scene:Node2D=world.exterior if mark.region=="harbor" else world.get_node("HarborDistrict")

@@ -12,7 +12,8 @@ func locations() -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
 	for marker in $InteractPoints.get_children():
 		if marker is Marker2D:
-			result.append({"id": String(marker.name), "point": marker.position,
+			var point:Vector2=to_local($DepthSortedObjects/Restaurant/InteractPoint.global_position) if marker.name=="restaurant" else marker.position
+			result.append({"id": String(marker.name), "point": point,
 				"title": marker.get_meta("title", ""), "body": marker.get_meta("body", "")})
 	return result
 

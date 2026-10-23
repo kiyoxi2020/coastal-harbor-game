@@ -4,11 +4,14 @@ const Schema = preload("res://scripts/simulation/state_schema.gd")
 const Inventory = preload("res://scripts/inventory/inventory_container.gd")
 const Farming = preload("res://scripts/simulation/farming_rules.gd")
 const Crafting = preload("res://scripts/simulation/crafting_rules.gd")
+const Recipes = preload("res://scripts/simulation/recipe_catalog.gd")
+const Transactions = preload("res://scripts/simulation/account_transactions.gd")
 const Day = preload("res://scripts/simulation/day_rules.gd")
 const Data = preload("res://scripts/harbor_data.gd")
 const Catalog = preload("res://scripts/inventory/item_catalog.gd")
 # Shared contract E: fixed prototype prices, never supplied by the caller.
 const BUY_PRICES := {"lettuce_seed":5, "tomato_seed":8}
+const SUPPLY_PRICES := {"clam":8,"snail":10,"lettuce":12,"tomato":20,"clam_salad":24,"snail_stew":36}
 const SELL_PRICES := {"clam":8, "snail":10, "kelp":6, "lettuce":12, "tomato":20}
 
 static func _failure(code: String) -> Dictionary:
@@ -48,6 +51,12 @@ static func plan(data: Dictionary, kind: String, args: Dictionary, request_id: i
 		return _failure("stale_request")
 	if request_id != sequence + 1:
 		return _failure("invalid_request")
+	if kind == "supply":
+		return _supply(data,args,request_id)
+	if kind == "fund_restaurant":
+		return _fund(data,args,request_id)
+	if kind == "open_restaurant":
+		return _open_restaurant(data,args,request_id)
 	if kind == "sleep":
 		if not Schema._exact_keys(args, ["expected_day"]) or not (args.expected_day is int or args.expected_day is float) or args.expected_day is bool:
 			return _failure("invalid_request")
@@ -97,33 +106,56 @@ static func plan(data: Dictionary, kind: String, args: Dictionary, request_id: i
 	var total: int = int(prices[item]) * amount
 	var candidate := data.duplicate(true)
 	var market: Dictionary = candidate.life.accounts.market
-	var bag = Inventory.new(24)
-	var stock = Inventory.new(48)
-	if not bag.restore_slots(candidate.bag) or not stock.restore_slots(market.slots):
-		return _failure("invalid_state")
-	var source = stock if buy else bag
-	var target = bag if buy else stock
-	if source.count_item(item) < amount:
-		return _failure("insufficient_stock")
-	if target.space_for(item) < amount:
-		return _failure("inventory_full")
-	if (candidate.life.wallet if buy else market.cash) < total:
-		return _failure("insufficient_funds")
-	if not buy and market.buy_quota[item] < amount:
-		return _failure("quota_exceeded")
-	if not source.remove_item(item, amount) or target.add(item, amount) != amount:
-		return _failure("invalid_state")
-	candidate.bag = bag.snapshot()
-	market.slots = stock.snapshot()
-	candidate.life.wallet += -total if buy else total
-	market.cash += total if buy else -total
-	if not buy:
-		market.buy_quota[item] -= amount
+	var code:=Transactions.exchange(candidate,"player" if buy else "market","market" if buy else "player",item,amount,total,{} if buy else market.buy_quota)
+	if code!="ok":return _failure(code)
 	# source/target follow cash; goods in this transfer move in the opposite direction.
 	var event := {"day_id":int(candidate.life.day_id), "kind":"transfer",
 		"source":"player" if buy else "market", "target":"market" if buy else "player",
 		"items":{item:amount}, "cash":total, "reason":"trade"}
 	return _finish(candidate, kind, args, request_id, [event])
+
+static func _supply(data:Dictionary,args:Dictionary,request_id:int) -> Dictionary:
+	if not Schema._exact_keys(args,["account_id","item_id","amount"]):return _failure("invalid_request")
+	if not args.account_id is String or not args.item_id is String or not (args.amount is int or args.amount is float) or args.amount is bool:return _failure("invalid_request")
+	if args.account_id!="restaurant" or not data.life.has("town"):return _failure("unknown_account")
+	if not Catalog.ITEMS.has(args.item_id):return _failure("unknown_item")
+	if not SUPPLY_PRICES.has(args.item_id):return _failure("not_allowed")
+	if not Schema._bounded_integer(args.amount,1,99):return _failure("invalid_amount")
+	var candidate=data.duplicate(true)
+	var amount=int(args.amount)
+	var total=int(SUPPLY_PRICES[args.item_id])*amount
+	var code:=Transactions.exchange(candidate,"restaurant","player",args.item_id,amount,total,candidate.life.town.restaurant.supply_quota)
+	if code!="ok":return _failure(code)
+	return _finish(candidate,"supply",args,request_id,[{"day_id":int(data.life.day_id),"kind":"transfer","source":"restaurant","target":"player","items":{args.item_id:amount},"cash":total,"reason":"restaurant_supply"}])
+
+static func _fund(data:Dictionary,args:Dictionary,request_id:int) -> Dictionary:
+	if not Schema._exact_keys(args,["amount"]) or not (args.amount is int or args.amount is float) or args.amount is bool:return _failure("invalid_request")
+	if not Schema._bounded_integer(args.amount,1,1000):return _failure("invalid_amount")
+	if not data.life.has("town"):return _failure("unknown_account")
+	var candidate=data.duplicate(true)
+	var code:=Transactions.move_cash(candidate,"player","restaurant",int(args.amount))
+	if code!="ok":return _failure(code)
+	return _finish(candidate,"fund_restaurant",args,request_id,[{"day_id":int(data.life.day_id),"kind":"transfer","source":"player","target":"restaurant","items":{},"cash":int(args.amount),"reason":"restaurant_funding"}])
+
+static func _open_restaurant(data:Dictionary,args:Dictionary,request_id:int) -> Dictionary:
+	if not args.is_empty():return _failure("invalid_request")
+	if not data.life.has("town"):return _failure("not_allowed")
+	var restaurant:Dictionary=data.life.town.restaurant
+	if restaurant.enabled or restaurant.status!="closed":return _failure("not_allowed")
+	var inventory=Inventory.new(48)
+	if not inventory.restore_slots(restaurant.slots):return _failure("invalid_state")
+	var can_open=false
+	for recipe_id in ["clam_salad","snail_stew"]:
+		var recipe:Dictionary=Recipes.get_recipe(recipe_id)
+		var enough=true
+		for item in recipe.inputs:
+			if inventory.count_item(item)<int(recipe.inputs[item]):enough=false;break
+		if enough:can_open=true;break
+	if not can_open:return _failure("insufficient_stock")
+	var candidate=data.duplicate(true)
+	restaurant=candidate.life.town.restaurant
+	restaurant.enabled=true;restaurant.status="trial";restaurant.good_days=0;restaurant.bad_days=0
+	return _finish(candidate,"open_restaurant",args,request_id,[{"day_id":int(data.life.day_id),"kind":"restaurant_status","source":"closed","target":"trial","items":{},"cash":0,"reason":"open_restaurant"}])
 
 static func _collect(data: Dictionary, args: Dictionary, request_id: int) -> Dictionary:
 	if not Schema._exact_keys(args, ["pickup_id"]) or not args.pickup_id is String:
@@ -156,8 +188,34 @@ static func _finish(candidate: Dictionary, kind: String, args: Dictionary, reque
 	for index in range(numbered.size()):
 		numbered[index].event_id = "a:%d:%d" % [request_id, index]
 		candidate.life.events.append(numbered[index].duplicate(true))
-	if candidate.life.events.size() > 256:
-		candidate.life.events = candidate.life.events.slice(candidate.life.events.size() - 256)
+	if not _trim_events(candidate.life.events,int(candidate.life.day_id)):
+		return _failure("invalid_state")
 	if not Schema.validate_current(candidate):
 		return _failure("invalid_state")
 	return {"ok":true, "code":"ok", "state":candidate, "events":numbered}
+
+# Current-day money must survive the bounded audit log until reports are settled.
+# On overflow, evict old/nonfinancial entries first; if all entries are financial,
+# compact equivalent transfers into an explicit summary without losing totals.
+static func _trim_events(events:Array,current_day:int) -> bool:
+	while events.size()>256:
+		var removable=-1
+		for i in range(events.size()):
+			if events[i].day_id!=current_day or events[i].kind not in ["transfer","transfer_summary"]:
+				removable=i;break
+		if removable>=0:
+			events.remove_at(removable);continue
+		var grouped:Dictionary={}
+		var merged=false
+		for i in range(events.size()):
+			var event:Dictionary=events[i]
+			var key="summary:%d:%s:%s:%s"%[current_day,event.source,event.target,event.reason]
+			if not grouped.has(key):
+				grouped[key]=i;continue
+			var first:Dictionary=events[grouped[key]]
+			first.kind="transfer_summary";first.event_id=key
+			first.cash+=event.cash
+			for item in event.items:first.items[item]=int(first.items.get(item,0))+int(event.items[item])
+			events.remove_at(i);merged=true;break
+		if not merged:return false
+	return true

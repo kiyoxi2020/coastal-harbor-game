@@ -1,0 +1,35 @@
+{
+  "balances": [
+    115,
+    1495,
+    748,
+    392,
+    610,
+    9040
+  ],
+  "cumulative_destroyed": {
+    "clam_salad": 56,
+    "lettuce_seed": 1
+  },
+  "cumulative_inputs": {
+    "clam": 56,
+    "lettuce": 56
+  },
+  "cumulative_outputs": {
+    "clam_salad": 56,
+    "lettuce": 3
+  },
+  "day": 17,
+  "depot": {
+    "cash": 610,
+    "stock": {
+      "clam": 5.0,
+      "lettuce": 5.0,
+      "snail": 56.0,
+      "tomato": 56.0
+    }
+  },
+  "food_served": 28,
+  "food_total": 35,
+  "total": 12400
+}

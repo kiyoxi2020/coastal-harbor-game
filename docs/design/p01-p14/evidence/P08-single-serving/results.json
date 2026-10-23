@@ -1,0 +1,1416 @@
+{
+  "independent": [
+    {
+      "day": 1,
+      "balances": [
+        100,
+        940,
+        372,
+        948,
+        100,
+        9940
+      ],
+      "households": [
+        186,
+        186,
+        182,
+        182,
+        212
+      ],
+      "market": {
+        "clam": 2,
+        "snail": 4,
+        "lettuce": 2,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 56,
+        "snail": 56,
+        "lettuce": 56,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 1,
+        "tomato": 1
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 72,
+      "served": 4,
+      "staff": 2
+    },
+    {
+      "day": 2,
+      "balances": [
+        100,
+        1000,
+        404,
+        896,
+        120,
+        9880
+      ],
+      "households": [
+        202,
+        172,
+        164,
+        164,
+        194
+      ],
+      "market": {
+        "clam": 0,
+        "snail": 4,
+        "lettuce": 0,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 54,
+        "snail": 56,
+        "lettuce": 54,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 1,
+        "tomato": 1
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 32,
+      "served": 4,
+      "staff": 2
+    },
+    {
+      "day": 3,
+      "balances": [
+        100,
+        1040,
+        436,
+        844,
+        160,
+        9820
+      ],
+      "households": [
+        188,
+        188,
+        146,
+        146,
+        176
+      ],
+      "market": {
+        "clam": 0,
+        "snail": 4,
+        "lettuce": 0,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 50,
+        "snail": 56,
+        "lettuce": 50,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 1,
+        "tomato": 1
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 32,
+      "served": 4,
+      "staff": 2
+    },
+    {
+      "day": 4,
+      "balances": [
+        100,
+        1080,
+        468,
+        792,
+        200,
+        9760
+      ],
+      "households": [
+        174,
+        174,
+        158,
+        128,
+        158
+      ],
+      "market": {
+        "clam": 0,
+        "snail": 4,
+        "lettuce": 0,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 46,
+        "snail": 56,
+        "lettuce": 46,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 1,
+        "tomato": 1
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 32,
+      "served": 4,
+      "staff": 2
+    },
+    {
+      "day": 5,
+      "balances": [
+        100,
+        1120,
+        500,
+        740,
+        240,
+        9700
+      ],
+      "households": [
+        160,
+        160,
+        140,
+        140,
+        140
+      ],
+      "market": {
+        "clam": 0,
+        "snail": 4,
+        "lettuce": 0,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 42,
+        "snail": 56,
+        "lettuce": 42,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 1,
+        "tomato": 1
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 32,
+      "served": 4,
+      "staff": 2
+    },
+    {
+      "day": 6,
+      "balances": [
+        100,
+        1160,
+        532,
+        688,
+        280,
+        9640
+      ],
+      "households": [
+        146,
+        146,
+        122,
+        122,
+        152
+      ],
+      "market": {
+        "clam": 0,
+        "snail": 4,
+        "lettuce": 0,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 38,
+        "snail": 56,
+        "lettuce": 38,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 1,
+        "tomato": 1
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 32,
+      "served": 4,
+      "staff": 2
+    },
+    {
+      "day": 7,
+      "balances": [
+        100,
+        1200,
+        564,
+        636,
+        320,
+        9580
+      ],
+      "households": [
+        162,
+        132,
+        104,
+        104,
+        134
+      ],
+      "market": {
+        "clam": 0,
+        "snail": 4,
+        "lettuce": 0,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 34,
+        "snail": 56,
+        "lettuce": 34,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 1,
+        "tomato": 1
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 32,
+      "served": 4,
+      "staff": 2
+    },
+    {
+      "day": 8,
+      "balances": [
+        100,
+        1240,
+        596,
+        584,
+        360,
+        9520
+      ],
+      "households": [
+        148,
+        148,
+        86,
+        86,
+        116
+      ],
+      "market": {
+        "clam": 0,
+        "snail": 4,
+        "lettuce": 0,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 30,
+        "snail": 56,
+        "lettuce": 30,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 1,
+        "tomato": 1
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 32,
+      "served": 4,
+      "staff": 2
+    },
+    {
+      "day": 9,
+      "balances": [
+        100,
+        1280,
+        628,
+        532,
+        400,
+        9460
+      ],
+      "households": [
+        134,
+        134,
+        98,
+        68,
+        98
+      ],
+      "market": {
+        "clam": 0,
+        "snail": 4,
+        "lettuce": 0,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 26,
+        "snail": 56,
+        "lettuce": 26,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 1,
+        "tomato": 1
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 32,
+      "served": 4,
+      "staff": 2
+    },
+    {
+      "day": 10,
+      "balances": [
+        100,
+        1320,
+        660,
+        480,
+        440,
+        9400
+      ],
+      "households": [
+        120,
+        120,
+        80,
+        80,
+        80
+      ],
+      "market": {
+        "clam": 0,
+        "snail": 4,
+        "lettuce": 0,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 22,
+        "snail": 56,
+        "lettuce": 22,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 1,
+        "tomato": 1
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 32,
+      "served": 4,
+      "staff": 2
+    },
+    {
+      "day": 11,
+      "balances": [
+        100,
+        1360,
+        692,
+        428,
+        480,
+        9340
+      ],
+      "households": [
+        106,
+        106,
+        62,
+        62,
+        92
+      ],
+      "market": {
+        "clam": 0,
+        "snail": 4,
+        "lettuce": 0,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 18,
+        "snail": 56,
+        "lettuce": 18,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 1,
+        "tomato": 1
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 32,
+      "served": 4,
+      "staff": 2
+    },
+    {
+      "day": 12,
+      "balances": [
+        100,
+        1400,
+        724,
+        376,
+        520,
+        9280
+      ],
+      "households": [
+        122,
+        92,
+        44,
+        44,
+        74
+      ],
+      "market": {
+        "clam": 0,
+        "snail": 4,
+        "lettuce": 0,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 14,
+        "snail": 56,
+        "lettuce": 14,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 1,
+        "tomato": 1
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 32,
+      "served": 4,
+      "staff": 2
+    },
+    {
+      "day": 13,
+      "balances": [
+        100,
+        1440,
+        756,
+        324,
+        560,
+        9220
+      ],
+      "households": [
+        108,
+        108,
+        26,
+        26,
+        56
+      ],
+      "market": {
+        "clam": 0,
+        "snail": 4,
+        "lettuce": 0,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 10,
+        "snail": 56,
+        "lettuce": 10,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 1,
+        "tomato": 1
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 32,
+      "served": 4,
+      "staff": 2
+    },
+    {
+      "day": 14,
+      "balances": [
+        100,
+        1480,
+        788,
+        272,
+        600,
+        9160
+      ],
+      "households": [
+        94,
+        94,
+        38,
+        8,
+        38
+      ],
+      "market": {
+        "clam": 0,
+        "snail": 4,
+        "lettuce": 0,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 6,
+        "snail": 56,
+        "lettuce": 6,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 1,
+        "tomato": 1
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 32,
+      "served": 4,
+      "staff": 2
+    }
+  ],
+  "default": [
+    {
+      "day": 1,
+      "balances": [
+        95,
+        905,
+        300,
+        1060,
+        100,
+        9940
+      ],
+      "households": [
+        212,
+        212,
+        212,
+        212,
+        212
+      ],
+      "market": {
+        "clam": 4,
+        "snail": 4,
+        "lettuce": 4,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 56,
+        "snail": 56,
+        "lettuce": 56,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 0,
+        "tomato": 0
+      },
+      "produced": {
+        "salad": 0,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 0,
+        "stew": 0
+      },
+      "profit": 0,
+      "served": 0,
+      "staff": 0
+    },
+    {
+      "day": 2,
+      "balances": [
+        95,
+        905,
+        300,
+        1120,
+        100,
+        9880
+      ],
+      "households": [
+        224,
+        224,
+        224,
+        224,
+        224
+      ],
+      "market": {
+        "clam": 4,
+        "snail": 4,
+        "lettuce": 4,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 56,
+        "snail": 56,
+        "lettuce": 56,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 0,
+        "tomato": 0
+      },
+      "produced": {
+        "salad": 0,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 0,
+        "stew": 0
+      },
+      "profit": 0,
+      "served": 0,
+      "staff": 0
+    },
+    {
+      "day": 3,
+      "balances": [
+        115,
+        965,
+        332,
+        1068,
+        100,
+        9820
+      ],
+      "households": [
+        210,
+        240,
+        206,
+        206,
+        206
+      ],
+      "market": {
+        "clam": 1,
+        "snail": 4,
+        "lettuce": 1,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 56,
+        "snail": 56,
+        "lettuce": 56,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 0,
+        "tomato": 0
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 32,
+      "served": 4,
+      "staff": 2
+    },
+    {
+      "day": 4,
+      "balances": [
+        115,
+        1015,
+        364,
+        1016,
+        130,
+        9760
+      ],
+      "households": [
+        196,
+        226,
+        218,
+        188,
+        188
+      ],
+      "market": {
+        "clam": 0,
+        "snail": 4,
+        "lettuce": 0,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 53,
+        "snail": 56,
+        "lettuce": 53,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 0,
+        "tomato": 0
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 32,
+      "served": 4,
+      "staff": 2
+    },
+    {
+      "day": 5,
+      "balances": [
+        115,
+        1055,
+        396,
+        964,
+        170,
+        9700
+      ],
+      "households": [
+        182,
+        212,
+        200,
+        200,
+        170
+      ],
+      "market": {
+        "clam": 0,
+        "snail": 4,
+        "lettuce": 0,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 49,
+        "snail": 56,
+        "lettuce": 49,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 0,
+        "tomato": 0
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 32,
+      "served": 4,
+      "staff": 2
+    },
+    {
+      "day": 6,
+      "balances": [
+        115,
+        1095,
+        428,
+        912,
+        210,
+        9640
+      ],
+      "households": [
+        168,
+        198,
+        182,
+        182,
+        182
+      ],
+      "market": {
+        "clam": 0,
+        "snail": 4,
+        "lettuce": 0,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 45,
+        "snail": 56,
+        "lettuce": 45,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 0,
+        "tomato": 0
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 32,
+      "served": 4,
+      "staff": 2
+    },
+    {
+      "day": 7,
+      "balances": [
+        115,
+        1135,
+        460,
+        860,
+        250,
+        9580
+      ],
+      "households": [
+        184,
+        184,
+        164,
+        164,
+        164
+      ],
+      "market": {
+        "clam": 0,
+        "snail": 4,
+        "lettuce": 0,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 41,
+        "snail": 56,
+        "lettuce": 41,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 0,
+        "tomato": 0
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 32,
+      "served": 4,
+      "staff": 2
+    },
+    {
+      "day": 8,
+      "balances": [
+        115,
+        1175,
+        492,
+        808,
+        290,
+        9520
+      ],
+      "households": [
+        170,
+        200,
+        146,
+        146,
+        146
+      ],
+      "market": {
+        "clam": 0,
+        "snail": 4,
+        "lettuce": 0,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 37,
+        "snail": 56,
+        "lettuce": 37,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 0,
+        "tomato": 0
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 32,
+      "served": 4,
+      "staff": 2
+    },
+    {
+      "day": 9,
+      "balances": [
+        115,
+        1215,
+        524,
+        756,
+        330,
+        9460
+      ],
+      "households": [
+        156,
+        186,
+        158,
+        128,
+        128
+      ],
+      "market": {
+        "clam": 0,
+        "snail": 4,
+        "lettuce": 0,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 33,
+        "snail": 56,
+        "lettuce": 33,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 0,
+        "tomato": 0
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 32,
+      "served": 4,
+      "staff": 2
+    },
+    {
+      "day": 10,
+      "balances": [
+        115,
+        1255,
+        556,
+        704,
+        370,
+        9400
+      ],
+      "households": [
+        142,
+        172,
+        140,
+        140,
+        110
+      ],
+      "market": {
+        "clam": 0,
+        "snail": 4,
+        "lettuce": 0,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 29,
+        "snail": 56,
+        "lettuce": 29,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 0,
+        "tomato": 0
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 32,
+      "served": 4,
+      "staff": 2
+    },
+    {
+      "day": 11,
+      "balances": [
+        115,
+        1295,
+        588,
+        652,
+        410,
+        9340
+      ],
+      "households": [
+        128,
+        158,
+        122,
+        122,
+        122
+      ],
+      "market": {
+        "clam": 0,
+        "snail": 4,
+        "lettuce": 0,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 25,
+        "snail": 56,
+        "lettuce": 25,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 0,
+        "tomato": 0
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 32,
+      "served": 4,
+      "staff": 2
+    },
+    {
+      "day": 12,
+      "balances": [
+        115,
+        1335,
+        620,
+        600,
+        450,
+        9280
+      ],
+      "households": [
+        144,
+        144,
+        104,
+        104,
+        104
+      ],
+      "market": {
+        "clam": 0,
+        "snail": 4,
+        "lettuce": 0,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 21,
+        "snail": 56,
+        "lettuce": 21,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 0,
+        "tomato": 0
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 32,
+      "served": 4,
+      "staff": 2
+    },
+    {
+      "day": 13,
+      "balances": [
+        115,
+        1375,
+        652,
+        548,
+        490,
+        9220
+      ],
+      "households": [
+        130,
+        160,
+        86,
+        86,
+        86
+      ],
+      "market": {
+        "clam": 0,
+        "snail": 4,
+        "lettuce": 0,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 17,
+        "snail": 56,
+        "lettuce": 17,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 0,
+        "tomato": 0
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 32,
+      "served": 4,
+      "staff": 2
+    },
+    {
+      "day": 14,
+      "balances": [
+        115,
+        1415,
+        684,
+        496,
+        530,
+        9160
+      ],
+      "households": [
+        116,
+        146,
+        98,
+        68,
+        68
+      ],
+      "market": {
+        "clam": 0,
+        "snail": 4,
+        "lettuce": 0,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 13,
+        "snail": 56,
+        "lettuce": 13,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 0,
+        "tomato": 0
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 32,
+      "served": 4,
+      "staff": 2
+    },
+    {
+      "day": 15,
+      "balances": [
+        115,
+        1455,
+        716,
+        444,
+        570,
+        9100
+      ],
+      "households": [
+        102,
+        132,
+        80,
+        80,
+        50
+      ],
+      "market": {
+        "clam": 0,
+        "snail": 4,
+        "lettuce": 0,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 9,
+        "snail": 56,
+        "lettuce": 9,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 0,
+        "tomato": 0
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 32,
+      "served": 4,
+      "staff": 2
+    },
+    {
+      "day": 16,
+      "balances": [
+        115,
+        1495,
+        748,
+        392,
+        610,
+        9040
+      ],
+      "households": [
+        88,
+        118,
+        62,
+        62,
+        62
+      ],
+      "market": {
+        "clam": 0,
+        "snail": 4,
+        "lettuce": 0,
+        "tomato": 4
+      },
+      "depot": {
+        "clam": 5,
+        "snail": 56,
+        "lettuce": 5,
+        "tomato": 56
+      },
+      "restaurant_stock": {
+        "clam": 0,
+        "lettuce": 0,
+        "snail": 0,
+        "tomato": 0
+      },
+      "produced": {
+        "salad": 4,
+        "stew": 0
+      },
+      "sold": {
+        "salad": 4,
+        "stew": 0
+      },
+      "profit": 32,
+      "served": 4,
+      "staff": 2
+    }
+  ]
+}
