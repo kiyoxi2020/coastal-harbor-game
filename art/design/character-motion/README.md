@@ -1,7 +1,7 @@
 # 动态人体试作
 
-当前目录：`adult-standard-v1/walk-west-proof-v1/`。两份GPT四帧西向试稿保留sources与prompts，v2使用v1作参考；均未通过比例和交替步态验收，不进入生产角色。
+当前交付：[四向walk/idle × 两套上衣](adult-standard-v1/locomotion-v1/README.md)，包含[左右同步对照](adult-standard-v1/locomotion-v1/symmetry-review.html)、[全部姿态评审](adult-standard-v1/locomotion-v1/review.html)和[港口试玩](adult-standard-v1/locomotion-v1/launch-game-trial.command)。2026-10-25已修正左右步态，保留75%速度；自动检查和原生证据见交付说明。
 
-工具范围见[工具计划](adult-standard-v1/walk-west-proof-v1/tools-plan.md)：四帧A/B离线合成与共享时间轴是局部试作合同，不能当作支持所有新动作/体型的生产系统。像素fixture测试只证明合成逻辑，不能证明美术效果。
+2026-10-25用户已认可当前试玩，记录与接触测量见交付说明；完整关节/接触合同和严格脚点跟踪尚未冻结。run/hoe/water/harvest、动态衣裤鞋8配方、发帽及其他体型尚未完成，生产主角尚未迁移。
 
-待完成：合格人体动作、完整隐藏部件、两种袖长衣物、逐姿态覆盖/遮挡、实际motion.json和原生连续循环评审。之后再补齐walk/run/hoe/water/harvest四向及idle。制作合同见[统一管线](../../../docs/design/character-art-pipeline.md)。
+[原西向小样](adult-standard-v1/walk-west-proof-v1/README.md)与失败稿、提示词、源图保留为历史。制作以[统一管线](../../../docs/design/character-art-pipeline.md)为准。

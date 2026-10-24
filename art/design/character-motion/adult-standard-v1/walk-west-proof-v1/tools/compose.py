@@ -27,6 +27,41 @@ def pair(value, label):
     return tuple(value)
 
 
+def validate_locomotion(data, frames):
+    require(isinstance(frames, list) and frames, 'schema2 requires nonempty global frames')
+    for key in ('template_id', 'motion_set_id'):
+        require(isinstance(data.get(key), str) and data[key], f'{key} required')
+    poses = {}
+    for frame in frames:
+        require(isinstance(frame, dict), 'frame object required')
+        pose = frame.get('pose_id')
+        require(isinstance(pose, str) and pose and pose not in poses, 'unique nonempty pose_id required')
+        require(type(frame.get('duration_ms')) is int and frame['duration_ms'] > 0, 'duration_ms must be positive integer')
+        poses[pose] = frame
+    actions = data.get('actions')
+    require(isinstance(actions, dict) and set(actions) == {'idle', 'walk'}, 'schema2 requires idle and walk')
+    assigned = set()
+    for action, clip in actions.items():
+        require(isinstance(clip, dict) and clip.get('loop') is True, f'{action}: loop=true required')
+        directions = clip.get('directions')
+        require(isinstance(directions, dict) and set(directions) == {'south', 'west', 'east', 'north'}, f'{action}: four directions required')
+        for direction, entries in directions.items():
+            require(isinstance(entries, list) and entries, f'{action}/{direction}: nonempty pose list required')
+            for pose in entries:
+                require(isinstance(pose, str) and pose in poses and pose not in assigned, 'unknown or multiply assigned pose')
+                require(poses[pose].get('action') == action and poses[pose].get('direction') == direction, 'pose action/direction mismatch')
+                assigned.add(pose)
+    require(assigned == set(poses), 'actions must cover every global pose exactly once')
+    policies = data.get('move_policy')
+    require(isinstance(policies, dict) and set(policies) == set(actions), 'move_policy must match actions')
+    for action, policy in policies.items():
+        require(isinstance(policy, dict), 'move policy object required')
+        speed, rate = policy.get('base_world_speed'), policy.get('playback_rate')
+        require(type(speed) in (int, float) and math.isfinite(speed) and (speed > 0 if action == 'walk' else speed == 0), 'invalid action speed')
+        require(type(rate) in (int, float) and math.isfinite(rate) and 0 < rate <= 1, 'invalid playback_rate')
+    return list(poses)
+
+
 def compose(motion_path, output_dir=None):
     motion_path = Path(motion_path).resolve()
     root = motion_path.parent
@@ -34,7 +69,7 @@ def compose(motion_path, output_dir=None):
         data = json.loads(motion_path.read_text())
     except (OSError, json.JSONDecodeError) as error:
         raise ValueError(f'cannot read motion: {error}') from error
-    require(isinstance(data, dict) and type(data.get('schema_version')) is int and data['schema_version'] == 1, 'schema_version must be 1')
+    require(isinstance(data, dict) and type(data.get('schema_version')) is int and data['schema_version'] in (1, 2), 'schema_version must be 1 or 2')
     canvas = pair(data.get('canvas_px'), 'canvas_px')
     require(canvas == (512, 768), 'this proof requires canvas_px=[512,768]')
     anchor = pair(data.get('root_anchor_px'), 'root_anchor_px')
@@ -42,13 +77,29 @@ def compose(motion_path, output_dir=None):
     scale = data.get('display_scale')
     require(type(scale) in (float, int) and math.isfinite(scale) and 0 < scale <= 1, 'display_scale must be finite in (0,1]')
     frames = data.get('frames')
-    require(isinstance(frames, list) and len(frames) == 4, 'exactly four timeline frames required')
-    for i, frame in enumerate(frames):
-        require(isinstance(frame, dict) and frame.get('pose_id') == EXPECTED_POSES[i], f'frame {i}: expected pose_id={EXPECTED_POSES[i]}')
-        require(type(frame.get('duration_ms')) is int and frame['duration_ms'] > 0, f'frame {i}: duration_ms must be positive integer')
+    schema = data['schema_version']
+    if schema == 1:
+        require(isinstance(frames, list) and len(frames) == 4, 'exactly four timeline frames required')
+        for i, frame in enumerate(frames):
+            require(isinstance(frame, dict) and frame.get('pose_id') == EXPECTED_POSES[i], f'frame {i}: expected pose_id={EXPECTED_POSES[i]}')
+            require(type(frame.get('duration_ms')) is int and frame['duration_ms'] > 0, f'frame {i}: duration_ms must be positive integer')
+        expected_poses = EXPECTED_POSES
+    else:
+        require(anchor == (256, 708) and math.isclose(scale, 138 / 582, rel_tol=0, abs_tol=1e-12), 'schema2 registered root/display_scale mismatch')
+        expected_poses = validate_locomotion(data, frames)
     recipes = data.get('recipes')
     require(isinstance(recipes, dict) and set(recipes) == {'A', 'B'}, 'exactly A and B recipes required')
     inputs = {'motion.json': {'path': motion_path.name, 'sha256': sha256(motion_path)}}
+    if schema == 2:
+        contract = data.get('source_contract')
+        require(isinstance(contract, dict) and contract, 'nonempty source_contract required')
+        for reference, expected_hash in contract.items():
+            require(isinstance(reference, str) and reference, 'source_contract requires relative file paths')
+            rel = Path(reference)
+            path = (root / rel).resolve()
+            require(not rel.is_absolute() and '..' not in rel.parts and path.is_relative_to(root) and path.is_file(), f'missing or external source_contract dependency: {reference}')
+            require(isinstance(expected_hash, str) and len(expected_hash) == 64 and expected_hash == sha256(path), f'source_contract hash mismatch: {reference}')
+            inputs[reference] = {'path': reference, 'sha256': expected_hash}
     image_cache = {}
 
     def read_image(reference, is_mask=False):
@@ -74,11 +125,11 @@ def compose(motion_path, output_dir=None):
 
     # Resolve/validate every frame before writing anything. A source can map to all poses.
     for recipe_id, recipe in recipes.items():
-        require(isinstance(recipe, dict) and isinstance(recipe.get('frames'), list) and len(recipe['frames']) == 4, f'{recipe_id}: four mapped frames required')
+        require(isinstance(recipe, dict) and isinstance(recipe.get('frames'), list) and len(recipe['frames']) == len(frames), f'{recipe_id}: complete mapped frames required')
         for index, frame in enumerate(recipe['frames']):
             require(isinstance(frame, dict), f'{recipe_id}/{index}: frame object required')
-            if 'pose_id' in frame:
-                require(frame['pose_id'] == EXPECTED_POSES[index], f'{recipe_id}/{index}: mismatched pose')
+            if schema == 2 or 'pose_id' in frame:
+                require(frame.get('pose_id') == expected_poses[index], f'{recipe_id}/{index}: mismatched pose')
             layers = frame.get('layers')
             require(isinstance(layers, list) and layers, f'{recipe_id}/{index}: nonempty layers required')
             ids = set()
@@ -90,20 +141,26 @@ def compose(motion_path, output_dir=None):
                 image = read_image(layer.get('source'))
                 x, y = pair(layer.get('offset_px'), f'{recipe_id}/{index}/{layer_id} offset_px')
                 require(x >= 0 and y >= 0 and x + image.width <= canvas[0] and y + image.height <= canvas[1], f'{recipe_id}/{index}/{layer_id}: source exceeds canvas')
+                if schema == 2:
+                    require((x, y) == (0, 0) and image.size == canvas, 'schema2 layers must be full-frame registered at offset [0,0]')
                 if 'hide_mask' in layer:
                     read_image(layer['hide_mask'], True)
 
     tool_root = Path(__file__).parent
     tools = {path.name: sha256(path) for path in sorted(tool_root.iterdir()) if path.suffix in ('.py', '.gd', '.tscn', '.godot') and path.is_file()}
     manifest = {
-        'schema_version': 1, 'canvas_px': list(canvas), 'root_anchor_px': list(anchor),
+        'schema_version': schema, 'canvas_px': list(canvas), 'root_anchor_px': list(anchor),
         'display_scale': scale, 'frames': frames, 'inputs': inputs, 'tools': tools,
         'mask_semantics': 'full_canvas_L_white_hides_target_layer_only',
         'recipes': {}, 'verification_scope': 'structure_and_compositing_only',
     }
+    if schema == 2:
+        for key in ('template_id', 'motion_set_id', 'actions', 'move_policy', 'source_contract'):
+            manifest[key] = data[key]
     digest_input = json.dumps({'inputs': inputs, 'tools': tools}, sort_keys=True, separators=(',', ':')).encode()
     manifest['artifact_digest'] = hashlib.sha256(digest_input).hexdigest()
     destination = Path(output_dir).resolve() if output_dir else root / 'baked'
+    manifest['source_root'] = os.path.relpath(root, destination)
     destination.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='coastal-motion-bake-', dir=destination.parent) as scratch:
         stage = Path(scratch)
@@ -120,7 +177,7 @@ def compose(motion_path, output_dir=None):
                     result.alpha_composite(source, (x, y))
                 filename = f'{recipe_id}_{i}.png'
                 result.save(stage / filename)
-                baked_frames.append({'file': filename, 'sha256': sha256(stage / filename), 'pose_id': frames[i]['pose_id'], 'duration_ms': frames[i]['duration_ms'], 'layers': frame['layers']})
+                baked_frames.append({'file': filename, 'sha256': sha256(stage / filename), 'pose_id': frames[i]['pose_id'], 'duration_ms': frames[i]['duration_ms'], 'layers': frame['layers'], **({key: frames[i][key] for key in ('action', 'direction')} if schema == 2 else {})})
             manifest['recipes'][recipe_id] = {'frames': baked_frames}
         (stage / 'export-manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
         destination.mkdir(parents=True, exist_ok=True)
@@ -140,7 +197,7 @@ def main():
         result = compose(args.motion, args.output_dir)
     except ValueError as error:
         parser.exit(2, f'Invalid motion: {error}\n')
-    print(json.dumps({'artifact_digest': result['artifact_digest'], 'recipes': list(result['recipes']), 'frames_per_recipe': 4}))
+    print(json.dumps({'artifact_digest': result['artifact_digest'], 'recipes': list(result['recipes']), 'frames_per_recipe': len(result['frames'])}))
 
 
 if __name__ == '__main__':

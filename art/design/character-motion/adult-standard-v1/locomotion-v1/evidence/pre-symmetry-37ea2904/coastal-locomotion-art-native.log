@@ -1,0 +1,46 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+OpenGL API 4.1 Metal - 90.5 - Compatibility - Using Device: Apple - Apple M4
+
+PASS native_renderer
+PASS complete_schema2_loaded
+PASS default_accepted_75_percent
+PASS camera_scale_once
+PASS capture_00-idle-start
+PASS capture_walk-west-0
+PASS capture_walk-west-1
+PASS capture_walk-west-2
+PASS keyboard_move_west
+PASS actual_motion_clock_west
+PASS release_idle_west
+PASS capture_idle-west
+PASS capture_walk-east-0
+PASS capture_walk-east-1
+PASS capture_walk-east-2
+PASS keyboard_move_east
+PASS actual_motion_clock_east
+PASS release_idle_east
+PASS capture_idle-east
+PASS capture_walk-north-0
+PASS capture_walk-north-1
+PASS capture_walk-north-2
+PASS keyboard_move_north
+PASS actual_motion_clock_north
+PASS release_idle_north
+PASS capture_idle-north
+PASS capture_walk-south-0
+PASS capture_walk-south-1
+PASS capture_walk-south-2
+PASS keyboard_move_south
+PASS actual_motion_clock_south
+PASS release_idle_south
+PASS capture_idle-south
+PASS turn_preserves_normalized_phase
+PASS keyboard_garment_same_phase
+PASS capture_long-east-same-phase
+PASS mouse_garment_same_phase
+PASS never_mirrors
+PASS diagonal_speed_normalized
+PASS keyboard_reset
+PASS native_collision_clock_stops
+PASS capture_collision-idle
+GRID_NATIVE checks=42 passed=true

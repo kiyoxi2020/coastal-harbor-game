@@ -90,6 +90,13 @@ class ComposeTests(unittest.TestCase):
                 self.assertEqual(frame['layers'][0]['hide_mask'], 'skin-mask.png')
                 self.assertEqual(frame['sha256'], hashlib.sha256((self.root / 'baked' / frame['file']).read_bytes()).hexdigest())
 
+    def test_source_root_resolves_when_baked_elsewhere(self):
+        motion = self.root / 'motion.json'
+        motion.write_text(json.dumps(self.data))
+        destination = self.root / 'nested' / 'export'
+        result = module.compose(motion, destination)
+        self.assertEqual((destination / result['source_root']).resolve(), self.root)
+
     def test_missing_frame_rejected(self):
         self.rejected(lambda d: d['recipes']['B']['frames'].pop())
 

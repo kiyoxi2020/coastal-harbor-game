@@ -14,3 +14,11 @@
 !.env.example
 /godot2d/verification*/
 /art/interior/processed/
+
+# Native character-motion evidence required to reproduce committed validation.
+!/art/design/character-motion/adult-standard-v1/walk-west-proof-v1/evidence/native-originals.zip
+!/art/design/character-motion/adult-standard-v1/walk-west-proof-v1/evidence/travel-originals.zip
+!/art/design/character-motion/adult-standard-v1/locomotion-v1/evidence/backgrounds-originals.zip
+!/art/design/character-motion/adult-standard-v1/locomotion-v1/evidence/visual-originals.zip
+!/art/design/character-motion/adult-standard-v1/locomotion-v1/evidence/harbor-controls-originals.zip
+!/art/design/character-motion/adult-standard-v1/locomotion-v1/evidence/contact-audit-v1/originals.zip

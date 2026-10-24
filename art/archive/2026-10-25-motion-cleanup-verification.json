@@ -1,0 +1,9 @@
+{
+  "locomotion-v1": 546,
+  "walk-west-proof-v1": 8,
+  "evidence_files": 77,
+  "evidence_zip_crc": 6,
+  "python_tests": 54,
+  "acceptance_manifest": true,
+  "native_rerun": false
+}

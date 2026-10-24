@@ -1,0 +1,99 @@
+{
+  "date": "2026-10-25",
+  "scope": "character motion development cleanup",
+  "removed": [
+    {
+      "path": "art/design/character-motion/.DS_Store",
+      "bytes": 8196,
+      "sha256": "644fd102850ee2e5f2c66eaa4bc3973606296a8135c679049c9fff736b2fae40",
+      "reason": "regenerable Python cache or Finder metadata"
+    },
+    {
+      "path": "art/design/character-motion/adult-standard-v1/.DS_Store",
+      "bytes": 8196,
+      "sha256": "4b02115d44e7744777743020c9d1c6a772a717c6d01acd1429eb092055b92b81",
+      "reason": "regenerable Python cache or Finder metadata"
+    },
+    {
+      "path": "art/design/character-motion/adult-standard-v1/locomotion-v1/__pycache__/build_parts.cpython-314.pyc",
+      "bytes": 28658,
+      "sha256": "fcc31aa1fb9f7f37954d5195aa9725c24c8d156704e10c0401f0693fbb691117",
+      "reason": "regenerable Python cache or Finder metadata"
+    },
+    {
+      "path": "art/design/character-motion/adult-standard-v1/locomotion-v1/__pycache__/test_parts.cpython-314.pyc",
+      "bytes": 21364,
+      "sha256": "1596aab32e3026e0aa3a68bb797bf821e7b5576da37f054b089dbba503372486",
+      "reason": "regenerable Python cache or Finder metadata"
+    },
+    {
+      "path": "art/design/character-motion/adult-standard-v1/locomotion-v1/__pycache__/test_registration.cpython-314.pyc",
+      "bytes": 3677,
+      "sha256": "8a78885cc1e7b6a5f3f44d520b227ce2291bd6aa10befbca882c726cb3862d22",
+      "reason": "regenerable Python cache or Finder metadata"
+    },
+    {
+      "path": "art/design/character-motion/adult-standard-v1/locomotion-v1/__pycache__/test_symmetry.cpython-314.pyc",
+      "bytes": 7973,
+      "sha256": "b34f43108170b26e5ec155e9fc3727e69148bbe4484ae86284b9ff8c26d6b4ae",
+      "reason": "regenerable Python cache or Finder metadata"
+    },
+    {
+      "path": "art/design/character-motion/adult-standard-v1/locomotion-v1/tools/__pycache__/contact_audit.cpython-314.pyc",
+      "bytes": 7167,
+      "sha256": "21a7584eca6ac2a2aa6eefe7e7791a48d7573c7c9b801df47bb91b1940d0e365",
+      "reason": "regenerable Python cache or Finder metadata"
+    },
+    {
+      "path": "art/design/character-motion/adult-standard-v1/locomotion-v1/tools/__pycache__/test_contact_audit.cpython-314.pyc",
+      "bytes": 4435,
+      "sha256": "e4dedc0d87f572d79d14765291238cc9045825eb80e2af24d7fb2a048666a5e7",
+      "reason": "regenerable Python cache or Finder metadata"
+    },
+    {
+      "path": "art/design/character-motion/adult-standard-v1/walk-west-proof-v1/__pycache__/build_parts.cpython-314.pyc",
+      "bytes": 12670,
+      "sha256": "8ff4e3b70ae129136fa3886c2548f8cf3d1c080262b2f7ffce0711c1d8eddb7a",
+      "reason": "regenerable Python cache or Finder metadata"
+    },
+    {
+      "path": "art/design/character-motion/adult-standard-v1/walk-west-proof-v1/__pycache__/test_parts.cpython-314.pyc",
+      "bytes": 7313,
+      "sha256": "413bd9bddf0423cf0453165e37ba1c938820eb03caac2abb0328f8d0107a8a50",
+      "reason": "regenerable Python cache or Finder metadata"
+    },
+    {
+      "path": "art/design/character-motion/adult-standard-v1/walk-west-proof-v1/tools/__pycache__/compose.cpython-314.pyc",
+      "bytes": 20833,
+      "sha256": "fd5925b73ae39baf5e46f0a5ff459fbee9d63483bda4489b9b8b9048fc912205",
+      "reason": "regenerable Python cache or Finder metadata"
+    },
+    {
+      "path": "art/design/character-motion/adult-standard-v1/walk-west-proof-v1/tools/__pycache__/test_compose.cpython-314.pyc",
+      "bytes": 18472,
+      "sha256": "484a462b0a195e29924c639663d1b76c9e4a51104a36ccc93bb7926b8dd163df",
+      "reason": "regenerable Python cache or Finder metadata"
+    },
+    {
+      "path": "art/design/character-motion/adult-standard-v1/walk-west-proof-v1/tools/__pycache__/test_compose_schema2.cpython-314.pyc",
+      "bytes": 13153,
+      "sha256": "6e9de902bc85b830a43531148ca0bae21c4ea41c413a0015192dc66d8bcc380c",
+      "reason": "regenerable Python cache or Finder metadata"
+    },
+    {
+      "path": "art/design/character-motion/adult-standard-v1/walk-west-proof-v1/tools/__pycache__/test_verify_travel.cpython-314.pyc",
+      "bytes": 2133,
+      "sha256": "ee3d99ec165fee52fab56327c90195ef10a110fa1f12f8b123098e81a759da93",
+      "reason": "regenerable Python cache or Finder metadata"
+    },
+    {
+      "path": "art/design/character-motion/adult-standard-v1/walk-west-proof-v1/tools/__pycache__/verify_travel_capture.cpython-314.pyc",
+      "bytes": 9093,
+      "sha256": "47240d3a722c4542302857818b49b640b717d01eef839af6263c9c8c3622d043",
+      "reason": "regenerable Python cache or Finder metadata"
+    }
+  ],
+  "removed_bytes": 173333,
+  "preserved": "All source art, prompts, registered frames, masks, dependency contracts, historical rejected revisions and native evidence remain. Historical west tools are dependencies, not unused copies.",
+  "evidence_zip_policy": "Six native evidence ZIPs are explicitly included in Git; art/archive recovery ZIPs remain local-only."
+}
