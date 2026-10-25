@@ -1,0 +1,14 @@
+Edit this EXACT 1024×1536 four-cell reference into a WEST/LEFT-facing hoe animation. Keep output1024×1536 with a2×2 grid: TOP LEFT raised, TOP RIGHT downswing, BOTTOM LEFT contact, BOTTOM RIGHT recovery. Each cell remains512×768 source pixels. True transparent background, no labels or gridlines.
+The reference consists of exact approved idle sprites. Repaint complete different poses, preserving THIS SAME CHARACTER AND NATIVE PIXEL DENSITY. Do not zoom out. Preserve the same approximately239px head width,242px crown-to-chin height INCLUDING outline, the same eye diameter, ear, nose, one eyebrow, skin, shirt/body/leg/shoe sizes. Approved upright figure crown124, sole710,586px tall including outline; world root256,708 in each local cell. Cream short sleeve rolled cuff shirt, olive long trousers, brown shoes, bald head, no hat/hair. Raised/recovery figures must remain about586px tall before posture compression. Bent figures have naturally bent torsos/knees but SAME physical head/hand/shoe size. Every preceding attempt miniaturized the head: avoid that exact error.
+One rigid hoe, straight wooden shaft EXACTLY300px collar-pivot to BUTT END, thickness12px, same70×60px iron blade at90degrees. The tool rotates only IN THE IMAGE PLANE, NEVER toward/away from camera. Keep both endpoints clearly visible in all4 poses. Butt extends35-45px past rear hand. BOTH hands clasp the shaft, fixed hand spacing60px along shaft, fingers crossing over wood, not floating palms. Never shrink/stretch/resize tool.
+Local cell geometric guide, all four shafts are300px:
+raised collar(90,40)→butt(254,292);
+downswing collar(52,325)→butt(310,478);
+contact collar(55,655)→butt(340,561);
+recovery collar(55,390)→butt(318,535).
+Raised: two arms overhead/forward with bent elbows, natural whole-body extension.
+Downswing: hands lower, torso inclines and knees bend, blade visibly off ground.
+Contact: full body bends forward, two hands push shaft down-left; blade bottom touches soil plane near(50,708).
+Recovery: body rises toward the reference upright proportions, hands retract, blade lifts clear.
+Both shoes remain planted in same staggered stance nearx210 andx320, solesy708, no sliding/miniaturization. Fit complete character and hoe INSIDE each cellx12..500,y12..735; no crossing into a neighboring cell. Adjust genuine elbow/shoulder/torso pose if needed, never shrink figure/tool to fit.
+One complete character and one hoe percell, natural new head projection with same anatomy; do not paste static face/hand pixels. Painted pixel shading and thick outline exactly like reference. No floor, shadows, soil, motion trails, text, extra objects or duplicate limbs. Unapproved full-frame proof only.

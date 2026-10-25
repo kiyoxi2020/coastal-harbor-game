@@ -9,7 +9,7 @@
 | [character-bodies](character-bodies/README.md) | 当前成年母版、修订选择和认可参考索引 |
 | [character-head-proof-v1](character-head-proof-v1/README.md)、[character-clothing-proof-v1](character-clothing-proof-v1/README.md) | 静态头部及衣裤鞋验证小样；不代表动画通过 |
 | [character-candidates-v2](character-candidates-v2/README.md) | 六类各10静态候选，视觉交接及儿童比例修订待完成 |
-| [character-motion](character-motion/README.md) | 四向行走/站姿与两套上衣试玩；左右步态已修正并获用户认可；接触基线已记录 |
+| [character-motion](character-motion/README.md) | 四向walk/idle及v4西向短袖run已认可；A分层精确还原，西向长袖B已启用、待视觉评审 |
 | [npc-modular-v2](npc-modular-v2/README.md)、[character-library-v1](character-library-v1/README.md) | 已认可旧外观/年龄比例参考，独立运行副本已退役 |
 | [archive](../archive/README.md) | 历史失败稿本地恢复包与可追溯清单，不作为现行制作依据 |
 

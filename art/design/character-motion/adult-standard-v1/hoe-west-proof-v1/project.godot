@@ -1,0 +1,15 @@
+config_version=5
+
+[application]
+config/name="Hoe West Candidate Review"
+
+[display]
+window/size/viewport_width=1100
+window/size/viewport_height=650
+window/size/window_width_override=1100
+window/size/window_height_override=650
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+textures/default_filters/use_nearest_mipmap_filter=false
+textures/canvas_textures/default_texture_filter=0

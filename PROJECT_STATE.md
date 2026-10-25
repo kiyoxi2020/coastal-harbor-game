@@ -1,3 +1,35 @@
+## 2026-10-25 西向奔跑换衣修复与农事 v2（当前有效）
+
+西向短袖 A 的已认可 v4 清单未变（SHA256 8d5cc104fec72450eef948a1ccacaa8da813b1884f23a7058250e2fefd1d0a1d）。长袖 B 已在原港口隔离试玩启用，1/2 换衣、Shift 向西跑；真实分层7项、逻辑48项、原生A/B 25项及两套十循环通过。此前腰线缺口实际来自 A 裤腰棕色像素误归上衣，已用失败测试定位并修正 ownership，四帧缺口0、A全RGBA差异0；未挪动/缩放/补色。当前仍用 B v2，v3编辑仅留作诊断。B待用户视觉评审，见[走跑换衣入口](art/design/character-motion/adult-standard-v1/run-west-proof-v1/README.md)和 evidence/garments/layering-validation.json。此前 walk 28逻辑/43原生结果保留，本次未改其脚本或输入。
+
+并行农事结果：[浇水 v2](art/design/character-motion/adult-standard-v1/water-west-proof-v1/revisions/v2/README.md)纠正旧腿长，同口径根至头585px，对照批准idle584px；保留完整水流，整帧登记到768×768，4项结构检查及原生明暗十循环完成（337采样/199捕获）。脚接触、壶刚性、握点与用户认可仍未通过。[锄地 v2](art/design/character-motion/adult-standard-v1/hoe-west-proof-v1/revisions/v2/acceptance.md)两轮均拒绝：头部约219×218px vs239×242px、工具长度变化、四帧跨格；完整源与失败测量保留，未做无意义的原生验收。采收未改。
+
+主代理完成 run 修复与所有原生验收；复用 hoe_motion/water_motion（均 gpt-6.1-sol high）分别做独立农事返工，模型用于姿态与遮挡判断，两次失败后均停止生成。按产物和测量监控，子代理本轮已交付；hoe_motion完成run只读复查，无阻塞；第3帧5个裤色像素仍归远臂层、原RGBA不变，扩独立裤装前需清理。下一步先评审 B 奔跑与浇水 v2；锄地须改变制作方案再重试。四向run、农事换装、完整关节/接触合同、独立裤鞋/发帽、其他体型及生产迁移仍待完成。未改玩家档。本批按用户要求纳入本地提交，提交号以 Git 记录为准；未推送或导出。
+
+## 2026-10-25 v4认可与西向上衣分层（历史记录）
+
+用户“可以，继续按照当前的版本往下执行”认可v4西向短袖步态，visual-acceptance-v4.json绑定candidate SHA256 8d5cc104fec72450eef948a1ccacaa8da813b1884f23a7058250e2fefd1d0a1d。完成短袖A衣身/袖子/共享身体和GPT隐藏衣身分层，四帧RGBA逐字节0差异；原批准candidate与纹理未变。
+
+可选跑步换衣接口完成：48项逻辑、28项walk逻辑、17项原生A走跑/十循环、43项walk原生通过。A连续181样本/91捕获已归档。真实分层6项中5通过、B腰线1失败；长袖两轮源图后，第3/4帧腰线仍有57/84个源像素缺口，未生成启用清单，试玩仍仅短袖西向可跑。B只完成原生明暗诊断，未完成十循环/用户认可。入口：art/design/character-motion/adult-standard-v1/run-west-proof-v1/garment-review.html，证据evidence/garments/layering-validation.json。
+
+复用water_motion（gpt-6.1-sol high）负责首轮GPT源和分层，主代理负责接口、独立原生检查，并在子代理长时未回报后接管第二轮源修订与验收。下一步先按明确衣摆/袖口坐标重做B第3/4姿态接口，再启用换衣；四向run、农事修订、独立裤鞋、完整隐藏裸身体和生产迁移仍未完成。不用局部缩放或挪动补缝；未提交/推送/导出。
+
+## 2026-10-25 奔跑重复姿态修订与农事动作并行试作（历史记录）
+
+用户反馈run第1/3、第2/4帧相同，v2退回；v4保留前两帧并重绘后两完整姿态，后收脚跟、胫骨轮廓和鞋尖方向变化，待用户视觉评审。当前候选清单8d5cc104fec72450eef948a1ccacaa8da813b1884f23a7058250e2fefd1d0a1d；4登记、40逻辑、16原生控制/十循环通过。旧v2证据在run-west-proof-v1/history/v2，不能代替当前美术认可。
+
+用户明确授权并行其他动作，两个gpt-6.1-sol high子代理独立开发hoe/water，hoe完成后复用于harvest；主代理处理run及集成，模型用于独立中复杂动作源图/登记/证据交付。三类均有GPT原图、提示词、登记、HTML和原生录像；hoe头部偏小且工具长度变化，water身高644对照582，harvest比例偏高且起身脚位漂移，均未过美术验收，暂不接入。统一入口：[动作评审](art/design/character-motion/review.html)。
+
+下一步评审run修订，并对农事动作按测得问题重做少量关键姿态；不直接扩四向或换装。完整关节/接触、衣物分层、生产迁移仍待完成。未改玩家存档或玩法事务，未提交/推送/导出。
+
+## 2026-10-25 西向run小样与走跑切换（历史记录）
+
+承接上一条的下一任务，已制作同一adult-standard-v1母版西向奶油短袖run四帧候选，复用现有港口试玩的可选候选导入和Shift走跑切换。walk保持已认可54世界单位/秒；run暂81，尚待用户认可。入口：[走跑评审](art/design/character-motion/adult-standard-v1/run-west-proof-v1/review.html)、[制作与试玩说明](art/design/character-motion/adult-standard-v1/run-west-proof-v1/README.md)。GPT完整原图、两轮提示词、v1拒绝原因、整帧登记、原生视频与明暗图均保留；当前候选清单SHA256 `e8494665f1cdb153f13dce05ddd09bf4c1b615b3cfbbe1f41d60a5d9f6bde887`。
+
+验证：登记Python4项、共享工具22项、run逻辑40项、原walk逻辑28项、Apple M4原生run16项及原walk43项通过；另有原生明暗诊断图。176个连续样本/89张捕获覆盖约10循环，原始证据ZIP与视频归档，见候选目录evidence/validation.json。记录器改为先内存采样再写PNG，避免同步写盘漏采；未改动作时序。
+
+本轮是完整帧动作小样，尚未拆run衣身/袖子或证明换装兼容，未完成四向run、hoe/water/harvest、动态裤鞋8配方、发帽、其他体型或生产迁移。精确关节、接触事件和批准目标轨迹仍未冻结，不能声称严格1像素轨迹验收通过。下一步先评审当前西向run步态、81跑速与walk切换，再补同姿态分层/上衣接口；不把新候选继承为已有walk认可。P12未启动。未使用玩家档，未提交、推送或导出；无跨平台/新导出验证。旧walk纹理及artifact未变，试玩脚本已变化，旧原生控制证据为历史；本轮43项回归绑定新脚本。
+
 ## 2026-10-25 人物动作整理与本地提交（当前有效）
 
 本次本地提交包含人物西向试作到四向walk/idle、两套上衣、左右步态修正、港口试玩和接触测量。用户已认可当前画面与75%速度（54世界单位/秒），绑定artifact `166c5a0da9249a8da537e86406b12f3889ace5fa150aefc854265608703bd603`。入口：[动作说明与试玩](art/design/character-motion/adult-standard-v1/locomotion-v1/README.md)、[认可记录](art/design/character-motion/adult-standard-v1/locomotion-v1/visual-acceptance.json)。本次提交哈希见Git记录，未推送、未导出。
