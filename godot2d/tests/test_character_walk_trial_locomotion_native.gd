@@ -24,6 +24,11 @@ func run() -> void:
 	await capture("00-idle-start")
 	var code_map := {"west": KEY_A, "east": KEY_D, "north": KEY_W, "south": KEY_S}
 	for direction in ["west", "east", "north", "south"]:
+		# Captures and other desktop activity can move OS focus between segments.
+		# Restore the real window, never bypass the actor's focus guard.
+		root.grab_focus()
+		for i in range(4): await process_frame
+		check("window_focused_" + direction, trial.focused)
 		trial.reset_position()
 		# Market/crate blockers border the original north/south route at x490.
 		# Use the verified eastern path for unobstructed clock measurement.

@@ -109,6 +109,11 @@ def build():
                     pants_waist.putpixel((x,y),255)
         cloth['A']=ImageChops.subtract(cloth['A'],pants_waist)
         save(pants_waist,f'masks/pants_waist_{i}.png',purpose='source_ownership',owner='same_A_pants',pose_id=pose)
+        # The pose-specific observed waistband overrides broad arm polygons as
+        # well as cloth classification. Keep its pixels with the shared base.
+        near=ImageChops.subtract(near,pants_waist)
+        far=ImageChops.subtract(far,pants_waist)
+        arms=union(near,far)
         torso_owner=ImageChops.subtract(cloth['A'],arms)
         base_owner=ImageChops.invert(union(arms,torso_owner))
         owners={'body_base':base_owner,'near_arm':near,'far_arm':far,'torso':torso_owner}

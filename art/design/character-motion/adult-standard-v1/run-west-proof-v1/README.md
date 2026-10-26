@@ -1,3 +1,7 @@
+## 2026-10-25 独立裤装前的归属修正
+
+已复核旧复查坐标：5个棕裤像素实际在零起算pose 3（第4帧），旧报告误记pose 2；pose 2同坐标为真实手臂边缘，不能移走。新增失败测试后，将已有姿态裤腰语义mask同时从手臂归属中排除。8项分层、48项逻辑、25项原生通过；candidate、四张registered及A/B八张baked的文件SHA256均不变。见[evidence/garments/ownership-correction/validation.json](evidence/garments/ownership-correction/validation.json)。旧独立报告保留历史，P3归属项已修复；该修复不代表独立裤装完成。
+
 ## 2026-10-25 西向 A/B 奔跑换衣（当前状态）
 
 用户已认可 v4 西向短袖奔跑，认可记录仍绑定原 [candidate](candidate.json)，其纹理、时序和 81 跑速未变。短袖 A 衣身、近远侧袖、共享身体和手、GPT 隐藏衣身分别登记 ownership/coverage/occlusion，四帧全 RGBA 精确还原，差异 0。

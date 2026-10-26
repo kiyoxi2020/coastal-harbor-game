@@ -79,5 +79,20 @@ class RunPartsAcceptance(unittest.TestCase):
             missing=ImageChops.multiply(a.point(lambda x:255 if x>=240 else 0), b.point(lambda x:255 if x<128 else 0))
             self.assertIsNone(missing.getbbox(),f'New transparent waist gap in B frame {i}')
 
+    def test_fourth_pose_pants_are_not_owned_by_swappable_arm(self):
+        # Original review mislabeled these as pose 2; actual brown waistband
+        # is in zero-based pose 3. Pose 2 has a genuine arm contour here.
+        points = [(165,481),(166,481),(167,481),(168,481),(165,482)]
+        original = Image.open(ROOT/'registered/run_west_3.png').convert('RGBA')
+        base = Image.open(ROOT/'parts/run_west_3_body_base.png').convert('RGBA')
+        far = Image.open(ROOT/'parts/run_west_3_body_far.png').convert('RGBA')
+        for point in points:
+            self.assertEqual(base.getpixel(point), original.getpixel(point),
+                             f'Pants must remain when far arm is replaced: {point}')
+            self.assertEqual(far.getpixel(point)[3], 0)
+        arm = Image.open(ROOT/'parts/run_west_2_body_near.png').convert('RGBA')
+        self.assertGreater(arm.getpixel((165,481))[3], 0,
+                           'Do not move actual pose 2 arm pixels to the pants')
+
 if __name__ == '__main__':
     unittest.main()

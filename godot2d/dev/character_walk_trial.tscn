@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://dev/character_walk_trial.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/world/harbor_exterior.tscn" id="2"]
 [ext_resource type="Script" path="res://scripts/world_camera.gd" id="3"]
 [ext_resource type="FontFile" path="res://assets/NotoSansCJKsc-Regular.otf" id="4"]
+[ext_resource type="PackedScene" path="res://dev/character_motion_review.tscn" id="5_review"]
 [sub_resource type="RectangleShape2D" id="Collision"]
 size = Vector2(10, 6)
 [sub_resource type="StyleBoxFlat" id="Panel"]
@@ -112,6 +113,11 @@ layout_mode = 2
 focus_mode = 0
 text = "R 回起点"
 
+[node name="Review" type="Button" parent="TrialUI/Panel/Margin/Rows/Controls"]
+layout_mode = 2
+focus_mode = 0
+text = "C 动作对照"
+
 [node name="Exit" type="Button" parent="TrialUI/Panel/Margin/Rows/Controls"]
 layout_mode = 2
 focus_mode = 0
@@ -121,3 +127,5 @@ text = "退出体验"
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "仅播放当前清单已声明的方向与动作；跑步和工具动作未接入。本入口不读写存档。"
+
+[node name="MotionReview" parent="TrialUI" instance=ExtResource("5_review")]
