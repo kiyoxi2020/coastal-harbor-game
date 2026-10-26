@@ -1,3 +1,53 @@
+## 2026-10-26 三农事四向长短袖试玩已验收，提交归档（当前有效）
+
+用户确认“验收没有问题，提交代码，更新进度”。锄地、浇水、收获三动作×四方向×短长袖24组/96姿态，以及锄地蓝长袖16帧衣色修订，当前显示效果全部获认可。最终认可绑定实际catalog-color-v2、24个candidate、96纹理和时序，记录见[最终验收](art/design/character-motion/adult-standard-v1/farming-four-directions-v1/visual-acceptance-final-2026-10-26.json)。保留原反馈、旧颜色与原生报告，不改写历史认可范围；冻结资源中的accepted=false为原生成时状态，以本次独立绑定记录表述最终视觉验收，避免变更资源导致证据失效。
+
+本轮完成：完整动作、同向同衣试玩、暂停逐帧、世界动作锁移/结束idle/排队换衣/取消，以及长袖色差修订。此前397项逻辑/资源回归、原颜色346项原生、修订7项资源检查与69项真实Godot渲染fixture通过；后者直接调用控件信号/动作handler，方向与focused由fixture设置，两轮OS注入失败保留，不计为系统键鼠/WM焦点通过。最终独立复审无未关闭P1/P2。此次只新增验收与进度记录，未改已验收纹理/运行代码；本地提交，不推送。
+
+本阶段完成，不自动启动下一阶段。独立衣体/裤鞋发帽动态混搭、其他体型、精确接触、生产人物/玩法迁移、系统焦点恢复及跨平台/新导出仍待开发或验证，当前视觉认可不扩写为这些事项完成。历史待验收描述由本节和最终绑定记录取代。
+
+## 2026-10-26 锄地长袖衣色修订完成（历史交付，现已验收）
+
+用户原反馈“锄地的衣服颜色比其他动作浅，其他没问题”已绑定原24组输入：visual-acceptance-2026-10-26.json。诊断为蓝长袖B，保留其他20组的原视觉认可及hoe B非颜色认可；本轮新衣色仍待用户确认。
+
+两位复用gpt-6.1-sol high子代理分别完成东西、南北各8帧GPT颜色源；gpt-6-astra high独立审计。仅四向hoe B的16帧衣色RGB变化，原alpha、mask外RGBA、整帧注册、姿态锚点和时序逐项保持。衣色由GPT原图提取，没有程序调色。compose4项及revision3项通过；原v1与失败稿保留。新catalog-color-v2.json仅替换4条，其他20条逐字段不变；启动器已指向新版。
+
+原生颜色渲染fixture69项通过，16停帧/4方向各10面板循环+1world one-shot，3420采样/148连续捕获。主代理已查看4张原生对照板；采集前1685依赖合同与采集后回执绑定，archive_allowed=true。证据位于hoe/revisions/color-v2/evidence/native。本次使用真实控件信号/动作handler；direction直接赋值、focused由fixture置true，不代表OS键鼠、移动转向或WM焦点验证。两轮OS注入失败记录保留，旧346项仍只属原palette历史，不移作新版结果。
+
+未改生产输入逻辑、玩法事务、玩家存档或导出包；无提交/推送。现已完成颜色修订接入并重新启动新版试玩（原生OpenGL/Apple M4启动正常），按2选长袖检查四方向；新衣色待用户视觉验收。固定完整穿衣图仍非独立部件动态组合；旧系统焦点验证限制保留。
+
+## 2026-10-26 三农事四向长短袖24组完成并入试玩（当前有效）
+
+用户明确要求持续至锄地/浇水/收获四方向长短袖全部进入试玩。本轮已完成[完整24组试玩入口](art/design/character-motion/adult-standard-v1/farming-four-directions-v1/launch-game-trial.command)：hoe/water/harvest × south/west/east/north × A/B，共24组96个真实姿态。每组ready/使用/收回过程四阶段，hoe800ms，water/harvest1000ms；统一源密度2及scale138/1164，源图/prompt/失败稿/登记/测量保留，不镜像代方向、不局部缩放修头脚。原西hoe A四帧RGBA/时序无损复用，西water/harvest已认可关键姿态作为真实部分保留，新增阶段/组合仍待本次用户视觉验收。
+
+新catalog schema2要求完整24键与四动作阶段、独立真实纹理、全部源/配置/纹理哈希；失败原子清空，旧schema1仍只west/A。独立复查发现schema1条目显式错向/错衣可别名P2，建立2项失败回归后最小修复，39目录检查及复审关闭。面板支持四向/三农事、1/2短长袖、暂停/逐帧；固定2倍原生显示，slots224×240容纳完整1536×1920画布，六动作合一排。世界WASD/Shift转向走跑后F/G/H使用同向同衣动作，锁移动/方向、结束idle/延后换衣、R取消。没有农事事务/体力/存档，旧启动器保留原catalog。
+
+验证：397项Godot逻辑/资源/回归（39新目录+122夹具世界面板+25真实24组+211旧回归）全通过；hoe6/water10/harvest4结构与拒绝测试、96姿态完整源RGBA登记检查通过；21项证据门禁隔离测试通过。原生346项全通过：全部96停帧/24组各10次面板连续循环、各1次世界one-shot、走跑进入与排队换衣/取消；62645采样/1096连续捕获，主代理已目视24张原生idle+四姿态板，无工具/水流截断。来源在采集前snapshot1589保守静态/manifest超集，report记录snapshotSHA及实际UTC，采集后时序/实际依赖门禁archive_allowed=true。1193原始PNG无损tar.xz恢复逐哈希核验、24段mp4便览及最终review存farming-four-directions-v1/evidence/native，原报告不改写。
+
+真实系统失焦恢复独立补测未验证：最小化仅退出焦点/时钟冻结通过，未恢复窗口；辅助原生Window/外部激活也未证明WM状态切换。三策略失败证据保留，不计入346成功，不写成通过。失焦仅有逻辑暂停回归；系统原生焦点控制与跨平台/新导出/生产玩法/长期真人验证仍待做。此限制与全部新图视觉反馈、精确脚握点投影测量、隐藏身体及独立衣体组合待办分别记录。
+
+分工：复用hoe_long_sleeve与water_south，均gpt-6.1-sol high/fork_turns=none，独立完成各自8组并分别追加harvest西B/北B；前者只读复查加载逻辑、后者实现预采集证据门禁。主代理负责采收8组统一登记、Godot/UI/启动器、全部原生和归档。复用gpt-6-astra high最终跨合同评审，限定24组规格/质量通过，无未关闭P1/P2；失焦原生未验证如实保留。无嵌套，未提交/推送/导出，未动生产人物或玩家档。
+
+本轮停止在完整24组待视觉验收试玩，不自动扩裤鞋发帽、其他体型或生产迁移。用户此前认可西向衔接继续保留原依赖绑定，不把它自动扩写为96新姿态已认可。
+
+## 2026-10-26 衔接认可与新小样展示（当前有效）
+
+用户反馈“1没问题，2、3我看不到”，接受本次西向短袖农事衔接试玩已显示效果；绑定记录为farming-transitions-v1/visual-acceptance-transitions-2026-10-26.json，核对原生报告中的实际脚本/场景/catalog哈希未变。用户未逐项陈述操作覆盖，不扩写为每个子场景均完成真人测试；该认可不包含完整动作、精确接触、分层或生产迁移。
+
+南向浇水/西向长袖锄地仍未获用户认可：此前只提供本地HTML链接，用户未看到。现改为直接展示两张Godot原生明暗1x/2x对照PNG，并用系统预览打开。图中左为已认可同向同衣idle，中为预备，右为倾倒/落锄；不改候选、时序或试玩逻辑，因此未重跑Godot。下一步只待这两组实际可见画面的反馈，不重复要求已认可衔接评审。
+
+## 2026-10-26 农事衔接试玩与并行小样（当前有效）
+
+用户授权读取进度并继续，要求多个子代理并行。本轮交付[西向农事衔接独立启动器](art/design/character-motion/adult-standard-v1/farming-transitions-v1/launch-game-trial.command)：WASD/Shift走跑，先西向短袖，F浇水/G锄地/H采收；锁移动/方向，一次播放后回idle，下一tick恢复输入，1/2换衣延后整体切换，R取消清队列，失焦暂停。新增--trial-farming-transitions；原走跑入口不自动启用。沿用已认可西water v3/hoe v4/harvest v2，原纹理/时序/catalog均未改。进入/退出是硬切，没有新工具收放过渡姿态；water/harvest两姿态仍不等于完整动作，不执行农事事务/体力/存档。
+
+验证：新增48项逻辑、相关163项回归通过，实际命令行启动和启动器语法通过；原生78项通过，三动作各十次，所有8姿态，2715采样/169连续捕获，全程有效焦点、0恢复；主代理目视世界水流/锄地/采收原尺寸。evidence/native/report.json绑定实际输入，169张PNG无损tar.xz恢复核验及便览mp4齐全。首轮采收第4次起停483ms，符合失焦暂停；失败report/代表截图保留，测试增加窗口就绪和焦点采样后通过，未改播放行为。未跑新导出、跨平台、生产全玩法或世界复杂遮挡。
+
+并行新小样：[南向短袖浇水](art/design/character-motion/adult-standard-v1/water-south-proof-v1/README.md)ready/pour两姿态，candidate 7a3f897cc1a5aaff1d6956e6579719a1c38930fea8bc86a003f438d9e659f31f；[西向长袖锄地](art/design/character-motion/adult-standard-v1/hoe-west-long-sleeve-proof-v1/README.md)ready/contact两姿态，candidate 009e77f1c55768612a0570002b6d87b6b4f77b1272e47fd8b1533dea3c484f96。两目录各4结构检查，主代理各8项Godot原生静态明暗1x/2x板检查、目视并绑定最终candidate；源/提示词/失败稿/整帧注册/真实测量保留。静态原生不等于连续动作；未改冻结candidate的native_checked历史字段，以外部native-static/report说明新增范围。两者不接共享catalog、未分层、未获用户认可；water头部较母版密度略小（宽约3%、高6–8%）保留待审，不局部修比例。hoe缺lift/recovery，完整衣体接口/隐藏身体/精确脚握点尚未完成。
+
+两个子代理均gpt-6.1-sol high，fork_turns=none：water_south负责南water及主逻辑窄只读复查，hoe_long_sleeve负责西B锄地；选型用于独立源图身份/姿态判断与登记，无嵌套。Task1复查规格/质量通过、无P1/P2；最终gpt-6-astra high跨合同评审发现world证据缺依赖P2，复用water_south补post-run独立契约、1140保守静态可达/manifest超集与12项失败回归，门禁当前通过，复审P2关闭。补证不冒称运行时加载列表；原report/checks/原采集脚本未改。归档/复用前必须运行dependency_contract.py validate，失败会清旧summary通过状态。主代理负责实现、原生、归档与交接。未提交、推送、导出，未动生产角色或玩家档。
+
+下一步先审这两组新小样及硬切衔接可见效果；依同母版补农事必要中间/收放姿态、其他方向与长袖、衣体分层及精确接触，再做裤鞋发帽8配方与正式迁移。本轮没有把阶段4/5或完整人体体系标为完成。
+
 ## 2026-10-26 锄地认可与本地整理提交（当前有效）
 
 用户确认“锄地效果ok”，认可西向短袖锄地v4四姿态、头部比例及当前显示效果。记录run-four-directions-v1/visual-acceptance-hoe-2026-10-26.json绑定实际四纹理、800ms时序、candidate/catalog和试玩输入；保留浇水/采收及四向走跑两上衣原认可。现有锄柄长度差异作为已接受画面的测量历史保留，不再因当前不可见差异返工；旧段落“待确认/未提交”为当时状态。

@@ -16,9 +16,9 @@ corner_radius_bottom_right = 8
 [node name="MotionReview" type="PanelContainer"]
 visible = false
 offset_left = 24.0
-offset_top = 172.0
-offset_right = 492.0
-offset_bottom = 704.0
+offset_top = 164.0
+offset_right = 556.0
+offset_bottom = 720.0
 theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 14
 theme_override_styles/panel = SubResource("Panel")
@@ -118,16 +118,16 @@ button_group = SubResource("Actions")
 button_pressed = true
 text = "奔跑"
 
-[node name="FarmActions" type="HBoxContainer" parent="Margin/Rows"]
+[node name="FarmActions" type="HBoxContainer" parent="Margin/Rows/Actions"]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Label" type="Label" parent="Margin/Rows/FarmActions"]
+[node name="Label" type="Label" parent="Margin/Rows/Actions/FarmActions"]
 layout_mode = 2
 text = "农事"
 
-[node name="Water" type="Button" parent="Margin/Rows/FarmActions"]
+[node name="Water" type="Button" parent="Margin/Rows/Actions/FarmActions"]
 custom_minimum_size = Vector2(58, 0)
 layout_mode = 2
 focus_mode = 0
@@ -135,7 +135,7 @@ toggle_mode = true
 button_group = SubResource("Actions")
 text = "浇水"
 
-[node name="Hoe" type="Button" parent="Margin/Rows/FarmActions"]
+[node name="Hoe" type="Button" parent="Margin/Rows/Actions/FarmActions"]
 custom_minimum_size = Vector2(58, 0)
 layout_mode = 2
 focus_mode = 0
@@ -143,7 +143,7 @@ toggle_mode = true
 button_group = SubResource("Actions")
 text = "锄地"
 
-[node name="Harvest" type="Button" parent="Margin/Rows/FarmActions"]
+[node name="Harvest" type="Button" parent="Margin/Rows/Actions/FarmActions"]
 custom_minimum_size = Vector2(58, 0)
 layout_mode = 2
 focus_mode = 0
@@ -165,13 +165,13 @@ text = "已认可站姿"
 horizontal_alignment = 1
 
 [node name="Slot" type="Control" parent="Margin/Rows/Views/Reference"]
-custom_minimum_size = Vector2(192, 216)
+custom_minimum_size = Vector2(224, 240)
 layout_mode = 2
 mouse_filter = 2
 
 [node name="Texture" type="Sprite2D" parent="Margin/Rows/Views/Reference/Slot"]
 texture_filter = 1
-position = Vector2(35.29897, 16.12371)
+position = Vector2(51.29897, 32.12371)
 scale = Vector2(0.2371134, 0.2371134)
 centered = false
 
@@ -184,13 +184,13 @@ text = "当前动作"
 horizontal_alignment = 1
 
 [node name="Slot" type="Control" parent="Margin/Rows/Views/Motion"]
-custom_minimum_size = Vector2(192, 216)
+custom_minimum_size = Vector2(224, 240)
 layout_mode = 2
 mouse_filter = 2
 
 [node name="Texture" type="Sprite2D" parent="Margin/Rows/Views/Motion/Slot"]
 texture_filter = 1
-position = Vector2(35.29897, 16.12371)
+position = Vector2(51.29897, 32.12371)
 scale = Vector2(0.2371134, 0.2371134)
 centered = false
 
@@ -222,4 +222,4 @@ text = "对比头部、身形和动作；是否通过由你确认。"
 [node name="Help" type="Label" parent="Margin/Rows"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
-text = "面板独立选动作；农事仅西向短袖（按 1）。\n港口照常 WASD / Shift 移动；C 显示或收起对照。"
+text = "面板独立选方向/动作；1 短袖 / 2 长袖。\n港口照常 WASD / Shift 移动；C 显示或收起对照。"

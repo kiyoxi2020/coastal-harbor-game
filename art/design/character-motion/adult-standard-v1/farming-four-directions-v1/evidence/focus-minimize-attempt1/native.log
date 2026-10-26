@@ -1,0 +1,12 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+OpenGL API 4.1 Metal - 90.5 - Compatibility - Using Device: Apple - Apple M4
+
+PASS native_renderer
+FAIL tool_started_west_A
+PASS capture_before-real-minimize
+PASS real_minimize_focus_out
+PASS native_focus_freezes_world_tool_clock
+PASS native_focus_keeps_position
+FAIL native_window_focus_restored
+FAIL native_tool_clock_resumes
+FAIL native_tool_finishes_idle

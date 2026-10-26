@@ -1,0 +1,60 @@
+FFFFF
+======================================================================
+FAIL: test_duplicate_pose_content_rejected (__main__.RejectContracts.test_duplicate_pose_content_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/wyq/Documents/code/coastal-harbor-game/art/design/character-motion/adult-standard-v1/farming-four-directions-v1/hoe/test_candidates.py", line 18, in test_duplicate_pose_content_rejected
+    m=self.validator();p=ROOT/'west-A/candidate.json';self.assertTrue(p.exists());c=json.loads(p.read_text());c['frames'][1]=copy.deepcopy(c['frames'][0]);c['frames'][1]['pose_id']='hoe_west_key_1';c['frames'][1]['phase']='lift'
+  File "/Users/wyq/Documents/code/coastal-harbor-game/art/design/character-motion/adult-standard-v1/farming-four-directions-v1/hoe/test_candidates.py", line 8, in validator
+    self.assertTrue((ROOT/'register_clip.py').exists(),'hoe registration/validation is not implemented')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : hoe registration/validation is not implemented
+
+======================================================================
+FAIL: test_eight_real_clips_contract (__main__.RejectContracts.test_eight_real_clips_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/wyq/Documents/code/coastal-harbor-game/art/design/character-motion/adult-standard-v1/farming-four-directions-v1/hoe/test_candidates.py", line 14, in test_eight_real_clips_contract
+    m=self.validator()
+  File "/Users/wyq/Documents/code/coastal-harbor-game/art/design/character-motion/adult-standard-v1/farming-four-directions-v1/hoe/test_candidates.py", line 8, in validator
+    self.assertTrue((ROOT/'register_clip.py').exists(),'hoe registration/validation is not implemented')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : hoe registration/validation is not implemented
+
+======================================================================
+FAIL: test_missing_clip_rejected (__main__.RejectContracts.test_missing_clip_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/wyq/Documents/code/coastal-harbor-game/art/design/character-motion/adult-standard-v1/farming-four-directions-v1/hoe/test_candidates.py", line 11, in test_missing_clip_rejected
+    m=self.validator()
+  File "/Users/wyq/Documents/code/coastal-harbor-game/art/design/character-motion/adult-standard-v1/farming-four-directions-v1/hoe/test_candidates.py", line 8, in validator
+    self.assertTrue((ROOT/'register_clip.py').exists(),'hoe registration/validation is not implemented')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : hoe registration/validation is not implemented
+
+======================================================================
+FAIL: test_missing_source_dependency_rejected (__main__.RejectContracts.test_missing_source_dependency_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/wyq/Documents/code/coastal-harbor-game/art/design/character-motion/adult-standard-v1/farming-four-directions-v1/hoe/test_candidates.py", line 26, in test_missing_source_dependency_rejected
+    m=self.validator();p=ROOT/'west-A/candidate.json';self.assertTrue(p.exists());c=json.loads(p.read_text());c['inputs'].pop(c['frames'][0]['source'])
+  File "/Users/wyq/Documents/code/coastal-harbor-game/art/design/character-motion/adult-standard-v1/farming-four-directions-v1/hoe/test_candidates.py", line 8, in validator
+    self.assertTrue((ROOT/'register_clip.py').exists(),'hoe registration/validation is not implemented')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : hoe registration/validation is not implemented
+
+======================================================================
+FAIL: test_wrong_garment_direction_density_rejected (__main__.RejectContracts.test_wrong_garment_direction_density_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/wyq/Documents/code/coastal-harbor-game/art/design/character-motion/adult-standard-v1/farming-four-directions-v1/hoe/test_candidates.py", line 21, in test_wrong_garment_direction_density_rejected
+    m=self.validator();p=ROOT/'west-A/candidate.json';self.assertTrue(p.exists());c=json.loads(p.read_text())
+  File "/Users/wyq/Documents/code/coastal-harbor-game/art/design/character-motion/adult-standard-v1/farming-four-directions-v1/hoe/test_candidates.py", line 8, in validator
+    self.assertTrue((ROOT/'register_clip.py').exists(),'hoe registration/validation is not implemented')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : hoe registration/validation is not implemented
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+FAILED (failures=5)

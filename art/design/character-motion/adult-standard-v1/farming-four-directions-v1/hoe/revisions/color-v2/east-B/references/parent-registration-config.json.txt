@@ -1,0 +1,415 @@
+{
+  "schema_version": 1,
+  "template_id": "adult-standard-v1",
+  "action_id": "hoe",
+  "direction": "east",
+  "garment": "B",
+  "source_canvas_px": [
+    1024,
+    1536
+  ],
+  "canvas_px": [
+    1536,
+    1792
+  ],
+  "root_anchor_px": [
+    768,
+    1544
+  ],
+  "display_scale": 0.11855670103092783,
+  "source_density_scale_vs_idle": 2,
+  "manual_uncertainty_source_px": 12,
+  "root_method": "Observed near shoe heel offset for east; observed central planted footprint for south/north. Author root, not certified support trajectory.",
+  "frames": [
+    {
+      "source": "sources/ready-attempt1.png",
+      "phase": "ready",
+      "duration_ms": 180,
+      "source_root_px": [
+        257,
+        1414
+      ],
+      "head_bbox_px": [
+        185,
+        209,
+        620,
+        640
+      ],
+      "landmarks_px": {
+        "hip_joint": null,
+        "near_knee_joint": null,
+        "far_knee_joint": null,
+        "near_ankle_joint": null,
+        "far_ankle_joint": null,
+        "far_shoulder_joint": null,
+        "far_elbow_joint": null,
+        "neck_base": [
+          385,
+          711
+        ],
+        "near_shoulder_surface": [
+          202,
+          685
+        ],
+        "near_elbow_surface": [
+          157,
+          818
+        ],
+        "near_wrist": null,
+        "far_wrist": null,
+        "shirt_hem": [
+          418,
+          933
+        ],
+        "head_crown": [
+          402,
+          209
+        ],
+        "chin": [
+          402,
+          640
+        ],
+        "near_cuff_surface": [
+          216,
+          855
+        ],
+        "far_cuff_surface": [
+          555,
+          974
+        ]
+      },
+      "foot_points_px": {
+        "near_heel": [
+          113,
+          1418
+        ],
+        "near_toe": [
+          294,
+          1418
+        ],
+        "far_heel": [
+          396,
+          1390
+        ],
+        "far_toe": [
+          616,
+          1390
+        ]
+      },
+      "tool_points_px": {
+        "collar": [
+          904,
+          1209
+        ],
+        "butt": null,
+        "near_grip": [
+          225,
+          916
+        ],
+        "far_grip": [
+          547,
+          1030
+        ],
+        "blade_lowest": [
+          985,
+          1385
+        ]
+      },
+      "observation": "Visible outline/skin/cloth boundary observation ±12sourcepx. B pose inherits its A edit-target coordinate observations after visual alignment review; cloth cuff boundaries differ and hidden joints remain unknown. Covered wrist centers null; cuff/hand surface boundaries separately observed."
+    },
+    {
+      "source": "sources/lift-attempt1.png",
+      "phase": "lift",
+      "duration_ms": 220,
+      "source_root_px": [
+        256,
+        1393
+      ],
+      "head_bbox_px": [
+        104,
+        229,
+        532,
+        628
+      ],
+      "landmarks_px": {
+        "hip_joint": null,
+        "near_knee_joint": null,
+        "far_knee_joint": null,
+        "near_ankle_joint": null,
+        "far_ankle_joint": null,
+        "far_shoulder_joint": null,
+        "far_elbow_joint": null,
+        "neck_base": [
+          376,
+          673
+        ],
+        "near_shoulder_surface": [
+          285,
+          696
+        ],
+        "near_elbow_surface": [
+          371,
+          780
+        ],
+        "near_wrist": null,
+        "far_wrist": null,
+        "shirt_hem": [
+          451,
+          931
+        ],
+        "head_crown": [
+          318,
+          229
+        ],
+        "chin": [
+          318,
+          628
+        ],
+        "near_cuff_surface": [
+          544,
+          706
+        ],
+        "far_cuff_surface": [
+          648,
+          459
+        ]
+      },
+      "foot_points_px": {
+        "near_heel": [
+          112,
+          1397
+        ],
+        "near_toe": [
+          295,
+          1397
+        ],
+        "far_heel": [
+          450,
+          1372
+        ],
+        "far_toe": [
+          680,
+          1372
+        ]
+      },
+      "tool_points_px": {
+        "collar": [
+          851,
+          139
+        ],
+        "butt": [
+          566,
+          777
+        ],
+        "near_grip": [
+          602,
+          677
+        ],
+        "far_grip": [
+          704,
+          433
+        ],
+        "blade_lowest": [
+          989,
+          249
+        ]
+      },
+      "observation": "Visible outline/skin/cloth boundary observation ±12sourcepx. B pose inherits its A edit-target coordinate observations after visual alignment review; cloth cuff boundaries differ and hidden joints remain unknown. Covered wrist centers null; cuff/hand surface boundaries separately observed."
+    },
+    {
+      "source": "sources/contact-attempt1.png",
+      "phase": "contact",
+      "duration_ms": 140,
+      "source_root_px": [
+        256,
+        1350
+      ],
+      "head_bbox_px": [
+        255,
+        250,
+        685,
+        681
+      ],
+      "landmarks_px": {
+        "hip_joint": null,
+        "near_knee_joint": null,
+        "far_knee_joint": null,
+        "near_ankle_joint": null,
+        "far_ankle_joint": null,
+        "far_shoulder_joint": null,
+        "far_elbow_joint": null,
+        "neck_base": [
+          435,
+          729
+        ],
+        "near_shoulder_surface": [
+          231,
+          666
+        ],
+        "near_elbow_surface": [
+          205,
+          779
+        ],
+        "near_wrist": null,
+        "far_wrist": null,
+        "shirt_hem": [
+          344,
+          880
+        ],
+        "head_crown": [
+          470,
+          250
+        ],
+        "chin": [
+          470,
+          681
+        ],
+        "near_cuff_surface": [
+          280,
+          841
+        ],
+        "far_cuff_surface": [
+          592,
+          973
+        ]
+      },
+      "foot_points_px": {
+        "near_heel": [
+          98,
+          1350
+        ],
+        "near_toe": [
+          288,
+          1350
+        ],
+        "far_heel": [
+          399,
+          1338
+        ],
+        "far_toe": [
+          617,
+          1338
+        ]
+      },
+      "tool_points_px": {
+        "collar": [
+          896,
+          1226
+        ],
+        "butt": null,
+        "near_grip": [
+          293,
+          857
+        ],
+        "far_grip": [
+          602,
+          1021
+        ],
+        "blade_lowest": [
+          973,
+          1394
+        ]
+      },
+      "observation": "Visible outline/skin/cloth boundary observation ±12sourcepx. B pose inherits its A edit-target coordinate observations after visual alignment review; cloth cuff boundaries differ and hidden joints remain unknown. Covered wrist centers null; cuff/hand surface boundaries separately observed."
+    },
+    {
+      "source": "sources/recovery-attempt1.png",
+      "phase": "recovery",
+      "duration_ms": 260,
+      "source_root_px": [
+        256,
+        1382
+      ],
+      "head_bbox_px": [
+        211,
+        190,
+        627,
+        618
+      ],
+      "landmarks_px": {
+        "hip_joint": null,
+        "near_knee_joint": null,
+        "far_knee_joint": null,
+        "near_ankle_joint": null,
+        "far_ankle_joint": null,
+        "far_shoulder_joint": null,
+        "far_elbow_joint": null,
+        "neck_base": [
+          405,
+          665
+        ],
+        "near_shoulder_surface": [
+          210,
+          644
+        ],
+        "near_elbow_surface": [
+          154,
+          788
+        ],
+        "near_wrist": null,
+        "far_wrist": null,
+        "shirt_hem": [
+          419,
+          864
+        ],
+        "head_crown": [
+          419,
+          190
+        ],
+        "chin": [
+          419,
+          618
+        ],
+        "near_cuff_surface": [
+          213,
+          838
+        ],
+        "far_cuff_surface": [
+          555,
+          858
+        ]
+      },
+      "foot_points_px": {
+        "near_heel": [
+          111,
+          1386
+        ],
+        "near_toe": [
+          292,
+          1386
+        ],
+        "far_heel": [
+          396,
+          1367
+        ],
+        "far_toe": [
+          614,
+          1367
+        ]
+      },
+      "tool_points_px": {
+        "collar": [
+          890,
+          926
+        ],
+        "butt": [
+          135,
+          867
+        ],
+        "near_grip": [
+          211,
+          882
+        ],
+        "far_grip": [
+          559,
+          914
+        ],
+        "blade_lowest": [
+          982,
+          1076
+        ]
+      },
+      "observation": "Visible outline/skin/cloth boundary observation ±12sourcepx. B pose inherits its A edit-target coordinate observations after visual alignment review; cloth cuff boundaries differ and hidden joints remain unknown. Covered wrist centers null; cuff/hand surface boundaries separately observed."
+    }
+  ]
+}

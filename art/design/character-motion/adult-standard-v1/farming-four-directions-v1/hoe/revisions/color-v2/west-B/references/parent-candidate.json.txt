@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "template_id": "adult-standard-v1",
+  "motion_set_id": "farming-four-directions-v1",
+  "revision_id": "v1",
+  "action_id": "hoe",
+  "direction": "west",
+  "garment": "B",
+  "status": "complete_four_pose_fixed_outfit_review_candidate",
+  "canvas_px": [
+    1536,
+    1792
+  ],
+  "root_anchor_px": [
+    768,
+    1544
+  ],
+  "display_scale": 0.11855670103092783,
+  "source_density_scale_vs_idle": 2,
+  "frames": [
+    {
+      "pose_id": "hoe_west_key_0",
+      "phase": "ready",
+      "file": "registered/hoe_west_key_0.png",
+      "source": "sources/ready-attempt1.png",
+      "sha256": "7968ea1254d9b21c021d9221e4ae775dc2b830beb5d3d8194e4691dae65b119a",
+      "source_sha256": "b7cd35d28e48643e427a547a9da527028b15e65191e2040f3b1242460853265f",
+      "duration_ms": 180,
+      "source_box_px": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "whole_frame_translation_px": [
+        82,
+        129
+      ]
+    },
+    {
+      "pose_id": "hoe_west_key_1",
+      "phase": "lift",
+      "file": "registered/hoe_west_key_1.png",
+      "source": "sources/lift-attempt1.png",
+      "sha256": "6f77cea4e68209fa0cebf84657a2663040631334c1bf1f8867010ea1bf8df18e",
+      "source_sha256": "3984f0951df63da1cb72067c152ad6710ec6e1fbbfcb4296490ac5c6fa682be7",
+      "duration_ms": 220,
+      "source_box_px": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "whole_frame_translation_px": [
+        86,
+        129
+      ]
+    },
+    {
+      "pose_id": "hoe_west_key_2",
+      "phase": "contact",
+      "file": "registered/hoe_west_key_2.png",
+      "source": "sources/contact-alpha-cleanup.png",
+      "sha256": "58037e68a582fafc652137c50a42f2f3b9df997bad7c558c8ad063515c742b35",
+      "source_sha256": "bf6e4951bf8d5a2b620f707f5539c26c643e180249a63cd1de32b8d911dc0349",
+      "duration_ms": 140,
+      "source_box_px": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "whole_frame_translation_px": [
+        96,
+        127
+      ]
+    },
+    {
+      "pose_id": "hoe_west_key_3",
+      "phase": "recovery",
+      "file": "registered/hoe_west_key_3.png",
+      "source": "sources/recovery-attempt1.png",
+      "sha256": "d0b39916ff2717ad2c5111c240b697e182ca42e7a9ee4493cc9efa53dd33f2bc",
+      "source_sha256": "9de34104bd22be76aec3b26cac9666f32c27c4eeb5f3eb4efcd9e1a0032462bb",
+      "duration_ms": 260,
+      "source_box_px": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "whole_frame_translation_px": [
+        78,
+        126
+      ]
+    }
+  ],
+  "inputs": {
+    "sources/contact-alpha-cleanup.png": "bf6e4951bf8d5a2b620f707f5539c26c643e180249a63cd1de32b8d911dc0349",
+    "sources/contact-attempt1.png": "3f945bbfaa128ce1e249397b302f40d3c5b07b4cf1fc5955fc604b07caa4d0fe",
+    "sources/contact-attempt2.png": "b8fc805e0168bcdee5a3cff0cb27af1c96638514fab1efd6df7decdd24e71fcf",
+    "sources/lift-attempt1.png": "3984f0951df63da1cb72067c152ad6710ec6e1fbbfcb4296490ac5c6fa682be7",
+    "sources/ready-attempt1.png": "b7cd35d28e48643e427a547a9da527028b15e65191e2040f3b1242460853265f",
+    "sources/recovery-attempt1.png": "9de34104bd22be76aec3b26cac9666f32c27c4eeb5f3eb4efcd9e1a0032462bb",
+    "prompts/lift-attempt1.txt": "93c1d58f5ca9c0012b1c41aa61269cd882791ad9389931d8f55533bc7b3bd2ca",
+    "prompts/prior-contact-alpha-cleanup.txt": "b038a57efe3b169184d4caec557f2c428dfa041006b00022fed85a16c153418a",
+    "prompts/prior-contact-attempt1.txt": "d92f86760e9b2c3e85951590c82caf18e1ec223f440b02eb591ebf11cf165ccb",
+    "prompts/prior-contact-attempt2.txt": "9ba00fd99b7fe4271259c700b9d6b7482db0d1ddfced746a89dc1f3ecb409e5d",
+    "prompts/prior-ready-attempt1.txt": "b5785f5d94a1acc91095868f18626f468839b1a0e8120fb7fde73e29e2a174d8",
+    "prompts/recovery-attempt1.txt": "724f987a49fea94e43e637cdf5262a3ea1c619b517659107537039b9e29f566b",
+    "references/lift-A.png": "43c4f834c425b7cfdfabd910dc7882fa2ac70ed973fd6fa0c6bf40a3830efe2e",
+    "references/recovery-A.png": "84227cf0669626251bc08b61faf5948c2b595d8f13e25a6181a7c8cb317cb5bb",
+    "registration-config.json": "73593cddb1a81c6af364547d63a764b181f70092063dbfc32cd0d2e22e8287f3",
+    "provenance.json": "1910489c13730fe6f10f6d0bc467b3d4d447f50247d220fbc31e553189c84c29",
+    "poses.json": "aa52b131341db943a9575cad411eba3c9e87f3eb63a7bb4fc7b9a4591d2c3bde",
+    "measurements.json": "5de02a547497b1c4cc61ec6b8155a6a1a6f0abf4d31372e7833e6e73862d8263"
+  },
+  "events": [],
+  "loop": false,
+  "review_repeat": true,
+  "accepted": false,
+  "native_checked": false,
+  "modular": false,
+  "gameplay_available": false,
+  "move_policy": "isolated_trial_only_locked_during_action",
+  "scope": "Four distinct full GPT poses for fixed A/B outfit trial; not independent garment/body compatibility or production release.",
+  "registration_tool_sha256": "9bc309a2bc638ecd94f26d9b6654ba1e4122437ab7105de594d7c8a836d72d4d",
+  "artifact_digest": "429adc329bb93e96ff1fa53f24a45900fb4c5c57e5e282a3e277a0d5fec57fcb"
+}

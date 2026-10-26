@@ -1,0 +1,36 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS farming_panel_adapter_exists
+PASS actual_farming_sources_load
+PASS water_actual_texture
+PASS water_same_direction_idle
+PASS water_pose_count
+PASS water_density_preserved
+PASS water_registered_roots_aligned
+PASS water_original_timing
+PASS water_pause
+PASS water_step
+PASS water_wraps_full_sequence
+PASS hoe_actual_texture
+PASS hoe_same_direction_idle
+PASS hoe_pose_count
+PASS hoe_density_preserved
+PASS hoe_registered_roots_aligned
+PASS hoe_original_timing
+PASS hoe_pause
+PASS hoe_step
+PASS hoe_wraps_full_sequence
+PASS harvest_actual_texture
+PASS harvest_same_direction_idle
+PASS harvest_pose_count
+PASS harvest_density_preserved
+PASS harvest_registered_roots_aligned
+PASS harvest_original_timing
+PASS harvest_pause
+PASS harvest_step
+PASS harvest_wraps_full_sequence
+PASS long_sleeve_not_faked
+PASS missing_direction_not_faked
+PASS walk_geometry_restored
+PASS preview_did_not_change_world
+FARMING_PANEL checks=33 passed=true

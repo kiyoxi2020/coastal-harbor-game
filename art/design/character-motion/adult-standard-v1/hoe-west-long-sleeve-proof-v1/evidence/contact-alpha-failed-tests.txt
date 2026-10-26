@@ -1,0 +1,14 @@
+..F.
+======================================================================
+FAIL: test_entire_source_rgba_preserved (__main__.CandidateStructure.test_entire_source_rgba_preserved)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/wyq/Documents/code/coastal-harbor-game/art/design/character-motion/adult-standard-v1/hoe-west-long-sleeve-proof-v1/test_candidate.py", line 25, in test_entire_source_rgba_preserved
+    a=source.getchannel('A');self.assertEqual(a.getextrema()[0],0);self.assertGreaterEqual(a.getextrema()[1],250);self.assertGreater(a.histogram()[0],source.width*source.height*0.1)
+                                                                                                                  ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 41871 not greater than 157286.40000000002
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.113s
+
+FAILED (failures=1)

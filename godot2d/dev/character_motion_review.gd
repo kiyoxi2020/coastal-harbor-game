@@ -11,7 +11,7 @@ var review_action := "run"
 var preview_phase_ms := 0.0
 var playing := true
 @onready var direction_buttons: Array[Button] = [$Margin/Rows/Directions/South, $Margin/Rows/Directions/West, $Margin/Rows/Directions/East, $Margin/Rows/Directions/North]
-@onready var action_buttons: Array[Button] = [$Margin/Rows/Actions/Idle, $Margin/Rows/Actions/Walk, $Margin/Rows/Actions/Run, $Margin/Rows/FarmActions/Water, $Margin/Rows/FarmActions/Hoe, $Margin/Rows/FarmActions/Harvest]
+@onready var action_buttons: Array[Button] = [$Margin/Rows/Actions/Idle, $Margin/Rows/Actions/Walk, $Margin/Rows/Actions/Run, $Margin/Rows/Actions/FarmActions/Water, $Margin/Rows/Actions/FarmActions/Hoe, $Margin/Rows/Actions/FarmActions/Harvest]
 @onready var reference_view: Sprite2D = $Margin/Rows/Views/Reference/Slot/Texture
 @onready var motion_view: Sprite2D = $Margin/Rows/Views/Motion/Slot/Texture
 @onready var play_button: CheckButton = $Margin/Rows/Playback/Play
@@ -45,14 +45,14 @@ func set_playing(value: bool) -> void:
 	playing = value
 	play_button.set_pressed_no_signal(value)
 
-func load_farming_samples(project_root: String) -> bool:
-	$Margin/Rows/FarmActions.show()
+func load_farming_samples(project_root: String, catalog_path: String = "res://dev/farming_review_catalog.json") -> bool:
+	$Margin/Rows/Actions/FarmActions.show()
 	var path := "res://dev/character_farming_review.gd"
 	if not ResourceLoader.exists(path):
 		farming_error = "农事样例加载器未找到。"
 		return false
 	farming_library = load(path).new()
-	var loaded: bool = farming_library.load_catalog(project_root)
+	var loaded: bool = farming_library.load_catalog(project_root,catalog_path)
 	farming_error = farming_library.error
 	refresh_preview()
 	return loaded
@@ -118,7 +118,7 @@ func refresh_preview() -> void:
 	if not preview_available():
 		message.text = "此方向未提供这套上衣的动作；按 1 查看短袖，或选择其他方向。"
 		if review_action in FARMING_ACTIONS:
-			message.text = farming_error if farming_error != "" else "农事样例仅有西向短袖；请选西，并按 1 查看短袖。"
+			message.text = farming_error if farming_error != "" else ("农事样例仅有西向短袖；请选西，并按 1 查看短袖。" if farming_library == null or farming_library.catalog_version == 1 else "当前方向或上衣的农事资源未提供；请检查目录。")
 		frame_label.text = "资源未提供"
 		return
 	var index := current_pose_index()
@@ -128,7 +128,7 @@ func refresh_preview() -> void:
 		# Whole-frame placement from the recorded root, preserving source density.
 		motion_view.scale = reference_view.scale * (float(clip.display_scale) / (138.0 / 582.0))
 		motion_view.position = reference_view.position + Vector2(256,708) * reference_view.scale - clip.root_anchor_px * motion_view.scale
-		$Margin/Rows/Views/Motion/Label.text = "农事关键姿态"
+		$Margin/Rows/Views/Motion/Label.text = "农事动作候选" if farming_library.catalog_version == 2 else "农事关键姿态"
 		frame_label.text = "第 %d / %d 姿态" % [index + 1, clip.textures.size()]
 		message.text = clip.note
 		return

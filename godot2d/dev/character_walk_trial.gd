@@ -27,6 +27,14 @@ var review_enabled := false
 var run_diagnostics_enabled := false
 var farming_review_enabled := false
 var farming_review_action := "water"
+var farming_catalog_path := "res://dev/farming_review_catalog.json"
+# Review-only one-shot playback; never dispatches farming events or save writes.
+var farming_transitions_enabled := false
+var farming_clip: Dictionary = {}
+var farming_elapsed_ms := 0.0
+var farming_pending_garment := ""
+var farming_original_scale := Vector2.ONE
+var farming_original_offset := Vector2.ZERO
 var run_diagnostics: Dictionary = {}
 var run_diagnostics_digest := ""
 # Remains the existing west proof until the complete new root has passed review.
@@ -56,9 +64,15 @@ func _ready() -> void:
 			review_enabled = true
 		elif argument == "--trial-run-diagnostics":
 			run_diagnostics_enabled = true
+		elif argument == "--trial-farming-transitions":
+			farming_transitions_enabled = true
+			farming_review_enabled = true
+			review_enabled = true
 		elif argument == "--trial-farming-review":
 			farming_review_enabled = true
 			review_enabled = true
+		elif argument.begins_with("--trial-farming-catalog="):
+			farming_catalog_path = argument.trim_prefix("--trial-farming-catalog=")
 		elif argument.begins_with("--trial-farming-action="):
 			set_initial_farming_action(argument.trim_prefix("--trial-farming-action="))
 	$WorldCamera.target = actor
@@ -78,12 +92,16 @@ func _ready() -> void:
 		review_panel.bind_trial(self)
 		review_panel.visible = review_enabled
 		if farming_review_enabled:
-			review_panel.load_farming_samples(ProjectSettings.globalize_path("res://.."))
+			review_panel.load_farming_samples(ProjectSettings.globalize_path("res://.."),farming_catalog_path)
 			set_garment("A")
 			review_panel.select_clip("west", farming_review_action)
 			$TrialUI/Panel/Margin/Rows/Scope.text = "走跑与两套上衣已认可；农事关键姿态在对照面板试看，尚非完整动作。不读写存档。"
+	if farming_transitions_enabled:
+		$TrialUI/Panel/Margin/Rows/Scope.text = "西向短袖农事衔接小样：F 浇水 / G 锄地 / H 采收；锁移动，结束回站立；换衣延后。无农事事务或存档。"
+	if farming_transitions_enabled and review_panel.farming_library != null and review_panel.farming_library.catalog_version == 2:
+		$TrialUI/Panel/Margin/Rows/Scope.text = "三类农事 · 四方向 · 短/长袖：F 浇水 / G 锄地 / H 收获；C 面板选号/暂停/逐帧，1/2 换衣。"
 	refresh_pose()
-	get_window().title = "潮港旧屋 · 人物步行体验（WASD / 方向键，R回起点）"
+	get_window().title = "潮港旧屋 · 农事动作试玩" if farming_transitions_enabled else "潮港旧屋 · 人物步行体验（WASD / 方向键，R回起点）"
 
 func toggle_review() -> void:
 	if schema_version == 2:
@@ -108,6 +126,7 @@ func relative_file(value: Variant) -> bool:
 	return value is String and not value.is_empty() and not value.is_absolute_path() and not ".." in value.split("/")
 
 func load_art(directory: String) -> bool:
+	cancel_farming_sample()
 	clear_run_candidate()
 	var manifest_path := directory.path_join("baked/export-manifest.json")
 	if not FileAccess.file_exists(manifest_path): return reject_art("找不到小样资源，请从完整源码目录启动。")
@@ -364,6 +383,7 @@ func has_motion_garment(action: String, direction: String, recipe: String) -> bo
 	return true
 
 func set_locomotion_action(value: String) -> bool:
+	if not farming_clip.is_empty(): return false
 	if value not in ["walk", "run"] or not has_motion_garment(value, facing, garment):
 		return reject_run_candidate("当前上衣或方向未提供此动作资源。")
 	if current_action == value: return true
@@ -402,6 +422,9 @@ func set_speed_factor(value: float) -> void:
 
 func set_garment(value: String) -> void:
 	if value not in ["A", "B"]: return
+	if not farming_clip.is_empty():
+		farming_pending_garment = value
+		return
 	if not has_motion_garment(current_action, facing, value):
 		reject_run_candidate("当前动作缺少这套上衣资源。")
 		return
@@ -416,6 +439,7 @@ func clip_duration(action: String, direction: String) -> float:
 	return total
 
 func set_motion_direction(value: String) -> bool:
+	if not farming_clip.is_empty(): return value == facing
 	if current_action == "run":
 		if not has_motion_garment("run", value, garment): return reject_run_candidate("当前上衣尚未提供这个跑步方向；松开 Shift 可行走转向。")
 		if value == facing: return true
@@ -447,7 +471,62 @@ func current_frame() -> int:
 		elapsed -= duration
 	return entries[-1]
 
+func start_farming_sample(action: String) -> bool:
+	if not farming_transitions_enabled or load_error != "" or schema_version != 2 or not farming_clip.is_empty() or not focused:
+		return false
+	var library = review_panel.farming_library
+	var selected: Dictionary = library.get_clip(action, facing, garment) if library != null else {}
+	if selected.is_empty():
+		motion_error = "当前朝向或上衣缺少该农事序列，请查看动作对照面板。"
+		refresh_status()
+		return false
+	farming_clip = selected
+	farming_elapsed_ms = 0.0
+	farming_pending_garment = ""
+	farming_original_scale = pose.scale
+	farming_original_offset = pose.offset
+	pose.scale *= float(selected.display_scale) / (138.0 / 582.0)
+	pose.offset = -selected.root_anchor_px
+	actor.velocity = Vector2.ZERO
+	current_action = action
+	motion_error = ""
+	refresh_pose()
+	return true
+
+func farming_pose_index() -> int:
+	var elapsed := farming_elapsed_ms
+	for i in range(farming_clip.durations_ms.size()):
+		if elapsed < float(farming_clip.durations_ms[i]): return i
+		elapsed -= float(farming_clip.durations_ms[i])
+	return farming_clip.durations_ms.size() - 1
+
+func cancel_farming_sample() -> void:
+	if farming_clip.is_empty(): return
+	pose.scale = farming_original_scale
+	pose.offset = farming_original_offset
+	farming_clip = {}
+	farming_elapsed_ms = 0.0
+	farming_pending_garment = ""
+	current_action = "idle"
+	idle_phase_ms = 0.0
+
+func advance_farming_sample(delta: float) -> void:
+	actor.velocity = Vector2.ZERO
+	if not focused: return
+	farming_elapsed_ms += maxf(delta, 0.0) * 1000.0
+	var duration := 0.0
+	for value in farming_clip.durations_ms: duration += float(value)
+	if farming_elapsed_ms >= duration:
+		var pending := farming_pending_garment
+		cancel_farming_sample()
+		if pending != "": set_garment(pending)
+	refresh_pose()
+
 func refresh_pose() -> void:
+	if not farming_clip.is_empty():
+		pose.texture = farming_clip.textures[farming_pose_index()]
+		refresh_status()
+		return
 	if load_error == "" and frames.has(garment): pose.texture = frames[garment][current_frame()]
 	refresh_status()
 
@@ -455,10 +534,12 @@ func refresh_status() -> void:
 	if not is_instance_valid(status): return
 	if load_error != "": status.text = load_error
 	elif motion_error != "": status.text = motion_error
+	elif not farming_clip.is_empty(): status.text = "%s · %s / %s · 姿态 %d/%d · 锁移动/方向；结束回站立%s" % ["短袖" if garment == "A" else "长袖",current_action,facing, farming_pose_index()+1, farming_clip.textures.size(), " · 换衣已排队" if farming_pending_garment != "" else ""]
 	else: status.text = "%s · %s / %s · 速度 %d%%（%.0f 世界单位/秒） · 当前帧 %.1f ms" % ["奶油短袖" if garment == "A" else "蓝色长袖", current_action, facing, roundi(speed_factor * 100), locomotion_speed() if current_action == "run" else walk_speed(), frame_duration_ms()]
 	if load_error == "" and motion_error == "" and diagnostic_note(current_action,facing,garment) != "": status.text += " · 诊断稿"
 
 func reset_position() -> void:
+	cancel_farming_sample()
 	actor.position = $Start.position
 	actor.velocity = Vector2.ZERO
 	phase_ms = 0.0
@@ -476,6 +557,9 @@ func direction_from_vector(value: Vector2) -> String:
 
 func _physics_process(delta: float) -> void:
 	if load_error != "": return
+	if not farming_clip.is_empty():
+		advance_farming_sample(delta)
+		return
 	var requested := movement_input()
 	var supported := true
 	if clips.has("run") and not requested.is_zero_approx():
@@ -504,6 +588,9 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	match event.physical_keycode:
 		KEY_1: set_garment("A")
 		KEY_2: set_garment("B")
+		KEY_F: start_farming_sample("water")
+		KEY_G: start_farming_sample("hoe")
+		KEY_H: start_farming_sample("harvest")
 		KEY_R: reset_position()
 		KEY_C: toggle_review()
 		KEY_MINUS: set_speed_factor(speed_factor - 0.05)

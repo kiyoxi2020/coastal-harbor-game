@@ -1,14 +1,19 @@
 extends RefCounted
 ## Read-only key-pose catalog. No actor, gameplay events, save service, or art edits.
 const ACTIONS := ["water", "hoe", "harvest"]
+const DIRECTIONS := ["south", "west", "east", "north"]
+const GARMENTS := ["A", "B"]
+const PHASES := {"hoe":["ready","lift","contact","recovery"],"water":["ready","raise","pour","recovery"],"harvest":["ready","reach","pluck","recovery"]}
 const DISPLAY_SCALE := 138.0 / 1164.0
 var clips: Dictionary = {}
 var error: String = ""
 var catalog_sha256: String = ""
+var catalog_version := 0
 
 func _reject(message: String) -> bool:
 	clips.clear()
 	catalog_sha256 = ""
+	catalog_version = 0
 	error = message
 	return false
 
@@ -44,19 +49,29 @@ func load_catalog(project_root: String, catalog_path: String = "res://dev/farmin
 	clips.clear()
 	error = ""
 	catalog_sha256 = ""
+	catalog_version = 0
 	if not project_root.is_absolute_path() or not DirAccess.dir_exists_absolute(project_root):
 		return _reject("农事评审项目根目录无效。")
 	var catalog: Variant = _json(catalog_path)
-	if not catalog is Dictionary or catalog.get("schema_version") != 1 or catalog.get("template_id") != "adult-standard-v1":
+	if not catalog is Dictionary or (not _number(catalog.get("schema_version")) or float(catalog.schema_version) not in [1.0, 2.0]) or catalog.get("template_id") != "adult-standard-v1":
 		return _reject("农事评审目录合同无效。")
+	var version := int(catalog.schema_version)
 	var records: Variant = catalog.get("clips")
-	if not records is Array or records.size() != ACTIONS.size():
-		return _reject("农事评审目录缺少三个已登记小样。")
+	var required_count := ACTIONS.size() if version == 1 else ACTIONS.size()*DIRECTIONS.size()*GARMENTS.size()
+	if not records is Array or records.size() != required_count:
+		return _reject("农事评审目录缺少完整动作、方向或上衣组合。")
 	var pending := {}
 	for record in records:
 		if not record is Dictionary: return _reject("农事评审条目无效。")
 		var action: Variant = record.get("action_id")
-		if action not in ACTIONS or pending.has(action): return _reject("农事评审动作重复或未知。")
+		var direction: Variant = record.get("direction", "west") if version == 1 else record.get("direction")
+		var garment: Variant = record.get("garment", "A") if version == 1 else record.get("garment")
+		if version == 1 and (direction != "west" or garment != "A"):
+			return _reject("旧版农事目录只支持西向短袖。")
+		if action not in ACTIONS or direction not in DIRECTIONS or garment not in GARMENTS:
+			return _reject("农事评审动作、方向或上衣未知。")
+		var key: String = str(action) if version == 1 else "%s/%s/%s" % [action,direction,garment]
+		if pending.has(key): return _reject("农事评审组合重复。")
 		if not _relative_file(record.get("candidate")) or not _sha(record.get("sha256")):
 			return _reject("农事评审候选路径或哈希无效。")
 		var note: Variant = record.get("note")
@@ -65,7 +80,7 @@ func load_catalog(project_root: String, catalog_path: String = "res://dev/farmin
 		if not FileAccess.file_exists(candidate_path) or FileAccess.get_sha256(candidate_path) != record.sha256:
 			return _reject("农事评审候选缺失或哈希不匹配。")
 		var data: Variant = _json(candidate_path)
-		if not data is Dictionary or data.get("schema_version") != 1 or data.get("template_id") != "adult-standard-v1" or data.get("action_id") != action or data.get("direction") != "west":
+		if not data is Dictionary or data.get("schema_version") != 1 or data.get("template_id") != "adult-standard-v1" or data.get("action_id") != action or data.get("direction") != direction or (version == 2 and data.get("garment") != garment):
 			return _reject("农事评审体型、动作或方向不匹配。")
 		var status: Variant = data.get("status")
 		if not status is String or status.is_empty(): return _reject("农事评审缺少源状态。")
@@ -92,6 +107,10 @@ func load_catalog(project_root: String, catalog_path: String = "res://dev/farmin
 		var textures: Array[Texture2D] = []
 		var durations: Array[int] = []
 		var poses: Array[String] = []
+		var phases_seen := {}
+		var texture_hashes := {}
+		var previous_phase := -1
+		if version == 2 and entries.size() < 4: return _reject("完整农事序列少于四个真实姿态。")
 		for entry in entries:
 			if not entry is Dictionary or not entry.get("pose_id") is String or entry.pose_id.is_empty() or poses.has(entry.pose_id):
 				return _reject("农事评审姿态ID缺失或重复。")
@@ -105,11 +124,21 @@ func load_catalog(project_root: String, catalog_path: String = "res://dev/farmin
 			var image := Image.load_from_file(path)
 			if image == null or image.get_size() != Vector2i(int(canvas[0]), int(canvas[1])):
 				return _reject("农事评审实际纹理尺寸与画布不匹配。")
+			if version == 2:
+				var phase: Variant = entry.get("phase")
+				if phase not in PHASES[action]: return _reject("完整农事序列缺少合法动作阶段。")
+				var phase_index: int = PHASES[action].find(phase)
+				if phase_index < previous_phase: return _reject("农事动作阶段顺序无效。")
+				previous_phase = phase_index
+				phases_seen[phase] = true
+				texture_hashes[entry.sha256] = true
 			textures.append(ImageTexture.create_from_image(image))
 			durations.append(int(entry.duration_ms))
 			poses.append(str(entry.pose_id))
-		pending[action] = {
-			"action_id": str(action), "direction": "west", "garment": "A",
+		if version == 2 and (phases_seen.size() != 4 or texture_hashes.size() < 4):
+			return _reject("完整农事序列未覆盖预备、使用、收回或真实姿态重复。")
+		pending[key] = {
+			"action_id": str(action), "direction": str(direction), "garment": str(garment),
 			"textures": textures, "durations_ms": durations, "pose_ids": poses,
 			"canvas_px": Vector2(float(canvas[0]), float(canvas[1])),
 			"root_anchor_px": Vector2(float(anchor[0]), float(anchor[1])),
@@ -117,9 +146,13 @@ func load_catalog(project_root: String, catalog_path: String = "res://dev/farmin
 			"note": str(note), "source_status": str(status)
 		}
 	clips = pending
+	catalog_version = version
 	catalog_sha256 = FileAccess.get_sha256(catalog_path)
 	return true
 
 func get_clip(action: String, direction: String, garment: String) -> Dictionary:
-	if action not in ACTIONS or direction != "west" or garment != "A": return {}
-	return clips.get(action, {})
+	if action not in ACTIONS or direction not in DIRECTIONS or garment not in GARMENTS: return {}
+	if catalog_version == 1:
+		if direction != "west" or garment != "A": return {}
+		return clips.get(action, {})
+	return clips.get("%s/%s/%s" % [action,direction,garment], {})

@@ -1,0 +1,42 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+PASS v2_complete_24_load
+PASS hoesouthA_actual_clip
+PASS hoesouthB_actual_clip
+PASS hoewestA_actual_clip
+PASS hoewestB_actual_clip
+PASS hoeeastA_actual_clip
+PASS hoeeastB_actual_clip
+PASS hoenorthA_actual_clip
+PASS hoenorthB_actual_clip
+PASS watersouthA_actual_clip
+PASS watersouthB_actual_clip
+PASS waterwestA_actual_clip
+PASS waterwestB_actual_clip
+PASS watereastA_actual_clip
+PASS watereastB_actual_clip
+PASS waternorthA_actual_clip
+PASS waternorthB_actual_clip
+PASS harvestsouthA_actual_clip
+PASS harvestsouthB_actual_clip
+PASS harvestwestA_actual_clip
+PASS harvestwestB_actual_clip
+PASS harvesteastA_actual_clip
+PASS harvesteastB_actual_clip
+PASS harvestnorthA_actual_clip
+PASS harvestnorthB_actual_clip
+PASS unknown_recipe_no_fallback
+PASS missing_combo_rejected
+PASS duplicate_combo_rejected
+PASS unknown_direction_rejected
+PASS unknown_garment_rejected
+PASS mismatched_direction_rejected
+PASS mismatched_garment_rejected
+PASS incomplete_sequence_rejected
+PASS missing_contact_phase_rejected
+PASS duplicate_texture_sequence_rejected
+PASS valid_reload_recovers
+PASS schema1_wrong_scope_6
+PASS schema1_wrong_scope_3
+PASS v2_after_schema1_rejection_recovers
+FARMING_CATALOG_V2 checks=39 passed=true
