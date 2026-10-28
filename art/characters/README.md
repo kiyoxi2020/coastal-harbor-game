@@ -1,27 +1,72 @@
-# 人物资源库
+# 人物资源库：结构与当前使用逻辑
 
-这里是现行人物**制作与评审**入口。正式游戏仍使用既有 `player-unified-v4`；当前没有批准的新人体正式发布，不会缺帧时回退或混用两套模型。
+这是现行人物**制作、构建和评审**的资源库。后续 agent 先读本页，再按任务进入具体文件；不要靠目录名、文件数量或旧日志推断资源已能通用组合。
 
-唯一制作规范：[character-art-pipeline.md](../../docs/design/character-art-pipeline.md)。当前导航见 [catalog.json](catalog.json)，实际范围见 [coverage.json](coverage.json)。静态60候选仍为候选，不能据此推定动态兼容。
+## 接手时先读什么
 
-## 查找资源
+1. 仓库根 [AGENTS.md](../../AGENTS.md)：执行约定和强制门禁。
+2. [PROJECT_STATE.md](../../PROJECT_STATE.md)、[HANDOFF.md](../../HANDOFF.md) 顶部：当前阶段、已完成和待办；后文是历史。
+3. [唯一人物制作规范](../../docs/design/character-art-pipeline.md)：母版、姿态、注册、部件接口、动态验收与发布规则。本页只解释导航和现有实现，不另立制作合同。
+4. [catalog.json](catalog.json) 找资源，[coverage.json](coverage.json) 查实际能力和缺口。准备构建时再读[工具说明](../../tools/characters/README.md)与[严格配方示例](recipes/wardrobe-hoe-west/r002.json)。
 
-| 内容 | 位置 |
-|---|---|
-| 当前成年母版 | [template.json](templates/adult-standard-v1/template.json) 与 [selection.json](templates/adult-standard-v1/selection.json) |
-| 动作、方向与姿态 | [motion-set.json](templates/adult-standard-v1/motions/review-motion-v1/motion-set.json)，下设六类action与四向poses |
-| 衣裤鞋、头发、帽子 | `parts/<design-id>/design.json`；按体型/动作集的adaptations查view、pose-map和真实接口 |
-| 最终原图、提示词、必要参考 | `sources/<source-id>/source.json`；保留完整原分辨率，来源别名与旧SHA在migrations记录 |
-| 实际组合和输出 | `recipes/`、`builds/`；完整帧不是可任意拆换的隐藏身体 |
-| 静态候选 | [静态图库](reviews/static-candidates/gallery.html) 与 [static-index.json](static-index.json) |
-| 分范围原认可 | `evidence/<scope-id>/acceptance.json`，保留原话、范围、Git位置、旧新版本绑定 |
-| 迁移与清理核验 | `migrations/2026-10-resource-layout/` |
+不要默认全量读取 sources、migrations 或历史原生报告；先由具体配方/动作引用定位必要输入。
 
-款式ID、体型ID、pose、view与配方各自独立。`original-*`是保留作用域的旧配方标签，不能仅凭同名推断为一个通用款式；资源ID数量也不是独立生图或新款数量。
+## 当前有哪几条使用链
 
-## 统一试玩入口
+| 使用场景 | 实际入口与数据 | 当前边界 |
+|---|---|---|
+| 正式游戏 | `godot2d/scenes/harbor.tscn` → 现有玩家/顾客场景与 `godot2d/assets/player-unified-v4/` | 仍运行旧生产资源；本库 `catalog.production_release` 为 null，没有新的 active_release |
+| 现行试玩 | `tools/characters/review.py <suite>` → `reviews/<suite>/review.json` → Godot评审场景/静态HTML → 已登记catalog与build | 展示已完成的有限抽样，不自动遍历所有款式或新配方 |
+| 后续严格构建 | `recipes/<recipe-id>/<revision>.json` → `tools/characters/build.py build` → 新build目录 → `verify` | 只产review-only；目前真实示例是西锄衣装四姿态+idle，不是完整衣柜或生产发布 |
 
-在仓库内运行；也可双击 `tools/characters/review.command`，默认西锄发帽。
+**新构建成功不会自动替换试玩或正式游戏。** 现行Godot试玩仍使用迁移保留的sample/candidate格式；严格构建输出有自己的manifest。需要接入新评审范围时，须另核对消费者、格式和验收，不能只把catalog路径换过去或另建人物播放器。
+
+## 目录结构与职责
+
+```text
+art/characters/
+├── README.md            # 人读入口；不是资源发布清单
+├── catalog.json         # 母版、部件、评审suite和来源索引
+├── coverage.json        # 已有配方/动作/方向及验收范围、能力缺口
+├── static-index.json    # 静态候选与来源索引
+├── definitions/         # 动作与槽位词汇说明
+├── templates/           # 母版选择、修订、动作、pose与同姿态身体参考
+├── sources/             # 原图、prompt、必要参考及来源元数据
+├── parts/               # 款式定义、体型/动作适配、view、pose-map和mask
+├── recipes/             # 实际有限组合；新版严格配方也放这里
+├── builds/              # 已烘焙输出及清单；不是可随时删除的缓存
+├── reviews/             # 试玩/图库配置、抽样catalog
+├── evidence/            # 分范围认可、核验回执、摘要与少量代表图
+└── migrations/          # 旧新路径/SHA映射、清理和恢复记录
+```
+
+| 要查什么 | 从哪里进入 | 关键含义 |
+|---|---|---|
+| 当前成年母版 | [template.json](templates/adult-standard-v1/template.json)、[selection.json](templates/adult-standard-v1/selection.json) | `active_revision`绑定选定外观；静态母版认可不等于隐藏身体或全动作完成 |
+| 动作及四向姿态 | [motion-set.json](templates/adult-standard-v1/motions/review-motion-v1/motion-set.json) → `actions/<action-id>/<revision>/<direction>/poses.json` | 看实际variant、pose顺序、时长、canvas、root和scale；不能把A/B当无差别替换 |
+| 同pose身体参考 | `templates/<template-id>/motions/<motion-set-id>/body-views/` | 某些是保留脸/手/工具/衣物轮廓的完整穿衣参考，不是可任意换装的裸身体 |
+| 具体衣裤鞋/发帽 | `parts/<design-id>/design.json` → `adaptations/<template-id>/<motion-set-id>/<revision>/` | `views.json`列实际适配，`pose-map.json`关联pose/view；只承诺列出的配方范围 |
+| 原始来源 | `sources/<source-id>/source.json` → 其assets及prompt/metadata | 保留完整原图与来源身份；originals中也可能含切图或必要中间参考，不能仅凭名字删除 |
+| 实际组合 | `recipes/<recipe-id>/<revision>.json` | 区分旧抽样记录与有 `kind: coastal-character-construction-v1` 的严格配方，不能仅按r001/r002判断格式 |
+| 当前显示帧 | 配方或评审catalog指向的 `builds/<build-id>/` | 依具体manifest/sample/candidate解析，不按文件名猜哪个是最新版 |
+| 静态候选 | [static-index.json](static-index.json)、[静态图库](reviews/static-candidates/gallery.html) | 仍是候选；存在图片不等于动态适配、组合兼容或用户认可 |
+| 验收状态 | `coverage.json`与 `evidence/<scope-id>/acceptance.json`、receipt/summary | 技术检查、原生验证和用户认可分别解释；不能从一个布尔值扩大范围 |
+
+款式ID、体型ID、动作集ID、pose_id、view和recipe_id是不同身份。`original-*`保留旧配方作用域，同名不能推断为通用款式；来源包数也不等于独立生图次数。definitions提供词汇导航，修改其JSON不会自动扩展构建器校验、Godot加载器或玩法事件处理器。
+
+## 路径应该怎样理解
+
+- `resource_root: art/characters` 声明资源库根；其纹理、source、mask和inputs通常使用相对于本库的路径，例如 `parts/...`、`sources/...`。
+- 现行评审catalog的 `sample`/`candidate` 保留相对于**仓库根**的路径，例如 `art/characters/builds/.../sample.json`，并绑定SHA。
+- `res://dev/characters/...` 相对于 **Godot工程根 `godot2d/`**，不是仓库根。
+- sources中的opaque历史metadata和migrations可能记录旧路径；追溯字段不是活动加载入口，不做全库字符串替换。
+- 缺文件、越界、未知root或SHA不符应先查具体引用链；不要用symlink、另拷一份旧资源或刷新基线掩盖失败。
+
+## 日常操作
+
+以下命令在**仓库根目录**执行。详细参数与依赖见[工具README](../../tools/characters/README.md)。
+
+### 查看已有资源
 
 ```sh
 python3 tools/characters/review.py headwear
@@ -31,36 +76,85 @@ python3 tools/characters/review.py locomotion
 python3 tools/characters/review.py static-candidates
 ```
 
-headwear为四个动作/方向×裸头/短发/草帽/发帽；wardrobe为五个代表性配方；farming为24组；locomotion为四向走跑与两上衣。新源与贴图路径显式绑定统一库根，缺资源或哈希不符直接拒绝，测试及试玩不读写玩家存档。
+| suite | 当前内容 |
+|---|---|
+| headwear（默认） | 东跑/西锄/南浇/北收四组，每组bare/hair/hat/hair_hat；启动默认西锄发帽 |
+| wardrobe | 五个代表性衣物配方；不是全部款式通配 |
+| farming | 三类农事×四向×长短袖24组 |
+| locomotion | 四向站/走/跑及已有两上衣参考 |
+| static-candidates | 静态候选HTML图库 |
 
-## 构建门禁
+可加 `--dry-run` 只查看启动命令。也可双击 `tools/characters/review.command`。实际场景和加载器职责见 [Godot试玩README](../../godot2d/dev/characters/README.md)。
 
-后续新配方统一使用[严格配方示例](recipes/wardrobe-hoe-west/r002.json)，通过 `tools/characters/build.py build` 构建及 `verify` 复核；完整字段与命令见[工具说明](../../tools/characters/README.md)。旧r001抽样配方保留原范围，不能复制为新的无合同配方。
+### 构建和复核一个新修订
 
-构建必须绑定真实母版/动作/variant、部件、来源、mask、时序与层序。仅接受已支持的整帧接口和模板一致的整帧注册，缺能力直接报错。结果仅供评审，正式发布仍须完整动态/原生/接触和用户认可；已有迁移回执不能给新构建授予认可。
+```sh
+python3 tools/characters/build.py build art/characters/recipes/wardrobe-hoe-west/r002.json --output /private/tmp/coastal-character-readme-example-r002
+python3 tools/characters/build.py verify /private/tmp/coastal-character-readme-example-r002
+python3 tools/characters/check.py
+python3 -m unittest discover -s tools/characters/tests
+```
 
-提交评审前运行 `python3 tools/characters/check.py` 与全套人物工具测试。生产人物依赖冻结在runtime-baseline；不能靠更新白名单绕过失败。详见AGENTS中的人物构建约定。
+示例输出路径必须尚不存在；再次构建换一个新路径。正式留存的评审构建可放到全新的 `art/characters/builds/<build-id>`，不得覆盖旧目录。构建器不会自动修改catalog、coverage或认可记录，也没有正式发布命令。
 
-## 后续扩展
+严格配方绑定唯一model、母版/动作集、真实variant、必需动作/方向、同pose部件、源包、mask和完整层序。当前支持完整整帧分层，以及与模板所选variant完全一致的整帧平移注册；不支持构建时裁剪/密度缩放或部件局部挪缩。缺接口时先扩统一合同和测试，不能绕开入口写批次构建脚本。
 
-- 新动作放入当前体型动作集的 `actions/<action-id>/<revision>/`，登记真实pose、时序、根点与所需能力。
-- 新款放入 `parts/<design-id>/`；只为实际变化的姿态补view，沿pose-map复用相同投影。ownership、coverage、occlusion保持不同含义。
-- 新体型建立自身template比例与锚点，仍沿同一合同；不能缩小成人或分叉另一套播放器。
-- 新配方先声明required actions与实际部件修订，再生成新build及评审记录；不覆盖已认可源与旧输出。
-- 本库包含完整穿衣参考及已完成的部分分层接口。目录可扩展不表示现有范围固定的试玩能零代码执行任意新动作；能力缺口按coverage逐项补齐。
+`alpha-over`与`ownership-replace`显式区分。ownership描述源像素归属，coverage描述覆盖接口，occlusion描述当前前后关系；即使PNG恰好相同也不是同一概念。二值归属替换保留原RGBA软边，不能把诊断mask再乘到源alpha上。
 
-此次没有扩画新动作、遍历全衣柜或切换生产角色。后续先补首个实际生产配方的缺口，再统一迁移全部生产角色，不能只换走路而保留旧模型耕地。
+### 修改后需要哪些验证
+
+- 仅README/导航：检查文档链接和所述命令，按AGENTS执行人物工具测试与仓库门禁；不因文档变化重复GPU采集。
+- 合同、构建器或路径逻辑：先做能复现误用的失败测试，再跑人物工具测试与 `check.py`；Godot变化再做对应加载/行为回归。
+- 实际贴图、pose、mask、时序、层序或组合：按唯一制作规范完成实际显示尺寸、连续动作和原生世界验收；headless或加载成功不能替代。
+- 生产切换：完整角色能力、动态/接触/认可与唯一发布清单另行验收；当前仍关闭。
+
+[Godot测试README](../../godot2d/tests/characters/README.md)解释实际加载、合成fixture与原生采集的区别。新build的manifest绑定配方、依赖、构建器/Pillow与输出；依赖改变后 `verify` 会失败，不能手改SHA或通过字段沿用旧证据。原迁移GPU回执只证明当时冻结范围，不给新构建授予认可。
+
+## 后续资源应如何扩展
+
+| 任务 | 修改入口 | 完成前必须确认 |
+|---|---|---|
+| 新动作 | 当前体型动作集的 `actions/<action-id>/<revision>/`，再补实际配方 | 新pose/时序/事件及进入退出规则；对应衣物/发帽接口齐全 |
+| 新款式 | `parts/<design-id>/`及目标体型/动作集适配 | 同投影可复用view；新形态要真实补源/隐藏区/覆盖与层序 |
+| 新体型 | 自身template与动作适配，沿同一model合同 | 不能缩小成人冒充儿童，不能分叉另一套人体管线 |
+| 新组合 | `recipes/`中的严格配方新revision，再产新build | 声明实际能力和依赖；先单侧运动小样再扩四向/动态混搭 |
+
+按coverage先补实际生产配方的缺口，不预先穷举整衣柜。当前仍欠完整同配方全动作四向发帽、部分隐藏身体/新衣型接口、严格足/握持/目标接触、其他体型动态适配和正式角色发布。南浇/北收发帽未记录的新用户认可不能由目录迁移补写。
+
+## 维护工具与冻结边界
+
+日常只用 `review.py`、`build.py`、`check.py`及对应测试。以下工具保留用于迁移核验/维护，**不是新增资源的一键初始化步骤**：
+
+| 工具 | 用途与边界 |
+|---|---|
+| `migrate_layout.py verify`、`import_static.py --verify` | 检查Git基线迁入资源；import/publish不是日常追加资源命令 |
+| `index_library.py` | 本次迁移数据的导航生成器；重跑会重写索引/派生数据，不能用来自动登记任意新动作或修复SHA失败 |
+| `record_acceptance.py` | 迁移已有分范围认可，不能制造新用户认可 |
+| `native_contract.py` | 本次129图等范围的GPU合同校验，不是通用人物正式发布器 |
+| `cleanup_legacy.py` | 已批准迁移的清理/保全工具，不是日常资源垃圾回收器 |
+
+[生产与旧构建基线](../../tools/characters/runtime-baseline.json)冻结现行生产依赖、九份旧配方及既有构建文件。不要改旧sample或baseline来“过检查”，不要把builds当缓存清空，也不要在builds根直接放杂项文件（当前门禁按构建子目录检查）。静态门禁不能判断任意新代码的语义或图片中的人体，代码评审与动态视觉验收仍有必要。
+
+PR/push检查见 [character-construction.yml](../../.github/workflows/character-construction.yml)。配置文件存在不等于远端已经运行或分支保护已设置；服务端required check需要另行配置。
 
 ## 留存与恢复
 
-工作区保留最终采用版本、可编辑/可重建所需的源、prompt、部件、mask、注册和配置，以及轻量认可与少量代表图。普通失败稿和重复过程资料移出工作区，历史主要由Git保存，不另建整库archive副本。
+保留最终采用资源、可编辑/重建所需原图、prompt、mask、注册和配置，以及轻量认可和代表图。普通失败稿与重复过程资料主要留在Git历史，不额外复制整库archive。
 
-旧布局固定在 `379a9bc`，迁移清单记录完整commit与旧路径/SHA。查看单个历史原件：
+旧布局基线为 `379a9bc`；目录迁移和构建门禁本地提交为 `ad1fb18`。完整旧新路径、SHA及清理记录见 `migrations/2026-10-resource-layout/`。单件历史可用：
 
 ```sh
 git show 379a9bc:art/design/character-motion/adult-standard-v1/headwear-sampling-v1/catalog.json
 ```
 
-精确重跑旧工具时使用独立历史checkout；不要把旧工具或旧路径恢复到当前活动库。导入迁移工具是对该Git基线的适配器，不是后续美术编辑器，重新运行导入不得覆盖未来新增资源。
+重跑旧工具用独立历史checkout，不恢复旧制作目录为当前活动入口。未入Git旧过程资料暂存在 `/private/tmp/coastal-character-layout-untracked-hold`，完整迁移原生采集在 `/private/tmp/coastal-character-layout-native`；临时目录不是永久归档，删除前须核实持久保全。库内保留轻量回执、摘要与代表图，不把“临时保全”写成“已入Git可删除”。
 
-未入Git的旧过程资料先暂存在 `/private/tmp/coastal-character-layout-untracked-hold`，清理记录列出原位置与哈希；它们没有被当作最终资源，也未被静默删除。原生完整采集同样留在本次 `/private/tmp/coastal-character-layout-native`，库内只保留其验证回执、范围摘要和代表图。
+## 西锄严格构建四状态小样
+
+统一入口的四份schema2固定配方位于 `recipes/headwear-hoe-west-{bare,hair,hat,hair-hat}/r001.json`。它们引用现有严格衣装配方 `wardrobe-hoe-west/r002.json`，先重建衣装并完成整帧登记，再在目标画布组合已登记头层。四状态仍只覆盖西锄四pose及匹配idle；没有扩全动作或生产发布。
+
+```sh
+python3 tools/characters/review.py headwear-construction
+```
+
+入口在启动前逐一verify四构建，Godot加载器再次核输入/工具/输出哈希与模板姿态时序。配方和输出仍review-only；不沿用旧用户认可作为新发布资格。准确合成规则和多来源选择见 [小样设计](../../docs/superpowers/specs/2026-10-28-west-hoe-construction-design.md)。

@@ -72,6 +72,7 @@ class Validated:
     recipe: dict
     dependencies: dict
     registrations: dict
+    base: object = None
 
     def image(self, ref):
         with Image.open(safe_file(self.library, ref['file'])) as img:
@@ -107,6 +108,9 @@ def validate(repo, recipe_path):
         return read_json(reference(ref, namespace))
 
     recipe = read_json(recipe_path)
+    if isinstance(recipe, dict) and type(recipe.get('schema_version')) is int and recipe['schema_version'] == 2:
+        from composition_contract import validate_composition
+        return validate_composition(repo, recipe_path, recipe)
     keys(recipe, 'kind schema_version resource_root character_model_id recipe_id revision template motion_set slots required_capabilities clips authoring_inputs', 'recipe')
     require(recipe['kind'] == KIND and type(recipe['schema_version']) is int and recipe['schema_version'] == 1, 'Unsupported schema')
     require(recipe['resource_root'] == 'art/characters', 'Wrong resource root')

@@ -1,0 +1,1430 @@
+{
+  "scope": "art/characters; ordinary file bytes including ignored .DS_Store; excludes .git and .godot; no deletability claim",
+  "git_head": "ad1fb183c96ba8ab88f546a528d71cc5a3885a71",
+  "groups": {
+    "(root)": {
+      "files": 5,
+      "bytes": 118610
+    },
+    "builds": {
+      "files": 528,
+      "bytes": 291800288
+    },
+    "definitions": {
+      "files": 2,
+      "bytes": 366
+    },
+    "evidence": {
+      "files": 19,
+      "bytes": 1931528
+    },
+    "migrations": {
+      "files": 4,
+      "bytes": 5702195
+    },
+    "parts": {
+      "files": 1106,
+      "bytes": 42958717
+    },
+    "recipes": {
+      "files": 10,
+      "bytes": 67657
+    },
+    "reviews": {
+      "files": 10,
+      "bytes": 1038576
+    },
+    "sources": {
+      "files": 2095,
+      "bytes": 477053364
+    },
+    "templates": {
+      "files": 180,
+      "bytes": 40821779
+    }
+  },
+  "file_count": 3959,
+  "bytes": 861493080,
+  "directory_count": 1249,
+  "duplicate_redundant_bytes": 9756883,
+  "duplicate_groups": [
+    {
+      "sha256": "15eb1ce11538cafd8a039977616cf6d21185d85b1a926a2d56ed9a033c217958",
+      "files": [
+        {
+          "path": "art/characters/sources/motion-headwear-sampling-v1-ac71442e/originals/hat-worn-v1-b8b0332f.png",
+          "bytes": 1633047
+        },
+        {
+          "path": "art/characters/sources/static-hat01-v1/source.png",
+          "bytes": 1633047
+        }
+      ],
+      "redundant_bytes": 1633047
+    },
+    {
+      "sha256": "e630868715dc8998611bfd8e406f219ed449de3b9186cbc6caafe7495d069763",
+      "files": [
+        {
+          "path": "art/characters/sources/motion-headwear-sampling-v1-a363e199/originals/hair-worn-v2-8f1fdc2f.png",
+          "bytes": 1628111
+        },
+        {
+          "path": "art/characters/sources/static-hair01-v1/source.png",
+          "bytes": 1628111
+        }
+      ],
+      "redundant_bytes": 1628111
+    },
+    {
+      "sha256": "1ec93b20beebbd2a7ffbee3f0da1747d45492fe5447f4707a027f6d716486d53",
+      "files": [
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/body-views/north.png",
+          "bytes": 358411
+        },
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/inputs/baseline-head-proof/bare_north.png",
+          "bytes": 358411
+        },
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/inputs/front-eyelids-brows-v2/proof/bare_north.png",
+          "bytes": 358411
+        },
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/inputs/original-body-views/north.png",
+          "bytes": 358411
+        }
+      ],
+      "redundant_bytes": 1075233
+    },
+    {
+      "sha256": "1aa32c2b60dcd7a605a7cf355d9ff8d9675dfd4676930986fabc7c849ce8cd4d",
+      "files": [
+        {
+          "path": "art/characters/builds/static-head-baseline-v3/frames/hair_hat_north.png",
+          "bytes": 411592
+        },
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/inputs/baseline-head-proof/hair_hat_north.png",
+          "bytes": 411592
+        },
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/inputs/front-eyelids-brows-v2/proof/hair_hat_north.png",
+          "bytes": 411592
+        }
+      ],
+      "redundant_bytes": 823184
+    },
+    {
+      "sha256": "45bfffec9ec4abd231c620c8d313a54b589e4755e4bc2a367a0ff569072a47e1",
+      "files": [
+        {
+          "path": "art/characters/builds/static-head-baseline-v3/frames/hat_north.png",
+          "bytes": 408701
+        },
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/inputs/baseline-head-proof/hat_north.png",
+          "bytes": 408701
+        },
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/inputs/front-eyelids-brows-v2/proof/hat_north.png",
+          "bytes": 408701
+        }
+      ],
+      "redundant_bytes": 817402
+    },
+    {
+      "sha256": "d5de7bd5a20491026fc4c1675cdbcbcf8adcc990d052131e2ced4cdc0dcecb7a",
+      "files": [
+        {
+          "path": "art/characters/builds/static-head-baseline-v3/frames/hair_north.png",
+          "bytes": 382063
+        },
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/inputs/baseline-head-proof/hair_north.png",
+          "bytes": 382063
+        },
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/inputs/front-eyelids-brows-v2/proof/hair_north.png",
+          "bytes": 382063
+        }
+      ],
+      "redundant_bytes": 764126
+    },
+    {
+      "sha256": "a2c887d725b029b4308ca6129a547cbf9d51c6d53233342fedbf6173b3d6f48c",
+      "files": [
+        {
+          "path": "art/characters/builds/static-head-baseline-v3/frames/hair_hat_south.png",
+          "bytes": 406029
+        },
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/inputs/front-eyelids-brows-v2/proof/hair_hat_south.png",
+          "bytes": 406029
+        }
+      ],
+      "redundant_bytes": 406029
+    },
+    {
+      "sha256": "1360a2e76d552e40b362acf641f1e1b24c1338e87a3869b731c348b4266aa70e",
+      "files": [
+        {
+          "path": "art/characters/builds/static-head-baseline-v3/frames/hat_south.png",
+          "bytes": 400430
+        },
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/inputs/front-eyelids-brows-v2/proof/hat_south.png",
+          "bytes": 400430
+        }
+      ],
+      "redundant_bytes": 400430
+    },
+    {
+      "sha256": "c628879773f1ca60e191e3468d448fd8e00805e6f140648ecab63e07c5517214",
+      "files": [
+        {
+          "path": "art/characters/builds/static-head-baseline-v3/frames/hair_south.png",
+          "bytes": 391572
+        },
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/inputs/front-eyelids-brows-v2/proof/hair_south.png",
+          "bytes": 391572
+        }
+      ],
+      "redundant_bytes": 391572
+    },
+    {
+      "sha256": "6c731c0ea663bb9be08630763ba3b3b75e13b7071ba02f4d9ec8d480914dc1bf",
+      "files": [
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/body-views/south.png",
+          "bytes": 367940
+        },
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/inputs/front-eyelids-brows-v2/proof/bare_south.png",
+          "bytes": 367940
+        }
+      ],
+      "redundant_bytes": 367940
+    },
+    {
+      "sha256": "34d1b4ac0d7cd17c19f94db94e3a73fa0f7145614d7b11fc75373547c4c6ae86",
+      "files": [
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/inputs/baseline-head-proof/bare_south.png",
+          "bytes": 366046
+        },
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/inputs/original-body-views/south.png",
+          "bytes": 366046
+        }
+      ],
+      "redundant_bytes": 366046
+    },
+    {
+      "sha256": "88772c21b7ad262a6350bd439871fbec7d1131a6deb8e5be5f7a2e7f749cb5cf",
+      "files": [
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/inputs/baseline-head-proof/bare_east.png",
+          "bytes": 349905
+        },
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/inputs/original-body-views/east.png",
+          "bytes": 349905
+        }
+      ],
+      "redundant_bytes": 349905
+    },
+    {
+      "sha256": "573cecc12e957eb71a544b397e4b600f96a4346f2151ccfc3014e265bb6c5d58",
+      "files": [
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/inputs/baseline-head-proof/bare_west.png",
+          "bytes": 349754
+        },
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/inputs/original-body-views/west.png",
+          "bytes": 349754
+        }
+      ],
+      "redundant_bytes": 349754
+    },
+    {
+      "sha256": "369aba60132aed4338d6ff55a98647cbc71d9d401f92c74e15c1b093765d4c3c",
+      "files": [
+        {
+          "path": "art/characters/parts/hair-chestnut-short-v1/adaptations/adult-standard-v1/review-motion-v1/r001/views/headwear-run-east/idle_east_0-hair-complete_source-0fa41b11.png",
+          "bytes": 76345
+        },
+        {
+          "path": "art/characters/parts/hair01/adaptations/adult-standard-v1/standing_0/static-candidate-v1/views/east.png",
+          "bytes": 76345
+        }
+      ],
+      "redundant_bytes": 76345
+    },
+    {
+      "sha256": "28fab476b732af9d5509e36f8af136b3637840e4426f2c7cb5256b333f38c2b7",
+      "files": [
+        {
+          "path": "art/characters/parts/hair-chestnut-short-v1/adaptations/adult-standard-v1/review-motion-v1/r001/views/headwear-hoe-west/idle_west_0-hair-complete_source-ac29024d.png",
+          "bytes": 75988
+        },
+        {
+          "path": "art/characters/parts/hair01/adaptations/adult-standard-v1/standing_0/static-candidate-v1/views/west.png",
+          "bytes": 75988
+        }
+      ],
+      "redundant_bytes": 75988
+    },
+    {
+      "sha256": "da67aa87b1a6ba7f07fec95a4c85d486163ac2bf8fc7b7246a8e23bfc9d6c6b8",
+      "files": [
+        {
+          "path": "art/characters/parts/shoes02/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-north.png",
+          "bytes": 1543
+        },
+        {
+          "path": "art/characters/parts/shoes03/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-north.png",
+          "bytes": 1543
+        },
+        {
+          "path": "art/characters/parts/shoes04/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-north.png",
+          "bytes": 1543
+        },
+        {
+          "path": "art/characters/parts/shoes05/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-north.png",
+          "bytes": 1543
+        },
+        {
+          "path": "art/characters/parts/shoes06/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-north.png",
+          "bytes": 1543
+        },
+        {
+          "path": "art/characters/parts/shoes07/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-north.png",
+          "bytes": 1543
+        },
+        {
+          "path": "art/characters/parts/shoes08/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-north.png",
+          "bytes": 1543
+        },
+        {
+          "path": "art/characters/parts/shoes09/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-north.png",
+          "bytes": 1543
+        },
+        {
+          "path": "art/characters/parts/shoes10/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-north.png",
+          "bytes": 1543
+        }
+      ],
+      "redundant_bytes": 12344
+    },
+    {
+      "sha256": "d3b1c8fb16b493db70da0e2f3183cad273771ba2d2e66cfda5ab9617bd549326",
+      "files": [
+        {
+          "path": "art/characters/parts/shoes02/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-south.png",
+          "bytes": 1511
+        },
+        {
+          "path": "art/characters/parts/shoes03/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-south.png",
+          "bytes": 1511
+        },
+        {
+          "path": "art/characters/parts/shoes04/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-south.png",
+          "bytes": 1511
+        },
+        {
+          "path": "art/characters/parts/shoes05/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-south.png",
+          "bytes": 1511
+        },
+        {
+          "path": "art/characters/parts/shoes06/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-south.png",
+          "bytes": 1511
+        },
+        {
+          "path": "art/characters/parts/shoes07/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-south.png",
+          "bytes": 1511
+        },
+        {
+          "path": "art/characters/parts/shoes08/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-south.png",
+          "bytes": 1511
+        },
+        {
+          "path": "art/characters/parts/shoes09/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-south.png",
+          "bytes": 1511
+        },
+        {
+          "path": "art/characters/parts/shoes10/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-south.png",
+          "bytes": 1511
+        }
+      ],
+      "redundant_bytes": 12088
+    },
+    {
+      "sha256": "9a91e178131737b54c38d9b3814f1d58622c38579e820aaa03b8cef1aa95a44a",
+      "files": [
+        {
+          "path": "art/characters/parts/shoes02/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-west.png",
+          "bytes": 1475
+        },
+        {
+          "path": "art/characters/parts/shoes03/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-west.png",
+          "bytes": 1475
+        },
+        {
+          "path": "art/characters/parts/shoes04/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-west.png",
+          "bytes": 1475
+        },
+        {
+          "path": "art/characters/parts/shoes05/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-west.png",
+          "bytes": 1475
+        },
+        {
+          "path": "art/characters/parts/shoes06/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-west.png",
+          "bytes": 1475
+        },
+        {
+          "path": "art/characters/parts/shoes07/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-west.png",
+          "bytes": 1475
+        },
+        {
+          "path": "art/characters/parts/shoes08/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-west.png",
+          "bytes": 1475
+        },
+        {
+          "path": "art/characters/parts/shoes09/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-west.png",
+          "bytes": 1475
+        },
+        {
+          "path": "art/characters/parts/shoes10/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-west.png",
+          "bytes": 1475
+        }
+      ],
+      "redundant_bytes": 11800
+    },
+    {
+      "sha256": "c67e0acd682cf204c76040e5802248488b9a216f067a61541ba68c66fbd70502",
+      "files": [
+        {
+          "path": "art/characters/parts/shoes02/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-east.png",
+          "bytes": 1473
+        },
+        {
+          "path": "art/characters/parts/shoes03/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-east.png",
+          "bytes": 1473
+        },
+        {
+          "path": "art/characters/parts/shoes04/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-east.png",
+          "bytes": 1473
+        },
+        {
+          "path": "art/characters/parts/shoes05/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-east.png",
+          "bytes": 1473
+        },
+        {
+          "path": "art/characters/parts/shoes06/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-east.png",
+          "bytes": 1473
+        },
+        {
+          "path": "art/characters/parts/shoes07/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-east.png",
+          "bytes": 1473
+        },
+        {
+          "path": "art/characters/parts/shoes08/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-east.png",
+          "bytes": 1473
+        },
+        {
+          "path": "art/characters/parts/shoes09/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-east.png",
+          "bytes": 1473
+        },
+        {
+          "path": "art/characters/parts/shoes10/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-east.png",
+          "bytes": 1473
+        }
+      ],
+      "redundant_bytes": 11784
+    },
+    {
+      "sha256": "d15021748f136600b504951f7ad412845ea43907f84f7ae6392e303d48f47968",
+      "files": [
+        {
+          "path": "art/characters/parts/top02/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-east.png",
+          "bytes": 1301
+        },
+        {
+          "path": "art/characters/parts/top03/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-east.png",
+          "bytes": 1301
+        },
+        {
+          "path": "art/characters/parts/top04/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-east.png",
+          "bytes": 1301
+        },
+        {
+          "path": "art/characters/parts/top05/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-east.png",
+          "bytes": 1301
+        },
+        {
+          "path": "art/characters/parts/top06/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-east.png",
+          "bytes": 1301
+        },
+        {
+          "path": "art/characters/parts/top07/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-east.png",
+          "bytes": 1301
+        },
+        {
+          "path": "art/characters/parts/top08/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-east.png",
+          "bytes": 1301
+        },
+        {
+          "path": "art/characters/parts/top09/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-east.png",
+          "bytes": 1301
+        },
+        {
+          "path": "art/characters/parts/top10/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-east.png",
+          "bytes": 1301
+        }
+      ],
+      "redundant_bytes": 10408
+    },
+    {
+      "sha256": "57b289b6684c4633c49502be528b8dc17ac5a48d82a45a06a3fa153a22e1f654",
+      "files": [
+        {
+          "path": "art/characters/parts/top02/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-west.png",
+          "bytes": 1299
+        },
+        {
+          "path": "art/characters/parts/top03/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-west.png",
+          "bytes": 1299
+        },
+        {
+          "path": "art/characters/parts/top04/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-west.png",
+          "bytes": 1299
+        },
+        {
+          "path": "art/characters/parts/top05/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-west.png",
+          "bytes": 1299
+        },
+        {
+          "path": "art/characters/parts/top06/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-west.png",
+          "bytes": 1299
+        },
+        {
+          "path": "art/characters/parts/top07/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-west.png",
+          "bytes": 1299
+        },
+        {
+          "path": "art/characters/parts/top08/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-west.png",
+          "bytes": 1299
+        },
+        {
+          "path": "art/characters/parts/top09/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-west.png",
+          "bytes": 1299
+        },
+        {
+          "path": "art/characters/parts/top10/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-west.png",
+          "bytes": 1299
+        }
+      ],
+      "redundant_bytes": 10392
+    },
+    {
+      "sha256": "1e428df6c0def4ea26725603ec79925681d04e1141f77d853bd4ced5191232b2",
+      "files": [
+        {
+          "path": "art/characters/parts/top02/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-north.png",
+          "bytes": 1289
+        },
+        {
+          "path": "art/characters/parts/top03/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-north.png",
+          "bytes": 1289
+        },
+        {
+          "path": "art/characters/parts/top04/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-north.png",
+          "bytes": 1289
+        },
+        {
+          "path": "art/characters/parts/top05/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-north.png",
+          "bytes": 1289
+        },
+        {
+          "path": "art/characters/parts/top06/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-north.png",
+          "bytes": 1289
+        },
+        {
+          "path": "art/characters/parts/top07/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-north.png",
+          "bytes": 1289
+        },
+        {
+          "path": "art/characters/parts/top08/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-north.png",
+          "bytes": 1289
+        },
+        {
+          "path": "art/characters/parts/top09/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-north.png",
+          "bytes": 1289
+        },
+        {
+          "path": "art/characters/parts/top10/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-north.png",
+          "bytes": 1289
+        }
+      ],
+      "redundant_bytes": 10312
+    },
+    {
+      "sha256": "3356d0de9c5e2893ef14a29f953f0e6852e3e8e7ef26e16c1f491f4c58441ff3",
+      "files": [
+        {
+          "path": "art/characters/parts/top02/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/east.png",
+          "bytes": 1270
+        },
+        {
+          "path": "art/characters/parts/top03/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/east.png",
+          "bytes": 1270
+        },
+        {
+          "path": "art/characters/parts/top04/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/east.png",
+          "bytes": 1270
+        },
+        {
+          "path": "art/characters/parts/top05/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/east.png",
+          "bytes": 1270
+        },
+        {
+          "path": "art/characters/parts/top06/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/east.png",
+          "bytes": 1270
+        },
+        {
+          "path": "art/characters/parts/top07/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/east.png",
+          "bytes": 1270
+        },
+        {
+          "path": "art/characters/parts/top08/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/east.png",
+          "bytes": 1270
+        },
+        {
+          "path": "art/characters/parts/top09/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/east.png",
+          "bytes": 1270
+        },
+        {
+          "path": "art/characters/parts/top10/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/east.png",
+          "bytes": 1270
+        }
+      ],
+      "redundant_bytes": 10160
+    },
+    {
+      "sha256": "b36fcfed7985a97e85257ab7dcc8875b58cac60cda726411c36594e1a380791a",
+      "files": [
+        {
+          "path": "art/characters/parts/top02/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-north.png",
+          "bytes": 1676
+        },
+        {
+          "path": "art/characters/parts/top03/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-north.png",
+          "bytes": 1676
+        },
+        {
+          "path": "art/characters/parts/top04/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-north.png",
+          "bytes": 1676
+        },
+        {
+          "path": "art/characters/parts/top06/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-north.png",
+          "bytes": 1676
+        },
+        {
+          "path": "art/characters/parts/top08/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-north.png",
+          "bytes": 1676
+        },
+        {
+          "path": "art/characters/parts/top09/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-north.png",
+          "bytes": 1676
+        },
+        {
+          "path": "art/characters/parts/top10/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-north.png",
+          "bytes": 1676
+        }
+      ],
+      "redundant_bytes": 10056
+    },
+    {
+      "sha256": "17ef2cde318d98a7cd416e440556a50cb41764a11884f799cde17927d6430f0f",
+      "files": [
+        {
+          "path": "art/characters/parts/top02/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-south.png",
+          "bytes": 1247
+        },
+        {
+          "path": "art/characters/parts/top03/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-south.png",
+          "bytes": 1247
+        },
+        {
+          "path": "art/characters/parts/top04/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-south.png",
+          "bytes": 1247
+        },
+        {
+          "path": "art/characters/parts/top05/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-south.png",
+          "bytes": 1247
+        },
+        {
+          "path": "art/characters/parts/top06/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-south.png",
+          "bytes": 1247
+        },
+        {
+          "path": "art/characters/parts/top07/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-south.png",
+          "bytes": 1247
+        },
+        {
+          "path": "art/characters/parts/top08/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-south.png",
+          "bytes": 1247
+        },
+        {
+          "path": "art/characters/parts/top09/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-south.png",
+          "bytes": 1247
+        },
+        {
+          "path": "art/characters/parts/top10/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-south.png",
+          "bytes": 1247
+        }
+      ],
+      "redundant_bytes": 9976
+    },
+    {
+      "sha256": "491b9b6eca95490f01bc7071b752c99313eaeabf9cb548072b8b108eff00af5b",
+      "files": [
+        {
+          "path": "art/characters/parts/top02/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-east.png",
+          "bytes": 1742
+        },
+        {
+          "path": "art/characters/parts/top03/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-east.png",
+          "bytes": 1742
+        },
+        {
+          "path": "art/characters/parts/top04/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-east.png",
+          "bytes": 1742
+        },
+        {
+          "path": "art/characters/parts/top05/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-east.png",
+          "bytes": 1742
+        },
+        {
+          "path": "art/characters/parts/top06/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-east.png",
+          "bytes": 1742
+        },
+        {
+          "path": "art/characters/parts/top09/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-east.png",
+          "bytes": 1742
+        }
+      ],
+      "redundant_bytes": 8710
+    },
+    {
+      "sha256": "2807467d7ef7dbbc94c02b2a63352ed95a4e5b7fc9c5f601c0b7877a8ef67d2e",
+      "files": [
+        {
+          "path": "art/characters/parts/top02/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/north.png",
+          "bytes": 1438
+        },
+        {
+          "path": "art/characters/parts/top03/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/north.png",
+          "bytes": 1438
+        },
+        {
+          "path": "art/characters/parts/top04/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/north.png",
+          "bytes": 1438
+        },
+        {
+          "path": "art/characters/parts/top06/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/north.png",
+          "bytes": 1438
+        },
+        {
+          "path": "art/characters/parts/top08/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/north.png",
+          "bytes": 1438
+        },
+        {
+          "path": "art/characters/parts/top09/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/north.png",
+          "bytes": 1438
+        },
+        {
+          "path": "art/characters/parts/top10/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/north.png",
+          "bytes": 1438
+        }
+      ],
+      "redundant_bytes": 8628
+    },
+    {
+      "sha256": "a6e58f1e8cdf333329726b414dafbbd717c523bc271b0264f85df8d734f14791",
+      "files": [
+        {
+          "path": "art/characters/parts/pants02/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-south.png",
+          "bytes": 924
+        },
+        {
+          "path": "art/characters/parts/pants03/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-south.png",
+          "bytes": 924
+        },
+        {
+          "path": "art/characters/parts/pants04/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-south.png",
+          "bytes": 924
+        },
+        {
+          "path": "art/characters/parts/pants05/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-south.png",
+          "bytes": 924
+        },
+        {
+          "path": "art/characters/parts/pants06/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-south.png",
+          "bytes": 924
+        },
+        {
+          "path": "art/characters/parts/pants09/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-south.png",
+          "bytes": 924
+        },
+        {
+          "path": "art/characters/parts/pants10/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-south.png",
+          "bytes": 924
+        }
+      ],
+      "redundant_bytes": 5544
+    },
+    {
+      "sha256": "11cbf52b3b09b581816438ca08cd118147216713c946051fc9232f6d1dca188b",
+      "files": [
+        {
+          "path": "art/characters/parts/pants02/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-west.png",
+          "bytes": 918
+        },
+        {
+          "path": "art/characters/parts/pants03/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-west.png",
+          "bytes": 918
+        },
+        {
+          "path": "art/characters/parts/pants04/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-west.png",
+          "bytes": 918
+        },
+        {
+          "path": "art/characters/parts/pants05/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-west.png",
+          "bytes": 918
+        },
+        {
+          "path": "art/characters/parts/pants06/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-west.png",
+          "bytes": 918
+        },
+        {
+          "path": "art/characters/parts/pants09/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-west.png",
+          "bytes": 918
+        },
+        {
+          "path": "art/characters/parts/pants10/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-west.png",
+          "bytes": 918
+        }
+      ],
+      "redundant_bytes": 5508
+    },
+    {
+      "sha256": "dced0b7d99189adf0e7cbb8124394e6e544a24dfb23abd7a951711e591b96ad1",
+      "files": [
+        {
+          "path": "art/characters/parts/pants02/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-north.png",
+          "bytes": 907
+        },
+        {
+          "path": "art/characters/parts/pants03/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-north.png",
+          "bytes": 907
+        },
+        {
+          "path": "art/characters/parts/pants04/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-north.png",
+          "bytes": 907
+        },
+        {
+          "path": "art/characters/parts/pants05/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-north.png",
+          "bytes": 907
+        },
+        {
+          "path": "art/characters/parts/pants06/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-north.png",
+          "bytes": 907
+        },
+        {
+          "path": "art/characters/parts/pants09/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-north.png",
+          "bytes": 907
+        },
+        {
+          "path": "art/characters/parts/pants10/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-north.png",
+          "bytes": 907
+        }
+      ],
+      "redundant_bytes": 5442
+    },
+    {
+      "sha256": "afef5f4a0ccc9da99a698cec864053ef44179466e0b1a3148c95b1a71bc63d85",
+      "files": [
+        {
+          "path": "art/characters/parts/pants02/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-east.png",
+          "bytes": 881
+        },
+        {
+          "path": "art/characters/parts/pants03/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-east.png",
+          "bytes": 881
+        },
+        {
+          "path": "art/characters/parts/pants04/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-east.png",
+          "bytes": 881
+        },
+        {
+          "path": "art/characters/parts/pants05/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-east.png",
+          "bytes": 881
+        },
+        {
+          "path": "art/characters/parts/pants06/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-east.png",
+          "bytes": 881
+        },
+        {
+          "path": "art/characters/parts/pants09/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-east.png",
+          "bytes": 881
+        },
+        {
+          "path": "art/characters/parts/pants10/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-east.png",
+          "bytes": 881
+        }
+      ],
+      "redundant_bytes": 5286
+    },
+    {
+      "sha256": "02c6ed8492ce5035151e75bef23333fb13ec23d66a46e1e16410556f694051c0",
+      "files": [
+        {
+          "path": "art/characters/parts/top03/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-south.png",
+          "bytes": 1754
+        },
+        {
+          "path": "art/characters/parts/top04/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-south.png",
+          "bytes": 1754
+        },
+        {
+          "path": "art/characters/parts/top08/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-south.png",
+          "bytes": 1754
+        },
+        {
+          "path": "art/characters/parts/top10/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-south.png",
+          "bytes": 1754
+        }
+      ],
+      "redundant_bytes": 5262
+    },
+    {
+      "sha256": "bd83e11be94916a5368207ef60f24279e9606b48aa026b47b6c77b41b0baf5dc",
+      "files": [
+        {
+          "path": "art/characters/parts/top02/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-west.png",
+          "bytes": 1738
+        },
+        {
+          "path": "art/characters/parts/top04/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-west.png",
+          "bytes": 1738
+        },
+        {
+          "path": "art/characters/parts/top06/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-west.png",
+          "bytes": 1738
+        },
+        {
+          "path": "art/characters/parts/top09/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-west.png",
+          "bytes": 1738
+        }
+      ],
+      "redundant_bytes": 5214
+    },
+    {
+      "sha256": "b8eb803dbd205e7d0b51a4692c8709510bb58d0931022cfa29dec8610b55f4b3",
+      "files": [
+        {
+          "path": "art/characters/parts/shoes02/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-east.png",
+          "bytes": 852
+        },
+        {
+          "path": "art/characters/parts/shoes03/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-east.png",
+          "bytes": 852
+        },
+        {
+          "path": "art/characters/parts/shoes04/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-east.png",
+          "bytes": 852
+        },
+        {
+          "path": "art/characters/parts/shoes06/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-east.png",
+          "bytes": 852
+        },
+        {
+          "path": "art/characters/parts/shoes07/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-east.png",
+          "bytes": 852
+        },
+        {
+          "path": "art/characters/parts/shoes08/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-east.png",
+          "bytes": 852
+        },
+        {
+          "path": "art/characters/parts/shoes10/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-east.png",
+          "bytes": 852
+        }
+      ],
+      "redundant_bytes": 5112
+    },
+    {
+      "sha256": "5f112124e48abfbdc8844fbccb01447a534eea1cc33b9535f2abeb32c0f5c86a",
+      "files": [
+        {
+          "path": "art/characters/parts/shoes02/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-south.png",
+          "bytes": 845
+        },
+        {
+          "path": "art/characters/parts/shoes03/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-south.png",
+          "bytes": 845
+        },
+        {
+          "path": "art/characters/parts/shoes04/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-south.png",
+          "bytes": 845
+        },
+        {
+          "path": "art/characters/parts/shoes06/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-south.png",
+          "bytes": 845
+        },
+        {
+          "path": "art/characters/parts/shoes07/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-south.png",
+          "bytes": 845
+        },
+        {
+          "path": "art/characters/parts/shoes08/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-south.png",
+          "bytes": 845
+        },
+        {
+          "path": "art/characters/parts/shoes10/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-south.png",
+          "bytes": 845
+        }
+      ],
+      "redundant_bytes": 5070
+    },
+    {
+      "sha256": "f29cd229891bec3839594900a28097d55a20ece5eef341f74933d7a78a2d6ad4",
+      "files": [
+        {
+          "path": "art/characters/parts/shoes02/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-west.png",
+          "bytes": 841
+        },
+        {
+          "path": "art/characters/parts/shoes03/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-west.png",
+          "bytes": 841
+        },
+        {
+          "path": "art/characters/parts/shoes04/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-west.png",
+          "bytes": 841
+        },
+        {
+          "path": "art/characters/parts/shoes06/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-west.png",
+          "bytes": 841
+        },
+        {
+          "path": "art/characters/parts/shoes07/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-west.png",
+          "bytes": 841
+        },
+        {
+          "path": "art/characters/parts/shoes08/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-west.png",
+          "bytes": 841
+        },
+        {
+          "path": "art/characters/parts/shoes10/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-west.png",
+          "bytes": 841
+        }
+      ],
+      "redundant_bytes": 5046
+    },
+    {
+      "sha256": "babfb82c0541a00670d9cbefa76d89020f98c5a325970b8ffa6a632759694fa2",
+      "files": [
+        {
+          "path": "art/characters/parts/shoes02/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-north.png",
+          "bytes": 827
+        },
+        {
+          "path": "art/characters/parts/shoes03/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-north.png",
+          "bytes": 827
+        },
+        {
+          "path": "art/characters/parts/shoes04/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-north.png",
+          "bytes": 827
+        },
+        {
+          "path": "art/characters/parts/shoes06/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-north.png",
+          "bytes": 827
+        },
+        {
+          "path": "art/characters/parts/shoes07/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-north.png",
+          "bytes": 827
+        },
+        {
+          "path": "art/characters/parts/shoes08/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-north.png",
+          "bytes": 827
+        },
+        {
+          "path": "art/characters/parts/shoes10/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-north.png",
+          "bytes": 827
+        }
+      ],
+      "redundant_bytes": 4962
+    },
+    {
+      "sha256": "7ca61b70855084e8e90ac128196d783b86588b941ce46f9a2d6c004120d0cdfb",
+      "files": [
+        {
+          "path": "art/characters/parts/hair-chestnut-short-v1/adaptations/adult-standard-v1/review-motion-v1/r001/masks/headwear-harvest-north/idle_north_0-hair-source_ownership-cec54732.png",
+          "bytes": 2218
+        },
+        {
+          "path": "art/characters/parts/hair01/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/owner-north.png",
+          "bytes": 2218
+        },
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/inputs/baseline-head-proof/hair-mask_north.png",
+          "bytes": 2218
+        }
+      ],
+      "redundant_bytes": 4436
+    },
+    {
+      "sha256": "51e9a22a5eac7aaade30ede4fda0073844e3dbebe7b2c76a16aec69897a9cb30",
+      "files": [
+        {
+          "path": "art/characters/parts/hair01/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/owner-east.png",
+          "bytes": 2173
+        },
+        {
+          "path": "art/characters/sources/motion-headwear-sampling-v1-f3259134/originals/idle_east_0-hair-edit-region-414ce10e.png",
+          "bytes": 2173
+        },
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/inputs/baseline-head-proof/hair-mask_east.png",
+          "bytes": 2173
+        }
+      ],
+      "redundant_bytes": 4346
+    },
+    {
+      "sha256": "20ee4d8b99907433b0f70fd0693950773a5354559a4afe53448390083e59738d",
+      "files": [
+        {
+          "path": "art/characters/parts/hair01/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/owner-west.png",
+          "bytes": 2147
+        },
+        {
+          "path": "art/characters/sources/motion-headwear-sampling-v1-d9a3c790/originals/idle_west_0-hair-edit-region-6bf19b17.png",
+          "bytes": 2147
+        },
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/inputs/baseline-head-proof/hair-mask_west.png",
+          "bytes": 2147
+        }
+      ],
+      "redundant_bytes": 4294
+    },
+    {
+      "sha256": "090ad3704e6789263341219fcb72c1afc78d9962a5b1cd2232e763165d5ba105",
+      "files": [
+        {
+          "path": "art/characters/parts/top03/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/south.png",
+          "bytes": 1418
+        },
+        {
+          "path": "art/characters/parts/top04/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/south.png",
+          "bytes": 1418
+        },
+        {
+          "path": "art/characters/parts/top08/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/south.png",
+          "bytes": 1418
+        },
+        {
+          "path": "art/characters/parts/top10/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/south.png",
+          "bytes": 1418
+        }
+      ],
+      "redundant_bytes": 4254
+    },
+    {
+      "sha256": "a4b40fc8238a4c61b067eb46e3eb93e362b849f6a520392ffb0f36b1d60a1111",
+      "files": [
+        {
+          "path": "art/characters/parts/hair-chestnut-short-v1/adaptations/adult-standard-v1/review-motion-v1/r001/masks/headwear-water-south/idle_south_0-hair-source_ownership-ab33b21b.png",
+          "bytes": 2106
+        },
+        {
+          "path": "art/characters/parts/hair01/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/owner-south.png",
+          "bytes": 2106
+        },
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/inputs/baseline-head-proof/hair-mask_south.png",
+          "bytes": 2106
+        }
+      ],
+      "redundant_bytes": 4212
+    },
+    {
+      "sha256": "7b2ca966e39453bbb599e07347979d2eb96b5347bc2e30e5467e15385aa2d175",
+      "files": [
+        {
+          "path": "art/characters/parts/top02/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/west.png",
+          "bytes": 1356
+        },
+        {
+          "path": "art/characters/parts/top04/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/west.png",
+          "bytes": 1356
+        },
+        {
+          "path": "art/characters/parts/top06/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/west.png",
+          "bytes": 1356
+        },
+        {
+          "path": "art/characters/parts/top09/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/west.png",
+          "bytes": 1356
+        }
+      ],
+      "redundant_bytes": 4068
+    },
+    {
+      "sha256": "729140bccb9639fd63a6af102af80ff9c366f0cf984eda51dd87c9d386b6acec",
+      "files": [
+        {
+          "path": "art/characters/parts/top02/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-south.png",
+          "bytes": 1754
+        },
+        {
+          "path": "art/characters/parts/top06/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-south.png",
+          "bytes": 1754
+        },
+        {
+          "path": "art/characters/parts/top09/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-south.png",
+          "bytes": 1754
+        }
+      ],
+      "redundant_bytes": 3508
+    },
+    {
+      "sha256": "221274aaf9eb2aaec1595d36dcc30727d6140c2f7172053aa17ff38c104f4798",
+      "files": [
+        {
+          "path": "art/characters/parts/hat-straw-navy-band-v1/adaptations/adult-standard-v1/review-motion-v1/r001/masks/headwear-harvest-north/idle_north_0-hat-source_ownership-ae5c7700.png",
+          "bytes": 1652
+        },
+        {
+          "path": "art/characters/parts/hat01/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/owner-north.png",
+          "bytes": 1652
+        },
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/inputs/baseline-head-proof/hat-mask_north.png",
+          "bytes": 1652
+        }
+      ],
+      "redundant_bytes": 3304
+    },
+    {
+      "sha256": "df6112a6810b12dac278f50dc90906098ccd6e4865d3663024553def4f699733",
+      "files": [
+        {
+          "path": "art/characters/parts/hat-straw-navy-band-v1/adaptations/adult-standard-v1/review-motion-v1/r001/masks/headwear-water-south/idle_south_0-hat-source_ownership-4c63f437.png",
+          "bytes": 1620
+        },
+        {
+          "path": "art/characters/parts/hat01/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/owner-south.png",
+          "bytes": 1620
+        },
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/inputs/baseline-head-proof/hat-mask_south.png",
+          "bytes": 1620
+        }
+      ],
+      "redundant_bytes": 3240
+    },
+    {
+      "sha256": "07ad97d7d77cdcd7ad82ed9c82b8473b49dabfbfd80e11450dfb971d0c61c603",
+      "files": [
+        {
+          "path": "art/characters/parts/top02/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/south.png",
+          "bytes": 1418
+        },
+        {
+          "path": "art/characters/parts/top06/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/south.png",
+          "bytes": 1418
+        },
+        {
+          "path": "art/characters/parts/top09/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/south.png",
+          "bytes": 1418
+        }
+      ],
+      "redundant_bytes": 2836
+    },
+    {
+      "sha256": "79140da7642acfe707ee67737f91feef4e7c451fa903d85a4b7af044157cd974",
+      "files": [
+        {
+          "path": "art/characters/parts/hat01/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/owner-west.png",
+          "bytes": 1858
+        },
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/inputs/baseline-head-proof/hat-mask_west.png",
+          "bytes": 1858
+        }
+      ],
+      "redundant_bytes": 1858
+    },
+    {
+      "sha256": "527332a086a97852c7a86e911cb95613c15a0e6677edac0404906d8472db589c",
+      "files": [
+        {
+          "path": "art/characters/parts/hat01/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/owner-east.png",
+          "bytes": 1766
+        },
+        {
+          "path": "art/characters/templates/adult-standard-v1/revisions/directional-brows-v3/inputs/baseline-head-proof/hat-mask_east.png",
+          "bytes": 1766
+        }
+      ],
+      "redundant_bytes": 1766
+    },
+    {
+      "sha256": "d0141896e6c49b6f2e321db98e9a90d5261f774e8f52d95a03bb5eca08419f6b",
+      "files": [
+        {
+          "path": "art/characters/parts/top08/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-west.png",
+          "bytes": 1728
+        },
+        {
+          "path": "art/characters/parts/top10/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/protected-west.png",
+          "bytes": 1728
+        }
+      ],
+      "redundant_bytes": 1728
+    },
+    {
+      "sha256": "c25398471251aa680f535fb09e812e0eb9d3f5fb77943bf8ab8ecc75acc585db",
+      "files": [
+        {
+          "path": "art/characters/parts/top08/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/west.png",
+          "bytes": 1357
+        },
+        {
+          "path": "art/characters/parts/top10/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/west.png",
+          "bytes": 1357
+        }
+      ],
+      "redundant_bytes": 1357
+    },
+    {
+      "sha256": "039774f5cce23c385a9644c68c11f09afc97d5cec1ad2c59579033c049d7660d",
+      "files": [
+        {
+          "path": "art/characters/parts/pants07/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-north.png",
+          "bytes": 1062
+        },
+        {
+          "path": "art/characters/parts/pants08/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-north.png",
+          "bytes": 1062
+        }
+      ],
+      "redundant_bytes": 1062
+    },
+    {
+      "sha256": "215a7f01094c4a77ac2f883353ef7516570daff008e9535a643e7e4bcc8b179d",
+      "files": [
+        {
+          "path": "art/characters/parts/pants07/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-west.png",
+          "bytes": 1048
+        },
+        {
+          "path": "art/characters/parts/pants08/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-west.png",
+          "bytes": 1048
+        }
+      ],
+      "redundant_bytes": 1048
+    },
+    {
+      "sha256": "2249b4bf40e35c3b9b8c148813dfea60ed719cf6578aac88d98fee4f46ea0ed6",
+      "files": [
+        {
+          "path": "art/characters/parts/pants07/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-east.png",
+          "bytes": 1025
+        },
+        {
+          "path": "art/characters/parts/pants08/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-east.png",
+          "bytes": 1025
+        }
+      ],
+      "redundant_bytes": 1025
+    },
+    {
+      "sha256": "e3813106d214b471a8254dfd809df173bdebe2db0841e9ae575f365ff1a5c643",
+      "files": [
+        {
+          "path": "art/characters/parts/pants07/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-south.png",
+          "bytes": 1016
+        },
+        {
+          "path": "art/characters/parts/pants08/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-south.png",
+          "bytes": 1016
+        }
+      ],
+      "redundant_bytes": 1016
+    },
+    {
+      "sha256": "e96465ca07a54791f33f451067d5cf110c09f8bf64f94024fc318d0d0dafbf6e",
+      "files": [
+        {
+          "path": "art/characters/parts/shoes05/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-south.png",
+          "bytes": 869
+        },
+        {
+          "path": "art/characters/parts/shoes09/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-south.png",
+          "bytes": 869
+        }
+      ],
+      "redundant_bytes": 869
+    },
+    {
+      "sha256": "6456b390cb951b234a81a81d2ed098ab753c9b6cbb849b603749bb1aa1a90146",
+      "files": [
+        {
+          "path": "art/characters/parts/shoes05/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-north.png",
+          "bytes": 857
+        },
+        {
+          "path": "art/characters/parts/shoes09/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-north.png",
+          "bytes": 857
+        }
+      ],
+      "redundant_bytes": 857
+    },
+    {
+      "sha256": "c6b19d6b1862b7709560b0022c77c8ec1bc370692773b626c0c376c0a286cdfe",
+      "files": [
+        {
+          "path": "art/characters/parts/shoes05/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-west.png",
+          "bytes": 823
+        },
+        {
+          "path": "art/characters/parts/shoes09/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-west.png",
+          "bytes": 823
+        }
+      ],
+      "redundant_bytes": 823
+    },
+    {
+      "sha256": "2661dd4488f29977b59a5ee69b719eb9c778f014f12b8f4371b5a4a31965f283",
+      "files": [
+        {
+          "path": "art/characters/parts/shoes05/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-east.png",
+          "bytes": 760
+        },
+        {
+          "path": "art/characters/parts/shoes09/adaptations/adult-standard-v1/standing_0/static-candidate-v1/source-ownership/semantic-east.png",
+          "bytes": 760
+        }
+      ],
+      "redundant_bytes": 760
+    }
+  ]
+}

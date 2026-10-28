@@ -15,7 +15,7 @@ REPO = Path(__file__).resolve().parents[2]
 
 def engine_identity():
     base = Path(__file__).parent
-    return {'pillow': PIL.__version__, 'code': {p: digest(base / p) for p in ('build.py', 'build_contract.py')}}
+    return {'pillow': PIL.__version__, 'code': {p: digest(base / p) for p in ('build.py', 'build_contract.py', 'composition_contract.py')}}
 
 
 def artifact(validated):
@@ -23,6 +23,10 @@ def artifact(validated):
 
 
 def render(validated):
+    if validated.base is not None:
+        from composition_contract import render_composition
+        yield from render_composition(validated, render)
+        return
     for clip in validated.recipe['clips']:
         for frame in clip['frames']:
             layers = {layer['id']: layer for layer in frame['layers']}

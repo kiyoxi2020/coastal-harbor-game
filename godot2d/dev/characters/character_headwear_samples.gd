@@ -1,4 +1,5 @@
 extends RefCounted
+const ConstructionLibrary=preload("res://dev/characters/character_construction_samples.gd")
 const ResourcePaths = preload("res://dev/characters/character_resource_paths.gd")
 ## Bounded headwear views. Everything resolves against an exact accepted pose.
 const IDS=["run-east","hoe-west","water-south","harvest-north"]
@@ -6,8 +7,10 @@ const STATES=["bare","hair","hat","hair_hat"]
 var samples:Array=[]
 var error:=""
 var catalog_sha256:=""
+var suite_kind:=""
+var manifest_bindings:Dictionary={}
 func reject(message:String) -> bool:
- samples.clear();catalog_sha256="";error=message;return false
+ samples.clear();catalog_sha256="";suite_kind="";manifest_bindings.clear();error=message;return false
 func relative_file(value: Variant) -> bool:
  return ResourcePaths.relative_file(value)
 
@@ -44,8 +47,13 @@ func state_textures(base:String,frame:Dictionary,inputs:Dictionary,size:Vector2i
   result[state]=ImageTexture.create_from_image(picture)
  return result
 func load_samples(project:String,path:String) -> bool:
- samples.clear();error="";catalog_sha256=""
+ samples.clear();error="";catalog_sha256="";suite_kind="";manifest_bindings.clear()
  var catalog=read_json(path)
+ if catalog is Dictionary and catalog.get("kind")==ConstructionLibrary.KIND:
+  var strict=ConstructionLibrary.new()
+  if not strict.load_samples(project,path):return reject(strict.error)
+  samples=strict.samples;catalog_sha256=strict.catalog_sha256;suite_kind=strict.suite_kind;manifest_bindings=strict.manifest_bindings
+  return true
  if not catalog is Dictionary or catalog.get("schema_version")!=1 or catalog.get("template_id")!="adult-standard-v1" or catalog.get("scope")!="sampled-headwear-not-exhaustive" or not catalog.get("samples") is Array or catalog.samples.size()!=IDS.size():return reject("发帽目录必须明确包含四个抽样。")
  if ResourcePaths.base(project,path,catalog).is_empty():return reject("发帽目录资源根无效。")
  var pending:Array=[];var seen:Array=[]

@@ -8,25 +8,43 @@ var head_state:="bare"
 var head_catalog_override:=""
 @onready var head_label:Label=$TrialUI/Headwear/Margin/Rows/Selection
 func _ready() -> void:
+ for argument in OS.get_cmdline_user_args():
+  if argument.begins_with("--construction-suite="):head_catalog_override=argument.trim_prefix("--construction-suite=")
+  if argument.begins_with("--head-catalog="):head_catalog_override=argument.trim_prefix("--head-catalog=")
  super._ready()
  get_window().title="潮港旧屋 · 动态发帽抽样"
  $TrialUI/Panel/Margin/Rows/Instructions.text="动态发帽体验 · 右上选动作、右下选发帽 · R回起点 · 左侧暂停/逐帧"
  $TrialUI/Samples/Margin/Rows/Title.text="动态发帽 · 四组动作抽样"
  $TrialUI/Samples/Margin/Rows/Buttons.get_node("walk-west").hide()
  $TrialUI/Panel/Margin/Rows/Scope.text="右上选动作、右下选发帽；左侧暂停/逐帧。方向键跑步，F浇水 / G锄地 / H收获。仅所选方向，无存档。"
- var project:=ProjectSettings.globalize_path("res://..")
+ var project:=ProjectSettings.globalize_path("res://..").simplify_path()
  var catalog:=head_catalog_override if head_catalog_override!="" else project.path_join("art/characters/reviews/headwear/catalog.json")
  if sample_error!="" or load_error!="":head_error=sample_error if sample_error!="" else load_error
  elif not head_library.load_samples(project,catalog):head_error=head_library.error
+ if head_error=="" and head_library.suite_kind=="coastal-character-construction-review-v1":
+  # Replace inherited wardrobe sample entries before exposing any construction
+  # selection. The actual motion library still supplies the frozen clock/pose map.
+  sample_library.samples=[]
+  for head in head_library.samples:
+   var sample:Dictionary=head.duplicate(false)
+   sample.textures=head.textures_by_state.bare;sample.idle_texture=head.idle_by_state.bare
+   sample_library.samples.append(sample)
+  if not apply_samples():head_error=sample_error
  if head_error!="":
   load_error=head_error;head_label.text="发帽加载失败："+head_error
   for button in $TrialUI/Samples/Margin/Rows/Buttons.get_children():button.disabled=true
   for button in $TrialUI/Headwear/Margin/Rows/Buttons.get_children():button.disabled=true
   return
+ var available:Array=[]
+ for sample in head_library.samples:available.append(sample.id)
+ for button in $TrialUI/Samples/Margin/Rows/Buttons.get_children():
+  button.visible=button.name in available;button.disabled=not button.name in available
+ $TrialUI/Samples/Margin/Rows/Title.text="西向锄地 · 四种发帽" if head_library.suite_kind!="" else "动态发帽 · 四组动作抽样"
+ if head_library.suite_kind!="":$TrialUI/Panel/Margin/Rows/Scope.text="西向锄地四姿态与匹配站姿；右下选择发帽，左侧暂停/逐帧。G锄地，R回起点。无存档。"
  for state in HeadLibrary.STATES:
   $TrialUI/Headwear/Margin/Rows/Buttons.get_node(state).pressed.connect(select_head_state.bind(state))
  head_ready=true
- select_sample("run-east")
+ select_sample("hoe-west" if head_library.suite_kind!="" else "run-east")
  select_head_state("hair_hat")
 func select_sample(id:String) -> void:
  # During parent setup head resources have not loaded; do not expose that selection.
@@ -40,6 +58,7 @@ func select_sample(id:String) -> void:
  if not found:return
  apply_head_state(head_state)
  super.select_sample(id)
+ if head_library.suite_kind!="":sample_label.text="当前：西向锄地 · 海军条纹衫\n原款长裤与棕鞋 · 四种发帽\n世界：G锄地；R回起点。"
  refresh_head_label()
 func apply_head_state(state:String) -> void:
  for head in head_library.samples:
@@ -64,7 +83,7 @@ func select_head_state(state:String) -> bool:
  return true
 func refresh_head_label() -> void:
  if not is_instance_valid(head_label):return
- head_label.text="当前："+str(HEAD_LABELS[head_state])+" · 切换保持当前动作进度\n仅本次四组抽样，外观待你验收。"
+ head_label.text="当前："+str(HEAD_LABELS[head_state])+" · 切换保持当前动作进度\n"+("仅西锄四姿态＋站姿小样，外观待你验收。" if head_library.suite_kind!="" else "仅本次四组抽样，外观待你验收。")
  for state in HeadLibrary.STATES:
   $TrialUI/Headwear/Margin/Rows/Buttons.get_node(state).set_pressed_no_signal(state==head_state)
 func movement_input() -> Vector2:

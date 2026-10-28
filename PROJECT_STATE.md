@@ -1,3 +1,63 @@
+## 2026-10-29 用户确认本地提交并更新进度
+
+用户要求“提交和更新进度”。本次提交纳入本会话已完成的人物库导航与精简/覆盖审计、西锄schema2四固定头部配方及20帧严格构建、Godot消费者/评审/原生证据校验，以及同配方西walk素材准备、诊断与独立复查资料。提交标识以Git最新记录为准；不推送。
+
+沿用最近且源码未再变更的114项人物测试、Godot synthetic134/actual48、旧回归34/98/90和Apple M4原生120检查/3307时序/215PNG；257迁移帧与60静态候选核验保持。提交前再次check.py通过（strict5/build4/legacy9），差异格式与文件范围检查通过；不为提交重复GPU采集。正式游戏仍使用player-unified-v4，发布关闭。
+
+西walk本轮仍只有来源准备及离线诊断，尚未新增正式配方/原生能力；后续先处理设计身份、多target同view登记、层/mask语义及构建历史保全，再实施统一构建/评审/原生验收。原始GPU采集和未入Git旧过程资料仍在已记录/private/tmp路径，不称为已永久归档；本次只冻结库内必要源、当前代码/构建、轻量回执与代表图。
+
+Paseo跟踪本次范围核对、记录更新、本地提交与提交后核验。主代理直接执行，未创建新子代理；既有阶段历史中的“未提交”描述按各记录创建时状态解释。
+
+## 2026-10-29 同配方西向行走素材准备完成
+
+继续推进成年候选top03/原橄榄裤/原棕鞋，已核实可复用现有GPT像素做有限西walk小样准备，未新增生图。西锄idle裤鞋coverage区与B_1逐RGBA相同；四走诊断仅取旧条纹top-visible区，裤鞋/alpha及top外对B均0差异，不当成独立裤鞋接口。临时walk idle条纹与已交付idle差22853像素，故正式小样推荐直接沿用r002精确idle，不返工当前待机。
+
+头部同西向投影复用候选：source_view_pose=idle_west_0，四walk按实测耳弓锚delta[1,-1]/[1,-1]/[0,-1]/[2,-1]，无缩放/换脸手/任意调位；完整hair/near-far帽/专用帽下源与ownership可追溯。边界残差最大3.162源像素≈0.75逻辑显示像素，不是已测物理屏幕误差。五pose四state诊断保留exact idle，四idle状态与现交付RGBA相同；APNG为4×80ms源时序，未应用runtime .75倍率，非Godot原生。
+
+交付：`docs/reviews/2026-10-29-walk-west-readiness.md`、同目录walk-west-preparation诊断PNG/APNG和evidence.json、`2026-10-29-walk-west-readiness-review.md`。245条来源/产物SHA、114项人物测试、check.py(strict5/build4/legacy9)、链接/数据/diff通过；独立规格/证据复查PASS。原有四strict构建保持当前有效，西锄试玩仍原交付。
+
+本轮只新增准备资料，未改运行代码/正式art/配方/构建/基线/认可，未新strict build/Godot加载/GPU/生产/导出。尚欠walk设计身份桥接、多target同view正式登记及真实layer/mask语义、统一合同与旧构建历史保全、actual/native验收。修改共用design/r001/idle/engine会按实际依赖使旧build过期，不能忽略SHA或刷新baseline。下一任务先完成这些登记/生命周期边界，再实施正式walk小样；不把本轮诊断PNG当新身体源。
+
+两位gpt-6.1-sol/high分别做衣装来源与头部锚点准备，gpt-6-astra/high独立复查，主代理整合依赖影响/诊断和验收。Paseo四步完成，保留全部起始修改；未提交/推送。完整临时过程在/private/tmp/coastal-walk-west-prep，未假称永久归档。本阶段完成。
+
+## 2026-10-29 西锄四头部状态统一严格构建小样完成
+
+同一coastal-character-construction-v1新增schema2，引用严格r002衣装配方在内存重建，完成整帧登记后在目标画布组合头层。四份固定配方/四库内build覆盖西锄四pose+匹配idle、bare/hair/hat/hair_hat，20/20与原显示帧逐RGBA完全一致。混合合成、key2双来源ownership选择、实际注册inputs字节、近远帽同源及帽下发兼容hash严格绑定；未知字段/缺依赖/错误来源/局部挪缩拒绝。旧配方、原图与baseline未改。
+
+新增strict消费者并接入原headwear trial/launcher：`python3 tools/characters/review.py headwear-construction`，启动前verify四build；真实Godot仅显示西锄，四状态连续播放/动作内评审切换不重置时钟。普通旧场景仍默认东跑，原西锄薄入口保留。新试玩窗口已打开；正式人物继续player-unified-v4，发布关闭。
+
+验证：114项人物Python测试；check.py(strict_recipes5/strict_builds4/legacy9)；Godot synthetic134/真实actual48，旧loader34/actual98/trial90；迁移35 artifacts/257帧与静态60候选均通过。真实Apple M4/OpenGL原生120项检查、3307条binary64时序、215PNG，4422输入闭包及输出哈希通过。四state各十面板循环、明暗五pose、世界四pose、live切换时钟/结束idle通过。主代理查看明暗发帽/仅发及key2世界对照；独立最终复查规格/质量/证据PASS，无未解决问题。
+
+交付：`art/characters/evidence/construction-headwear-west-v1/README.md`、同目录合同/回执/摘要/五代表图；`docs/reviews/2026-10-29-west-hoe-construction-review.md`；设计与执行计划见2026-10-28-west-hoe-construction文档。完整原生观察保留/private/tmp/coastal-west-hoe-construction-native-01，不称Git已归档；旧layout-native两份dev脚本的当前输入绑定已失效，旧回执保留历史，新回执只认证本西锄小样。
+
+未验证OS键鼠/WM焦点、严格足/握持/目标接触、全帧率录像、跨平台或导出；未新增用户认可、未扩其他动作/方向/体型或切换生产。两位gpt-6.1-sol/high并行负责Python合同/配方与Godot消费者，gpt-6-astra/high独立复查；主代理集成、反例修复、构建与原生验收。Paseo五步完成，保留起始所有文档/AGENTS修改；未提交/推送。本任务完成，不自动开始下一阶段。
+
+## 2026-10-28 固定候选人物配方覆盖审计完成
+
+按用户确认计划并行核查成年母版+top03条纹上衣+original-pants/original-shoes及栗色短发/草帽。24衣装格为2完整登记、3局部、19未登记；未登记不是无源图或必须重画。四组发帽仅西锄及匹配西idle的父衣装精确匹配候选，计8/96能力单元、20个pose/state显示结果；其他三组为不同衣装。静态四向top03源保留为可复用待核。
+
+准确旧规则核对：hair-only为二值支撑RGBA替换，hat/hair_hat为分层alpha合成后仅在真实支撑内贴回body。r002重建bare+现有注册头层20/20逐RGBA相同。下一独立任务建议是统一严格合同表达西锄四固定头状态、混合合成/目标坐标/多来源并接入既有评审；本轮未实现合同、加载器或新配方，未补美术、放宽基线或切换生产。
+
+交付：`docs/reviews/character-first-recipe-coverage-audit.md`及同名JSON、`character-first-recipe-coverage-review.md`；计划勾选完成。75项人物测试、check.py、4369项旧原生输入、10项认可原件/subject、附件760条引用记录与路径根核验均通过。独立复查spec compliance/evidence quality均PASS，无未解决项。旧原生/认可仍限原范围；本轮未新GPU采集、OS输入、严格接触或导出验证。
+
+分工：两位gpt-6.1-sol/high子代理分别做衣装/头部跨清单来源审计，gpt-6-astra/high作独立一致性复查，主代理完成合同/消费者、像素探针、集成与验证。Paseo跟踪四步；子代理沙箱内连接失败一次后由主代理统一同步，不阻塞。保留所有起始README/AGENTS及分析修改；未提交/推送。审计任务完成，不自动开始小样或四向扩展。
+
+## 2026-10-28 人物目录README与Agent导航完善
+
+已完善 `art/characters/README.md`：Agent阅读顺序、全部资源分区职责、路径根、正式生产/现行抽样试玩/严格构建三条调用链、日常命令、扩展位置与冻结/恢复边界。特别说明严格新build不会自动接入现行Godot试玩，静态候选/完整穿衣参考不等于动态通配或隐藏身体。
+
+新增 `godot2d/dev/characters/README.md` 与 `godot2d/tests/characters/README.md`，说明场景/加载器职责、实际加载/合成fixture/原生采集区别及前置条件；工具README将日常构建放在维护工具前，AGENTS补上阅读入口。仅文档变更，未改资源、运行代码、配方、冻结JSON或基线。
+
+验证：四份README的47个本地链接、五种suite的dry-run入口、check.py及75项人物工具测试均通过；差异格式检查通过。按AGENTS完成必要工具回归，未重跑GPU采集。保留起始已有目录精简分析修改；本轮未提交/推送。
+
+## 2026-10-28 人物目录进一步精简分析完成
+
+本轮仅分析，未移动/删除/重编码人物资源，未改代码或冻结基线。新库3,959文件、1,249子目录、约821.58MiB；59组同SHA文件的理论去重上限9.30MiB（约1.13%），不等于可直接删除。建议优先简化README日常入口与可读导航，保留来源/部件/姿态/配方/输出职责；旧构建受门禁保护，先按实际配方逐份迁入新合同再讨论退役。生产player-unified-v4保持。
+
+分析与逐项SHA清单：`docs/reviews/2026-10-28-character-simplification-analysis.md`及同目录`2026-10-28-character-simplification-inventory.json`。75项Python测试及check.py通过；未做全库语义可达性证明、PNG重压缩试验或新原生/导出验证。既有/private/tmp未入Git资料仍需持久保全，不作为已归档删除依据。
+
+Paseo已通过沙箱外连接正常跟踪本次三步分析。主代理直接执行，无子代理；未实施建议、未提交/推送。下一任务建议仅做人物库日常入口与文档导航简化。
+
 ## 2026-10-28 用户确认提交人物目录迁移与构建门禁（当前有效）
 
 用户要求“提交代码，更新进度”。本次本地提交包含已完成的人物资源目录迁移/精简、Godot试玩与测试迁移、统一严格构建入口、仓库门禁、自动检查配置及规范/交接。提交标识见Git最新记录；不推送、不导出，正式游戏仍使用player-unified-v4。

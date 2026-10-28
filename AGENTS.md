@@ -24,6 +24,7 @@
 
 ## 人物构建入口与强制门禁
 
+- 人物任务先查阅 `art/characters/README.md` 的目录职责、Agent阅读顺序及正式生产/现行试玩/严格构建三条调用链；Godot试玩和测试的具体入口见各自目录README。README负责导航，制作合同仍以唯一规范为准。
 - 后续新建人物配方统一使用 `coastal-character-construction-v1`，通过 `python3 tools/characters/build.py build <配方JSON> --output <新目录>` 构建，使用 `verify <构建目录>` 复核。配方位于 `art/characters/recipes/<recipe-id>/<revision>.json`；禁止另写每批次人物合成/播放器或将旧迁移配方冒充新合同。
 - 当前入口支持同姿态整帧分层；整帧源坐标注册须绑定记录并与模板variant完全一致，禁止部件单独挪缩。普通alpha与二值归属合成须显式区分；ownership、coverage、occlusion不是可互换的mask。未支持的接口明确报错，不绕开校验补图。
 - 人物相关改动交付前必须执行 `python3 -m unittest discover -s tools/characters/tests` 与 `python3 tools/characters/check.py`；修改实际美术/动画仍须完成制作规范要求的原生动态与视觉验收，不能以结构测试替代。
