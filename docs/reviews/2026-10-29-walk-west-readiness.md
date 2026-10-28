@@ -6,7 +6,7 @@
 
 **目前可用现有GPT同源像素推进有限西向行走小样，无须因缺walk专用发帽PNG就立即生图。** 新四走候选保留locomotion原下身与脸手，仅替换已登记条纹上衣可见区；头部可尝试以完整西idle视图作多pose映射。既有r002精确idle直接沿用，不重做待机。
 
-可查看[五pose四状态离线总览](walk-west-preparation/candidate-overview-diagnostic.png)、[头部源像素对照](walk-west-preparation/candidate-heads-diagnostic.png)及[无损APNG诊断循环](walk-west-preparation/candidate-loop-diagnostic.apng)。它们是离线诊断，不是Godot原生录像、已注册part或新strict build，也不作为后续构建的身体/source输入。
+可查看[五pose四状态离线总览](walk-west-preparation/candidate-overview-diagnostic.png)、[头部源像素对照](walk-west-preparation/candidate-heads-diagnostic.png)及[无损APNG诊断循环](walk-west-preparation/candidate-loop-diagnostic.png)。它们是离线诊断，不是Godot原生录像、已注册part或新strict build，也不作为后续构建的身体/source输入。
 
 ![离线四头状态诊断，最后一行为既有精确idle](walk-west-preparation/candidate-overview-diagnostic.png)
 
