@@ -1,0 +1,8 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+PASS actual_five_samples_loaded
+FAIL json_times_match_integer_parent
+FAIL initial_sample_selected
+WARDROBE_ACTUAL checks=3 passed=false

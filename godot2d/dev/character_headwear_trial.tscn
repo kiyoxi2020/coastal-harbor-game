@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="PackedScene" path="res://dev/character_wardrobe_trial.tscn" id="1"]
+[ext_resource type="Script" path="res://dev/character_headwear_trial.gd" id="2"]
+
+[ext_resource type="FontFile" path="res://assets/NotoSansCJKsc-Regular.otf" id="3"]
+
+[node name="CharacterHeadwearTrial" instance=ExtResource("1")]
+script = ExtResource("2")
+
+[node name="Headwear" type="PanelContainer" parent="TrialUI" index="3"]
+offset_left = 570.0
+offset_top = 560.0
+offset_right = 1240.0
+offset_bottom = 692.0
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 16
+
+[node name="Margin" type="MarginContainer" parent="TrialUI/Headwear"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 10
+
+[node name="Rows" type="VBoxContainer" parent="TrialUI/Headwear/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="TrialUI/Headwear/Margin/Rows"]
+layout_mode = 2
+text = "头发与帽子"
+
+[node name="Buttons" type="HBoxContainer" parent="TrialUI/Headwear/Margin/Rows"]
+layout_mode = 2
+
+[node name="bare" type="Button" parent="TrialUI/Headwear/Margin/Rows/Buttons"]
+layout_mode = 2
+toggle_mode = true
+text = "裸头"
+
+[node name="hair" type="Button" parent="TrialUI/Headwear/Margin/Rows/Buttons"]
+layout_mode = 2
+toggle_mode = true
+text = "仅头发"
+
+[node name="hat" type="Button" parent="TrialUI/Headwear/Margin/Rows/Buttons"]
+layout_mode = 2
+toggle_mode = true
+text = "仅草帽"
+
+[node name="hair_hat" type="Button" parent="TrialUI/Headwear/Margin/Rows/Buttons"]
+layout_mode = 2
+toggle_mode = true
+text = "头发＋草帽"
+
+[node name="Selection" type="Label" parent="TrialUI/Headwear/Margin/Rows"]
+layout_mode = 2
+autowrap_mode = 3
+text = "正在加载发帽抽样…"
+
+[node name="Instructions" parent="TrialUI/Panel/Margin/Rows" index="0"]
+text = "动态发帽体验 · 右上选动作、右下选发帽 · R回起点 · 左侧暂停/逐帧"
+
+[node name="SpeedLabel" parent="TrialUI/Panel/Margin/Rows/Controls" index="2"]
+text = "动作速度"
+
+[node name="Directions" parent="TrialUI/MotionReview/Margin/Rows" index="1"]
+visible = false
+
+[node name="Actions" parent="TrialUI/MotionReview/Margin/Rows" index="2"]
+visible = false
+
+[node name="Help" parent="TrialUI/MotionReview/Margin/Rows" index="6"]
+text = "右上选择当前动作，右下选择发帽；左侧暂停/逐帧。\n世界仅启用所选方向/动作；C显示或收起对照。"

@@ -1,0 +1,1122 @@
+{
+  "schema_version": 1,
+  "template_id": "adult-standard-v1",
+  "action_id": "harvest",
+  "direction": "north",
+  "status": "sampled-not-exhaustive",
+  "recipe": {
+    "id": "harvest-north-sample-v1",
+    "slots": {
+      "top": "top04",
+      "pants": "pants02",
+      "shoes": "original-shoes"
+    },
+    "variant": "same-cut-surface-adaptation-v1"
+  },
+  "canvas_px": [
+    1536,
+    1920
+  ],
+  "root_anchor_px": [
+    768,
+    1600
+  ],
+  "display_scale": 0.11855670103092783,
+  "source_density_scale_vs_idle": 2,
+  "frames": [
+    {
+      "pose_id": "harvest_north_B_ready",
+      "phase": "ready",
+      "duration_ms": 200,
+      "file": "baked/harvest_north_B_ready.png",
+      "sha256": "8df2b25a321284948008b189044035b6b799acd54ee3070711cc96d1e3764b5c",
+      "source_references": [
+        "references/original-ready.png",
+        "sources/ready-full-attempt1.png",
+        "sources/ready-anchored-completion-attempt1.png"
+      ],
+      "whole_frame_translation_px": [
+        218,
+        196
+      ],
+      "source_box_px": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "layers": [
+        {
+          "id": "shared_same_pose_foreground_and_contour",
+          "file": "parts/ready/shared_same_pose_foreground_and_contour.png",
+          "placement_mode": "full_frame",
+          "offset_px": [
+            0,
+            0
+          ],
+          "scope": "Exact original face/skin/hands/tool/vegetables/water, original cut contour and alpha edge. Not a hidden nude body."
+        },
+        {
+          "id": "shoes",
+          "design_id": "original-shoes",
+          "file": "parts/ready/shoes-complete-source.png",
+          "visible_file": "parts/ready/shoes-visible.png",
+          "source_ownership": "masks/ready-shoes-source-ownership.png",
+          "coverage_mask": "masks/ready-shoes-visible-coverage.png",
+          "occlusion_mask": "masks/ready-shoes-occlusion.png",
+          "placement_mode": "full_frame",
+          "offset_px": [
+            0,
+            0
+          ],
+          "local_scale": [
+            1,
+            1
+          ],
+          "source_references": [
+            "references/original-ready.png",
+            "sources/ready-anchored-completion-attempt1.png"
+          ],
+          "selected_density_source": "references/original-ready.png",
+          "source_surface_repairs": [],
+          "visible_pixels": 25424,
+          "retained_hidden_source_pixels": 0
+        },
+        {
+          "id": "pants",
+          "design_id": "pants02",
+          "file": "parts/ready/pants-complete-source.png",
+          "visible_file": "parts/ready/pants-visible.png",
+          "source_ownership": "masks/ready-pants-source-ownership.png",
+          "coverage_mask": "masks/ready-pants-visible-coverage.png",
+          "occlusion_mask": "masks/ready-pants-occlusion.png",
+          "placement_mode": "full_frame",
+          "offset_px": [
+            0,
+            0
+          ],
+          "local_scale": [
+            1,
+            1
+          ],
+          "source_references": [
+            "sources/ready-full-attempt1.png",
+            "sources/ready-anchored-completion-attempt1.png"
+          ],
+          "selected_density_source": "sources/ready-selected-density.png",
+          "source_surface_repairs": [],
+          "visible_pixels": 104248,
+          "retained_hidden_source_pixels": 1701
+        },
+        {
+          "id": "top",
+          "design_id": "top04",
+          "file": "parts/ready/top-complete-source.png",
+          "visible_file": "parts/ready/top-visible.png",
+          "source_ownership": "masks/ready-top-source-ownership.png",
+          "coverage_mask": "masks/ready-top-visible-coverage.png",
+          "occlusion_mask": "masks/ready-top-occlusion.png",
+          "placement_mode": "full_frame",
+          "offset_px": [
+            0,
+            0
+          ],
+          "local_scale": [
+            1,
+            1
+          ],
+          "source_references": [
+            "sources/ready-full-attempt1.png",
+            "sources/ready-anchored-completion-attempt1.png"
+          ],
+          "selected_density_source": "sources/ready-selected-density.png",
+          "source_surface_repairs": [
+            {
+              "slot": "top",
+              "source": "sources/ready-isolated-top-collar-repair.png",
+              "polygons": [
+                [
+                  [
+                    462,
+                    686
+                  ],
+                  [
+                    550,
+                    686
+                  ],
+                  [
+                    550,
+                    696
+                  ],
+                  [
+                    462,
+                    696
+                  ]
+                ],
+                [
+                  [
+                    561,
+                    681
+                  ],
+                  [
+                    574,
+                    681
+                  ],
+                  [
+                    574,
+                    688
+                  ],
+                  [
+                    561,
+                    688
+                  ]
+                ]
+              ],
+              "basis": "Exact original back collar blue-material edge; isolated same-coordinate GPT red cloth surface only; repair limited to actual reviewed collar segments, excluding unrelated shoulder-edge transparent pixels",
+              "mask": "masks/ready-source-surface-repair-0.png",
+              "density_projection": null
+            }
+          ],
+          "visible_pixels": 97617,
+          "retained_hidden_source_pixels": 0
+        }
+      ],
+      "changed_clothing_mask": "masks/ready-changed-clothing.png",
+      "selected_density_base_source": "sources/ready-full-attempt1.png",
+      "source_surface_repairs": [
+        {
+          "slot": "top",
+          "source": "sources/ready-isolated-top-collar-repair.png",
+          "polygons": [
+            [
+              [
+                462,
+                686
+              ],
+              [
+                550,
+                686
+              ],
+              [
+                550,
+                696
+              ],
+              [
+                462,
+                696
+              ]
+            ],
+            [
+              [
+                561,
+                681
+              ],
+              [
+                574,
+                681
+              ],
+              [
+                574,
+                688
+              ],
+              [
+                561,
+                688
+              ]
+            ]
+          ],
+          "basis": "Exact original back collar blue-material edge; isolated same-coordinate GPT red cloth surface only; repair limited to actual reviewed collar segments, excluding unrelated shoulder-edge transparent pixels",
+          "mask": "masks/ready-source-surface-repair-0.png",
+          "density_projection": null
+        }
+      ],
+      "density_normalization": null
+    },
+    {
+      "pose_id": "harvest_north_B_reach",
+      "phase": "reach",
+      "duration_ms": 250,
+      "file": "baked/harvest_north_B_reach.png",
+      "sha256": "95f3a44655a4038797fd457274850e16ffbd88bd7eeabfdefa6c44a161343b64",
+      "source_references": [
+        "references/original-reach.png",
+        "sources/reach-full-attempt1.png",
+        "sources/reach-anchored-completion-attempt1.png"
+      ],
+      "whole_frame_translation_px": [
+        218,
+        219
+      ],
+      "source_box_px": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "layers": [
+        {
+          "id": "shared_same_pose_foreground_and_contour",
+          "file": "parts/reach/shared_same_pose_foreground_and_contour.png",
+          "placement_mode": "full_frame",
+          "offset_px": [
+            0,
+            0
+          ],
+          "scope": "Exact original face/skin/hands/tool/vegetables/water, original cut contour and alpha edge. Not a hidden nude body."
+        },
+        {
+          "id": "shoes",
+          "design_id": "original-shoes",
+          "file": "parts/reach/shoes-complete-source.png",
+          "visible_file": "parts/reach/shoes-visible.png",
+          "source_ownership": "masks/reach-shoes-source-ownership.png",
+          "coverage_mask": "masks/reach-shoes-visible-coverage.png",
+          "occlusion_mask": "masks/reach-shoes-occlusion.png",
+          "placement_mode": "full_frame",
+          "offset_px": [
+            0,
+            0
+          ],
+          "local_scale": [
+            1,
+            1
+          ],
+          "source_references": [
+            "references/original-reach.png",
+            "sources/reach-anchored-completion-attempt1.png"
+          ],
+          "selected_density_source": "references/original-reach.png",
+          "source_surface_repairs": [],
+          "visible_pixels": 33268,
+          "retained_hidden_source_pixels": 0
+        },
+        {
+          "id": "pants",
+          "design_id": "pants02",
+          "file": "parts/reach/pants-complete-source.png",
+          "visible_file": "parts/reach/pants-visible.png",
+          "source_ownership": "masks/reach-pants-source-ownership.png",
+          "coverage_mask": "masks/reach-pants-visible-coverage.png",
+          "occlusion_mask": "masks/reach-pants-occlusion.png",
+          "placement_mode": "full_frame",
+          "offset_px": [
+            0,
+            0
+          ],
+          "local_scale": [
+            1,
+            1
+          ],
+          "source_references": [
+            "sources/reach-full-attempt1.png",
+            "sources/reach-anchored-completion-attempt1.png"
+          ],
+          "selected_density_source": "sources/reach-selected-density.png",
+          "source_surface_repairs": [],
+          "visible_pixels": 138707,
+          "retained_hidden_source_pixels": 1606
+        },
+        {
+          "id": "top",
+          "design_id": "top04",
+          "file": "parts/reach/top-complete-source.png",
+          "visible_file": "parts/reach/top-visible.png",
+          "source_ownership": "masks/reach-top-source-ownership.png",
+          "coverage_mask": "masks/reach-top-visible-coverage.png",
+          "occlusion_mask": "masks/reach-top-occlusion.png",
+          "placement_mode": "full_frame",
+          "offset_px": [
+            0,
+            0
+          ],
+          "local_scale": [
+            1,
+            1
+          ],
+          "source_references": [
+            "sources/reach-full-attempt1.png",
+            "sources/reach-anchored-completion-attempt1.png"
+          ],
+          "selected_density_source": "sources/reach-selected-density.png",
+          "source_surface_repairs": [
+            {
+              "slot": "top",
+              "source": "sources/reach-anchored-completion-attempt1.png",
+              "polygons": [
+                [
+                  [
+                    290,
+                    948
+                  ],
+                  [
+                    316,
+                    948
+                  ],
+                  [
+                    316,
+                    970
+                  ],
+                  [
+                    290,
+                    970
+                  ]
+                ]
+              ],
+              "basis": "Enlarged old/full/completion wrist comparison: anchored completion provides red cuff cloth at original blue edge; no hand/outer contour imported",
+              "mask": "masks/reach-source-surface-repair-0.png",
+              "density_projection": null
+            }
+          ],
+          "visible_pixels": 104646,
+          "retained_hidden_source_pixels": 0
+        }
+      ],
+      "changed_clothing_mask": "masks/reach-changed-clothing.png",
+      "selected_density_base_source": "sources/reach-full-attempt1.png",
+      "source_surface_repairs": [
+        {
+          "slot": "top",
+          "source": "sources/reach-anchored-completion-attempt1.png",
+          "polygons": [
+            [
+              [
+                290,
+                948
+              ],
+              [
+                316,
+                948
+              ],
+              [
+                316,
+                970
+              ],
+              [
+                290,
+                970
+              ]
+            ]
+          ],
+          "basis": "Enlarged old/full/completion wrist comparison: anchored completion provides red cuff cloth at original blue edge; no hand/outer contour imported",
+          "mask": "masks/reach-source-surface-repair-0.png",
+          "density_projection": null
+        }
+      ],
+      "density_normalization": null
+    },
+    {
+      "pose_id": "harvest_north_B_pluck",
+      "phase": "pluck",
+      "duration_ms": 250,
+      "file": "baked/harvest_north_B_pluck.png",
+      "sha256": "6eea3b380abcdf0ba87b99268b8d794426fbb2e32bd7a5d3422144887fd2ad20",
+      "source_references": [
+        "references/original-pluck.png",
+        "sources/pluck-full-attempt1.png",
+        "sources/pluck-anchored-completion-attempt1.png"
+      ],
+      "whole_frame_translation_px": [
+        218,
+        181
+      ],
+      "source_box_px": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "layers": [
+        {
+          "id": "shared_same_pose_foreground_and_contour",
+          "file": "parts/pluck/shared_same_pose_foreground_and_contour.png",
+          "placement_mode": "full_frame",
+          "offset_px": [
+            0,
+            0
+          ],
+          "scope": "Exact original face/skin/hands/tool/vegetables/water, original cut contour and alpha edge. Not a hidden nude body."
+        },
+        {
+          "id": "shoes",
+          "design_id": "original-shoes",
+          "file": "parts/pluck/shoes-complete-source.png",
+          "visible_file": "parts/pluck/shoes-visible.png",
+          "source_ownership": "masks/pluck-shoes-source-ownership.png",
+          "coverage_mask": "masks/pluck-shoes-visible-coverage.png",
+          "occlusion_mask": "masks/pluck-shoes-occlusion.png",
+          "placement_mode": "full_frame",
+          "offset_px": [
+            0,
+            0
+          ],
+          "local_scale": [
+            1,
+            1
+          ],
+          "source_references": [
+            "references/original-pluck.png",
+            "sources/pluck-anchored-completion-attempt1.png"
+          ],
+          "selected_density_source": "references/original-pluck.png",
+          "source_surface_repairs": [],
+          "visible_pixels": 26794,
+          "retained_hidden_source_pixels": 0
+        },
+        {
+          "id": "pants",
+          "design_id": "pants02",
+          "file": "parts/pluck/pants-complete-source.png",
+          "visible_file": "parts/pluck/pants-visible.png",
+          "source_ownership": "masks/pluck-pants-source-ownership.png",
+          "coverage_mask": "masks/pluck-pants-visible-coverage.png",
+          "occlusion_mask": "masks/pluck-pants-occlusion.png",
+          "placement_mode": "full_frame",
+          "offset_px": [
+            0,
+            0
+          ],
+          "local_scale": [
+            1,
+            1
+          ],
+          "source_references": [
+            "sources/pluck-full-attempt1.png",
+            "sources/pluck-anchored-completion-attempt1.png"
+          ],
+          "selected_density_source": "sources/pluck-selected-density.png",
+          "source_surface_repairs": [],
+          "visible_pixels": 104158,
+          "retained_hidden_source_pixels": 0
+        },
+        {
+          "id": "top",
+          "design_id": "top04",
+          "file": "parts/pluck/top-complete-source.png",
+          "visible_file": "parts/pluck/top-visible.png",
+          "source_ownership": "masks/pluck-top-source-ownership.png",
+          "coverage_mask": "masks/pluck-top-visible-coverage.png",
+          "occlusion_mask": "masks/pluck-top-occlusion.png",
+          "placement_mode": "full_frame",
+          "offset_px": [
+            0,
+            0
+          ],
+          "local_scale": [
+            1,
+            1
+          ],
+          "source_references": [
+            "sources/pluck-full-attempt1.png",
+            "sources/pluck-anchored-completion-attempt1.png"
+          ],
+          "selected_density_source": "sources/pluck-selected-density.png",
+          "source_surface_repairs": [
+            {
+              "slot": "top",
+              "source": "sources/pluck-isolated-top-collar-repair-attempt2.png",
+              "polygons": [
+                [
+                  [
+                    507,
+                    615
+                  ],
+                  [
+                    600,
+                    615
+                  ],
+                  [
+                    600,
+                    647
+                  ],
+                  [
+                    507,
+                    647
+                  ]
+                ]
+              ],
+              "basis": "Exact original back collar blue-material edge; isolated same-coordinate GPT red cloth surface only; opaque donor collar margin generated upward, original coverage clips the margin without a local transform",
+              "mask": "masks/pluck-source-surface-repair-0.png",
+              "density_projection": null
+            }
+          ],
+          "visible_pixels": 111875,
+          "retained_hidden_source_pixels": 0
+        }
+      ],
+      "changed_clothing_mask": "masks/pluck-changed-clothing.png",
+      "selected_density_base_source": "sources/pluck-full-attempt1.png",
+      "source_surface_repairs": [
+        {
+          "slot": "top",
+          "source": "sources/pluck-isolated-top-collar-repair-attempt2.png",
+          "polygons": [
+            [
+              [
+                507,
+                615
+              ],
+              [
+                600,
+                615
+              ],
+              [
+                600,
+                647
+              ],
+              [
+                507,
+                647
+              ]
+            ]
+          ],
+          "basis": "Exact original back collar blue-material edge; isolated same-coordinate GPT red cloth surface only; opaque donor collar margin generated upward, original coverage clips the margin without a local transform",
+          "mask": "masks/pluck-source-surface-repair-0.png",
+          "density_projection": null
+        }
+      ],
+      "density_normalization": null
+    },
+    {
+      "pose_id": "harvest_north_B_recovery",
+      "phase": "recovery",
+      "duration_ms": 300,
+      "file": "baked/harvest_north_B_recovery.png",
+      "sha256": "ad8e5b5ff98dd776520c70fce1a1035d74223291c85a9162e9dce1cd0a39b1d3",
+      "source_references": [
+        "references/original-recovery.png",
+        "sources/recovery-full-attempt1.png",
+        "sources/recovery-anchored-completion-attempt1.png"
+      ],
+      "whole_frame_translation_px": [
+        243,
+        148
+      ],
+      "source_box_px": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "layers": [
+        {
+          "id": "shared_same_pose_foreground_and_contour",
+          "file": "parts/recovery/shared_same_pose_foreground_and_contour.png",
+          "placement_mode": "full_frame",
+          "offset_px": [
+            0,
+            0
+          ],
+          "scope": "Exact original face/skin/hands/tool/vegetables/water, original cut contour and alpha edge. Not a hidden nude body."
+        },
+        {
+          "id": "shoes",
+          "design_id": "original-shoes",
+          "file": "parts/recovery/shoes-complete-source.png",
+          "visible_file": "parts/recovery/shoes-visible.png",
+          "source_ownership": "masks/recovery-shoes-source-ownership.png",
+          "coverage_mask": "masks/recovery-shoes-visible-coverage.png",
+          "occlusion_mask": "masks/recovery-shoes-occlusion.png",
+          "placement_mode": "full_frame",
+          "offset_px": [
+            0,
+            0
+          ],
+          "local_scale": [
+            1,
+            1
+          ],
+          "source_references": [
+            "references/original-recovery.png",
+            "sources/recovery-anchored-completion-attempt1.png"
+          ],
+          "selected_density_source": "references/original-recovery.png",
+          "source_surface_repairs": [],
+          "visible_pixels": 28573,
+          "retained_hidden_source_pixels": 0
+        },
+        {
+          "id": "pants",
+          "design_id": "pants02",
+          "file": "parts/recovery/pants-complete-source.png",
+          "visible_file": "parts/recovery/pants-visible.png",
+          "source_ownership": "masks/recovery-pants-source-ownership.png",
+          "coverage_mask": "masks/recovery-pants-visible-coverage.png",
+          "occlusion_mask": "masks/recovery-pants-occlusion.png",
+          "placement_mode": "full_frame",
+          "offset_px": [
+            0,
+            0
+          ],
+          "local_scale": [
+            1,
+            1
+          ],
+          "source_references": [
+            "sources/recovery-full-attempt1.png",
+            "sources/recovery-anchored-completion-attempt1.png"
+          ],
+          "selected_density_source": "sources/recovery-selected-density.png",
+          "source_surface_repairs": [],
+          "visible_pixels": 118365,
+          "retained_hidden_source_pixels": 0
+        },
+        {
+          "id": "top",
+          "design_id": "top04",
+          "file": "parts/recovery/top-complete-source.png",
+          "visible_file": "parts/recovery/top-visible.png",
+          "source_ownership": "masks/recovery-top-source-ownership.png",
+          "coverage_mask": "masks/recovery-top-visible-coverage.png",
+          "occlusion_mask": "masks/recovery-top-occlusion.png",
+          "placement_mode": "full_frame",
+          "offset_px": [
+            0,
+            0
+          ],
+          "local_scale": [
+            1,
+            1
+          ],
+          "source_references": [
+            "sources/recovery-full-attempt1.png",
+            "sources/recovery-anchored-completion-attempt1.png"
+          ],
+          "selected_density_source": "sources/recovery-selected-density.png",
+          "source_surface_repairs": [],
+          "visible_pixels": 111592,
+          "retained_hidden_source_pixels": 0
+        }
+      ],
+      "changed_clothing_mask": "masks/recovery-changed-clothing.png",
+      "selected_density_base_source": "sources/recovery-full-attempt1.png",
+      "source_surface_repairs": [],
+      "density_normalization": null
+    }
+  ],
+  "idle": {
+    "pose_id": "idle_north_0",
+    "phase": "idle",
+    "duration_ms": 200,
+    "file": "baked/idle_north_0.png",
+    "sha256": "3dc1698c3ecd3c6055f2146c96250fe4738aa10a66174b2d1ef68968b8b5beea",
+    "source_references": [
+      "references/original-idle.png",
+      "sources/idle-full-attempt2.png",
+      "sources/idle-full-attempt2.png"
+    ],
+    "whole_frame_translation_px": [
+      0,
+      0
+    ],
+    "source_box_px": [
+      0,
+      0,
+      512,
+      768
+    ],
+    "layers": [
+      {
+        "id": "shared_same_pose_foreground_and_contour",
+        "file": "parts/idle/shared_same_pose_foreground_and_contour.png",
+        "placement_mode": "full_frame",
+        "offset_px": [
+          0,
+          0
+        ],
+        "scope": "Exact original face/skin/hands/tool/vegetables/water, original cut contour and alpha edge. Not a hidden nude body."
+      },
+      {
+        "id": "shoes",
+        "design_id": "original-shoes",
+        "file": "parts/idle/shoes-complete-source.png",
+        "visible_file": "parts/idle/shoes-visible.png",
+        "source_ownership": "masks/idle-shoes-source-ownership.png",
+        "coverage_mask": "masks/idle-shoes-visible-coverage.png",
+        "occlusion_mask": "masks/idle-shoes-occlusion.png",
+        "placement_mode": "full_frame",
+        "offset_px": [
+          0,
+          0
+        ],
+        "local_scale": [
+          1,
+          1
+        ],
+        "source_references": [
+          "references/original-idle.png",
+          "sources/idle-full-attempt2.png"
+        ],
+        "selected_density_source": "references/original-idle.png",
+        "source_surface_repairs": [],
+        "visible_pixels": 4247,
+        "retained_hidden_source_pixels": 0
+      },
+      {
+        "id": "pants",
+        "design_id": "pants02",
+        "file": "parts/idle/pants-complete-source.png",
+        "visible_file": "parts/idle/pants-visible.png",
+        "source_ownership": "masks/idle-pants-source-ownership.png",
+        "coverage_mask": "masks/idle-pants-visible-coverage.png",
+        "occlusion_mask": "masks/idle-pants-occlusion.png",
+        "placement_mode": "full_frame",
+        "offset_px": [
+          0,
+          0
+        ],
+        "local_scale": [
+          1,
+          1
+        ],
+        "source_references": [
+          "sources/idle-full-attempt2.png",
+          "sources/idle-full-attempt2.png"
+        ],
+        "selected_density_source": "sources/idle-selected-density.png",
+        "source_surface_repairs": [],
+        "visible_pixels": 16823,
+        "retained_hidden_source_pixels": 0
+      },
+      {
+        "id": "top",
+        "design_id": "top04",
+        "file": "parts/idle/top-complete-source.png",
+        "visible_file": "parts/idle/top-visible.png",
+        "source_ownership": "masks/idle-top-source-ownership.png",
+        "coverage_mask": "masks/idle-top-visible-coverage.png",
+        "occlusion_mask": "masks/idle-top-occlusion.png",
+        "placement_mode": "full_frame",
+        "offset_px": [
+          0,
+          0
+        ],
+        "local_scale": [
+          1,
+          1
+        ],
+        "source_references": [
+          "sources/idle-full-attempt2.png",
+          "sources/idle-full-attempt2.png"
+        ],
+        "selected_density_source": "sources/idle-selected-density.png",
+        "source_surface_repairs": [
+          {
+            "slot": "top",
+            "source": "sources/idle-isolated-top-cuff-repair-attempt4.png",
+            "polygons": [
+              [
+                [
+                  107,
+                  479
+                ],
+                [
+                  172,
+                  479
+                ],
+                [
+                  172,
+                  520
+                ],
+                [
+                  107,
+                  520
+                ]
+              ],
+              [
+                [
+                  337,
+                  479
+                ],
+                [
+                  400,
+                  479
+                ],
+                [
+                  400,
+                  520
+                ],
+                [
+                  337,
+                  520
+                ]
+              ]
+            ],
+            "basis": "Isolated same-coordinate original blue top, GPT red knit with cuff donor margin; original top coverage clips extra source cloth, uniform whole-frame density2-to1 only",
+            "mask": "masks/idle-source-surface-repair-0.png",
+            "density_projection": {
+              "whole_frame_scale": 0.5,
+              "resampling": "nearest",
+              "offset_px": [
+                0,
+                0
+              ]
+            }
+          }
+        ],
+        "visible_pixels": 34690,
+        "retained_hidden_source_pixels": 0
+      }
+    ],
+    "changed_clothing_mask": "masks/idle-changed-clothing.png",
+    "selected_density_base_source": "sources/idle-full-attempt2.png",
+    "source_surface_repairs": [
+      {
+        "slot": "top",
+        "source": "sources/idle-isolated-top-cuff-repair-attempt4.png",
+        "polygons": [
+          [
+            [
+              107,
+              479
+            ],
+            [
+              172,
+              479
+            ],
+            [
+              172,
+              520
+            ],
+            [
+              107,
+              520
+            ]
+          ],
+          [
+            [
+              337,
+              479
+            ],
+            [
+              400,
+              479
+            ],
+            [
+              400,
+              520
+            ],
+            [
+              337,
+              520
+            ]
+          ]
+        ],
+        "basis": "Isolated same-coordinate original blue top, GPT red knit with cuff donor margin; original top coverage clips extra source cloth, uniform whole-frame density2-to1 only",
+        "mask": "masks/idle-source-surface-repair-0.png",
+        "density_projection": {
+          "whole_frame_scale": 0.5,
+          "resampling": "nearest",
+          "offset_px": [
+            0,
+            0
+          ]
+        }
+      }
+    ],
+    "density_normalization": {
+      "operation": "whole-frame nearest uniform density conversion",
+      "source_canvas_px": [
+        1024,
+        1536
+      ],
+      "output_canvas_px": [
+        512,
+        768
+      ],
+      "scale": 0.5,
+      "offset_px": [
+        0,
+        0
+      ],
+      "reference_only_upsample": "references/idle-registration-reference2x.png",
+      "new_pixels_authored_by": "built-in GPT imagegen; no upsampled original is used as new garment texture"
+    },
+    "canvas_px": [
+      512,
+      768
+    ],
+    "root_anchor_px": [
+      256,
+      708
+    ],
+    "display_scale": 0.23711340206185566,
+    "source_density_scale_vs_idle": 1
+  },
+  "loop": false,
+  "review_repeat": true,
+  "scope": "Only this recipe and direction, four original poses plus matching idle. Independent same-cut garment surface slots with shared_same_pose_foreground_and_contour. No arbitrary cuts, hidden nude body, other combinations, directions or production capability.",
+  "source_parent": {
+    "project_path": "art/design/character-motion/adult-standard-v1/farming-four-directions-v1/harvest/north-B/candidate.json",
+    "copied_reference": "references/parent-candidate.json.txt",
+    "sha256": "6ac4b1c9e123835b4f9c02fb3da14ee1cbecea9ae1909cb9fe559fee15a779e3"
+  },
+  "accepted": false,
+  "native_checked": false,
+  "inputs": {
+    "audit_source_semantics.py": "c90ea9aa5abc788e8fd5713f247ff3548d30da1c7996130dcb2e5f558b7e4726",
+    "baked/harvest_north_B_pluck.png": "6eea3b380abcdf0ba87b99268b8d794426fbb2e32bd7a5d3422144887fd2ad20",
+    "baked/harvest_north_B_reach.png": "95f3a44655a4038797fd457274850e16ffbd88bd7eeabfdefa6c44a161343b64",
+    "baked/harvest_north_B_ready.png": "8df2b25a321284948008b189044035b6b799acd54ee3070711cc96d1e3764b5c",
+    "baked/harvest_north_B_recovery.png": "ad8e5b5ff98dd776520c70fce1a1035d74223291c85a9162e9dce1cd0a39b1d3",
+    "baked/idle_north_0.png": "3dc1698c3ecd3c6055f2146c96250fe4738aa10a66174b2d1ef68968b8b5beea",
+    "checks.json": "6608ecf9b2e2447aba0b61af563722f6e1787bed2418f88a0f365645c8439ffa",
+    "evidence/repair-attempt-audit.json": "aa1ce33b15891ba6ff98fd8fb8c9a4aefcbfb258e3cb1d4e815635024323dd6b",
+    "evidence/source-semantics-before.json": "a27f1b4de0070057767c5339e3b1eabb6dc6456c20aeec1e3667af392c4b757d",
+    "masks/idle-changed-clothing.png": "c005bdfb5039600c68c55488e9d68ef34d6e573628a1cf9a0533cba1c0b8cc7b",
+    "masks/idle-pants-occlusion.png": "7c1f43be103c3932fe59e9b9f49902e2949707348dc3557593150fd82eabbb74",
+    "masks/idle-pants-source-ownership.png": "3cfebf2eb227e0aad7e21be920743165779c7283e19277deb8404ec4506bfb06",
+    "masks/idle-pants-visible-coverage.png": "3cfebf2eb227e0aad7e21be920743165779c7283e19277deb8404ec4506bfb06",
+    "masks/idle-shoes-occlusion.png": "7c1f43be103c3932fe59e9b9f49902e2949707348dc3557593150fd82eabbb74",
+    "masks/idle-shoes-source-ownership.png": "6e4871168ebff50a628fa4bd37033c6fe456793b6b17cf3211e8befb7f7c58e1",
+    "masks/idle-shoes-visible-coverage.png": "6e4871168ebff50a628fa4bd37033c6fe456793b6b17cf3211e8befb7f7c58e1",
+    "masks/idle-source-surface-repair-0.png": "1058ebd2d7151e5384fd9c70603469f1e98571bd06290d01b5f9acc6779e272f",
+    "masks/idle-top-occlusion.png": "7c1f43be103c3932fe59e9b9f49902e2949707348dc3557593150fd82eabbb74",
+    "masks/idle-top-source-ownership.png": "ae235728b121d8b1eb66ada925b32bd78104de72263bb3ca27e7f106dc398106",
+    "masks/idle-top-visible-coverage.png": "ae235728b121d8b1eb66ada925b32bd78104de72263bb3ca27e7f106dc398106",
+    "masks/pluck-changed-clothing.png": "5e79142ba552e949fc87ca62193a1a919f198b7a12860b8a3769561b8cc673d8",
+    "masks/pluck-pants-occlusion.png": "0807909bd58a9f929118935c505dde213e4d14ca6a4f9460b3cd408c6d1a6517",
+    "masks/pluck-pants-source-ownership.png": "73f07bc0ec402b97bdd28fada81a331e5526a001578ccd7309fcac14f7ee6791",
+    "masks/pluck-pants-visible-coverage.png": "73f07bc0ec402b97bdd28fada81a331e5526a001578ccd7309fcac14f7ee6791",
+    "masks/pluck-shoes-occlusion.png": "0807909bd58a9f929118935c505dde213e4d14ca6a4f9460b3cd408c6d1a6517",
+    "masks/pluck-shoes-source-ownership.png": "d108a6cc83d88df150735ecaa0e81b6ce03dc13082fa76ae61c00bb93255483a",
+    "masks/pluck-shoes-visible-coverage.png": "d108a6cc83d88df150735ecaa0e81b6ce03dc13082fa76ae61c00bb93255483a",
+    "masks/pluck-source-surface-repair-0.png": "83c35ce808720ef4b31ca9a87cdff9e1a368da190d20b2410b278814bfb5c67d",
+    "masks/pluck-top-occlusion.png": "0807909bd58a9f929118935c505dde213e4d14ca6a4f9460b3cd408c6d1a6517",
+    "masks/pluck-top-source-ownership.png": "7fe3c99948d059846744fe47d253e36e1ccfd68715ae9c3b38544f524e35ce1d",
+    "masks/pluck-top-visible-coverage.png": "7fe3c99948d059846744fe47d253e36e1ccfd68715ae9c3b38544f524e35ce1d",
+    "masks/reach-changed-clothing.png": "c1e846373e1fc4caaf8f6a2a1952e426965956c9db68a912338544ac94b88443",
+    "masks/reach-pants-occlusion.png": "71d8e3b2578fca409429dda2f56620c01815efb72fd84043fb5a149d79aa79c7",
+    "masks/reach-pants-source-ownership.png": "69e9ba53757a61d6182973a66126c6270cd2502b04089de98ae812d35f562389",
+    "masks/reach-pants-visible-coverage.png": "ea51fe5949bd8912445d64e1e8f8d5e7deda223feeaedbdb7c5c7f12613e9b9f",
+    "masks/reach-shoes-occlusion.png": "0807909bd58a9f929118935c505dde213e4d14ca6a4f9460b3cd408c6d1a6517",
+    "masks/reach-shoes-source-ownership.png": "10e5b200b5f2ac201d5f3652a3535993a7bbad8aab7507dae8fd895472cbfb55",
+    "masks/reach-shoes-visible-coverage.png": "10e5b200b5f2ac201d5f3652a3535993a7bbad8aab7507dae8fd895472cbfb55",
+    "masks/reach-source-surface-repair-0.png": "ce4d95f32886da792e02f5fab956c1a810182f5e6235e431e9a59b488303ea96",
+    "masks/reach-top-occlusion.png": "0807909bd58a9f929118935c505dde213e4d14ca6a4f9460b3cd408c6d1a6517",
+    "masks/reach-top-source-ownership.png": "cdfb08b283cb2c825321569294d7dde43818536a45027aff1a88d615deb2c9e9",
+    "masks/reach-top-visible-coverage.png": "cdfb08b283cb2c825321569294d7dde43818536a45027aff1a88d615deb2c9e9",
+    "masks/ready-changed-clothing.png": "f5c9ee5739aeaee8f483fe0b4285c1b1ac6b7958692f5e3429d385ce9b3f6196",
+    "masks/ready-pants-occlusion.png": "ee419b53215e9aee57027ce0166e4561fbf4ba2c143a4e7e7cbf0d171725f9d7",
+    "masks/ready-pants-source-ownership.png": "1a32642a9ffe04fd9c3a72eb0b551dcab937b9c917bdc01879110557f2104dc8",
+    "masks/ready-pants-visible-coverage.png": "946d41befa4434d68c42ff3e24eafb635fc6c1e527eb3b240085eb09a8c80fd9",
+    "masks/ready-shoes-occlusion.png": "0807909bd58a9f929118935c505dde213e4d14ca6a4f9460b3cd408c6d1a6517",
+    "masks/ready-shoes-source-ownership.png": "0c1f13f40a1615f431da5c48ba55455dd4927056e054cf497b8e77061add32f8",
+    "masks/ready-shoes-visible-coverage.png": "0c1f13f40a1615f431da5c48ba55455dd4927056e054cf497b8e77061add32f8",
+    "masks/ready-source-surface-repair-0.png": "5b98ff65677b62dbd7e919a33e2dd6cc16794ba0299beb0a6079cd24a0806838",
+    "masks/ready-top-occlusion.png": "0807909bd58a9f929118935c505dde213e4d14ca6a4f9460b3cd408c6d1a6517",
+    "masks/ready-top-source-ownership.png": "db1cd47ffffd1fcc167613d8b3fc4f9082b7191338497a0e1cc2b7f0c9250cdc",
+    "masks/ready-top-visible-coverage.png": "db1cd47ffffd1fcc167613d8b3fc4f9082b7191338497a0e1cc2b7f0c9250cdc",
+    "masks/recovery-changed-clothing.png": "8bc9b04615d3b8ca5a5c03f2b76bc58dd2ceba139d73145f75cef9a762981a6b",
+    "masks/recovery-pants-occlusion.png": "0807909bd58a9f929118935c505dde213e4d14ca6a4f9460b3cd408c6d1a6517",
+    "masks/recovery-pants-source-ownership.png": "950fd69f098ec2b61313954272add97f99a56d288c67a6f0da9d4a970fa8456c",
+    "masks/recovery-pants-visible-coverage.png": "950fd69f098ec2b61313954272add97f99a56d288c67a6f0da9d4a970fa8456c",
+    "masks/recovery-shoes-occlusion.png": "0807909bd58a9f929118935c505dde213e4d14ca6a4f9460b3cd408c6d1a6517",
+    "masks/recovery-shoes-source-ownership.png": "e0049b47803584fd4fa3efdafe654c4c649702749fc5b7980315c098ac859230",
+    "masks/recovery-shoes-visible-coverage.png": "e0049b47803584fd4fa3efdafe654c4c649702749fc5b7980315c098ac859230",
+    "masks/recovery-top-occlusion.png": "0807909bd58a9f929118935c505dde213e4d14ca6a4f9460b3cd408c6d1a6517",
+    "masks/recovery-top-source-ownership.png": "1aa546124798ba377e6483bdcebd143011ce6e74315f9d947ade25d145db18ec",
+    "masks/recovery-top-visible-coverage.png": "1aa546124798ba377e6483bdcebd143011ce6e74315f9d947ade25d145db18ec",
+    "ownership.json": "c0071b1b500c8e1b3632d593a26b48f601d0ae3111f1c33e77d29f97b54dd972",
+    "parts/idle/pants-complete-source.png": "fab67a50b54cbe0f765f5c0c73b2d4eb3fc985cbddf345b98ab646e36b304e10",
+    "parts/idle/pants-visible.png": "fab67a50b54cbe0f765f5c0c73b2d4eb3fc985cbddf345b98ab646e36b304e10",
+    "parts/idle/shared_same_pose_foreground_and_contour.png": "0bbf2521b511a4ea4ea36ae051e491d1923d294470d669cd2657e48accce316f",
+    "parts/idle/shoes-complete-source.png": "cc14110e950056219de9d2af4ad63d8f2a9c50659fedbd467a7525e0536de485",
+    "parts/idle/shoes-visible.png": "cc14110e950056219de9d2af4ad63d8f2a9c50659fedbd467a7525e0536de485",
+    "parts/idle/top-complete-source.png": "3698b5499931be5ad15996d69f9f5551d0603d502b6c91cb2af0a174cb1acb2b",
+    "parts/idle/top-visible.png": "3698b5499931be5ad15996d69f9f5551d0603d502b6c91cb2af0a174cb1acb2b",
+    "parts/pluck/pants-complete-source.png": "a5bfdbd361d1350a63355bc1eeb5e3b9713ceeb4a4c54520117c6321d5aa1e5d",
+    "parts/pluck/pants-visible.png": "a5bfdbd361d1350a63355bc1eeb5e3b9713ceeb4a4c54520117c6321d5aa1e5d",
+    "parts/pluck/shared_same_pose_foreground_and_contour.png": "1dd52ded3a7a6af62c644b506216a2f9a25f22f8e76065b327f129fe54df4c6b",
+    "parts/pluck/shoes-complete-source.png": "4be2babe4eec4589ddbf4d84ff21dbc8b945e3d514d45cf59d21073142828d4c",
+    "parts/pluck/shoes-visible.png": "4be2babe4eec4589ddbf4d84ff21dbc8b945e3d514d45cf59d21073142828d4c",
+    "parts/pluck/top-complete-source.png": "693770ee092905d683649170024633289ee4488c3d4b756b645779d85e4a269f",
+    "parts/pluck/top-visible.png": "693770ee092905d683649170024633289ee4488c3d4b756b645779d85e4a269f",
+    "parts/reach/pants-complete-source.png": "f605c7c29352678c78eb0bd11bd8753d09e713eb5bf359dd31c04c345f50182b",
+    "parts/reach/pants-visible.png": "e14786838fc7d0f93df041b7102801117760419bf8736399f3722f76d2f75feb",
+    "parts/reach/shared_same_pose_foreground_and_contour.png": "91116b2f43433da5cbadf88e937102f01f05ff232d2bd7c4022435b5a0dfd983",
+    "parts/reach/shoes-complete-source.png": "65509d319d460ffaa3ff4f3d7690f537d0e0f32f8453dc1cf2a2de5702ffaec1",
+    "parts/reach/shoes-visible.png": "65509d319d460ffaa3ff4f3d7690f537d0e0f32f8453dc1cf2a2de5702ffaec1",
+    "parts/reach/top-complete-source.png": "c7ebf395e2c2d739485c5dc0c8e7e4058b7de72eed9b54e776eff1b9db1b8031",
+    "parts/reach/top-visible.png": "c7ebf395e2c2d739485c5dc0c8e7e4058b7de72eed9b54e776eff1b9db1b8031",
+    "parts/ready/pants-complete-source.png": "9b5183028280f622f7bb6b5b4506e8cb4675f29437de78e5878f3acab973183b",
+    "parts/ready/pants-visible.png": "2374bd3d4b234f01522899e0f891a0a43ba0b6b4b2b18bd38f26bfad88e7b3f4",
+    "parts/ready/shared_same_pose_foreground_and_contour.png": "eb523b074ce07f2e4222da240f7bf6bc7762cce6f66036f290b0efdbee3d4ad1",
+    "parts/ready/shoes-complete-source.png": "ca3c8aa12cce555b051fa41ea729aef78135b6c15b91b91fbd596eb458b5f575",
+    "parts/ready/shoes-visible.png": "ca3c8aa12cce555b051fa41ea729aef78135b6c15b91b91fbd596eb458b5f575",
+    "parts/ready/top-complete-source.png": "7560495e6aafa41ed34127c746f83d6fafae3d2ee79f91741e1c3d32743c9440",
+    "parts/ready/top-visible.png": "7560495e6aafa41ed34127c746f83d6fafae3d2ee79f91741e1c3d32743c9440",
+    "parts/recovery/pants-complete-source.png": "b584e6e9dbb304ccfba2f767e29662434e6a51caf6bf2ded8e0440ca32f502d0",
+    "parts/recovery/pants-visible.png": "b584e6e9dbb304ccfba2f767e29662434e6a51caf6bf2ded8e0440ca32f502d0",
+    "parts/recovery/shared_same_pose_foreground_and_contour.png": "50bfe16f13bfbc16ba3b50cbb808783cec913d1fa709668892e907d579e21019",
+    "parts/recovery/shoes-complete-source.png": "31a8ad8e19ec4415086e752d77426052aa20e5e9d5dad9f15a0257e57f302481",
+    "parts/recovery/shoes-visible.png": "31a8ad8e19ec4415086e752d77426052aa20e5e9d5dad9f15a0257e57f302481",
+    "parts/recovery/top-complete-source.png": "0ceae9e9b703f7b2999b0eafc0a37498e21a790dbc6f4fd37bfbb3997e13d664",
+    "parts/recovery/top-visible.png": "0ceae9e9b703f7b2999b0eafc0a37498e21a790dbc6f4fd37bfbb3997e13d664",
+    "prompts/idle-cuff-repair-attempt3.txt": "88f1896dd2acee64fb185cd96815feb216995e6ebb47b48ec64aecb9e3947e02",
+    "prompts/idle-full-attempt1.txt": "a81917368353d32ce80851e007851321976eebaabdd1a5c15c711d7a2d823399",
+    "prompts/idle-full-attempt2.txt": "648cbfea912f180917cbb7ffc547af90ce7c1134e8fab11656f875cd1f751969",
+    "prompts/idle-isolated-top-cuff-repair-attempt4.txt": "b7d0d7fea81af6ba9c1acd854c3d65aa8ffe834aefbc631adc9ef54e22b36d87",
+    "prompts/pluck-anchored-completion-attempt1.txt": "99a85307ff4871943fb5226b770279ed6b1182e38095c0e4072907aef1e0b299",
+    "prompts/pluck-full-attempt1.txt": "c0a1e4f72f960bdc368258334addcc2c739580e829e99a8bd9e6b9aae32114af",
+    "prompts/pluck-isolated-top-collar-repair-attempt2.txt": "e636bf51768267db28855f07dd78c3944f3c17ca49aa91057cea99bb94cfc1df",
+    "prompts/pluck-isolated-top-collar-repair.txt": "361408428830fec7f879625a4cfab5ea8261c0bf9433fd808859833a2883796a",
+    "prompts/pluck-unoccluded-attempt1.txt": "7054a6c3e2b5b0ac8438e36bb4f30960d6407dbe8b6fd3db554ba58624feeb29",
+    "prompts/reach-anchored-completion-attempt1.txt": "99a85307ff4871943fb5226b770279ed6b1182e38095c0e4072907aef1e0b299",
+    "prompts/reach-full-attempt1.txt": "edc0c2b58fba934ecb5f78fbd8a692fced0ec18f4460532e9e437614cdb74190",
+    "prompts/reach-unoccluded-attempt1.txt": "5c305f85a186e9b6f5bc78bbaf0368c203a40c9f18daea280b493b75ecab853a",
+    "prompts/ready-anchored-completion-attempt1.txt": "99a85307ff4871943fb5226b770279ed6b1182e38095c0e4072907aef1e0b299",
+    "prompts/ready-full-attempt1.txt": "997945aac2df415fd551fd5d13c0013b2ffb6c6736c7b2381c21f46f26c9336c",
+    "prompts/ready-isolated-top-collar-repair.txt": "417d68bc47e7dca280c653046162ba822dc5fdc17c20480e95dfea18e52eb76a",
+    "prompts/ready-unoccluded-attempt1.txt": "98847b872c5d9ff36925c66ac89cc73b8573d3288f74970a1ef6ef44e2f6b154",
+    "prompts/recovery-anchored-completion-attempt1.txt": "99a85307ff4871943fb5226b770279ed6b1182e38095c0e4072907aef1e0b299",
+    "prompts/recovery-full-attempt1.txt": "b5bc6542ec6a05cb9da8d6e61c2e73ff6a0d4f330fa313b79441a723913eb9bd",
+    "prompts/recovery-unoccluded-attempt1.txt": "dc26ca97301f779563dfad91424a5a2a4019ab68d12ff26dd24ea59ce449fd72",
+    "references/build_samples-before-cuff-fix.py.txt": "5fe56645950fa319d66ac74da66274600c70eb61caafcbcc8acef64a9fdb54ee",
+    "references/build_samples.py.txt": "92d535e334063ed1829607b31f2bbde13a6ccc2eb1465b18d460ad77bf7a6fee",
+    "references/idle-export-manifest.json.txt": "a8b5c61c2ddcebc5e72cf02de2b2a6ebd7c9e874eec2f9e4b880496ee1f595ff",
+    "references/idle-isolated-blue-top-2x.png": "6a9c3291839b55cd2e99e4fcb0430790f17bbdcfe4f90e6ec4f339d13492351b",
+    "references/idle-registration-reference2x.png": "1189b2db1f2a1186e847469fc9d4409c3de6422e315ea46dcee2eec3093a5e25",
+    "references/original-idle.png": "1f1cde2f501b34cc58dfdb2cb6002bb6f288727410ead454bc62aaadb32299c1",
+    "references/original-pluck.png": "0ed022b592487c30d8e6148cf3eac54961e11efacf6cd2b2b67075d2c2109c16",
+    "references/original-reach.png": "d8a2eb8e1b613247c8f6a3e20f6f7cbd45f4a77464855d9034ae57b6077c7e49",
+    "references/original-ready.png": "30abac7019fdc2923d0ca55cea08fc5ebdfb3b447fe690f6d275bc551a143b27",
+    "references/original-recovery.png": "7938b256b9ef3d9a0accdcca22c7fe17f4a9512811a9d1d9fdebd2881bf7bfd4",
+    "references/ownership-repair-attempt1.json.txt": "85c5130d3fa3a008f9716471c15fcb44a47c8cef7e740436067a37d6fed31d58",
+    "references/pants02-design.png": "8b2d6ea4f91b73837e12b800b2d6f0755d8a4dd1425fa3855a36769d70148428",
+    "references/pants02-north.png": "496aa9c27dcec6b83d2f33d8cf57d91fb131bda6342cffb3727f56df07238626",
+    "references/parent-candidate.json.txt": "6ac4b1c9e123835b4f9c02fb3da14ee1cbecea9ae1909cb9fe559fee15a779e3",
+    "references/parent-registration-config.json.txt": "672cbdb6aedc2da116f8a6e4fcad2532c39f3c8449ecf56553e5e36a32111fc3",
+    "references/pluck-isolated-blue-top.png": "e1e82dd7badf12e984dba09ff186c5c9864d45b663e1baaa554d2965718b6cdf",
+    "references/ready-isolated-blue-top.png": "b1f806b0cf8fefa2a5a37e2413afac85a52569f1de8c8dfbdd0f54d43ce4f658",
+    "references/top04-design.png": "add6ba563119475c9d17fe6e13aa6f51b76dadbb0fc4ef90422aa9475eb45f03",
+    "references/top04-north.png": "872869c49581a7669e14e8633307ef1c6b9323d9bafd780aca2cc8d8b0851b82",
+    "sources/idle-density1.png": "15ba36aa9a85010809efdb0131bc1b188aba35ce70c593d84f5820d04b54a413",
+    "sources/idle-full-attempt1.png": "1c4ac22f8f1afc71f4c7355f0ebc1c9d20a8eb90a2778c35ae69427b20f87e2d",
+    "sources/idle-full-attempt2.png": "89b9e228ff2e5975b12b8f0e16ba3fdf02161bffd1b2e44c47ed8b79af36590c",
+    "sources/idle-full-attempt3.png": "109f9678dda4bebdc9b1107b429c923ed73dd4308c5225763e6935227e1f7ac7",
+    "sources/idle-isolated-top-cuff-repair-attempt4.png": "3ca6f226429ff5d522c190101ab06cb747ea9c574dac2ff22dcaebed4573992a",
+    "sources/idle-selected-density.png": "ab242a5848e464405fbb19577f2156a0049f42dc32f542e109106c1cc9239ab0",
+    "sources/pluck-anchored-completion-attempt1.png": "95edb538649da203d49b002bd50dfef9e9d3f0b9d5342914948c5987ad5119b7",
+    "sources/pluck-full-attempt1.png": "fe8d39bf213c102568ebfbb96bff168f972755d68590ab591cc1a3e1ab56dd88",
+    "sources/pluck-isolated-top-collar-repair-attempt2.png": "d91daff9151bcc3330aa93db71e9db6aef9e285c0c585a48c500a909f12d3bb7",
+    "sources/pluck-isolated-top-collar-repair.png": "2cd92678090ca11b07b7761244b65fa1bb6fe52c4f74280c88ccfc66383ecb80",
+    "sources/pluck-selected-density.png": "e4542ff6a4cb819877f727791a69da234633c6f67057eb266f113a14d1befa8c",
+    "sources/pluck-unoccluded-attempt1.png": "25249d9314876138cf72aa07dd19eb965cd0d0182789eb5f08fe38d387ba1e44",
+    "sources/reach-anchored-completion-attempt1.png": "08d3567f3a1621e32802d7e95d4fb96847b7910ad29e408cd8bd8708912547ee",
+    "sources/reach-full-attempt1.png": "489b688eb8bf1d4445e32b7b53f13578a697b4cef6abb971b3ce5b1c58e93572",
+    "sources/reach-selected-density.png": "d583ec417d031c0800bb1c80b04322f4ce6baf888b009ced0112b5c2e52222ce",
+    "sources/reach-unoccluded-attempt1.png": "48c9baa0d316b13204b7b6b2a7ccd3d7a50b1e28e2f333e01f735124c1fbf632",
+    "sources/ready-anchored-completion-attempt1.png": "7276312b14636d28480e9f099e3e921389a5b542ea543bd2c259ef1e4735ff1b",
+    "sources/ready-full-attempt1.png": "72c793546df7a48f6a0393a5bc43a53d9297a32dd545caa28c21bcae1532391a",
+    "sources/ready-isolated-top-collar-repair.png": "53b3471c625f39b6677b1ff62c510b63de8b8d3b65858cb180f95c435a5eea97",
+    "sources/ready-selected-density.png": "ec338103e96cb0774c12c7c86209ddfd79a845ceb30056da3e3629a41c07dbc8",
+    "sources/ready-unoccluded-attempt1.png": "caf11297420955afb836fd77dff12c7f2072437449e6a03258d86a38132f2d22",
+    "sources/recovery-anchored-completion-attempt1.png": "2573782b2a78bdc37e48819820c2b51df9f97b19f973f7e0fc7488ceab657008",
+    "sources/recovery-full-attempt1.png": "b5052f58144c67f6e73f28a41c5f07da2843380ab16cddae5474f73af917a6af",
+    "sources/recovery-selected-density.png": "2468ee4657ec4cbf4bc2c66c84de1396c36776ca9d8bb342e27b49b75bfc1d1b",
+    "sources/recovery-unoccluded-attempt1.png": "57c30bea2063d0cd9a3de1f287bb52ec8935061d71a9374324c2b0c8b5e3e1f2",
+    "task-scope.json": "0ca79f8db476a19be42f0fb54466d48d7fee44855c78666972b1392fd30d37fb",
+    "test_harvest_sample.py": "dfcefb8a379a76d72b7fea5ca26d58068b19ffdd571e847b9818409a9318cc98"
+  },
+  "artifact_digest": "aa4daeb0b3714bcca1a6b7f8fc22abd3d203b7570302b7be873cd4282934b5da"
+}

@@ -1,0 +1,371 @@
+{
+  "schema_version": 1,
+  "direction": "south",
+  "garment": "B",
+  "canvas_px": [
+    1536,
+    1920
+  ],
+  "root_anchor_px": [
+    768,
+    1600
+  ],
+  "root_note": "Diagnostic observed footwear with fixed same-direction reference offset. Foot contours color-assisted only; manually reviewed actual source shoe ROI. Not approved support trajectory. No character dimension fitting.",
+  "frames": [
+    {
+      "phase": "ready",
+      "duration_ms": 200,
+      "source": "sources/ready-v1.png",
+      "source_box_px": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "source_root_px": [
+        510,
+        1389
+      ],
+      "visible_foot_points_px": {
+        "observed_shoe_0_outer": [
+          328,
+          1393
+        ],
+        "observed_shoe_0_inner": [
+          514,
+          1393
+        ],
+        "observed_shoe_1_outer": [
+          505,
+          1393
+        ],
+        "observed_shoe_1_inner": [
+          691,
+          1393
+        ]
+      },
+      "visible_grip_points_px": {
+        "top_handle_contact": [
+          474,
+          813
+        ],
+        "side_handle_contact": [
+          653,
+          943
+        ],
+        "rose_center": [
+          407,
+          1064
+        ]
+      },
+      "visible_landmarks_px": {
+        "chin": [
+          510,
+          669
+        ],
+        "neck_base": [
+          512,
+          733
+        ],
+        "observed_shoulder_surface": [
+          337,
+          747
+        ],
+        "observed_elbow_surface": [
+          310,
+          876
+        ],
+        "observed_wrist": [
+          425,
+          818
+        ],
+        "head_crown": [
+          512,
+          211
+        ]
+      },
+      "water_landing_px": null,
+      "observed_shoe_color_bbox_px": [
+        [
+          328,
+          1304,
+          515,
+          1394
+        ],
+        [
+          505,
+          1304,
+          692,
+          1394
+        ]
+      ]
+    },
+    {
+      "phase": "raise",
+      "duration_ms": 200,
+      "source": "sources/raise-v1.png",
+      "source_box_px": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "source_root_px": [
+        512,
+        1388
+      ],
+      "visible_foot_points_px": {
+        "observed_shoe_0_outer": [
+          330,
+          1392
+        ],
+        "observed_shoe_0_inner": [
+          516,
+          1392
+        ],
+        "observed_shoe_1_outer": [
+          507,
+          1392
+        ],
+        "observed_shoe_1_inner": [
+          693,
+          1392
+        ]
+      },
+      "visible_grip_points_px": {
+        "top_handle_contact": [
+          478,
+          700
+        ],
+        "side_handle_contact": [
+          643,
+          838
+        ],
+        "rose_center": [
+          389,
+          940
+        ]
+      },
+      "visible_landmarks_px": {
+        "chin": [
+          510,
+          628
+        ],
+        "neck_base": [
+          512,
+          682
+        ],
+        "observed_shoulder_surface": [
+          340,
+          700
+        ],
+        "observed_elbow_surface": [
+          294,
+          833
+        ],
+        "observed_wrist": [
+          437,
+          724
+        ],
+        "head_crown": [
+          512,
+          170
+        ]
+      },
+      "water_landing_px": null,
+      "observed_shoe_color_bbox_px": [
+        [
+          330,
+          1302,
+          517,
+          1393
+        ],
+        [
+          507,
+          1302,
+          694,
+          1393
+        ]
+      ]
+    },
+    {
+      "phase": "pour",
+      "duration_ms": 350,
+      "source": "sources/pour-v1.png",
+      "source_box_px": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "source_root_px": [
+        512,
+        1320
+      ],
+      "visible_foot_points_px": {
+        "right_outer_sole_row": [
+          350,
+          1320
+        ],
+        "right_inner_sole_row": [
+          484,
+          1320
+        ],
+        "left_inner_sole_row": [
+          539,
+          1320
+        ],
+        "left_outer_sole_row": [
+          673,
+          1320
+        ]
+      },
+      "visible_grip_points_px": {
+        "top_handle_contact": [
+          476,
+          743
+        ],
+        "side_handle_contact": [
+          651,
+          843
+        ],
+        "rose_center": [
+          404,
+          1001
+        ]
+      },
+      "visible_landmarks_px": {
+        "chin": [
+          510,
+          608
+        ],
+        "neck_base": [
+          512,
+          675
+        ],
+        "observed_shoulder_surface": [
+          343,
+          654
+        ],
+        "observed_elbow_surface": [
+          296,
+          800
+        ],
+        "observed_wrist": [
+          421,
+          754
+        ],
+        "head_crown": [
+          512,
+          160
+        ]
+      },
+      "water_landing_px": [
+        292,
+        1407
+      ],
+      "observed_shoe_color_bbox_px": [
+        [
+          319,
+          1232,
+          517,
+          1334
+        ],
+        [
+          507,
+          1232,
+          699,
+          1324
+        ]
+      ]
+    },
+    {
+      "phase": "recovery",
+      "duration_ms": 250,
+      "source": "sources/recovery-v1.png",
+      "source_box_px": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "source_root_px": [
+        510,
+        1389
+      ],
+      "visible_foot_points_px": {
+        "observed_shoe_0_outer": [
+          329,
+          1393
+        ],
+        "observed_shoe_0_inner": [
+          516,
+          1393
+        ],
+        "observed_shoe_1_outer": [
+          506,
+          1393
+        ],
+        "observed_shoe_1_inner": [
+          692,
+          1393
+        ]
+      },
+      "visible_grip_points_px": {
+        "top_handle_contact": [
+          475,
+          943
+        ],
+        "side_handle_contact": [
+          640,
+          1017
+        ],
+        "rose_center": [
+          366,
+          1109
+        ]
+      },
+      "visible_landmarks_px": {
+        "chin": [
+          510,
+          674
+        ],
+        "neck_base": [
+          512,
+          737
+        ],
+        "observed_shoulder_surface": [
+          343,
+          760
+        ],
+        "observed_elbow_surface": [
+          328,
+          906
+        ],
+        "observed_wrist": [
+          429,
+          949
+        ],
+        "head_crown": [
+          512,
+          211
+        ]
+      },
+      "water_landing_px": null,
+      "observed_shoe_color_bbox_px": [
+        [
+          329,
+          1304,
+          517,
+          1394
+        ],
+        [
+          506,
+          1304,
+          693,
+          1394
+        ]
+      ]
+    }
+  ]
+}

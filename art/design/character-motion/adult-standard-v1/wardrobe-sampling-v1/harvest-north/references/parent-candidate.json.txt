@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "template_id": "adult-standard-v1",
+  "motion_set_id": "farming-four-directions-v1",
+  "revision_id": "v1",
+  "action_id": "harvest",
+  "direction": "north",
+  "garment": "B",
+  "status": "complete_four_phase_fixed_outfit_trial_candidate",
+  "canvas_px": [
+    1536,
+    1920
+  ],
+  "root_anchor_px": [
+    768,
+    1600
+  ],
+  "display_scale": 0.11855670103092783,
+  "source_density_scale_vs_idle": 2,
+  "loop": false,
+  "events": [],
+  "accepted": false,
+  "native_checked": false,
+  "geometry_approved": false,
+  "modular": false,
+  "gameplay_available": false,
+  "root_method": "Visible shoe support outline: back/front reference midpoint minus4px y, side near posterior heel plus[144,-4] for east. Whole-frame integer registration only;12px uncertainty. Not total-height fitting or strict contact approval.",
+  "frames": [
+    {
+      "pose_id": "harvest_north_B_ready",
+      "phase": "ready",
+      "duration_ms": 200,
+      "file": "registered/harvest_north_B_0.png",
+      "sha256": "1164c8abcd3201bdcf5f30d3aa06cf271ac39e0569cbe630a9fb9375273009fe",
+      "source": "sources/ready.png",
+      "source_sha256": "30abac7019fdc2923d0ca55cea08fc5ebdfb3b447fe690f6d275bc551a143b27",
+      "source_box_px": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "whole_frame_translation_px": [
+        218,
+        196
+      ]
+    },
+    {
+      "pose_id": "harvest_north_B_reach",
+      "phase": "reach",
+      "duration_ms": 250,
+      "file": "registered/harvest_north_B_1.png",
+      "sha256": "4ca1ab395a66f9e52afa7035a0fab602ffe93ac870b4acd0de0cde280dc31cf3",
+      "source": "sources/reach.png",
+      "source_sha256": "d8a2eb8e1b613247c8f6a3e20f6f7cbd45f4a77464855d9034ae57b6077c7e49",
+      "source_box_px": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "whole_frame_translation_px": [
+        218,
+        219
+      ]
+    },
+    {
+      "pose_id": "harvest_north_B_pluck",
+      "phase": "pluck",
+      "duration_ms": 250,
+      "file": "registered/harvest_north_B_2.png",
+      "sha256": "df2e2f982514b75b9e4d4aaf5499fcfc3ee0db29a34d77bfc6b1a777c0d7c1d2",
+      "source": "sources/pluck.png",
+      "source_sha256": "0ed022b592487c30d8e6148cf3eac54961e11efacf6cd2b2b67075d2c2109c16",
+      "source_box_px": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "whole_frame_translation_px": [
+        218,
+        181
+      ]
+    },
+    {
+      "pose_id": "harvest_north_B_recovery",
+      "phase": "recovery",
+      "duration_ms": 300,
+      "file": "registered/harvest_north_B_3.png",
+      "sha256": "daa8bf2344dff30ab05c40f51c2adcab58c74cd688375f06949fdad16d7f177e",
+      "source": "sources/recovery.png",
+      "source_sha256": "7938b256b9ef3d9a0accdcca22c7fe17f4a9512811a9d1d9fdebd2881bf7bfd4",
+      "source_box_px": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "whole_frame_translation_px": [
+        243,
+        148
+      ]
+    }
+  ],
+  "inputs": {
+    "sources/pluck.png": "0ed022b592487c30d8e6148cf3eac54961e11efacf6cd2b2b67075d2c2109c16",
+    "sources/reach.png": "d8a2eb8e1b613247c8f6a3e20f6f7cbd45f4a77464855d9034ae57b6077c7e49",
+    "sources/ready.png": "30abac7019fdc2923d0ca55cea08fc5ebdfb3b447fe690f6d275bc551a143b27",
+    "sources/recovery.png": "7938b256b9ef3d9a0accdcca22c7fe17f4a9512811a9d1d9fdebd2881bf7bfd4",
+    "prompts/pluck.txt": "55b5f86ec120c2f818a26c561795403758a1336d681b28b7eccb7883a9c58c68",
+    "prompts/reach.txt": "5cd43c05e1e8c714e173c3c3297b2f460242d7f32a4cb909870460149a6790d5",
+    "prompts/ready.txt": "5dd0eda40ff397a5befc5f7e84c4f33d44e7ef249910729fb0c208aae9737a60",
+    "prompts/recovery.txt": "324e68e5158bc420e9a57e10b302fdd54ac27bf301b2404e7fe0b009c483677b",
+    "references/approved-idle-north-B.png": "1f1cde2f501b34cc58dfdb2cb6002bb6f288727410ead454bc62aaadb32299c1",
+    "references/approved-idle.png": "1f1cde2f501b34cc58dfdb2cb6002bb6f288727410ead454bc62aaadb32299c1",
+    "references/pose-A-pluck.png": "9c5588ce30f2c7fc72b7172f46981694cd8c696b916de2de0c23d5804c85c98b",
+    "references/pose-A-reach.png": "8f05598f90193a336bee0c2fd85e0c2c60294117dc995d0a280ff8c9f4d1bf5d",
+    "references/pose-A-ready.png": "6c1c554878cb59cf5d81f2a69daf580f264970ee83048b9e83ad11dce1a629c5",
+    "references/pose-A-recovery.png": "1384044c23666fde4ba2e7a71f5898c3b9a577e1158b49760403479de9e08f2b",
+    "registration-config.json": "672cbdb6aedc2da116f8a6e4fcad2532c39f3c8449ecf56553e5e36a32111fc3"
+  },
+  "registration_tool": {
+    "path": "art/design/character-motion/adult-standard-v1/farming-four-directions-v1/harvest/build_candidate.py",
+    "sha256": "99f9c6dde3c7fa69cea24dd2dd211ec2cebeab7913283cae236152c8cfc5596b"
+  },
+  "scope": "Complete fixed-outfit four-phase harvest sequence for isolated trial; not independent garment composition, strict support/grip approval, gameplay or user visual acceptance.",
+  "artifact_digest": "daa49242550e27d32b0aa67d97c28bcebd8637d1873d8b51a917e0abc2ecb10b"
+}

@@ -1,0 +1,435 @@
+{
+  "schema_version": 1,
+  "template_id": "adult-standard-v1",
+  "motion_set_id": "hoe-west-proof-v1",
+  "revision_id": "v4",
+  "action_id": "hoe",
+  "direction": "west",
+  "status": "unapproved_four_pose_short_arc_candidate",
+  "source_canvas_px": [
+    1024,
+    1536
+  ],
+  "canvas_px": [
+    1536,
+    1792
+  ],
+  "root_anchor_px": [
+    768,
+    1544
+  ],
+  "display_scale": 0.11855670103092783,
+  "source_density_scale_vs_idle": 2,
+  "accepted": false,
+  "native_checked": false,
+  "modular": false,
+  "gameplay_available": false,
+  "loop": false,
+  "root_method": "Observed near-shoe posterior/sole outline minus fixed2x mother offset[144,4]; integer whole-frame registration. Inferred authoring root, not certified support trajectory.",
+  "manual_uncertainty_source_px": 8,
+  "reference_head_size_px": [
+    473,
+    488
+  ],
+  "frames": [
+    {
+      "source": "sources/ready.png",
+      "phase": "ready",
+      "duration_ms": 180,
+      "source_root_px": [
+        686,
+        1415
+      ],
+      "head_bbox_px": [
+        333,
+        189,
+        802,
+        665
+      ],
+      "landmarks_px": {
+        "hip_joint": null,
+        "near_knee_joint": null,
+        "far_knee_joint": null,
+        "near_ankle_joint": null,
+        "far_ankle_joint": null,
+        "far_shoulder_joint": null,
+        "far_elbow_joint": null,
+        "head_crown": [
+          561,
+          189
+        ],
+        "chin": [
+          450,
+          665
+        ],
+        "neck_base": [
+          561,
+          716
+        ],
+        "near_shoulder_surface": [
+          750,
+          756
+        ],
+        "near_elbow_surface": [
+          804,
+          831
+        ],
+        "near_wrist": [
+          707,
+          873
+        ],
+        "far_wrist": [
+          449,
+          925
+        ],
+        "shirt_hem": [
+          749,
+          1016
+        ]
+      },
+      "foot_points_px": {
+        "near_heel": [
+          830,
+          1419
+        ],
+        "near_toe": [
+          595,
+          1419
+        ],
+        "far_toe_outline": [
+          458,
+          1365
+        ],
+        "far_heel_outline": [
+          652,
+          1394
+        ]
+      },
+      "tool_points_px": {
+        "collar": [
+          230,
+          1074
+        ],
+        "butt": [
+          760,
+          917
+        ],
+        "near_grip": [
+          686,
+          938
+        ],
+        "far_grip": [
+          420,
+          1017
+        ],
+        "blade_lowest": [
+          231,
+          1242
+        ]
+      },
+      "pose_id": "hoe_west_key_0",
+      "approved_A_head_bbox_px": [
+        333,
+        189,
+        802,
+        665
+      ]
+    },
+    {
+      "source": "sources/lift.png",
+      "phase": "lift",
+      "duration_ms": 220,
+      "source_root_px": [
+        682,
+        1415
+      ],
+      "head_bbox_px": [
+        304,
+        243,
+        768,
+        725
+      ],
+      "landmarks_px": {
+        "hip_joint": null,
+        "near_knee_joint": null,
+        "far_knee_joint": null,
+        "near_ankle_joint": null,
+        "far_ankle_joint": null,
+        "far_shoulder_joint": null,
+        "far_elbow_joint": null,
+        "head_crown": [
+          532,
+          243
+        ],
+        "chin": [
+          445,
+          725
+        ],
+        "neck_base": [
+          541,
+          779
+        ],
+        "near_shoulder_surface": [
+          729,
+          802
+        ],
+        "near_elbow_surface": [
+          799,
+          901
+        ],
+        "near_wrist": [
+          734,
+          976
+        ],
+        "far_wrist": [
+          417,
+          907
+        ],
+        "shirt_hem": [
+          745,
+          1043
+        ]
+      },
+      "foot_points_px": {
+        "near_heel": [
+          826,
+          1419
+        ],
+        "near_toe": [
+          590,
+          1419
+        ],
+        "far_toe_outline": [
+          463,
+          1365
+        ],
+        "far_heel_outline": [
+          651,
+          1394
+        ]
+      },
+      "tool_points_px": {
+        "collar": [
+          250,
+          921
+        ],
+        "butt": [
+          777,
+          1063
+        ],
+        "near_grip": [
+          706,
+          1038
+        ],
+        "far_grip": [
+          375,
+          956
+        ],
+        "blade_lowest": [
+          211,
+          1055
+        ]
+      }
+    },
+    {
+      "source": "sources/contact.png",
+      "phase": "contact",
+      "duration_ms": 140,
+      "source_root_px": [
+        672,
+        1417
+      ],
+      "head_bbox_px": [
+        286,
+        242,
+        768,
+        737
+      ],
+      "landmarks_px": {
+        "hip_joint": null,
+        "near_knee_joint": null,
+        "far_knee_joint": null,
+        "near_ankle_joint": null,
+        "far_ankle_joint": null,
+        "far_shoulder_joint": null,
+        "far_elbow_joint": null,
+        "head_crown": [
+          531,
+          242
+        ],
+        "chin": [
+          440,
+          737
+        ],
+        "neck_base": [
+          548,
+          786
+        ],
+        "near_shoulder_surface": [
+          709,
+          785
+        ],
+        "near_elbow_surface": [
+          790,
+          883
+        ],
+        "near_wrist": [
+          670,
+          959
+        ],
+        "far_wrist": [
+          434,
+          1090
+        ],
+        "shirt_hem": [
+          753,
+          1045
+        ]
+      },
+      "foot_points_px": {
+        "near_heel": [
+          816,
+          1421
+        ],
+        "near_toe": [
+          580,
+          1421
+        ],
+        "far_toe_outline": [
+          458,
+          1365
+        ],
+        "far_heel_outline": [
+          640,
+          1394
+        ]
+      },
+      "tool_points_px": {
+        "collar": [
+          244,
+          1252
+        ],
+        "butt": [
+          720,
+          991
+        ],
+        "near_grip": [
+          663,
+          1023
+        ],
+        "far_grip": [
+          423,
+          1151
+        ],
+        "blade_lowest": [
+          259,
+          1426
+        ]
+      },
+      "pose_id": "hoe_west_key_2",
+      "approved_A_head_bbox_px": [
+        293,
+        250,
+        767,
+        737
+      ]
+    },
+    {
+      "source": "sources/recovery.png",
+      "phase": "recovery",
+      "duration_ms": 260,
+      "source_root_px": [
+        690,
+        1418
+      ],
+      "head_bbox_px": [
+        336,
+        182,
+        800,
+        665
+      ],
+      "landmarks_px": {
+        "hip_joint": null,
+        "near_knee_joint": null,
+        "far_knee_joint": null,
+        "near_ankle_joint": null,
+        "far_ankle_joint": null,
+        "far_shoulder_joint": null,
+        "far_elbow_joint": null,
+        "head_crown": [
+          551,
+          182
+        ],
+        "chin": [
+          454,
+          665
+        ],
+        "neck_base": [
+          564,
+          721
+        ],
+        "near_shoulder_surface": [
+          745,
+          763
+        ],
+        "near_elbow_surface": [
+          793,
+          852
+        ],
+        "near_wrist": [
+          733,
+          886
+        ],
+        "far_wrist": [
+          441,
+          903
+        ],
+        "shirt_hem": [
+          751,
+          1021
+        ]
+      },
+      "foot_points_px": {
+        "near_heel": [
+          834,
+          1422
+        ],
+        "near_toe": [
+          600,
+          1422
+        ],
+        "far_toe_outline": [
+          450,
+          1366
+        ],
+        "far_heel_outline": [
+          655,
+          1396
+        ]
+      },
+      "tool_points_px": {
+        "collar": [
+          225,
+          970
+        ],
+        "butt": [
+          828,
+          965
+        ],
+        "near_grip": [
+          711,
+          971
+        ],
+        "far_grip": [
+          419,
+          972
+        ],
+        "blade_lowest": [
+          182,
+          1117
+        ]
+      }
+    }
+  ],
+  "garment": "B"
+}

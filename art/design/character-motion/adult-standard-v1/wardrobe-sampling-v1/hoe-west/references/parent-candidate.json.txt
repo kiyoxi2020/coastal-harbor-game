@@ -1,0 +1,1417 @@
+{
+  "schema_version": 1,
+  "template_id": "adult-standard-v1",
+  "motion_set_id": "farming-four-directions-v1",
+  "revision_id": "color-v2",
+  "action_id": "hoe",
+  "direction": "west",
+  "garment": "B",
+  "status": "complete_four_pose_fixed_outfit_review_candidate",
+  "canvas_px": [
+    1536,
+    1792
+  ],
+  "root_anchor_px": [
+    768,
+    1544
+  ],
+  "display_scale": 0.11855670103092783,
+  "source_density_scale_vs_idle": 2,
+  "frames": [
+    {
+      "pose_id": "hoe_west_key_0",
+      "phase": "ready",
+      "file": "registered/hoe_west_key_0.png",
+      "source": "sources/ready.png",
+      "sha256": "2c3c4c25bac9f1b0c54aca8e6d47cfe7243396f75268f184f6ba521013c1c965",
+      "source_sha256": "664ade060c923ab4684c6063f347eae429014a18f2fd1ce3f210d6b88fd01735",
+      "duration_ms": 180,
+      "source_box_px": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "whole_frame_translation_px": [
+        82,
+        129
+      ]
+    },
+    {
+      "pose_id": "hoe_west_key_1",
+      "phase": "lift",
+      "file": "registered/hoe_west_key_1.png",
+      "source": "sources/lift.png",
+      "sha256": "5a8dddf4b1a55de580837ee6527453df32c9e4fb4160e5e57b9a3b0873e7c400",
+      "source_sha256": "e2e5823f257383a25e9e993363a119a11bcee3b8457af7927aa5ebbb44b7c302",
+      "duration_ms": 220,
+      "source_box_px": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "whole_frame_translation_px": [
+        86,
+        129
+      ]
+    },
+    {
+      "pose_id": "hoe_west_key_2",
+      "phase": "contact",
+      "file": "registered/hoe_west_key_2.png",
+      "source": "sources/contact.png",
+      "sha256": "b5ebf1f0f023cc891a27fcbf6c3dadc2eb4d096be893f1c6dd85160891909e3a",
+      "source_sha256": "1994be6212057c9836678147fc42bb09f851cecd84e967212dab999b9df054d0",
+      "duration_ms": 140,
+      "source_box_px": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "whole_frame_translation_px": [
+        96,
+        127
+      ]
+    },
+    {
+      "pose_id": "hoe_west_key_3",
+      "phase": "recovery",
+      "file": "registered/hoe_west_key_3.png",
+      "source": "sources/recovery.png",
+      "sha256": "fccb6ac3df57e3fe32cfd9bd7a1c97f7fafcad82cedcacae0011156e33e526e7",
+      "source_sha256": "b2f07886e32ee3f598ba4b54ffe41c4e4ab4e9db3480d86bdf5a79d9fcaced49",
+      "duration_ms": 260,
+      "source_box_px": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "whole_frame_translation_px": [
+        78,
+        126
+      ]
+    }
+  ],
+  "inputs": {
+    "sources/contact.png": "1994be6212057c9836678147fc42bb09f851cecd84e967212dab999b9df054d0",
+    "sources/gpt-contact-attempt1.png": "273b12efbfd1f93c0c07b8bbb9eb0e171257b1ccb978f1bfd22856c3c0ec9600",
+    "sources/gpt-lift-attempt1.png": "17c2ab712e4a5191eaf2be772a882133f091818c276551624f6df31ee0436cc5",
+    "sources/gpt-lift-attempt2.png": "315ceb50852bea9c745697596d1698a69095ad099b61767741e7a57d287e506b",
+    "sources/gpt-ready-attempt1.png": "0d744768e1784b02bbb532153d5b7dfb077c9465dd698395612c691a340cdd05",
+    "sources/gpt-recovery-attempt1.png": "71acad24ee31f8daf82d40747f984bfe6567e3db1985d59a5bd644cfdecce431",
+    "sources/lift.png": "e2e5823f257383a25e9e993363a119a11bcee3b8457af7927aa5ebbb44b7c302",
+    "sources/ready.png": "664ade060c923ab4684c6063f347eae429014a18f2fd1ce3f210d6b88fd01735",
+    "sources/recovery.png": "b2f07886e32ee3f598ba4b54ffe41c4e4ab4e9db3480d86bdf5a79d9fcaced49",
+    "prompts/contact-color-attempt1.txt": "deb1f5adecd39637b5dca9cb8092c9f865bae3203289a21b1fd6ca77fb52852a",
+    "prompts/lift-color-attempt1.txt": "664d23cd83cc2d0234f672ef4f03b6fafe0548d1fc7644a5195cc157894680dd",
+    "prompts/lift-color-attempt2.txt": "9bea96c13096366b701313bdb771aafe2e3170f271fa2dce331c0000ec13cebc",
+    "prompts/ready-color-attempt1.txt": "edc816b70c767ac9b37f9f3c2e3a6a27727fb50d57c0651485c31ded3ff6ef00",
+    "prompts/recovery-color-attempt1.txt": "ada571b10c2110b567a8c0ea638bd5761956639b7a82dfb92260bcfd7ec9b439",
+    "references/approved-blue-harvest.png": "6ec9fd391ae6d151140b70f57a834ebcca6c06982d9663412cf3a68da42d5023",
+    "references/compose_color.py": "eb3fe0cd3f5c8e8cbbe4f5f6089c1ff9dac8869ffa3f4d6ee1a7252727444242",
+    "references/composition-contact.json": "4eb325ff80d206b7441a641e949f25e2f22d7ce15af1747c8b1d3987ba5472c1",
+    "references/composition-lift.json": "1279f4482c0126f8c31d00ece8c0e529ed7a03b2df798461c220cd69a70694b2",
+    "references/composition-ready.json": "c74905007ce4df8f3ec4e0ee7c3acd6fd49b035dab6285d25ec574e5061bce3d",
+    "references/composition-recovery.json": "024df08126e61aed30e69de3e967451ee9ed011c2e7cafed2de1498cd2d11882",
+    "references/manual-owned-contact.png": "9cd170118409e78aa27eb2cf57851eb82ea45683e0321b9bc9e8151cdb71a736",
+    "references/manual-owned-lift.png": "e76632ced94f962b8f8f213eb88c700556f2abaa03002b984ad9c57ca85c5892",
+    "references/manual-owned-ready.png": "d45709c687d9790762ac248c2fb330825f91b5f1229e93fac77fb3ec2f4ed4a5",
+    "references/manual-owned-recovery.png": "f51df07e919831d9649e507cd43ebccdd6fe52c8afd43c762223df534fdd1f7b",
+    "references/original-contact.png": "bf6e4951bf8d5a2b620f707f5539c26c643e180249a63cd1de32b8d911dc0349",
+    "references/original-lift.png": "3984f0951df63da1cb72067c152ad6710ec6e1fbbfcb4296490ac5c6fa682be7",
+    "references/original-ready.png": "b7cd35d28e48643e427a547a9da527028b15e65191e2040f3b1242460853265f",
+    "references/original-recovery.png": "9de34104bd22be76aec3b26cac9666f32c27c4eeb5f3eb4efcd9e1a0032462bb",
+    "references/ownership.json": "cf0946adf3f4d26a58cd2497c94fc961bb940112494a105faf40bf88ffa3969b",
+    "references/paint-contact.png": "aa4fee84cfe2dbc0dcf81b7ff76e2de639cfa4abb7d894d7b094947ba58ac832",
+    "references/paint-lift.png": "8cee90948fdecdc2fccc77b83ae9a5768276ac37584267ab28b696ddef3dfd56",
+    "references/paint-ready.png": "9749de32f0086a5d379c3b40ca852072329b5a83a0deefda430ff0451373e83f",
+    "references/paint-recovery.png": "57a3936b676ae87256624d32b992ab34e7f0116bbf0649acc713fac9fa125c29",
+    "references/parent-candidate.json.txt": "5c15bd950e3557beb08b8a612f7866daa2a1b7627a1e5971f97c5667abd746c9",
+    "references/parent-registration-config.json.txt": "73593cddb1a81c6af364547d63a764b181f70092063dbfc32cd0d2e22e8287f3",
+    "registration-config.json": "6aabd9d1261225d22a9cca234565f1f391ad6c37dd7bb6e9a10bc98a421adcb9",
+    "provenance.json": "09feadd3ed721b70629d65ddfb3fa19fa4af18f3ffa383860a9c44740cc452e6",
+    "poses.json": "d67089e2ed483d5cd03fc7c8f97166e37541acce8cfe4ca329aefc96ab338858",
+    "measurements.json": "d090410677899e85e578b012698356f2f1c503ce8d9dbca87d9d26d6d8d80ddf"
+  },
+  "events": [],
+  "loop": false,
+  "review_repeat": true,
+  "accepted": false,
+  "native_checked": false,
+  "modular": false,
+  "gameplay_available": false,
+  "move_policy": "isolated_trial_only_locked_during_action",
+  "scope": "Only GPT-authored blue shirt RGB palette correction; original body/tool/pose/alpha and non-owned RGBA/timing retained; new palette awaits native/user review.",
+  "registration_tool_sha256": "9bc309a2bc638ecd94f26d9b6654ba1e4122437ab7105de594d7c8a836d72d4d",
+  "parent_candidate_sha256": "5c15bd950e3557beb08b8a612f7866daa2a1b7627a1e5971f97c5667abd746c9",
+  "color_revision": {
+    "parent_candidate_sha256": "5c15bd950e3557beb08b8a612f7866daa2a1b7627a1e5971f97c5667abd746c9",
+    "compositor_sha256": "eb3fe0cd3f5c8e8cbbe4f5f6089c1ff9dac8869ffa3f4d6ee1a7252727444242",
+    "frames": [
+      {
+        "phase": "ready",
+        "mask": "references/paint-ready.png",
+        "raw_gpt": "sources/gpt-ready-attempt1.png",
+        "ownership_polygons": [
+          [
+            [
+              528,
+              684
+            ],
+            [
+              553,
+              725
+            ],
+            [
+              576,
+              726
+            ],
+            [
+              639,
+              657
+            ],
+            [
+              687,
+              678
+            ],
+            [
+              746,
+              713
+            ],
+            [
+              724,
+              759
+            ],
+            [
+              708,
+              807
+            ],
+            [
+              711,
+              848
+            ],
+            [
+              667,
+              884
+            ],
+            [
+              629,
+              924
+            ],
+            [
+              628,
+              966
+            ],
+            [
+              687,
+              984
+            ],
+            [
+              732,
+              975
+            ],
+            [
+              766,
+              939
+            ],
+            [
+              807,
+              936
+            ],
+            [
+              826,
+              1000
+            ],
+            [
+              783,
+              1015
+            ],
+            [
+              712,
+              1015
+            ],
+            [
+              647,
+              1009
+            ],
+            [
+              573,
+              990
+            ],
+            [
+              548,
+              962
+            ],
+            [
+              553,
+              922
+            ],
+            [
+              551,
+              880
+            ],
+            [
+              521,
+              842
+            ],
+            [
+              493,
+              818
+            ],
+            [
+              471,
+              774
+            ],
+            [
+              489,
+              727
+            ]
+          ],
+          [
+            [
+              657,
+              725
+            ],
+            [
+              738,
+              717
+            ],
+            [
+              795,
+              753
+            ],
+            [
+              842,
+              792
+            ],
+            [
+              844,
+              825
+            ],
+            [
+              816,
+              851
+            ],
+            [
+              757,
+              904
+            ],
+            [
+              700,
+              861
+            ],
+            [
+              677,
+              847
+            ],
+            [
+              698,
+              807
+            ]
+          ],
+          [
+            [
+              476,
+              764
+            ],
+            [
+              518,
+              786
+            ],
+            [
+              542,
+              834
+            ],
+            [
+              531,
+              871
+            ],
+            [
+              499,
+              911
+            ],
+            [
+              462,
+              936
+            ],
+            [
+              420,
+              914
+            ],
+            [
+              410,
+              883
+            ],
+            [
+              415,
+              854
+            ],
+            [
+              440,
+              813
+            ]
+          ],
+          [
+            [
+              640,
+              651
+            ],
+            [
+              690,
+              676
+            ],
+            [
+              745,
+              707
+            ],
+            [
+              796,
+              752
+            ],
+            [
+              818,
+              784
+            ],
+            [
+              779,
+              784
+            ],
+            [
+              742,
+              744
+            ],
+            [
+              700,
+              723
+            ],
+            [
+              653,
+              713
+            ]
+          ],
+          [
+            [
+              762,
+              914
+            ],
+            [
+              805,
+              922
+            ],
+            [
+              821,
+              956
+            ],
+            [
+              829,
+              993
+            ],
+            [
+              788,
+              1014
+            ],
+            [
+              737,
+              1017
+            ],
+            [
+              733,
+              986
+            ]
+          ]
+        ],
+        "composition_info": {
+          "manual_surface_ownership": true,
+          "owned_blue_pixels": 75927,
+          "gpt_color_pixels_applied": 75370,
+          "original_edge_pixels_retained": 557,
+          "fallback_fraction": 0.007335993783502581,
+          "max_fallback_fraction": 0.05,
+          "outside_mask_rgba_differences": 0,
+          "original_alpha_unchanged": true,
+          "original_alpha_sha256": "b8ed57df59e51afe255b5f791d83965f3c7a284f85f6b695196ce35e810dee83",
+          "operation": "GPT garment RGB extraction through manual same-pose shirt ownership; preserve original alpha and all other source RGBA"
+        }
+      },
+      {
+        "phase": "lift",
+        "mask": "references/paint-lift.png",
+        "raw_gpt": "sources/gpt-lift-attempt2.png",
+        "ownership_polygons": [
+          [
+            [
+              476,
+              739
+            ],
+            [
+              541,
+              784
+            ],
+            [
+              576,
+              766
+            ],
+            [
+              616,
+              716
+            ],
+            [
+              652,
+              724
+            ],
+            [
+              707,
+              766
+            ],
+            [
+              739,
+              802
+            ],
+            [
+              724,
+              845
+            ],
+            [
+              699,
+              899
+            ],
+            [
+              666,
+              954
+            ],
+            [
+              648,
+              981
+            ],
+            [
+              707,
+              1000
+            ],
+            [
+              749,
+              1014
+            ],
+            [
+              753,
+              1040
+            ],
+            [
+              712,
+              1047
+            ],
+            [
+              657,
+              1034
+            ],
+            [
+              602,
+              1001
+            ],
+            [
+              533,
+              979
+            ],
+            [
+              515,
+              937
+            ],
+            [
+              488,
+              883
+            ],
+            [
+              454,
+              833
+            ],
+            [
+              452,
+              791
+            ]
+          ],
+          [
+            [
+              449,
+              802
+            ],
+            [
+              491,
+              828
+            ],
+            [
+              520,
+              863
+            ],
+            [
+              504,
+              900
+            ],
+            [
+              464,
+              922
+            ],
+            [
+              438,
+              913
+            ],
+            [
+              414,
+              900
+            ],
+            [
+              394,
+              895
+            ],
+            [
+              381,
+              875
+            ],
+            [
+              388,
+              844
+            ],
+            [
+              413,
+              819
+            ]
+          ],
+          [
+            [
+              678,
+              767
+            ],
+            [
+              733,
+              788
+            ],
+            [
+              782,
+              826
+            ],
+            [
+              824,
+              862
+            ],
+            [
+              849,
+              902
+            ],
+            [
+              828,
+              945
+            ],
+            [
+              788,
+              991
+            ],
+            [
+              752,
+              1007
+            ],
+            [
+              702,
+              975
+            ],
+            [
+              701,
+              933
+            ],
+            [
+              721,
+              885
+            ],
+            [
+              732,
+              844
+            ]
+          ],
+          [
+            [
+              631,
+              703
+            ],
+            [
+              685,
+              728
+            ],
+            [
+              740,
+              770
+            ],
+            [
+              804,
+              811
+            ],
+            [
+              849,
+              851
+            ],
+            [
+              858,
+              890
+            ],
+            [
+              852,
+              928
+            ],
+            [
+              818,
+              971
+            ],
+            [
+              780,
+              1006
+            ],
+            [
+              753,
+              995
+            ],
+            [
+              780,
+              940
+            ],
+            [
+              790,
+              883
+            ],
+            [
+              771,
+              837
+            ],
+            [
+              735,
+              803
+            ],
+            [
+              683,
+              773
+            ]
+          ],
+          [
+            [
+              518,
+              942
+            ],
+            [
+              568,
+              970
+            ],
+            [
+              632,
+              997
+            ],
+            [
+              684,
+              1018
+            ],
+            [
+              735,
+              1037
+            ],
+            [
+              754,
+              1031
+            ],
+            [
+              748,
+              1053
+            ],
+            [
+              692,
+              1048
+            ],
+            [
+              631,
+              1029
+            ],
+            [
+              564,
+              1007
+            ],
+            [
+              528,
+              980
+            ]
+          ]
+        ],
+        "composition_info": {
+          "manual_surface_ownership": true,
+          "owned_blue_pixels": 76432,
+          "gpt_color_pixels_applied": 76345,
+          "original_edge_pixels_retained": 87,
+          "fallback_fraction": 0.0011382666945781716,
+          "max_fallback_fraction": 0.05,
+          "outside_mask_rgba_differences": 0,
+          "original_alpha_unchanged": true,
+          "original_alpha_sha256": "c55e31178396b7cbcb4701ed01aa0e5379d0332c90a92df2625cbf79119693bb",
+          "operation": "GPT garment RGB extraction through manual same-pose shirt ownership; preserve original alpha and all other source RGBA"
+        }
+      },
+      {
+        "phase": "contact",
+        "mask": "references/paint-contact.png",
+        "raw_gpt": "sources/gpt-contact-attempt1.png",
+        "ownership_polygons": [
+          [
+            [
+              489,
+              757
+            ],
+            [
+              540,
+              802
+            ],
+            [
+              583,
+              793
+            ],
+            [
+              635,
+              710
+            ],
+            [
+              676,
+              735
+            ],
+            [
+              715,
+              768
+            ],
+            [
+              701,
+              805
+            ],
+            [
+              664,
+              857
+            ],
+            [
+              639,
+              911
+            ],
+            [
+              614,
+              962
+            ],
+            [
+              653,
+              998
+            ],
+            [
+              697,
+              1005
+            ],
+            [
+              756,
+              1014
+            ],
+            [
+              797,
+              1003
+            ],
+            [
+              816,
+              1027
+            ],
+            [
+              783,
+              1041
+            ],
+            [
+              708,
+              1057
+            ],
+            [
+              650,
+              1050
+            ],
+            [
+              604,
+              1026
+            ],
+            [
+              561,
+              994
+            ],
+            [
+              546,
+              949
+            ],
+            [
+              530,
+              901
+            ],
+            [
+              506,
+              855
+            ],
+            [
+              477,
+              817
+            ]
+          ],
+          [
+            [
+              638,
+              735
+            ],
+            [
+              697,
+              754
+            ],
+            [
+              758,
+              796
+            ],
+            [
+              798,
+              830
+            ],
+            [
+              816,
+              866
+            ],
+            [
+              811,
+              907
+            ],
+            [
+              788,
+              945
+            ],
+            [
+              745,
+              984
+            ],
+            [
+              696,
+              956
+            ],
+            [
+              657,
+              932
+            ],
+            [
+              652,
+              901
+            ],
+            [
+              670,
+              867
+            ],
+            [
+              688,
+              830
+            ],
+            [
+              674,
+              797
+            ]
+          ],
+          [
+            [
+              451,
+              810
+            ],
+            [
+              485,
+              831
+            ],
+            [
+              511,
+              862
+            ],
+            [
+              522,
+              897
+            ],
+            [
+              514,
+              943
+            ],
+            [
+              487,
+              987
+            ],
+            [
+              470,
+              1044
+            ],
+            [
+              464,
+              1092
+            ],
+            [
+              424,
+              1082
+            ],
+            [
+              404,
+              1069
+            ],
+            [
+              405,
+              1024
+            ],
+            [
+              398,
+              984
+            ],
+            [
+              398,
+              944
+            ],
+            [
+              412,
+              889
+            ],
+            [
+              428,
+              854
+            ]
+          ],
+          [
+            [
+              483,
+              748
+            ],
+            [
+              513,
+              773
+            ],
+            [
+              539,
+              796
+            ],
+            [
+              579,
+              803
+            ],
+            [
+              625,
+              748
+            ],
+            [
+              640,
+              705
+            ],
+            [
+              650,
+              722
+            ],
+            [
+              614,
+              799
+            ],
+            [
+              583,
+              832
+            ],
+            [
+              543,
+              822
+            ],
+            [
+              506,
+              794
+            ]
+          ],
+          [
+            [
+              469,
+              968
+            ],
+            [
+              491,
+              948
+            ],
+            [
+              518,
+              926
+            ],
+            [
+              518,
+              969
+            ],
+            [
+              494,
+              1002
+            ],
+            [
+              483,
+              1045
+            ],
+            [
+              469,
+              1097
+            ],
+            [
+              454,
+              1088
+            ]
+          ],
+          [
+            [
+              610,
+              984
+            ],
+            [
+              664,
+              1004
+            ],
+            [
+              716,
+              1023
+            ],
+            [
+              767,
+              1010
+            ],
+            [
+              809,
+              988
+            ],
+            [
+              818,
+              1013
+            ],
+            [
+              804,
+              1031
+            ],
+            [
+              751,
+              1050
+            ],
+            [
+              688,
+              1056
+            ],
+            [
+              634,
+              1034
+            ]
+          ]
+        ],
+        "composition_info": {
+          "manual_surface_ownership": true,
+          "owned_blue_pixels": 74605,
+          "gpt_color_pixels_applied": 74380,
+          "original_edge_pixels_retained": 225,
+          "fallback_fraction": 0.0030158836539105893,
+          "max_fallback_fraction": 0.05,
+          "outside_mask_rgba_differences": 0,
+          "original_alpha_unchanged": true,
+          "original_alpha_sha256": "e1b036c830d145294c10cab057e45ea315cd4bad98e37dae029c6c6685e3b3ba",
+          "operation": "GPT garment RGB extraction through manual same-pose shirt ownership; preserve original alpha and all other source RGBA"
+        }
+      },
+      {
+        "phase": "recovery",
+        "mask": "references/paint-recovery.png",
+        "raw_gpt": "sources/gpt-recovery-attempt1.png",
+        "ownership_polygons": [
+          [
+            [
+              530,
+              684
+            ],
+            [
+              558,
+              718
+            ],
+            [
+              600,
+              699
+            ],
+            [
+              637,
+              654
+            ],
+            [
+              688,
+              678
+            ],
+            [
+              736,
+              708
+            ],
+            [
+              713,
+              760
+            ],
+            [
+              703,
+              806
+            ],
+            [
+              675,
+              847
+            ],
+            [
+              641,
+              888
+            ],
+            [
+              625,
+              925
+            ],
+            [
+              623,
+              961
+            ],
+            [
+              663,
+              989
+            ],
+            [
+              733,
+              999
+            ],
+            [
+              780,
+              988
+            ],
+            [
+              810,
+              977
+            ],
+            [
+              813,
+              1014
+            ],
+            [
+              764,
+              1023
+            ],
+            [
+              688,
+              1019
+            ],
+            [
+              602,
+              1004
+            ],
+            [
+              548,
+              972
+            ],
+            [
+              550,
+              919
+            ],
+            [
+              535,
+              881
+            ],
+            [
+              512,
+              847
+            ],
+            [
+              476,
+              810
+            ],
+            [
+              467,
+              762
+            ],
+            [
+              488,
+              718
+            ]
+          ],
+          [
+            [
+              657,
+              712
+            ],
+            [
+              731,
+              724
+            ],
+            [
+              777,
+              757
+            ],
+            [
+              819,
+              794
+            ],
+            [
+              846,
+              827
+            ],
+            [
+              839,
+              857
+            ],
+            [
+              793,
+              887
+            ],
+            [
+              754,
+              924
+            ],
+            [
+              709,
+              886
+            ],
+            [
+              671,
+              860
+            ],
+            [
+              688,
+              811
+            ],
+            [
+              695,
+              774
+            ]
+          ],
+          [
+            [
+              462,
+              778
+            ],
+            [
+              500,
+              802
+            ],
+            [
+              527,
+              828
+            ],
+            [
+              545,
+              861
+            ],
+            [
+              529,
+              892
+            ],
+            [
+              496,
+              917
+            ],
+            [
+              465,
+              933
+            ],
+            [
+              429,
+              917
+            ],
+            [
+              419,
+              883
+            ],
+            [
+              417,
+              851
+            ],
+            [
+              438,
+              811
+            ]
+          ],
+          [
+            [
+              698,
+              779
+            ],
+            [
+              715,
+              815
+            ],
+            [
+              701,
+              845
+            ],
+            [
+              669,
+              874
+            ],
+            [
+              648,
+              903
+            ],
+            [
+              634,
+              926
+            ],
+            [
+              670,
+              947
+            ],
+            [
+              699,
+              926
+            ],
+            [
+              721,
+              904
+            ],
+            [
+              743,
+              888
+            ],
+            [
+              748,
+              907
+            ],
+            [
+              710,
+              930
+            ],
+            [
+              686,
+              944
+            ],
+            [
+              659,
+              957
+            ],
+            [
+              642,
+              948
+            ],
+            [
+              628,
+              918
+            ],
+            [
+              646,
+              891
+            ],
+            [
+              674,
+              861
+            ],
+            [
+              682,
+              825
+            ]
+          ]
+        ],
+        "composition_info": {
+          "manual_surface_ownership": true,
+          "owned_blue_pixels": 69051,
+          "gpt_color_pixels_applied": 68849,
+          "original_edge_pixels_retained": 202,
+          "fallback_fraction": 0.002925373998928338,
+          "max_fallback_fraction": 0.05,
+          "outside_mask_rgba_differences": 0,
+          "original_alpha_unchanged": true,
+          "original_alpha_sha256": "f737a4966f1d67346bdc0631ad23b3278d91c11f33459a1c6738754ba1486fea",
+          "operation": "GPT garment RGB extraction through manual same-pose shirt ownership; preserve original alpha and all other source RGBA"
+        }
+      }
+    ]
+  },
+  "artifact_digest": "55b8a7792ccda6567df4708fe180d87ce1ee65bb1ff09de59863be7797542691"
+}

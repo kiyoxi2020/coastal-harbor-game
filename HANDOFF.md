@@ -1,3 +1,85 @@
+## 2026-10-28 条纹西锄发帽修复获用户认可（当前有效）
+
+用户反馈的hoe-west帽头贴合/遮挡已修复：待机切图剔除生成皮肤，五姿态帽面按完整头部核实整源登记与near/far；key1复用兼容原完整发，其余四姿态使用内置imagegen帽下可见发片，不再按每列max-y无限削发。原脸/身体/条纹衣/锄头、bare/hair和[180,220,140,260]ms时序保留，用户已认可东向v5资源及其他目录条目逐项保持。
+
+活动headwear-sampling-v1/catalog.json仅将hoe-west指向revisions/hoe-west-hat-v2/sample-build/sample.json。55项帽审计、48项发审计、10个独立逐RGBA合成、4项工具与98项真实资源检查通过。Apple M4真实GPU原生114项全通过：四状态各十循环、五姿态明暗停帧、世界四姿态、挥锄启动、动作内切换时钟和结束idle；2408时序采样、201原PNG、210输出。evidence/native-02/archive-receipt.json严格覆盖/时序/源/4工具SHA及归档哈希通过。主代理已目视8明暗板及帽/发帽世界四姿态，未见明显缝、露头皮条或穿冠；未补色掩盖源软边。
+
+提取与只读集成复查使用用户指定gpt-6.1-sol/high，主代理负责构建/原生/归档。试玩窗口已打开，默认hoe-west hair_hat；重开用hoe-v2/launch-hoe-review.command，效果与修改说明见README.md。最后只读集成复查已完成，P2回执覆盖截图风险已先失败反例再修复，原路径/软硬链接均防护，定点复查关闭；用户明确“效果ok，提交文件，更新进度”，视觉认可已绑定hoe-v2/visual-acceptance-2026-10-28.json的确切sample/native/receipt SHA；不扩大到其他动作/方向，也不宣称用户逐状态真人测试。未验证OS键鼠、连续录像、跨平台或导出包。paseo-progress不可达，仅本地progress.json记录；用户已要求本地提交，本轮文件与必要衣装依赖一并入库；未推送/导出。
+
+## 2026-10-27 v5已接入并过原生（东向记录）
+
+新活动catalog仅替换run-east，路径headwear-sampling-v1/revisions/run-east-hat-approved-v5/sample-build/sample.json；原launch-game-trial.command自动打开新版。用户批准的是右侧wearing-source-v2静态戴法，绑定v5/visual-acceptance-reference.json；新派生组合/动态仍待用户，不能沿用旧v4固定线否决新获准戴法，也不改变原人物脸/身体。
+
+资源选择：idle-extraction；motion-extraction的run0/1；motion-extraction-v2的run2/3；under-hat-hair-extraction四帧专用可见发片。原窄帽冠失败证据保留。当前source登记已烘焙，runtime零placement，不再叠加offset；按far→原body→新帽下发→near。原hair-only完整源/烘焙不变，未max-y削发。sample-build已冻结，不能为标记native/user布尔直接修改其中sample或inputs；新增证据用外部receipt/视觉绑定记录。
+
+6工具、34加载、90切换、98真实资源回归通过。真实GPU110项通过，1693时序采样、136PNG、145原生输出；五姿态明暗/四状态各十循环/世界动作/中途切换与idle全覆盖。主代理已查看8明暗板及native-cycle-hat/hair_hat、world四状态板；未见明显缝、残脸缘、穿冠或裁檐。周期图为抽样非逐帧录像，四pose另有静态与world原生图、完整时序采样。源少量1像素软边差异不补色掩盖，待真人动态反馈。
+
+证据v5/evidence/native/input-contract.json、report.json、receipt.json，-02为最终采集；/private/tmp/-01只有旧工具绑定预快照，未采集不可用。native_contract.py绑定自身和legacy/base/wardrobe共4工具SHA并在调用legacy门禁前检查；严格单east检查/输出/十循环时间门禁，无未关闭P1/P2。pose/候选flag防御已修复，冻结idle仅确切路径+SHA白名单。282本地inputs、1301显式/保守闭包非运行加载trace，其他3样例条目不变。
+
+用户最新模型要求已执行：剩余帽下发和最终只读审查为gpt-6.1-sol/high，既有帽2/3完成/前一轮审查为gpt-5.6-sol/high；Astra已停止实施。不再有运行中子任务。当前阶段停止在可试玩候选，等新动态反馈；不扩其他方向、体型或生产迁移。不宣称系统OS键鼠/焦点恢复、导出/跨平台通过；无提交/推送/导出。
+
+## 2026-10-27 v5获准戴法接入，剩帽下发与原生（历史）
+
+用户已明确接受对照右图wearing-source-v2静态帽戴法并要求执行；绑定v5/visual-acceptance-reference.json。旧v4固定曲线不再是新戴法的验收线，不可把旧拒绝状态继续当最新用户意见。原身体不得换成生成脸，静态参考认可不扩为派生合成/发帽/动态通过。
+
+v5/selected-extractions.json选择idle-extraction、motion-extraction的run0/1及motion-extraction-v2的run2/3，五份帽manifest与source SHA/原body合成逐RGBA已由主代理复核。原窄帽冠run2/3失败留存，新单姿态源完整覆盖原头弧且零runtime placement；不重复加源登记位移。原run短发会穿新帽冠，需帽下专用发视图，不能max-y削发。其GPT源在under-hat-hair-sources/source-v1-normalized.png，剩余提取仅写under-hat-hair-extraction；selected-hair-extractions.json已准备，未完成时builder拒绝构建。
+
+用户最新明确“改用gpt-6.1-sol执行”。当前子代理hat_hair_61_implementation为gpt-6.1-sol/high，接续旧5.6暂停的帽下发提取。帽2/3实施与只读审查此前已由gpt-5.6-sol/high完成；Astra停止实施，不再派发给它。主代理负责build_approved.py/native_contract.py及Godot集成；新native fixture为tests/test_character_headwear_approved_native.gd，仅东run四状态十循环/五姿态明暗/世界切换与idle，不声明其他三组新视觉验收。
+
+审查P2“错pose或缺candidate字段可进入builder”已先复现再修复：load_extraction(path,expected_pose)严格匹配，runtime_candidate_allowed is True；唯冻结idle的确切路径+SHA白名单兼容旧字段。5项工具测试通过，Godot新fixture解析通过。当前sample-build不存在，活动catalog未改、原生未执行；待发层就绪构建→实际图片检查→原生输入快照/真实GPU验证/严格coverage回执→再接目录。原bare/hair/其他样例/时序保留，未提交/推送/导出。
+
+## 2026-10-27 交接：内置 imagegen 可视遮罩尝试（历史）
+
+用户已指定直接内置imagegen，不需API密钥；禁止再要求配置密钥来继续此路线。API预检是历史备选且从未实际调用。当前源/提示词/可视遮罩/两次尝试manifest在art/design/character-motion/adult-standard-v1/headwear-sampling-v1/revisions/run-east-hat-interface-v4/builtin-mask-edit。固定合同SHA仍为b79157cf8428165211d9146765a3162fb0835969bbd2a57f5a4a7b790b7031a4，mask未变。
+
+两次可视遮罩尝试均拒绝：source-v1整帽下移/放大，帽冠下移44px、外框约放大8%，不能平移缩放补救；wearing-source-v2保留大体穿戴布局，但近侧边界未吻合固定帽口，指定帽面点含生成皮肤。第二份为全不透明穿戴参照，源alpha255不能证明帽归属；必须排除其生成身体/背景，不能直接烘焙整图、裁新边或把近侧帽沿假分远侧。两轮停止，不第三次同类重试。旧v2还有650/926点开口侵入，不能再只说八点缺口。
+
+复用gpt-6-astra/high独立只读复查；主代理新增两个先失败反例，修复实际帽层alpha及完整可见头部带漏检，7项测试通过，audit_baselines保持两个旧候选失败。没有合格新帽合成或新版原生验证，未接活动catalog，发帽/东跑四姿态未展开。原身体/已认可美术不变，无提交/推送/导出。下一步必须取得符合固定接口的真实GPT帽源或明确提出新设计，不能静默放松曲线或把技术检查当视觉验收。
+
+## 2026-10-27 帽口恢复执行交接：局部源失败（历史）
+
+后续授权已到：用户“可以使用imagegen技能”回应显式CLI/API询问，故不再请求该路径许可。技能CLI显式mask编辑dry-run通过，参数预览在v4/masked-edit-preflight/cli-dry-run.json；无API调用/图片生成。当前唯一执行前置阻塞为本进程未配置OPENAI_API_KEY。下文“待授权”是此前状态，不是新的审批要求。
+
+当前帽子仍未修好，未接入新候选。用户已批准 Astra 方案并要求执行；工作目录为 art/design/character-motion/adult-standard-v1/headwear-sampling-v1/revisions/run-east-hat-interface-v4。contracts 由复用 gpt-6-astra/high 冻结，主代理负责其外工具与两次内置 GPT 局部源。五项工具测试通过，旧提取失败复现保存；不得放宽合同或把测试数当视觉通过。
+
+两次源后，原坐标合法真帽面并集仍缺前额端八个实体内唇点；Astra 的 contracts/post-source-review.md 说明为什么旧 v3 的同坐标金色亮面不能补。达到批准的同法两次失败停止条件，禁止第三次同类型参考图重试、改 alpha、重复叠加、随意位移或改变原头。八点是源完整性阻塞，不是整帽只剩八点即可完成；整体合成/层序、发帽、东跑四姿态及新版原生均尚未验收。
+
+prepare_masked_edit.py 已备好 masked-edit-preflight 输入、显式 alpha mask、提示词和 CLI 参数清单；原坐标224点受固定 allowed_edit/frozen_hat 约束，八缺点均包含。尚未调用 API：当前环境无 OPENAI_API_KEY，且 imagegen 技能要求用户明确确认 CLI/API 路径。不要索取聊天中的密钥；需用户本机配置。官方说明 mask 只是模型引导，不能保证像素边界，后续也只能按实际来源与原冻结合同验收，不能直接采用整张返回图或中性底色。活动 catalog/身体/冻结源不变，无新原生验证、提交/推送/导出。见该目录 README.md 与 PROJECT_STATE 首节。
+
+## 2026-10-27 Astra 帽子恢复设计完成（修复仍未完成）
+
+按用户建议，实际调用gpt-6-astra/high独立审查用户两张反馈、原帽源/提取层及两轮失败候选，交付docs/superpowers/specs/2026-10-27-hat-recovery-astra-design.md。主代理同时整理18份确切输入SHA及原idle几何诊断（diagnostics/2026-10-27-*.json），没有继续修改运行素材。
+
+设计纠正此前过度归因：整帽前景不必然错误；根因优先为没有按原头定义帽口、归属中混入源脸缘、提取损伤及缺失帽面被错误当作层序修补。旧帽冠/帽带/大部分帽檐可复用，先审计其在目标帽口是否有真实帽像素；不足时只GPT补固定坐标的帽口/内缘接触带，不再生成整身后按耳配准。先idle_east_0单帽，再当前发帽，通过后仅扩东run四姿态。接触折线为待评审设计建议，不是用户已认可的美术接口。
+
+内置工具没有硬编辑mask的限制已写明；只采纳授权帽像素、原身体和full_frame零偏移固定。接触无缝、无肤色/脸缘残留、不露原上头弧、帽轮廓不损失分别门禁；两次几何失败即停止同法并列出准确缺面。434项旧技术检查、v2单像素/层序检查均不代表视觉修复。当前仅完成独立诊断和可执行方案，未生图/接入新候选、未运行新版原生验收、未提交/推送/导出；帽子仍未修好。
+
+## 2026-10-27 帽子视觉反馈：修复未完成（最新有效）
+
+用户指出东向帽檐遮挡错误、帽子与头部有缝隙、下沿有切图残留，并询问对照图是否为最终结果。对照图是中间诊断，不是最终修复。run-east-hat-depth-v2已标记失败：单前景层/每列最低点收发不表达真实前后遮挡，拆层后仍有贴合缝隙及旧源脸缘残留。新GPT单站姿源图pilot虽无裁边，但与原头部投影仍不匹配，同样失败，不作为修复交付。两者均未接入试玩，活动catalog与已冻结源未改。2项深度逻辑/像素回归只能证明指定层序与探针，不代表画面合格；未进行新版原生验收。实际用户截图/拒绝范围见headwear-sampling-v1/feedback/2026-10-27-hat-depth。
+
+下一需先获得贴合实际头型且边缘干净的同姿态帽子视图，再验证原生近景/原尺寸及连续动作。上一轮434项只证明旧候选技术覆盖，不再表述为帽子视觉无问题。当前修复尚未完成；不提交/推送/导出。
+
+## 2026-10-26 动态发帽四组抽样完成（技术验收通过，待视觉认可）
+
+新增[动态发帽试玩](art/design/character-motion/adult-standard-v1/headwear-sampling-v1/launch-game-trial.command)：东run毛衣、西hoe条纹、南water牛仔搭扣、北harvest牛仔四组，每组四动作姿态+匹配idle，裸头/栗色短发/草帽/短发草帽四状态，共80显示状态。右上选动作、右下选发帽；面板暂停/逐帧，世界仅当前方向/动作，切发帽不重启动作时间，工具结束回同状态idle，无玩家存档。
+
+沿adult-standard-v1同一体系；同pose原身体/脸手/衣物/工具保持，发帽独立GPT部件、整张源密度归一及真实头部锚点整数登记，ownership/目标叠绘/帽下收发分别记录。侧向初版耳颈污染、帽冠露头皮及错误朝向稿已退回保留；最终侧向采用独立透明发/帽源，锄地key1/3用单姿态西向源，未贴旧脸/挪缩部件/擦掉身体修投影。北reach源格孤立非帽竖线已有失败回归与明确源归属排除。
+
+验证：Godot加载34、切换隔离90、真实资源集成98、旧衣物集成13项通过；Python合同10+源图伪影1项通过。Apple M4真实GPU原生434项全通过：16组状态各明暗停帧/10面板循环、世界四姿态/动作结束idle与动作中换发帽不重置时钟，18981采样、852连续/停帧/world捕获。主代理查看全部32原生停帧板（8合并板）、4世界全状态板和总览；输入快照、输出SHA/UTC及完整性门禁通过，archive_allowed=true。852采集图无损归档后已实际解包，885原生输出逐SHA一致，16段VFR预览齐全。证据见headwear-sampling-v1/evidence/native；源图/输出/世界原尺寸与2倍面板尺寸见display-measurements.json。
+
+原生采用真实控件信号/handler/逻辑Input actions，focused由fixture设置，不宣称OS键鼠投递或系统焦点恢复。独立复查发现原生报告可被单图假检查误放行P2，已有失败复现并补冻结clip、精确检查/截图集合及十循环采样门禁；本轮复查无未关闭P1/P2。视觉认可仍待用户实际反馈，只限四个抽样配方/方向，不扩大为全发帽库、完整动作兼容、严格接触、其他体型或生产迁移完成。原已认可衣物与生产角色资源未修改；未提交/推送/导出。最终动态发帽试玩已启动，Apple M4原生运行正常、启动日志无脚本/加载错误，等待用户实际视觉反馈。
+
+## 2026-10-26 五类动作衣物组合抽样已获视觉认可（当前有效）
+
+按用户“无需遍历所有组合和动作，抽样组合就行”，完成五个固定样例，各含四姿态动作与同配方idle：西walk条纹衫+牛仔裤；东run砖红毛衣+搭扣鞋；西hoe条纹衫；南water原蓝衣+牛仔裤+搭扣鞋；北harvest原蓝衣+牛仔裤。只验证这些配方/方向，不外推全衣柜或其他剪裁。入口为[衣物抽样试玩](art/design/character-motion/adult-standard-v1/wardrobe-sampling-v1/launch-game-trial.command)。右上五按钮选号，面板暂停/逐帧，世界仅启用所选方向/动作；停步或工具结束保持同衣装站姿，无玩家存档。
+
+资源沿adult-standard-v1同一体系制作：GPT衣物源与完整布面、人工source ownership/当前coverage/occlusion/层序分开，已认可同pose身体/脸手/工具及轮廓保留，槽位拆分后离线烘焙，再复用原角色播放时间轴。非衣RGBA、原alpha、原姿态注册与时序均保持；walk/run仅完整源画布密度2→1投影，不局部挪缩。hoe lift肩缘由同pose两GPT稿的有效布面按120点人工mask取原坐标补齐，无程序造色。harvest红毛衣后领/袖口稿未过门禁，失败源保留，按抽样目标最终只换牛仔裤；红毛衣在run样例覆盖，不继续扩该款第二动作。
+
+验证：加载失败门禁16项、真实五组集成13项（JSON float与parent int数组误判已有失败回归，改逐项数值比较后通过）、证据门禁9项通过；walk/run独立重建236/264断言、农事8项隔离及harvest7项测试与三组实际来源/登记重建通过。真实GPU原生119项全通过，20姿态明暗停帧、每组10面板循环、world走跑真实逻辑输入位移与三工具一次播放、20world姿态及5结束idle。3928采样、188连续/world捕获，233原始PNG无损归档逐哈希恢复一致，15张原生板及5段VFR面板录像已保存。主代理目视全部15板，独立Astra最终复审无未关闭P1/P2。快照/回执双SHA与UTC时序绑定，archive_allowed=true；catalog SHA8b12f260…、native report a5899526…，详见wardrobe-sampling-v1/evidence/native。
+
+首次native因数值数组类型检查停止，失败report/快照与精确原脚本保留在evidence/failed-timing-load，不计通过。证据回执覆写输入的P2已建立直接路径/软硬链接失败回归并修复。原生采用真实控件信号/handler/逻辑Input actions，focused由fixture设置，不代表OS键鼠或WM焦点通过。固定同版型布面适配，不宣称隐藏裸体、任意剪裁/全部混搭或生产迁移；原已认可24组与正式脚本未修改，用户现反馈“效果ok”，已绑定五组实际配方、20动作纹理/5匹配idle、时序、catalog和原生证据，见wardrobe-sampling-v1/visual-acceptance-2026-10-26.json。用户未逐项陈述操作覆盖；认可只限当前显示的抽样效果。阶段停止在五样例交付，不自动扩款/体型/玩法，不提交/推送/导出。本轮抽样试玩已启动并获当前效果认可；样例切换入口在画面中上部偏右“衣物组合抽样”标题下。资源内原创建状态保持冻结，以独立认可记录为准。
+
 ## 2026-10-26 三农事四向长短袖试玩已验收，提交归档（当前有效）
 
 用户确认“验收没有问题，提交代码，更新进度”。锄地、浇水、收获三动作×四方向×短长袖24组/96姿态，以及锄地蓝长袖16帧衣色修订，当前显示效果全部获认可。最终认可绑定实际catalog-color-v2、24个candidate、96纹理和时序，记录见[最终验收](art/design/character-motion/adult-standard-v1/farming-four-directions-v1/visual-acceptance-final-2026-10-26.json)。保留原反馈、旧颜色与原生报告，不改写历史认可范围；冻结资源中的accepted=false为原生成时状态，以本次独立绑定记录表述最终视觉验收，避免变更资源导致证据失效。

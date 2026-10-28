@@ -1,0 +1,97 @@
+{
+  "template_id": "adult-standard-v1",
+  "action_id": "harvest",
+  "direction": "north",
+  "garment": "B",
+  "root_method": "Visible shoe support outline: back/front reference midpoint minus4px y, side near posterior heel plus[144,-4] for east. Whole-frame integer registration only;12px uncertainty. Not total-height fitting or strict contact approval.",
+  "frames": [
+    {
+      "source": "sources/ready.png",
+      "phase": "ready",
+      "source_root_px": [
+        550,
+        1404
+      ],
+      "visible_foot_points_source_px": {
+        "support_root_reference": [
+          550,
+          1404
+        ]
+      },
+      "grip_points_source_px": null,
+      "unknown_joint_centers": null,
+      "head_bbox_px": [
+        205,
+        172,
+        795,
+        695
+      ]
+    },
+    {
+      "source": "sources/reach.png",
+      "phase": "reach",
+      "source_root_px": [
+        550,
+        1381
+      ],
+      "visible_foot_points_source_px": {
+        "support_root_reference": [
+          550,
+          1381
+        ]
+      },
+      "grip_points_source_px": null,
+      "unknown_joint_centers": null,
+      "head_bbox_px": [
+        205,
+        177,
+        795,
+        697
+      ]
+    },
+    {
+      "source": "sources/pluck.png",
+      "phase": "pluck",
+      "source_root_px": [
+        550,
+        1419
+      ],
+      "visible_foot_points_source_px": {
+        "support_root_reference": [
+          550,
+          1419
+        ]
+      },
+      "grip_points_source_px": null,
+      "unknown_joint_centers": null,
+      "head_bbox_px": [
+        205,
+        100,
+        795,
+        618
+      ]
+    },
+    {
+      "source": "sources/recovery.png",
+      "phase": "recovery",
+      "source_root_px": [
+        525,
+        1452
+      ],
+      "visible_foot_points_source_px": {
+        "support_root_reference": [
+          525,
+          1452
+        ]
+      },
+      "grip_points_source_px": null,
+      "unknown_joint_centers": null,
+      "head_bbox_px": [
+        233,
+        110,
+        796,
+        620
+      ]
+    }
+  ]
+}

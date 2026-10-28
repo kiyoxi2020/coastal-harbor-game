@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "generation_tool": "built-in image_gen.imagegen",
+  "exact_image_model_id": "not returned by built-in tool; not inferred",
+  "agent_model": "gpt-6.1-sol",
+  "reasoning_effort": "high",
+  "fork_turns": "none",
+  "source_origin": "same-pose full GPT fabric adaptation, raw anchored torso completions and original approved unchanged source pixels",
+  "drafts": [
+    {
+      "file": "sources/contact-anchored-completion-attempt1.png",
+      "sha256": "f9e16936943e5b3061948c97eca8d4f5debf3cb1726da8943cfd4625e6e4cce3",
+      "role": "raw GPT output; exact selection roles in source-selection.json/ownership.json"
+    },
+    {
+      "file": "sources/contact-anchored-completion-attempt2.png",
+      "sha256": "c8d064656edfa9877bcdeec2edb23492815e966c4a114c1e104787c318846f13",
+      "role": "raw GPT output; exact selection roles in source-selection.json/ownership.json"
+    },
+    {
+      "file": "sources/contact-full-attempt1.png",
+      "sha256": "16a563ef716aaccfb172ec245a48d90fd48acfc5ada8788e16e47d6a83d9c4be",
+      "role": "raw GPT output; exact selection roles in source-selection.json/ownership.json"
+    },
+    {
+      "file": "sources/contact-unoccluded-attempt1.png",
+      "sha256": "8cb219b58eb32203d33e15b67b8fe4df4a0ea61fe012590ce9625b9466f377ea",
+      "role": "rejected: outfit-only recentered"
+    },
+    {
+      "file": "sources/idle-full-attempt1.png",
+      "sha256": "1835fc2f974e13f51ea0b3a822c7106f806e9a32ff635daf257c84a7084a531f",
+      "role": "rejected: idle1 reframed; actual source2 uses1024 registration reference"
+    },
+    {
+      "file": "sources/idle-full-attempt2.png",
+      "sha256": "e10f4a75f1e592d9d503971bccfc88f83a4ce8196ee47d806966243faf989a4b",
+      "role": "raw GPT output; exact selection roles in source-selection.json/ownership.json"
+    },
+    {
+      "file": "sources/lift-anchored-completion-attempt1.png",
+      "sha256": "31fbc3117955fb66a8f05c5d218e30527389661d923f91404c1d82fd73d0e06d",
+      "role": "raw GPT output; exact selection roles in source-selection.json/ownership.json"
+    },
+    {
+      "file": "sources/lift-anchored-completion-attempt2.png",
+      "sha256": "a676e1dbe9a38e68c54300f2f95e245bb3921566181e6790efdb579de120a020",
+      "role": "raw GPT output; exact selection roles in source-selection.json/ownership.json"
+    },
+    {
+      "file": "sources/lift-full-attempt1.png",
+      "sha256": "035957c4461bb995ad939e83283a7708678e55199583d54cc767a5eef6283ddc",
+      "role": "raw GPT output; exact selection roles in source-selection.json/ownership.json"
+    },
+    {
+      "file": "sources/lift-full-attempt2.png",
+      "sha256": "270ce8e8d04d77924656b8649ad2449878542bd5b1b4984dd260592d3ba3d64a",
+      "role": "raw GPT output; exact selection roles in source-selection.json/ownership.json"
+    },
+    {
+      "file": "sources/lift-full-attempt3.png",
+      "sha256": "e17a176f360450f9740dcfdcfd702c17f7b06500b4f54b6e9d5dd6ab50732b86",
+      "role": "raw GPT output; exact selection roles in source-selection.json/ownership.json"
+    },
+    {
+      "file": "sources/lift-unoccluded-attempt1.png",
+      "sha256": "9b43d7c715f912c56aa306e3c132fee4e6f47d4c25f63af3096700deee0a7dcb",
+      "role": "rejected: outfit-only recentered"
+    },
+    {
+      "file": "sources/ready-anchored-completion-attempt1.png",
+      "sha256": "bb5857772858aa669c3eaca2f6409f4130aff3c6e712092facb0709463d33ee5",
+      "role": "raw GPT output; exact selection roles in source-selection.json/ownership.json"
+    },
+    {
+      "file": "sources/ready-anchored-completion-attempt2.png",
+      "sha256": "dfb45e851c1521ee54fa181ccebb002ff38ae8761ab40628d424741349c01f37",
+      "role": "raw GPT output; exact selection roles in source-selection.json/ownership.json"
+    },
+    {
+      "file": "sources/ready-attempt1.png",
+      "sha256": "d303d1a595b96b3cf376c5421a764a0b72802f8bf6d31993b7c54d646d6da60b",
+      "role": "top-only first isolation: preserved diagnostic, not registered layer"
+    },
+    {
+      "file": "sources/ready-full-attempt1.png",
+      "sha256": "c32f32e6d14d93fbaeedfcdfb5c169e14c9a55847f6193bc9935fcc3a35e5e74",
+      "role": "raw GPT output; exact selection roles in source-selection.json/ownership.json"
+    },
+    {
+      "file": "sources/ready-unoccluded-attempt1.png",
+      "sha256": "d74aaa5115c2062f3e40c40f1b7abe0ab6da0a3f06cd474cb14d183c9610474c",
+      "role": "rejected: outfit-only recentered"
+    },
+    {
+      "file": "sources/recovery-anchored-completion-attempt1.png",
+      "sha256": "80bc140ea7ee7be80d88103a689ebf0f01373508abd89d5c59779934ef6f3b19",
+      "role": "raw GPT output; exact selection roles in source-selection.json/ownership.json"
+    },
+    {
+      "file": "sources/recovery-full-attempt1.png",
+      "sha256": "46e2df2d0bf6cf1678374303342a33b84fd6ec54b68e840cd04929acef165160",
+      "role": "raw GPT output; exact selection roles in source-selection.json/ownership.json"
+    },
+    {
+      "file": "sources/recovery-unoccluded-attempt1.png",
+      "sha256": "1e3a7413b1d6984bd31b674d1a9e248f9db5f7a43fcdb8c69fd389c26eae7645",
+      "role": "rejected: outfit-only recentered"
+    }
+  ],
+  "reference_origins": {
+    "parent_candidate": "art/design/character-motion/adult-standard-v1/farming-four-directions-v1/hoe/revisions/color-v2/west-B/candidate.json",
+    "idle": "art/design/character-motion/adult-standard-v1/locomotion-v1/baked/B_1.png",
+    "top03": "art/design/character-candidates-v2/top/top03/source.png"
+  },
+  "strategy_change": "Two isolated-source failures recentered. Anchored completion preserves head/feet as fiducials; only manually declared actual hidden torso is imported, unvalidated regenerated limbs/cuts are ignored. Lift full1 misses213 shoulder points; full2 increases wrist/cut drift. Diagnostic evidence justified a targeted GPT shoulder source3, then source3 still lacks120 shoulder points. Source2 has true same-pose stripes at all120; explicit manual shoulder panel + primary-alpha-zero condition selects those original-coordinate pixels with0transform."
+}

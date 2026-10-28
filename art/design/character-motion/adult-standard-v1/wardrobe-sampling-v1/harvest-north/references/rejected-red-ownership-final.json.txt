@@ -1,0 +1,709 @@
+{
+  "schema_version": 1,
+  "author": "gpt-6.1-sol manual per-pose review",
+  "variant": "same-cut-surface-adaptation-v1",
+  "scope": "Only this recipe/direction/action and matching idle; shared original contour interface; not arbitrary cut or hidden nude body capability",
+  "frames": {
+    "ready": {
+      "top": [
+        [
+          [
+            275,
+            674
+          ],
+          [
+            758,
+            674
+          ],
+          [
+            758,
+            1004
+          ],
+          [
+            275,
+            1004
+          ]
+        ]
+      ],
+      "pants": [
+        [
+          [
+            312,
+            941
+          ],
+          [
+            781,
+            941
+          ],
+          [
+            781,
+            1340
+          ],
+          [
+            312,
+            1340
+          ]
+        ]
+      ],
+      "shoes": [
+        [
+          [
+            262,
+            1290
+          ],
+          [
+            835,
+            1290
+          ],
+          [
+            835,
+            1417
+          ],
+          [
+            262,
+            1417
+          ]
+        ]
+      ],
+      "coordinate_space": "original-source-1024x1536",
+      "visible_owner_method": "human-authored same-pose garment surface envelope + original material boundary assistance; original shared black contour/alpha edge retained separately",
+      "slot_order": [
+        "shoes",
+        "pants",
+        "top"
+      ],
+      "occlusion_order": [
+        "garments",
+        "shared_same_pose_foreground_and_contour"
+      ],
+      "protected_foreground_polygons": [],
+      "pants_protected_polygons": [
+        [
+          [
+            480,
+            1146
+          ],
+          [
+            549,
+            1140
+          ],
+          [
+            605,
+            1173
+          ],
+          [
+            619,
+            1218
+          ],
+          [
+            591,
+            1280
+          ],
+          [
+            552,
+            1301
+          ],
+          [
+            552,
+            1330
+          ],
+          [
+            582,
+            1361
+          ],
+          [
+            570,
+            1371
+          ],
+          [
+            535,
+            1341
+          ],
+          [
+            520,
+            1291
+          ],
+          [
+            501,
+            1276
+          ],
+          [
+            481,
+            1230
+          ],
+          [
+            468,
+            1190
+          ]
+        ]
+      ],
+      "complete_source_ownership_note": "Source ownership = complete manually declared garment surface (current visible surface + relevant hidden surface). Current coverage/occlusion are separate; no hand/tool-shaped hole cut into complete source. Black silhouette contour is the retained same-cut shared interface.",
+      "hidden_surface_polygons": {
+        "top": [],
+        "pants": [
+          [
+            [
+              460,
+              1060
+            ],
+            [
+              624,
+              1060
+            ],
+            [
+              624,
+              1131
+            ],
+            [
+              460,
+              1131
+            ]
+          ]
+        ],
+        "shoes": []
+      },
+      "hidden_surface_basis": "Manual same-pose torso or trousers surface behind original hand/tool only; copy anchored GPT completion at identical coordinates. Ignore regenerated arms/outer cuts in completion. Source raw remains intact.",
+      "source_surface_repairs": [
+        {
+          "slot": "top",
+          "source": "sources/ready-isolated-top-collar-repair.png",
+          "polygons": [
+            [
+              [
+                462,
+                686
+              ],
+              [
+                550,
+                686
+              ],
+              [
+                550,
+                696
+              ],
+              [
+                462,
+                696
+              ]
+            ],
+            [
+              [
+                561,
+                681
+              ],
+              [
+                574,
+                681
+              ],
+              [
+                574,
+                688
+              ],
+              [
+                561,
+                688
+              ]
+            ]
+          ],
+          "basis": "Exact original back collar blue-material edge; isolated same-coordinate GPT red cloth surface only; repair limited to actual reviewed collar segments, excluding unrelated shoulder-edge transparent pixels"
+        }
+      ]
+    },
+    "reach": {
+      "top": [
+        [
+          [
+            247,
+            663
+          ],
+          [
+            803,
+            663
+          ],
+          [
+            803,
+            990
+          ],
+          [
+            247,
+            990
+          ]
+        ]
+      ],
+      "pants": [
+        [
+          [
+            239,
+            905
+          ],
+          [
+            842,
+            905
+          ],
+          [
+            842,
+            1310
+          ],
+          [
+            239,
+            1310
+          ]
+        ]
+      ],
+      "shoes": [
+        [
+          [
+            201,
+            1262
+          ],
+          [
+            888,
+            1262
+          ],
+          [
+            888,
+            1396
+          ],
+          [
+            201,
+            1396
+          ]
+        ]
+      ],
+      "coordinate_space": "original-source-1024x1536",
+      "visible_owner_method": "human-authored same-pose garment surface envelope + original material boundary assistance; original shared black contour/alpha edge retained separately",
+      "slot_order": [
+        "shoes",
+        "pants",
+        "top"
+      ],
+      "occlusion_order": [
+        "garments",
+        "shared_same_pose_foreground_and_contour"
+      ],
+      "protected_foreground_polygons": [],
+      "pants_protected_polygons": [
+        [
+          [
+            466,
+            1150
+          ],
+          [
+            545,
+            1147
+          ],
+          [
+            596,
+            1171
+          ],
+          [
+            621,
+            1200
+          ],
+          [
+            620,
+            1256
+          ],
+          [
+            585,
+            1296
+          ],
+          [
+            555,
+            1333
+          ],
+          [
+            588,
+            1362
+          ],
+          [
+            572,
+            1372
+          ],
+          [
+            530,
+            1340
+          ],
+          [
+            515,
+            1292
+          ],
+          [
+            480,
+            1264
+          ],
+          [
+            462,
+            1220
+          ]
+        ]
+      ],
+      "complete_source_ownership_note": "Source ownership = complete manually declared garment surface (current visible surface + relevant hidden surface). Current coverage/occlusion are separate; no hand/tool-shaped hole cut into complete source. Black silhouette contour is the retained same-cut shared interface.",
+      "hidden_surface_polygons": {
+        "top": [],
+        "pants": [
+          [
+            [
+              446,
+              1033
+            ],
+            [
+              628,
+              1033
+            ],
+            [
+              628,
+              1120
+            ],
+            [
+              446,
+              1120
+            ]
+          ]
+        ],
+        "shoes": []
+      },
+      "hidden_surface_basis": "Manual same-pose torso or trousers surface behind original hand/tool only; copy anchored GPT completion at identical coordinates. Ignore regenerated arms/outer cuts in completion. Source raw remains intact.",
+      "source_surface_repairs": [
+        {
+          "slot": "top",
+          "source": "sources/reach-anchored-completion-attempt1.png",
+          "polygons": [
+            [
+              [
+                290,
+                948
+              ],
+              [
+                316,
+                948
+              ],
+              [
+                316,
+                970
+              ],
+              [
+                290,
+                970
+              ]
+            ]
+          ],
+          "basis": "Enlarged old/full/completion wrist comparison: anchored completion provides red cuff cloth at original blue edge; no hand/outer contour imported"
+        }
+      ]
+    },
+    "pluck": {
+      "top": [
+        [
+          [
+            272,
+            617
+          ],
+          [
+            763,
+            617
+          ],
+          [
+            763,
+            997
+          ],
+          [
+            272,
+            997
+          ]
+        ]
+      ],
+      "pants": [
+        [
+          [
+            332,
+            945
+          ],
+          [
+            788,
+            945
+          ],
+          [
+            788,
+            1357
+          ],
+          [
+            332,
+            1357
+          ]
+        ]
+      ],
+      "shoes": [
+        [
+          [
+            277,
+            1301
+          ],
+          [
+            845,
+            1301
+          ],
+          [
+            845,
+            1431
+          ],
+          [
+            277,
+            1431
+          ]
+        ]
+      ],
+      "coordinate_space": "original-source-1024x1536",
+      "visible_owner_method": "human-authored same-pose garment surface envelope + original material boundary assistance; original shared black contour/alpha edge retained separately",
+      "slot_order": [
+        "shoes",
+        "pants",
+        "top"
+      ],
+      "occlusion_order": [
+        "garments",
+        "shared_same_pose_foreground_and_contour"
+      ],
+      "protected_foreground_polygons": [],
+      "complete_source_ownership_note": "Source ownership = complete manually declared garment surface (current visible surface + relevant hidden surface). Current coverage/occlusion are separate; no hand/tool-shaped hole cut into complete source. Black silhouette contour is the retained same-cut shared interface.",
+      "hidden_surface_polygons": {
+        "top": [],
+        "pants": [],
+        "shoes": []
+      },
+      "hidden_surface_basis": "Manual same-pose torso or trousers surface behind original hand/tool only; copy anchored GPT completion at identical coordinates. Ignore regenerated arms/outer cuts in completion. Source raw remains intact.",
+      "source_surface_repairs": [
+        {
+          "slot": "top",
+          "source": "sources/pluck-isolated-top-collar-repair-attempt2.png",
+          "polygons": [
+            [
+              [
+                507,
+                615
+              ],
+              [
+                600,
+                615
+              ],
+              [
+                600,
+                647
+              ],
+              [
+                507,
+                647
+              ]
+            ]
+          ],
+          "basis": "Exact original back collar blue-material edge; isolated same-coordinate GPT red cloth surface only; opaque donor collar margin generated upward, original coverage clips the margin without a local transform"
+        }
+      ]
+    },
+    "recovery": {
+      "top": [
+        [
+          [
+            263,
+            615
+          ],
+          [
+            772,
+            615
+          ],
+          [
+            772,
+            975
+          ],
+          [
+            263,
+            975
+          ]
+        ]
+      ],
+      "pants": [
+        [
+          [
+            320,
+            928
+          ],
+          [
+            726,
+            928
+          ],
+          [
+            726,
+            1375
+          ],
+          [
+            320,
+            1375
+          ]
+        ]
+      ],
+      "shoes": [
+        [
+          [
+            270,
+            1327
+          ],
+          [
+            776,
+            1327
+          ],
+          [
+            776,
+            1466
+          ],
+          [
+            270,
+            1466
+          ]
+        ]
+      ],
+      "coordinate_space": "original-source-1024x1536",
+      "visible_owner_method": "human-authored same-pose garment surface envelope + original material boundary assistance; original shared black contour/alpha edge retained separately",
+      "slot_order": [
+        "shoes",
+        "pants",
+        "top"
+      ],
+      "occlusion_order": [
+        "garments",
+        "shared_same_pose_foreground_and_contour"
+      ],
+      "protected_foreground_polygons": [],
+      "complete_source_ownership_note": "Source ownership = complete manually declared garment surface (current visible surface + relevant hidden surface). Current coverage/occlusion are separate; no hand/tool-shaped hole cut into complete source. Black silhouette contour is the retained same-cut shared interface.",
+      "hidden_surface_polygons": {
+        "top": [],
+        "pants": [],
+        "shoes": []
+      },
+      "hidden_surface_basis": "Manual same-pose torso or trousers surface behind original hand/tool only; copy anchored GPT completion at identical coordinates. Ignore regenerated arms/outer cuts in completion. Source raw remains intact."
+    },
+    "idle": {
+      "top": [
+        [
+          [
+            99,
+            358
+          ],
+          [
+            414,
+            358
+          ],
+          [
+            414,
+            538
+          ],
+          [
+            99,
+            538
+          ]
+        ]
+      ],
+      "pants": [
+        [
+          [
+            163,
+            526
+          ],
+          [
+            349,
+            526
+          ],
+          [
+            349,
+            677
+          ],
+          [
+            163,
+            677
+          ]
+        ]
+      ],
+      "shoes": [
+        [
+          [
+            149,
+            648
+          ],
+          [
+            357,
+            648
+          ],
+          [
+            357,
+            716
+          ],
+          [
+            149,
+            716
+          ]
+        ]
+      ],
+      "coordinate_space": "idle512x768",
+      "slot_order": [
+        "shoes",
+        "pants",
+        "top"
+      ],
+      "occlusion_order": [
+        "garments",
+        "shared_same_pose_foreground_and_contour"
+      ],
+      "visible_owner_method": "human same-pose envelopes plus original material boundary assistance",
+      "protected_foreground_polygons": [],
+      "hidden_surface_polygons": {
+        "top": [],
+        "pants": [],
+        "shoes": []
+      },
+      "source_surface_repairs": [
+        {
+          "slot": "top",
+          "source": "sources/idle-isolated-top-cuff-repair-attempt4.png",
+          "polygons": [
+            [
+              [
+                107,
+                479
+              ],
+              [
+                172,
+                479
+              ],
+              [
+                172,
+                520
+              ],
+              [
+                107,
+                520
+              ]
+            ],
+            [
+              [
+                337,
+                479
+              ],
+              [
+                400,
+                479
+              ],
+              [
+                400,
+                520
+              ],
+              [
+                337,
+                520
+              ]
+            ]
+          ],
+          "basis": "Isolated same-coordinate original blue top, GPT red knit with cuff donor margin; original top coverage clips extra source cloth, uniform whole-frame density2-to1 only"
+        }
+      ]
+    }
+  }
+}
