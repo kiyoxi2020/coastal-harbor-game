@@ -1,8 +1,0 @@
-LAYOUT_DIAGNOSTIC reference=(122.0, 183.0) motion=(122.0, 183.0) minimum=(121.4021, 182.1031) canvas_scale=(2.0, 2.0)
-POPUP_OPEN selected=0 focus=-1 visible=true
-POPUP_HOME focus=-1
-POPUP_DOWN count=1 focus=-1
-POPUP_DOWN count=2 focus=-1
-POPUP_DOWN count=3 focus=0
-POPUP_DOWN count=4 focus=1
-POPUP_FINAL selected=1 direction=west

@@ -1,1 +1,0 @@
-Requested four 1024x1536 cells, received total1024x1536. Rejected for final use: density only1x after cell crop. Strategy changed to single complete1024x1536 frames.

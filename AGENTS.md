@@ -22,6 +22,13 @@
 - 默认不读取 `.godot/` 缓存，不全文输出大型日志；诊断确有需要时，只检查相关文件、错误段落或统计摘要。
 - 图片、音频、二进制资源及导出包按任务需要使用合适工具检查，不将其作为文本批量读取。
 
+## 人物构建入口与强制门禁
+
+- 后续新建人物配方统一使用 `coastal-character-construction-v1`，通过 `python3 tools/characters/build.py build <配方JSON> --output <新目录>` 构建，使用 `verify <构建目录>` 复核。配方位于 `art/characters/recipes/<recipe-id>/<revision>.json`；禁止另写每批次人物合成/播放器或将旧迁移配方冒充新合同。
+- 当前入口支持同姿态整帧分层；整帧源坐标注册须绑定记录并与模板variant完全一致，禁止部件单独挪缩。普通alpha与二值归属合成须显式区分；ownership、coverage、occlusion不是可互换的mask。未支持的接口明确报错，不绕开校验补图。
+- 人物相关改动交付前必须执行 `python3 -m unittest discover -s tools/characters/tests` 与 `python3 tools/characters/check.py`；修改实际美术/动画仍须完成制作规范要求的原生动态与视觉验收，不能以结构测试替代。
+- `tools/characters/runtime-baseline.json`冻结当前生产人物依赖和迁移旧配方范围；不得为通过检查自动刷新、放宽或加入新旧格式例外。生产切换需另行完成发布合同并评审更新基线；构建输出始终为review-only，不继承迁移原生回执或旧认可成为新发布。
+
 ## 验证与数据保护
 
 - 可自动验证的逻辑错误，先建立能复现问题的失败测试，再做最小修复。新增逻辑功能按验收条件设计必要测试。

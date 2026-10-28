@@ -1,6 +1,6 @@
 # 统一人体、动画与衣物组合制作规范
 
-版本：2，2026-10-23。按用户本轮要求，将动态人体与衣物组合正式纳入唯一制作规范；本文件替代原先“先扩完整静态库、最后另做动画”的执行顺序。AGENTS和各复盘页引用本文件，复盘不维护另一套制作合同。现处于首个运动小样制作阶段，正式动态资源尚未通过验收。
+版本：2.1，2026-10-28（仅更新资源存储与留存约定；制作合同保持版本2）。按用户本轮要求，将动态人体与衣物组合正式纳入唯一制作规范；本文件替代原先“先扩完整静态库、最后另做动画”的执行顺序。AGENTS和各复盘页引用本文件，复盘不维护另一套制作合同。当前四向动作与代表性组合已有分范围认可；实际覆盖见人物库 coverage.json，不等于完整组合或正式生产迁移完成。
 
 ## 1. 目标、母版与适用范围
 
@@ -8,9 +8,9 @@
 
 正式交付只保留一套现行人体模型体系与播放/合成管线，不长期并行维护旧版和新版。成年男女、老人、儿童是该体系内的体型变体，仍保留各自比例及适配；“一版”不意味着全员使用同一个成人轮廓。新增动作和样式通过同一资源合同扩展，不重新建立一套人物生成或播放系统。
 
-成年标准的原始外观来源为[用户选中母版](../../art/design/character-bodies/adult-standard-v1/source.png)。原始source.png不可覆盖，制作输入读取[selection.json](../../art/design/character-bodies/adult-standard-v1/selection.json)的active_revision；当前是已认可的三向眉毛v3。它穿衬衣和短裤，只提供外观与站立比例，尚不是隐藏身体齐全的运动模板。
+成年标准的原始外观来源为[用户选中母版](../../art/characters/sources/adult-standard-original-v1/source.png)。原始source.png不可覆盖，制作输入读取[selection.json](../../art/characters/templates/adult-standard-v1/selection.json)的active_revision；当前是已认可的三向眉毛v3。它穿衬衣和短裤，只提供外观与站立比例，尚不是隐藏身体齐全的运动模板。
 
-保留该人物自身的脸、头颅、耳、身体比例与身份特征；运动时允许自然改变姿态和投影，不把站立脸手像素硬贴到转头、抬手或弯腰帧。旧A/B等认可图仅是[历史参考](../../art/design/character-bodies/README.md)，不能拆其脸手补到新人物。
+保留该人物自身的脸、头颅、耳、身体比例与身份特征；运动时允许自然改变姿态和投影，不把站立脸手像素硬贴到转头、抬手或弯腰帧。旧A/B等认可图仅是Git `379a9bc` 中的 `art/design/character-bodies/README.md` 历史参考，不能拆其脸手补到新人物。
 
 每个体型使用独立template_id/version，动作集用motion_set_id/version，姿态用pose_id；一个姿态不再被误称为一个独立体型。女性、老人、儿童各自冻结比例，不将成人缩小当儿童；性别不作服装硬限制，兼容取决于实际体型与姿态。
 
@@ -161,18 +161,24 @@ mask与目标表面必须在同一姿态坐标系，记录source/pose/owner/targ
 
 ## 8. 目录、迁移与成本
 
-现有静态源、认可修订及证据保留；新动态制作资料使用以下结构（已建立walk-west-proof-v1试验目录，完整生产结构待实现）：
+现行人物制作资源统一位于 [art/characters](../../art/characters/README.md)，按稳定资源身份组织：
 
-- `art/design/character-motion/<template-id>/<motion-set-id>/`：README、template.json、motions.json、poses.json，sources/prompts及对应来源清单。
-- 同目录`parts/<design-id>/<variant-id>/`：views.json、完整部件图集、pose-map.json；`masks/`保存有目标表面与姿态的mask及规则。
-- 同目录`recipes/`保存有限组合；`baked/`保存派生完整帧与export-manifest.json；`evidence/`保存结构报告、停帧、连续录像及review.json。
-- 仅通过对应验收的导出进入`godot2d/assets/characters/<template-id>/<motion-set-id>/`；Godot帧资源与场景设置在正式接入时制作，不预先覆盖现生产主角。
+- `sources/<source-id>/`：最终采用的完整GPT源、提示词、必要生成参考与注册元数据；source.json关联确切来源与SHA。
+- `templates/<template-id>/revisions/`：所选母版；`motions/<motion-set-id>/actions/<action-id>/<revision>/<direction>/`：动作、姿态、画布/根点/时序与真实已有接口。完整穿衣参考不冒充隐藏身体。
+- `parts/<design-id>/`：款式与变体；`adaptations/<template-id>/<motion-set-id>/<revision>/`保存完整view、pose-map及分开的ownership/coverage/occlusion引用。多个pose可以引用同一view，不按动作复制款式。
+- `recipes/<recipe-id>/`：实际有限配方；`builds/<build-id>/`：精确烘焙输出与输入清单；`reviews/<suite-id>/`：评审入口；`evidence/<scope-id>/`：轻量原认可记录与必要当前核验证据；`migrations/`：旧新映射、保全与恢复记录。
+- 制作与核验代码在 `tools/characters/`；Godot隔离试玩在`godot2d/dev/characters/`，相关测试在`godot2d/tests/characters/`。统一启动为`python3 tools/characters/review.py <suite>`，不在新美术批次下另建Godot工程。
+- 正式发布门禁通过后，才在`godot2d/assets/characters/releases/<release-id>/`接入唯一发布清单。当前正式`player-unified-v4`仍在运行，本次目录迁移不提前切换或删除它。
+
+经用户确认，工作区只保留最终资源和必要制作输入；普通失败稿、旧试验工具与大量重复过程证据在Git可恢复且现行依赖已迁出的条件下移出。Git基线`379a9bc`保留旧路径与原字节，不额外复制庞大archive树。仍被最终稿引用的失败参考是必要输入（例如pants08的skirt-waist参考），不能按rejected目录名删除。未入Git的历史资料清理时先临时保全并记录位置，不静默丢弃。
+
+原认可保留确切范围、版本/哈希和少量代表图。新路径清单产生新digest；以迁移等价记录关联旧认可，不重写旧认可或将旧原生receipt用于新合同。必要源元数据的旧JSON作为opaque provenance保留，现行工具通过新view/index与路径映射解析，不能重新执行其中旧路径。后续改图/时序/层序则使受影响证据失效，沿新revision重新验收。
 
 旧静态所有权mask、手颈保护框、裤脚列边界只服务原standing_0，不直接复制到新动作。完整GPT源稿/外观ID/提示词可复用，站立透明层仅在实际相同投影中复用，缺失隐藏区按需补齐。当前60项目录与静态交接、body09男童近成人高度问题分别处理；未解决体型不能冻结为动作母版。
 
 成本分别统计：独立绘制视图、隐藏区补画、姿态映射/覆盖规则、实际组合审核数量。姿态数×部件数只是兼容检查规模，不能当作独立生图次数。若与旧版一样每向每动作六帧，五类四向动作共120姿态，另加四向idle为124；8衣裤鞋配方为992状态，再验证无帽/有帽两种头部条件，共1984合成状态，均非1984次独立生图。其他职业动作及体型另计；阶段3的四帧数不作为完整动作集的统一帧数。
 
-旧失败批次已归档，恢复入口见[历史清理记录](../../art/archive/README.md)；不作为现行制作范例，不因更新规范再次删除美术文件或历史证据。六类各10候选的静态任务保留，其完成不等于本版动态验收。
+旧失败批次与完整过程记录由Git基线恢复，入口见人物库README及migrations清单；不作为现行制作范例。六类各10候选的静态任务保留，其完成不等于本版动态验收。
 
 ## 9. 新动作、新样式与体型的扩展合同
 
@@ -204,6 +210,12 @@ mask与目标表面必须在同一姿态坐标系，记录source/pose/owner/targ
 
 新增体型沿用同一合同与工具，独立冻结比例、关节与运动视图，再适配衣物。无需复制一套引擎或分叉一套生成脚本；相同语义锚点名称不意味着成人与儿童可共用坐标或衣物像素。
 
+### 当前可执行构建合同
+
+统一构建入口为 `tools/characters/build.py`，新配方使用 `coastal-character-construction-v1`；字段与实际西锄示例见[工具说明](../../tools/characters/README.md)。`build`只产生不可覆盖的评审构建，`verify`重新解析配方和实际依赖并逐RGBA重建；`check.py`与PR/push工作流检查仓库入口和生产依赖。当前生产发布门禁仍关闭，不存在新active_release。
+
+首版支持完整整帧分层、alpha-over与二值归属替换；源帧合成后的整帧注册须绑定确切记录并与模板variant一致。构建时裁剪/密度缩放、局部变换和未声明接口明确拒绝。此范围不等于本规范全部接口/运动/发布要求已实现；扩能力必须先扩统一合同及反例测试，不新增批次专用构建器。技术构建成功不产生新的用户认可或动态接触证据。
+
 ### 增量构建、回归与发布
 
 依赖链为：体型/动作姿态＋部件视图＋mask/层序＋配方→烘焙帧→原生证据→唯一发布清单。artifact_digest按每个配方/动作的实际依赖闭包计算；发布清单另记录全局release哈希。只追加无关动作/衣物不使未受影响美术证据失效；改共享身体、姿态、mask或合成算法，则所有实际依赖它的结果必须失效并重建，不能靠旧文件名沿用证据。
@@ -218,22 +230,8 @@ motion_set新增action时保留其他action_id及其revision；修改pose/锚点
 
 [运动评审与游戏实现调研](p01-p14/NPC-motion-astra-review.md)保留Astra实际代码审查和公开资料来源；[返工复盘索引](p01-p14/NPC-rework-astra-review.md)保留问题原因。它们解释设计依据，步骤、资源合同与验收只以本文件为准。
 
-版本2设计及入口已同步。当前交付[四向walk/idle与两套上衣评审候选](../../art/design/character-motion/adult-standard-v1/locomotion-v1/README.md)，2026-10-25已按反馈修正左右步态，保留75%速度。18项分层/注册/对称、20项合成器回归、43项原生港口检查通过，40停帧、8段十循环与明暗诊断板已归档。2026-10-25用户已认可当前试玩，记录绑定当前artifact；384个真实移动采样的接触基线已归档。同姿态帧内相对地面滑动与“相对批准姿态轨迹误差”是不同指标，不将1像素目标擅自改写为全程锁脚。完整关节/接触事件合同与批准目标轨迹仍待冻结，不宣称阶段3或整套迁移通过。其余run/hoe/water/harvest、动态衣裤鞋8配方和发帽条件尚未完成。Godot日志统一`--log-file /private/tmp/coastal-*.log`，未经用户要求不提交、推送或导出。
+当前进度以[人物资源库](../../art/characters/README.md)、[覆盖清单](../../art/characters/coverage.json)及PROJECT_STATE/HANDOFF顶部记录为准。此前逐次试稿、修订和原生过程记录可在Git `379a9bc` 按旧路径查阅；本规范不继续堆积制作流水账。
 
-2026-10-25续作：[西向run小样](../../art/design/character-motion/adult-standard-v1/run-west-proof-v1/README.md)已提供完整GPT帧候选与同一试玩入口的Shift走跑切换；walk54保持，run81待评审。登记4、共享工具22、run逻辑40、walk逻辑28、原生run16/walk43通过，176连续样本与89捕获覆盖十循环。当前run只证明完整帧加载/播放/控制，run衣身/袖/隐藏身体未拆，不能认作动态换装或阶段4通过；用户步态/速度认可及精确接触轨迹均未冻结。下一步先评审此小样，再补同姿态分层与衣物接口。
+四向walk/idle/run两上衣、三农事四向长短袖24组及五衣物抽样的已显示效果认可保留；发帽仍是四个动作/方向的有限抽样，东跑v5与西锄ear-v3分别保留认可，不扩写到其他方向/动作。新目录只整理既有能力，不补画缺失隐藏身体、严格接触、其他体型或生产角色能力。
 
-2026-10-25追加反馈：run v2因1/3、2/4姿态重复感退回，v4重绘后两完整姿态待用户复审。用户授权两个子代理并行hoe/water，再接续harvest；三类均有原生小样证据，但比例/工具刚性/脚位问题未过，不能标记阶段4完成。入口art/design/character-motion/review.html，详情以各候选README为准。
-
-2026-10-25继续：用户已认可v4西向短袖run，视觉认可绑定原candidate，分层A四帧全RGBA精确还原。可选跑步换衣接口已实现并通过48项逻辑，原生A17/walk43通过。真实B两轮GPT源后仍有第3/4帧腰线缺口，分层6项中1失败，未启用；不得将fixture加载或A还原当作B动态换装通过。见[分层诊断](../../art/design/character-motion/adult-standard-v1/run-west-proof-v1/garment-review.html)。下一步修正有坐标约束的B衣摆/袖口接口，通过后再扩四向；完整裸身体、独立裤鞋和生产迁移仍待完成。
-
-2026-10-25 接续修订：西向 B 已启用并完成真实 A/B 换衣验收。此前腰线缺口定位为 A 棕色裤腰误归上衣，先以实际裤像素建立失败测试，再修正 ownership；保留原裤源像素后四帧缺口均为0，未局部挪动/缩放/补色。实际使用原 B v2，新增 v3 仅作诊断留档。真实分层7项、逻辑48项、原生A/B 25项及两套十循环通过；A原认可清单与全RGBA还原不变，B待用户视觉评审。当前仍仅两套上衣与固定裤鞋，不代表完整动态混搭、四向run或生产迁移。
-
-本轮并行农事 v2：浇水定位旧腿长后改用批准 idle 几何参考，根至头同口径585px vs584px，完整水流及整帧平移登记到768×768；4项结构检查、原生明暗十循环完成，尚未通过精确脚接触、工具刚性、握点和用户认可。锄地两次生成均因头部偏小、工具投影长度不一致和跨格退回；停止同思路重试，保留完整源与失败证据。两项均未接入玩法或动态换装。新入口见[动作总览](../../art/design/character-motion/review.html)。
-
-2026-10-25 提交归档：用户要求提交本批累计的西向 run v4、A/B 换衣、农事试稿与 v2 修订、原生证据及进度记录。本地提交不改变验收状态：长袖与浇水待视觉评审，锄地/采收仍需返工；四向动作、独立裤鞋/发帽与生产迁移未完成。第3帧5个裤色像素仍归远臂层的P3问题已登记，扩独立裤装前处理。未推送、未导出。
-
-2026-10-25 继续实施：四向run A技术候选与west/east B已在隔离试玩加载并原生检查；南北上部轮廓带较批准idle宽约10–13%（含耳ROI，不是冻结头骨），身份比例待复审，南北B失败拒绝。完整关节/接触、农事动作、裤鞋发帽和8配方仍未通过。water v3仅两关键姿态诊断，hoe v3/harvest v2拒绝扩帧。具体实际范围见[本轮入口](../../art/design/character-motion/adult-standard-v1/run-four-directions-v1/README.md)及PROJECT_STATE顶部；不覆盖旧西向认可，不宣称阶段4/5/6完成。
-
-2026-10-26用户已认可此前可显示的四向walk/idle、四向run A及西/东run B（含当前比例），认可绑定run-four-directions-v1/visual-acceptance-2026-10-26.json。随后按用户要求，通过显式诊断清单把既有南北B失败稿放入隔离试玩查看；南B为完整源帧、北B为既有分层稿，保留现象并标诊断，不进入有效发布清单或自动继承认可。该查看授权不等于正式资源门禁通过。
-
-2026-10-26南北长袖当前显示效果亦获用户认可，绑定visual-acceptance-long-sleeves-2026-10-26.json。当前显示的四向idle/walk/run与A/B上衣外观认可完整；对已认可当前纹理不继续以不可见测量差强制返工，原测量保留。南B完整帧展示仍不等于独立衣物视图兼容；新增组合、农事、体型及正式接入按实际合同与依赖验收。
+本次迁移的原生检查是新入口与数据等价核验，不替代新动画发布所需的完整动作/组合与连续验证。OS输入/WM焦点、全帧率录像、跨平台与新导出等既有未验证项保持明确。

@@ -1,0 +1,11 @@
+{
+  "actions": [
+    "idle",
+    "walk",
+    "run",
+    "hoe",
+    "water",
+    "harvest"
+  ],
+  "scope": "Existing semantic actions only; extra actions require explicit motion data and applicable gameplay handler."
+}

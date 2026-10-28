@@ -1,0 +1,11 @@
+{
+  "slots": [
+    "hair",
+    "top",
+    "pants",
+    "shoes",
+    "hat",
+    "tool"
+  ],
+  "source_ownership_coverage_occlusion_separate": true
+}
