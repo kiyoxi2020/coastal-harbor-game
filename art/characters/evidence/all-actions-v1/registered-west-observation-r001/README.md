@@ -1,0 +1,1 @@
+内部西向idle+walk原生观察，非全24格验收。实际GPU239检查、785连续面板帧，10面板循环，世界实际输入完整4姿态与结束idle；输入291文件、114原生PNG均复hash，连续panel clock与实际process delta最大差2.85e-14ms。未测完整转换、10世界循环、严格足/握/目标接触或用户认可。完整原始114PNG临时目录 /private/tmp/coastal-registered-west-native-02；此处只持久化报告、输入清单及3代表图，未声称未复制PNG永久归档。第一次同步保存PNG导致漏采世界姿态，失败证据保留/private/tmp/coastal-registered-west-native-01；改为结束后统一保存后4姿态齐全。

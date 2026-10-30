@@ -1,0 +1,9 @@
+...................................................................................................................................................................................................................................................................................................................................................................
+----------------------------------------------------------------------
+Ran 355 tests in 359.260s
+
+OK
+{"output": "/private/tmp/coastal-contact-evidence-5_252vrz/receipt.json", "raster_matrix_complete": false, "physical_contact_acceptance": false}
+{"passed": false, "error": "Receipt output must be fresh"}
+{"passed": false, "error": "Shoes raster measurement requires native samples"}
+{"output": "/private/tmp/coastal-contact-evidence-ahzxe_as/bound-static.json", "raster_matrix_complete": false, "physical_contact_acceptance": false}

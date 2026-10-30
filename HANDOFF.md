@@ -1,3 +1,131 @@
+## 2026-10-30 全动作统一评审包本地提交
+
+本次提交纳入固定hair_hat全动作统一管线、24动作方向／84姿态的配方与构建、完整GPT来源／部件／注册资料、共享Godot试玩与原生验证工具、完整原生证据和Q2=B范围决定。统一入口 `tools/characters/review-all-actions.command`。旧西锄r001的24个文件按既有迁移退出现行build目录；父提交2742c19及历史清单保留原字节，现行引用指向已验证的新构建。
+
+提交前核对207个当前证据文件SHA、已冻结运行／验证源码、355测试通过记录、六组raw聚合缺项0和Q2=B决定，确认逻辑／制品未变；暂存检查仅清理contact_evidence.py的一个行尾空格，AST等价且原测量源与回执保留，记录见commit-format-only-validator-note.json；沿用355测试、check53配方/47构建/9冻结legacy及原生结果，本次不机械重跑。差异格式与baseline不变核验通过。提交后的哈希、暂存区和工作区状态在Git/Progress中复核。
+
+本轮按用户Q2=B接收当前四关键帧像素步态完整评审包；严格足底支撑／腾空／滑步仍转后续、未验证，生产player-unified-v4与runtime-baseline不变。仅本地提交，不推送；不新增游戏或美术修改。下文“未提交”为此前阶段历史。
+
+## 2026-10-30 用户Q2=B：全动作统一评审交付完成
+
+用户明确回复“Q2 (步态验收标准): B”，本轮接收当前四关键帧像素步态。固定top03／原裤鞋／栗短发＋草帽的24动作方向、84姿态统一评审包完成；唯一入口 `tools/characters/review-all-actions.command`，151.749秒原生总览见 `art/characters/evidence/all-actions-v1/native-r001/videos/all-actions-native-overview.mp4`。决定记录 `native-r001/q2-b-decision.json` 绑定artifact61d071…／manifest9b209…／suite27f973…，资源、配方、速度、渲染与构建字节均未因选择而更改。
+
+沿用已通过且代码/资源未变的355人物测试、check53配方/47构建/9冻结legacy、六组原生闭包缺项0、8工具点几何、102＋8407栅格对应与8643原始PNG完整无损留存。本次仅更新决定、范围、当前状态与交付文档，并复核旧证据全部文件SHA、manifest/suite与新索引完整性；不机械重跑GPU/全量测试。
+
+严格足底支撑／腾空／滑步合同转后续，原审查和未验证结论完整保留，不记为通过，也不扩大为动态混搭、所有美术或生产认可。生产player-unified-v4、runtime-baseline不变；OS输入、导出与其它平台未测；未提交/推送。Paseo T01–T08全部完成，Q2=B已记录，运行已Finished；本轮按该标准结项。下文“Q2待答/未结项”为决定前历史。
+
+## 2026-10-30 最终技术验证与完整留存完成；仅Q2步态标准待答（未结项）
+
+统一固定hair_hat：24动作方向、84姿态，build `adult-top03-full-hair-hat-r001`／artifact61d071a98a25ee765be62fa4d4623cae074d4097327c8e781ca3a207b6af421a，3102输入strict build/verify通过。完整入口 `tools/characters/review-all-actions.command`，CLI `python3 tools/characters/review.py all-actions-construction`；同一共享Godot播放器、六动作四向、只显示发帽组合。已启动完整试玩，未切生产。
+
+最终355人物测试全部通过（359.260s），check53配方/47构建/9冻结legacy通过。六组真实原生数据最终闭包聚合通过，缺项0：168明暗停帧覆盖84pose，20世界十轮组，48农事＋32走跑时序，96转换，14港口空间。最终采集为poses06/world05/farm-timing03/locomotion-timing03/transitions03/spatial05；相应完整实际输入3629/3633/3635/3635/3635/3636文件已核。另8真实锄刃/水花点在GardenA合法站位的原生几何验证通过，不称土壤冲击/隐藏握点/业务事务。102定姿＋8407连续材质/鞋面测量全部最佳0px、无缺项/歧义。Root目视全部84原生姿态及61空间＋8目标截图。
+
+完整原生证据已持久化 `art/characters/evidence/all-actions-v1/native-r001/`：8643 PNG路径、全部原始报告/输入/最终r003回执、无损tar hardlinks（每成员SHA重读）、243运行源文件与12验证/测试源的UTF8/SHA不可执行快照、尺寸合同、1×板图、20视频及151.749秒总览。状态见status.json，原始聚合raw-observation-set.json；所有旧失败/诊断保留，不转PASS。UI农事按钮隐藏、数值边界采样、错误提前完成门槛、合法碰撞恢复误拒和不成立的wall+1tick推算均已用失败测试定位并修复；最后空间69测试通过且真实3045tick/61PNG独立重算通过。未改变游戏速度/源图/正式模型以迎合校验。
+
+**严格足底支撑/腾空/滑步仍未满足。** 独立source审查与1373实际PNG、64材料候选、全部328持帧段保留在foot-support-review。历史prompt有制作意图，但缺正式实际足点/轨迹合同；条件材料漂移walk8–24px、run16–36px：若作为固定支撑则超1px，不能冒称无条件物理误差或用栅格0px替代支撑通过。
+
+Paseo Q2待用户选：A保持严格支撑目标继续补资源/合同并重验，B本轮接当前四帧像素评审包、严格支撑后续。推荐A，用户Work around设置明确回答前不实施任一选项；只读审查已结束，未开始步态重做。所有不受Q2影响的构建、原生验证、预览、持久化、记录已完成。进度保持开放：T01–04/T06 done，T05/T07 Review，T08等待T07；等待Q2，不finish、不标全动作严格验收完成。
+
+生产player-unified-v4及runtime-baseline不变，用户视觉认可/生产发布/OS输入/导出/其他平台仍未取得或未测；无提交/推送。原两gpt-6.1-sol/high代理分别独立足部审查及空间validator窄修，均完成，无新/嵌套代理。磁盘约1GiB可用，先前满盘失败均拒收；源/历史/临时原路径都保留，只对关闭的同SHA PNG去重，勿覆盖旧采集。
+
+## 2026-10-30 全动作统一包已可评审；Q2步态标准待答，尚未结项
+
+24/24动作方向、84姿态已统一为 `adult-top03-full-hair-hat-r001`，artifact61d071a98a25ee765be62fa4d4623cae074d4097327c8e781ca3a207b6af421a；3102输入strict build/verify通过。入口 `tools/characters/review-all-actions.command`（仅hair_hat），CLI `python3 tools/characters/review.py all-actions-construction`。实际完整试玩已启动于Apple M4；OS级UI/CUA抓窗未验证，原生RenderingServer截图与世界输入已实际采集。
+
+最终定姿poses06通过5348producer检查／3629输入独立复核，168明暗停帧覆盖84姿态，2583PNG；Root逐帧目视全部84原生姿态。世界world05（官方--max-fps60，仍采每个实际draw）通过12312producer检查、5894draw＋overview、20组各十轮／实例；48farm时序219、32loco时序115、96转换595producer检查及独立raw均通过。102定姿＋8407连续材质／鞋面测量全部最佳偏移0、无歧义和缺项；这不是支撑/滑步/土壤接触证明。20视频已解码5914帧，总览151.749s。最新完整Python333项通过461.242s；check53配方／47构建／9冻结legacy通过。其后空间verifier新增14碰撞恢复测试＋8实际tick墙钟因果测试，最终69模块测试/最终全量复核仍进行。
+
+空间03/04曾被旧validator错误拒绝：实际CharacterBody2D合法安全边距分离≤0.08world、一次2R32ULP接触抖动；后又发现sum(physics delta)≤PNG墙钟+1tick未经Engine保证。Root不改游戏以迎合校验，改spatial观察器记录实际normal/request/motion/margin/phase及每physics tick的ticks_usec和Engine时钟配置，spatial05已真实完成212producer检查；独立最终聚合待新verifier冻结后执行。8锄刃／水花候选在真实GardenA格内，40producer检查通过，独立geometry侧车待复核；不声称源图土壤、隐藏握点或业务事务。
+
+**明确遗留：严格足底支撑／腾空／滑步门槛仍未满足。** 独立审查43当前元数据＋18历史JSON＋26prompt，找到制作意图但没有正式逐足点/支撑轨迹合同。1373实际PNG、64源鞋底材质候选、全部328持帧段条件漂移：walk8–24px、run16–36px；若对应点为固定支撑，则超过1px。报告 `evidence/all-actions-v1/native-r001/foot-support-review/review.md`，不能冒称无条件物理误差或已通过。
+
+Paseo Q2要求用户在A保持严格支撑继续补资源/合同，B本轮接当前四帧像素评审包并明确严格支撑后续之间选择。推荐A；用户设置Work around，插件明确回答前不实施任一选项。主代理继续不受此选择影响的验证/持久化/记录，未开始步态重做，进度保持开放：T05 Review、T07 Fixes、T08等待。原两gpt-6.1-sol/high代理分别做只读足部审查（已结束）与空间独立validator窄修复；无新代理/嵌套。
+
+原生留存 `art/characters/evidence/all-actions-v1/native-r001/`：完整poses无损tar（2583路径／277唯一PNGpayload，约110MB；每member重读SHA），原生1×板图、原始输入/报告gz、102/8407receipt、64候选/328段足部审查、20视频/总览、source/output/native尺寸合同、原始code UTF8/SHA非执行JSON快照。world/timing/loco/transitions/spatial05/ground05完整归档待最终raw聚合。磁盘曾满导致poses03/world04缺报告均拒收；所有原始源与历史路径保留，仅对关闭的同SHA临时PNG做hardlink去重。当前约1GiB可用，不再创建重复payload tar。
+
+生产player-unified-v4、runtime-baseline不变，review-only；未提交、推送或导出。不要因文件齐／栅格0px／producer通过将Q2与严格支撑门槛关闭。
+
+## 2026-10-30 统一全动作包已构建，原生验收进行中
+
+目标仍为成年 top03／原裤鞋／栗短发＋草帽固定 hair_hat，四向 idle、walk、run、hoe、water、harvest。24/24 动作方向、84 姿态已齐，唯一统一构建 `art/characters/builds/adult-top03-full-hair-hat-r001`，artifact `61d071a98a25ee765be62fa4d4623cae074d4097327c8e781ca3a207b6af421a`，3102 输入，strict build/verify 通过。统一入口 `art/characters/reviews/all-actions-construction/review.json`，preflight 和 dry-run 通过；尚未完成整包原生验收，不宣称最终交付。
+
+真实 Apple M4 Godot 定姿 poses04 已完成：5258 producer 检查全通过、20999 samples、2538 PNG；独立原始证据复核仍运行。此前 poses02 的南北 run 漏末姿态是起点碰到港口固定障碍，改为预声明安全起点 (330,230) 后重采；未改模型、贴图或动作运动。poses03 因磁盘满缺报告，拒收。world02 正在执行 8 走跑×10 距离循环、12 农事×10 唯一实例的逐实际 draw 采集。其后执行农事48、走跑32时序、96转换、14港口空间情形；另8真实锄刃／水花点只核合法地块的原生投影，不伪称源图土壤接触或隐藏握点。
+
+最新全量 Python 312 测试通过（392.262s，后续新增2项 contact 测试另已通过，最终全量待重跑）。完整 check 首次因磁盘满退出120，恢复空间后的重验运行中，不能按通过报告。磁盘紧张已对冻结临时 PNG 做 SHA 相同文件硬链接去重，20204 个路径保留原字节与 SHA，释放约1.54GiB；未删除来源／历史，详细收据 `/private/tmp/coastal-frozen-png-deduplication-receipt.json`。
+
+生产 `player-unified-v4` 和 runtime-baseline 未变，review-only，用户视觉认可、生产／导出均未取得；无提交／推送。Root 负责统一构建及捕获脚本，原两代理分别负责独立 raw／ground 验证与真实接触栅格复核（gpt-6.1-sol/high，复用既有代理）。Paseo T01–04、T06 done，T05/T07 Verify，T08 等待整包验收。
+
+## 2026-10-30 全动作继续执行：23/24已齐，尚未完整交付
+
+目标不变：成年top03/原裤鞋/栗短发＋草帽固定hair_hat，四向idle/walk/run/hoe/water/harvest共24格84姿态；生产player-unified-v4及基线不变，未提交推送。
+
+当前23格80姿态：movement-r003的12格36姿态＋11农事头clip。South3 recipe/build r003，West hoe recipe r003/build r005、水/收r001，East hoe r002、水/收r001，North water r001（artifact446f367…、261inputs）及harvest r001（8f35e9a…、199inputs）均已严格冻结。当前实际路径矩阵`evidence/all-actions-v1/current-farm-head-build-matrix.json`。只余NorthHoe：Root三层crop证实hair owner误收源neck/collar离散AA/蓝线；衣装代理正做source语义新修订，不生成新图、不擦真发，15点正常覆颈保留计数；Water冻结不动。NHarvest Recovery 14棕+621黑真实soft帽共边残差获Root有界静态接口判断，非用户/原生认可。
+
+共用核心仍6ab31ab/733f8a/20987d。241全测是较早结果；后新增snapshot7定点已通过（含native_contract.py真实传递依赖变更拒绝，旧漏项反例复现）；最终全量预计244＋代理新evidence tests，尚未跑。全库check此前43/38通过，所有新head需最终重验。
+
+原生工具新进展：synthetic world全实际draw采集15559检查、7518draw/7519PNG、4086physics独立通过（P14/raw路径见.sdd）；32走跑时序114检查/1656physics，加farm48共80工具情形；真实港口空间工具145检查/14routes/1528physics/52PNG。均不等于真实全包art/native/contact。旧工具合同曾漏绑定Python import native_contract.py，现已修；历史清单只按原列输入解释，未改Git HEAD源码补存见native-transitive-python-input-fix.json。最新poses补实际panel_texture/world_texture，PNG对齐stills/world计划并补world-idle；P15 actualGPU native正在运行，当前session52174、/private/tmp/coastal-registered-panel-gpu-identity-synthetic-01。
+
+Root独占capture.py、所有capture GDS及统一集成/实际采集。头部代理NHar已冻结，现写all_actions_evidence.py＋tests，按raw独立验证所有observer并列缺口，不能假报接触/用户认可；衣装代理NHoe冻结后独立审12农事真实握/落点，只写tmp。等待NHoe后按现成recipe_assembly.py组一个adult-top03-full-hair-hat/r001，再strict build/verify，使用/private/tmp/coastal-author-full-action-review-suite.py创建唯一all-actions-construction/review.json；勿先造缺帧full。
+
+## 2026-10-29 固定发帽全动作续行（仍未完整交付）
+
+目标保持成年top03/原裤鞋/栗色短发草帽24格84姿态，最终只交付hair_hat统一包。四向idle/walk/run已统一12格36姿态，当前构建`fixed-hair-hat-movement-r003`、candidate `four-direction-movement-r003.json`。生产player-unified-v4不变，无提交/推送。
+
+共同引擎冻结为build_contract733f8a/composition20987d。实际抬锄需要同母版RGBA互斥前景，已修复独立复核发现的‘另选同姿态head mask逃逸’：FG须与所有实际hair/hat mapping使用完全同一target selector。独立复核C0/I0/M0，Python前景7/token4、Godot15、当前全24前景+整帧留边117通过。27制品按修复版build/verify、2010输入与全部PNG/RGBA同旧版后切新引用；旧制品/输入/工具完整归档路径与记录见`evidence/all-actions-v1/foreground-authority-current-build-migration.json`。该记录是引擎迁移历史；农事后续metadata-only修订另见farm报告。
+
+衣装：12农事自然clip/48pose＋12exact idle已正式recipe r002，4hoe build r004、8water/harvest r002，60输出PNG/RGBA均与归档旧版相同。97制作诊断脚本完整UTF8+SHA转非执行JSON快照，795原PNG未改；原1045输入/12旧build归档且独立verify12/12。649原navy/近黑/混色边点明确留旧非新材；两个旧候选握点实为蓝cloth，未冒充真实接触。报告和矩阵已入`art/characters/evidence/all-actions-v1/farm-*`。West三组头已冻结：hoe recipe r003/build r005，water/harvest r001；接肤混色边以新ownership修订，原source/真实发量未动。South三组recipe/build r003已严格build/verify并准入，共12动作pose+3exact idle；256接肤混色源边排除，24虹膜ROI零差异、真实发帽支撑外身体0变化。原固定耳矩形中真实鬓发遮盖计数保留，不伪报耳部全0。证据`evidence/all-actions-v1/south-farm-head-r003/`。
+
+自动验证：当前241人物测试全通过（228.472s），包含全包native输入闭包4测试；此前236为历史。全局check曾因资源目录可执行制作脚本失败，已完成迁移清零，后续check43recipe/38build通过；South3及之后新配方仍需最终全库重验。原生走跑12格995检查及8组各10世界循环883检查已归档；32pose/412连续图鞋部最佳偏移全0。证据绑定采集时旧引擎，不冒充当前全包验收。隔离synthetic验收工具另通过20组世界执行1997检查、48时序情形和96条转换594检查/588物理tick，原始数据均独立重算、输入PNG再哈希；仅证明工具与控制链，不等于真实全包美术/接触/港口遮挡或用户认可。
+
+当前分工：root独占South三农事头部与统一集成/native；原头部gpt-6.1-sol/high代理负责East/West及Northharvest donor；原衣装同模型代理完成衣装后接North hoe/water8真实wearing源候选，不并改parts。East三组已冻结（hoe r002、水/收r001）；南/西/东共9农事头clip齐备，北3组尚未准入。Paseo开放：T05 Verify、T06 Review；T01/T02/T03/T04done。剩余North三农事发帽与统一24格构建、真实连续/转向/倍率/工具与脚接触、树/柜台/门空间验收、完整试玩。恢复细节见`.superpowers/sdd/progress.md`。
+
+## 2026-10-29 全动作实施进展更新（目标继续，尚未交付）
+
+目标仍为固定hair_hat/top03/原裤鞋的24格、当前84姿态统一评审包。Paseo T01来源/历史清单、T02统一合同/旧制品迁移已完成；T03消费者在独立复查修复阶段，实际资源适配同步推进，不能把局部组件或synthetic fixture写成完整动作包。
+
+共同引擎已冻结，schema3支持整源归一/多源选择/真实atlas与canonical body绑定；schema2 mapped hair_hat复用同mapper并用独立typed兼容记录。独立合同复查PASS。当前四旧西锄strict build引用r003，20PNG及输入对原交付不变，原r001按Git2742c19恢复，中间r002含工具保存在明确临时目录；不刷新baseline。195人物测试与check(strict5/build4/legacy9)通过；资源登记后196测试及check也通过。生产仍player-unified-v4，未提交/推送。
+
+全包控制链已实现四向六动作、元数据geometry、固定发帽、声明stable-idle走跑过渡、实例事件/结束去重、失焦与倍率；此前synthetic149项、loader72项及旧134/48/90通过，但独立复查发现3重要门禁：固定款式身份、传递refs闭包、旧人物库bootstrap依赖，正在逐项修复。前两项已补actual身份fixture03及75项loader拒绝/正例；bootstrap无legacy库103项初步通过，仍在集成复查。旧里程碑不作为新代码验收。全包native validator、真实足/握/目标接触与连续动画仍未完成。
+
+实际组件：南water ready帽下发r004与真实草帽atlas已持久登记hair/hat r002、独立annotation/compatibility并经mapper/36输入复算；南walk0 top03使用真实r005+r007、434点边缘选择，29586有限cloth材料/coverage，零部件挪缩、coverage外身体0变动。均未造缺帧clip或全包build，未过Godot原生/用户视觉认可。南walk其余3帧与south idle继续同规范补源；旧shirt-only候选下摆或腕位错误已拒绝，不以alpha统计替代视觉。主代理目视了登记发帽与walk0衣装，尚不构成原生动态验收。
+
+证据与报告入口art/characters/evidence/all-actions-v1/；来源/parts/annotation各新修订保留完整原图与prompt。两个gpt-6.1-sol/high子代理分别南向衣装源扩展、消费者独立复查/定点bootstrap修复；主代理做合同/消费者闭包/身份修复、集成和最终验收。全动作目标与Progress保持开放。
+
+## 2026-10-29 固定发帽全动作实施进行中（未交付）
+
+用户确认继续实施。Paseo“成年固定发帽配方：全动作统一交付”保持开放，8工作包，T01来源/历史清单已完成，T02统一合同正在实现。24格/84pose真实来源与缺口、衣装/头部核查及四旧build的Git恢复结果存于`art/characters/evidence/all-actions-v1/`；readiness明确fully_ready=false，不能把清单完成当来源齐备。
+
+schema3基础注册已实现版本化pose annotation、真实完整源ownership重建、同源多target及合法正负整数锚注册（24项新测试及原build32/组合30通过）；whole-source密度归一和多源选择仍在实现。主代理新增全包范围preflight（5项RED→GREEN，防止西锄冒充全包）及复用同一mapper的固定hair_hat注册头部接口（7项测试通过，真实合成fixture）；尚无真实全包配方、Godot全包消费者或新原生验收。独立复查进行中，已发现半透明前景不可二值擦底层的occlusion问题，待修复及重验。
+
+南walk0已保留GPT完整衣源/提示词于`sources/gpt-top03-walk-south-0-v1`（review-only-unregistered）。两完整衣源按实测领口选择可覆盖30655可见布料点，但源归一/选择合同及正式mask/原生仍未通过，隐藏B torso侧边139点限制保留。南向帽下发补源r003仍有真实帽面外冠发3761像素，继续按实测两侧部位重绘，禁止volume擦发。候选、失败源和prompt暂存/private/tmp/coastal-all-actions-source-attempts，未假称正式资源能力。
+
+构建器代码已变化，现行四旧strict build的engine绑定在本中间状态已过期；原manifest/输出未覆盖，旧版本223文件已从Git2742c19恢复并四build verify通过。共同引擎稳定后新目录重建/迁移当前引用，再执行全量门禁，不忽略hash或刷新baseline。119全人物测试和strict5/build4/legacy9通过结果仅属于本轮早期、schema3变更前阶段，不代表当前完整门禁通过。生产仍player-unified-v4；未提交/推送。代码责任：主代理消费者/组合合同/集成，两位gpt-6.1-sol/high分别基础合同与头部/独立复查，不并改共享脚本。
+
+## 2026-10-29 用户收敛交付：仅栗色短发＋草帽组合
+
+用户明确只需头发和帽子组合的版本。现行全动作设计/执行方案已改为仅hair_hat：成年top03/原裤鞋、栗色短发＋藏蓝缎带草帽，idle及walk/run/hoe/water/harvest各四向，共24能力单元，当前84姿态结果。此前96格/336结果及四头状态新交付范围已被替代；不新增裸头、仅发、仅帽全动作配方或换装控件。
+
+头发/帽子完整源、帽下发与近远帽层仍分别保留并随pose验证。已有西锄四状态保留原范围历史/必要兼容回归，不扩成新交付任务。新全包一个hair_hat构建；循环运动8组、农事12组各至少10次，全部方向/动作衔接和接触门槛保持。旧19–39小时初估作废，按实际缺图重估。Paseo记录本次范围收敛；仅修改文档，未实施代码/美术，未提交/推送。
+
+验证：设计/计划链接、24格/84姿态计数、无残留96/336交付要求与diff检查；源码未变，沿用同会话114测试及门禁通过结果，不重复GPU采集。
+
+## 2026-10-29 本轮目标调整为全动作统一交付：设计执行方案
+
+用户明确要求本轮以全动作统一交付为目标并设计执行方案。设计：`docs/superpowers/specs/2026-10-29-character-all-actions-design.md`；执行方案：`docs/superpowers/plans/2026-10-29-character-all-actions.md`。范围固定成年top03/原裤/原鞋，idle及walk/run/hoe/water/harvest各四向、四头部状态，共96能力单元；按当前模板84姿态/336结果，必要增帧不受此数限制。
+
+旧西walk单独阶段边界已被替代。西锄作为回归基准，西walk是全包内部多target/移动衔接验证，不作为新一轮最终交付。计划8工作包覆盖来源/历史恢复、统一合同、消费者/权威时钟、idle+walk、run、三农事、全包原生与统一交付；没有完成局部便关闭全动作任务的出口。缺源按实际pose/view定位，必要GPT补图，不拼不同衣装或伪造裸身体。
+
+本次仅交付设计执行方案，新增schema3/评审schema2/全包suite等尚未实现；开始开发须按书面方案进行。目标为完整固定配方评审动作包，其他体型/8混搭/生产统一发布另有规范门禁，正式游戏仍player-unified-v4。技术完成与用户视觉认可分开，不自动提交/推送。Paseo本次跟踪方案设计，开发另开覆盖8工作包的运行。
+
+本轮源码未变，沿用同会话114测试和check.py(strict5/build4/legacy9)通过结果；文档链接、96格/84姿态/336结果计数和diff另行核验，不称新实现/GPU/接触已通过。保留此前未提交文档，主代理直接执行，未创建子代理。
+
+## 2026-10-29 下一步计划分析
+
+本轮仅分析并保存`docs/superpowers/plans/2026-10-29-walk-west-next-step-analysis.md`。基线2742c19，开始时工作区干净。下一明确任务建议为同配方西walk正式登记设计与构建生命周期方案：先落实来源准入、source/target多姿态映射与真实层/mask语义、旧四build及工具可恢复保全和新current引用重验，再实施统一合同/四状态构建/现有Godot评审/原生验收。exact idle沿用既有交付；诊断PNG不作正式源，不扩大原裤鞋独立换装或walk能力。
+
+验证：114项人物单元测试、check.py（strict5/build4/legacy9）、计划2条本地链接与差异格式检查通过；未新做Godot实际加载或原生验收。
+
+后续开发顺序、初步投入和逐步出口已写入计划，均尚未启动。Paseo运行“西向行走下一步计划分析”跟踪本次三步分析；实施时另建运行。正式游戏仍player-unified-v4，发布关闭；未改代码/美术/配方/基线，未重采GPU或新增认可，未提交/推送。
+
 ## 2026-10-29 用户确认本地提交并更新进度
 
 用户要求“提交和更新进度”。本次提交纳入本会话已完成的人物库导航与精简/覆盖审计、西锄schema2四固定头部配方及20帧严格构建、Godot消费者/评审/原生证据校验，以及同配方西walk素材准备、诊断与独立复查资料。核心交付提交为`656cc64`；提交后预览路径核验发现动画实际以.png容器名入库，报告/证据中的仓库相对路径已另行修正（SHA及4帧内容不变）。后续链接修正提交见Git最新记录；不推送。

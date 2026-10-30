@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://dev/characters/character_headwear_trial.tscn" id="1_trial"]
+[ext_resource type="Texture2D" path="res://assets/environment-v2/stone.png" id="2_stone"]
+
+[node name="CharacterMotionLane" instance=ExtResource("1_trial")]
+
+[node name="HarborExterior" parent="." index="0"]
+world_bounds = Rect2(800, 800, 1600, 1600)
+
+[node name="TrialActor" parent="HarborExterior/DepthSortedObjects" index="16"]
+position = Vector2(1600, 1600)
+
+[node name="Start" parent="." index="1"]
+position = Vector2(1600, 1600)
+
+[node name="AcceptancePaving" type="Sprite2D" parent="." index="5"]
+z_index = -50
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(800, 800)
+texture = ExtResource("2_stone")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 1600, 1600)

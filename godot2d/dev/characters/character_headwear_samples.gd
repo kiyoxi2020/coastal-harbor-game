@@ -9,8 +9,13 @@ var error:=""
 var catalog_sha256:=""
 var suite_kind:=""
 var manifest_bindings:Dictionary={}
+var full_package:=false
+var candidate_package:=false
+var full_clips:Dictionary={}
+var canonical_idle:Dictionary={}
+var runtime:Dictionary={}
 func reject(message:String) -> bool:
- samples.clear();catalog_sha256="";suite_kind="";manifest_bindings.clear();error=message;return false
+ samples.clear();catalog_sha256="";suite_kind="";manifest_bindings.clear();full_package=false;candidate_package=false;full_clips.clear();canonical_idle.clear();runtime.clear();error=message;return false
 func relative_file(value: Variant) -> bool:
  return ResourcePaths.relative_file(value)
 
@@ -47,12 +52,13 @@ func state_textures(base:String,frame:Dictionary,inputs:Dictionary,size:Vector2i
   result[state]=ImageTexture.create_from_image(picture)
  return result
 func load_samples(project:String,path:String) -> bool:
- samples.clear();error="";catalog_sha256="";suite_kind="";manifest_bindings.clear()
+ samples.clear();error="";catalog_sha256="";suite_kind="";manifest_bindings.clear();full_package=false;candidate_package=false;full_clips.clear();canonical_idle.clear();runtime.clear()
  var catalog=read_json(path)
- if catalog is Dictionary and catalog.get("kind")==ConstructionLibrary.KIND:
+ if catalog is Dictionary and catalog.get("kind") in [ConstructionLibrary.KIND,ConstructionLibrary.CANDIDATE_KIND]:
   var strict=ConstructionLibrary.new()
   if not strict.load_samples(project,path):return reject(strict.error)
   samples=strict.samples;catalog_sha256=strict.catalog_sha256;suite_kind=strict.suite_kind;manifest_bindings=strict.manifest_bindings
+  full_package=strict.full_package;candidate_package=strict.candidate_package;full_clips=strict.full_clips;canonical_idle=strict.canonical_idle;runtime=strict.runtime
   return true
  if not catalog is Dictionary or catalog.get("schema_version")!=1 or catalog.get("template_id")!="adult-standard-v1" or catalog.get("scope")!="sampled-headwear-not-exhaustive" or not catalog.get("samples") is Array or catalog.samples.size()!=IDS.size():return reject("发帽目录必须明确包含四个抽样。")
  if ResourcePaths.base(project,path,catalog).is_empty():return reject("发帽目录资源根无效。")

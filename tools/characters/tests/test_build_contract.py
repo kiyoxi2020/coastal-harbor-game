@@ -19,7 +19,30 @@ class ConstructionTests(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory(prefix='coastal-build-', dir='/private/tmp')
         self.repo = Path(self.temp.name)
         self.lib = self.repo / 'art/characters'
+        def fixed_names(value):
+            # Full-package fixtures exercise the production identity gate with
+            # synthetic pixels; they do not claim visual or native approval.
+            if not getattr(self, 'fixed_profile', False): return value
+            if isinstance(value, str):
+                for old, new in [('templates/test/', 'templates/adult-standard-v1/'),
+                                 ('/motions/motion/', '/motions/review-motion-v1/'),
+                                 ('/adaptations/test/motion/', '/adaptations/adult-standard-v1/review-motion-v1/'),
+                                 ('parts/top/', 'parts/top03/'),
+                                 ('parts/hair/', 'parts/hair-chestnut-short-v1/'),
+                                 ('parts/hat/', 'parts/hat-straw-navy-band-v1/')]:
+                    value = value.replace(old, new)
+            elif isinstance(value, dict):
+                for key, item in list(value.items()):
+                    if key == 'template_id' and item == 'test': value[key] = 'adult-standard-v1'
+                    elif key == 'motion_set_id' and item == 'motion': value[key] = 'review-motion-v1'
+                    elif key == 'design_id': value[key] = {'top': 'top03', 'hair': 'hair-chestnut-short-v1', 'hat': 'hat-straw-navy-band-v1'}.get(item, item)
+                    else: value[key] = fixed_names(item)
+            elif isinstance(value, list):
+                for index, item in enumerate(value): value[index] = fixed_names(item)
+            return value
         def write(path, data):
+            path = fixed_names(path)
+            data = fixed_names(data)
             p = self.lib / path
             p.parent.mkdir(parents=True, exist_ok=True)
             if isinstance(data, dict):

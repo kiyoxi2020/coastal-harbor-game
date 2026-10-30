@@ -11,15 +11,19 @@
 
 不要默认全量读取 sources、migrations 或历史原生报告；先由具体配方/动作引用定位必要输入。
 
+## 本轮统一全动作候选
+
+固定 top03 条纹衫、原裤鞋、栗色短发＋草帽的 [统一配方](recipes/adult-top03-full-hair-hat/r001.json) 已完成四向六动作共24格84姿态的严格构建与复核。统一入口为 `python3 tools/characters/review.py all-actions-construction`，配置见 [review.json](reviews/all-actions-construction/review.json)。原生整包既定raw验证已完成；用户Q2=B接收本轮当前四帧像素步态评审交付，严格支撑后续，当前状态见 [readiness](evidence/all-actions-v1/current-delivery-readiness.json)；此入口只展示固定 hair_hat，不扩展其他体型／款式或生产发布。
+
 ## 当前有哪几条使用链
 
 | 使用场景 | 实际入口与数据 | 当前边界 |
 |---|---|---|
 | 正式游戏 | `godot2d/scenes/harbor.tscn` → 现有玩家/顾客场景与 `godot2d/assets/player-unified-v4/` | 仍运行旧生产资源；本库 `catalog.production_release` 为 null，没有新的 active_release |
 | 现行试玩 | `tools/characters/review.py <suite>` → `reviews/<suite>/review.json` → Godot评审场景/静态HTML → 已登记catalog与build | 展示已完成的有限抽样，不自动遍历所有款式或新配方 |
-| 后续严格构建 | `recipes/<recipe-id>/<revision>.json` → `tools/characters/build.py build` → 新build目录 → `verify` | 只产review-only；目前真实示例是西锄衣装四姿态+idle，不是完整衣柜或生产发布 |
+| 后续严格构建 | `recipes/<recipe-id>/<revision>.json` → `tools/characters/build.py build` → 新build目录 → `verify` | 只产review-only；现有统一固定hair_hat24格84姿态及旧西锄示例，用户Q2=B接收本轮四帧评审版，严格支撑后续，不是完整衣柜或生产发布 |
 
-**新构建成功不会自动替换试玩或正式游戏。** 现行Godot试玩仍使用迁移保留的sample/candidate格式；严格构建输出有自己的manifest。需要接入新评审范围时，须另核对消费者、格式和验收，不能只把catalog路径换过去或另建人物播放器。
+**新构建成功不会自动替换试玩或正式游戏。** all-actions-construction消费严格manifest与完整suite；其余历史抽样保留sample/candidate格式。需要接入新评审范围时，须另核对消费者、格式和验收，不能只把catalog路径换过去或另建人物播放器。
 
 ## 目录结构与职责
 

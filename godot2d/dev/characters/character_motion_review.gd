@@ -10,6 +10,8 @@ var review_direction := "south"
 var review_action := "run"
 var preview_phase_ms := 0.0
 var playing := true
+var full_preview_density:=Vector2.ZERO
+var full_preview_root:=Vector2.ZERO
 @onready var direction_buttons: Array[Button] = [$Margin/Rows/Directions/South, $Margin/Rows/Directions/West, $Margin/Rows/Directions/East, $Margin/Rows/Directions/North]
 @onready var action_buttons: Array[Button] = [$Margin/Rows/Actions/Idle, $Margin/Rows/Actions/Walk, $Margin/Rows/Actions/Run, $Margin/Rows/Actions/FarmActions/Water, $Margin/Rows/Actions/FarmActions/Hoe, $Margin/Rows/Actions/FarmActions/Harvest]
 @onready var reference_view: Sprite2D = $Margin/Rows/Views/Reference/Slot/Texture
@@ -97,6 +99,9 @@ func advance_preview(delta: float) -> void:
 	if playing and duration > 0 and preview_available():
 		var rate: float = trial.speed_factor if review_action in ["walk", "run"] else float(trial.move_policy.get("idle", {}).get("playback_rate", 1.0))
 		if review_action in FARMING_ACTIONS: rate = 1.0
+		if trial.has_method("full_clip_geometry") and not trial.full_clip_geometry(review_action,review_direction).is_empty():
+			rate=float(trial.head_library.runtime.clips[review_action+"-"+review_direction].playback_rate)
+			if review_action in ["walk","run"]:rate*=trial.speed_factor
 		preview_phase_ms = fposmod(preview_phase_ms + delta * 1000.0 * rate, duration)
 	refresh_preview()
 
@@ -111,6 +116,7 @@ func step_frame() -> void:
 
 func refresh_preview() -> void:
 	if not is_instance_valid(trial): return
+	if trial.has_method("update_registered_controls"):trial.update_registered_controls()
 	reference_view.texture = null
 	motion_view.texture = null
 	$Margin/Rows/Views/Motion/Label.text = "当前动作"
@@ -123,6 +129,21 @@ func refresh_preview() -> void:
 		frame_label.text = "资源未提供"
 		return
 	var index := current_pose_index()
+	if trial.has_method("full_clip_geometry"):
+		var geometry:Dictionary=trial.full_clip_geometry(review_action,review_direction)
+		if not geometry.is_empty():
+			if full_preview_density==Vector2.ZERO:
+				full_preview_density=reference_view.scale/(138.0/582.0)
+				full_preview_root=reference_view.position+Vector2(256,708)*reference_view.scale
+			var idle:Dictionary=trial.full_clip_geometry("idle",review_direction)
+			reference_view.scale=full_preview_density*float(idle.display_scale)
+			reference_view.position=full_preview_root-idle.root_anchor_px*reference_view.scale
+			motion_view.scale=full_preview_density*float(geometry.display_scale)
+			motion_view.position=full_preview_root-geometry.root_anchor_px*motion_view.scale
+			motion_view.texture=geometry.textures[index]
+			frame_label.text="第 %d / %d 姿态"%[index+1,geometry.textures.size()]
+			message.text="固定短发草帽配方 · 已登记%d/24动作方向；待视觉验收。"%trial.head_library.full_clips.size()
+			return
 	if review_action in FARMING_ACTIONS:
 		var clip := farming_clip()
 		motion_view.texture = clip.textures[index]

@@ -1,0 +1,241 @@
+{
+  "kind": "coastal-native-ground-target-candidates-v1",
+  "artifact_id": "61d071a98a25ee765be62fa4d4623cae074d4097327c8e781ca3a207b6af421a",
+  "source_review_sha256": "554108ffb6f8fc00d5ce98744d7e3f6cd529636f1eb0c2f37a68d68f149ffa74",
+  "scope": "Eight actual visible hoe metal or watering splash points; only native projected alignment to legal target cell. No source soil-plane, physical impact, hidden contact or gameplay transaction proof. Standing offsets predeclared before native observation.",
+  "cases": [
+    {
+      "id": "hoe-south",
+      "clip": "hoe-south",
+      "pose_id": "hoe_south_key_2",
+      "source_point_px": [
+        1147,
+        1670
+      ],
+      "canonical_point_px": [
+        1147,
+        1670
+      ],
+      "source_rgba": [
+        159,
+        152,
+        152,
+        253
+      ],
+      "source_image": "art/characters/builds/farming-hoe-south-b-r001/frames/hoe_south_key_2-frame.png",
+      "source_image_sha256": "b6fa7acfad1f58488f36504c93f05275feafc744f33489d2f5e72e0fb8c99934",
+      "standing_offset": [
+        8,
+        8
+      ],
+      "cell_id": "garden_a:1:0",
+      "point_kind": "metal_working_edge",
+      "source_ground_contact_proven": false,
+      "point_uncertainty_source_px": 8
+    },
+    {
+      "id": "hoe-west",
+      "clip": "hoe-west",
+      "pose_id": "hoe_west_key_2",
+      "source_point_px": [
+        240,
+        1490
+      ],
+      "canonical_point_px": [
+        240,
+        1490
+      ],
+      "source_rgba": [
+        207,
+        209,
+        216,
+        253
+      ],
+      "source_image": "art/characters/builds/farming-hoe-west-b-r001/frames/hoe_west_key_2-frame.png",
+      "source_image_sha256": "b5ebf1f0f023cc891a27fcbf6c3dadc2eb4d096be893f1c6dd85160891909e3a",
+      "standing_offset": [
+        -16,
+        0
+      ],
+      "cell_id": "garden_a:1:0",
+      "point_kind": "metal_working_edge",
+      "source_ground_contact_proven": false,
+      "point_uncertainty_source_px": 8
+    },
+    {
+      "id": "hoe-east",
+      "clip": "hoe-east",
+      "pose_id": "hoe_east_key_2",
+      "source_point_px": [
+        1400,
+        1530
+      ],
+      "canonical_point_px": [
+        1400,
+        1530
+      ],
+      "source_rgba": [
+        205,
+        203,
+        202,
+        253
+      ],
+      "source_image": "art/characters/builds/farming-hoe-east-b-r001/frames/hoe_east_key_2-frame.png",
+      "source_image_sha256": "937eeca17aa15e3e11860fc2c3ade2bd4700a7695c9c8eebbc35cea6f809ea7f",
+      "standing_offset": [
+        16,
+        0
+      ],
+      "cell_id": "garden_a:1:0",
+      "point_kind": "metal_working_edge",
+      "source_ground_contact_proven": false,
+      "point_uncertainty_source_px": 8
+    },
+    {
+      "id": "hoe-north",
+      "clip": "hoe-north",
+      "pose_id": "hoe_north_key_2",
+      "source_point_px": [
+        1222,
+        1483
+      ],
+      "canonical_point_px": [
+        1222,
+        1483
+      ],
+      "source_rgba": [
+        188,
+        184,
+        184,
+        253
+      ],
+      "source_image": "art/characters/builds/farming-hoe-north-b-r001/frames/hoe_north_key_2-frame.png",
+      "source_image_sha256": "17082e5026af5ee3a11d3b048e2aa6f6b7043b0802fa9bebe1b6ea4e8c88c280",
+      "standing_offset": [
+        8,
+        -8
+      ],
+      "cell_id": "garden_a:1:0",
+      "point_kind": "metal_working_edge",
+      "source_ground_contact_proven": false,
+      "point_uncertainty_source_px": 8
+    },
+    {
+      "id": "water-south",
+      "clip": "water-south",
+      "pose_id": "water_south_B_pour",
+      "source_point_px": [
+        545,
+        1670
+      ],
+      "canonical_point_px": [
+        545,
+        1670
+      ],
+      "source_rgba": [
+        144,
+        233,
+        255,
+        253
+      ],
+      "source_image": "art/characters/builds/farming-water-south-b-r001/frames/water_south_B_pour-frame.png",
+      "source_image_sha256": "7ead8c118ac402b484fd25412f2f76209a5b2a54926e84b476d3a8219d3971d4",
+      "standing_offset": [
+        -7,
+        8
+      ],
+      "cell_id": "garden_a:1:0",
+      "point_kind": "splash_center",
+      "source_ground_contact_proven": false,
+      "point_uncertainty_source_px": 8
+    },
+    {
+      "id": "water-west",
+      "clip": "water-west",
+      "pose_id": "water_west_B_pour",
+      "source_point_px": [
+        309,
+        1570
+      ],
+      "canonical_point_px": [
+        309,
+        1570
+      ],
+      "source_rgba": [
+        4,
+        164,
+        251,
+        253
+      ],
+      "source_image": "art/characters/builds/farming-water-west-b-r001/frames/water_west_B_pour-frame.png",
+      "source_image_sha256": "bf0e28eeb8f6c5ebb3749900d21e91b392e3b81aff347a56e0413f9284eaaa36",
+      "standing_offset": [
+        -16,
+        0
+      ],
+      "cell_id": "garden_a:1:0",
+      "point_kind": "splash_center",
+      "source_ground_contact_proven": false,
+      "point_uncertainty_source_px": 8
+    },
+    {
+      "id": "water-east",
+      "clip": "water-east",
+      "pose_id": "water_east_B_pour",
+      "source_point_px": [
+        1350,
+        1600
+      ],
+      "canonical_point_px": [
+        1350,
+        1600
+      ],
+      "source_rgba": [
+        210,
+        245,
+        253,
+        253
+      ],
+      "source_image": "art/characters/builds/farming-water-east-b-r001/frames/water_east_B_pour-frame.png",
+      "source_image_sha256": "188236d671011a006d75c91d3ffd940616dd506978f0033889e737f59440173e",
+      "standing_offset": [
+        16,
+        0
+      ],
+      "cell_id": "garden_a:1:0",
+      "point_kind": "splash_center",
+      "source_ground_contact_proven": false,
+      "point_uncertainty_source_px": 8
+    },
+    {
+      "id": "water-north",
+      "clip": "water-north",
+      "pose_id": "water_north_B_pour",
+      "source_point_px": [
+        367,
+        1575
+      ],
+      "canonical_point_px": [
+        367,
+        1575
+      ],
+      "source_rgba": [
+        168,
+        228,
+        254,
+        253
+      ],
+      "source_image": "art/characters/builds/farming-water-north-b-r001/frames/water_north_B_pour-frame.png",
+      "source_image_sha256": "e5d319901f79cfb169a818568d72b5e9b419568ed528972e66186fc1b0ef8bc8",
+      "standing_offset": [
+        -7,
+        -8
+      ],
+      "cell_id": "garden_a:1:0",
+      "point_kind": "splash_center",
+      "source_ground_contact_proven": false,
+      "point_uncertainty_source_px": 8
+    }
+  ],
+  "target_selection_mode": "keyboard-forward-12"
+}

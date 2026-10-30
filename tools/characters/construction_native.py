@@ -21,6 +21,49 @@ FIXTURE = 'godot2d/tests/characters/test_character_construction_native.gd'
 REPO = Path(__file__).resolve().parents[2]
 
 
+def full_capture_plan(base, head):
+    """Enumerate full-package evidence after strict preflight; this is no receipt.
+
+    The legacy west-hoe capture below keeps its original bounded scope. Full
+    capture consumers must use pose counts, geometry and clocks from this plan.
+    """
+    from review import full_action_clips
+    clips = full_action_clips(base, head)
+    pending = {}; pngs = ['overview.png']; transitions = set()
+    directions = ['south', 'west', 'east', 'north']
+    for (action, direction), clip in clips.items():
+        key = action+'-'+direction
+        pending[key] = {'action_id': action, 'direction': direction,
+            'pose_ids': [frame['pose_id'] for frame in clip['frames']],
+            'duration_ms': [frame['duration_ms'] for frame in clip['frames']],
+            'canvas_px': clip['canvas_px'], 'root_anchor_px': clip['root_anchor_px'],
+            'display_scale': clip['display_scale'],
+            'minimum_repetitions': 0 if action == 'idle' else 10,
+            'world_motion': action in ['walk', 'run']}
+        for i in range(len(clip['frames'])):
+            pngs += [f'stills/{key}-{background}-{i}.png' for background in ['dark', 'light']]
+            pngs.append(f'world/{key}-pose-{i}.png')
+    for direction in directions:
+        for source in ['idle', 'walk', 'run']:
+            for target in ['idle', 'walk', 'run']:
+                if source != target: transitions.add(f'{source}-{direction}-to-{target}-{direction}')
+            for target in ['hoe', 'water', 'harvest']:
+                transitions.add(f'{source}-{direction}-to-{target}-{direction}')
+        for action in ['hoe', 'water', 'harvest']:
+            transitions.add(f'{action}-{direction}-to-idle-{direction}')
+        for target in directions:
+            if target == direction: continue
+            for action in ['walk', 'run']:
+                transitions.add(f'{action}-{direction}-to-{action}-{target}')
+    return {'kind': 'coastal-all-actions-capture-plan-v1', 'scope': 'capture-plan-only',
+        'head_state': 'hair_hat', 'clips': pending, 'required_pngs': sorted(pngs),
+        'transitions': sorted(transitions), 'requires_contact_measurements': True,
+        'requires_actual_engine_delta': True, 'requires_binary64_clock_records': True,
+        'requires_world_screen_transforms': True,
+        'time_scenarios': {key: ['low-frame-rate', 'focus-pause', 'playback-rate', 'replay-once']
+                           for key, clip in pending.items() if clip['action_id'] != 'idle'}}
+
+
 def contract_digest(contract):
     return hashlib.sha256(stable({k:v for k,v in contract.items() if k != 'contract_digest'})).hexdigest()
 

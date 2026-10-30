@@ -38,6 +38,7 @@ var farming_original_scale := Vector2.ONE
 var farming_original_offset := Vector2.ZERO
 var run_diagnostics: Dictionary = {}
 var run_diagnostics_digest := ""
+var trial_shell_initialized := false
 # Authoring library only; production player resources remain independent.
 var art_root := ProjectSettings.globalize_path("res://..").path_join("art/characters/builds/locomotion-r001").simplify_path()
 @onready var actor: CharacterBody2D = $HarborExterior/DepthSortedObjects/TrialActor
@@ -46,7 +47,11 @@ var art_root := ProjectSettings.globalize_path("res://..").path_join("art/charac
 @onready var speed_slider: HSlider = $TrialUI/Panel/Margin/Rows/Controls/Speed
 @onready var review_panel = $TrialUI/MotionReview
 
-func _ready() -> void:
+func initialize_trial_shell() -> void:
+	# Input, camera and existing controls are shared by all review formats. This
+	# setup deliberately reads no character library; each entry loads its own.
+	if trial_shell_initialized: return
+	trial_shell_initialized = true
 	var codes := {"west": [KEY_A, KEY_LEFT], "east": [KEY_D, KEY_RIGHT], "north": [KEY_W, KEY_UP], "south": [KEY_S, KEY_DOWN]}
 	for direction in codes:
 		var action_name := "trial_walk_" + str(direction)
@@ -85,6 +90,9 @@ func _ready() -> void:
 	$TrialUI/Panel/Margin/Rows/Controls/Reset.pressed.connect(reset_position)
 	$TrialUI/Panel/Margin/Rows/Controls/Exit.pressed.connect(func(): get_tree().quit())
 	$TrialUI/Panel/Margin/Rows/Controls/Review.pressed.connect(toggle_review)
+
+func _ready() -> void:
+	initialize_trial_shell()
 	load_art(art_root)
 	if run_candidate_root != "":
 		if load_run_candidate(run_candidate_root) and run_diagnostics_enabled:

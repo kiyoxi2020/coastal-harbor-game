@@ -55,3 +55,28 @@ hair-only按alpha>0二值支撑复制原RGBA；hat/hair_hat按far/body/(hair)/ne
 `review.py headwear-construction [--dry-run]`消费 `art/characters/reviews/headwear-construction/review.json`，先verify四build再进入既有发帽试玩。严格schema2仍沿用原build manifest格式，不能直接替换旧sample路径假定兼容。
 
 新GPU证据入口为 `construction_native.py snapshot --suite <suite.json> --evidence /private/tmp/coastal-<new>`，再运行 `res://tests/characters/test_character_construction_native.gd -- --evidence=<同目录>`；完成后 `construction_native.py verify --evidence <同目录> --receipt <同目录>/receipt.json`。Godot命令必须传 `--log-file /private/tmp/coastal-*.log`。snapshot目录必须全新，native只接受input-contract.json，无其他文件/目录；验证拒绝覆盖旧回执。它认证本小样的四state十面板循环、明暗停帧和世界动作，不认证OS输入/WM焦点、严格接触、导出或用户认可。
+
+
+## schema3注册视图与全动作评审（实施中）
+
+多个已verify的同母版、同款式hair_hat部分包可用`recipe_assembly.py <新recipe-id> <新revision> <父build目录...>`汇总登记元数据，再对其输出JSON调用上述`build.py build/verify`。它只创建版本化定义、带父编号的view/mapping目录和明确类型的来源快照，不处理PNG；重复非idle能力拒绝，重复idle须证明同canonical pose/body/geometry及基础、发帽像素一致。能力只取父包真实并集，不补缺帧或继承视觉认可。父制品保留不变，汇总包仍需同Godot消费者和原生验收。
+
+内部资源批次使用`coastal-character-construction-candidate-v1`、明确capabilities及internal-review-only范围；`candidate_preflight`核对实际固定款式严格制品。同一Godot消费者只启用真实动作，内部批次不能通过完整24格preflight。`capture_registered_candidate.gd`仅记录内部GPU明暗停帧、10面板循环与世界一循环的观察；它不替代全包接触、衔接、10世界循环或用户视觉验收。完整范围仍由`all-actions-construction`入口强制检查。
+
+schema3基础配方沿用同一build/verify入口，要求恰好一个与canonical variant逐RGBA一致的完整body。版本化pose annotation绑定真实source/target、人工锚与表面；同一RegisteredAdaptations映射器复算完整源二值ownership、多来源选择、整源统一有理数密度归一或透明补边、真实atlas注册，再核对实际纹理。允许合法整帧整数注册，不支持部件单独缩放/挪动。coverage与occlusion仍须分别证明；半透明前景不能作为二值擦除依据。
+
+schema2带显式adaptations时只支持固定hair_hat并引用schema3父配方，复用同一mapper。帽可为真实near-only或far/body/under-hat/near；近远帽归属并集必须是完整帽，独立typed compatibility记录绑定实际头发与帽的来源身份，允许共享原始atlas而不形成源包SHA环。
+
+真实帽面超出canonical画布时，mapped schema2的clip可显式声明`output_padding_px:[left,top,right,bottom]`（每项0–512整数）。canonical身体、source/target annotation与锚保持原坐标；构建器在所有该clip头层登记与最终base合成时统一添加透明留边，派生交付canvas与root一起增加对应量，world/panel原身体位置不变。此接口仅允许无coverage/occlusion的hair/hat alpha层，不给基础衣体挪缩接口，也不允许裁掉owned alpha。部件纹理本身必须为真实登记后的完整输出画布；使用正常build/verify复算，不能只改manifest尺寸或root。
+
+同姿态手或工具确实位于发帽前方时，mapped schema2的frame可声明`base_foreground`：`mode`为`canonical-rgba-ownership-split`，`target_pose`为当前canonical姿态的typed annotation selector，`surface_id`为`hands-tools-foreground`，`ownership`为`{role:canonical-foreground-ownership,mask:<SHA引用>}`。`target_pose`必须与该帧所有实际hair/near-hat/far-hat映射使用完全相同的annotation selector，禁止另造同姿态head mask sidecar。annotation中同名surface必须属于`base`且绑定同一二值mask；可见`head` surface与它互斥，衣裤鞋实际覆盖不可进入此mask，并须确实与当前头发/近帽相交。层序末尾追加虚拟`base_foreground`，不能添加另一张身体纹理。构建器把已经验证的同一base RGBA按归属分成互斥两片，保留原半透明边缘、只参与一次alpha合成；不把alpha253谎称255，也不重复叠整个人体。透明留边统一作用于该分片，不改变canonical mask坐标。前景归属须沿真实手/工具轮廓并记录前后关系依据，不能仅拿帽交集作mask或默认北向背后工具也在前。
+
+schema3的`pose_id`原样匹配canonical pose token，允许母版既有的`B`等大写字符；路径分隔及非法字符仍拒绝。其他配方、记录、映射和部件ID继续使用既有小写ID合同，不为此改写母版姿态名。
+
+全动作suite schema2要求24 clips、20动作条目、四向canonical idle、一份hair_hat manifest和runtime。runtime v1显式声明走跑世界速度、默认速度因子、stable-idle-v1过渡时长及每clip播放率/pose内事件；走跑时间仍由实际位移驱动。缺字段或事件不属于实际pose时拒绝。农事事件只写隔离评审journal，用instance/event/loop身份去重，无业务事务或存档。
+
+`review.py all-actions-construction`已实现全包预检和既有试玩的全包模式，但真实24格资源尚未齐备，故目前没有正式全包review.json，不能把合成fixture当成可交付美术。原西锄四状态仍从headwear-construction入口回归；当前构建迁移及原Git恢复见 `art/characters/evidence/all-actions-v1/`。全包原生验收工具和实际接触验收仍待完成，旧西锄native入口不认证全包。
+
+全24格原生输入冻结使用`all_actions_capture.py snapshot --suite <全包suite.json> --evidence /private/tmp/coastal-<全新目录> --observer <poses|world|timing|transitions|spatial|locomotion-timing>`。它先严格预检完整hair_hat包，绑定实际源/输出、构建工具、播放与观察脚本的真实资源引用闭包，以及由实际姿态数量推导的采集计划；随后用`verify-inputs --evidence <同目录>`复核。重新计算合同摘要也不能删掉输入或降低计划要求。此入口仅证明输入闭包，尚不产生完整美术/接触/发布回执；不得把输入检查或synthetic观察等同于真实全包验收。
+
+前四种observer分别运行`res://tests/characters/capture_registered_candidate.gd`、`capture_registered_actions_world.gd`、`capture_registered_farm_timing.gd`、`capture_registered_transitions.gd`。传递`--evidence=<冻结目录>`与`--construction-suite=<同一绝对suite路径>`；poses用原港口试玩场景，其余用同一玩家的运动lane。Godot仍须传`--log-file /private/tmp/coastal-*.log`。`spatial`运行`capture_registered_spatial.gd`，保留原港口地形/树/柜台/门与真实碰撞；显式分场景设置起点，路径中使用实际输入和物理。隐藏评审UI只为避开世界截图遮盖，不改变人物或物体层序。原始GPU/物理/时序数据还须独立验证；农事timing观察器覆盖12农事×4情形，locomotion-timing通过`capture_registered_locomotion_timing.gd`另外覆盖8走跑×4情形；其变速调用公开50–100%速度控制，重启为松开到idle再继续原相位，低FPS允许跳过显示姿态。两者合计80情形仍须实际全包采集与原始数据重算；不能据此推导工具合法目标或港口空间通过。

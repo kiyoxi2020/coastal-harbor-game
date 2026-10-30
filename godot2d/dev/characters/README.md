@@ -2,6 +2,10 @@
 
 本目录是隔离制作评审的场景和加载代码，资源统一来自 [art/characters](../../../art/characters/README.md)。它不接管正式玩家/顾客，正式入口仍是 `res://scenes/harbor.tscn`。
 
+## 统一固定发帽全动作入口
+
+`python3 tools/characters/review.py all-actions-construction` 加载唯一严格构建，包含成年固定 top03／原裤鞋／栗短发＋草帽的24动作方向、84姿态。沿用同一 headwear trial／motion review，共享世界玩家与权威动作时钟。左侧六动作四方向可暂停和逐帧；方向键行走、Shift跑步、F浇水、G锄地、H收获，C收起对照、R回起点。只有 hair_hat，不提供其他头部状态切换。本轮Q2=B评审交付状态见资源库 readiness；无真实存档和生产切换。
+
 ## 启动与调用关系
 
 从仓库根运行 `python3 tools/characters/review.py <suite>`；launcher读取 `art/characters/reviews/<suite>/review.json`，选择本目录场景及参数。默认suite为headwear，也可用 `--dry-run` 查看实际命令。静态候选打开HTML，不经过Godot播放器。
@@ -15,7 +19,7 @@
 | 动作/农事面板 | [character_motion_review.gd](character_motion_review.gd)、[character_farming_review.gd](character_farming_review.gd) | 现有动作面板、时间与农事评审辅助逻辑 |
 | 路径校验 | [character_resource_paths.gd](character_resource_paths.gd) | 解析显式库根，拒绝非法路径；无root兼容用于已有格式/隔离fixture，不授权新配方绕过合同 |
 
-现行Godot加载器消费迁移保留的manifest/sample/candidate格式。`build.py`的新严格构建不会自动出现在这些suite中；新增评审范围要明确接入和验证消费者，不能直接替换catalog路径后假定兼容。
+完整all-actions-construction消费当前严格构建manifest和统一suite；历史suite保留迁移manifest/sample/candidate格式。`build.py`的新严格构建不会自动出现在这些suite中；新增评审范围要明确接入和验证消费者，不能直接替换catalog路径后假定兼容。
 
 ## 路径与状态
 

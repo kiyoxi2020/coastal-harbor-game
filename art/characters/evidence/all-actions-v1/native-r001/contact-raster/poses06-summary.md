@@ -1,0 +1,9 @@
+正式poses06：102/102栅格对应通过（70源点固定41ROI＋32走跑真实shoe coverage），missing0，全部最优offset[0,0]，无同优歧义。最大meanRGB1.777482；固定4ULP共排136资格样本，每项保留14–562。
+
+manifest SHA9b209b9d4000a5e2c366705ff7e752efa875fd68100dacf3b1636826f53d6533，artifact61d071a98a25ee765be62fa4d4623cae074d4097327c8e781ca3a207b6af421a。源70点原始SHA/原坐标/41ROI完全保留。每项全部等优offset≤1且RGB≤原alpha界，未按native图调整ROI。
+
+旧poses04原mismatch receipt历史保留，未重写或重发PASS。新闭包poses06源hard-edge项排4/20个数值不确定资格样本，余16样本meanRGB0.6667≤3。sampling filter在读取actual颜色前独立确定。
+
+代表对照4张只作诊断display crop，actual capture及source字节不变；完整receipt、summary JSON及representative-diagnostic-records.json保存SHA。额外复制固定4ULP报告、6handle文本标签勘误及冻结源70报告供root持久化。
+
+只证明≤1px近不透明栅格对应，不证明握持、support/flight/滑步、soil/合法target、art/native动态美术或用户认可。all_actions_evidence官方原始观察复核由root负责；world04连续各draw鞋面尚待采集完成。

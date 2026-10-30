@@ -4,11 +4,13 @@ This does not re-execute opaque historical source extraction or create releases.
 Registered views retain separately bound source, ownership and registration data.
 """
 from pathlib import Path, PurePosixPath
+import hashlib
 import re
 from PIL import Image, ImageChops
 
 from build_contract import (KIND, MODEL, Validated, digest, identifier, keys,
-                            read_json, require, safe_file, validate)
+                            read_json, require, safe_file, stable, validate, RegisteredAdaptations,
+                            whole_frame_padding)
 
 RULES = {
     'bare': ('none', {}, ['base']),
@@ -23,24 +25,115 @@ def support(image):
     return image.getchannel('A').point(lambda a: 255 if a else 0)
 
 
-def compose(base, frame, image):
+def hat_source_identity(near, far, whole_ownership):
+    """Fingerprint the actual hat source selection/partition before target mapping.
+
+    Target motion anchors are excluded so one compatible pair can be registered
+    to several poses; changing any source, extraction or hat surface is not the
+    same compatibility claim.
+    """
+    basis = {field: near[field] for field in
+             ('source', 'source_bundle', 'source_pose', 'canvas_px', 'root_anchor_px', 'extraction')}
+    basis.update(kind='coastal-hat-source-identity-v1', whole_ownership=whole_ownership,
+                 near_ownership=near['source_ownership'],
+                 far_ownership=far['source_ownership'] if far is not None else None)
+    return hashlib.sha256(stable(basis)).hexdigest()
+
+
+def component_source_identity(view):
+    """Identity of the selected source pixels, excluding a compatibility claim.
+
+    A separate pair record avoids a hash cycle when hair and hat share one real
+    source bundle. Every raw source/selection and ownership remains in this ID.
+    """
+    basis = {field: view[field] for field in
+             ('source', 'source_bundle', 'source_pose', 'canvas_px', 'root_anchor_px',
+              'source_ownership', 'extraction')}
+    basis['kind'] = 'coastal-component-source-identity-v1'
+    return hashlib.sha256(stable(basis)).hexdigest()
+
+
+def compose(base, frame, image, output_padding=None):
     """Use exact RGBA replacement or preserve base RGBA outside head support."""
     if frame['operation'] == 'none':
         return base
     layers = {layer['id']: image(layer['texture']) for layer in frame['layers']}
     if frame['operation'] == 'binary-rgba-replace':
         return Image.composite(layers['hair'], base, support(layers['hair']))
+    remainder = base
+    foreground = None
+    if 'base_foreground' in frame:
+        owner = image(frame['base_foreground']['ownership']['mask']).convert('L')
+        if output_padding is not None:
+            shifted = Image.new('L', base.size)
+            shifted.paste(owner, tuple(output_padding[:2])); owner = shifted
+        # Ownership partitions the one validated base. Its RGBA is never
+        # duplicated or supplied by a second body PNG, including soft alpha.
+        foreground = Image.composite(base, Image.new('RGBA', base.size), owner)
+        remainder = Image.composite(Image.new('RGBA', base.size), base, owner)
     result = Image.new('RGBA', base.size)
     selected = Image.new('L', base.size)
     for layer_id in frame['layer_order']:
-        texture = base if layer_id == 'base' else layers[layer_id]
+        texture = remainder if layer_id == 'base' else (foreground if layer_id == 'base_foreground' else layers[layer_id])
         result = Image.alpha_composite(result, texture)
         if layer_id != 'base':
             selected = ImageChops.lighter(selected, support(texture))
     return Image.composite(result, base, selected)
 
 
+def canonical_foreground(registry, binding, clip, old, layers, padding):
+    """A same-pose hand/tool partition, never an arbitrary body replacement."""
+    keys(binding, 'mode target_pose surface_id ownership', 'canonical foreground')
+    require(binding['mode'] == 'canonical-rgba-ownership-split'
+            and binding['surface_id'] == 'hands-tools-foreground', 'Unsupported canonical foreground mode/surface')
+    keys(binding['ownership'], 'role mask', 'canonical foreground ownership')
+    require(binding['ownership']['role'] == 'canonical-foreground-ownership', 'Foreground is not an ownership partition')
+    target, _, action, direction = registry.annotation(binding['target_pose'])
+    for layer in layers:
+        _, mappings, _ = registry.adaptations[layer['slot']]
+        mapping = mappings[layer['view_binding']['mapping_id']]
+        require(mapping['target_pose'] == binding['target_pose'],
+                'Canonical foreground annotation differs from actual head mapping')
+    require((target['pose_id'], action, direction, target['poses'], target['variant']) ==
+            (old['pose_id'], clip['action_id'], clip['direction'], clip['poses'], clip['variant']),
+            'Canonical foreground target pose mismatch')
+    surface = target['surfaces'].get(binding['surface_id'])
+    require(isinstance(surface, dict) and surface['layer_id'] == 'base'
+            and surface['mask'] == binding['ownership']['mask'], 'Canonical foreground surface binding differs')
+    mask = registry.mask(binding['ownership']['mask'], clip['canvas_px'])
+    require(mask.getbbox() is not None, 'Empty canonical foreground')
+    with Image.open(registry.reference(target['reference_frame'], image_size=clip['canvas_px'])) as canonical:
+        require(ImageChops.subtract(mask, support(canonical.convert('RGBA'))).getbbox() is None,
+                'Canonical foreground exceeds actual body support')
+    head = target['surfaces'].get('head')
+    require(isinstance(head, dict) and head['layer_id'] == 'base', 'Canonical visible-head surface missing')
+    visible_head = registry.mask(head['mask'], clip['canvas_px'])
+    require(visible_head.getbbox() is not None and ImageChops.darker(mask, visible_head).getbbox() is None,
+            'Canonical foreground intersects visible head')
+    for layer in old['layers']:
+        if layer['slot'] == 'body': continue
+        if layer['coverage'] is not None:
+            painted = registry.mask(layer['coverage'], clip['canvas_px'])
+        else:
+            with Image.open(registry.reference(layer['texture'], image_size=clip['canvas_px'])) as texture:
+                painted = support(texture.convert('RGBA'))
+        require(ImageChops.darker(mask, painted).getbbox() is None,
+                'Canonical foreground intersects clothing surface')
+    geometry = whole_frame_padding(clip, padding) if padding is not None else clip
+    placed = Image.new('L', tuple(geometry['canvas_px']))
+    placed.paste(mask, tuple(padding[:2]) if padding is not None else (0, 0))
+    covered = Image.new('L', placed.size)
+    for layer in layers:
+        if layer['id'] == 'far_hat': continue
+        with Image.open(registry.reference(layer['texture'], image_size=geometry['canvas_px'])) as texture:
+            covered = ImageChops.lighter(covered, support(texture.convert('RGBA')))
+    require(ImageChops.darker(placed, covered).getbbox() is not None,
+            'Canonical foreground has no actual hair/near-hat intersection')
+
+
 def validate_composition(repo, recipe_path, recipe):
+    if isinstance(recipe, dict) and 'adaptations' in recipe:
+        return validate_registered_composition(repo, recipe_path, recipe)
     library = Path(repo) / 'art/characters'
     keys(recipe, 'kind schema_version resource_root character_model_id recipe_id revision base_recipe head_state slots clips authoring_inputs', 'schema2 recipe')
     require(recipe['kind'] == KIND and type(recipe['schema_version']) is int and recipe['schema_version'] == 2, 'Unsupported schema2')
@@ -354,7 +447,140 @@ def validate_composition(repo, recipe_path, recipe):
     return Validated(Path(repo), library, recipe_path, recipe, dict(sorted(dependencies.items())), {}, base)
 
 
+def validate_registered_composition(repo, recipe_path, recipe):
+    """Fixed hair_hat over a strict schema3 base; reuse its source mapper.
+
+    Explicit adaptations select this interface. Legacy schema2 registrations
+    continue through the original sample/extraction contract above.
+    """
+    library = Path(repo) / 'art/characters'
+    keys(recipe, 'kind schema_version resource_root character_model_id recipe_id revision base_recipe head_state slots clips authoring_inputs adaptations', 'registered head recipe')
+    require(recipe['kind'] == KIND and type(recipe['schema_version']) is int
+            and recipe['schema_version'] == 2, 'Unsupported registered head schema')
+    require(recipe['resource_root'] == 'art/characters' and recipe['character_model_id'] == MODEL,
+            'Wrong registered head model/root')
+    identifier(recipe['recipe_id']); identifier(recipe['revision'])
+    relative = recipe_path.relative_to(library).as_posix()
+    require(relative == f"recipes/{recipe['recipe_id']}/{recipe['revision']}.json", 'Recipe identity/path mismatch')
+    dependencies = {relative: digest(recipe_path)}
+
+    def reference(ref, namespace=None, image_size=None):
+        keys(ref, 'file sha256', 'registered head reference')
+        require(isinstance(ref['sha256'], str) and re.fullmatch('[0-9a-f]{64}', ref['sha256']), 'Invalid SHA256')
+        path = safe_file(library, ref['file'], namespace)
+        require(digest(path) == ref['sha256'], 'SHA mismatch: ' + ref['file'])
+        require(ref['file'] not in dependencies or dependencies[ref['file']] == ref['sha256'], 'Conflicting dependency SHA')
+        dependencies[ref['file']] = ref['sha256']
+        if image_size is not None:
+            with Image.open(path) as image:
+                require(image.format == 'PNG' and image.size == tuple(image_size), 'Image canvas mismatch')
+        return path
+
+    def record(ref, namespace=None):
+        return read_json(reference(ref, namespace))
+
+    base_path = reference(recipe['base_recipe'], 'recipes')
+    base_record = record(recipe['base_recipe'])
+    require(base_path != recipe_path and isinstance(base_record, dict)
+            and type(base_record.get('schema_version')) is int and base_record['schema_version'] == 3,
+            'Registered head requires schema3 base; nesting forbidden')
+    base = validate(repo, base_path)
+    for name, value in base.dependencies.items():
+        require(name not in dependencies or dependencies[name] == value, 'Conflicting base dependency SHA')
+        dependencies[name] = value
+    require(recipe['head_state'] == 'hair_hat', 'Registered head delivery requires fixed hair_hat')
+    require(isinstance(recipe['slots'], dict) and set(recipe['slots']) == {'hair', 'hat'}, 'Registered hair_hat slots differ')
+    template, motion = record(base.recipe['template']), record(base.recipe['motion_set'])
+    designs = {}
+    for slot, ref in recipe['slots'].items():
+        design = record(ref, 'parts')
+        require(isinstance(design, dict), 'Registered head design missing')
+        name, revision = identifier(design.get('design_id')), identifier(design.get('revision'))
+        require(design.get('category') == slot and ref['file'] == f'parts/{name}/revisions/{revision}/design.json',
+                'Registered head design identity/category mismatch')
+        designs[slot] = design
+    require(isinstance(recipe['authoring_inputs'], list), 'Registered head authoring inputs missing')
+    for ref in recipe['authoring_inputs']:
+        reference(ref)
+        require(ref['file'].split('/')[0] in {'sources', 'templates', 'parts', 'builds'}, 'Wrong authoring namespace')
+    registry = RegisteredAdaptations(library, recipe, reference, record, template['template_id'], motion, designs)
+    require(isinstance(recipe['clips'], list) and len(recipe['clips']) == len(base.recipe['clips']), 'Registered head clips differ')
+    operation = RULES['hair_hat'][0]
+    for clip, original in zip(recipe['clips'], base.recipe['clips']):
+        require(isinstance(clip, dict), 'Registered head clip must be an object')
+        keys(clip, 'action_id direction frames' + (' output_padding_px' if 'output_padding_px' in clip else ''), 'registered head clip')
+        padding = clip.get('output_padding_px')
+        if 'output_padding_px' in clip: whole_frame_padding(original, padding)
+        require((clip['action_id'], clip['direction']) == (original['action_id'], original['direction']), 'Registered head capability/order differs')
+        require(isinstance(clip['frames'], list) and len(clip['frames']) == len(original['frames']), 'Registered head poses differ')
+        for frame, old in zip(clip['frames'], original['frames']):
+            has_foreground = 'base_foreground' in frame
+            keys(frame, 'pose_id operation layers layer_order compatibility' + (' base_foreground' if has_foreground else ''), 'registered head frame')
+            require(frame['pose_id'] == old['pose_id'], 'Registered head pose/order differs')
+            layers = frame['layers']
+            require(isinstance(layers, list) and all(isinstance(layer, dict) for layer in layers), 'Invalid registered head layers')
+            ids = [layer.get('id') for layer in layers]
+            has_far = 'far_hat' in ids
+            roles = {'under_hat_hair': 'hair', 'near_hat': 'hat'}
+            if has_far: roles['far_hat'] = 'hat'
+            order = (['far_hat'] if has_far else []) + ['base', 'under_hat_hair', 'near_hat']
+            if has_foreground: order.append('base_foreground')
+            require(frame['operation'] == operation and frame['layer_order'] == order, 'Registered head operation/order differs')
+            require(all(isinstance(name, str) for name in ids) and len(ids) == len(set(ids)) and set(ids) == set(roles),
+                    'Missing/duplicate registered head layers')
+            # The base here is the validated in-memory body output, not an
+            # arbitrary PNG supplied by the head recipe.
+            context = dict(old, composition='alpha-over', layer_order=order,
+                           layers=[{'id': 'base', 'slot': 'body'}] + layers)
+            selected = {}
+            for layer in layers:
+                keys(layer, 'id slot pose_id texture source source_bundle ownership coverage occlusion interface_scope placement_mode offset_px local_scale view_binding', 'registered head layer')
+                require(layer['slot'] == roles[layer['id']], 'Registered head slot differs')
+                require(layer['pose_id'] == old['pose_id'], 'Registered head layer pose differs')
+                require(layer['placement_mode'] == 'full_frame' and layer['offset_px'] == [0, 0]
+                        and layer['local_scale'] == [1, 1], 'Unsupported registered head transform')
+                require(layer['coverage'] is None and layer['occlusion'] is None,
+                        'Registered head uses actual alpha/layer order, not erase masks')
+                registry.component(layer, original, context, padding)
+                views, mappings, _ = registry.adaptations[layer['slot']]
+                selected[layer['id']] = (views[layer['view_binding']['view_id']], mappings[layer['view_binding']['mapping_id']])
+            if has_foreground:
+                canonical_foreground(registry, frame['base_foreground'], original, old, layers, padding)
+            near, near_mapping = selected['near_hat']
+            if has_far:
+                far, far_mapping = selected['far_hat']
+                require(all(near[field] == far[field] for field in ('source', 'source_bundle', 'source_pose', 'canvas_px', 'root_anchor_px', 'extraction'))
+                        and all(near_mapping[field] == far_mapping[field] for field in ('target_pose', 'anchors')),
+                        'Near/far hat must share one complete registered source')
+            compatibility = frame['compatibility']
+            keys(compatibility, 'hat_source hat_ownership hat_identity_sha256', 'registered head compatibility')
+            require(compatibility['hat_source'] == near['source'], 'Hat compatibility source differs')
+            size = near['canvas_px']
+            near_owner = registry.mask(near['source_ownership']['mask'], size)
+            far_owner = registry.mask(far['source_ownership']['mask'], size) if has_far else Image.new('L', tuple(size))
+            require(ImageChops.darker(near_owner, far_owner).getbbox() is None, 'Hat ownership overlap')
+            whole_owner = registry.mask(compatibility['hat_ownership'], size)
+            require(ImageChops.difference(ImageChops.lighter(near_owner, far_owner), whole_owner).getbbox() is None,
+                    'Hat ownership does not reconstruct complete source ownership')
+            require(compatibility['hat_identity_sha256'] == hat_source_identity(
+                near, far if has_far else None, compatibility['hat_ownership']), 'Hat compatibility identity differs')
+            under, _ = selected['under_hat_hair']
+            require(isinstance(under.get('compatibility'), dict), 'Under-hat compatibility record missing')
+            claim = record(under['compatibility'], registry.adaptations['hair'][2])
+            keys(claim, 'kind schema_version hair_identity_sha256 hat_identity_sha256', 'under-hat compatibility record')
+            require(claim['kind'] == 'coastal-head-compatibility-v1' and type(claim['schema_version']) is int
+                    and claim['schema_version'] == 1, 'Unsupported under-hat compatibility record')
+            require(claim['hat_identity_sha256'] == compatibility['hat_identity_sha256'],
+                    'Under-hat compatibility differs from selected hat source/ownership')
+            require(claim['hair_identity_sha256'] == component_source_identity(under), 'Under-hat source identity differs')
+    return Validated(Path(repo), library, recipe_path, recipe, dict(sorted(dependencies.items())), {}, base)
+
+
 def render_composition(validated, render_base):
-    frames = [f for clip in validated.recipe['clips'] for f in clip['frames']]
-    for (name, base), frame in zip(render_base(validated.base), frames):
-        yield name, compose(base, frame, validated.image)
+    frames = [(f, clip.get('output_padding_px')) for clip in validated.recipe['clips'] for f in clip['frames']]
+    for (name, base), (frame, padding) in zip(render_base(validated.base), frames):
+        if padding is not None:
+            left, top, right, bottom = padding
+            padded = Image.new('RGBA', (base.width + left + right, base.height + top + bottom))
+            padded.paste(base, (left, top)); base = padded
+        yield name, compose(base, frame, validated.image, padding)

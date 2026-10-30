@@ -1,5 +1,7 @@
 # 西锄四固定头部状态：统一构建小样
 
+> 历史范围说明（2026-10-29全动作实施）：本页原生回执认证Git `2742c19`冻结的r001构建与当时工具。当前入口已迁至新引擎重建的r007输出，20张PNG/RGBA与原交付完全相同，但尚未为新引擎重采原生证据；不能把旧回执继承为新全包认可。原字节/工具可按[历史恢复清单](../all-actions-v1/history.json)的Git对象恢复；[当前迁移记录](../all-actions-v1/current-build-migration.json)列出新旧引用。下文r001路径和检查数字均按原交付历史解释。
+
 2026-10-29交付。范围：成年母版、条纹上衣、原裤鞋，西锄四姿态＋匹配西向待机，bare/hair/hat/hair_hat四固定配方。均为review-only；生产发布仍关闭。
 
 ```sh
@@ -10,7 +12,7 @@ python3 tools/characters/review.py headwear-construction
 
 ## 实际交付与验证
 
-- 同一 `coastal-character-construction-v1` 的schema2，引用严格r002衣装配方并重建，统一整帧登记后在目标画布组合头层；没有新批次构建器。
+- 同一 `coastal-character-construction-v1` 的schema2，引用严格r005衣装配方并重建，统一整帧登记后在目标画布组合头层；没有新批次构建器。
 - 四配方位于 `recipes/headwear-hoe-west-{bare,hair,hat,hair-hat}/r001.json`，四输出位于同名加 `-r001` 的 `builds/` 子目录。原图、prompt、旧sample、旧认可和runtime-baseline保留。
 - [equivalence.json](equivalence.json)：20/20逐RGBA完全一致（包含透明RGB）、原姿态顺序/时长/画布不变。
 - 114项Python人物测试、check.py通过；门禁计strict_recipes=5、strict_builds=4、冻结旧配方9。
