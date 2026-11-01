@@ -267,7 +267,7 @@ func check_scene_occlusion(scene) -> void:
 			for depth in [7, 12, 24, 40]:
 				for lateral in [-8, 0, 8]:
 					scene.player.position = door.position + door.entrance_normal * depth + Vector2(lateral, 0)
-					scene.player.sprite.animation = "south"
+					scene.player.sprite.animation = "idle_south"
 					scene.player.sprite.frame = 0
 					var id = "%s-pose%d-depth%d-side%d" % [location, pose, depth, lateral]
 					var normal = await capture_scene(scene, id)
@@ -360,11 +360,13 @@ func check_scene_occlusion(scene) -> void:
 			scene.home.transition.busy = false
 			scene.player.reset_doorway_visual()
 	for direction in ["north", "south"]:
-		for frame in range(4):
-			var texture: Texture2D = scene.player.sprite.sprite_frames.get_frame_texture(direction, frame)
+		var animation: String = "walk_" + direction
+		for frame in range(scene.player.sprite.sprite_frames.get_frame_count(animation)):
+			var texture: Texture2D = scene.player.sprite.sprite_frames.get_frame_texture(animation, frame)
 			var bounds = texture.get_image().get_used_rect()
-			var visual_top = scene.player.sprite.position.y + (bounds.position.y - texture.get_height() * 0.5) * scene.player.sprite.scale.y
-			var visual_bottom = scene.player.sprite.position.y + (bounds.end.y - texture.get_height() * 0.5) * scene.player.sprite.scale.y
+			var origin = scene.player.sprite.offset.y - (texture.get_height() * 0.5 if scene.player.sprite.centered else 0.0)
+			var visual_top = scene.player.sprite.position.y + (bounds.position.y + origin) * scene.player.sprite.scale.y
+			var visual_bottom = scene.player.sprite.position.y + (bounds.end.y + origin) * scene.player.sprite.scale.y
 			print("MEASURE ", direction, frame, " visual_y=", visual_top, "..", visual_bottom)
 
 func actor_region(scene, rendered: Image, location: String) -> Image:

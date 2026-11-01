@@ -51,7 +51,8 @@ func run() -> void:
 		s.check("action_busy",w.player.action_busy)
 		var r: Dictionary=w.perform_action("hoe",{"cell_id":"garden_a:1:0"},2)
 		s.check("busy_no_repeat",not r.ok)
-		await create_timer(0.8).timeout
+		var deadline := Time.get_ticks_msec()+2000
+		while w.player.action_busy and Time.get_ticks_msec()<deadline: await process_frame
 		s.check("action_finishes_fixed_feet",not w.player.action_busy and w.player.position==foot and w.player.sprite.visible)
 	w.queue_free()
 	await process_frame

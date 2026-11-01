@@ -53,18 +53,18 @@ func walk_to(point: Vector2) -> bool:
 	var delta: Vector2=point-player.position
 	player.facing="south" if delta.y>=0 else "north"
 	if absf(delta.x)>absf(delta.y): player.facing="east" if delta.x>0 else "west"
-	player.sprite.play(player.facing)
+	player.sprite.play("walk_"+player.facing)
 	while player.position.distance_to(point)>0.01:
 		await get_tree().physics_frame
 		var step: Vector2=player.position.direction_to(point)*minf(player.position.distance_to(point),player.SPEED*get_physics_process_delta_time())
 		var hit=player.move_and_collide(step)
 		update_clip()
 		if hit:
-			player.sprite.stop()
+			player.play_idle()
 			return false
 	player.position=point
 	update_clip()
-	player.sprite.stop()
+	player.play_idle()
 	return true
 func update_clip() -> void:
 	if not is_instance_valid(clipping_door): return

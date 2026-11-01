@@ -4,8 +4,14 @@ func run() -> void:
 	evidence="/private/tmp/coastal-unified-native"
 	DirAccess.make_dir_recursive_absolute(evidence)
 	w=load("res://scenes/harbor.tscn").instantiate()
+	w.set_meta("save_directory", "/private/tmp/coastal-unified-native-save-" + str(Time.get_ticks_usec()))
 	root.add_child(w)
 	check("native",DisplayServer.get_name()!="headless")
+	var isolated: bool = w.save_service.directory.begins_with("/private/tmp/coastal-")
+	check("save_isolated", isolated)
+	if not isolated:
+		finish()
+		return
 	w.start_new_game("动作验收")
 	for i in range(4): await process_frame
 	w.player.position=Vector2(124,244)
@@ -13,24 +19,24 @@ func run() -> void:
 	# Actual Shift input changes both movement speed and animation selection.
 	await key(KEY_D,true)
 	for i in range(4):await physics_frame
-	check("walk_animation",w.player.sprite.animation=="east" and is_equal_approx(w.player.velocity.length(),72))
+	check("walk_animation",w.player.sprite.animation=="walk_east" and is_equal_approx(w.player.velocity.length(),72))
 	await key(KEY_SHIFT,true)
 	for i in range(4):await physics_frame
 	check("run_animation",w.player.sprite.animation=="run_east" and is_equal_approx(w.player.velocity.length(),108))
 	await key(KEY_SHIFT,false)
 	await key(KEY_D,false)
 	for i in range(3):await physics_frame
-	check("run_release_idle",not w.player.running and w.player.velocity==Vector2.ZERO)
+	check("run_release_idle",not w.player.running and w.player.velocity==Vector2.ZERO and w.player.sprite.animation=="idle_east")
 	# Fixed-foot native preview: render every authored image, without transforming it.
 	w.player.position=Vector2(124,244)
 	w.player.set_physics_process(false)
 	for i in range(3):await process_frame
 	for direction in ["south","west","east","north"]:
-		for action in ["walk","run","hoe","water","harvest"]:
-			var id: String=direction if action=="walk" else action+"_"+direction
+		for action in ["idle","walk","run","hoe","water","harvest"]:
+			var id: String=action+"_"+direction
 			w.player.sprite.stop()
 			w.player.sprite.animation=id
-			for f in range(6):
+			for f in range(w.player.sprite.sprite_frames.get_frame_count(id)):
 				w.player.sprite.frame=f
 				await process_frame
 				await RenderingServer.frame_post_draw
@@ -48,5 +54,5 @@ func run() -> void:
 			while w.player.action_busy:
 				seen[w.player.sprite.frame]=true
 				await process_frame
-			check("play_all_"+action+direction,seen.size()==6 and w.player.position==point and w.player.sprite.animation==direction)
+			check("play_all_"+action+direction,seen.size()==w.player.sprite.sprite_frames.get_frame_count(action+"_"+direction) and w.player.position==point and w.player.sprite.animation=="idle_"+direction)
 	finish()

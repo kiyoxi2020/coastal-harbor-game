@@ -124,7 +124,9 @@ func render_aperture_top(scene) -> void:
 	root.add_child(viewport)
 	var sprite:=AnimatedSprite2D.new()
 	sprite.sprite_frames=scene.player.sprite.sprite_frames
-	sprite.animation="north"
+	sprite.animation="idle_north"
+	sprite.centered=scene.player.sprite.centered
+	sprite.offset=scene.player.sprite.offset
 	sprite.scale=scene.player.sprite.scale
 	sprite.position=scene.player.position+scene.player.sprite.position
 	sprite.material=scene.player.doorway_material

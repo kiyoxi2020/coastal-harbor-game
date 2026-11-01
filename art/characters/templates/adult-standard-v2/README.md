@@ -1,5 +1,7 @@
 # 成年标准身体候选后继修订
 
+2026-11-01更新：Q22=A已批准将此候选的visible严格输出接到默认游戏主角，作为本地开发接入；旧餐馆NPC暂留，完整发布仍关闭。以下保留源登记时的制作范围；该本地接入不修改本模板/源build的review-only身份，也不授予衣物兼容资格。
+
 这是Q19认可灰色不透明连体底衣完整母版的候选登记，仍属`unified-composable-character-v1`，不是第二套模型/构建管线。当前生产仍用冻结旧资源；本候选不改变旧template、catalog、发布清单或runtime-baseline。
 
 `body-motion-v1`包含四向六动作、108姿态，两种明确variant：`visible`在农事保留完整工具动作，`body-reference`用于无工具姿态参考；非农事共享相同PNG。共164个源格作精确矩形提取，未重画/缩放/挪动身体部位或编辑alpha。来源在`sources/visible-atlas-packed-r001/`，不可变提取映射逐文件绑定Q19源图集与RGBA。

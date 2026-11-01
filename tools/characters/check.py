@@ -89,6 +89,20 @@ def capture_baseline(repo):
             'legacy_build_files': file_hashes(repo, legacy_dirs)}
 
 
+def verify_local_integrations(repo, policy):
+    """Q22 local player binding is explicit; source builds remain review-only."""
+    from godot_integration import verify as verify_integration
+    registered = policy.get('local_integrations', [])
+    require(isinstance(registered, list), 'Invalid local integration registry')
+    require(len(set(registered)) == len(registered), 'Duplicate local integration registration')
+    root = repo / 'godot2d/assets/characters/integrations'
+    actual = {p.relative_to(repo).as_posix() for p in root.glob('*/manifest.json')}
+    require(actual == set(registered), 'Unregistered or missing local integration')
+    for name in registered:
+        verify_integration(repo, repo / name)
+    return len(registered)
+
+
 def check_repository(repo, policy=None):
     repo = Path(repo).resolve()
     policy = read_json(BASELINE) if policy is None else policy
@@ -107,6 +121,7 @@ def check_repository(repo, policy=None):
     refs, bodies = production_scan(repo)
     require(refs == policy['production_references'], 'Unreviewed production character reference change')
     require(bodies == policy['character_body_entries'], 'Unregistered production character body entry')
+    integrations = verify_local_integrations(repo, policy)
     legacy_expected = dict(verify_legacy_binding(repo, name, sha) for name, sha in policy['legacy_build_files'].items())
     require(file_hashes(repo, policy['legacy_build_directories']) == legacy_expected, 'Legacy build changed or contains unregistered files')
     for name, expected in policy['legacy_recipes'].items():
@@ -137,7 +152,9 @@ def check_repository(repo, policy=None):
         builds += 1
     return {'passed': True, 'strict_recipes': recipes, 'strict_builds': builds,
             'frozen_legacy_recipes': len(policy['legacy_recipes']),
-            'production_release': 'closed; current player-unified-v4 preserved'}
+            'local_integrations': integrations,
+            'production_release': ('closed; local player integration only, legacy NPCs retained'
+                                   if integrations else 'closed; current player-unified-v4 preserved')}
 
 
 def main():

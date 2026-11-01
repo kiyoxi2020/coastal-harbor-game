@@ -1,4 +1,14 @@
+## 2026-11-01 像素风试验关闭
+
+用户选择保留当前原始人物方案：默认游戏继续使用 `adult-standard-v2-visible-r001` 原帧。单帧与六帧imagegen像素风结果均仅预览、未采用，未替换资源或变更发布状态。
+
 # 当前人物与衣物入口
+
+## 默认游戏主角（2026-11-01，Q22=A）
+
+正常游戏入口现用最新归档的灰色连体底衣身体，`adult-standard-v2-visible-r001`共24动作方向108帧，农事带工具。运行包：[本地接入清单](../../godot2d/assets/characters/integrations/adult-standard-v2-visible-r001/manifest.json)；来源：[严格构建](builds/adult-standard-v2-visible-r001/manifest.json)与[身体源归档](parts/body/adult-v1/archive-r001.json)。
+
+这是默认玩家的本地开发接入，旧餐馆NPC暂留；完整统一发布、精确接触及动态换装仍待完成。下文是独立的固定发帽评审入口，不是当前默认游戏主角。
 
 ## 当前可试玩人物
 

@@ -2,6 +2,20 @@
 
 先读[人物库结构与当前使用逻辑](../../art/characters/README.md)。日常只需三类入口：`review.py`查看已登记抽样，`build.py build/verify`构建与复核严格配方，`check.py`检查仓库边界。新构建不会自动替换现行Godot试玩或正式玩家。
 
+## 明确评审的Godot本地接入
+
+Q22=A批准默认主角使用归档身体，运行接入清单在`godot2d/assets/characters/integrations/adult-standard-v2-visible-r001/manifest.json`。复核命令：
+
+```sh
+python3 tools/characters/godot_integration.py verify godot2d/assets/characters/integrations/adult-standard-v2-visible-r001/manifest.json
+```
+
+新接入用`godot_integration.py create <严格build目录> --package godot2d/assets/characters/integrations/<新ID> --frames godot2d/resources/<新名>.tres`，输出必须不存在。此工具只接受完整四向六动作visible构建，校验既有严格输出后逐字节复制，按原毫秒时序生成SpriteFrames；不是合成器或正式发布命令，不自动改玩家场景、catalog或基线。身体世界缩放采用本次批准的0.25。
+
+导入配置固定无损、无mipmap、无透明边缘修色/预乘/通道重排，`verify`检查导入参数及source/remap。Godot测试另逐帧比对实际加载RGBA与严格摘要；文件SHA和路径不能代替导入后像素验收。
+
+门禁仅验证`runtime-baseline.local_integrations`显式登记的运行包；原文件/引用冻结仍生效。Q22的115项精确差异见`docs/reviews/2026-11-01-body-game-baseline-changes.json`；不为新接入自动刷新基线。源build仍review-only，餐馆旧NPC暂留，完整发布关闭。
+
 ## 日常查看
 
 在仓库根执行 `python3 tools/characters/review.py <suite>`；suite为headwear（默认西锄发帽）、wardrobe、farming、locomotion或static-candidates，可加 `--dry-run`。也可双击review.command。场景与加载器导航见[Godot试玩README](../../godot2d/dev/characters/README.md)，测试分类见[Godot测试README](../../godot2d/tests/characters/README.md)。

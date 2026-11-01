@@ -75,4 +75,23 @@ class RepositoryGateTests(unittest.TestCase):
         d=self.fixture.recipe;d['clips'][1]['frames'].pop();self.fixture.save()
         with self.assertRaisesRegex(ValueError,'pose'):self.check()
 
+    def test_unregistered_local_integration_rejected(self):
+        import check
+        p=self.repo/'godot2d/assets/characters/integrations/rogue/manifest.json'
+        p.parent.mkdir(parents=True);p.write_text('{}')
+        with self.assertRaisesRegex(ValueError,'Unregistered'):
+            check.verify_local_integrations(self.repo,self.policy)
+
+    def test_registered_local_integration_cannot_disappear(self):
+        import check
+        self.policy['local_integrations']=['godot2d/assets/characters/integrations/missing/manifest.json']
+        with self.assertRaisesRegex(ValueError,'Unregistered|missing'):
+            check.verify_local_integrations(self.repo,self.policy)
+
+    def test_duplicate_local_integration_registration_rejected(self):
+        import check
+        self.policy['local_integrations']=['a','a']
+        with self.assertRaisesRegex(ValueError,'Duplicate'):
+            check.verify_local_integrations(self.repo,self.policy)
+
 if __name__=='__main__':unittest.main()

@@ -213,6 +213,7 @@ func can_reach_cell(target: Dictionary) -> bool:
 func use_farm_tool(target: Dictionary) -> void:
 	if target.is_empty(): return
 	var tools := $FarmTools
+	if tools.tool in ["hoe","water","harvest"] and not player.can_play_tool_action(tools.tool,target.point): return
 	var args := {"cell_id":target.id}
 	if tools.tool=="plant": args.crop_id=tools.crop_id
 	var result := perform_action(tools.tool,args,int(foraging.life.action_seq)+1)

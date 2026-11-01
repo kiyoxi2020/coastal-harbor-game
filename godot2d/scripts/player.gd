@@ -30,13 +30,20 @@ func _ready() -> void:
 	initial_sprite_modulate = sprite.modulate
 	initial_sprite_z_index = sprite.z_index
 	initial_shadow_visible = shadow.visible
-	# Include every walking frame so fade starts only after the last opaque pixel.
-	for direction in ["north", "south"]:
-		for frame in range(sprite.sprite_frames.get_frame_count(direction)):
-			var texture := sprite.sprite_frames.get_frame_texture(direction, frame)
-			var bounds := texture.get_image().get_used_rect()
-			visual_top = minf(visual_top, sprite.position.y + (bounds.position.y - texture.get_height() * 0.5) * sprite.scale.y)
-			visual_bottom = maxf(visual_bottom, sprite.position.y + (bounds.end.y - texture.get_height() * 0.5) * sprite.scale.y)
+	# Door movement uses walk and idle; measure both with the scene's actual origin.
+	for direction in ["north", "south", "west", "east"]:
+		for action in ["idle", "walk"]:
+			var animation: String = action + "_" + direction
+			if not sprite.sprite_frames.has_animation(animation): continue
+			for frame in range(sprite.sprite_frames.get_frame_count(animation)):
+				var texture := sprite.sprite_frames.get_frame_texture(animation, frame)
+				if texture == null: continue
+				var bounds := texture.get_image().get_used_rect()
+				var origin := sprite.offset.y - (texture.get_height() * 0.5 if sprite.centered else 0.0)
+				var top := sprite.position.y + (bounds.position.y + origin) * sprite.scale.y
+				var bottom := sprite.position.y + (bounds.end.y + origin) * sprite.scale.y
+				visual_top = minf(visual_top, minf(top, bottom))
+				visual_bottom = maxf(visual_bottom, maxf(top, bottom))
 	queue_redraw()
 
 func set_doorway_hidden(value: float) -> void:
@@ -57,6 +64,18 @@ func reset_doorway_visual() -> void:
 func play_tool_action(kind: String, target: Vector2) -> void:
 	$ToolAction.begin(kind,target)
 
+func can_play_tool_action(kind: String, target: Vector2) -> bool:
+	return $ToolAction.can_begin(kind,target)
+
+func play_idle() -> void:
+	walking = false
+	running = false
+	var animation := "idle_" + facing
+	if not sprite.sprite_frames.has_animation(animation) or sprite.sprite_frames.get_frame_count(animation) == 0:
+		sprite.stop()
+		return
+	sprite.play(animation)
+
 func _physics_process(_delta: float) -> void:
 	if action_busy:
 		velocity=Vector2.ZERO
@@ -66,7 +85,7 @@ func _physics_process(_delta: float) -> void:
 		return
 	if is_instance_valid(world) and world.get("release_input") == true:
 		velocity = Vector2.ZERO
-		sprite.stop()
+		play_idle()
 		return
 	var direction := Input.get_vector("left","right","up","down")
 	if direction != Vector2.ZERO:
@@ -79,8 +98,6 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	walking = get_real_velocity().length() > 2.0
 	if walking:
-		sprite.play("run_"+facing if running else facing)
+		sprite.play(("run_" if running else "walk_")+facing)
 	else:
-		sprite.stop()
-		sprite.animation = facing
-		sprite.frame = 0
+		play_idle()

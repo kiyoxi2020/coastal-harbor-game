@@ -1,5 +1,7 @@
 # 人物测试与原生采集导航
 
+默认游戏身体接入测试位于上级`test_unified_player.gd`（实际导入RGBA、时序、玩家动作及农事提交前拒绝）、`test_body_game_native.gd`（真实harbor场景走跑/工具/暂停/遮挡）。后者要求启动前冻结输入到全新的`/private/tmp/coastal-*/inputs.json`，支持`--body-evidence=<目录>`；存档在该目录/save，拒绝覆盖已有trace。真实耕种/换日/收获/重载另用`test_life_farming_native.gd`并显式传`--test-save-directory=/private/tmp/coastal-...`，不能把观察器的动画调用当成事务验收。
+
 这里保存人物Godot回归和采集入口。先读 [人物库README](../../../art/characters/README.md)理解当前资源范围，再按实际改动选择测试；不要按文件数量或名字相似判定可以删除。
 
 ## 测试分组

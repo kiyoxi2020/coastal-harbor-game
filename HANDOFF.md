@@ -1,3 +1,23 @@
+## 2026-11-01 保留原始人物方案，关闭像素风试验
+
+用户决定先保留原始人物方案：继续使用已接入默认游戏的 `adult-standard-v2-visible-r001` 灰色底衣身体及原有108帧、nearest显示和整帧登记，不采用imagegen像素风重绘，不回退Q22=A身体接入。
+
+已试单帧256×224及六帧3×2整表768×448；imagegen实际输出分别1341×1173与1642×958，仍有渐变、半透明及轮廓变化，未通过固定网格/注册和动态验收。两次输出仅作外部预览，未写入人物库或运行资源，本轮关闭，不自动继续。
+
+本次提交保存此前已完成的身体接入、测试和验收文档，并记录上述决定。提交前复核既有419项Python测试与人物门禁通过记录，以及生产文件、源构建/运行清单/基线哈希；本轮仅补文档，未重复执行完整测试或原生验收。旧NPC暂留、完整发布关闭，后续边界见下方验收记录。仅本地提交，不推送。
+
+## 2026-11-01 Q22=A默认游戏主角身体接入完成
+
+用户选择A，默认`godot2d/scenes/harbor.tscn`主角已使用归档灰色底衣`adult-standard-v2-visible-r001`，四向六动作24格108帧、农事带工具。运行包`godot2d/assets/characters/integrations/adult-standard-v2-visible-r001/`，资源`resources/player_body_frames.tres`；复用原玩家/单AnimatedSprite2D，独立idle、真实时长、根点(123,201)/整帧scale0.25，门过渡及农事提交前能力校验已接入。原生成像素、源配方/build保持review-only。
+
+新增通用godot_integration.py校验严格来源、复制PNG及生成SpriteFrames/导入配置。Godot默认透明边缘修色造成实际RGBA变化，已关闭并验证108帧加载RGBA一致；缺动作/空帧/循环/空纹理在农事事务前拒绝，不改土壤、体力、序号或存档。基线115项精确差异经独立复查，旧资产及旧配方/构建冻结哈希保持；生产发布仍关闭，旧餐馆NPC按A范围暂留。
+
+验证：419人物Python测试通过（281.133s）；check通过55严格配方、49严格构建、9冻结旧配方、1本地接入。Godot玩家469、农田规则401、农事32、保存往返15、紧凑屋37通过；真实海港GPU171、真实四晚耕种/收获/重载150、门遮挡GPU132通过。实际存档均/private/tmp/coastal-*，原生日志无ERROR/脚本错误。独立复查两项Important均已修复。
+
+[验收报告](docs/reviews/2026-11-01-body-game-integration.md)、[基线逐项记录](docs/reviews/2026-11-01-body-game-baseline-changes.json)、[运行截图](docs/reviews/body-game-integration-v1/default-body-world.png)。完整原生快照/视频在/private/tmp/coastal-body-game-native-r001，农事证据在/private/tmp/coastal-body-game-farming-r001；仓库保留轻量摘要与两张原尺寸代表图。输入快照期间唯一变动是无关unified测试负例fixture，实际运行依赖未改，已单独记录。
+
+本轮完成本地默认主角接入，不是完整统一人物发布。精确接触/滑步、低FPS完整时序、动态换装、差异化NPC及旧人物彻底退役仍待后续；未做导出包、Windows/Intel或真人长时游玩；未提交/推送。旧上衣A/B实验已按用户要求结束，不自动继续。本轮Progress完成后等待下一明确任务。
+
 ## 2026-11-01 身体源归档提交检查点；上衣A/B单帧仍待验收
 
 身体源归档入口为 `art/characters/parts/body/adult-v1/archive-r001.json`，本次提交前重读其586个绑定文件SHA全部一致。提交包含此前人物目录整理及引用迁移、身体源图/提示词、图集、严格构建与必要验证工具；生产依赖基线保持不变。

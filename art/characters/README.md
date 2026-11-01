@@ -2,6 +2,12 @@
 
 这是现行人物**制作、构建和评审**的资源库。后续 agent 先读本页，再按任务进入具体文件；不要靠目录名、文件数量或旧日志推断资源已能通用组合。
 
+## 2026-11-01 默认游戏主角身体接入（Q22=A）
+
+正常启动Godot游戏后，主角使用`adult-standard-v2-visible-r001`归档灰色底衣身体，四向六动作共24格108帧；农事保留工具。运行包位于`godot2d/assets/characters/integrations/adult-standard-v2-visible-r001/`，由`godot_integration.py`校验严格构建后生成，SpriteFrames为`godot2d/resources/player_body_frames.tres`。
+
+这是用户批准的本地开发接入阶段：旧餐馆NPC暂留，完整生产发布仍关闭；源配方/build保持review-only，未授予换装或精确接触资格。基线按[具体变更记录](../../docs/reviews/2026-11-01-body-game-baseline-changes.json)精确更新，没有重新采集整份基线。运行接入不改变下文历史发帽评审包的范围。
+
 ## 2026-10-30 分类整理后的日常入口
 
 先看 [当前人物与衣物](CURRENT.md)。真实部件路径已按 `parts/<部位>/<款式ID>/` 分类，部位为 top、pants、shoes、hair、hat；共享接口在 shared。每款的体型/动作适配直接位于 `<template>/<motion>/<revision>/`，不再嵌套 adaptations。稳定ID保留，不能仅凭目录存在推断完整动作兼容。
@@ -27,7 +33,7 @@ sources保留制作源与提示词，templates保留母版和姿态，recipes定
 
 | 使用场景 | 实际入口与数据 | 当前边界 |
 |---|---|---|
-| 正式游戏 | `godot2d/scenes/harbor.tscn` → 现有玩家/顾客场景与 `godot2d/assets/player-unified-v4/` | 仍运行旧生产资源；本库 `catalog.production_release` 为 null，没有新的 active_release |
+| 默认游戏（本地接入阶段） | `godot2d/scenes/harbor.tscn` → 新身体玩家；餐馆顾客仍用 `godot2d/assets/player-unified-v4/` | Q22=A允许阶段性接入；`catalog.production_release` 为 null，没有新的正式 active_release |
 | 现行试玩 | `tools/characters/review.py <suite>` → `reviews/<suite>/review.json` → Godot评审场景/静态HTML → 已登记catalog与build | 展示已完成的有限抽样，不自动遍历所有款式或新配方 |
 | 后续严格构建 | `recipes/<recipe-id>/<revision>.json` → `tools/characters/build.py build` → 新build目录 → `verify` | 只产review-only；现有统一固定hair_hat24格84姿态及旧西锄示例，用户Q2=B接收本轮四帧评审版，严格支撑后续，不是完整衣柜或生产发布 |
 
