@@ -244,15 +244,21 @@ def import_static(repo_root: Path, destination: Path, baseline_ref='379a9bc', in
 
 def verify_static(repo_root: Path, destination: Path | None = None) -> dict:
     """Verify imported bytes, active root-relative references and static scope."""
+    current_library = destination is None
     destination = Path(destination) if destination is not None else Path(repo_root) / ROOT
     manifest = json.loads((destination / 'migrations/2026-10-resource-layout/static-inventory.json').read_text())
+    if current_library:
+        from organize_library import historical_binding
     verified = set()
     for record in manifest['files'] + manifest.get('derived_files', []):
         new = _safe_path(record['new_path'])
         if not new.startswith(ROOT + '/'):
             raise ValueError('resource path outside library: ' + new)
+        expected = record['new_sha256']
+        if current_library:
+            new, expected = historical_binding(repo_root, new, expected)
         path = destination / new[len(ROOT) + 1:]
-        if not path.is_file() or _sha(path.read_bytes()) != record['new_sha256']:
+        if not path.is_file() or _sha(path.read_bytes()) != expected:
             raise ValueError('imported resource SHA mismatch: ' + new)
         verified.add(path)
     references = 0

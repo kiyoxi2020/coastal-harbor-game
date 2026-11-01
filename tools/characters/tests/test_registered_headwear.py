@@ -40,10 +40,10 @@ class RegisteredHeadwearTests(unittest.TestCase):
         self.masks = {}
         for role, point in [('far_hat', (0, 0)), ('near_hat', (1, 1)), ('under_hat_hair', (1, 0))]:
             mask = Image.new('L', (2, 2)); mask.putpixel(point, 255)
-            self.masks[role] = self.write('parts/' + ('hat' if role != 'under_hat_hair' else 'hair')
-                                           + '/adaptations/test/motion/r002/' + role + '-owner.png', mask)
+            self.masks[role] = self.write('parts/' + ('hat/hat' if role != 'under_hat_hair' else 'hair/hair')
+                                           + '/test/motion/r002/' + role + '-owner.png', mask)
         full = Image.new('L', (2, 2)); full.putpixel((0, 0), 255); full.putpixel((1, 1), 255)
-        owner = self.write('parts/hat/adaptations/test/motion/r002/full-hat-owner.png', full)
+        owner = self.write('parts/hat/hat/test/motion/r002/full-hat-owner.png', full)
         self.compatibility = {'hat_source': self.sources['hat'], 'hat_ownership': owner}
         self.bundles = {}
         for slot, source_id in [('hat', 'cap'), ('hair', 'locks')]:
@@ -59,7 +59,7 @@ class RegisteredHeadwearTests(unittest.TestCase):
                        'clips': [], 'authoring_inputs': []}
         self.adaptations = {}
         for slot in ['hair', 'hat']:
-            self.recipe['slots'][slot] = self.write('parts/' + slot + '/revisions/r002/design.json',
+            self.recipe['slots'][slot] = self.write('parts/' + slot + '/' + slot + '/revisions/r002/design.json',
                 {'design_id': slot, 'category': slot, 'revision': 'r002'})
             self.adaptations[slot] = {'kind': 'coastal-registered-adaptations-v1', 'schema_version': 1,
                 'design_id': slot, 'design_revision': 'r002', 'template_id': 'test', 'motion_set_id': 'motion',
@@ -79,7 +79,7 @@ class RegisteredHeadwearTests(unittest.TestCase):
                 layers = []
                 for role in ['far_hat', 'under_hat_hair', 'near_hat']:
                     slot = 'hair' if role == 'under_hat_hair' else 'hat'
-                    texture = {'file': f'parts/{slot}/adaptations/test/motion/r002/{role}-{frame["pose_id"]}.png', 'sha256': ''}
+                    texture = {'file': f'parts/{slot}/{slot}/test/motion/r002/{role}-{frame["pose_id"]}.png', 'sha256': ''}
                     self.adaptations[slot]['mappings'].append({'mapping_id': role + '-' + frame['pose_id'],
                         'view_id': role, 'texture': texture,
                         'target_pose': {'document': self.annotation, 'record': frame['pose_id']},
@@ -126,7 +126,7 @@ class RegisteredHeadwearTests(unittest.TestCase):
                      'hair_identity_sha256': component_source_identity(view),
                      'hat_identity_sha256': self.compatibility['hat_identity_sha256']}
             view['compatibility'] = self.write(
-                'parts/hair/adaptations/test/motion/r002/compatibility/' + view['view_id'] + '.json', claim)
+                'parts/hair/hair/test/motion/r002/compatibility/' + view['view_id'] + '.json', claim)
 
     def refresh(self):
         for clip, base_clip in zip(self.recipe['clips'], self.fixture.recipe['clips']):
@@ -144,7 +144,7 @@ class RegisteredHeadwearTests(unittest.TestCase):
                     layer.update(texture=mapping['texture'], source=view['source'], source_bundle=view['source_bundle'],
                                  ownership=view['source_ownership']['mask'])
         for slot, data in self.adaptations.items():
-            self.recipe['adaptations'][slot] = self.write(f'parts/{slot}/adaptations/test/motion/r002/views.json', data)
+            self.recipe['adaptations'][slot] = self.write(f'parts/{slot}/{slot}/test/motion/r002/views.json', data)
         self.save()
 
     def save(self):
@@ -199,7 +199,7 @@ class RegisteredHeadwearTests(unittest.TestCase):
 
     def test_hat_ownership_must_cover_the_complete_registered_hat(self):
         mask = Image.new('L', (2, 2)); mask.putpixel((0, 0), 255)
-        ref = self.write('parts/hat/adaptations/test/motion/r002/incomplete-hat.png', mask)
+        ref = self.write('parts/hat/hat/test/motion/r002/incomplete-hat.png', mask)
         for clip in self.recipe['clips']:
             for frame in clip['frames']:
                 frame['compatibility']['hat_ownership'] = ref
@@ -237,7 +237,7 @@ class RegisteredHeadwearTests(unittest.TestCase):
                     texture.paste(extracted, delta)
                     mapping['texture'] = self.write(mapping['texture']['file'], texture)
                     layer['texture'] = mapping['texture']
-        self.recipe['adaptations']['hat'] = self.write('parts/hat/adaptations/test/motion/r002/views.json',
+        self.recipe['adaptations']['hat'] = self.write('parts/hat/hat/test/motion/r002/views.json',
                                                        self.adaptations['hat'])
         with self.assertRaisesRegex(ValueError, 'Hat compatibility identity'):
             self.check()

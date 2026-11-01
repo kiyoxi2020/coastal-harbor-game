@@ -25,8 +25,8 @@ func reset_fixture() -> void:
  save(project.path_join("tools/characters/composition_contract.py"),{"synthetic":"composition"})
  save(library.path_join("sources/source.json"),{"synthetic":"source"})
  var source=reference("sources/source.json")
- for name in ["templates/adult-standard-v1/template.json","templates/adult-standard-v1/motions/review-motion-v1/motion-set.json","parts/top03/design.json","parts/original-pants/design.json","parts/original-shoes/design.json","parts/hair-chestnut-short-v1/design.json","parts/hat-straw-navy-band-v1/design.json"]:save(library.path_join(name),{"synthetic":"registered-reference"})
- base={"kind":"coastal-character-construction-v1","schema_version":1,"resource_root":"art/characters","character_model_id":"unified-composable-character-v1","recipe_id":"base","revision":"r001","template":reference("templates/adult-standard-v1/template.json"),"motion_set":reference("templates/adult-standard-v1/motions/review-motion-v1/motion-set.json"),"slots":{"body":null,"top":reference("parts/top03/design.json"),"pants":reference("parts/original-pants/design.json"),"shoes":reference("parts/original-shoes/design.json")},"required_capabilities":[{"action_id":"hoe","direction":"west"},{"action_id":"idle","direction":"west"}],"clips":[],"authoring_inputs":[source]}
+ for name in ["templates/adult-standard-v1/template.json","templates/adult-standard-v1/motions/review-motion-v1/motion-set.json","parts/top/top03/design.json","parts/pants/original-pants/design.json","parts/shoes/original-shoes/design.json","parts/hair/hair-chestnut-short-v1/design.json","parts/hat/hat-straw-navy-band-v1/design.json"]:save(library.path_join(name),{"synthetic":"registered-reference"})
+ base={"kind":"coastal-character-construction-v1","schema_version":1,"resource_root":"art/characters","character_model_id":"unified-composable-character-v1","recipe_id":"base","revision":"r001","template":reference("templates/adult-standard-v1/template.json"),"motion_set":reference("templates/adult-standard-v1/motions/review-motion-v1/motion-set.json"),"slots":{"body":null,"top":reference("parts/top/top03/design.json"),"pants":reference("parts/pants/original-pants/design.json"),"shoes":reference("parts/shoes/original-shoes/design.json")},"required_capabilities":[{"action_id":"hoe","direction":"west"},{"action_id":"idle","direction":"west"}],"clips":[],"authoring_inputs":[source]}
  for action in ["hoe","idle"]:
   var frames:Array=[]
   for i in range(4 if action=="hoe" else 1):frames.append({"pose_id":"hoe_west_key_"+str(i) if action=="hoe" else "idle_west_0","duration_ms":100,"layers":[],"layer_order":[],"registration":{},"composition":"alpha-over"})
@@ -41,8 +41,8 @@ func reset_fixture() -> void:
  suite={"kind":"coastal-character-construction-review-v1","schema_version":1,"resource_root":"art/characters","scope":"review-only","sample_id":"hoe-west","states":{}}
  for state in STATES:
   recipes[state]={"kind":"coastal-character-construction-v1","schema_version":2,"resource_root":"art/characters","character_model_id":"unified-composable-character-v1","recipe_id":"head-"+state,"revision":"r001","base_recipe":{},"head_state":state,"slots":{},"clips":base.clips.duplicate(true),"authoring_inputs":[]}
-  if state in ["hair","hair_hat"]:recipes[state].slots.hair=reference("parts/hair-chestnut-short-v1/design.json")
-  if state in ["hat","hair_hat"]:recipes[state].slots.hat=reference("parts/hat-straw-navy-band-v1/design.json")
+  if state in ["hair","hair_hat"]:recipes[state].slots.hair=reference("parts/hair/hair-chestnut-short-v1/design.json")
+  if state in ["hat","hair_hat"]:recipes[state].slots.hat=reference("parts/hat/hat-straw-navy-band-v1/design.json")
   recipes[state].clips=[]
   for clip in base.clips:
    var head_frames:Array=[]
@@ -70,7 +70,7 @@ func publish() -> void:
   recipes[state].base_recipe=reference("recipes/base/r001.json")
   save(library.path_join(manifests[state].recipe),recipes[state])
   manifests[state].inputs={"recipes/base/r001.json":FileAccess.get_sha256(library.path_join("recipes/base/r001.json")),"sources/source.json":FileAccess.get_sha256(library.path_join("sources/source.json"))}
-  for name in ["templates/adult-standard-v1/template.json","templates/adult-standard-v1/motions/review-motion-v1/motion-set.json","parts/top03/design.json","parts/original-pants/design.json","parts/original-shoes/design.json","parts/hair-chestnut-short-v1/design.json","parts/hat-straw-navy-band-v1/design.json"]:manifests[state].inputs[name]=FileAccess.get_sha256(library.path_join(name))
+  for name in ["templates/adult-standard-v1/template.json","templates/adult-standard-v1/motions/review-motion-v1/motion-set.json","parts/top/top03/design.json","parts/pants/original-pants/design.json","parts/shoes/original-shoes/design.json","parts/hair/hair-chestnut-short-v1/design.json","parts/hat/hat-straw-navy-band-v1/design.json"]:manifests[state].inputs[name]=FileAccess.get_sha256(library.path_join(name))
   for clip in base.clips:
    for dependency in [clip.action,clip.poses]:manifests[state].inputs[dependency.file]=dependency.sha256
   manifests[state].inputs[manifests[state].recipe]=FileAccess.get_sha256(library.path_join(manifests[state].recipe))
@@ -133,11 +133,11 @@ func run() -> void:
    "base_actual_scale":base.clips[0].display_scale=0.5;publish()
    "base_actual_root":base.clips[0].root_anchor_px=[3,7];publish()
    "empty_slots":recipes.hair.slots={};publish()
-   "wrong_design":recipes.hair.slots.hair=reference("parts/hat-straw-navy-band-v1/design.json");publish()
+   "wrong_design":recipes.hair.slots.hair=reference("parts/hat/hat-straw-navy-band-v1/design.json");publish()
    "empty_layers":recipes.hair.clips[0].frames[0].layers=[];publish()
    "wrong_layer_slot":recipes.hair.clips[0].frames[0].layers[0].slot="hat";publish()
    "wrong_layer_order":recipes.hair_hat.clips[0].frames[0].layer_order=["near_hat","base","under_hat_hair","far_hat"];publish()
-   "base_slots":base.slots={"body":null,"top":{"file":"parts/top04/design.json","sha256":"0".repeat(64)}};publish()
+   "base_slots":base.slots={"body":null,"top":{"file":"parts/top/top04/design.json","sha256":"0".repeat(64)}};publish()
    "base_template":base.template=base.motion_set;publish()
    "recipe_slots_type":recipes.hair.slots=[];publish()
    "recipe_authoring_type":recipes.hair.authoring_inputs={};publish()

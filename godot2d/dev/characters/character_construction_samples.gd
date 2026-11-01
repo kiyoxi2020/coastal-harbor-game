@@ -170,7 +170,7 @@ func base_valid(base:Variant) -> bool:
  if not exact(base.slots,"body top pants shoes") or base.slots.body!=null:return false
  for slot in ["top","pants","shoes"]:
   var design="top03" if slot=="top" else "original-"+slot
-  if not exact(base.slots[slot],"file sha256") or base.slots[slot].file!="parts/"+design+"/design.json":return false
+  if not exact(base.slots[slot],"file sha256") or base.slots[slot].file!="parts/"+slot+"/"+design+"/design.json":return false
  if not base.required_capabilities is Array or base.required_capabilities!=[{"action_id":"hoe","direction":"west"},{"action_id":"idle","direction":"west"}] or not base.authoring_inputs is Array or base.authoring_inputs.is_empty():return false
  var actions:Array=[]
  for clip in base.clips:
@@ -203,7 +203,7 @@ func head_slots_valid(library:String,slots:Variant,state:String,inputs:Dictionar
  if not exact(slots,fields):return false
  for slot in slots:
   var design="hair-chestnut-short-v1" if slot=="hair" else "hat-straw-navy-band-v1"
-  if not ref_valid(library,slots[slot],inputs,"parts") or slots[slot].file!="parts/"+design+"/design.json":return false
+  if not ref_valid(library,slots[slot],inputs,"parts") or slots[slot].file!="parts/"+slot+"/"+design+"/design.json":return false
  return true
 func matching_head_clips(library:String,head:Variant,base_clips:Array,state:String,inputs:Dictionary) -> bool:
  if not head is Array or head.size()!=base_clips.size():return false

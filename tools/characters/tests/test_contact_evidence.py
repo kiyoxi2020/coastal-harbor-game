@@ -159,3 +159,45 @@ class ContactEvidenceTests(unittest.TestCase):
 
     def test_shoes_flag_without_native_samples_is_not_silently_ignored(self):
         m=self.module();p=self.repo/'no-native-shoes.json';args=['--repo',str(self.repo),'--manifest',str(self.mp),'--manifest-sha256',sha(self.mp),'--artifact',self.manifest['artifact_digest'],'--points',str(self.points),'--points-sha256',sha(self.points),'--shoes','--output',str(p)];self.assertEqual(m.main(args),2);self.assertFalse(p.exists())
+
+    def make_body_only(self):
+        self.base['slots']={'body':None}
+        self.base['clips'][0]['frames'][0]['layers']=[{'slot':'body'}]
+        self.base_ref=self.doc('recipes/body/r001.json',self.base)
+        self.output=self.raw.copy();self.output.save(self.output_path)
+        self.manifest['recipe']=self.base_ref['file']
+        self.manifest['inputs']=copy.deepcopy(self.inputs)
+        self.manifest['artifact_digest']=hashlib.sha256(stable({'inputs':self.inputs,'engine':{}})).hexdigest()
+        self.manifest['outputs'][0].update(sha256=sha(self.output_path),rgba_sha256=hashlib.sha256(self.output.tobytes()).hexdigest(),size=[60,60])
+        self.mp.write_text(json.dumps(self.manifest))
+
+    def test_body_only_uses_actual_canonical_geometry_without_fake_head_or_padding(self):
+        self.make_body_only();tool=self.tool();row=tool.static_points()[0]
+        self.assertEqual(row['output_padding_px'],[0,0,0,0]);self.assertEqual(row['final_px'],[30,30])
+        self.assertEqual(tool.reference_kind,'schema3-body-only')
+        with self.assertRaisesRegex(ValueError,'shoes'):tool.shoe_surfaces()
+
+    def test_direct_schema3_cannot_hide_unregistered_clothing_or_wrong_body_layer(self):
+        self.make_body_only()
+        for change in [lambda b:b['slots'].update(top={}),lambda b:b['clips'][0]['frames'][0]['layers'].append({'slot':'shoes'})]:
+            original=copy.deepcopy(self.base);change(self.base)
+            self.base_ref=self.doc('recipes/body/r001.json',self.base);self.manifest['inputs']=copy.deepcopy(self.inputs);self.manifest['artifact_digest']=hashlib.sha256(stable({'inputs':self.inputs,'engine':{}})).hexdigest();self.mp.write_text(json.dumps(self.manifest))
+            with self.assertRaises(ValueError):self.tool()
+            self.base=original
+
+    def test_body_native_material_pixels_do_not_certify_physical_contact(self):
+        self.make_body_only();self.native()
+        cp=self.evidence/'input-contract.json';c=json.loads(cp.read_text());c.update(kind='coastal-body-source-native-input-v1',observer='source-poses',source_points={'file':self.points.relative_to(self.repo).as_posix(),'sha256':sha(self.points)})
+        c['files'][self.points.relative_to(self.repo).as_posix()]=sha(self.points)
+        c['contract_digest']=hashlib.sha256(stable({k:v for k,v in c.items() if k!='contract_digest'})).hexdigest();cp.write_text(json.dumps(c))
+        rp=self.evidence/'report.json';r=json.loads(rp.read_text());r.update(kind='coastal-body-source-native-observation-v1',input_contract_sha256=sha(cp));r['samples'][0].update(mode='source-pose',texture_size_px=[60,60]);rp.write_text(json.dumps(r))
+        receipt=self.tool().native_receipt(self.evidence)
+        self.assertTrue(receipt['raster_matrix_complete']);self.assertFalse(receipt['physical_contact_acceptance']);self.assertFalse(receipt['support_flight_slide_acceptance'])
+        c['source_points']['sha256']='0'*64;c['contract_digest']=hashlib.sha256(stable({k:v for k,v in c.items() if k!='contract_digest'})).hexdigest();cp.write_text(json.dumps(c));r['input_contract_sha256']=sha(cp);rp.write_text(json.dumps(r))
+        with self.assertRaises(ValueError):self.tool().native_receipt(self.evidence)
+
+    def test_legacy_head_contract_cannot_impersonate_body_source_observer(self):
+        self.native();cp=self.evidence/'input-contract.json';c=json.loads(cp.read_text());c['observer']='source-poses'
+        c['contract_digest']=hashlib.sha256(stable({k:v for k,v in c.items() if k!='contract_digest'})).hexdigest();cp.write_text(json.dumps(c))
+        rp=self.evidence/'report.json';r=json.loads(rp.read_text());r.update(kind='coastal-body-source-native-observation-v1',input_contract_sha256=sha(cp));r['samples'][0]['mode']='source-pose';rp.write_text(json.dumps(r))
+        with self.assertRaises(ValueError):self.tool().native_receipt(self.evidence)

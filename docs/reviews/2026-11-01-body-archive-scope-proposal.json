@@ -1,0 +1,285 @@
+{
+  "kind": "coastal-body-source-archive-proposal-v1",
+  "status": "awaiting-archive-scope-decision",
+  "selected_scope": null,
+  "character_model_id": "unified-composable-character-v1",
+  "template_id": "adult-standard-v2",
+  "source_artifact": {
+    "file": "art/characters/parts/body/adult-v1/r001/manifest.json",
+    "sha256": "74ce76b84a171733062effb6cfaae8a7f84b577c483e58a2ce89939b6a423f7e"
+  },
+  "layout": {
+    "file": "art/characters/parts/body/adult-v1/r001/layout.json",
+    "sha256": "ac1c7c93ad48d574d67d4cd6b624b49ce600f2f0e6546315bbd39e534917e7dc"
+  },
+  "strict_builds": {
+    "visible": {
+      "file": "art/characters/builds/adult-standard-v2-visible-r001/manifest.json",
+      "sha256": "20a9e57673ac7cb8d57ad1f4b3bde19fc831e8ae6b1eb1a417844091e080bd57",
+      "artifact_digest": "e29e3cd73fb189240d1de8cc3376edc136d822726122e281141975e9c1ef6d9d",
+      "frames": 108,
+      "status": "review-only"
+    },
+    "body-reference": {
+      "file": "art/characters/builds/adult-standard-v2-body-reference-r001/manifest.json",
+      "sha256": "5935890b45937100fafe141976639f350f365aed24cdf0881abd7c51eb25e090",
+      "artifact_digest": "74e6818875c1cb3e9a2879630cdd7fcb420043a0cc425e5b12e2b0a6b2eadfe7",
+      "frames": 108,
+      "status": "review-only"
+    }
+  },
+  "source_points": {
+    "file": "art/characters/templates/adult-standard-v2/motions/body-motion-v1/material-points/r001.json",
+    "sha256": "32e01a6ae5c1cee070c316eedb55df17ddaea3b7daa7b5de960817d0be2bb96b"
+  },
+  "raster_receipt": {
+    "file": "/private/tmp/coastal-body-material-raster-r002/raster-receipt.json",
+    "sha256": "467f514864b622d6f872714095dd78a3f6109950282d1de20383e57b007acf6b"
+  },
+  "visual_approvals": {
+    "Q19": {
+      "question": "Q19",
+      "answer": "A",
+      "words": "Q19 (打包后全套身体外观): A",
+      "recorded_at": "2026-10-31T17:45:50.024376+00:00",
+      "scope": "Packed native-size all-action proportions, display size and overall visual appearance only. No actual movement/support/sliding, tool contact, spatial/transition, clothing compatibility, complete archive or production acceptance.",
+      "package": {
+        "file": "art/characters/parts/body/adult-v1/r001/manifest.json",
+        "sha256": "74ce76b84a171733062effb6cfaae8a7f84b577c483e58a2ce89939b6a423f7e",
+        "artifact_digest": "dbcf4de9bcdf03481ae2a5228e43ec3f684d0faa032d529b8ef6526457caaf3e"
+      },
+      "layout": {
+        "file": "art/characters/parts/body/adult-v1/r001/layout.json",
+        "sha256": "ac1c7c93ad48d574d67d4cd6b624b49ce600f2f0e6546315bbd39e534917e7dc"
+      },
+      "outputs": [
+        {
+          "file": "atlases/body/harvest.png",
+          "sha256": "0f8b1b6c1f4c6066d66d921676130bea9a795b6f4d7f148621c36bc0fcdb0284",
+          "size_px": [
+            1024,
+            896
+          ],
+          "rgba_sha256": "db7c0b976953f444cc8ac5360bbbeb2e8e8bda58c4667e2331cd08821b4a1474"
+        },
+        {
+          "file": "atlases/body/hoe.png",
+          "sha256": "0174ea96d7aabeff0ab8193a02bc4564a59fd6d19c63846f5e0b0d077f31e2a2",
+          "size_px": [
+            1536,
+            896
+          ],
+          "rgba_sha256": "83873303a3cefc56828549fde3dfb86809e4c4dfb3e058062380e1b350acf28e"
+        },
+        {
+          "file": "atlases/body/idle.png",
+          "sha256": "ce122d50ad8a03732b5f72804adb0bc5743bf18d10df6afe9c68e2df0317c03b",
+          "size_px": [
+            256,
+            896
+          ],
+          "rgba_sha256": "6a826506258cab92eb69aa9e3cbc8e813f239a63c5a886e02eb3323730f5ae70"
+        },
+        {
+          "file": "atlases/body/run.png",
+          "sha256": "3d7f82609c3b624cf84c84c0e814b4e818704dfd33ca6e6f6a822d650ec20488",
+          "size_px": [
+            1536,
+            896
+          ],
+          "rgba_sha256": "b8d9d81df8c3625b2d65ac6eba07bc9a3d6491b3d0641f4a3b686a3609526d9d"
+        },
+        {
+          "file": "atlases/body/walk.png",
+          "sha256": "1a262415ffecdf87289a6c7629c7b777201795385793f604b3561111195df3d2",
+          "size_px": [
+            1536,
+            896
+          ],
+          "rgba_sha256": "e042b11eb09bf41813ca678449fe2865d8ab2ad4546a3cf42749e12617fe4afc"
+        },
+        {
+          "file": "atlases/body/water.png",
+          "sha256": "cb62d8633c61ee58518008ac5e360d2642e5ee4c059ec314bb3f105d67ad7990",
+          "size_px": [
+            1024,
+            896
+          ],
+          "rgba_sha256": "e9c59e7d6b253b6ef8b09d2cfa11f91a65a5d8b2531f251b7ca3da0939e2ab36"
+        },
+        {
+          "file": "atlases/harvest-visible/harvest.png",
+          "sha256": "6ae07519f9694d947a5550fda43c92faa102f4b6ff1accbe663a14809fe5c999",
+          "size_px": [
+            1024,
+            896
+          ],
+          "rgba_sha256": "d1b37c274ab3b97b4ae8c9f410836f76f7a70c9e2da0ca6e96d40c98b12d0072"
+        },
+        {
+          "file": "atlases/hoe-visible/hoe.png",
+          "sha256": "48d3255c768653cb89fd068aa4905d4af03fcf50c6b5fcc19fc6c43c127114e0",
+          "size_px": [
+            1536,
+            896
+          ],
+          "rgba_sha256": "f74ecca427590b3858d08253af438a6433fc312338761f2535bef63b84474227"
+        },
+        {
+          "file": "atlases/water-visible/water.png",
+          "sha256": "056880bab14f5f6e6e40fb6e9264276177685e3c3c351877078d3708d2122586",
+          "size_px": [
+            1024,
+            896
+          ],
+          "rgba_sha256": "575940f558e8ce1f775346d136856025e74e01fe056c022b29bf54bcd495a1e2"
+        },
+        {
+          "file": "layout.json",
+          "sha256": "ac1c7c93ad48d574d67d4cd6b624b49ce600f2f0e6546315bbd39e534917e7dc"
+        }
+      ],
+      "source_plan": {
+        "file": "art/characters/sources/visible-atlas-body-r001/packing/r001.json",
+        "sha256": "5df666cd9a51d1c5222ca00977800a2d0b9483d2c5d4b8b3d63f2008242f8157"
+      },
+      "engine": {
+        "pillow": "12.3.0",
+        "code": {
+          "pack_sources.py": "0a77bec9452f18faabe57b51fc0a6e493249dc311da4384d873eff5efb4d3d4e",
+          "build_contract.py": "3b318591071691e12fbc5ab9cb2c10b6d4f0f605a1097697253b514122971fa5"
+        }
+      },
+      "native_diagnostic": {
+        "groups": 9,
+        "clips": 36,
+        "body_clips": 24,
+        "body_poses": 108,
+        "visible_farming_poses": 56,
+        "all_phase_indices_covered": true,
+        "backgrounds": [
+          "dark",
+          "light"
+        ],
+        "walk_run_stationary_loops_each": 10,
+        "scope": "Existing motion-review panel reads real packed PNG AtlasTexture regions. Stationary comparison only; not strict contact or world acceptance.",
+        "artifacts": [
+          {
+            "file": "/private/tmp/coastal-visible-atlas-body-r001/native-packed-r002/native-review.json",
+            "sha256": "3ade959617f10e1adca13a00340284c429a44b3f2e94dd117b2063ae09f31b14"
+          },
+          {
+            "file": "/private/tmp/coastal-visible-atlas-body-r001/native-packed-r002/packed-native-overview.png",
+            "sha256": "7d8e029152c4044809008a94ba7cce127b3b8818a62f9cc57c219b6024cf55a7"
+          },
+          {
+            "file": "/private/tmp/coastal-visible-atlas-body-r001/native-packed-r002/body-walk/body-walk.mp4",
+            "sha256": "2cbd090a9c9c7184a72e0df6e89b4b0f51debbc2abcb83b6cb4f0d3aca090d34"
+          },
+          {
+            "file": "/private/tmp/coastal-visible-atlas-body-r001/native-packed-r002/body-run/body-run.mp4",
+            "sha256": "4b9e1eae0dbd8187f811b1583f539cb215c86fcdd58919e6ed83c880d23c387e"
+          },
+          {
+            "file": "/private/tmp/coastal-visible-atlas-body-r001/native-packed-r002/hoe-visible-hoe/hoe-visible-hoe.mp4",
+            "sha256": "e9cd441d2bf278fcb4a30222814ba3e310546cc3cd116e921d51ef3f4bbd3e0b"
+          },
+          {
+            "file": "/private/tmp/coastal-visible-atlas-body-r001/native-packed-r002/water-visible-water/water-visible-water.mp4",
+            "sha256": "7294540083cf8a010f611d72ab8b1d42280c6124c2db7da62dedba32b9122169"
+          },
+          {
+            "file": "/private/tmp/coastal-visible-atlas-body-r001/native-packed-r002/harvest-visible-harvest/harvest-visible-harvest.mp4",
+            "sha256": "5a6e0b2ef0700a05d1b848f6a87f1e200492612ec00d9e7dda0d92b17f16254d"
+          }
+        ]
+      }
+    },
+    "Q20": {
+      "question": "Q20",
+      "answer": "A",
+      "words": "Q20 (实际世界中的人物效果): A",
+      "recorded_at": "2026-11-01T02:04:01.482188+00:00",
+      "scope": "Visual appearance in actual-world motion, tool-action and selected tree/counter spatial contexts only. Does not approve precise support/slide/grip/ground-target measurements, full timing/native receipt, garment interfaces, complete body archive or production release.",
+      "strict_builds": {
+        "visible": {
+          "file": "art/characters/builds/adult-standard-v2-visible-r001/manifest.json",
+          "sha256": "20a9e57673ac7cb8d57ad1f4b3bde19fc831e8ae6b1eb1a417844091e080bd57",
+          "artifact_digest": "e29e3cd73fb189240d1de8cc3376edc136d822726122e281141975e9c1ef6d9d",
+          "frames": 108,
+          "status": "review-only"
+        },
+        "body-reference": {
+          "file": "art/characters/builds/adult-standard-v2-body-reference-r001/manifest.json",
+          "sha256": "5935890b45937100fafe141976639f350f365aed24cdf0881abd7c51eb25e090",
+          "artifact_digest": "74e6818875c1cb3e9a2879630cdd7fcb420043a0cc425e5b12e2b0a6b2eadfe7",
+          "frames": 108,
+          "status": "review-only"
+        }
+      },
+      "native_artifacts": [
+        {
+          "file": "/private/tmp/coastal-visible-atlas-body-r001/native-strict-body-world-r001/report.json",
+          "sha256": "e25b15c8f52fc4676fcb6dd7ac05617d2997397a34d0309ff2f77a0e4ef5883d"
+        },
+        {
+          "file": "/private/tmp/coastal-visible-atlas-body-r001/native-strict-body-world-r001/input-audit.json",
+          "sha256": "1272e8ddf75521a4ebccc677e08b6a9894bc3b10c4986a239a0c13aa4e70c65b"
+        },
+        {
+          "file": "/private/tmp/coastal-visible-atlas-body-r001/native-strict-body-world-r001/world-native-board.png",
+          "sha256": "b67efa0c8850f72df3ab396b609d6354d5b53ef894e031fc6fab2e39354e97f2"
+        },
+        {
+          "file": "/private/tmp/coastal-visible-atlas-body-r001/native-strict-body-farm-spatial-r001/report.json",
+          "sha256": "211948adc484045550a7f63165cfe7a6e08cd031729c8ca5d5523dc3c6af21d2"
+        },
+        {
+          "file": "/private/tmp/coastal-visible-atlas-body-r001/native-strict-body-spatial-detail-r001/report.json",
+          "sha256": "a003a08b7c0df8e0cfeda9cef8e5ffae344a3f777bd4899c0d5e3a8dddb78dd8"
+        },
+        {
+          "file": "/private/tmp/coastal-visible-atlas-body-r001/native-strict-body-world-r001/walk-west/walk-west-physics-replay.mp4",
+          "sha256": "65fa6ead7271820f654240c04924593327f8bd1a766d5574ab30c0b51222ecc9"
+        },
+        {
+          "file": "/private/tmp/coastal-visible-atlas-body-r001/native-strict-body-world-r001/run-west/run-west-physics-replay.mp4",
+          "sha256": "0e4b3f547029dda1263fe677b06195dc18eabdd065410e6988a4045e6baed54e"
+        },
+        {
+          "file": "/private/tmp/coastal-visible-atlas-body-r001/native-strict-body-world-r001/walk-north/walk-north-physics-replay.mp4",
+          "sha256": "edb3e6423d650fac9cdf4478aee9d3b695ff7474972cfb0f0db3882c0eda1ea4"
+        },
+        {
+          "file": "/private/tmp/coastal-visible-atlas-body-r001/native-strict-body-world-r001/run-north/run-north-physics-replay.mp4",
+          "sha256": "e21ca5c688e25c007c9e5f0a72943b4ecaf2f29123ddde6dd22c8690a4173154"
+        }
+      ],
+      "template_id": "adult-standard-v2",
+      "character_model_id": "unified-composable-character-v1",
+      "motion_set_id": "body-motion-v1"
+    }
+  },
+  "source_preparation_rebuild": [
+    "python3 tools/characters/pack_sources.py verify art/characters/parts/body/adult-v1/r001",
+    "python3 tools/characters/build.py verify art/characters/builds/adult-standard-v2-visible-r001",
+    "python3 tools/characters/build.py verify art/characters/builds/adult-standard-v2-body-reference-r001"
+  ],
+  "proven": {
+    "source_pose_material_points": 108,
+    "native_verified_points": 108,
+    "max_all_best_raster_offsets_within_one_pixel": true,
+    "visual_source_and_world_approved": true
+  },
+  "not_proven": [
+    "Physical support/flight/sliding trajectories",
+    "Mechanical palm/grip and legal ground-target contact",
+    "Complete low-FPS/pause/replay and world observer receipts",
+    "Dynamic clothing composition/production release"
+  ],
+  "options": {
+    "A": "Archive this exact reviewed, reproducible pixel body SOURCE only, allowing clothing A/B source experiments; explicitly defer strict physical contact to integration and keep all physical/release flags false. This revises the earlier archive prerequisite, it does not certify deferred tests.",
+    "B": "Keep the earlier strict-contact-before-archive gate; continue actual stance/grip/target annotations and dynamic measurement before closing body archive; no clothing A/B meanwhile."
+  },
+  "production_release": false
+}

@@ -68,14 +68,25 @@ class BoundContactEvidence:
         require(self.points['kind']=='coastal-independent-actual-farm-contact-source-review-v1' and isinstance(self.points['rows'],list),'Wrong material point report')
         self.outputs={row['file']:row for row in self.manifest['outputs']};require(len(self.outputs)==len(self.manifest['outputs']),'Duplicate manifest output')
         self.head=self._json({'file':self.manifest['recipe'],'sha256':self.manifest['inputs'][self.manifest['recipe']]})
-        self.base=self._json(self.head['base_recipe'])
-        require(self.head['kind']==self.base['kind']=='coastal-character-construction-v1' and self.head['schema_version']==2 and self.base['schema_version']==3,'Contact evidence requires registered head plus schema3 body')
+        if self.head.get('schema_version')==3:
+            self.base=self.head
+            self.reference_kind='schema3-body-only'
+            require(self.base.get('kind')=='coastal-character-construction-v1'
+                    and self.base.get('slots')=={'body':None},'Direct schema3 contact requires body-only slots')
+            require(all(len(f['layers'])==1 and f['layers'][0]['slot']=='body'
+                        for c in self.base['clips'] for f in c['frames']),
+                    'Direct body reference contains non-body layers')
+        else:
+            self.base=self._json(self.head['base_recipe'])
+            self.reference_kind='registered-head-composite'
+            require(self.head['kind']==self.base['kind']=='coastal-character-construction-v1' and self.head['schema_version']==2 and self.base['schema_version']==3,'Contact evidence requires registered head plus schema3 body')
         self.clips={};self.head_clips={}
         for clip in self.base['clips']:
             key=clip['action_id']+'-'+clip['direction'];require(key not in self.clips,'Duplicate body clip');self.clips[key]=clip
-        for clip in self.head['clips']:
-            key=clip['action_id']+'-'+clip['direction'];require(key not in self.head_clips,'Duplicate head clip');self.head_clips[key]=clip
-        require(set(self.clips)==set(self.head_clips),'Head/body clip scope differs')
+        if self.reference_kind=='registered-head-composite':
+            for clip in self.head['clips']:
+                key=clip['action_id']+'-'+clip['direction'];require(key not in self.head_clips,'Duplicate head clip');self.head_clips[key]=clip
+            require(set(self.clips)==set(self.head_clips),'Head/body clip scope differs')
 
     def _bind(self,path,expected):
         path=Path(path).absolute();require(not any(q.is_symlink() for q in [path,*path.parents]),'Contact evidence symlink forbidden')
@@ -98,7 +109,7 @@ class BoundContactEvidence:
         clip=self.clips[key];name=f'frames/{clip["action_id"]}/{clip["direction"]}/{pose}.png';entry=self.outputs[name]
         path=self._bind(safe_file(self.manifest_path.parent,name,'frames'),entry['sha256']);im=self._image(str(path))
         require(list(im.size)==entry['size'] and rgba_hash(im)==entry['rgba_sha256'],'Actual final PNG/RGBA differs')
-        pad=self.head_clips[key].get('output_padding_px',[0,0,0,0]);require(isinstance(pad,list) and len(pad)==4 and all(type(x) is int and x>=0 for x in pad),'Invalid whole-frame output padding')
+        pad=self.head_clips.get(key,{}).get('output_padding_px',[0,0,0,0]);require(isinstance(pad,list) and len(pad)==4 and all(type(x) is int and x>=0 for x in pad),'Invalid whole-frame output padding')
         require(list(im.size)==[clip['canvas_px'][0]+pad[0]+pad[2],clip['canvas_px'][1]+pad[1]+pad[3]],'Whole-frame output geometry differs')
         return im,pad,entry
 
@@ -130,7 +141,7 @@ class BoundContactEvidence:
                 value=list(canonical.getpixel(tuple(xy)));require(value==point['RGBA']==list(raw.getpixel(tuple(rawxy))) and value[3]>0,'Actual canonical/source point RGBA differs')
                 fp=[xy[0]+pad[0],xy[1]+pad[1]];actual=list(final.getpixel(tuple(fp)));box=[xy[0]-20,xy[1]-20,xy[0]+21,xy[1]+21]
                 item.update(canonical_px=xy,source_px=rawxy,RGBA=value,final_px=fp,final_RGBA=actual,fixed_source_roi_px=box,fixed_raw_roi_px=[rawxy[0]-20,rawxy[1]-20,rawxy[0]+21,rawxy[1]+21],fixed_final_roi_px=[box[0]+pad[0],box[1]+pad[1],box[2]+pad[0],box[3]+pad[1]],source_status='visible-unchanged' if value==actual else 'changed-unverified')
-                if value!=actual:
+                if value!=actual and self.reference_kind=='registered-head-composite':
                     hf=next(f for f in self.head_clips[key]['frames'] if f['pose_id']==pose);order=hf['layer_order'];after=order[order.index('base')+1:];cover=[]
                     for layer in hf['layers']:
                         if layer['id'] not in after:continue
@@ -143,6 +154,7 @@ class BoundContactEvidence:
 
     @contract_errors
     def shoe_surfaces(self,actions=('walk','run')):
+        require(self.reference_kind!='schema3-body-only','Body-only reference has no shoes coverage; use explicit visible material points')
         result=[]
         for key,clip in self.clips.items():
             if clip['action_id'] not in actions:continue
@@ -158,12 +170,19 @@ class BoundContactEvidence:
 
     def _native(self,evidence):
         evidence=Path(evidence).absolute();cp=safe_file(evidence,'input-contract.json');rp=safe_file(evidence,'report.json');self._bind(cp,digest(cp));self._bind(rp,digest(rp));contract=read_json(cp);report=read_json(rp)
-        require(contract['kind']=='coastal-all-actions-native-input-v1' and contract['schema_version']==1 and contract['contract_digest']==hashlib.sha256(stable({k:v for k,v in contract.items() if k!='contract_digest'})).hexdigest(),'Native input contract differs')
+        body_native=contract['kind']=='coastal-body-source-native-input-v1'
+        require(contract['kind'] in ['coastal-all-actions-native-input-v1','coastal-body-source-native-input-v1'] and contract['schema_version']==1 and contract['contract_digest']==hashlib.sha256(stable({k:v for k,v in contract.items() if k!='contract_digest'})).hexdigest(),'Native input contract differs')
+        require(body_native==(contract['observer']=='source-poses'),'Body source observer requires its own typed input contract')
+        if body_native:
+            require(self.reference_kind=='schema3-body-only' and contract['observer']=='source-poses'
+                    and contract['source_points']=={'file':self.points_path.relative_to(self.repo).as_posix(),'sha256':digest(self.points_path)},
+                    'Body native source points/reference differ')
         require(contract['manifest']=={'manifest':self.manifest_path.relative_to(self.repo).as_posix(),'sha256':digest(self.manifest_path)} and contract['artifact_digest']==self.manifest['artifact_digest'],'Native observes another actual manifest/artifact')
         require(report['input_contract_sha256']==digest(cp) and isinstance(report['renderer'],str) and report['renderer'] not in ['','headless'] and report['checks'] and all(type(v) is bool and v for v in report['checks'].values()),'Native raw input/renderer/checks differ')
-        require((contract['observer'],report['kind']) in [('world','coastal-registered-actions-world-observation-v1'),('poses','coastal-registered-native-observation-v1')],'Unsupported native screenshot convention')
+        require((contract['observer'],report['kind']) in [('world','coastal-registered-actions-world-observation-v1'),('poses','coastal-registered-native-observation-v1'),('source-poses','coastal-body-source-native-observation-v1')],'Unsupported native screenshot convention')
         for name,expected in contract['files'].items():self._bind(safe_file(self.repo,name),expected)
         expected_files={'art/characters/'+k:v for k,v in self.manifest['inputs'].items()};expected_files.update({self.manifest_path.relative_to(self.repo).as_posix():digest(self.manifest_path)});expected_files.update({(self.manifest_path.parent/o['file']).relative_to(self.repo).as_posix():o['sha256'] for o in self.manifest['outputs']})
+        if body_native:expected_files[self.points_path.relative_to(self.repo).as_posix()]=digest(self.points_path)
         require(all(contract['files'].get(k)==v for k,v in expected_files.items()),'Native snapshot omits frozen package inputs/outputs')
         hashes=report['output_hashes'];require(set(hashes)=={p.relative_to(evidence).as_posix() for p in evidence.rglob('*.png')},'Native PNG inventory differs')
         for name,expected in hashes.items():self._bind(safe_file(evidence,name),expected)
@@ -174,6 +193,7 @@ class BoundContactEvidence:
         points=self.static_points();surfaces=points+(self.shoe_surfaces() if include_shoes else []);evidence,contract,report=self._native(evidence);by_pose={};required={s['identity'] for s in surfaces};observed=set();measurements=[];seen_captures=set()
         for s in surfaces:by_pose.setdefault((s['clip'],s['pose_id']),[]).append(s)
         for sample in report['samples']:
+            if contract['observer']=='source-poses':require(sample.get('mode')=='source-pose','Body material observer is not a motion/contact observation')
             if contract['observer']=='poses' and sample['mode'] not in ['world-continuous','world-idle']:continue
             if not sample.get('capture'):continue
             capture=sample['capture'];require(capture in report['output_hashes'] and capture not in seen_captures,'Missing/duplicate actual native capture');seen_captures.add(capture)
@@ -211,7 +231,7 @@ class BoundContactEvidence:
                 for d in ['south','west','east','north']:
                     key=a+'-'+d
                     if key not in self.clips or len(self.clips[key]['frames'])!=4:shoe_gaps.append(key+' requires4 actual poses')
-        return {'kind':'coastal-bounded-contact-raster-correspondence-v1','schema_version':1,'status':'internal-raster-observation-only','manifest':{'file':self.manifest_path.relative_to(self.repo).as_posix(),'sha256':digest(self.manifest_path)},'artifact_digest':self.manifest['artifact_digest'],'source_points_sha256':digest(self.points_path),'native_input_contract_sha256':digest(evidence/'input-contract.json'),'native_report_sha256':digest(evidence/'report.json'),'tool_sha256':digest(__file__),'native_raster_sha256':digest(Path(__file__).with_name('native_raster.py')),'fixed_point_roi_size_px':[41,41],'precision_contract':'All equally best raster offsets must be<=1px and RGB error<=native_raster alpha-blend bound; no unique-best requirement. Nonlocal ambiguity/low samples/missing fields remain unverified.','measurements':measurements,'required_points':len(points),'shoe_pose_count':sum('mask' in s for s in surfaces),'missing_points':missing,'shoe_scope_gaps':shoe_gaps,'raster_matrix_complete':bool(required) and not missing and not bad and not shoe_gaps,'verified_measurements':sum(r['status']=='within-one-pixel' for r in measurements),'unverified_or_mismatched_measurements':len(bad),'bound_files':dict(sorted(self.used.items())),'physical_contact_acceptance':False,'support_flight_slide_acceptance':False,'soil_or_target_acceptance':False,'art_acceptance':False,'user_approval':False,'release_eligible':False,'scope':'Actual source material and near-opaque raster correspondence only. Does not replace strict build or full raw observer validation; no physical support/flight/sliding/soil/target/art/user proof.'}
+        return {'kind':'coastal-bounded-contact-raster-correspondence-v1','schema_version':1,'status':'internal-raster-observation-only','reference_kind':self.reference_kind,'raster_scope':'Only the explicitly selected source points/surfaces; not whole bare-foot coverage or physical contact.','manifest':{'file':self.manifest_path.relative_to(self.repo).as_posix(),'sha256':digest(self.manifest_path)},'artifact_digest':self.manifest['artifact_digest'],'source_points_sha256':digest(self.points_path),'native_input_contract_sha256':digest(evidence/'input-contract.json'),'native_report_sha256':digest(evidence/'report.json'),'tool_sha256':digest(__file__),'native_raster_sha256':digest(Path(__file__).with_name('native_raster.py')),'fixed_point_roi_size_px':[41,41],'precision_contract':'All equally best raster offsets must be<=1px and RGB error<=native_raster alpha-blend bound; no unique-best requirement. Nonlocal ambiguity/low samples/missing fields remain unverified.','measurements':measurements,'required_points':len(points),'shoe_pose_count':sum('mask' in s for s in surfaces),'missing_points':missing,'shoe_scope_gaps':shoe_gaps,'raster_matrix_complete':bool(required) and not missing and not bad and not shoe_gaps,'verified_measurements':sum(r['status']=='within-one-pixel' for r in measurements),'unverified_or_mismatched_measurements':len(bad),'bound_files':dict(sorted(self.used.items())),'physical_contact_acceptance':False,'support_flight_slide_acceptance':False,'soil_or_target_acceptance':False,'art_acceptance':False,'user_approval':False,'release_eligible':False,'scope':'Actual source material and near-opaque raster correspondence only. Does not replace strict build or full raw observer validation; no physical support/flight/sliding/soil/target/art/user proof.'}
 
     def verify_unchanged(self):
         for name,expected in self.used.items():require(digest(name)==expected,'Contact evidence changed during measurement: '+name)

@@ -109,7 +109,7 @@ class RegisteredAdaptations:
         require(isinstance(recipe['adaptations'], dict) and set(recipe['adaptations']) == set(designs),
                 'Missing or unknown slot adaptation')
         for slot, design in designs.items():
-            namespace = f"parts/{design['design_id']}/adaptations/{template_id}/{self.motion_id}"
+            namespace = f"parts/{slot}/{design['design_id']}/{template_id}/{self.motion_id}"
             data = record(recipe['adaptations'][slot], namespace)
             keys(data, 'kind schema_version design_id design_revision template_id motion_set_id views mappings', 'adaptation')
             require(data['kind'] == 'coastal-registered-adaptations-v1' and type(data['schema_version']) is int
@@ -560,10 +560,10 @@ def validate(repo, recipe_path):
         if schema3:
             require(isinstance(design.get('revision'), str), 'Part definition revision missing')
             revision = identifier(design['revision'])
-            require(ref['file'] == f'parts/{design_id}/revisions/{revision}/design.json', 'Part revision identity/path mismatch')
+            require(ref['file'] == f'parts/{slot}/{design_id}/revisions/{revision}/design.json', 'Part revision identity/path mismatch')
             designs[slot] = design
         else:
-            require(ref['file'] == f'parts/{design_id}/design.json', 'Part identity/path mismatch')
+            require(ref['file'] == f'parts/{slot}/{design_id}/design.json', 'Part identity/path mismatch')
     adaptations = RegisteredAdaptations(library, recipe, reference, record, template_id, motion, designs) if schema3 else None
 
     required = recipe['required_capabilities']
@@ -659,7 +659,7 @@ def validate(repo, recipe_path):
                     namespace = f'templates/{template_id}/motions/{motion_id}/body-views'
                 else:
                     require(layer['interface_scope'] == 'registered-component', 'Unsupported component interface')
-                    namespace = adaptations.component(layer, clip, frame) if schema3 else str(PurePosixPath(slots[slot]['file']).parent) + f'/adaptations/{template_id}/{motion_id}'
+                    namespace = adaptations.component(layer, clip, frame) if schema3 else str(PurePosixPath(slots[slot]['file']).parent) + f'/{template_id}/{motion_id}'
                     for mask in (() if schema3 else ('ownership', 'coverage', 'occlusion')):
                         require(isinstance(layer[mask], dict), 'Missing component mask: ' + mask)
                         # Ownership may use original source coordinates; coverage and

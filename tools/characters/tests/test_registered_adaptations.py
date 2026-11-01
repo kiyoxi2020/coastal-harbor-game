@@ -27,7 +27,7 @@ class RegisteredAdaptationTests(unittest.TestCase):
         self.write = self.base.write
         self.recipe = self.base.recipe
         self.recipe['schema_version'] = 3
-        self.namespace = 'parts/top/adaptations/test/motion/r002'
+        self.namespace = 'parts/top/top/test/motion/r002'
         self.annotation_path = 'templates/test/motions/motion/annotations/r002/poses.json'
         source_image = Image.new('RGBA', (2, 2), (11, 12, 13, 0))
         source_image.putpixel((0, 0), (200, 30, 40, 128))
@@ -40,7 +40,7 @@ class RegisteredAdaptationTests(unittest.TestCase):
         ownership = Image.new('L', (2, 2), 0)
         ownership.putpixel((0, 0), 255); ownership.putpixel((1, 1), 255)
         self.ownership = self.write(self.namespace + '/ownership.png', ownership)
-        definition = self.write('parts/top/revisions/r002/design.json', {
+        definition = self.write('parts/top/top/revisions/r002/design.json', {
             'design_id': 'top', 'category': 'top', 'revision': 'r002'})
         self.recipe['slots']['top'] = definition
         self.recipe['authoring_inputs'] = [self.source]
@@ -421,11 +421,26 @@ class RegisteredAdaptationTests(unittest.TestCase):
         self.rejected('exceeds.*surface')
 
     def test_versioned_definition_does_not_move_texture_namespace(self):
-        ref = self.write('parts/top/revisions/r002/adaptations/test/motion/wrong.png',
+        ref = self.write('parts/top/top/revisions/r002/test/motion/wrong.png',
                          Image.new('RGBA', (2, 2)))
         self.first_layer()['texture'] = ref
         self.adaptation['mappings'][0]['texture'] = ref
         self.rejected('namespace')
+
+    def test_adaptation_path_binds_category_design_template_and_motion(self):
+        for path in [
+            'parts/pants/top/test/motion/r002/views.json',
+            'parts/top/another/test/motion/r002/views.json',
+            'parts/top/top/another/motion/r002/views.json',
+            'parts/top/top/test/another/r002/views.json',
+            'parts/top/top/adaptations/test/motion/r002/views.json',
+        ]:
+            with self.subTest(path=path):
+                self.refresh()
+                self.recipe['adaptations']['top'] = self.write(path, self.adaptation)
+                self.save()
+                with self.assertRaisesRegex(ValueError, 'namespace'):
+                    validate(self.repo, self.path)
 
     def test_occlusion_cannot_erase_where_declared_foreground_has_no_pixels(self):
         frame = self.recipe['clips'][0]['frames'][0]
@@ -726,9 +741,9 @@ class RegisteredAdaptationTests(unittest.TestCase):
             support = alpha.point(lambda v: 255 if v >= 128 else 0)
             visible = ImageChops.lighter(visible, support) if layer['id'] == 'shirt_torso' or 'sleeve' in layer['id'] else ImageChops.subtract(visible, support)
         self.assertEqual(visible.histogram()[255], 30655)
-        namespace = 'parts/top03/adaptations/adult-standard-v1/review-motion-v1/source-test'
+        namespace = 'parts/top/top03/adult-standard-v1/review-motion-v1/source-test'
         owner = self.write(namespace + '/visible-surface-probe.png', visible)
-        review = contract.read_json(real / 'evidence/all-actions-v1/south-walk0-source-review.json')
+        review = contract.read_json(Path(__file__).parent / 'fixtures/south-walk0-selection.json')
         polygon = review['source_selection_candidate']['polygon_target_units']
         selection_mask = Image.new('L', tuple(size)); ImageDraw.Draw(selection_mask).polygon([tuple(p) for p in polygon], fill=255)
         selection_ref = self.write(namespace + '/collar-source-selection-probe.png', selection_mask)
@@ -1061,7 +1076,7 @@ class RegisteredAdaptationTests(unittest.TestCase):
         real = TOOLS.parents[1]/'art/characters'
         raw_path = 'sources/motion-headwear-sampling-v1-9f06fab9/originals/headwear-sheet-attempt1-b71b3574.png'
         bundle_path = 'sources/motion-headwear-sampling-v1-9f06fab9/source.json'
-        views = contract.read_json(real/'parts/hat-straw-navy-band-v1/adaptations/adult-standard-v1/review-motion-v1/r001/views.json')
+        views = contract.read_json(real/'parts/hat/hat-straw-navy-band-v1/adult-standard-v1/review-motion-v1/r001/views.json')
         old = next(v['view'] for v in views['views'] if v['pose_id'] == 'water_south_B_ready')
         poses_path = 'templates/adult-standard-v1/motions/review-motion-v1/actions/water/r001/south/poses.json'
         action_path = 'templates/adult-standard-v1/motions/review-motion-v1/actions/water/r001/action.json'
@@ -1089,7 +1104,7 @@ class RegisteredAdaptationTests(unittest.TestCase):
         with Image.open(real/old['source_ownership']) as owner:
             atlas_owner.paste(owner, tuple(crop[:2]))
         canonical_owner = Image.new('L', tuple(variant['canvas_px'])); canonical_owner.paste(atlas_owner, tuple(delta))
-        namespace = 'parts/hat-straw-navy-band-v1/adaptations/adult-standard-v1/review-motion-v1/atlas-test'
+        namespace = 'parts/hat/hat-straw-navy-band-v1/adult-standard-v1/review-motion-v1/atlas-test'
         atlas_mask = self.write(namespace+'/atlas-owner-probe.png', atlas_owner)
         canonical_mask = self.write(namespace+'/canonical-owner-probe.png', canonical_owner)
         annotation_path = 'templates/adult-standard-v1/motions/review-motion-v1/annotations/atlas-test/poses.json'
@@ -1167,8 +1182,23 @@ class RegisteredAdaptationTests(unittest.TestCase):
 
     def hair_compatibility_fixture(self):
         # This generic two-pixel design ID is opaque; its category is hair.
-        design = self.recipe['slots'].pop('top')
-        self.recipe['slots']['hair'] = self.write(design['file'], {'design_id': 'top', 'category': 'hair', 'revision': 'r002'})
+        old_root, new_root = 'parts/top/top/', 'parts/hair/top/'
+        (self.lib / new_root).parent.mkdir(parents=True, exist_ok=True)
+        shutil.move(self.lib / old_root, self.lib / new_root)
+        def recategorize(value):
+            if isinstance(value, str): return value.replace(old_root, new_root)
+            if isinstance(value, dict): return {k: recategorize(v) for k, v in value.items()}
+            if isinstance(value, list): return [recategorize(v) for v in value]
+            return value
+        self.recipe = recategorize(self.recipe)
+        self.adaptation = recategorize(self.adaptation)
+        self.annotations = recategorize(self.annotations)
+        self.namespace = self.namespace.replace(old_root, new_root)
+        self.annotation = self.write(self.annotation_path, self.annotations)
+        for view in self.adaptation['views']: view['source_pose']['document'] = self.annotation
+        for mapping in self.adaptation['mappings']: mapping['target_pose']['document'] = self.annotation
+        self.recipe['slots'].pop('top')
+        self.recipe['slots']['hair'] = self.write('parts/hair/top/revisions/r002/design.json', {'design_id': 'top', 'category': 'hair', 'revision': 'r002'})
         for clip in self.recipe['clips']:
             for frame in clip['frames']: frame['layers'][1]['slot'] = 'hair'
         ref = self.write(self.namespace + '/compatibility/source-fit.json', {
@@ -1191,7 +1221,7 @@ class RegisteredAdaptationTests(unittest.TestCase):
 
     def test_hair_compatibility_reference_has_its_own_adaptation_namespace_and_shape(self):
         self.hair_compatibility_fixture()
-        wrong = self.write('parts/other/adaptations/test/motion/r002/compatibility/fit.json', {'probe': True})
+        wrong = self.write('parts/hair/other/test/motion/r002/compatibility/fit.json', {'probe': True})
         self.adaptation['views'][0]['compatibility'] = wrong
         self.recipe['adaptations']['hair'] = self.write(self.namespace+'/views.json', self.adaptation); self.save()
         with self.assertRaisesRegex(ValueError, 'namespace'):

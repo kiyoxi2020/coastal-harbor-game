@@ -30,7 +30,7 @@ class StaticImportTests(unittest.TestCase):
         for identity, old in [('body02', 'old/body.png'), ('pants08', 'old/pants08/rejected/skirt-waist/source.png'), ('top02', 'old/style02.png'), ('top03', 'old/style03.png')]:
             candidates.append({'id': identity, 'design_id': identity, 'status': 'candidate', 'source': old, 'compatibility': {'body_ids': [identity if identity.startswith('body') else 'body01'], 'pose': 'standing_0'}, 'hashes': {old: sha(self.payloads[old])}})
         self.payloads['old/catalog.json'] = json.dumps({'categories': {'body': candidates[:1], 'pants': candidates[1:2], 'top': candidates[2:]}}).encode()
-        destinations = ['templates/body02-candidate-v1/revisions/static-candidate-v1/body-atlas.png', 'sources/static-pants08-waist-reference-v1/source.png', 'parts/top02/static/source.png', 'parts/top03/static/source.png', 'reviews/static-candidates/catalog.json']
+        destinations = ['templates/body02-candidate-v1/revisions/static-candidate-v1/body-atlas.png', 'sources/static-pants08-waist-reference-v1/source.png', 'parts/top/top02/static/source.png', 'parts/top/top03/static/source.png', 'reviews/static-candidates/catalog.json']
         self.inventory = {'schema_version': 1, 'selected_template': {'active_revision': {'id': 'directional-brows-v3'}}, 'candidates': candidates, 'files': []}
         for (old, data), dest in zip(self.payloads.items(), destinations):
             p = self.repo / old
@@ -96,7 +96,7 @@ class StaticImportTests(unittest.TestCase):
 
     def test_manifest_bare_filenames_resolve_in_their_declared_scope(self):
         additions = {
-            'old/proof/parts/pants.png': (b'transparent part', 'parts/pants01/static/pants.png'),
+            'old/proof/parts/pants.png': (b'transparent part', 'parts/pants/pants01/static/pants.png'),
             'old/proof/proof/pants.png': (b'clothed preview', 'builds/static-proof/pants.png'),
         }
         manifest = {'parts': {'pants.png': sha(b'transparent part')}, 'frames': {'pants.png': sha(b'clothed preview')}}
@@ -111,7 +111,7 @@ class StaticImportTests(unittest.TestCase):
         self.inventory_path.write_text(json.dumps(self.inventory))
         self.run_import()
         migrated = json.loads((self.dest / 'builds/static-proof/manifest.json').read_text())
-        self.assertEqual(migrated['parts'], {'parts/pants01/static/pants.png': sha(b'transparent part')})
+        self.assertEqual(migrated['parts'], {'parts/pants/pants01/static/pants.png': sha(b'transparent part')})
         self.assertEqual(migrated['frames'], {'builds/static-proof/pants.png': sha(b'clothed preview')})
 
     def test_missing_candidate_source_cannot_become_history(self):

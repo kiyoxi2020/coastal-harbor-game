@@ -1,3 +1,237 @@
+## 2026-11-01 身体源归档提交检查点；上衣A/B单帧仍待验收
+
+身体源归档入口为 `art/characters/parts/body/adult-v1/archive-r001.json`，本次提交前重读其586个绑定文件SHA全部一致。提交包含此前人物目录整理及引用迁移、身体源图/提示词、图集、严格构建与必要验证工具；生产依赖基线保持不变。
+
+上衣实验已完成四次GPT生成，原图、实际提示词、父图SHA和耗时保存于 `art/characters/sources/visible-atlas-pilot/`。A初稿混入灰色底衣，r002修订待原坐标原生alpha-over检查；B穿戴稿足部上移32源像素，提取稿又改变位置/大小，尚不合格。没有挪缩部件修补，也没有认可服装兼容。Progress T01完成、T02 Review、T03/T04等待；下一步仅继续单姿态原生比较，通过后再试西向六帧。身体源归档完成范围不受此实验未完成影响，严格物理/动态换装/生产门禁仍未通过。
+
+提交前验证：398项人物测试通过（259.755s）；全库check通过55严格配方、49严格构建、9冻结旧配方；暂存差异格式检查通过。586个归档依赖的暂存内容与归档SHA一致，A/B共14条原图/提示词/父图引用SHA一致。未新增原生衣物视觉验收，未推送。
+
+## 2026-11-01 Q21=A身体源归档完成，进入同姿态上衣A/B源实验
+
+用户Q21=A已记录，明确将已认可/可重建的像素身体 SOURCE归档，严格物理接触移至后续游戏/穿戴集成独立验证，仍未通过。当前入口art/characters/parts/body/adult-v1/archive-r001.json，archive_digest=5308f449069bf84063bb0e728b7f898857b44e96d43dcd8e7076072bda91a181。24动作方向/108身体姿态＋56带工具姿态、9图集/共享layout、两严格build及来源/工具共586文件重读SHA一致；pack_sources.verify、两build.verify再次通过。上层身体SOURCE归档complete=true，但下层不可变源图准备manifest的complete_body_archive=false保持原义；所有physical/support/slide/target/dynamic_wardrobe/runtime/release字段仍false，生产/基线不改。沿用刚完成398测试、check55严格配方/49构建/9冻结legacy，本轮未改像素或代码不重复跑。
+
+旧Progress四步骤run已Finished（按Q21身体源范围），新run“透明上衣A/B制作方式验证”按既定计划开始，T01 done、T02 Build。固定同一归档高分辨率1024×1536西walk pose1 suit_walk_west_1，root(512,1416)、整帧23/194登记到256×224/root(123,201)，与同一top03海军条纹套头衫参考。input-inventory.json与实际生成记录在sources/visible-atlas-pilot；不重画/替换母版，不从参考图借旧脸/手/裤子。该passing姿态用于领肩、袖口、手臂/衣身边界，不夸称极端胸前交叉。
+
+top03三分袖会露出Q4灰色底衣的下臂，已作为明确覆盖限制记录；不得脚本擦灰底或凭空露肤。A直接生成可见透明上衣；B编辑同一身体穿同款衫，再imagegen提取上衣；均须完整1024×1536原坐标并alpha-over原身体检查，不能挪缩部件救错位或用像素相减。先判断质量再比较生成/修整成本，通过单帧后才试西向6帧。当前A/穿戴B首轮生成中，未认可任何衣物兼容/生产范围。
+
+## 2026-11-01 body-only材质点108/108原生对应通过，Q21待归档范围决定
+
+contact_evidence最小支持严格schema3仅body槽，不伪造head或留边，鞋检查对无鞋身体显式拒绝；旧头部/衣装逻辑保留，反例阻止旧合同冒充新body观察器。新增通用body_native.py snapshot/verify-inputs与capture_body_raster.gd、body_raster_fixture.gd：复用原场景/初始化，静态摆pose且不实现人物/动画时钟，捕获前冻结760实际来源/构建/脚本/场景与108pose计划；改源点/脚本或删计划/依赖重算摘要均拒绝。源点模板material-points/r001.json记录实际RGBA与prepared整格裁取坐标，颜色仅辅助定位下缘皮肤材质，不赋予左右脚/支撑/ownership或隐藏接触语义。
+
+当前/private/tmp/coastal-body-material-raster-r002实际GPU108pose的108个所选点，固定41×41ROI，108/108通过/0未验证或不匹配，所有最优偏移最大0px、RGB在原界内；未改源点/ROI/≤1px阈值或美术。初轮之后补合同类型反例重采r002，当前输入/回执绑定最终代码。已目视走路/北浇实际采样图。source.json body_material_raster_revision与docs/reviews/2026-11-01-body-material-raster-review.md记录摘要；此raster_matrix_complete只对应所选点，physical/support/slide/target/user/release仍false。先前Q20世界视觉认可不变。
+
+回归：398人物测试通过（240.177s）；check55严格配方/49构建/9冻结legacy通过，构建/生产/基线未改。Q21为归档边界决策：A明确将本批已认可/可重建的身体源归档，允许衣物A/B素材实验，精确物理接触移至集成独立验证且不写通过；B保持既定严格接触前置并继续真实支撑窗/握点/地面目标量测。方案及逐制品绑定在docs/reviews/2026-11-01-body-archive-scope-proposal.md/JSON。原设计“存在未通过项时保持本阶段未完成”不能自行绕开，回答前完整归档和衣物仍关闭。Progress Q21 Work around、T04 Review。
+
+## 2026-11-01 Q20=A，实际世界中的人物效果获认可
+
+用户Q20=A已记录Progress，绑定adult-standard-v2当前两份严格构建manifest/artifact、216实际输出帧及本轮原生世界截图/录像/报告SHA。范围为真实移动、工具动作和已展示树/柜台场景的视觉效果，完整分范围记录见source.json的strict_body_world_revision.visual_acceptance及visual_acceptances.Q20；不扩大为精确支撑/滑步、握点/地面目标、低FPS/暂停/重播、换装、最终归档或生产认可。
+
+本轮只记认可与进度，重读两构建所有输出及已绑定原生制品SHA通过；未改美术、姿态、时序、代码或构建。沿用上一轮389测试、check55配方/49构建/9冻结legacy及实际世界观察，不重复运行。T04仍未done，下一步为body-only/赤脚源材质量测支持与真实接触标注/原生验证，并把临时观察fixture收敛到通用可复现入口，完成后才可最终身体归档。衣物A/B与生产切换仍未启动。
+
+## 2026-11-01 身体候选严格登记及实际世界观察完成，Q20待视觉反馈
+
+保持Q19像素不变，候选后继adult-standard-v2/body-motion-v1仍属unified-composable-character-v1；不可变prepared来源与164完整格精确提取映射已保存。两份新coastal-character-construction-v1/schema3配方adult-standard-v2-visible、adult-standard-v2-body-reference经原build.py build/verify，各108帧、review-only。未改旧模板/生产/catalog/runtime-baseline或构建器代码；实际frame RGBA对Q19源格复核全部相等。
+
+用当前严格输出PNG创建GPU纹理并校验SHA/RGBA，继承现有walk_trial控制/物理/动作时钟（临时fixture仅初始化/数据供给）。实际世界8段走跑各>10周期/全6pose/松键idle、5控制切换正常；12农事各10次共120实例全阶段、动作中锁移动/方向及结束idle/尺度/根点恢复通过。港口绕树/柜台8路点、门3状态及树/柜台前后含工具截图完成，已目视实际截图与总览，日志无ERROR/WARNING。初轮PNG同步保存漏采触地帧已用内存暂存/动作组结束写盘纠正，当前严格输出全部阶段观察完整。录像为真实快照按physics-frame间隔回放，观察是physics+draw快照而非全tick账本；760输入/资源/脚本审计发生在观察完成时，不冒充正式suite捕获前冻结或完整原生回执。细节见docs/reviews/2026-11-01-body-native-world-review.md，source.json strict_body_world_revision绑定源/build/观察摘要，当前证据native-strict-body-world-r001、native-strict-body-farm-spatial-r001、native-strict-body-spatial-detail-r001。
+
+389人物测试通过（271.024s）；check55严格配方/49构建/9冻结legacy通过。Q20仅问世界显示视觉，Work around、T04 Review。下一：现有接触工具需最小支持schema3 body-only/赤脚材质，冻结实际关节/支撑窗/握点及地面可观测范围，再做精确raster/接触/滑步、低FPS/暂停/重播量测；北向遮挡接触不造坐标。临时fixture需收敛到通用可复现观察入口后才能最终归档。complete_body_archive仍false，衣物A/B与生产未启动；不能从严格构建或本轮运行观察推断这些未通过项。
+
+## 2026-11-01 Q19=A，打包后全套身体外观获认可
+
+用户Q19=A已记录Progress，绑定parts/body/adult-v1/r001九张实际PNG、共享layout/manifest、不可变packing计划、工具/Pillow身份、artifact_digest和native-packed-r002证据SHA。认可范围为打包后四向六动作的整体外观、人物比例和原生显示尺寸；不外推世界移动支撑/滑步、工具握持/落点、空间遮挡/动作切换、衣物覆盖、最终完整归档或生产。完整分范围绑定见source.json的packed_source_revision.visual_acceptance及visual_acceptances.Q19。
+
+T03身体制作与打包视觉阶段完成，下一T04为严格动态与身体归档。当前complete_body_archive仍false、派生包仍review-only；衣物A/B及生产/基线切换未启动。本轮只记录用户认可与进度，重读包manifest和全部输出SHA通过，未改美术/布局/时序/代码；沿用上一轮389测试、53严格配方/47构建/9冻结legacy及原生结果，不重复运行。
+
+## 2026-11-01 Q18=A切分打包完成，Q19待全套派生图集视觉认可
+
+用户Q18=A授权已记录并执行，完整源图和生成alpha保留。新增通用源图预处理tools/characters/pack_sources.py及10项先失败后通过的反例/真实RGBA测试；仅裁完整源格、一次整帧nearest仿射登记、直接RGBA复制排版，不alpha-over叠乘、不画人物部件、不处理mask/alpha、不另建人物合成器或播放器。既有build.py/build_contract.py/composition_contract.py和runtime-baseline未改，原严格人物构建入口/engine及47旧构建保持不变。源图准备的类型/manifest不能冒充coastal-character-construction-v1，后续人物配方仍走原build/verify。
+
+不可变输入计划sources/visible-atlas-body-r001/packing/r001.json绑定164帧实际源/提示词/作者参考SHA、源格、整帧有理数倍率、根点/时序。实际输出parts/body/adult-v1/r001：六身体108pose＋三完整农事工具56pose共9PNG；共享layout.json与manifest同目录，不另复制第二份layout。统一256×224/root(123,201)，方向行north/west/south/east，保留原预览尺度；PNG目录约3.8MiB，全部RGBA解码35.875MiB。pack_sources verify已重建全部实际RGBA逐像素通过，源SHA、边界和原图不变；manifest恒review-only/complete_body_archive=false。代码/命令及边界见tools/characters/README.md和parts/body/adult-v1/README.md。
+
+实际派生图集经共享motion-review面板原生检查9组36clips/164pose，全姿态明暗停帧覆盖、源时钟保持、走跑各10原地循环（.75，320ms源周期）、农事各2循环；未以此冒充世界移动/严格接触。native-packed-r001最初背景只改窗口清底，未作为明暗结论，r002改实际面板底色后重新完整采集。当前证据/private/tmp/coastal-visible-atlas-body-r001/native-packed-r002；总览及走路原生源/派生对照已目视检查，日志无ERROR/WARNING，5连续录像与报告轻量SHA绑定source.json的packed_source_revision。389人物测试通过（302.807s）；全库check通过53严格配方/47构建/9冻结legacy。
+
+Progress Q19仅问打包后的全套原生尺寸/比例/整体视觉，Work around、T03 Review。T04严格移动支撑/滑步、工具握持/落点、动作切换与世界空间遮挡、最终完整归档未通过；complete_body_archive仍false，衣物A/B与生产切换未启动。源图准备成功不继承旧人物原生/世界或用户认可。下一步等Q19后按真实派生纹理完成对应动态门禁；不刷新冻结基线。
+
+## 2026-11-01 Q17后南北锄地身体参考同步完成，归档处理待Q18授权
+
+继续既定身体阶段：以Q17认可的南北带锄r003为唯一同姿态编辑输入，GPT移除工具生成hoe-south/north-male-six-sheet-r003，保留灰色长袖长裤连体衣、握拳/前臂与六帧姿态；完整PNG/实际提示词/父图SHA及旧身体clips保留source.json的hoe_body_sync_after_q17。当前body_clips南北hoe选择新r003，已认可带工具clips未改，Q17配置哈希完全一致。12poseID、源格、800ms时序对应，身体整帧足部root独立实测登记；新旧根点差记录，不能把去工具生成当像素完全相同的可分离图层。衣物覆盖与严格支撑/握持接触仍未通过。
+
+共享原生四栏身体/带工具对照6停帧/180draw覆盖全姿态，800ms周期与实际SHA核对，日志无ERROR/WARNING；已目视12姿态，无可见工具碎片、无新添北向背面手。证据/private/tmp/coastal-visible-atlas-body-r001/native-hoe-body-sync-r001，轻量SHA已持久记录。379人物测试通过（260.748s）；全库check通过53严格配方/47构建/9冻结legacy。
+
+24身体clips/108pose＋56完整农事可见帧共164引用完成只读尺寸/源SHA/区域及alpha边界预检。归档打包方案docs/reviews/2026-11-01-body-atlas-pack-proposal.md及同名JSON列每帧输入/变换，拟统一256×224格、root(123,201)，方向行north/west/south/east，保留当前预览整帧尺度、原图和alpha，6身体＋3可见动作图集约35.875MiB解码RGBA。尚未脚本处理图片或生成这些图集，源密度候选/严格动态/最终视觉和归档仍需后验。
+
+既定实施计划明确脚本处理图片需用户明确允许，旧Q5撤回不算授权；Progress Q18附具体方案请求切分/整帧nearest登记/打包许可，Work around。此刻T03 Review、T04未完成，未开始A/B、未切生产/基线。待Q18后按现有tools/characters合同实现必要派生输出和验证，不另建批次合成器/播放器，不把打包成功当归档成品。
+
+## 2026-11-01 Q17=A，南北向锄头位置修订获认可
+
+用户Q17=A已记录Progress，绑定hoe_forward_revision当前south/north带工具r003实际PNG、提示词/输入SHA、6帧区域、根登记、固定.28密度、800ms时序及原生证据摘要。认可范围为南北锄头位置、握持外观和六帧动作视觉；不外推严格世界接触、改握持后的无工具身体/换装接口兼容、统一归档或生产发布。完整绑定见source.json的hoe_forward_revision.visual_acceptance及visual_acceptances.Q17。
+
+本轮只记录认可与状态，未改美术/动作配置或代码；复核实际源/提示词/输入SHA通过，沿用上一轮379测试、53配方/47构建/9冻结legacy检查及原生180draw结果，不重复运行。下一既定工作是同步修订握持对应的身体参考并重验接口，再完成身体统一布局、严格动态验收与归档；T03/T04仍未完成，衣物A/B未启动。
+
+## 2026-11-01 南北锄头前向投影修订完成，Q17待视觉反馈
+
+用户要求优化南北锄头过于偏左。根因是旧南向提示词frontleft、北向强制刃留左侧轮廓外。新source采用hoe-south/north-with-tool-r003，实际提示词、完整PNG、父图r002/r001 SHA与旧clips保留source.json的hoe_forward_revision。r002首轮南向第4帧过早触地、北向仍偏左，r003再修早期下挥与前向短投影。南向低位锄刃靠近脚前中央，北向缩短横向伸出并允许身体自然遮挡；不冒充全锄刃可见或严格落地接触。第5帧可见金属ROI包围框相对脚部root的横偏诊断由南-78到-6原生像素、北-77.6到-27.7，仅粗略可见投影，非物理接触测量；不以提示词目标50源像素冒充实际达到。
+
+保持6帧/180、110、110、70、70、260ms共800ms，固定整帧.28密度；实测脚部占地登记，不以道具外框定位。新握持/前臂可能改变，同姿态身体接口不能继承旧Q12/Q13认可，body_clips原身体源保留为历史比例参考；新源通过视觉后仍须处理身体参考/接口重验。所有身体参考、东西锄、浇水和采收源/登记指纹未变；未脚本改像素、切分、alpha清理或部件挪缩。
+
+共享原生新旧四栏6停帧/180draw覆盖全姿态，800ms时钟、实际纹理SHA及日志无ERROR/WARNING已核对；六帧板与原生触地帧已目视检查。临时证据/private/tmp/coastal-visible-atlas-body-r001/native-hoe-forward-r001，轻量SHA摘要持久记录。379人物测试通过（244.645s）；全库check通过53严格配方/47构建/9冻结legacy。Progress Q17只问南北带锄修订视觉，Work around、T03 Review；生产/冻结基线不变，完整统一归档、严格世界接触及衣物A/B仍未完成/未启动。
+
+## 2026-11-01 北向浇水采用用户认可的稍偏左水滴表现
+
+用户提供参考并明确“可以接受这种稍微偏左的水滴”，已覆盖此前要求所有北向水滴藏在腿间的限制；参考原图复制到sources/visible-atlas-body-r001/references/north-water-user-direction-20261101.png，SHA与范围记录于source.json的water_north_droplets_q15。Q16=B记录此方向选择，不外推其他动作/方向或严格接触认可。当前北向前两帧保留r004，倾倒/回收两完整帧区域采用r006，明确显示稍偏左落水和回收余滴。完整PNG、实际提示词及父图保留；r005/r007服务审核拒绝无图，未采用；未脚本改像素、切分/打包或单独挪缩部件。
+
+实际四帧/1000ms保持，所有身体参考及其余浇水/采收记录指纹不变。共享原生四栏新旧对照4停帧/180draw覆盖全部姿态，日志无ERROR/WARNING，实际四帧板已目视确认。当前证据/private/tmp/coastal-visible-atlas-body-r001/native-water-north-drops-r002，源清单保存轻量SHA。379人物测试通过（292.144s）；全库check通过53严格配方/47构建/9冻结legacy。源稿未切生产，严格世界接触/统一归档仍待完成，衣物A/B不启动。
+
+## 2026-11-01 南北向浇水前向修订完成，Q15待视觉反馈
+
+Q14=B记录用户“浇水的南北向，水的位置有点偏，应该在人物的前方浇水”。原提示词把水壶和目标设在屏幕左侧；已由GPT改南向水壶为朝镜头的缩短壶嘴，北向改为远离镜头、自然遮挡水流，消除左侧壶底漏水。当前south带工具r002、north r004（r003父图保留）；south无工具参考同步r002，north保留原身体参考。完整源、实际提示词、输入SHA、旧图/登记与依赖失效记录见source.json的water_forward_q14；东西向浇水与harvest记录指纹未变。未脚本改像素、切图或单独挪缩部件。
+
+脚部root到可见水流下端：south源坐标差(-27,+34)，north(+14,-42)，均进入各自前向45度范围；北向可见水滴不冒充被遮挡的真实地面接触。共享原生面板新旧四栏、4停帧/180确定步长draw全姿态覆盖，1000ms周期保持，日志无ERROR/WARNING；已目视对照板和实际原生倾倒帧。图/录像及临时诊断脚本位于/private/tmp/coastal-visible-atlas-body-r001/native-water-forward-q14-r001，轻量SHA摘要持久记录。379人物测试通过（261.016s），check通过53严格配方/47构建/9冻结legacy；仅合同回归，非新美术严格接触验收。
+
+Progress Q15仅问南北浇水前向视觉，Work around、T03 Review；待回复，不将采收或其余方向视为获认可。仍24/24原始身体候选/108 pose，完整统一layout/密度、接口和严格世界接触、归档未完成，衣物A/B及生产切换未启动。
+
+## 2026-10-31 浇水/采收四向原始候选齐备，24/24动作方向，Q14待视觉反馈
+
+用户“效果ok，继续执行”已绑定hoe_with_tool_revision四向完整带锄头帧实际源/登记及800ms时序，范围为可见效果，非严格接触或生产。继续既定water/harvest各4帧：先西向原生小样，再补其他三向；可见水壶/水流、白色块根作物直接保留在完整动作帧，另由imagegen去道具生成同姿态身体参考。每向完整1254×1254源、2×2格627方格，整帧固定.25显示密度和实测足部占地登记，不用道具总外框作root。水壶/作物有自然前后遮挡，北向被遮手不冒充隐藏部件齐备；去道具会重绘其他像素，不当作像素完全相同的可组合图层。实际提示词、原图、父图SHA、区域/时序/根点见source.json的water_four_revision、harvest_four_revision及body_clips。
+
+water时序200/200/350/250ms=1000ms；east初稿水流跨格，单改水流未解决，采用r003整个人物＋水壶＋水流格内重排并清掉旧跨格水滴，原人物姿态未程序挪缩、源alpha未脚本清理/切图。harvest沿现有GPT白萝卜设计及手势参考，未贴旧脸手/衣服像素；200/250/250/300ms=1000ms，1/2空手、3/4持物。采收为单次动作，原生重复播放仅诊断；游戏作物目标/采摘/库存入账/回站立事件未改。最终水/采收各四栏4停帧/180确定步长draw覆盖各16姿态，1000ms时钟与实际源绑定，日志无ERROR/WARNING。对照板和录像在/private/tmp/coastal-visible-atlas-body-r001/native-water-four-r001及native-harvest-four-r001，轻量SHA摘要持久记录。
+
+当前24/24动作方向原始身体候选、108唯一pose，另56农事可见带道具帧；164帧引用PNG/提示词/输入SHA、尺寸/区域与身体/可见帧poseID和时序复核通过。379人物测试通过（513.401s），check通过53严格配方/47构建/9冻结legacy，仅既有代码合同回归，不替代新美术严格动态验收。Q14只复核新增浇水/采收视觉，Progress Work around、T03 Review；最终统一layout/像素密度、同姿态接口及严格世界支撑/握持/目标接触、完整归档manifest仍未完成，T04未done，生产/基线未切换，不开始衣物A/B。
+
+## 2026-10-31 用户要求锄头直接入帧，四向带锄头动作已补齐预览
+
+Q13=A（“动作通过，但是为什么没有锄头”）已绑定新三向身体实际源/登记，用户随后明确“把锄头加进去吧”。当前可见锄地改用人物＋锄头完整帧，不再把去工具身体稿当可见效果；原身体源及Q12/Q13绑定保留，仍作换装制作参考。计划首段已记录用户对工具分层策略的覆盖。west直接复用GPT完整握持源r004，east/south/north以获认可身体r002为主、原握持源仅作工具参考补锄；east首稿锄刃跨列，整个人物＋工具重新排布r002纠正，未单独挪缩肢体/锄刃。完整源PNG/实际提示词/父图SHA与当前可见选择在source.json的hoe_with_tool_revision和preferred_review_display_clips，body_clips仍保留无工具构建参考。后续锄地展示使用带工具clips，不再要求独立工具图层提取。
+
+共享原生农事motion-review面板完成已认可身体/新增带锄稿同姿态四栏对照、6停帧与180确定步长draw，24带锄姿态全覆盖、800ms时序/统一poseID保持；帧格区域内人物工具完整，无ERROR/WARNING。当前带锄24帧板与录像在/private/tmp/coastal-visible-atlas-body-r001/native-hoe-with-tool-r001；轻量SHA摘要持久记录。379测试通过（331.137s），check通过53严格配方/47构建/9冻结legacy；76身体＋24带工具帧引用PNG/提示词/输入SHA、尺寸/区域及时序验证通过，Q12/Q13身体图及登记绑定未改。生图可能重绘其他像素，带锄效果不自动继承身体用户认可；严格握持/支撑/工具目标接触与最终统一归档仍未通过，当前生产未切换。此次加锄头任务已交付，可继续按用户反馈；总身体仍16/24动作方向，water/harvest与全套归档待做，不启动衣物。
+
+## 2026-10-31 Q12=A西锄获认可，四向锄地身体候选复核完成，Q13待反馈
+
+用户Q12=A已绑定西锄6帧实际PNG/SHA、区域、时序与登记，范围为身体比例/动作视觉小样，不外推严格握持/支撑或其他朝向。新增east/south/north各6帧：先同母版方向站姿和西锄握持对照生成带工具整表，east/south整帧排布修订r002解决锄刃跨格，再imagegen去工具形成身体r001；原生与方向站姿对照发现头偏小，r002整帧生图重绘头颈。所有实际提示词、父图/完整PNG/SHA/登记见source.json的hoe_four_body_revision；去工具/头颈编辑不假定其他像素不变，无贴旧脸手、脚本alpha清理/切分或局部程序挪缩。北向被躯干遮挡的远手不冒充隐藏部件已齐备。
+
+新整表保持1536×1024/3×2格512方格，原源不预缩；新三向源密度不同于已认可西锄，按原生方向站姿头部对照，各自全6帧共用一个整帧显示倍率：west .33，east/south/north .28。根登记实测足部占地，不取含工具总外框；这仍是原始源稿诊断，最终统一layout/像素密度与严格支撑/握持/目标接触未冻结，不能以登记掩称无滑步。时序均180/110/110/70/70/260ms=800ms，未改玩法事件。
+
+最终native-hoe-four-r003复用共享农事motion-review面板/时钟，6停帧/180确定步长draw覆盖24姿态，原生板/连续预览及轻量SHA摘要已保存；日志无ERROR/WARNING。16动作方向/76当前帧PNG、提示词、输入SHA、尺寸与区域及时序复核通过，Q12西锄绑定完全未变。379人物测试通过（300.372s），check通过53严格配方/47构建/9冻结legacy，仅既有管线回归；源稿未接严格构建/生产，未刷新基线。Progress Q13待新增三向视觉反馈，Work around、T03 Review。水/采收四向、全套身体归档与严格动态门禁仍未完成，衣物A/B不启动。
+
+## 2026-10-31 西锄六帧身体候选原生复核，Q12待视觉反馈
+
+Q11=A南北run横晃修订认可已绑定PNG、区域、时序与登记。新增hoe-west身体六帧：完整1536×1024、3×2格512方格；先生成带工具握持对照hoe-west-grip-guide-r003，修第4帧形成r004，再由imagegen去工具形成hoe-west-male-six-sheet-r001。实际提示词/父图SHA及完整源在source.json的hoe_west_six_pilot；前两张窄格越界失败只放临时目录。源像素未脚本切分、改alpha、贴旧脸手或局部挪缩。原源中足部位置变化保留，通过实测双脚占地参考做整帧登记；登记不证明解剖脚位、固定支撑或无滑步。第4帧实际是早期下挥，未按请求的精确中弧坐标冒充通过；手间距/锄刃对脚面地线与目标的严格接触仍未通过。
+
+暂定时长180/110/110/70/70/260ms保持800ms，候选冲击阶段起点470ms，无玩法事件修改。复用现有共享农事motion-review面板/时钟注入真实源区域，实际6停帧/180确定步长draw覆盖guide/body全部姿态，800ms/1倍；原生板和录像在/private/tmp/coastal-visible-atlas-body-r001/native-hoe-west-six-r001，日志无ERROR/WARNING。58当前帧PNG/提示词/输入SHA、尺寸/区域复核通过，379人物测试通过（313.379s），check通过53严格配方/47构建/9冻结legacy；原生诊断和代码回归均不是严格构建或接触验收。现13/24动作方向、58帧候选，hoe其余三向、water/harvest全四向与全套归档仍缺，衣物/生产不启动。Progress Q12只问西锄比例与六帧衔接，Work around、T03 Review，未认可前不扩依赖朝向。
+
+## 2026-10-31 Q11=A南北跑步横晃修订获认可，继续西锄六帧身体
+
+用户“Q11 (南北跑步横晃修订): A 效果ok”已记录Progress，并绑定source.json中南北run实际PNG/SHA、区域、时序和修订整帧登记；范围为南北横晃视觉修订，不外推严格支撑、其他方向、农事或生产。继续既定hoe先6帧的单侧小样，先用同一男性灰底衣人物生成完整带锄握持对照，再去工具做身体源，准备/抬起/最高点/下挥/触地/回收保持暂定800ms周期；姿态及握持尚未验收。12/24格身体仍未全套归档，衣物A/B不启动。
+
+## 2026-10-31 Q10=B南北跑步横晃，整帧列登记修订中
+
+用户指出south/north奔跑左右位移过大，Q10记B，不扩为东西向认可。只读测量确认源图每列上下两帧头部中心几乎相同偏移：south播放顺序[222,208.5,193,222,208.5,194]，north[235.5,207,179.5,233.5,207.5,181.5]；旧统一x209让原生横晃达7.25/14px。改为各源列共用整数x登记south[222,208,194]、north[234,207,180]，保持原y登记、PNG/区域、比例、肢体与时序；非逐姿态固定头或逐帧钉脚。登记后头部残余横摆0.375/0.5原生像素，原源及旧登记历史保留source.json。旧四向预览南北依赖失效；原生前后6停帧/180draw及放大连续预览完成，日志无ERROR/WARNING；实际原生头部轮廓横摆south7→0.5px、north14→1.5px（轮廓/栅格量化与源测量不同）。379人物测试通过（314.013s），check通过53严格配方/47构建/9冻结legacy；52当前帧PNG SHA未变。证据在/private/tmp/coastal-visible-atlas-body-r001/native-run-lateral-q10-r001，source.json记录摘要。Progress Q11待修订视觉反馈，T03 Review、Work around。未改严格模板、发布或衣物，尚无修订视觉认可。
+
+## 2026-10-31 Q9=A男性体型获认可，四向跑步整表候选原生复核完成
+
+用户“体型ok”及Q9=A已绑定男性代表稿SHA，仅认可体型。西run改用r003整表，第3帧摆臂已修；新增东r003/南r001/北r001，每向完整1254×1254 PNG、3×2格418×627。东前两稿近侧3/6摆臂重复未采用；改用西整套姿态关系参考后生成r003。南按实际支撑脚顺序整帧映射[0,4,2,3,1,5]，保留原提示词与实际映射，不以提示阶段名冒充解剖验收。源全图/实际提示词/输入SHA在source.json；无脚本改alpha、切图、贴脸手或局部挪缩。
+
+原生复用共享motion-review面板，AtlasTexture仅取完整PNG区域，统一.25显示密度，同一行3格共用固定源根登记；登记不证明支撑/滑步。四栏6停帧/180确定步长draw覆盖24姿态，原生24帧板与录像在/private/tmp/coastal-visible-atlas-body-r001/native-run-four-male-r001，日志无ERROR/WARNING；52当前帧PNG/提示词/输入SHA、尺寸/区域及时序复核通过。379人物测试通过（277.601s），check通过53严格配方/47构建/9冻结legacy，仅验证既有管线回归。现有12/24动作方向、52帧候选，Progress Q10待四向跑步视觉反馈，Work around模式暂停受影响的后续身体制作；hoe/water/harvest及全套身体归档未完成，衣物A/B仍不启动，生产/严格发布基线不变。
+
+## 2026-10-31 Q8=B跑步体型偏移修订，Q9待男性代表体型复核
+
+用户指出run身体偏女性化，与原男性walk不一致；Q8已记B，原run6标为拒绝，原walk认可与源图不变。对照发现首张run深收腰、臀胯后凸与S弯被锁作后五帧躯干依据。直接引用旧run修体型首试仍延续曲线，未采用；改为仅以已认可男性walk整张为体型/身份来源、只驱动四肢，得到originals/suit-run-west-male-anchor-r002.png。原图、实际提示词与父图SHA在sources/visible-atlas-body-r001/source.json的run_west_body_fix；同尺度原生三列及躯干局部对照已完成，但修订尚待用户体型确认。
+
+同时按用户上轮讨论试了一张六帧整表：originals/run-west-male-six-sheet-r001.png，实际1254×1254、3×2格，每格418×627，未缩放/切分/打包源像素。底排头顶局部36—41px对比顶排57px，有16—21px登记漂移，动作/体型一致性及正式帧格未验，未替换已登记run。整表及代表姿态仅候选，不能当六帧已改好或现行严格构建。旧run6保留历史拒绝状态；登记池9格34帧含这6张拒稿，排除拒稿可用候选8格28帧，完整24格身体与归档仍未完成。
+
+原生体型对照和整表总览位于/private/tmp/coastal-visible-atlas-body-r001/native-run-male-body-r002，日志无ERROR/WARNING；来源PNG/提示词/输入SHA已核对。379人物测试通过（246.561s），check通过53严格配方/47构建/9冻结legacy，仅为既有代码/合同回归，不替代本次体型认可。Q9只问右侧代表稿是否恢复原男性体型，Progress Work around、T03 Review；未审批整组六帧动作/严格支撑、未扩朝向/衣物或生产。源全图保留，没有贴旧脸手、局部挪缩、脚本修alpha或放宽基线。
+
+## 2026-10-31 西向六帧跑步候选原生复核完成，Q8待视觉反馈
+
+东向修订walk认可已逐SHA绑定并冻结。新增西向run6，当前共有9/24动作方向候选、34张当前源图，跑步其他三向与hoe/water/harvest未补齐，全套身体归档未完成。run使用1024×1536整帧，6张RGBA8解码共36MiB；暂沿320ms源周期、108基速、0.75倍率。六阶段为视觉检查的暂定落脚/支撑/腾空A/B，不当作正式解剖标注或接触事件。首稿近侧摆臂与股部遮挡有问题，局部修订后按实际渲染的近侧支撑姿态，将原首稿第5张整帧重用为当前第2帧；保留真实原提示词并记录重映射，不按生成时阶段名冒充动作通过。头顶观测236—240px，未脚本移动/缩放肢体或改alpha。首稿及所用父图/提示词/输入SHA在sources/visible-atlas-body-r001，未采用的头部漂移、浮脚、彩色技术试验仅存临时目录；彩色图不作为当前身体输入。
+
+native-run-west-r002复用原生共享motion-review面板，与已认可west walk同周期对照，2倍界面6停帧/180确定步长draw覆盖全部姿态；另做原生1倍六帧轮廓检查，日志无ERROR/WARNING。所有34张当前源图/提示词/输入SHA及尺寸复核通过，379人物测试通过（328.255s），check通过53严格配方/47构建/9冻结legacy。原生板和录像在/private/tmp/coastal-visible-atlas-body-r001，轻量SHA摘要见source.json的run_west_revision；仅静止候选诊断，无世界行进或严格支撑/滑步证明。Q8问西向跑步视觉与六帧节奏，Work around模式下保持T03 Review并等待反馈；无新动作认可、严格构建或生产切换，仍不开始衣物A/B。
+
+## 2026-10-31 东向修订版获认可，继续六帧跑步身体
+
+用户“新版通过，继续执行”已绑定当前东walk六张PNG/SHA：q7-r002的第2/4/5帧、q7-r003低抬腿第3帧及原第1/6帧，记录于source.json的visual_acceptances；认可为视觉小样，不外推严格接触、其他新动作或生产。西向已认可六帧保持不变，南/北原候选不因本答复自动扩认可。
+
+Progress T03回Build，开始先单侧六帧run再扩四向。已核定旧run4×80ms=320ms、基速108、播放倍率0.75；六帧暂沿53/54/53/53/54/53ms保持源周期，记录完整落脚/压缩/腾空的两侧阶段。身体全动作四向及归档完成前仍不制作衣物A/B。新run草稿仅源候选，不接生产或放宽严格入口。
+
+## 2026-10-31 Q7=B东向第2—5帧修订，原生复核后待视觉反馈
+
+用户指出东向2/4/5左手异常与3帧重复1帧；已记录Q7=B。按同一近侧左臂连续轨迹重绘2/4/5的前臂、手腕和握拳，3帧改为后腿蹬离/另一腿低抬前摆。首稿原生检查发现抬膝像跑步，已降低前摆腿；采用图为originals/suit-walk-east-2-q7-r003.png，另三帧为*-1/3/4-q7-r002.png。东1/6及其他方向源SHA不变；完整GPT源图、实际提示词、中间参考及输入SHA见sources/visible-atlas-body-r001/source.json的q7_east_revision。未脚本挪缩肢体或改alpha。
+
+最终native-east-q7-r003/zoom2复用现有共享评审面板，实际6帧SHA已核对，6停帧/180确定步长draw覆盖全部姿态，320ms源周期/0.75倍率仍为426.667ms；前后对照板与录像位于/private/tmp/coastal-visible-atlas-body-r001。普通倍率另有6停帧，连续记录因窗口绘制暂停在144draw后关闭，退出前未走fixture清理而有临时纹理释放告警，不作为最终动态证据；最终2倍与对照板正常结束无ERROR/WARNING。379人物测试通过（279.019s），check通过53严格配方/47构建/9冻结legacy，28张当前源图/提示词SHA与尺寸复核通过。旧四向预览的east依赖已标失效，未变其他方向证据按原SHA保留。Progress T03回Review；修订稿尚无用户视觉认可，严格支撑/滑步、其余4类动作与完整身体归档未完成，不扩衣物或生产发布。
+
+## 2026-10-31 四向站姿及六帧行走候选齐备，Q7待视觉反馈
+
+在冻结已认可西walk六帧的前提下，新增四向idle及南/东/北各6帧walk，source.json登记8/24动作方向、28张源图；其他run/hoe/water/harvest与完整身体归档仍未完成。南向整帧重绘首稿产生头部漂移，整表试验也未形成合格帧格，均置于临时目录；采用限定四肢编辑的修订稿，南walk头顶247—251px，头型几何稳定不等于像素完全相同或用户认可。原图/实际提示词/输入SHA保存在sources/visible-atlas-body-r001，未经脚本改像素或任意挪缩部件。
+
+四向统一320ms源周期，0.75倍率下426.667ms，复用原生共享评审面板完成6停帧/180draw（确定步长，非真实帧率测量）；四向站姿对照、24帧板与连续录像位于/private/tmp/coastal-visible-atlas-body-r001，SHA摘要持久记录。Q7仅请求新三向视觉反馈，Progress为Work around，T03保持Review；不继承西向认可，不宣称支撑/滑步或严格构建通过，不扩依赖动作或衣物A/B。28张PNG、提示词、输入SHA、尺寸及walk时序复核通过。379人物测试通过（241.776s）；check通过53严格配方/47构建/9冻结legacy。生产/冻结基线均未修改，未提交推送。
+
+## 2026-10-31 用户认可西向六帧，继续四向身体扩展
+
+用户“效果ok，继续执行”已按当前6张PNG/SHA记录到sources/visible-atlas-body-r001/source.json的review_acceptance，范围是r008西walk视觉小样（含第3帧头颈修订），不扩大为严格支撑、全动作四向、混搭或生产认可。Progress T02 done，T03 Build。已开始四向中性连体底衣idle源图，再核对比例/透明后补其余朝向六帧walk；后续run/hoe/water/harvest仍按已定试验帧数验证。
+
+已认可的西walk原文件冻结，不覆盖；新姿态按方向/动作独立登记，仍由主代理直接制作和原生复验。完整身体完成并归档前不启动衣物A/B。当前四向idle仅生成候选，尚未视为完成或认可；全套制作/原生/归档继续，未提交推送或切生产。
+
+## 2026-10-31 第3帧头颈比例修订，候选复核中
+
+用户指出第3帧头部偏高偏小。实测旧头顶224、宽449、下颌长黑边约669—677；参照第2帧为238、458、700—701。两次直接图生图未修正完整头型，均未采用；改用GPT生成的无头肢体参考，另以干净第2帧单独定义头颈，重生完整第3帧。新头顶239、宽456、下颌700，已在同整帧倍率的原生前后对照中目视。没有脚本挪缩头部或覆盖旧脸；新整帧的颈口及部分肢体像素由GPT重绘，不声称仅头部像素变化。
+
+当前源图art/characters/sources/visible-atlas-body-r001/originals/suit-walk-west-2-head-aligned-r001.png；实际无头参考、提示词、输入链与观测摘要保存在同source.json。其他五帧SHA完全不变，六帧仍320ms。原生r008完成1×/2×各六停帧/100draw及头部前后对照；新一轮379人物测试通过（244.735s），check通过53严格配方/47构建/9冻结legacy。本轮候选与完整身体都未获用户认可，世界支撑/滑步、全动作四向归档未完成；Progress保持开放，不扩衣物、不提交推送或切生产。
+
+## 2026-10-31 西walk第3帧手臂重新生成，仍待视觉复核
+
+用户要求重生异常手臂。已用干净第2/4帧作参考重新生成整张第3帧，不把异常稿作为输入；改用较自然的斜向下前臂与真实躯干遮挡，取消横跨腰部的僵硬前臂轮廓。当前图为art/characters/sources/visible-atlas-body-r001/originals/suit-walk-west-2-arm-regenerated-r001.png，原图、实际imagegen提示词与输入SHA见同目录source.json。第1/2/4/5/6帧SHA完全不变，六帧仍共320ms；未用脚本挪缩/修画像素。
+
+本次r007复用现有motion-review面板作原生候选诊断，1×与2×观察各6停帧/100draw覆盖；Root目视六帧对照，第三帧背景采样alpha0。对照与放大录像在/private/tmp/coastal-visible-atlas-body-r001/native-r007，轻量摘要与SHA已持久保存。前一轮3—5帧摆臂修订（r006）被用户指出第三帧异常，不能记为认可；当时手部/脚部色块观测仅为诊断，不是正式解剖锚点或支撑通过。
+
+新一轮379人物测试通过（259.050s）；check通过53严格配方/47构建/9冻结legacy，无基线或正式资源修改。第3帧及整套仍是候选，世界支撑/滑步、用户认可、全动作四向身体归档未完成。Progress T02保持Review，后续任务等待；未开始衣物A/B，未提交/推送/生产切换。
+
+## 2026-10-30 用户更正帧号：已回退原六帧，仅修第4/5帧
+
+用户明确撤回前次帧号，应回退上一版并修第4、5帧。已先恢复native-r002前六张原候选并逐SHA复核；前次第3/4张修订撤出当前引用，仅保留历史。现行只替换索引3/4：第4张承接固定第3张的同一前摆腿落脚及近/远腿关系，第5张由高抬膝首稿修成低经过后接固定第6张。第1/2/3/6张对回退基准SHA完全一致，未改坐标/缩放或320ms时序。图像均由imagegen重绘，原图、提示词及实际输入链保留。
+
+现行索引art/characters/sources/visible-atlas-body-r001/source.json；新图originals/suit-walk-west-3-fix45-contact-r001.png和suit-walk-west-4-fix45-passing-r002.png。GPU原生诊断r005复用原共享面板，6停帧/100draw完整；Root目视对照板，新4/5背景采样alpha0。对照图统一1—6编号，位于/private/tmp/coastal-visible-atlas-body-r001/native-r005，录像、原始报告与SHA摘要对应新源。直接注入候选纹理仅为诊断，不冒充严格加载、世界支撑/滑步或用户认可。
+
+Progress T02保持Review，已撤出错误第3/4张当前交付，后续完整身体/衣物任务未开始。仍沿用同会话379人物测试及check53配方/47构建/9legacy通过；本轮未改人物工具、正式配方/构建/基线，只对无现行消费者引用的候选做原生与SHA定点复验，不重复无关全量检查。未提交、推送、生产替换。下方“第3/4张问题”已被用户帧号更正替代，不能继续据此返工第3张。
+
+## 2026-10-30 西walk第3/4张按用户反馈完成定点修订，待视觉复核
+
+用户指出第3、4张与第2、5张不连贯。已定位旧第3张过早大跨步、旧第4张腿部前后关系与反向摆臂表达不清；只用imagegen重绘索引2/3为收拢经过过渡与反侧落脚，保留原图/实际提示词/输入SHA。新第3张首次输出带实际矩形底（alpha24/44），另用imagegen修订至采样背景alpha0，并在Godot复验，无脚本改像素或挪缩肢体。第1/2/5/6张SHA完全不变，六帧时长仍53/54/53/53/54/53ms，共320ms。
+
+当前来源与轻量状态：art/characters/sources/visible-atlas-body-r001/source.json；当前两张为originals/suit-walk-west-2-continuity-alpha-r002.png及suit-walk-west-3-continuity-r001.png。原生诊断r004复用现有character_motion_review（直接注入候选纹理，不冒充正式加载）：6停帧与100draw覆盖完整，Root目视整板；对照板/录像/原始报告位于/private/tmp/coastal-visible-atlas-body-r001/native-r004，SHA摘要入source.json。仍未完成世界支撑/滑步、用户动作认可或完整身体归档，不扩其他动作朝向、不启动衣物A/B、不切生产。
+
+沿用同会话379人物测试通过及check第三次通过（53严格配方/47构建/9冻结legacy）；后续仅修改未被现行配方/构建引用的候选源和记录，未改工具/正式输入，不机械重跑同一套无关测试；本次定点验证为真实原生图、完整姿态/时序覆盖及四个冻结帧SHA。Progress T02保持Review，后续任务等待该小样；Q6反馈已记录为修改要求，不记为用户认可。未提交/推送。
+
+## 2026-10-30 Q4=B改为中性连体底衣；纠正透明光晕误判
+
+用户确认Q4=B：改用不透明、无纹理的中性连体底衣，后续服装覆盖须重验；仍全动作四向身体先完成归档。西walk已生成6张1024×1536原始候选与实际提示词，保存在art/characters/sources/visible-atlas-body-r001/，均未验收/准入。第4张早期头顶偏高40px，整体修订未解决；据实际坐标差改为仅编辑下方肢体，最新六帧头顶为240/238/241/239/234/240px，未移动或缩放原图像素。拟定53/54/53/53/54/53ms共320ms，仅作同旧周期比较，脚支撑与动作质量未通过。
+
+此前仅凭预览把轮廓外棕灰雾判为可见脏边是主代理误判：11个相关位置alpha=0，真实Godot GPU浅色底对照无可见大圈雾。Q5脚本清理问题已撤回，未处理任何图片像素。单次无衣候选清理moderation_blocked是历史工具拒绝，不代表整个无衣生成目标均不可用。当前依照用户Q4=B继续中性连体底衣；下方原阻塞记录按历史解释。
+
+379人物unittest全部通过（258.116s）。check先被构建根.DS_Store阻断，移走后又定位当前主构建及其frames/harvest内3个.DS_Store；均保留在/private/tmp/coastal-visible-atlas-body-r001，未修改门禁/基线，第三次check运行中。正在复用现有character_motion_review作候选纹理注入诊断，不经正式加载合同，不作为严格构建或世界接触验收。原生图/日志/录像仅在临时目录；源码、当前生产与试玩不改，完整身体归档未完成，未启动衣物A/B，未提交推送。
+
+## 2026-10-30 裸身体六帧试验启动；透明修订受生图服务阻断
+
+用户同意按动作验证帧数：先西walk六帧与旧四帧同速度/总时长比较，再确定其他动作并补四向。源参考已定位：选定成人母版与实际西walk，旧512×768、root(256,708)、display_scale0.2371134，walk基速72/倍率0.75/原始周期320ms；六帧暂定53/54/53/53/54/53ms。新留存约定：大型过程材料在/private/tmp/coastal-visible-atlas-body-r001，最终资源manifest合并验收摘要与哈希，不为新阶段新增常驻evidence。
+
+实际imagegen整张六格首稿因重复姿态及1254×1254非请求帧格而拒收；改逐帧生成得到一张1024×1536同身份无衣裤鞋中性身体候选，但有轮廓外光晕、alpha最大254及未核准新密度，尚不合格。随后仅清理透明边缘的请求被服务安全系统拒绝：moderation_blocked，output/other，request_id=41a90d39-fee3-44d5-8483-ca786937b0cf。未重试绕过拒绝。候选原图/提示词/实际状态已保存art/characters/sources/visible-atlas-body-r001/source.json，未接入parts、layout、配方、build或生产；无新的用户认可或原生结果。
+
+Progress“全动作裸身体制作与归档”保持开放：T01完成，T02因生图服务拒绝blocked，T03/T04依赖等待；全套裸身体未完成归档，服装A/B未开始。人物测试和check已启动，最终结果另见下一段；不把该过程写成六帧动画完成。未提交、推送、修改基线或切换生产。
+
+## 2026-10-30 执行顺序调整：全动作四向裸身体先完成并归档
+
+用户明确要求先完成裸身体的全部动作、朝向并归档，再执行后续步骤。现行可见部件设计及小样计划已更新：同一成年母版idle/walk/run/hoe/water/harvest六类×north/west/south/east四向，共24动作方向；当前84姿态仅作参考。新增Task 0覆盖身体制作、完整静态/原生连续验收、源图/提示词/逐帧与图集/layout/哈希/轻量证据持久归档；全部完成前不得启动上衣A/B及其他部件制作。后续发现身体缺陷须回到该阶段修订并重验归档。
+
+设计：`docs/superpowers/specs/2026-10-30-character-visible-atlas-design.md`；计划：`docs/superpowers/plans/2026-10-30-character-visible-atlas-pilot.md`。本次仅调整文档并核验顺序一致，尚未制作裸身体或启动A/B；未修改人物代码、美术和基线，未重跑人物测试/Godot，未提交或推送。现有固定装束试玩与旧生产保持；Q2=B不授予新身体认可，严格接触/混搭/发布仍未通过。Progress跟踪本次计划修改，实际制作另行启动。
+
+## 2026-10-30 人物资产按部位重组与历史展示精简完成
+
+用户要求参照dressup-studio按部位/款式组织真实资产，并授权删除确认后的mp4、动图等历史验收材料。部件已迁入parts/top、pants、shoes、hair、hat、shared，去掉中间adaptations层；新增art/characters/CURRENT.md作为当前人物/衣物索引。稳定ID、源图、mask、姿态、动作时序保留。47严格构建按新路径重建到新revision目录，所有输出PNG逐字节等于旧输出；完整主人公现为adult-top03-full-hair-hat-r002，suite入口不变。生产player-unified-v4及runtime-baseline原字节保持。
+
+迁移清单migrations/2026-10-30-organization.json记录3447个改路径/元数据文件及514个删除文件，约341.92MiB；删除限历史展示及无实际依赖资料，构建依赖内的review文件保留。原始历史资料可从7ef64b6恢复，不保留第二套活动目录、不清Git历史。旧报告媒体路径仅指历史；Q2=B、严格接触/混搭/生产未通过的边界不变。
+
+已完成原生实际24格84姿态、连续动作/回idle共245检查及2560×1440截图目视；旧layout/衣装/发帽/农事149加载检查、西锄严格四状态48加载检查、Godot构建加载器134检查通过。历史动态迁移2986文件/35制品/257帧、静态1274映射/60候选通过。全量人物Python执行379项：377首轮通过；1项被Finder生成的.DS_Store阻断，清理后复验通过；1项依赖已删历史报告，提取原11点多边形与来源哈希为820字节测试夹具后复验通过。未机械重跑其余未受影响用例。check最终重验通过53严格配方/47严格构建/9冻结legacy；3447迁移文件SHA全部复核一致，统一launcher dry-run及静态画廊240图片路径通过。轻量验证汇总见art/characters/evidence/organization-v2/summary.json。测试无玩家存档，临时输出/private/tmp/coastal-organize-*，不新增常驻视频/动图。
+
+主代理负责迁移/资源/Godot/集成；gpt-6.1-sol/high代理负责Python分类路径合同、失败回归及独立SHA门禁审查，先修复数值/布尔等价与任意SHA替换漏洞。legacy仅通过Git旧原文、当前文件和递归路径/语义等价证明衔接，未刷新基线或添加新legacy例外。尚未提交、推送、导出或生产替换。
+
 ## 2026-10-30 全动作统一评审包本地提交
 
 本次提交纳入固定hair_hat全动作统一管线、24动作方向／84姿态的配方与构建、完整GPT来源／部件／注册资料、共享Godot试玩与原生验证工具、完整原生证据和Q2=B范围决定。统一入口 `tools/characters/review-all-actions.command`。旧西锄r001的24个文件按既有迁移退出现行build目录；父提交2742c19及历史清单保留原字节，现行引用指向已验证的新构建。

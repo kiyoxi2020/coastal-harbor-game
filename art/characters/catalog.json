@@ -11,421 +11,421 @@
       "category": "hair",
       "static_status": "not-listed",
       "motion_adaptations": [
-        "parts/hair-chestnut-short-v1/adaptations/adult-standard-v1/review-motion-v1/r001/views.json"
+        "parts/hair/hair-chestnut-short-v1/adult-standard-v1/review-motion-v1/r001/views.json"
       ],
-      "definition": "parts/hair-chestnut-short-v1/design.json"
+      "definition": "parts/hair/hair-chestnut-short-v1/design.json"
     },
     {
       "design_id": "hair01",
       "static_status": "candidate",
       "category": "hair",
       "motion_adaptations": [],
-      "definition": "parts/hair01/design.json"
+      "definition": "parts/hair/hair01/design.json"
     },
     {
       "design_id": "hair02",
       "static_status": "candidate",
       "category": "hair",
       "motion_adaptations": [],
-      "definition": "parts/hair02/design.json"
+      "definition": "parts/hair/hair02/design.json"
     },
     {
       "design_id": "hair03",
       "static_status": "candidate",
       "category": "hair",
       "motion_adaptations": [],
-      "definition": "parts/hair03/design.json"
+      "definition": "parts/hair/hair03/design.json"
     },
     {
       "design_id": "hair04",
       "static_status": "candidate",
       "category": "hair",
       "motion_adaptations": [],
-      "definition": "parts/hair04/design.json"
+      "definition": "parts/hair/hair04/design.json"
     },
     {
       "design_id": "hair05",
       "static_status": "candidate",
       "category": "hair",
       "motion_adaptations": [],
-      "definition": "parts/hair05/design.json"
+      "definition": "parts/hair/hair05/design.json"
     },
     {
       "design_id": "hair06",
       "static_status": "candidate",
       "category": "hair",
       "motion_adaptations": [],
-      "definition": "parts/hair06/design.json"
+      "definition": "parts/hair/hair06/design.json"
     },
     {
       "design_id": "hair07",
       "static_status": "candidate",
       "category": "hair",
       "motion_adaptations": [],
-      "definition": "parts/hair07/design.json"
+      "definition": "parts/hair/hair07/design.json"
     },
     {
       "design_id": "hair08",
       "static_status": "candidate",
       "category": "hair",
       "motion_adaptations": [],
-      "definition": "parts/hair08/design.json"
+      "definition": "parts/hair/hair08/design.json"
     },
     {
       "design_id": "hair09",
       "static_status": "candidate",
       "category": "hair",
       "motion_adaptations": [],
-      "definition": "parts/hair09/design.json"
+      "definition": "parts/hair/hair09/design.json"
     },
     {
       "design_id": "hair10",
       "static_status": "candidate",
       "category": "hair",
       "motion_adaptations": [],
-      "definition": "parts/hair10/design.json"
+      "definition": "parts/hair/hair10/design.json"
     },
     {
       "design_id": "hat-straw-navy-band-v1",
       "category": "hat",
       "static_status": "not-listed",
       "motion_adaptations": [
-        "parts/hat-straw-navy-band-v1/adaptations/adult-standard-v1/review-motion-v1/r001/views.json"
+        "parts/hat/hat-straw-navy-band-v1/adult-standard-v1/review-motion-v1/r001/views.json"
       ],
-      "definition": "parts/hat-straw-navy-band-v1/design.json"
+      "definition": "parts/hat/hat-straw-navy-band-v1/design.json"
     },
     {
       "design_id": "hat01",
       "static_status": "candidate",
       "category": "hat",
       "motion_adaptations": [],
-      "definition": "parts/hat01/design.json"
+      "definition": "parts/hat/hat01/design.json"
     },
     {
       "design_id": "hat02",
       "static_status": "candidate",
       "category": "hat",
       "motion_adaptations": [],
-      "definition": "parts/hat02/design.json"
+      "definition": "parts/hat/hat02/design.json"
     },
     {
       "design_id": "hat03",
       "static_status": "candidate",
       "category": "hat",
       "motion_adaptations": [],
-      "definition": "parts/hat03/design.json"
+      "definition": "parts/hat/hat03/design.json"
     },
     {
       "design_id": "hat04",
       "static_status": "candidate",
       "category": "hat",
       "motion_adaptations": [],
-      "definition": "parts/hat04/design.json"
+      "definition": "parts/hat/hat04/design.json"
     },
     {
       "design_id": "hat05",
       "static_status": "candidate",
       "category": "hat",
       "motion_adaptations": [],
-      "definition": "parts/hat05/design.json"
+      "definition": "parts/hat/hat05/design.json"
     },
     {
       "design_id": "hat06",
       "static_status": "candidate",
       "category": "hat",
       "motion_adaptations": [],
-      "definition": "parts/hat06/design.json"
+      "definition": "parts/hat/hat06/design.json"
     },
     {
       "design_id": "hat07",
       "static_status": "candidate",
       "category": "hat",
       "motion_adaptations": [],
-      "definition": "parts/hat07/design.json"
+      "definition": "parts/hat/hat07/design.json"
     },
     {
       "design_id": "hat08",
       "static_status": "candidate",
       "category": "hat",
       "motion_adaptations": [],
-      "definition": "parts/hat08/design.json"
+      "definition": "parts/hat/hat08/design.json"
     },
     {
       "design_id": "hat09",
       "static_status": "candidate",
       "category": "hat",
       "motion_adaptations": [],
-      "definition": "parts/hat09/design.json"
+      "definition": "parts/hat/hat09/design.json"
     },
     {
       "design_id": "hat10",
       "static_status": "candidate",
       "category": "hat",
       "motion_adaptations": [],
-      "definition": "parts/hat10/design.json"
+      "definition": "parts/hat/hat10/design.json"
     },
     {
       "design_id": "original-blue-long-sleeve",
       "category": "top",
       "static_status": "not-listed",
       "motion_adaptations": [
-        "parts/original-blue-long-sleeve/adaptations/adult-standard-v1/review-motion-v1/r001/views.json"
+        "parts/top/original-blue-long-sleeve/adult-standard-v1/review-motion-v1/r001/views.json"
       ],
-      "definition": "parts/original-blue-long-sleeve/design.json"
+      "definition": "parts/top/original-blue-long-sleeve/design.json"
     },
     {
       "design_id": "original-brown-shoes-v1",
       "category": "shoes",
       "static_status": "not-listed",
       "motion_adaptations": [
-        "parts/original-brown-shoes-v1/adaptations/adult-standard-v1/review-motion-v1/r001/views.json"
+        "parts/shoes/original-brown-shoes-v1/adult-standard-v1/review-motion-v1/r001/views.json"
       ],
-      "definition": "parts/original-brown-shoes-v1/design.json"
+      "definition": "parts/shoes/original-brown-shoes-v1/design.json"
     },
     {
       "design_id": "original-olive-pants-v1",
       "category": "pants",
       "static_status": "not-listed",
       "motion_adaptations": [
-        "parts/original-olive-pants-v1/adaptations/adult-standard-v1/review-motion-v1/r001/views.json"
+        "parts/pants/original-olive-pants-v1/adult-standard-v1/review-motion-v1/r001/views.json"
       ],
-      "definition": "parts/original-olive-pants-v1/design.json"
+      "definition": "parts/pants/original-olive-pants-v1/design.json"
     },
     {
       "design_id": "original-pants",
       "category": "pants",
       "static_status": "not-listed",
       "motion_adaptations": [
-        "parts/original-pants/adaptations/adult-standard-v1/review-motion-v1/r001/views.json"
+        "parts/pants/original-pants/adult-standard-v1/review-motion-v1/r001/views.json"
       ],
-      "definition": "parts/original-pants/design.json"
+      "definition": "parts/pants/original-pants/design.json"
     },
     {
       "design_id": "original-shoes",
       "category": "shoes",
       "static_status": "not-listed",
       "motion_adaptations": [
-        "parts/original-shoes/adaptations/adult-standard-v1/review-motion-v1/r001/views.json"
+        "parts/shoes/original-shoes/adult-standard-v1/review-motion-v1/r001/views.json"
       ],
-      "definition": "parts/original-shoes/design.json"
+      "definition": "parts/shoes/original-shoes/design.json"
     },
     {
       "design_id": "pants01",
       "static_status": "candidate",
       "category": "pants",
       "motion_adaptations": [],
-      "definition": "parts/pants01/design.json"
+      "definition": "parts/pants/pants01/design.json"
     },
     {
       "design_id": "pants02",
       "static_status": "candidate",
       "category": "pants",
       "motion_adaptations": [
-        "parts/pants02/adaptations/adult-standard-v1/review-motion-v1/r001/views.json"
+        "parts/pants/pants02/adult-standard-v1/review-motion-v1/r001/views.json"
       ],
-      "definition": "parts/pants02/design.json"
+      "definition": "parts/pants/pants02/design.json"
     },
     {
       "design_id": "pants03",
       "static_status": "candidate",
       "category": "pants",
       "motion_adaptations": [],
-      "definition": "parts/pants03/design.json"
+      "definition": "parts/pants/pants03/design.json"
     },
     {
       "design_id": "pants04",
       "static_status": "candidate",
       "category": "pants",
       "motion_adaptations": [],
-      "definition": "parts/pants04/design.json"
+      "definition": "parts/pants/pants04/design.json"
     },
     {
       "design_id": "pants05",
       "static_status": "candidate",
       "category": "pants",
       "motion_adaptations": [],
-      "definition": "parts/pants05/design.json"
+      "definition": "parts/pants/pants05/design.json"
     },
     {
       "design_id": "pants06",
       "static_status": "candidate",
       "category": "pants",
       "motion_adaptations": [],
-      "definition": "parts/pants06/design.json"
+      "definition": "parts/pants/pants06/design.json"
     },
     {
       "design_id": "pants07",
       "static_status": "candidate",
       "category": "pants",
       "motion_adaptations": [],
-      "definition": "parts/pants07/design.json"
+      "definition": "parts/pants/pants07/design.json"
     },
     {
       "design_id": "pants08",
       "static_status": "candidate",
       "category": "pants",
       "motion_adaptations": [],
-      "definition": "parts/pants08/design.json"
+      "definition": "parts/pants/pants08/design.json"
     },
     {
       "design_id": "pants09",
       "static_status": "candidate",
       "category": "pants",
       "motion_adaptations": [],
-      "definition": "parts/pants09/design.json"
+      "definition": "parts/pants/pants09/design.json"
     },
     {
       "design_id": "pants10",
       "static_status": "candidate",
       "category": "pants",
       "motion_adaptations": [],
-      "definition": "parts/pants10/design.json"
+      "definition": "parts/pants/pants10/design.json"
     },
     {
       "design_id": "shoes01",
       "static_status": "candidate",
       "category": "shoes",
       "motion_adaptations": [],
-      "definition": "parts/shoes01/design.json"
+      "definition": "parts/shoes/shoes01/design.json"
     },
     {
       "design_id": "shoes02",
       "static_status": "candidate",
       "category": "shoes",
       "motion_adaptations": [],
-      "definition": "parts/shoes02/design.json"
+      "definition": "parts/shoes/shoes02/design.json"
     },
     {
       "design_id": "shoes03",
       "static_status": "candidate",
       "category": "shoes",
       "motion_adaptations": [],
-      "definition": "parts/shoes03/design.json"
+      "definition": "parts/shoes/shoes03/design.json"
     },
     {
       "design_id": "shoes04",
       "static_status": "candidate",
       "category": "shoes",
       "motion_adaptations": [
-        "parts/shoes04/adaptations/adult-standard-v1/review-motion-v1/r001/views.json"
+        "parts/shoes/shoes04/adult-standard-v1/review-motion-v1/r001/views.json"
       ],
-      "definition": "parts/shoes04/design.json"
+      "definition": "parts/shoes/shoes04/design.json"
     },
     {
       "design_id": "shoes05",
       "static_status": "candidate",
       "category": "shoes",
       "motion_adaptations": [],
-      "definition": "parts/shoes05/design.json"
+      "definition": "parts/shoes/shoes05/design.json"
     },
     {
       "design_id": "shoes06",
       "static_status": "candidate",
       "category": "shoes",
       "motion_adaptations": [],
-      "definition": "parts/shoes06/design.json"
+      "definition": "parts/shoes/shoes06/design.json"
     },
     {
       "design_id": "shoes07",
       "static_status": "candidate",
       "category": "shoes",
       "motion_adaptations": [],
-      "definition": "parts/shoes07/design.json"
+      "definition": "parts/shoes/shoes07/design.json"
     },
     {
       "design_id": "shoes08",
       "static_status": "candidate",
       "category": "shoes",
       "motion_adaptations": [],
-      "definition": "parts/shoes08/design.json"
+      "definition": "parts/shoes/shoes08/design.json"
     },
     {
       "design_id": "shoes09",
       "static_status": "candidate",
       "category": "shoes",
       "motion_adaptations": [],
-      "definition": "parts/shoes09/design.json"
+      "definition": "parts/shoes/shoes09/design.json"
     },
     {
       "design_id": "shoes10",
       "static_status": "candidate",
       "category": "shoes",
       "motion_adaptations": [],
-      "definition": "parts/shoes10/design.json"
+      "definition": "parts/shoes/shoes10/design.json"
     },
     {
       "design_id": "top01",
       "static_status": "candidate",
       "category": "top",
       "motion_adaptations": [],
-      "definition": "parts/top01/design.json"
+      "definition": "parts/top/top01/design.json"
     },
     {
       "design_id": "top02",
       "static_status": "candidate",
       "category": "top",
       "motion_adaptations": [],
-      "definition": "parts/top02/design.json"
+      "definition": "parts/top/top02/design.json"
     },
     {
       "design_id": "top03",
       "static_status": "candidate",
       "category": "top",
       "motion_adaptations": [
-        "parts/top03/adaptations/adult-standard-v1/review-motion-v1/r001/views.json"
+        "parts/top/top03/adult-standard-v1/review-motion-v1/r001/views.json"
       ],
-      "definition": "parts/top03/design.json"
+      "definition": "parts/top/top03/design.json"
     },
     {
       "design_id": "top04",
       "static_status": "candidate",
       "category": "top",
       "motion_adaptations": [
-        "parts/top04/adaptations/adult-standard-v1/review-motion-v1/r001/views.json"
+        "parts/top/top04/adult-standard-v1/review-motion-v1/r001/views.json"
       ],
-      "definition": "parts/top04/design.json"
+      "definition": "parts/top/top04/design.json"
     },
     {
       "design_id": "top05",
       "static_status": "candidate",
       "category": "top",
       "motion_adaptations": [],
-      "definition": "parts/top05/design.json"
+      "definition": "parts/top/top05/design.json"
     },
     {
       "design_id": "top06",
       "static_status": "candidate",
       "category": "top",
       "motion_adaptations": [],
-      "definition": "parts/top06/design.json"
+      "definition": "parts/top/top06/design.json"
     },
     {
       "design_id": "top07",
       "static_status": "candidate",
       "category": "top",
       "motion_adaptations": [],
-      "definition": "parts/top07/design.json"
+      "definition": "parts/top/top07/design.json"
     },
     {
       "design_id": "top08",
       "static_status": "candidate",
       "category": "top",
       "motion_adaptations": [],
-      "definition": "parts/top08/design.json"
+      "definition": "parts/top/top08/design.json"
     },
     {
       "design_id": "top09",
       "static_status": "candidate",
       "category": "top",
       "motion_adaptations": [],
-      "definition": "parts/top09/design.json"
+      "definition": "parts/top/top09/design.json"
     },
     {
       "design_id": "top10",
       "static_status": "candidate",
       "category": "top",
       "motion_adaptations": [],
-      "definition": "parts/top10/design.json"
+      "definition": "parts/top/top10/design.json"
     }
   ],
   "reviews": {

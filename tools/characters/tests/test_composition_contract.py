@@ -234,7 +234,7 @@ class RejectionTests(unittest.TestCase):
         path=self.lib/docref['file'];sample=json.loads(path.read_text())
         sample['frames'][0]['parts']['hair_under_hat']['compatible_hat_manifest_sha256']='0'*64
         self.write(path,sample);newsha=hashlib.sha256(path.read_bytes()).hexdigest()
-        adaptation=self.lib/'parts/hair-chestnut-short-v1/adaptations/adult-standard-v1/review-motion-v1/r001/views.json'
+        adaptation=self.lib/'parts/hair/hair-chestnut-short-v1/adult-standard-v1/review-motion-v1/r001/views.json'
         data=json.loads(adaptation.read_text())
         for view in data['views']:
             if view['recipe_id']=='headwear-hoe-west' and view['pose_id']=='hoe_west_key_0' and view['part_id']=='hair_under_hat':
@@ -263,7 +263,7 @@ class RejectionTests(unittest.TestCase):
         new_doc_ref={'file':new_document,'sha256':hashlib.sha256((self.lib/new_document).read_bytes()).hexdigest()}
         near['registration']['document']=new_doc_ref;near['registration']['extraction']=new_ext_ref
         near['provenance']['source_views'][0]['registration']=copy.deepcopy(near['registration'])
-        adaptation=self.lib/'parts/hat-straw-navy-band-v1/adaptations/adult-standard-v1/review-motion-v1/r001/views.json';data=json.loads(adaptation.read_text())
+        adaptation=self.lib/'parts/hat/hat-straw-navy-band-v1/adult-standard-v1/review-motion-v1/r001/views.json';data=json.loads(adaptation.read_text())
         original=next(v for v in data['views'] if v['recipe_id']=='headwear-hoe-west' and v['pose_id']=='hoe_west_key_0')
         duplicate=copy.deepcopy(original);duplicate['view']['extraction_manifest']=new_extraction;data['views'].append(duplicate);self.write(adaptation,data)
         def rebind(o):
@@ -390,7 +390,7 @@ class RejectionTests(unittest.TestCase):
             elif isinstance(o,list):
                 for value in o:rebind(value)
         rebind(self.recipe)
-        adaptation=self.lib/'parts/hair-chestnut-short-v1/adaptations/adult-standard-v1/review-motion-v1/r001/views.json'
+        adaptation=self.lib/'parts/hair/hair-chestnut-short-v1/adult-standard-v1/review-motion-v1/r001/views.json'
         data=json.loads(adaptation.read_text())
         for view in data['views']:
             if view['recipe_id']=='headwear-hoe-west' and view['pose_id']=='hoe_west_key_2' and view['part_id']=='hair_under_hat':

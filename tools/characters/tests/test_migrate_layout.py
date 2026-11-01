@@ -52,7 +52,7 @@ class MigrationTests(unittest.TestCase):
    try:
     result=migration.convert(record,'old/sample.json',set(),context={'recipe':'walk','pose':'key0','build':'walk','slots':{'top':'top03'}})
    except ValueError as error:self.fail('Distinct authored layers must not collide: '+str(error))
-   for layer in result['layers']:self.assertTrue(layer['file'].startswith('parts/top03/'))
+   for layer in result['layers']:self.assertTrue(layer['file'].startswith('parts/top/top03/'))
  def test_manifest_rejects_stale_external_hash_and_unresolved_ownership(self):
   m=self.module()
   with tempfile.TemporaryDirectory() as d:

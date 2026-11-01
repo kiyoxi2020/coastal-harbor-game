@@ -197,13 +197,13 @@ def validate_composition(repo, recipe_path, recipe):
     registered_views = {}
     for slot, ref in slots.items():
         design = record(ref, 'parts')
-        require(design.get('category', slot) == slot and ref['file'] == f"parts/{identifier(design['design_id'])}/design.json", 'Head design/category mismatch')
-        namespaces[slot] = str(PurePosixPath(ref['file']).parent) + f"/adaptations/{template['template_id']}/{motion['motion_set_id']}"
+        require(design.get('category', slot) == slot and ref['file'] == f"parts/{slot}/{identifier(design['design_id'])}/design.json", 'Head design/category mismatch')
+        namespaces[slot] = str(PurePosixPath(ref['file']).parent) + f"/{template['template_id']}/{motion['motion_set_id']}"
         adaptations = design.get('adaptations')
         require(isinstance(adaptations, list) and adaptations, 'Head design adaptations missing')
         registered_views[slot] = []
         for path in adaptations:
-            require(isinstance(path, str) and path.startswith('adaptations/'), 'Invalid head adaptation path')
+            require(isinstance(path, str) and path.startswith(f"{template['template_id']}/{motion['motion_set_id']}/"), 'Invalid head adaptation path')
             path = str(PurePosixPath(ref['file']).parent / path)
             data = record({'file': path, 'sha256': digest(safe_file(library, path, namespaces[slot]))})
             require(data.get('design_id') == design['design_id'] and data.get('template_id') == template['template_id'], 'Head adaptation identity mismatch')
@@ -496,7 +496,7 @@ def validate_registered_composition(repo, recipe_path, recipe):
         design = record(ref, 'parts')
         require(isinstance(design, dict), 'Registered head design missing')
         name, revision = identifier(design.get('design_id')), identifier(design.get('revision'))
-        require(design.get('category') == slot and ref['file'] == f'parts/{name}/revisions/{revision}/design.json',
+        require(design.get('category') == slot and ref['file'] == f'parts/{slot}/{name}/revisions/{revision}/design.json',
                 'Registered head design identity/category mismatch')
         designs[slot] = design
     require(isinstance(recipe['authoring_inputs'], list), 'Registered head authoring inputs missing')

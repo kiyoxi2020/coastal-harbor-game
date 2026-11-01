@@ -10,6 +10,14 @@
 
 安装工具依赖：`python3 -m pip install -r tools/characters/requirements.txt`。
 
+### 完整源帧准备（不属于人物构建）
+
+`pack_sources.py pack sources中的版本化packing计划 --output 全新目录`仅把完整源帧裁取、整帧nearest登记到公共画布，再直接复制RGBA排成图集；不组合部件、不处理mask、不补画或清理alpha。计划为`coastal-character-source-atlas-plan-v1`，路径必须为`sources/<source-id>/packing/<revision>.json`，绑定全部原PNG/提示词/作者输入SHA、原图尺寸、源格、整帧有理数倍率、根点与时序。切分和脚本处理仍须遵循任务中的用户授权。
+
+输出仅9图集等实际声明内容、`layout.json`和`manifest.json`，可放`parts/body/<design>/<revision>/`或`sources/<id>/derived/<revision>/`的全新目录；临时验证用`/private/tmp/coastal-*`。`python3 tools/characters/pack_sources.py verify <目录>`重读计划和实际输入，重建所有RGBA并逐像素比较，拒绝缺帧、越界、裁掉非零alpha、旧目录覆盖和源/布局/输出篡改。状态恒为review-only、complete_body_archive=false，不授予用户美术认可或生产资格。
+
+这只是统一构建前的源图准备，不能代替下方`build.py build/verify`：新增人物配方仍必须使用`coastal-character-construction-v1`，源图集仅作其已绑定输入。预处理工具有独立代码/依赖身份，不修改或刷新既有严格构建的engine哈希；不能据此绕过模板、同姿态、mask或换装接口校验。
+
 ```sh
 python3 tools/characters/build.py build art/characters/recipes/wardrobe-hoe-west/r002.json --output /private/tmp/coastal-character-build-r002
 python3 tools/characters/build.py verify /private/tmp/coastal-character-build-r002
@@ -30,6 +38,14 @@ manifest记录配方和实际依赖SHA、构建器/Pillow身份、artifact_diges
 check.py拒绝未登记的旧格式配方、旧构建变动或孤立输出、退役目录/试玩路径恢复、资源目录中的批次代码，以及未评审的生产人物贴图/控制器/引用或新增CharacterBody2D入口。当前九份旧配方只按冻结清单继续评审。runtime-baseline没有自动刷新命令，修改基线本身必须在评审中说明原因及对应验收。
 
 GitHub工作流 `Character construction gates / character-contract`在PR/push运行单元测试、仓库门禁及迁移校验。当前仅配置工作流，未运行远端CI或设置服务端required check；需要在仓库分支保护中将该job设为必需，才能阻止未通过的合并。静态扫描也不能识别任意脚本或判断图像中的人体，代码评审和原生动态验收仍是必要门禁。
+
+## Body-only材质点原生量测
+
+严格schema3且仅body槽的包可用`body_native.py snapshot --build <严格build目录> --points <版本化材质点JSON> --evidence /private/tmp/coastal-<全新目录>`冻结输入，再运行Godot `--script res://tests/characters/capture_body_raster.gd --log-file /private/tmp/coastal-<name>.log -- --evidence=<同目录>`。完成后必须先运行`body_native.py verify-inputs --evidence <同目录>`重算整个输入闭包和计划，再用`contact_evidence.py`的`--manifest/--manifest-sha256/--artifact/--points/--points-sha256/--native/--output`生成全新回执。
+
+观察器复用既有walk_trial场景和只替换初始化的test fixture，读取真实严格PNG并核对RGBA；逐pose静态采样，不实现角色/运动时钟，也不冒充实际移动观察。当前点范围只证明所选材质点的像素对应；没有把它们当作解剖支撑脚、掌心、地面或ownership mask。body-only不伪造head配方或留边，显式请求`--shoes`必须报无鞋覆盖，不能默默跳过。
+
+仍沿同一native_raster的41×41固定ROI、所有最优偏移≤1px和RGB界，不缩ROI、不改源点或阈值。`raster_matrix_complete`只指所选材质点/表面，physical/support/slide/target/release布尔值始终false；它不是身体归档、混搭或生产完成回执。旧schema2头部＋schema3衣装与鞋coverage核验保持原有范围。
 
 ## 迁移维护工具（按需读取）
 
@@ -57,7 +73,7 @@ hair-only按alpha>0二值支撑复制原RGBA；hat/hair_hat按far/body/(hair)/ne
 新GPU证据入口为 `construction_native.py snapshot --suite <suite.json> --evidence /private/tmp/coastal-<new>`，再运行 `res://tests/characters/test_character_construction_native.gd -- --evidence=<同目录>`；完成后 `construction_native.py verify --evidence <同目录> --receipt <同目录>/receipt.json`。Godot命令必须传 `--log-file /private/tmp/coastal-*.log`。snapshot目录必须全新，native只接受input-contract.json，无其他文件/目录；验证拒绝覆盖旧回执。它认证本小样的四state十面板循环、明暗停帧和世界动作，不认证OS输入/WM焦点、严格接触、导出或用户认可。
 
 
-## schema3注册视图与全动作评审（实施中）
+## schema3注册视图与全动作评审
 
 多个已verify的同母版、同款式hair_hat部分包可用`recipe_assembly.py <新recipe-id> <新revision> <父build目录...>`汇总登记元数据，再对其输出JSON调用上述`build.py build/verify`。它只创建版本化定义、带父编号的view/mapping目录和明确类型的来源快照，不处理PNG；重复非idle能力拒绝，重复idle须证明同canonical pose/body/geometry及基础、发帽像素一致。能力只取父包真实并集，不补缺帧或继承视觉认可。父制品保留不变，汇总包仍需同Godot消费者和原生验收。
 
@@ -75,7 +91,7 @@ schema3的`pose_id`原样匹配canonical pose token，允许母版既有的`B`�
 
 全动作suite schema2要求24 clips、20动作条目、四向canonical idle、一份hair_hat manifest和runtime。runtime v1显式声明走跑世界速度、默认速度因子、stable-idle-v1过渡时长及每clip播放率/pose内事件；走跑时间仍由实际位移驱动。缺字段或事件不属于实际pose时拒绝。农事事件只写隔离评审journal，用instance/event/loop身份去重，无业务事务或存档。
 
-`review.py all-actions-construction`已实现全包预检和既有试玩的全包模式，但真实24格资源尚未齐备，故目前没有正式全包review.json，不能把合成fixture当成可交付美术。原西锄四状态仍从headwear-construction入口回归；当前构建迁移及原Git恢复见 `art/characters/evidence/all-actions-v1/`。全包原生验收工具和实际接触验收仍待完成，旧西锄native入口不认证全包。
+`review.py all-actions-construction`提供真实24格84姿态的固定hair_hat评审包；当前构建由suite绑定。2026-10-30分类整理后，部件使用parts/<category>/<design>/<template>/<motion>/<revision>，strict制品按新路径重建；历史展示媒体已按用户要求清理，历史报告不能冒充本轮加载验证。原西锄四状态仍从headwear-construction入口回归。Q2=B保留，严格接触与生产发布仍未完成。
 
 全24格原生输入冻结使用`all_actions_capture.py snapshot --suite <全包suite.json> --evidence /private/tmp/coastal-<全新目录> --observer <poses|world|timing|transitions|spatial|locomotion-timing>`。它先严格预检完整hair_hat包，绑定实际源/输出、构建工具、播放与观察脚本的真实资源引用闭包，以及由实际姿态数量推导的采集计划；随后用`verify-inputs --evidence <同目录>`复核。重新计算合同摘要也不能删掉输入或降低计划要求。此入口仅证明输入闭包，尚不产生完整美术/接触/发布回执；不得把输入检查或synthetic观察等同于真实全包验收。
 

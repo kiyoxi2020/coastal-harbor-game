@@ -1,0 +1,56 @@
+{
+  "kind": "coastal-source-selection-test-reference-v1",
+  "historical_provenance": {
+    "commit": "7ef64b6",
+    "file": "art/characters/evidence/all-actions-v1/south-walk0-source-review.json",
+    "sha256": "6cbbb95e6ddf3215e683439c6eae87b77d16f07039aa1e2b16e7f2ef86be1dd2"
+  },
+  "source_selection_candidate": {
+    "polygon_target_units": [
+      [
+        202,
+        356
+      ],
+      [
+        308,
+        356
+      ],
+      [
+        310,
+        375
+      ],
+      [
+        304,
+        389
+      ],
+      [
+        291,
+        402
+      ],
+      [
+        275,
+        410
+      ],
+      [
+        255,
+        414
+      ],
+      [
+        236,
+        410
+      ],
+      [
+        219,
+        402
+      ],
+      [
+        207,
+        388
+      ],
+      [
+        201,
+        372
+      ]
+    ]
+  }
+}

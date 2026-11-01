@@ -86,7 +86,7 @@ def assemble(repo, parents, recipe_id, revision):
         design=copy.deepcopy(original);design.update(revision=recipe_id+'-'+revision,
             scope='Explicit union of verified parent registrations; review-only. No new source, pose or approval capability.')
         design.pop('status',None)
-        owner['slots'][slot]=write(f"parts/{design['design_id']}/revisions/{design['revision']}/design.json",design)
+        owner['slots'][slot]=write(f"parts/{slot}/{design['design_id']}/revisions/{design['revision']}/design.json",design)
         first=read_json(library/owner['adaptations'][slot]['file'])
         catalog=copy.deepcopy(first);catalog.update(design_revision=design['revision'],views=[],mappings=[])
         catalogs[slot]=catalog
@@ -123,7 +123,7 @@ def assemble(repo, parents, recipe_id, revision):
             base['required_capabilities'].append({'action_id':key[0],'direction':key[1]})
     for slot,catalog in catalogs.items():
         owner=head if slot in ['hair','hat'] else base
-        relative=f"parts/{catalog['design_id']}/adaptations/{catalog['template_id']}/{catalog['motion_set_id']}/{recipe_id}-{revision}/views.json"
+        relative=f"parts/{slot}/{catalog['design_id']}/{catalog['template_id']}/{catalog['motion_set_id']}/{recipe_id}-{revision}/views.json"
         owner['adaptations'][slot]=write(relative,catalog)
     proof={'kind':'coastal-registered-recipe-assembly-provenance-v1','scope':'metadata-only; strict build and native acceptance remain separate',
            'parents':[{'manifest':directory.relative_to(repo).as_posix()+'/manifest.json','manifest_sha256':digest(directory/'manifest.json'),

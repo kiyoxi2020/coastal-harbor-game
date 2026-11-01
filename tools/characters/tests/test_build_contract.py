@@ -26,10 +26,10 @@ class ConstructionTests(unittest.TestCase):
             if isinstance(value, str):
                 for old, new in [('templates/test/', 'templates/adult-standard-v1/'),
                                  ('/motions/motion/', '/motions/review-motion-v1/'),
-                                 ('/adaptations/test/motion/', '/adaptations/adult-standard-v1/review-motion-v1/'),
-                                 ('parts/top/', 'parts/top03/'),
-                                 ('parts/hair/', 'parts/hair-chestnut-short-v1/'),
-                                 ('parts/hat/', 'parts/hat-straw-navy-band-v1/')]:
+                                 ('/test/motion/', '/adult-standard-v1/review-motion-v1/'),
+                                 ('parts/top/top/', 'parts/top/top03/'),
+                                 ('parts/hair/hair/', 'parts/hair/hair-chestnut-short-v1/'),
+                                 ('parts/hat/hat/', 'parts/hat/hat-straw-navy-band-v1/')]:
                     value = value.replace(old, new)
             elif isinstance(value, dict):
                 for key, item in list(value.items()):
@@ -53,10 +53,10 @@ class ConstructionTests(unittest.TestCase):
         self.write = write
         source = write('sources/test/originals/source.png', Image.new('RGBA', (2, 2), (10, 20, 30, 255)))
         bundle = write('sources/test/source.json', {'source_id':'test', 'assets':[{'new_path':'art/characters/'+source['file'], 'new_sha256':source['sha256']}]})
-        texture = write('parts/top/adaptations/test/motion/r001/view.png', Image.new('RGBA', (2, 2), (200, 0, 0, 128)))
+        texture = write('parts/top/top/test/motion/r001/view.png', Image.new('RGBA', (2, 2), (200, 0, 0, 128)))
         body = write('templates/test/motions/motion/body-views/body.png', Image.new('RGBA', (2, 2), (10, 20, 30, 255)))
-        mask = write('parts/top/adaptations/test/motion/r001/mask.png', Image.new('L', (2, 2), 255))
-        definition = write('parts/top/design.json', {'design_id':'top', 'category':'top'})
+        mask = write('parts/top/top/test/motion/r001/mask.png', Image.new('L', (2, 2), 255))
+        definition = write('parts/top/top/design.json', {'design_id':'top', 'category':'top'})
         clips=[];actions={}
         for action, count in [('idle',1),('wave',3)]:
             frames=[]
@@ -100,6 +100,23 @@ class ConstructionTests(unittest.TestCase):
         self.recipe['authoring_inputs'].append(ref)
         (self.lib/ref['file']).write_text('{}')
         with self.assertRaisesRegex(ValueError,'SHA'):
+            self.validate()
+
+    def test_part_definition_uses_category_and_stable_design_identity(self):
+        self.recipe['slots']['top'] = self.write(
+            'parts/top/top/design.json', {'design_id': 'top', 'category': 'top'})
+        self.validate()
+
+    def test_part_definition_rejects_wrong_category_directory(self):
+        self.recipe['slots']['top'] = self.write(
+            'parts/pants/top/design.json', {'design_id': 'top', 'category': 'top'})
+        with self.assertRaisesRegex(ValueError, 'Part identity/path mismatch'):
+            self.validate()
+
+    def test_part_definition_rejects_wrong_design_directory(self):
+        self.recipe['slots']['top'] = self.write(
+            'parts/top/another/design.json', {'design_id': 'top', 'category': 'top'})
+        with self.assertRaisesRegex(ValueError, 'Part identity/path mismatch'):
             self.validate()
 
 
@@ -173,7 +190,7 @@ class ConstructionTests(unittest.TestCase):
 
 
     def test_ownership_must_be_an_actual_mask_image(self):
-        ref=self.write('parts/top/adaptations/test/motion/r001/not-mask.json',{'alpha':255})
+        ref=self.write('parts/top/top/test/motion/r001/not-mask.json',{'alpha':255})
         self.rejected(lambda d:d['clips'][0]['frames'][0]['layers'][1].update(ownership=ref),'mask')
 
     def test_source_bundle_must_be_canonical(self):
@@ -237,7 +254,7 @@ class ConstructionTests(unittest.TestCase):
         self.rejected(lambda d:d['clips'][1]['frames'][0].update(layer_order=['body','body']), 'order')
 
     def test_rejects_wrong_texture_dimensions(self):
-        ref=self.write('parts/top/adaptations/test/motion/r001/small.png',Image.new('RGBA',(1,1)))
+        ref=self.write('parts/top/top/test/motion/r001/small.png',Image.new('RGBA',(1,1)))
         self.rejected(lambda d:d['clips'][1]['frames'][0]['layers'][1].update(texture=ref), 'canvas')
 
     def test_rejects_hash_change(self):
@@ -253,7 +270,7 @@ class ConstructionTests(unittest.TestCase):
             self.validate()
 
     def test_rejects_symlink(self):
-        p=self.lib/'parts/top/adaptations/test/motion/r001/link.png';p.symlink_to(self.lib/self.recipe['clips'][0]['frames'][0]['layers'][1]['texture']['file'])
+        p=self.lib/'parts/top/top/test/motion/r001/link.png';p.symlink_to(self.lib/self.recipe['clips'][0]['frames'][0]['layers'][1]['texture']['file'])
         ref={'file':str(p.relative_to(self.lib)),'sha256':sha(p)}
         self.rejected(lambda d:d['clips'][0]['frames'][0]['layers'][1].update(texture=ref), 'symlink')
 

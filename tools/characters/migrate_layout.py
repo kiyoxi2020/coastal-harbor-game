@@ -129,7 +129,7 @@ class Migration:
             if context and value.get('id') and value.get('file') and (value.get('placement_mode') or value.get('slot') or 'offset_px' in value):
                 part=value['id'];slot=value.get('slot',part)
                 design=value.get('design_id',context.get('slots',{}).get(slot,'__body_interface__'))
-                context=dict(context,part=part,design=design)
+                context=dict(context,part=part,part_category=slot,design=design)
             out={}
             for k,v in value.items():
                 if k in {'inputs','artifact_digest','source_contract'}:continue
@@ -152,7 +152,7 @@ class Migration:
                     role=context.get('part')
                     if role:
                         sub='views' if key in {'registered_file','near_file','far_file','complete_source'} else 'masks'
-                        prefix=f"templates/adult-standard-v1/motions/review-motion-v1/body-views" if context['design']=='__body_interface__' else f"parts/{context['design']}/adaptations/adult-standard-v1/review-motion-v1/r001/{sub}"
+                        prefix=f"templates/adult-standard-v1/motions/review-motion-v1/body-views" if context['design']=='__body_interface__' else f"parts/{context.get('part_category', context.get('part'))}/{context['design']}/adult-standard-v1/review-motion-v1/r001/{sub}"
                         preferred=f"{prefix}/{context['recipe']}/{context['pose']}-{context['part']}-{key}-{hashlib.sha256(old.encode()).hexdigest()[:8]}.png"
                     elif key=='file':preferred=f"builds/{context['build']}/frames/{context['pose']}-{context.get('state','frame')}.png"
                 mapped=self.import_asset(old,preferred)
@@ -202,11 +202,12 @@ class Migration:
                 target['parts']={}
                 for part,record in frame['parts'].items():
                     design='hair-chestnut-short-v1' if part.startswith('hair') else 'hat-straw-navy-band-v1' if part=='hat' else data.get('recipe',{}).get('slots',{}).get(part,part)
-                    part_context=dict(ctx,part=part,design=design)
+                    slot = 'hair' if part.startswith('hair') else part
+                    part_context=dict(ctx,part=part,part_category=slot,design=design)
                     extraction=self.resolve(record.get('extraction_manifest'),old)
                     if extraction:part_context['secondary_origin']=extraction
                     converted_part=self.convert(record,old,deps,part,part_context);target['parts'][part]=converted_part
-                    self.part_views[design].append({'recipe_id':ctx['recipe'],'pose_id':frame['pose_id'],'part_id':part,'view':converted_part,'scope':'Exact imported sample only; no compatibility beyond declared pose and recipe.'})
+                    self.part_views[design].append({'recipe_id':ctx['recipe'],'pose_id':frame['pose_id'],'part_id':part,'slot':slot,'view':converted_part,'scope':'Exact imported sample only; no compatibility beyond declared pose and recipe.'})
             converted.append(target)
         result['frames']=converted[:-1];result['idle']=converted[-1]
         self.keep_inputs_metadata(old,data,deps)
@@ -344,8 +345,9 @@ class Migration:
             assets=[self.store.records[o] for o in sorted(origins)]
             self.write(f'sources/{sid}/source.json',{'source_id':sid,'origin_commit':self.reader.ref,'assets':assets,'scope':'Necessary source/registration records imported unchanged. Legacy JSON is opaque provenance; use current view and build indexes for resolved paths.'})
         for design,views in self.part_views.items():
-            self.write(f'parts/{design}/adaptations/adult-standard-v1/review-motion-v1/r001/views.json',{'design_id':design,'template_id':'adult-standard-v1','views':views,'scope':'Exact imported recipe/pose view mappings only'})
-            if not (self.root/f'parts/{design}/design.json').exists():self.write(f'parts/{design}/design.json',{'design_id':design,'adaptations':['adaptations/adult-standard-v1/review-motion-v1/r001/views.json'],'status':'sampled-motion-adaptations','do_not_infer_full_compatibility':True})
+            category=views[0]['slot']
+            self.write(f'parts/{category}/{design}/adult-standard-v1/review-motion-v1/r001/views.json',{'design_id':design,'template_id':'adult-standard-v1','views':views,'scope':'Exact imported recipe/pose view mappings only'})
+            if not (self.root/f'parts/{category}/{design}/design.json').exists():self.write(f'parts/{category}/{design}/design.json',{'design_id':design,'adaptations':['adult-standard-v1/review-motion-v1/r001/views.json'],'status':'sampled-motion-adaptations','do_not_infer_full_compatibility':True})
         for recipe in self.recipes:self.write(f"recipes/{recipe['recipe_id']}/r001.json",recipe)
         self.write('templates/adult-standard-v1/motions/review-motion-v1/motion-set.json',{'template_id':'adult-standard-v1','motion_set_id':'review-motion-v1','locomotion':'builds/locomotion-r001/manifest.json','run':'builds/run-r001/candidate.json','farming_reference_clips':self.actions,'scope':'Current approved complete-frame and sampled component material; hidden bodies and strict contact remain incomplete.'})
         self.write('definitions/actions.json',{'actions':['idle','walk','run','hoe','water','harvest'],'scope':'Existing semantic actions only; extra actions require explicit motion data and applicable gameplay handler.'})
@@ -390,10 +392,12 @@ def validate_manifest_references(root,obj):
     return True
 
 def verify(repo=REPO,destination=None):
+    from organize_library import historical_binding
     root=Path(destination) if destination else Path(repo)/LIB;data=json.loads((root/'migrations/2026-10-resource-layout/dynamic-path-map.json').read_bytes());count=0
     for entry in data['files']:
-        p=root/entry['new_path'][len(LIB)+1:]
-        if digest(p.read_bytes())!=entry['new_sha256']:raise ValueError('Migrated resource changed: '+str(p))
+        name, expected = historical_binding(repo, entry['new_path'], entry['new_sha256']) if destination is None else (entry['new_path'], entry['new_sha256'])
+        p=root/name[len(LIB)+1:]
+        if digest(p.read_bytes())!=expected:raise ValueError('Migrated resource changed: '+str(p))
         count+=1
     for path in data['core'].values():
         obj=json.loads((root/path[len(LIB)+1:]).read_bytes())

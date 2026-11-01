@@ -11,6 +11,7 @@ from pathlib import Path
 import re
 from build_contract import KIND, MODEL, digest, read_json, require, validate
 from build import verify
+from organize_library import verify_legacy_binding
 
 REPO = Path(__file__).resolve().parents[2]
 BASELINE = Path(__file__).with_name('runtime-baseline.json')
@@ -106,10 +107,12 @@ def check_repository(repo, policy=None):
     refs, bodies = production_scan(repo)
     require(refs == policy['production_references'], 'Unreviewed production character reference change')
     require(bodies == policy['character_body_entries'], 'Unregistered production character body entry')
-    require(file_hashes(repo, policy['legacy_build_directories']) == policy['legacy_build_files'], 'Legacy build changed or contains unregistered files')
+    legacy_expected = dict(verify_legacy_binding(repo, name, sha) for name, sha in policy['legacy_build_files'].items())
+    require(file_hashes(repo, policy['legacy_build_directories']) == legacy_expected, 'Legacy build changed or contains unregistered files')
     for name, expected in policy['legacy_recipes'].items():
-        path = repo/name
-        require(path.is_file() and not path.is_symlink() and digest(path) == expected, 'Frozen legacy recipe changed: ' + name)
+        current_name, current_sha = verify_legacy_binding(repo, name, expected)
+        path = repo/current_name
+        require(path.is_file() and not path.is_symlink() and digest(path) == current_sha, 'Frozen legacy recipe changed: ' + name)
     lib = repo/'art/characters'
     catalog = lib/'catalog.json'
     if catalog.exists():

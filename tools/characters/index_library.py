@@ -27,7 +27,8 @@ def main():
             for state in states:
                 rows.append({'recipe_id':recipe_id,'head_state':state,'template_id':s['template_id'],'action_id':s['action_id'],'direction':s['direction'],'manifest':sample_path,'pose_count':len(s['frames']),'has_matching_idle':True,'source_available':True,'baked_available':True,'component_scope':'exact sampled pose/recipe only','migration_native':'pending','user_acceptance':group+'-'+entry['id'] if group=='wardrobe' or entry['id'] in ['run-east','hoe-west'] else 'not-recorded'})
     for design,entries in views.items():
-        path=f'parts/{design}/adaptations/adult-standard-v1/review-motion-v1/r001/views.json'
+        category = 'hair' if design.startswith('hair') else entries[0]['slot']
+        path=f'parts/{category}/{design}/adult-standard-v1/review-motion-v1/r001/views.json'
         write(path,{'resource_root':'art/characters','design_id':design,'template_id':'adult-standard-v1','scope':'Only explicitly listed pose/recipe adaptations. No full wardrobe compatibility inferred.','views':entries})
         item=designs.setdefault(design,{'design_id':design,'category':entries[0]['slot'],'static_status':'not-listed','motion_adaptations':[]})
         item['motion_adaptations'].append(path)
@@ -44,7 +45,7 @@ def main():
     static_catalog=read('reviews/static-candidates/catalog.json')
     static_by_id={c['id']:c for entries in static_catalog['categories'].values() for c in entries if c['category']!='body'}
     for item in designs.values():
-        definition=f"parts/{item['design_id']}/design.json"
+        definition=f"parts/{item['category']}/{item['design_id']}/design.json"
         if not (LIB/definition).exists():
             candidate=static_by_id.get(item['design_id'],{})
             write(definition,{'design_id':item['design_id'],'label':candidate.get('label',item['design_id']),'category':item['category'],'source':candidate.get('source'),'static_scope':candidate.get('compatibility'),'static_status':item['static_status'],'motion_adaptations':item['motion_adaptations'],'identity_status':'legacy-scoped-baseline-label' if item['design_id'].startswith('original-') else 'declared-design-id','scope':'Only listed references and exact adaptations; no implied all-motion compatibility.'})
@@ -52,7 +53,7 @@ def main():
             entries=read(adaptation)['views'];base=str(Path(adaptation).parent)
             write(base+'/pose-map.json',{'design_id':item['design_id'],'mapping':[{'recipe_id':v['recipe_id'],'pose_id':v['pose_id'],'part_id':v['part_id'],'view_index':i} for i,v in enumerate(entries)],'views':'views.json','multi_pose_view_reuse_allowed':True})
             write(base+'/adaptation.json',{'design_id':item['design_id'],'template_id':'adult-standard-v1','motion_set_id':'review-motion-v1','revision':'r001','pose_map':'pose-map.json','views':'views.json','coverage_and_occlusion':'Stored separately in each referenced view; do not infer from source ownership','scope':'Exact sampled recipes only'})
-        p=f"parts/{item['design_id']}/design.json"
+        p=f"parts/{item['category']}/{item['design_id']}/design.json"
         if (LIB/p).exists():item['definition']=p
     write('catalog.json',{'schema_version':1,'resource_root':'art/characters','character_model_id':'unified-composable-character-v1','status':'development-library-not-production-release','selected_template':'templates/adult-standard-v1/template.json','static_candidates':'static-index.json','parts':sorted(designs.values(),key=lambda x:x['design_id']),'reviews':{name:'reviews/'+name+'/review.json' for name in ['locomotion','farming','wardrobe','headwear','static-candidates']},'coverage':'coverage.json','source_index':[str(p.relative_to(LIB)) for p in sorted((LIB/'sources').glob('*/source.json'))],'production_release':None})
     write('templates/adult-standard-v1/template.json',{'template_id':'adult-standard-v1','active_revision':static['selected_template']['active_revision'],'static_selection':'templates/adult-standard-v1/selection.json','motion_set':'templates/adult-standard-v1/motions/review-motion-v1/motion-set.json','scope':'Selected appearance plus imported motion references/interfaces. Not a complete hidden-body or all-combination capability claim.'})

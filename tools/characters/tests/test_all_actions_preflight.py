@@ -77,7 +77,7 @@ class FullPackagePreflightTests(unittest.TestCase):
                                                          if m['mapping_id'] == role + '-' + old_pose))
                         head_mapping.update(mapping_id=mapping_id)
                         head_mapping['target_pose']['record'] = pose
-                        head_mapping['texture']['file'] = f'parts/{slot}/adaptations/test/motion/r002/{mapping_id}.png'
+                        head_mapping['texture']['file'] = f'parts/{slot}/{slot}/test/motion/r002/{mapping_id}.png'
                         self.head.adaptations[slot]['mappings'].append(head_mapping)
                 pose_path = f'templates/test/motions/motion/actions/{action}/r001/{direction}/poses.json'
                 variant = {field: clip[field] for field in ['canvas_px', 'root_anchor_px', 'display_scale']}
@@ -107,12 +107,12 @@ class FullPackagePreflightTests(unittest.TestCase):
         # source/view/mapping layers in this deliberately synthetic fixture.
         for slot in ['pants', 'shoes']:
             design = 'original-' + slot
-            base.recipe['slots'][slot] = base.write(f'parts/{design}/revisions/r002/design.json',
+            base.recipe['slots'][slot] = base.write(f'parts/{slot}/{design}/revisions/r002/design.json',
                 {'design_id': design, 'category': slot, 'revision': 'r002'})
             data = copy.deepcopy(base.adaptation)
             data['design_id'] = design
             base.recipe['adaptations'][slot] = base.write(
-                f'parts/{design}/adaptations/adult-standard-v1/review-motion-v1/r002/views.json', data)
+                f'parts/{slot}/{design}/adult-standard-v1/review-motion-v1/r002/views.json', data)
             for clip in base.recipe['clips']:
                 for frame in clip['frames']:
                     layer = copy.deepcopy(frame['layers'][1])
@@ -120,7 +120,7 @@ class FullPackagePreflightTests(unittest.TestCase):
                     # Mapping textures must belong to this selected design.
                     mapping = next(m for m in data['mappings'] if m['mapping_id'] == frame['pose_id'])
                     with Image.open(base.lib/mapping['texture']['file']) as texture:
-                        mapping['texture'] = base.write(f'parts/{design}/adaptations/adult-standard-v1/review-motion-v1/r002/{frame["pose_id"]}.png', texture.copy())
+                        mapping['texture'] = base.write(f'parts/{slot}/{design}/adult-standard-v1/review-motion-v1/r002/{frame["pose_id"]}.png', texture.copy())
                     layer['texture'] = mapping['texture']
                     frame['layers'].append(layer); frame['layer_order'].append(slot)
             base.recipe['adaptations'][slot] = base.write(base.recipe['adaptations'][slot]['file'], data)
@@ -173,7 +173,7 @@ class FullPackagePreflightTests(unittest.TestCase):
     def test_unused_view_is_not_an_actual_input_dependency(self):
         unused = copy.deepcopy(self.head.adaptations['hair']['views'][0])
         unused['view_id'] = 'unused-alternative'
-        unused['compatibility'] = {'file': 'parts/hair-chestnut-short-v1/adaptations/adult-standard-v1/review-motion-v1/r002/compatibility/unselected.json', 'sha256': '0'*64}
+        unused['compatibility'] = {'file': 'parts/hair/hair-chestnut-short-v1/adult-standard-v1/review-motion-v1/r002/compatibility/unselected.json', 'sha256': '0'*64}
         self.head.adaptations['hair']['views'].append(unused)
         self.head.refresh()
         output = self.head.fixture.lib/'builds/full-unused-view-r001'

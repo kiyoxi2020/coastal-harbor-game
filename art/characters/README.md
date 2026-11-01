@@ -2,6 +2,14 @@
 
 这是现行人物**制作、构建和评审**的资源库。后续 agent 先读本页，再按任务进入具体文件；不要靠目录名、文件数量或旧日志推断资源已能通用组合。
 
+## 2026-10-30 分类整理后的日常入口
+
+先看 [当前人物与衣物](CURRENT.md)。真实部件路径已按 `parts/<部位>/<款式ID>/` 分类，部位为 top、pants、shoes、hair、hat；共享接口在 shared。每款的体型/动作适配直接位于 `<template>/<motion>/<revision>/`，不再嵌套 adaptations。稳定ID保留，不能仅凭目录存在推断完整动作兼容。
+
+sources保留制作源与提示词，templates保留母版和姿态，recipes定义组合，builds保留加载与重建必需制品。款式内部分review命名文件是实际SHA依赖，仍保留；它们不是可随意删除的展示缓存。
+
+用户已授权精简确认后的验收材料：视频、动图、非必需截图、原始截图压缩包和大型观察快照不再常驻。旧报告中的媒体路径为历史路径，必要时从迁移前提交7ef64b6恢复；旧原生验收不自动变成新路径验收。轻量决定/范围记录保留，迁移清单见 `migrations/2026-10-30-organization.json`。
+
 ## 接手时先读什么
 
 1. 仓库根 [AGENTS.md](../../AGENTS.md)：执行约定和强制门禁。
@@ -49,7 +57,7 @@ art/characters/
 | 当前成年母版 | [template.json](templates/adult-standard-v1/template.json)、[selection.json](templates/adult-standard-v1/selection.json) | `active_revision`绑定选定外观；静态母版认可不等于隐藏身体或全动作完成 |
 | 动作及四向姿态 | [motion-set.json](templates/adult-standard-v1/motions/review-motion-v1/motion-set.json) → `actions/<action-id>/<revision>/<direction>/poses.json` | 看实际variant、pose顺序、时长、canvas、root和scale；不能把A/B当无差别替换 |
 | 同pose身体参考 | `templates/<template-id>/motions/<motion-set-id>/body-views/` | 某些是保留脸/手/工具/衣物轮廓的完整穿衣参考，不是可任意换装的裸身体 |
-| 具体衣裤鞋/发帽 | `parts/<design-id>/design.json` → `adaptations/<template-id>/<motion-set-id>/<revision>/` | `views.json`列实际适配，`pose-map.json`关联pose/view；只承诺列出的配方范围 |
+| 具体衣裤鞋/发帽 | `parts/<category>/<design-id>/design.json` → `<template-id>/<motion-set-id>/<revision>/` | `views.json`列实际适配，`pose-map.json`关联pose/view；只承诺列出的配方范围 |
 | 原始来源 | `sources/<source-id>/source.json` → 其assets及prompt/metadata | 保留完整原图与来源身份；originals中也可能含切图或必要中间参考，不能仅凭名字删除 |
 | 实际组合 | `recipes/<recipe-id>/<revision>.json` | 区分旧抽样记录与有 `kind: coastal-character-construction-v1` 的严格配方，不能仅按r001/r002判断格式 |
 | 当前显示帧 | 配方或评审catalog指向的 `builds/<build-id>/` | 依具体manifest/sample/candidate解析，不按文件名猜哪个是最新版 |
@@ -119,11 +127,11 @@ python3 -m unittest discover -s tools/characters/tests
 | 任务 | 修改入口 | 完成前必须确认 |
 |---|---|---|
 | 新动作 | 当前体型动作集的 `actions/<action-id>/<revision>/`，再补实际配方 | 新pose/时序/事件及进入退出规则；对应衣物/发帽接口齐全 |
-| 新款式 | `parts/<design-id>/`及目标体型/动作集适配 | 同投影可复用view；新形态要真实补源/隐藏区/覆盖与层序 |
+| 新款式 | `parts/<category>/<design-id>/`及目标体型/动作集适配 | 同投影可复用view；新形态要真实补源/隐藏区/覆盖与层序 |
 | 新体型 | 自身template与动作适配，沿同一model合同 | 不能缩小成人冒充儿童，不能分叉另一套人体管线 |
 | 新组合 | `recipes/`中的严格配方新revision，再产新build | 声明实际能力和依赖；先单侧运动小样再扩四向/动态混搭 |
 
-按coverage先补实际生产配方的缺口，不预先穷举整衣柜。当前仍欠完整同配方全动作四向发帽、部分隐藏身体/新衣型接口、严格足/握持/目标接触、其他体型动态适配和正式角色发布。南浇/北收发帽未记录的新用户认可不能由目录迁移补写。
+按coverage先补实际生产配方的缺口，不预先穷举整衣柜。固定配方全动作四向发帽评审包已完成；仍欠部分隐藏身体/新衣型接口、严格足/握持/目标接触、其他体型动态适配和正式角色发布。南浇/北收发帽未记录的新用户认可不能由目录迁移补写。
 
 ## 维护工具与冻结边界
 

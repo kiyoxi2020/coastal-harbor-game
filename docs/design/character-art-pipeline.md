@@ -165,7 +165,7 @@ mask与目标表面必须在同一姿态坐标系，记录source/pose/owner/targ
 
 - `sources/<source-id>/`：最终采用的完整GPT源、提示词、必要生成参考与注册元数据；source.json关联确切来源与SHA。
 - `templates/<template-id>/revisions/`：所选母版；`motions/<motion-set-id>/actions/<action-id>/<revision>/<direction>/`：动作、姿态、画布/根点/时序与真实已有接口。完整穿衣参考不冒充隐藏身体。
-- `parts/<design-id>/`：款式与变体；`adaptations/<template-id>/<motion-set-id>/<revision>/`保存完整view、pose-map及分开的ownership/coverage/occlusion引用。多个pose可以引用同一view，不按动作复制款式。
+- `parts/<category>/<design-id>/`：款式与变体；`<template-id>/<motion-set-id>/<revision>/`保存完整view、pose-map及分开的ownership/coverage/occlusion引用。多个pose可以引用同一view，不按动作复制款式。
 - `recipes/<recipe-id>/`：实际有限配方；`builds/<build-id>/`：精确烘焙输出与输入清单；`reviews/<suite-id>/`：评审入口；`evidence/<scope-id>/`：轻量原认可记录与必要当前核验证据；`migrations/`：旧新映射、保全与恢复记录。
 - 制作与核验代码在 `tools/characters/`；Godot隔离试玩在`godot2d/dev/characters/`，相关测试在`godot2d/tests/characters/`。统一启动为`python3 tools/characters/review.py <suite>`，不在新美术批次下另建Godot工程。
 - 正式发布门禁通过后，才在`godot2d/assets/characters/releases/<release-id>/`接入唯一发布清单。当前正式`player-unified-v4`仍在运行，本次目录迁移不提前切换或删除它。
