@@ -12,9 +12,9 @@ import shutil
 from build_contract import digest, safe_file
 
 REPO = Path(__file__).resolve().parents[3]
-PACKAGE = Path('godot2d/assets/characters/integrations/adult-v4-tank-visible-r001')
+PACKAGE = Path('godot2d/assets/characters/integrations/adult-v5-pixel-visible-r010')
 BUILD = Path('art/characters/builds/runtime-fixture-r001')
-FRAMES = Path('godot2d/resources/player_body_v4_frames.tres')
+FRAMES = Path('godot2d/resources/player_body_v5_frames.tres')
 
 
 def runtime_manifest():
@@ -23,10 +23,10 @@ def runtime_manifest():
 
 def runtime_png(frame):
     path = frame['texture']
-    if not path.startswith('res://assets/characters/integrations/adult-v4-tank-visible-r001/frames/'):
+    if not path.startswith('res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/'):
         raise ValueError('Unexpected main runtime fixture texture')
     return safe_file(REPO/'godot2d', path.removeprefix('res://'),
-                     'assets/characters/integrations/adult-v4-tank-visible-r001/frames')
+                     'assets/characters/integrations/adult-v5-pixel-visible-r010/frames')
 
 
 def animation_inputs(manifest):

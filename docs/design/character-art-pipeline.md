@@ -184,7 +184,7 @@ parts中已有的版本化候选或静态适配仍按各自状态保留；**放�
 
 原始源图、必要canonical及不可变构建允许在各自目录保留，不能为消除重复而损坏依赖。旧目录属于历史技术依赖，不构成今后继续把最终美术留在parts之外的例外。新路径产生新manifest/digest，以逐RGBA、姿态/时序/注册等价记录关联原认可，不重写旧回执，不把目录迁移冒充新的视觉、接触或发布验收。
 
-制作代码位于`tools/characters/`，隔离试玩位于`godot2d/dev/characters/`，测试位于`godot2d/tests/characters/`；不在美术批次下另建合成器或Godot工程。正式发布另按发布合同进入`godot2d/assets/characters/releases/<release-id>/`。当前默认主角的v4背心短裤本地接入与旧NPC运行状态以CURRENT及runtime-baseline为准；parts归档不自动切换运行资源或授予发布资格。
+制作代码位于`tools/characters/`，隔离试玩位于`godot2d/dev/characters/`，测试位于`godot2d/tests/characters/`；不在美术批次下另建合成器或Godot工程。正式发布另按发布合同进入`godot2d/assets/characters/releases/<release-id>/`。当前默认主角的v5像素风本地接入与旧NPC运行状态以CURRENT及runtime-baseline为准；parts归档不自动切换运行资源或授予发布资格。
 
 ### 8.2.1 最终动画独立与制作过程精简
 

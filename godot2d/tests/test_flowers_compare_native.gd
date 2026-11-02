@@ -8,7 +8,7 @@ func run() -> void:
 	check("isolated",w.save_service.directory=="/private/tmp/coastal-flowers-v7-save")
 	check("native_renderer",DisplayServer.get_name()!="headless")
 	if w.save_service.directory!="/private/tmp/coastal-flowers-v7-save":finish();return
-	check("new_game",w.start_new_game("花丛对比"))
+	check("new_game",w.start_new_game("现行花丛验收"))
 	if not await walk_to(Vector2(270,244),"viewpoint"):finish();return
 	w.hud.get_node("Root/Toast").hide()
 	var flowers:Dictionary={}
@@ -19,11 +19,7 @@ func run() -> void:
 	for node in flowers:
 		check("production_48_"+node.name,node.texture.resource_path.begins_with("res://assets/flowers-v7/48/"))
 	await capture("flowers-production")
-	for width in [32,48]:
-		for node in flowers:
-			node.texture=load("res://assets/flowers-v7/%d/"%width+flowers[node])
-			node.scale=Vector2.ONE*(16.0/width)
-			node.offset=Vector2(0,-node.texture.get_height()/2.0)
-			check("same_footprint_%d_"%width+node.name,node.texture.get_size()*node.scale==Vector2(16,14))
-		await capture("flowers-%d"%width)
+	# The 32px comparison candidate is retired; verify the actual production nodes.
+	for node in flowers:
+		check("same_footprint_48_"+node.name,node.texture.get_size()*node.scale==Vector2(16,14))
 	finish()

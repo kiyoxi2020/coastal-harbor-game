@@ -1,6 +1,6 @@
 extends "res://tests/test_life_farming_native.gd"
 # Integration observer only: the actual harbor player owns movement and animation.
-const PACKAGE := "res://assets/characters/integrations/adult-v4-tank-visible-r001/manifest.json"
+const PACKAGE := "res://assets/characters/integrations/adult-v5-pixel-visible-r010/manifest.json"
 var trace: Array[Dictionary] = []
 var loop_counts: Dictionary = {}
 var video_frames: Array[Dictionary] = []

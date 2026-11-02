@@ -2,7 +2,7 @@
   "schema_version": 1,
   "resource_root": "art/characters",
   "character_model_id": "unified-composable-character-v1",
-  "status": "current-v4-main-game-and-independent-v5-review; historical character library retired by user",
+  "status": "current-v5-main-game-and-v4-authoring-template; historical character library retired by user",
   "selected_template": "templates/adult-standard-v4/template.json",
   "static_candidates": null,
   "parts": [],

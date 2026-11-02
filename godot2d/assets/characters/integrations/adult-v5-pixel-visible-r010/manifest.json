@@ -1,0 +1,986 @@
+{
+  "kind": "coastal-godot-character-integration-v1",
+  "schema_version": 1,
+  "status": "local-development-integration",
+  "production_release": false,
+  "character_model_id": "unified-composable-character-v1",
+  "source_build": {
+    "file": "art/characters/builds/adult-v5-pixel-visible-r010/manifest.json",
+    "sha256": "3c5811f7528e47c5d724f515e75ae03c5d31e529bd3a77746a6adecc6bad6bc7",
+    "artifact_digest": "281c1a1eeb725616ec5db29659143a9b76631d1b3aa3b65f0c5722c378bf186b"
+  },
+  "recipe": {
+    "file": "art/characters/recipes/adult-v5-pixel-visible/r010.json",
+    "sha256": "56346037bff4de2d633a62d272e594310acf9475d9209622508d02808c7f9506"
+  },
+  "package": "godot2d/assets/characters/integrations/adult-v5-pixel-visible-r010",
+  "sprite_frames": {
+    "file": "godot2d/resources/player_body_v5_frames.tres",
+    "sha256": "a64f51a68e5aacacf0c24adc356e245b650907da89b1f17758297e8264ed7c1e"
+  },
+  "geometry": {
+    "canvas_px": [
+      260,
+      228
+    ],
+    "root_anchor_px": [
+      125,
+      201
+    ],
+    "world_scale": 0.25
+  },
+  "clips": [
+    {
+      "name": "idle_north",
+      "action": "idle",
+      "direction": "north",
+      "loop": true,
+      "frames": [
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/idle/north/idle_north_0.png",
+          "pose_id": "idle_north_0",
+          "duration_ms": 1000,
+          "sha256": "f2d111afba5a2ccd6bc36cf81808683dcbbdc9e5572c6a37f25137c32097542a",
+          "rgba_sha256": "8d869867c63310ae21db99f05c0f8bae872f3dd2ed25c945c7a4b821da82d529"
+        }
+      ]
+    },
+    {
+      "name": "idle_west",
+      "action": "idle",
+      "direction": "west",
+      "loop": true,
+      "frames": [
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/idle/west/idle_west_0.png",
+          "pose_id": "idle_west_0",
+          "duration_ms": 1000,
+          "sha256": "093f5a009d8d87e043a575018c297b325d564ce37e262402732b30a20c1b3f1b",
+          "rgba_sha256": "e1a436e51e18d9ee9ae0f0f594309edb3058b2b23697443e9524636e9e2cdae3"
+        }
+      ]
+    },
+    {
+      "name": "idle_south",
+      "action": "idle",
+      "direction": "south",
+      "loop": true,
+      "frames": [
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/idle/south/idle_south_0.png",
+          "pose_id": "idle_south_0",
+          "duration_ms": 1000,
+          "sha256": "c276d440de0698ea337fc03c2c2215e3b1e7b68bcb5f534ec19411d160693821",
+          "rgba_sha256": "7410f5e25cf7232de7a8571320a21a470a7d3923afbd742b3c50d5380cf7a9a6"
+        }
+      ]
+    },
+    {
+      "name": "idle_east",
+      "action": "idle",
+      "direction": "east",
+      "loop": true,
+      "frames": [
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/idle/east/idle_east_0.png",
+          "pose_id": "idle_east_0",
+          "duration_ms": 1000,
+          "sha256": "1b6c52a27678694f9a502ea4f7fde9f21eb8d596a3027d9b88c452e3b0e47da9",
+          "rgba_sha256": "2754a1fb7e2d478ae99390e331ce647f0b64239f0852fa02d707effa35b5bad6"
+        }
+      ]
+    },
+    {
+      "name": "walk_north",
+      "action": "walk",
+      "direction": "north",
+      "loop": true,
+      "frames": [
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/walk/north/suit_walk_north_0.png",
+          "pose_id": "suit_walk_north_0",
+          "duration_ms": 53,
+          "sha256": "1092f8a9dc672f89008abd0597b846f69f5fa0124c2e6046d0c4e2b87ef98204",
+          "rgba_sha256": "ce394b42e0542e8dcc1b4a81fc03fd5c8506cc041f2735314d702b7c9f2915ce"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/walk/north/suit_walk_north_1.png",
+          "pose_id": "suit_walk_north_1",
+          "duration_ms": 54,
+          "sha256": "4b8c19df5f27dca276d5a3117f7668343e42120d2dac0feba427a05801afd03e",
+          "rgba_sha256": "649fa5db1b21bbb79235137851b3f4d32fa18f6cf239946419bfcc961ea00e6f"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/walk/north/suit_walk_north_2.png",
+          "pose_id": "suit_walk_north_2",
+          "duration_ms": 53,
+          "sha256": "f84f8a2b1e48f5d42eff56a1e68df27cd9ba046f10012b31eeb494b0090cda2a",
+          "rgba_sha256": "099527c752d1607c86edec38a2e5b8a7273d55df782e3dd33989d99f941ede18"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/walk/north/suit_walk_north_3.png",
+          "pose_id": "suit_walk_north_3",
+          "duration_ms": 53,
+          "sha256": "5126b35d085d878318c4007d65277d9f095730aed0875b6c82619308f2affc6c",
+          "rgba_sha256": "1447ab4b380b89de2af31a699c4a1619994f18da1aab897213125cda39bdebb6"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/walk/north/suit_walk_north_4.png",
+          "pose_id": "suit_walk_north_4",
+          "duration_ms": 54,
+          "sha256": "0144158b8e6d59e0934ee51aa97755acb3745cf5dd3d3d43d368e0108eea7258",
+          "rgba_sha256": "8e7b6e78a82ade1017ea04ac1e98630878d046c3d4ec81a6916e20039e914124"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/walk/north/suit_walk_north_5.png",
+          "pose_id": "suit_walk_north_5",
+          "duration_ms": 53,
+          "sha256": "b9f94fcec252f5f3e07ccf7af4f6b87cb8b5f01a3fcf2f8ec4d5c65eb12f27c6",
+          "rgba_sha256": "60998d36f2ec2c076dcf25cfef31f0d67f6b578b2a633a1f778f2c8011aab8dd"
+        }
+      ]
+    },
+    {
+      "name": "walk_west",
+      "action": "walk",
+      "direction": "west",
+      "loop": true,
+      "frames": [
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/walk/west/suit_walk_west_0.png",
+          "pose_id": "suit_walk_west_0",
+          "duration_ms": 53,
+          "sha256": "9880900ae024b4472eb026b60420ed0dc5e218167cf6c4e1ab1fcffcf2acbfcc",
+          "rgba_sha256": "5e1182be7f1e81865a447fbe647cc1ac312e314753901474bad69dffc353c86c"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/walk/west/suit_walk_west_1.png",
+          "pose_id": "suit_walk_west_1",
+          "duration_ms": 54,
+          "sha256": "e0c7699d6bbf6115513b510e0991d31af4c6bbb6a164810f0ccb37c39f296c07",
+          "rgba_sha256": "5369dc371b94faaf02740a3844cc57cf5106f03b45922dc62c676e0d85ddedb4"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/walk/west/suit_walk_west_2.png",
+          "pose_id": "suit_walk_west_2",
+          "duration_ms": 53,
+          "sha256": "8bfbaeeac48e25640ec8539aeb59dbe44134d2de8bd9c42573655a8de4a13c72",
+          "rgba_sha256": "8b3b92e9f4cffc9b0035e17c5676ef1b4dac28eb246b758bd4f0bb1afed622da"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/walk/west/suit_walk_west_3.png",
+          "pose_id": "suit_walk_west_3",
+          "duration_ms": 53,
+          "sha256": "761f3b30c9c464b7b6bd48ec5e6b20f071be04a5beb8e0fb83c48b2e7ca2d242",
+          "rgba_sha256": "a24800ec50066947adb5d46b3abc8ac9f1df252aae3c4530ad622f2597dccf12"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/walk/west/suit_walk_west_4.png",
+          "pose_id": "suit_walk_west_4",
+          "duration_ms": 54,
+          "sha256": "c64bcc13721efbae8d061489a4737b9e722047a10df2d2b5a7e411c16ca2997a",
+          "rgba_sha256": "f8b1488aaba1b9e80a6f777714745468dae83b815ac5a09336f79e9ab9f59d75"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/walk/west/suit_walk_west_5.png",
+          "pose_id": "suit_walk_west_5",
+          "duration_ms": 53,
+          "sha256": "e1e2410636e73ead9553625c5c802c313a01a80a29ae0f13b21e65fd8d2ab08e",
+          "rgba_sha256": "5636fdbb51754574cbf0ebc44be3fab4c0efd97eabf9fce79f3c602863a50cc4"
+        }
+      ]
+    },
+    {
+      "name": "walk_south",
+      "action": "walk",
+      "direction": "south",
+      "loop": true,
+      "frames": [
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/walk/south/suit_walk_south_0.png",
+          "pose_id": "suit_walk_south_0",
+          "duration_ms": 53,
+          "sha256": "2686c449b202dd14e3b169980ad6af9bd94e84e65955be024dfeca547fe40871",
+          "rgba_sha256": "82b5cb17f4d8eee73490257f7513411b2dabda896080cd8e96f9b2fccf628ce3"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/walk/south/suit_walk_south_1.png",
+          "pose_id": "suit_walk_south_1",
+          "duration_ms": 54,
+          "sha256": "1f91370732b3eecfb9d38af6fef01475b2e8a926c65a96ca7c051011254107bb",
+          "rgba_sha256": "3006847a83371ad6149262318fa379fa6733589368a3393fbd5ebfda2a5a0181"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/walk/south/suit_walk_south_2.png",
+          "pose_id": "suit_walk_south_2",
+          "duration_ms": 53,
+          "sha256": "db0ef79ad170c0a598cd6da83731aafedce358504dd2da4a198869c688812a22",
+          "rgba_sha256": "5425a54f60bdd397aed8aaf856dc547eb654a791d1c162561cce1abb86d0fe61"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/walk/south/suit_walk_south_3.png",
+          "pose_id": "suit_walk_south_3",
+          "duration_ms": 53,
+          "sha256": "0a37151d1a545517f79d504812d9e5ede7f95cb2b3bb8339ea8de58d09187946",
+          "rgba_sha256": "0ad2c1af895b5e854c29f3adf0dbd9095e31908ad0e694cc06c19a45e16d074e"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/walk/south/suit_walk_south_4.png",
+          "pose_id": "suit_walk_south_4",
+          "duration_ms": 54,
+          "sha256": "6198d70ffc6e30835adf22bc4335ff75399078bf792767763233e5acfbffcda4",
+          "rgba_sha256": "d0b31ec28eb375a77102f91cf6f43ee8c85847c427b989f331a90adcb4c38821"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/walk/south/suit_walk_south_5.png",
+          "pose_id": "suit_walk_south_5",
+          "duration_ms": 53,
+          "sha256": "a0e38671714c8de58ec16610fd6ea6b8d952caeaa1d40e54990d8be3c8c56f77",
+          "rgba_sha256": "238fe5dae02002fefdf4067f2d35b80a133d0cc3e0844f5cb74c2465287be393"
+        }
+      ]
+    },
+    {
+      "name": "walk_east",
+      "action": "walk",
+      "direction": "east",
+      "loop": true,
+      "frames": [
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/walk/east/suit_walk_east_0.png",
+          "pose_id": "suit_walk_east_0",
+          "duration_ms": 53,
+          "sha256": "470a9adea7b658b7ed3df4d530760c841ff6a54729dad0a0d78d000fab7dfab1",
+          "rgba_sha256": "e369ebd78301396c1e44f59e430d1310f3f494f880d694ce55ae15936fcd20b1"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/walk/east/suit_walk_east_1.png",
+          "pose_id": "suit_walk_east_1",
+          "duration_ms": 54,
+          "sha256": "60611b28a06f51421c6a6256e355ac54d0428400c6e3e7cc0703899eba51d3dd",
+          "rgba_sha256": "b21542038a6573ab2afdfeec1e5de2dffb722e8fc996903699448f73dbe486b4"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/walk/east/suit_walk_east_2.png",
+          "pose_id": "suit_walk_east_2",
+          "duration_ms": 53,
+          "sha256": "db7a43e40cf370e12c0188388b55a2641ad2c6a69b3a4b6132da1d17026e2b08",
+          "rgba_sha256": "6f8cf14273582a21dbe3faaf44c2136ee68d908b57f57ad9a0556782eca5c554"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/walk/east/suit_walk_east_3.png",
+          "pose_id": "suit_walk_east_3",
+          "duration_ms": 53,
+          "sha256": "498d5e0a73e676696be3e694a246442b7b3089c9ff2b2b2bac19b217fdd8b42a",
+          "rgba_sha256": "b8f3185d92239ffbca739176e0cf6c954896ab4f1b48ec9335e47b1cb7da213b"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/walk/east/suit_walk_east_4.png",
+          "pose_id": "suit_walk_east_4",
+          "duration_ms": 54,
+          "sha256": "566370deb4e713c6d698b0a2a8ea2ff34cb60a993e42107da3715499172e08cf",
+          "rgba_sha256": "dda6ff605034c469ba7df480e078469ecafa94d60b3d49d809d44865b0fdc142"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/walk/east/suit_walk_east_5.png",
+          "pose_id": "suit_walk_east_5",
+          "duration_ms": 53,
+          "sha256": "f7ec85cd3afcae89333e0e69b4fa75484e7ec2765c02898c0d948ef9309fef28",
+          "rgba_sha256": "5e720d867654165c26199c4aae3b0e0c5f8fc87f710677920867c42162ec148f"
+        }
+      ]
+    },
+    {
+      "name": "run_north",
+      "action": "run",
+      "direction": "north",
+      "loop": true,
+      "frames": [
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/run/north/suit_run_north_0.png",
+          "pose_id": "suit_run_north_0",
+          "duration_ms": 53,
+          "sha256": "3ff3cd67ffa15f8ffc115fd72244bfbc33255b776ccab811b714a9257e08a294",
+          "rgba_sha256": "a5cda55d52189c92744552cb5579e7be591a4072de4c180cb4095e93ea4f78a2"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/run/north/suit_run_north_1.png",
+          "pose_id": "suit_run_north_1",
+          "duration_ms": 54,
+          "sha256": "ad04e535c5fb42e6cca34c01062879513120a13cb58f16d7c61fcc542965b0f8",
+          "rgba_sha256": "d6f368ba495cec564bb435eb4c58993009c46f85639422f69ca5c56dd15ff75f"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/run/north/suit_run_north_2.png",
+          "pose_id": "suit_run_north_2",
+          "duration_ms": 53,
+          "sha256": "1969f6a34cf3ccb0232d2e23302b87ced914e94744497495cc1d3d08e463a57a",
+          "rgba_sha256": "37259acbce9b008956e5634abfb5aef88cfb936296ee9ebb3c5fd600a105e968"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/run/north/suit_run_north_3.png",
+          "pose_id": "suit_run_north_3",
+          "duration_ms": 53,
+          "sha256": "7e9a428199258a680b3863ce2c7ca28154f5c2b3be1d16296f2cccc02bb51a37",
+          "rgba_sha256": "a076e3c91c162f9c95e24dc6fdada18309b2234b32a1e5f56d03eded2dc21e57"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/run/north/suit_run_north_4.png",
+          "pose_id": "suit_run_north_4",
+          "duration_ms": 54,
+          "sha256": "55abb7ee9776f56c68cbcc87eef8d662a543b0e8cfae28dec19a5114794e8cc8",
+          "rgba_sha256": "bdec6ff4de713644271dca6d1a4946bae5aeb27eef9347f13c0010852e7a95b1"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/run/north/suit_run_north_5.png",
+          "pose_id": "suit_run_north_5",
+          "duration_ms": 53,
+          "sha256": "37098e8c516e45a7efc1c892887c7a95d75931e531a730473782d5cdcb62e35d",
+          "rgba_sha256": "b4cf64b184e2928cc74fcf5c1abfa4e948d624cba84d265a04ba1ed19b2ae78e"
+        }
+      ]
+    },
+    {
+      "name": "run_west",
+      "action": "run",
+      "direction": "west",
+      "loop": true,
+      "frames": [
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/run/west/suit_run_west_0.png",
+          "pose_id": "suit_run_west_0",
+          "duration_ms": 53,
+          "sha256": "693f537092639e32ecfbba6e4e8b20747fb3f8902a5776ce927268cbc6ab0d0f",
+          "rgba_sha256": "e1748ae30c7af49e975cdbb6c353b3ab2995b3da55b35275f833639f933f3168"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/run/west/suit_run_west_1.png",
+          "pose_id": "suit_run_west_1",
+          "duration_ms": 54,
+          "sha256": "cefe1c42222f7ce071a721132b3e5d366d4f7b27dd23488169a5d9bde82fd232",
+          "rgba_sha256": "87f7b587ce110ece04639df25bfc4d69bf21b9c900045215339ff22846505bcf"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/run/west/suit_run_west_2.png",
+          "pose_id": "suit_run_west_2",
+          "duration_ms": 53,
+          "sha256": "7dae0a2e1fb7764f8600dec99179b301f1413451eb6965ddb38f48869c4ad7b7",
+          "rgba_sha256": "4162af92eb361abb526f109915df5e2067376f1d10b5f92f3d669ad90a2e2f4d"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/run/west/suit_run_west_3.png",
+          "pose_id": "suit_run_west_3",
+          "duration_ms": 53,
+          "sha256": "0086e6a7a2cd9fd3f49e4f633bdcb936c306cf604e609431081918c817fa5972",
+          "rgba_sha256": "a7cd0b0b76b568e6f4252e1b55bd03dec7fbf95f788acb59341f91f908ae2c75"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/run/west/suit_run_west_4.png",
+          "pose_id": "suit_run_west_4",
+          "duration_ms": 54,
+          "sha256": "8fa9ae565d96538bc65f152bd03621f737f1e9f43bec7fe84ff97ef06185e15e",
+          "rgba_sha256": "2539f7eafcd790e5287ebf4d2baf034cc312c6801b9a9ba054fbf100a91a89d6"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/run/west/suit_run_west_5.png",
+          "pose_id": "suit_run_west_5",
+          "duration_ms": 53,
+          "sha256": "cbfa10dcc711920db598735a5bb94cce959fe3550d248f1031ee591e90371abd",
+          "rgba_sha256": "3c90592cf7643a0eec92d798bbb874e2f60493845960797f780856f4f2d8017f"
+        }
+      ]
+    },
+    {
+      "name": "run_south",
+      "action": "run",
+      "direction": "south",
+      "loop": true,
+      "frames": [
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/run/south/suit_run_south_0.png",
+          "pose_id": "suit_run_south_0",
+          "duration_ms": 53,
+          "sha256": "fb46222383f3f254d494c254b7994bb40d5dc2546e76cb62857e8f6153a69e72",
+          "rgba_sha256": "f03d47f2a2732da709bfcecf6b2814bf43dacda3934915e457f8a9fafc1ab145"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/run/south/suit_run_south_1.png",
+          "pose_id": "suit_run_south_1",
+          "duration_ms": 54,
+          "sha256": "ac6df4c47150ba529145010f734093299e26b4f434c9202f447e7c2e7a75590d",
+          "rgba_sha256": "03cf3cf40638e4f130c21ba6117b6732c7bf1f80278ed34f9a92d98a651cc207"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/run/south/suit_run_south_2.png",
+          "pose_id": "suit_run_south_2",
+          "duration_ms": 53,
+          "sha256": "1dba99d801d56daaf5610cd30277787f3ef8f06cfdd984b14c84b24c81c66c93",
+          "rgba_sha256": "6d04feb077171f7c4fa6ab813dc70618035c9dd4955b06771d23f9652d632c08"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/run/south/suit_run_south_3.png",
+          "pose_id": "suit_run_south_3",
+          "duration_ms": 53,
+          "sha256": "d585f43d6b806e3ecb1ed7554e1d128974d52a362ee085587dc3aee8342c4999",
+          "rgba_sha256": "99fd8c3e99b9d396893a22de551d5b124e134d4b5eb2847be1bd139c84bb83f8"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/run/south/suit_run_south_4.png",
+          "pose_id": "suit_run_south_4",
+          "duration_ms": 54,
+          "sha256": "2011edf06cfaeeb70004ae14889b0f786a167f5afc8648c1a7f46d8bfcb314bc",
+          "rgba_sha256": "f0b27e745c327ff925ea398e8696cc9c7eb17bbea5e58db11c99fd3c38aeb514"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/run/south/suit_run_south_5.png",
+          "pose_id": "suit_run_south_5",
+          "duration_ms": 53,
+          "sha256": "ff2d3ef9d92c25977d6a92f7b82e25016c9358a29e95a280c4744b0ee9febbf1",
+          "rgba_sha256": "3ae5492dad8e10d517aca7d3e61362167736fed51465f8da964bcf0f2a0c7a09"
+        }
+      ]
+    },
+    {
+      "name": "run_east",
+      "action": "run",
+      "direction": "east",
+      "loop": true,
+      "frames": [
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/run/east/suit_run_east_0.png",
+          "pose_id": "suit_run_east_0",
+          "duration_ms": 53,
+          "sha256": "140c3300f3c52168957369d842a055540c94644b6483eb862764b6c932e531f9",
+          "rgba_sha256": "985b50fc0e780b11e6102b052a37cbbc08d197a09fd311de8e3731eb51b42844"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/run/east/suit_run_east_1.png",
+          "pose_id": "suit_run_east_1",
+          "duration_ms": 54,
+          "sha256": "6262829636b88a97a3cf5df3fea602dafe14372ef7516c5f191de8c7160fb022",
+          "rgba_sha256": "0f0c87740bd4d665c67bcb9ce97d6b522a682bcdb370c29a8d5a9d1ccb1a428d"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/run/east/suit_run_east_2.png",
+          "pose_id": "suit_run_east_2",
+          "duration_ms": 53,
+          "sha256": "f050f28f3aa018950780a30050e4f62d99ae41d1174f7bef8339616029e9d501",
+          "rgba_sha256": "f65614b768d998ceed2119370f4ad4e8326a55d2751710026af6ed6bdc6667a7"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/run/east/suit_run_east_3.png",
+          "pose_id": "suit_run_east_3",
+          "duration_ms": 53,
+          "sha256": "4a83e4c6f8605194c9646ebd752ff60be94ecd5250ccb6fb9ad1e02c06f77a1d",
+          "rgba_sha256": "cc5bc833d2f8a056ad721be255794e4a0860f378aa34038922c3dbef9cc5cb76"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/run/east/suit_run_east_4.png",
+          "pose_id": "suit_run_east_4",
+          "duration_ms": 54,
+          "sha256": "4674b4e4a23e252d4b8d1671429550a2838a975d10925e562072ba0592c66bb2",
+          "rgba_sha256": "98651fdf2ab06ed25e90310a1e136594116f31ff29d30d363252c5ccf423aec5"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/run/east/suit_run_east_5.png",
+          "pose_id": "suit_run_east_5",
+          "duration_ms": 53,
+          "sha256": "053bd2a4dafabcdaa457061468ded4ddb3e77cc4e88536944e88a5a28ca03222",
+          "rgba_sha256": "533348cd2c96294dad46edf54349b9207c8054860dd46b1eb7ee80db2c857766"
+        }
+      ]
+    },
+    {
+      "name": "hoe_north",
+      "action": "hoe",
+      "direction": "north",
+      "loop": false,
+      "frames": [
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/hoe/north/suit_hoe_north_0.png",
+          "pose_id": "suit_hoe_north_0",
+          "duration_ms": 180,
+          "sha256": "4b34c3a0ac91848f36a5e7841aa3dc5a1e19e34291fe11feeb778487914a4bad",
+          "rgba_sha256": "17fc901f5158f692cf1fedc104099858186e7a223717d37e273063cee801a50c"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/hoe/north/suit_hoe_north_1.png",
+          "pose_id": "suit_hoe_north_1",
+          "duration_ms": 110,
+          "sha256": "c882a275f24452bb169b6a2e8ba8aaeadbc96ee150658575574cf5997e67c5a9",
+          "rgba_sha256": "3985fcc8fdd8fad56727204566fe6d928934025c409d6410cebcbc6ae0d1bdff"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/hoe/north/suit_hoe_north_2.png",
+          "pose_id": "suit_hoe_north_2",
+          "duration_ms": 110,
+          "sha256": "13c75140f138a2a72a27588f07e172b5e2983964a2a55b4446eb80331cceea39",
+          "rgba_sha256": "2ce9d68c7045d37848f3b4885b4d8539d274ee105f60a25a411377ad3e7307ea"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/hoe/north/suit_hoe_north_3.png",
+          "pose_id": "suit_hoe_north_3",
+          "duration_ms": 70,
+          "sha256": "6e0dc8d271c1f1f4904e081b808c40303ef7e7479bb368c970a0981017ab5578",
+          "rgba_sha256": "2c90ee2d431836feeb873ebc2bba4dfa67529aa91c8298f0eed9081bad53efda"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/hoe/north/suit_hoe_north_4.png",
+          "pose_id": "suit_hoe_north_4",
+          "duration_ms": 70,
+          "sha256": "6bd490a3c154bf8675de888a62f593af5fdc8c0d652335f6a0fb8d8093108ebf",
+          "rgba_sha256": "7fac2455d85a325b81e3eac0ce54f64d57bea542a0a657c1a234304408731d9e"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/hoe/north/suit_hoe_north_5.png",
+          "pose_id": "suit_hoe_north_5",
+          "duration_ms": 260,
+          "sha256": "0899c86640a291b11c11dc6006fcb4ae38a969dfb007262ee7a6781c90091627",
+          "rgba_sha256": "0887c4b7c305aaeee91659da2524a391df67dcd9596ad815ccc8b08327d667fb"
+        }
+      ]
+    },
+    {
+      "name": "hoe_west",
+      "action": "hoe",
+      "direction": "west",
+      "loop": false,
+      "frames": [
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/hoe/west/suit_hoe_west_0.png",
+          "pose_id": "suit_hoe_west_0",
+          "duration_ms": 180,
+          "sha256": "6830c639e6d9475c2268fc0f9457b36a3ab7c9b5fce274ae77ca07d4cfd543cc",
+          "rgba_sha256": "17be370d2441318c509f3556588da6a25dc476f6e8a4c3ac553aac8776a1490c"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/hoe/west/suit_hoe_west_1.png",
+          "pose_id": "suit_hoe_west_1",
+          "duration_ms": 110,
+          "sha256": "0fa0b8fda36beddaa07dbf39b68e3c84ba7609b0484b9806582b105ea9e83dff",
+          "rgba_sha256": "e9054ee252e9886e21425c749b1aafa1485a443c3f952f169240f34e4b66f800"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/hoe/west/suit_hoe_west_2.png",
+          "pose_id": "suit_hoe_west_2",
+          "duration_ms": 110,
+          "sha256": "f98e3fd5f366a8ca234d8f244c6a2f16c51c7b30dd5d759b6c0b1a12e73a83c9",
+          "rgba_sha256": "05765a10dc81418712fb5d36c580ee3ec571699f57a446a92f12f50988e49bb9"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/hoe/west/suit_hoe_west_3.png",
+          "pose_id": "suit_hoe_west_3",
+          "duration_ms": 70,
+          "sha256": "67a69d7349eb3a0e3ef6e046158edf815d9dd303f914e41cde709b1de0105f77",
+          "rgba_sha256": "e96bb3fcd8640f54db8f0a1ed4fec6d1fb23c4a4fa0574f139d78f7d14b1e179"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/hoe/west/suit_hoe_west_4.png",
+          "pose_id": "suit_hoe_west_4",
+          "duration_ms": 70,
+          "sha256": "58b35d9f5057d3bfc58a1b42f8d08f0253bf24da05e77481fcf792f843b3e0cb",
+          "rgba_sha256": "b8645437b929efaf94614bdd8c2405aedbf54674a91f7610960b27d4527748d4"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/hoe/west/suit_hoe_west_5.png",
+          "pose_id": "suit_hoe_west_5",
+          "duration_ms": 260,
+          "sha256": "3b99f71134db0de5e9168a733a33fbca6fb21e8cbd33c65045d4172127943e6c",
+          "rgba_sha256": "65bf81ff38ae09b579652f64b8a03fb121138c939a1097f3588c22a243ebaa2f"
+        }
+      ]
+    },
+    {
+      "name": "hoe_south",
+      "action": "hoe",
+      "direction": "south",
+      "loop": false,
+      "frames": [
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/hoe/south/suit_hoe_south_0.png",
+          "pose_id": "suit_hoe_south_0",
+          "duration_ms": 180,
+          "sha256": "8e5383206f58e5cb4369b8d890b0708b63abadf10708af2a6b629cdd963a03b9",
+          "rgba_sha256": "7c0370e3d8cc2af73ad496398e6b8ba64afd216cae88c31aa87c158f905b4302"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/hoe/south/suit_hoe_south_1.png",
+          "pose_id": "suit_hoe_south_1",
+          "duration_ms": 110,
+          "sha256": "a69ebd6e8fe8e90fc59a7469baad9daa45b75b491e5d42d6d6da15c78029a9d5",
+          "rgba_sha256": "b995fc8393500c5ec1fb42701aa4e027145e17605de89a792f5dbf5c7848095d"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/hoe/south/suit_hoe_south_2.png",
+          "pose_id": "suit_hoe_south_2",
+          "duration_ms": 110,
+          "sha256": "3734f3a400fdaa605dd6ebb39c5f0421c76e393e8accd7c5934559cefc0179be",
+          "rgba_sha256": "1a2abf8b9b468b30ba3b5857e08f9bde9a8e349a44c3553d71be8c79cffe1220"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/hoe/south/suit_hoe_south_3.png",
+          "pose_id": "suit_hoe_south_3",
+          "duration_ms": 70,
+          "sha256": "ee78fa24a45c8c0b80afa9c3d3a3bebdf79cab3dfa4d944ddbb5a0b0ef226ea2",
+          "rgba_sha256": "76ec61c6818dcf572cdb85f7fd6a6e5209a2dbd400794554268fc7dd3438b40b"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/hoe/south/suit_hoe_south_4.png",
+          "pose_id": "suit_hoe_south_4",
+          "duration_ms": 70,
+          "sha256": "da54a72d0ba532cb042cfb729b798d47611dae4e2f2bf481da0c9a518bf2dccf",
+          "rgba_sha256": "8787785e99441e45d4de11ac9825aa4ce513483f74e51fecfee1e71e6e1ba3b0"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/hoe/south/suit_hoe_south_5.png",
+          "pose_id": "suit_hoe_south_5",
+          "duration_ms": 260,
+          "sha256": "b1ef9ceafcab8d21387f1402ec364047d4cb286a5a8ad9caf4e73f54c44d03ee",
+          "rgba_sha256": "525e582612701d5c95e970afa2beb6da96199b526fbdba84c082a8d95d678a6e"
+        }
+      ]
+    },
+    {
+      "name": "hoe_east",
+      "action": "hoe",
+      "direction": "east",
+      "loop": false,
+      "frames": [
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/hoe/east/suit_hoe_east_0.png",
+          "pose_id": "suit_hoe_east_0",
+          "duration_ms": 180,
+          "sha256": "bcc1bc1f36e376b494a7736108d13140c41cc5993099621f8549a09f383cf2d9",
+          "rgba_sha256": "4caa14563a511f1d9ad2d959a7faedf0583f4f2d93259f9ceedcb186e0368018"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/hoe/east/suit_hoe_east_1.png",
+          "pose_id": "suit_hoe_east_1",
+          "duration_ms": 110,
+          "sha256": "6ae8165c401a51c841f8159cd5525a22a706970a35db17c60c449c4b18730bef",
+          "rgba_sha256": "976859b7327a1521349bec53a93945e05c9ce83a9bf45c23fb2b991b4a29a244"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/hoe/east/suit_hoe_east_2.png",
+          "pose_id": "suit_hoe_east_2",
+          "duration_ms": 110,
+          "sha256": "cc7bf503a6972883acb3de16b7e80e754c83a7b29bea095614a67548373a16fb",
+          "rgba_sha256": "8ffba07fa5811257dfd13690bb4d33e9973983a720d06290e3c604bcc1c08f69"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/hoe/east/suit_hoe_east_3.png",
+          "pose_id": "suit_hoe_east_3",
+          "duration_ms": 70,
+          "sha256": "5b9d3ecc32f107136d126998ed52cbf192ad0fc2fde2679845c8a1252be1efc1",
+          "rgba_sha256": "db030f5a64506d0ad005b7983babdc3d68fea41fe2433ec49edc1b0ca3475459"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/hoe/east/suit_hoe_east_4.png",
+          "pose_id": "suit_hoe_east_4",
+          "duration_ms": 70,
+          "sha256": "d76c6e1671e7595718f52daceb4fc882cd85404d15e4eae9b12b0ced92f0ab5c",
+          "rgba_sha256": "e75803b8769a5d6403071332393ee03898dc6a50b275cf82fdaeab63ead1d730"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/hoe/east/suit_hoe_east_5.png",
+          "pose_id": "suit_hoe_east_5",
+          "duration_ms": 260,
+          "sha256": "52f5f08f55a16aeaa38816bec2d5250c5e8aec07659aa3e23834e5cdaa5bbdc2",
+          "rgba_sha256": "c18277ce4458fc0e1c8a4a952f1f04972ee99c9d217c53d334691cff172a27eb"
+        }
+      ]
+    },
+    {
+      "name": "water_north",
+      "action": "water",
+      "direction": "north",
+      "loop": false,
+      "frames": [
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/water/north/suit_water_north_0.png",
+          "pose_id": "suit_water_north_0",
+          "duration_ms": 200,
+          "sha256": "1871bdc2bc32212073eb7c02bd0389def392baa4c18cfbc12064617cc63147a5",
+          "rgba_sha256": "952d98994175c125cbf66adcd37ed2f5ed369ad5a6c0d967b9ab0b58e04bebde"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/water/north/suit_water_north_1.png",
+          "pose_id": "suit_water_north_1",
+          "duration_ms": 200,
+          "sha256": "acc443b71484c44411fda636e88d6552d9ebfc2ffd6bc97225d975213376e6bc",
+          "rgba_sha256": "840771c3866c1b67d8c5d23d7750c0e421eff81d9b2a2c073b1714a0c50d7ce3"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/water/north/suit_water_north_2.png",
+          "pose_id": "suit_water_north_2",
+          "duration_ms": 350,
+          "sha256": "7cf20a8778c7575942de22efaf79e457faaba4f365f136c4b3aaf43b10fccf11",
+          "rgba_sha256": "648878bdf8ffcd51f86bc759dcaa20c798bef894a1aa26b753f6c8b1c2122bb0"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/water/north/suit_water_north_3.png",
+          "pose_id": "suit_water_north_3",
+          "duration_ms": 250,
+          "sha256": "38f14e5196558c72fae1d634ed3b40591f75191d5fd483f08cbfdf314d553f2b",
+          "rgba_sha256": "5e0c0b9f95da246344d06069f8168a42a68a9f1debfddd2c1505d6478b55c92f"
+        }
+      ]
+    },
+    {
+      "name": "water_west",
+      "action": "water",
+      "direction": "west",
+      "loop": false,
+      "frames": [
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/water/west/suit_water_west_0.png",
+          "pose_id": "suit_water_west_0",
+          "duration_ms": 200,
+          "sha256": "efff18517bb8ef02bed0b4f9233c8157d1c57c1b4a160377e5076045a6c06a37",
+          "rgba_sha256": "e6093441eb4ed197397ea67e09e74299ebe298bf1d59fdd75cd344668ac71776"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/water/west/suit_water_west_1.png",
+          "pose_id": "suit_water_west_1",
+          "duration_ms": 200,
+          "sha256": "3bd70cac086e9eab3b7e8874bbf09e91207845953e036a2b4f20bd302444ce70",
+          "rgba_sha256": "9256dd03c465a1e40ff212299cb5832bb55fa5fe0cdb4ad55c2bdeed21b5bb2e"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/water/west/suit_water_west_2.png",
+          "pose_id": "suit_water_west_2",
+          "duration_ms": 350,
+          "sha256": "861e969d2081c4b705ddd87a5902d89a1af90b721dfe141b64f4945b679c69ca",
+          "rgba_sha256": "6ec1d0287f5361883b975cbedbe32eedd031521352559d233e42a656fdb3eea6"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/water/west/suit_water_west_3.png",
+          "pose_id": "suit_water_west_3",
+          "duration_ms": 250,
+          "sha256": "2641cf2089f06f066aadfe6ecdc7138bd8c8f845a8c45b00f058649b70c5dbd0",
+          "rgba_sha256": "d2046857fd91eb0edd4217e63918b0ff28a959a41eff10f8c53633c9488d3851"
+        }
+      ]
+    },
+    {
+      "name": "water_south",
+      "action": "water",
+      "direction": "south",
+      "loop": false,
+      "frames": [
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/water/south/suit_water_south_0.png",
+          "pose_id": "suit_water_south_0",
+          "duration_ms": 200,
+          "sha256": "38658fa66b9f90717a4b783796bf63cba0c4bd44e216ed6c546622458c8250ba",
+          "rgba_sha256": "2c55177f3083513f20985ad704428ddfe09cd7bda8bdf22316a31b09e0bf21a0"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/water/south/suit_water_south_1.png",
+          "pose_id": "suit_water_south_1",
+          "duration_ms": 200,
+          "sha256": "6f2c38e44cc792c7cdd04c89754ac938ee772b50f21d3a021828478e392d4cee",
+          "rgba_sha256": "f20d2e1ab3256c11477f73be438ec4b52a98bd3b6fa16c17a70db1710f552269"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/water/south/suit_water_south_2.png",
+          "pose_id": "suit_water_south_2",
+          "duration_ms": 350,
+          "sha256": "a3b337c59a4877b0f4f3d13e474c1f7cbbb07149508c6a3430c694e114b595c3",
+          "rgba_sha256": "f625f78d5901b7c240a073faa082b66da578dcf76471fbae56fe1c2a134f7f5b"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/water/south/suit_water_south_3.png",
+          "pose_id": "suit_water_south_3",
+          "duration_ms": 250,
+          "sha256": "ae313d56e904f3e770161ee0d3bc5005dace4ba929d51d3c7543a0ef532efee6",
+          "rgba_sha256": "23c01ed169b6d9a22f598c8837765c4eafa2904a1738c17448f89aa24907477a"
+        }
+      ]
+    },
+    {
+      "name": "water_east",
+      "action": "water",
+      "direction": "east",
+      "loop": false,
+      "frames": [
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/water/east/suit_water_east_0.png",
+          "pose_id": "suit_water_east_0",
+          "duration_ms": 200,
+          "sha256": "357c7ad14763100f92934cc2d5537a040112372b4a740982fcbfb2b541fe1f22",
+          "rgba_sha256": "4731f5ee08f22a752094e5e024b1f7cb9467996a57a037be0c661858c2220e2d"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/water/east/suit_water_east_1.png",
+          "pose_id": "suit_water_east_1",
+          "duration_ms": 200,
+          "sha256": "5d31ef2903097f90de4ae720043c452dc23bf961b887a366234e8cf67fb2e591",
+          "rgba_sha256": "7847bcd39ae22b49eb6897dda062e378901f680aaac954e49036386801cd9469"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/water/east/suit_water_east_2.png",
+          "pose_id": "suit_water_east_2",
+          "duration_ms": 350,
+          "sha256": "f1a0df728b099e050bec991e4f7ddadc88d300866dfc810260f46fa93a5f757d",
+          "rgba_sha256": "ba3f774a460da63fda1ce7f1ddeeca0786868b04408a575627b02d368e16a2f5"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/water/east/suit_water_east_3.png",
+          "pose_id": "suit_water_east_3",
+          "duration_ms": 250,
+          "sha256": "60f980c338e187e87105a25db9bb1702155516653ef7367a1bc5254dfb631705",
+          "rgba_sha256": "3996037b625385e698523eb857ac4baacdb7a38fde42ee18d4243cb2dbb8de45"
+        }
+      ]
+    },
+    {
+      "name": "harvest_north",
+      "action": "harvest",
+      "direction": "north",
+      "loop": false,
+      "frames": [
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/harvest/north/suit_harvest_north_0.png",
+          "pose_id": "suit_harvest_north_0",
+          "duration_ms": 200,
+          "sha256": "23768958255e11afecc4980e222172413bffe4678e1aad5883af5be6e305cb27",
+          "rgba_sha256": "0fb079ffcec3b39827ab3817b7b1f6d3b3da1187b7bfd94cc71e795aa4d079b8"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/harvest/north/suit_harvest_north_1.png",
+          "pose_id": "suit_harvest_north_1",
+          "duration_ms": 250,
+          "sha256": "9f56207bf697afe66180fbadba838f9282fa985101746f720ee7cca61aaf96f3",
+          "rgba_sha256": "7501bcfb78a7bbcf7ba2b958357ea7184a61c61d1c018a2cab6cfb58a6fc0678"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/harvest/north/suit_harvest_north_2.png",
+          "pose_id": "suit_harvest_north_2",
+          "duration_ms": 250,
+          "sha256": "916c62689081e5e0beef43ee99f25ea5acac231165f7eb1fb909f450347252cd",
+          "rgba_sha256": "c7770d35f0bef82455bceeb9a08252c7bdb383741b2c06f0048f740dbff8ba8c"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/harvest/north/suit_harvest_north_3.png",
+          "pose_id": "suit_harvest_north_3",
+          "duration_ms": 300,
+          "sha256": "5eec6ec70acac80f0eb6a815fdc2491d82617b090569d245877c9e951d97467f",
+          "rgba_sha256": "a2e7340428a613596fc8bb07c2d727effaf77d4d0821f9d7bde0c42dcad6a869"
+        }
+      ]
+    },
+    {
+      "name": "harvest_west",
+      "action": "harvest",
+      "direction": "west",
+      "loop": false,
+      "frames": [
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/harvest/west/suit_harvest_west_0.png",
+          "pose_id": "suit_harvest_west_0",
+          "duration_ms": 200,
+          "sha256": "89a62de9c7031e5f30372c44ea947474d035b3fbfc1be4163ba651ded74f0c66",
+          "rgba_sha256": "021c17a3b97239c093a769d9cb2470d1c4ef8b1d0611f5d0456ec692a9fea370"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/harvest/west/suit_harvest_west_1.png",
+          "pose_id": "suit_harvest_west_1",
+          "duration_ms": 250,
+          "sha256": "4a728f0eb54b1e326fffde1b19febd92ff373b64d63f64557662c0caa77125bc",
+          "rgba_sha256": "efd95b5395891290d634402125e350542d8652fbc63d8de03be66a0944a334b3"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/harvest/west/suit_harvest_west_2.png",
+          "pose_id": "suit_harvest_west_2",
+          "duration_ms": 250,
+          "sha256": "c12ef1d4d334442f47c1a3564cda11c3820a2d05a6bfeabf211642b1b5d5414b",
+          "rgba_sha256": "1bb8cfcdf7ff5fdba32b87325a04f245d759f82ff1976137c7dc7a1f18b69add"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/harvest/west/suit_harvest_west_3.png",
+          "pose_id": "suit_harvest_west_3",
+          "duration_ms": 300,
+          "sha256": "3d5f593113ce7b6d047ef7a1ce296227e507dc56587acce494def402a9d06651",
+          "rgba_sha256": "088b4cc620655bf4550121e48357d12d323ebfffdb5f6f9527298bbd1068d141"
+        }
+      ]
+    },
+    {
+      "name": "harvest_south",
+      "action": "harvest",
+      "direction": "south",
+      "loop": false,
+      "frames": [
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/harvest/south/suit_harvest_south_0.png",
+          "pose_id": "suit_harvest_south_0",
+          "duration_ms": 200,
+          "sha256": "1c950bac8ad11726592b1660c7b12bbf309a0b7bd6c2d5f113423cc5eab94692",
+          "rgba_sha256": "3a2f0af35265125882a4329c562c5ffba154ef756d04b0a81a71fa9410a957a9"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/harvest/south/suit_harvest_south_1.png",
+          "pose_id": "suit_harvest_south_1",
+          "duration_ms": 250,
+          "sha256": "0c8d36ea2fbc4a26a8c0da8ac975a9aa7617fcf0b4675c924694510e443e353e",
+          "rgba_sha256": "2540bbb916500413f1cd747e0d5538f67c99568fd9fc650018c8a713eab585d5"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/harvest/south/suit_harvest_south_2.png",
+          "pose_id": "suit_harvest_south_2",
+          "duration_ms": 250,
+          "sha256": "b6c58d53a11df31386008e03d6a6f2c2cb6db4ba2a87f3545b39b39c71f8b386",
+          "rgba_sha256": "6a92254f22ae3a7f1cd1fefed1b62fff01ecbe567d2e70540799ade06743c1b8"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/harvest/south/suit_harvest_south_3.png",
+          "pose_id": "suit_harvest_south_3",
+          "duration_ms": 300,
+          "sha256": "e0cd4367cdbd09ddac2973e9df0fe819a9b27e557f0a83c23d592c734318182b",
+          "rgba_sha256": "1cc19a8acf954b90fabfbe08c9ce9ddbb2116ca012c9ac42affb334b0601b9cd"
+        }
+      ]
+    },
+    {
+      "name": "harvest_east",
+      "action": "harvest",
+      "direction": "east",
+      "loop": false,
+      "frames": [
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/harvest/east/suit_harvest_east_0.png",
+          "pose_id": "suit_harvest_east_0",
+          "duration_ms": 200,
+          "sha256": "13b23fd056f5ad8e91fe36c9a4861637204cb7c119ebd5bc2f650ce0ca9e2b83",
+          "rgba_sha256": "dfffb79d003a63e4e4e37e873394e1aabddae3b7dc6323377750141cdf3b07f1"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/harvest/east/suit_harvest_east_1.png",
+          "pose_id": "suit_harvest_east_1",
+          "duration_ms": 250,
+          "sha256": "00fe4b09b29763adf1715d5ff356a1bbe64bdb391624d5cca72609aae9ece1d9",
+          "rgba_sha256": "151a343b1ba6056947f1468c99ec3da38c4a73ead3e6a7cd3d46e27b5dcf7295"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/harvest/east/suit_harvest_east_2.png",
+          "pose_id": "suit_harvest_east_2",
+          "duration_ms": 250,
+          "sha256": "0a350772f402f39bf0e7dbff5d307dfb0a74b674c5900f057db2f65d7efbdec6",
+          "rgba_sha256": "7a29410bed2cede9c89b93eb79050a3d72138f67ec8dea58576847055ebcc187"
+        },
+        {
+          "texture": "res://assets/characters/integrations/adult-v5-pixel-visible-r010/frames/harvest/east/suit_harvest_east_3.png",
+          "pose_id": "suit_harvest_east_3",
+          "duration_ms": 300,
+          "sha256": "94b98a29dec71d15f013b8ce49ddc90a47dc2c95f1958d71b333553a82b37bea",
+          "rgba_sha256": "f52d3059ca93e85b8fa5271801cb5c96757d49db2c89ce450b01427fae739a59"
+        }
+      ]
+    }
+  ],
+  "generator": {
+    "file": "tools/characters/godot_integration.py",
+    "sha256": "5c8b965a70a3befb9d6f56f118f0405b57a213536e0f38e411d45bc130ebe138"
+  }
+}

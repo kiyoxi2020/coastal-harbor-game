@@ -1,10 +1,14 @@
+## 2026-11-03 V5默认主角接入
+
+运行包`adult-v5-pixel-visible-r010`来自同名严格build，24动作方向108帧，`player_body_v5_frames.tres`绑定默认玩家；画布260×228、根点125/201、整帧缩放0.25。verify与verify-runtime入口沿下文现有工具，替换为V5路径。V4制作母版保留；旧V4运行包已退役，真实图像测试夹具与CI使用V5。完整统一发布仍关闭。
+
 ## 当前入口（旧人物专项数据已退役）
 
 仅保留V4 body-actions与V5 body-pixel-v5；recipe/build分别r002与r010，唯一构建工具和通用注册/组合/时钟保持。运行包verify-runtime不读取本地制作源；verify仍要求严格源重建，二者不混同。下文旧例用于说明通用接口，涉及旧衣柜/发帽/迁移数据的命令不再可直接运行。CI不再调用已退役数据的迁移/静态导入验收。当前README/CURRENT为导航，制作合同仍以唯一规范为准。[退役范围及验证](../../docs/reviews/2026-11-02-resource-cleanup-executed.md)。
 
 ## 2026-11-02 V5独立动画归档
 
-`body-pixel-v5`仍通过现有统一评审器加载；当前template-v5-r009、两套recipe/build-r010、parts/body/adult-v5/r012、archive-r010，sources/adult-v5-animation-r012仅保存最终动画快照。旧V5制作过程与旧版本已清理，下文相应过程路径为历史。默认游戏/基线保持v4，唯一规范8.2.1约束验收后只留动画必需数据。
+`body-pixel-v5`仍通过现有统一评审器加载；当前template-v5-r009、两套recipe/build-r010、parts/body/adult-v5/r012、archive-r010，sources/adult-v5-animation-r012仅保存最终动画快照。旧V5制作过程与旧版本已清理，下文相应过程路径为历史。默认游戏于2026-11-03切换为v5本地接入，制作母版仍v4；唯一规范8.2.1约束验收后只留动画必需数据。
 
 ## 最终人物美术的存放门禁
 

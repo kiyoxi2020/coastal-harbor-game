@@ -1,14 +1,14 @@
 extends SceneTree
 const Support = preload("res://tests/life_test_support.gd")
-const MANIFEST = "res://assets/characters/integrations/adult-v4-tank-visible-r001/manifest.json"
-const FRAMES = "res://resources/player_body_v4_frames.tres"
+const MANIFEST = "res://assets/characters/integrations/adult-v5-pixel-visible-r010/manifest.json"
+const FRAMES = "res://resources/player_body_v5_frames.tres"
 var s := Support.new()
 func _initialize() -> void:
 	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(MANIFEST))
 	var frames := load(FRAMES) as SpriteFrames
 	var geometry: Dictionary = data.geometry
 	s.check("current_24_clips", data.clips.size() == 24 and frames.get_animation_names().size() == 24)
-	s.check("one_canvas_and_root", Vector2(geometry.canvas_px[0], geometry.canvas_px[1]) == Vector2(256, 224) and Vector2(geometry.root_anchor_px[0], geometry.root_anchor_px[1]) == Vector2(123, 201) and is_equal_approx(geometry.world_scale, 0.25))
+	s.check("one_canvas_and_root", Vector2(geometry.canvas_px[0], geometry.canvas_px[1]) == Vector2(260, 228) and Vector2(geometry.root_anchor_px[0], geometry.root_anchor_px[1]) == Vector2(125, 201) and is_equal_approx(geometry.world_scale, 0.25))
 	var total := 0
 	for clip in data.clips:
 		var valid: bool = frames.has_animation(clip.name) and frames.get_frame_count(clip.name) == clip.frames.size()

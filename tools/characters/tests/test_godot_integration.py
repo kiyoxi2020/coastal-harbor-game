@@ -19,6 +19,12 @@ class AnimationDataTests(unittest.TestCase):
     def setUp(self):
         self.recipe, self.manifest = animation_inputs(runtime_manifest())
 
+    def test_runtime_oracle_matches_default_player(self):
+        scene = (REPO/'godot2d/scenes/actors/player.tscn').read_text()
+        frames_path = 'res://' + FRAMES.relative_to('godot2d').as_posix()
+        self.assertIn('path="' + frames_path + '"', scene)
+        self.assertEqual(runtime_manifest()['sprite_frames']['file'], FRAMES.as_posix())
+
     def clips(self):
         return integration.animation_data(self.recipe, self.manifest['outputs'], 'res://assets/test')
 

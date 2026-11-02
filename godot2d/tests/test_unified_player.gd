@@ -1,7 +1,7 @@
 extends SceneTree
 const Support = preload("res://tests/life_test_support.gd")
-const FRAMES_PATH := "res://resources/player_body_v4_frames.tres"
-const MANIFEST_PATH := "res://assets/characters/integrations/adult-v4-tank-visible-r001/manifest.json"
+const FRAMES_PATH := "res://resources/player_body_v5_frames.tres"
+const MANIFEST_PATH := "res://assets/characters/integrations/adult-v5-pixel-visible-r010/manifest.json"
 const DIRECTIONS := {"south":Vector2.DOWN,"west":Vector2.LEFT,"east":Vector2.RIGHT,"north":Vector2.UP}
 class WorldStub:
 	extends Node
@@ -97,7 +97,7 @@ func run() -> void:
 	var frames: SpriteFrames = player.sprite.sprite_frames
 	s.check("body_frames_bound", frames.resource_path == FRAMES_PATH)
 	s.check("one_character_renderer", not player.has_node("ToolAction/Pose"))
-	s.check("registered_geometry", not player.sprite.centered and player.sprite.offset == Vector2(-123,-201) and player.sprite.position == Vector2.ZERO and player.sprite.scale == Vector2(0.25,0.25))
+	s.check("registered_geometry", not player.sprite.centered and player.sprite.offset == Vector2(-125,-201) and player.sprite.position == Vector2.ZERO and player.sprite.scale == Vector2(0.25,0.25))
 	s.check("collision_unchanged", player.get_node("CollisionShape2D").shape.size == Vector2(10,6))
 	s.check("independent_idle_api", player.has_method("play_idle"))
 	s.check("startup_idle", player.sprite.animation == "idle_south")
@@ -130,7 +130,7 @@ func run() -> void:
 			s.check(id+"_loop", frames.get_animation_loop(id) == clip.loop)
 			for i in range(mini(frames.get_frame_count(id), clip.frames.size())):
 				var texture: Texture2D = frames.get_frame_texture(id, i)
-				s.check(id+"_source_"+str(i), texture.resource_path == clip.frames[i].texture and texture.get_size() == Vector2(256,224))
+				s.check(id+"_source_"+str(i), texture.resource_path == clip.frames[i].texture and texture.get_size() == Vector2(260,228))
 				s.check(id+"_imported_rgba_"+str(i), rgba_sha256(texture) == clip.frames[i].get("rgba_sha256", ""))
 				s.check(id+"_duration_"+str(i), is_equal_approx(frames.get_frame_duration(id,i) / frames.get_animation_speed(id) * 1000.0, float(clip.frames[i].duration_ms)))
 				total += 1
