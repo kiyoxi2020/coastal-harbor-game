@@ -5,9 +5,10 @@ import json
 from pathlib import Path
 import re
 import shutil
+from PIL import Image
 
 from build import verify as verify_build
-from build_contract import digest, read_json, require, safe_file
+from build_contract import digest, identifier, keys, read_json, require, safe_file
 
 REPO = Path(__file__).resolve().parents[2]
 ACTIONS = ('idle', 'walk', 'run', 'hoe', 'water', 'harvest')
@@ -42,15 +43,24 @@ def import_config(texture):
 def verify_import(path, texture):
     require(path.is_file() and not path.is_symlink(), 'Import record missing or symlink')
     text = path.read_text()
-    for section, expected_values in import_sections(texture).items():
+    expected_sections = import_sections(texture)
+    headers = re.findall(r'(?m)^[ \t]*\[([^\]\r\n]+)\]', text)
+    require(len(headers) == len(expected_sections) and set(headers) == set(expected_sections),
+            'Import sections must be unique and registered')
+    for section, expected_values in expected_sections.items():
         match = re.search(r'(?ms)^\[' + section + r'\]\s*\n(.*?)(?=^\[|\Z)', text)
         require(match is not None, 'Import section missing: ' + section)
         found = {}
+        seen = set()
         for line in match[1].splitlines():
+            if line.lstrip().startswith((';', '#')): continue
             if '=' not in line: continue
             key, value = line.split('=', 1)
+            require(key == key.strip() and re.fullmatch(r'[A-Za-z0-9_/]+', key) is not None,
+                    'Noncanonical import parameter name')
+            require(key not in seen, 'Import duplicate parameter')
+            seen.add(key)
             if key in expected_values or section == 'params':
-                require(key not in found, 'Import duplicate parameter')
                 found[key] = json.loads(value)
         require(json.dumps(found, sort_keys=True) == json.dumps(expected_values, sort_keys=True),
                 'Import pixel processing or source binding mismatch: ' + section)
@@ -209,9 +219,100 @@ def verify(repo, manifest_path):
     actual = set()
     for path in package_dir.rglob('*'):
         require(not path.is_symlink(), 'Integration symlink forbidden')
-        if path.is_file():
+        if path.is_file() and path.name != '.DS_Store':
             relative = path.relative_to(package_dir).as_posix()
             actual.add(relative)
+    require(actual == names, 'Unexpected integration files')
+    return manifest
+
+
+def verify_runtime(repo, manifest_path):
+    """Verify the self-contained game package, without claiming source rebuild.
+
+    Historical authoring references retain their identity and safe namespace.
+    Actual pixels, import behavior, timing and SpriteFrames are checked here;
+    callers requiring authoring equivalence must use verify() separately.
+    """
+    repo = Path(repo).resolve()
+    manifest_path = managed_path(repo, manifest_path, 'godot2d/assets/characters/integrations')
+    require(manifest_path.name == 'manifest.json', 'Runtime manifest name mismatch')
+    manifest = read_json(manifest_path)
+    keys(manifest, 'kind schema_version status production_release character_model_id source_build recipe package sprite_frames geometry clips generator', 'runtime manifest')
+    require(manifest['kind'] == KIND and type(manifest['schema_version']) is int
+            and manifest['schema_version'] == 1
+            and manifest['status'] == 'local-development-integration'
+            and manifest['production_release'] is False
+            and manifest['character_model_id'] == 'unified-composable-character-v1',
+            'Invalid runtime integration identity or scope')
+    package = manifest_path.parent
+    require(manifest['package'] == package.relative_to(repo).as_posix(), 'Runtime package path mismatch')
+
+    def sha_value(value):
+        require(isinstance(value, str) and re.fullmatch(r'[0-9a-f]{64}', value) is not None,
+                'Invalid runtime SHA')
+
+    for name, prefix in [('source_build', 'art/characters/builds'),
+                         ('recipe', 'art/characters/recipes'), ('generator', 'tools/characters')]:
+        ref = manifest[name]
+        keys(ref, 'file sha256' + (' artifact_digest' if name == 'source_build' else ''), name)
+        require(isinstance(ref['file'], str) and not Path(ref['file']).is_absolute(), 'Invalid provenance path')
+        managed_path(repo, ref['file'], prefix)
+        sha_value(ref['sha256'])
+        if name == 'source_build': sha_value(ref['artifact_digest'])
+
+    geometry = manifest['geometry']
+    keys(geometry, 'canvas_px root_anchor_px world_scale', 'runtime geometry')
+    canvas, root = geometry['canvas_px'], geometry['root_anchor_px']
+    require(isinstance(canvas, list) and len(canvas) == 2
+            and all(type(v) is int and 0 < v <= 4096 for v in canvas)
+            and isinstance(root, list) and len(root) == 2
+            and all(type(root[i]) is int and 0 <= root[i] < canvas[i] for i in range(2))
+            and type(geometry['world_scale']) in (int, float) and geometry['world_scale'] == 0.25,
+            'Invalid runtime geometry')
+    clips = manifest['clips']
+    require(isinstance(clips, list) and len(clips) == len(ACTIONS) * len(DIRECTIONS), 'Runtime requires24 clips')
+    seen = set(); textures = set(); names = {'manifest.json'}
+    for clip in clips:
+        keys(clip, 'name action direction loop frames', 'runtime clip')
+        action, direction = clip['action'], clip['direction']
+        require(isinstance(action, str) and isinstance(direction, str)
+                and action in ACTIONS and direction in DIRECTIONS
+                and (action, direction) not in seen
+                and clip['name'] == action + '_' + direction
+                and type(clip['loop']) is bool and clip['loop'] == (action in ('idle', 'walk', 'run')),
+                'Invalid or duplicate runtime clip')
+        seen.add((action, direction))
+        require(isinstance(clip['frames'], list) and clip['frames'], 'Empty runtime clip')
+        poses = set()
+        for frame in clip['frames']:
+            keys(frame, 'texture pose_id duration_ms sha256 rgba_sha256', 'runtime frame')
+            identifier(frame['pose_id'])
+            require(frame['pose_id'] not in poses and type(frame['duration_ms']) is int
+                    and frame['duration_ms'] > 0, 'Invalid runtime pose or duration')
+            poses.add(frame['pose_id'])
+            relative = f"frames/{action}/{direction}/{frame['pose_id']}.png"
+            path = safe_file(package, relative, 'frames')
+            texture = 'res://' + path.relative_to(repo/'godot2d').as_posix()
+            require(frame['texture'] == texture and texture not in textures, 'Unsafe or duplicate runtime texture')
+            textures.add(texture)
+            sha_value(frame['sha256']); sha_value(frame['rgba_sha256'])
+            require(digest(path) == frame['sha256'], 'Runtime PNG SHA mismatch')
+            with Image.open(path) as image:
+                require(image.format == 'PNG' and image.mode == 'RGBA' and list(image.size) == canvas,
+                        'Runtime PNG geometry or mode mismatch')
+                require(hashlib.sha256(image.tobytes()).hexdigest() == frame['rgba_sha256'], 'Runtime RGBA SHA mismatch')
+            verify_import(Path(str(path) + '.import'), texture)
+            names.update((relative, relative + '.import'))
+    ref = manifest['sprite_frames']
+    keys(ref, 'file sha256', 'runtime SpriteFrames')
+    require(isinstance(ref['file'], str) and not Path(ref['file']).is_absolute(), 'Invalid SpriteFrames path')
+    frames = managed_path(repo, ref['file'], 'godot2d/resources')
+    sha_value(ref['sha256'])
+    require(digest(frames) == ref['sha256'] and frames.read_text() == sprite_frames(clips), 'SpriteFrames binding mismatch')
+    actual = set()
+    for path in package.rglob('*'):
+        require(not path.is_symlink(), 'Integration symlink forbidden')
+        if path.is_file() and path.name != '.DS_Store': actual.add(path.relative_to(package).as_posix())
     require(actual == names, 'Unexpected integration files')
     return manifest
 
@@ -225,10 +326,13 @@ def main():
     create_parser.add_argument('--frames', type=Path, required=True)
     verify_parser = commands.add_parser('verify')
     verify_parser.add_argument('manifest', type=Path)
+    runtime_parser = commands.add_parser('verify-runtime')
+    runtime_parser.add_argument('manifest', type=Path)
     args = parser.parse_args()
     try:
         result = (create(REPO, args.build_dir, args.package, args.frames) if args.command == 'create'
-                  else verify(REPO, args.manifest))
+                  else (verify_runtime(REPO, args.manifest) if args.command == 'verify-runtime'
+                        else verify(REPO, args.manifest)))
         print(json.dumps({'passed': True, 'status': result['status'], 'clips': len(result['clips']),
                           'frames': sum(len(c['frames']) for c in result['clips']), 'production_release': False}))
     except (ValueError, KeyError, TypeError, OSError) as exc:

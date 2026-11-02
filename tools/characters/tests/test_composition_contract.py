@@ -4,7 +4,6 @@ import hashlib
 import json
 from pathlib import Path
 import sys
-import shutil
 import tempfile
 import io
 import unittest
@@ -66,15 +65,15 @@ class CompositionTests(unittest.TestCase):
         self.assertIn('recipes/head-bare/r001.json', derived.dependencies)
 
 
-class RealCompositionTests(unittest.TestCase):
-    def test_base_five_outputs_keep_original_rgba(self):
-        repo=TOOLS.parents[1];lib=repo/'art/characters'
-        base=validate(repo,lib/'recipes/wardrobe-hoe-west/r002.json')
-        sample=json.loads((lib/'builds/wardrobe-hoe-west-r001/sample.json').read_text())
-        for (_,actual),old in zip(build.render(base),sample['frames']+[sample['idle']]):
-            path=lib/f"builds/wardrobe-hoe-west-r001/frames/{old['pose_id']}-frame.png"
-            with Image.open(path) as expected:
-                self.assertEqual(actual.tobytes(),expected.convert('RGBA').tobytes())
+class ProceduralCompositionTests(unittest.TestCase):
+    def test_procedural_bare_composition_keeps_all_base_rgba(self):
+        from composition_fixture import CompositionFixture
+        fixture = CompositionFixture()
+        self.addCleanup(fixture.cleanup)
+        base = validate(fixture.repo, fixture.base.path)
+        bare = validate(fixture.repo, fixture.recipes['bare'])
+        self.assertEqual([(n, image.tobytes()) for n, image in build.render(base)],
+                         [(n, image.tobytes()) for n, image in build.render(bare)])
 
     def test_hair_replaces_rgba_and_stack_preserves_transparent_base_rgb(self):
         from composition_contract import compose
@@ -90,44 +89,49 @@ class RealCompositionTests(unittest.TestCase):
         self.assertEqual(output.getpixel((0,0)),(115,15,32,255))
         self.assertEqual(output.getpixel((1,0)),(41,42,43,0))
 
-    def test_existing_twenty_outputs_are_exact_rgba(self):
-        repo = TOOLS.parents[1]
-        lib = repo/'art/characters'
-        sample = json.loads((lib/'builds/headwear-hoe-west-r001/sample.json').read_text())
-        for state, slug in [('bare','bare'), ('hair','hair'), ('hat','hat'), ('hair_hat','hair-hat')]:
-            with self.subTest(state=state):
-                path = lib/f'recipes/headwear-hoe-west-{slug}/r001.json'
-                try:
-                    validated = validate(repo, path)
-                except ValueError as exc:
-                    self.fail('real fixed-head state must validate: ' + str(exc))
-                rendered = list(build.render(validated))
-                self.assertEqual(len(rendered), 5)
-                for (_, actual), original in zip(rendered, sample['frames']+[sample['idle']]):
-                    with Image.open(lib/original['states'][state]['file']) as expected:
-                        self.assertEqual(actual.tobytes(), expected.convert('RGBA').tobytes())
+    def test_all_head_states_have_exact_procedural_pixel_oracles(self):
+        from composition_fixture import CompositionFixture
+        fixture = CompositionFixture()
+        self.addCleanup(fixture.cleanup)
+        # Oracles are explicit arithmetic, independent of the compositor.
+        # Base top (200, 0, 0, 128) alpha-over opaque body (10, 20, 30).
+        base = (105, 10, 15, 255)
+        for state, path in fixture.recipes.items():
+            rendered = list(build.render(validate(fixture.repo, path)))
+            self.assertEqual(len(rendered), 4)
+            for i, (_, image) in enumerate(rendered):
+                with self.subTest(state=state, frame=i):
+                    index = i if i < 3 else 0
+                    hair = (190, 40+index, 60, 128)
+                    self.assertEqual(image.getpixel((1, 1)), base)
+                    self.assertEqual(image.getpixel((0, 1)), base)
+                    if state == 'hair':
+                        self.assertEqual(image.getpixel((0, 0)), hair)
+                    elif state == 'hair_hat':
+                        expected = tuple((hair[c]*128+base[c]*127+127)//255 for c in range(3))+(255,)
+                        self.assertEqual(image.getpixel((0, 0)), expected)
+                    else:
+                        self.assertEqual(image.getpixel((0, 0)), base)
+                    if state in {'hat', 'hair_hat'}:
+                        near = (60,180,70+index,210)
+                        expected = tuple((near[c]*210+base[c]*45+127)//255 for c in range(3))+(255,)
+                        self.assertEqual(image.getpixel((1, 0)), expected)
+                    else:
+                        self.assertEqual(image.getpixel((1, 0)), base)
 
 
 class RejectionTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.temp = tempfile.TemporaryDirectory(prefix='coastal-composition-contract-', dir='/private/tmp')
-        cls.repo = Path(cls.temp.name)
-        cls.lib = cls.repo/'art/characters'
-        source_repo = TOOLS.parents[1]
-        source_lib = source_repo/'art/characters'
-        dependencies = {}
-        for slug in ['bare','hair','hat','hair-hat']:
-            path = source_lib/f'recipes/headwear-hoe-west-{slug}/r001.json'
-            dependencies.update(validate(source_repo, path).dependencies)
-        for name in dependencies:
-            target = cls.lib/name
-            target.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(source_lib/name, target)
+        from composition_fixture import CompositionFixture
+        cls.fixture = CompositionFixture()
+        cls.repo, cls.lib = cls.fixture.repo, cls.fixture.lib
+        for path in cls.fixture.recipes.values():
+            validate(cls.repo, path)
 
     @classmethod
     def tearDownClass(cls):
-        cls.temp.cleanup()
+        cls.fixture.cleanup()
 
     def setUp(self):
         self.changed = {}
@@ -176,7 +180,7 @@ class RejectionTests(unittest.TestCase):
         ref=self.recipe['clips'][0]['frames'][0]['layers'][0]['provenance']['source_views'][0]['source_ownership']
         path=self.lib/ref['file']
         with Image.open(path) as original:
-            changed=original.copy();changed.putpixel((0,0),255 if original.mode=='L' else (255,255,255,255))
+            changed=original.copy();value=original.getpixel((0,0));changed.putpixel((0,0),(0 if value else 255) if original.mode=='L' else (0,0,0,0))
             data=io.BytesIO();changed.save(data,format='PNG')
         self.write(path,data.getvalue());newsha=hashlib.sha256(path.read_bytes()).hexdigest();name=ref['file']
         def rebind(o):
@@ -314,7 +318,7 @@ class RejectionTests(unittest.TestCase):
         self.rejected(change, 'selection')
 
     def test_selection_requires_binary_target_canvas_mask(self):
-        for mode,canvas in [('gray',(1536,1792)),('small',(1,1))]:
+        for mode,canvas in [('gray',(2,2)),('small',(1,1))]:
             with self.subTest(mode=mode):
                 self.recipe=json.loads(self.path.read_text())
                 ref=self.recipe['clips'][0]['frames'][2]['layers'][1]['provenance']['source_views'][0]['selection']

@@ -1,5 +1,0 @@
-Use case: precise-object-edit
-Asset type: HAT-ONLY transparent overlay atlas; fixed 2x2 native head grid, 1536 square geometry target.
-Image 1 is ACTUAL GEOMETRY TARGET: four west-facing original bald farming movement heads. Image 2 is DESIGN REFERENCE ONLY: golden woven straw hat, navy ribbon; use second west-facing view.
-Produce ONLY four complete straw hats fitted around the exact original target heads. Output NO faces, skin, ears, brows, eyes, necks, shoulders, clothes or background. Transparent hat crown + brim layers only, no black anatomy lines or peach filler.
-Crown must encompass the ENTIRE original scalp contour from top down to brow height, including both side curves; no exposed bald patch above/behind crown. Draw new individual crown projection to fit the actual native head width and tilt in each cell. Never copy reference face or resize original heads. Brim above eyes, slightly over forehead as a real worn hat. The source head is large; keep that native density. Keep exact cell positions/framing. Complete opaque hat surfaces with woven gold texture, navy ribbon, coarse pixel-art clusters and dark contour. No labels, no separator or layout changes.

@@ -481,7 +481,14 @@ def validate_observation(repo, evidence):
     require(not any(p.is_symlink() for p in [evidence,*evidence.parents]), 'Evidence symlink forbidden')
     cp=safe_file(evidence,'input-contract.json');rp=safe_file(evidence,'report.json')
     contract_sha,report_sha=digest(cp),digest(rp)
-    capture.verify_inputs(repo,evidence);contract=read_json(cp);report=read_json(rp)
+    contract=read_json(cp)
+    require(isinstance(contract,dict), 'Invalid native input contract object')
+    if contract.get('suite_kind')=='coastal-body-character-review-v1':
+        from body_review import verify_inputs as verify_body_inputs
+        verify_body_inputs(repo,evidence)
+    else:
+        capture.verify_inputs(repo,evidence)
+    report=read_json(rp)
     require(isinstance(report,dict) and report.get('input_contract_sha256')==contract_sha,
             'Report binds another frozen input contract')
     require(isinstance(report.get('renderer'),str) and report['renderer'] not in ['', 'headless'], 'Actual GPU observation required')

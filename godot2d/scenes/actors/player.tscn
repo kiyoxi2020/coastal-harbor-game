@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_player"]
-[ext_resource type="SpriteFrames" path="res://resources/player_body_frames.tres" id="2_frames"]
+[ext_resource type="SpriteFrames" path="res://resources/player_body_v4_frames.tres" id="2_frames"]
 [ext_resource type="Material" path="res://resources/player_mask.tres" id="3_mask"]
 
 [ext_resource type="PackedScene" path="res://scenes/actors/player_tool_action.tscn" id="4_action"]

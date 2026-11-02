@@ -229,12 +229,25 @@ def candidate_preflight(repo, suite_path):
 
 def main():
     parser=argparse.ArgumentParser()
-    parser.add_argument('suite',choices=['locomotion','farming','wardrobe','headwear','static-candidates','headwear-construction','all-actions-construction'],nargs='?',default='headwear')
+    parser.add_argument('suite',choices=['locomotion','farming','wardrobe','headwear','static-candidates','headwear-construction','all-actions-construction','registered','body-actions','body-pixel-v5'],nargs='?',default='body-actions')
     parser.add_argument('--dry-run',action='store_true')
     args=parser.parse_args();lib=REPO/'art/characters'
     path=lib/'reviews'/args.suite/'review.json'
     try:
-        if args.suite in ['headwear-construction','all-actions-construction']:
+        if args.suite == 'body-pixel-v5':
+            catalog=read_json(lib/'catalog.json')
+            path=safe_file(lib,catalog['reviews']['body-pixel-v5'],'reviews')
+        if args.suite in ['body-actions','body-pixel-v5']:
+            from body_review import preflight
+            preflight(REPO, path)
+            config = {'scene': 'res://dev/characters/character_headwear_trial.tscn',
+                      'args': ['--construction-suite=' + str(path)]}
+        elif args.suite == 'registered':
+            from registered_review import preflight
+            preflight(REPO, path)
+            config = {'scene': 'res://dev/characters/character_registered_trial.tscn',
+                      'args': ['--registered-suite=' + str(path)]}
+        elif args.suite in ['headwear-construction','all-actions-construction']:
             checked=construction_preflight(REPO,path)
             if args.suite=='all-actions-construction':
                 require(checked['schema_version']==2, 'All-actions launcher requires full-package scope')

@@ -67,21 +67,26 @@ class FullActionScopeTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, 'Full-action head'):
                     self.validate()
 
-    def test_existing_west_hoe_build_cannot_be_relabelled_as_full_package(self):
-        repo = Path(__file__).resolve().parents[3]
-        existing = json.loads((repo/'art/characters/reviews/headwear-construction/review.json').read_text())
-        manifest = repo/existing['states']['hair_hat']['manifest']
+    def test_partial_build_cannot_be_relabelled_as_full_package(self):
+        import build
+        from composition_fixture import CompositionFixture
+        fixture = CompositionFixture()
+        self.addCleanup(fixture.cleanup)
+        repo = fixture.repo
+        output = fixture.lib/'builds/partial-head'
+        build.construct(repo, fixture.recipes['hair_hat'], output)
+        manifest = output/'manifest.json'
         suite = {'kind': 'coastal-character-construction-review-v1', 'schema_version': 2,
                  'resource_root': 'art/characters', 'scope': 'review-only',
                  'head_state': 'hair_hat',
                  'manifest': {'manifest': manifest.relative_to(repo).as_posix(),
                               'sha256': hashlib.sha256(manifest.read_bytes()).hexdigest()},
                  'samples': [], 'canonical_idle': {}, 'runtime': {}}
-        with tempfile.TemporaryDirectory(prefix='all-actions-test-', dir=repo/'art/characters/reviews') as directory:
-            path = Path(directory)/'review.json'
-            path.write_text(json.dumps(suite))
-            with self.assertRaisesRegex(ValueError, 'Full-action capability'):
-                review.construction_preflight(repo, path)
+        path = fixture.lib/'reviews/partial/review.json'
+        path.parent.mkdir(parents=True)
+        path.write_text(json.dumps(suite))
+        with self.assertRaisesRegex(ValueError, 'Full-action capability'):
+            review.construction_preflight(repo, path)
 
 
 if __name__ == '__main__':

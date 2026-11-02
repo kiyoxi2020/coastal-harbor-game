@@ -142,7 +142,8 @@ func refresh_preview() -> void:
 			motion_view.position=full_preview_root-geometry.root_anchor_px*motion_view.scale
 			motion_view.texture=geometry.textures[index]
 			frame_label.text="第 %d / %d 姿态"%[index+1,geometry.textures.size()]
-			message.text="固定短发草帽配方 · 已登记%d/24动作方向；待视觉验收。"%trial.head_library.full_clips.size()
+			var package_label:String="完整身体" if trial.has_method("body_review_mode") and trial.body_review_mode() else "固定短发草帽配方"
+			message.text=package_label+" · 已登记%d/24动作方向；待视觉验收。"%trial.head_library.full_clips.size()
 			return
 	if review_action in FARMING_ACTIONS:
 		var clip := farming_clip()

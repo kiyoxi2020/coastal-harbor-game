@@ -18,5 +18,4 @@ jobs:
       - run: python -m pip install -r tools/characters/requirements.txt
       - run: python -m unittest discover -s tools/characters/tests
       - run: python tools/characters/check.py
-      - run: python tools/characters/migrate_layout.py verify
-      - run: python tools/characters/import_static.py --verify
+      - run: python tools/characters/godot_integration.py verify-runtime godot2d/assets/characters/integrations/adult-v4-tank-visible-r001/manifest.json

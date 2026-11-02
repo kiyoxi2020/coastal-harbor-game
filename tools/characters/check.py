@@ -91,7 +91,7 @@ def capture_baseline(repo):
 
 def verify_local_integrations(repo, policy):
     """Q22 local player binding is explicit; source builds remain review-only."""
-    from godot_integration import verify as verify_integration
+    from godot_integration import verify_runtime as verify_integration
     registered = policy.get('local_integrations', [])
     require(isinstance(registered, list), 'Invalid local integration registry')
     require(len(set(registered)) == len(registered), 'Duplicate local integration registration')

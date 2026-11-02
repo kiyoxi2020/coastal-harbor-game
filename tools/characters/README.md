@@ -1,20 +1,47 @@
+## 当前入口（旧人物专项数据已退役）
+
+仅保留V4 body-actions与V5 body-pixel-v5；recipe/build分别r002与r010，唯一构建工具和通用注册/组合/时钟保持。运行包verify-runtime不读取本地制作源；verify仍要求严格源重建，二者不混同。下文旧例用于说明通用接口，涉及旧衣柜/发帽/迁移数据的命令不再可直接运行。CI不再调用已退役数据的迁移/静态导入验收。当前README/CURRENT为导航，制作合同仍以唯一规范为准。[退役范围及验证](../../docs/reviews/2026-11-02-resource-cleanup-executed.md)。
+
+## 2026-11-02 V5独立动画归档
+
+`body-pixel-v5`仍通过现有统一评审器加载；当前template-v5-r009、两套recipe/build-r010、parts/body/adult-v5/r012、archive-r010，sources/adult-v5-animation-r012仅保存最终动画快照。旧V5制作过程与旧版本已清理，下文相应过程路径为历史。默认游戏/基线保持v4，唯一规范8.2.1约束验收后只留动画必需数据。
+
+## 最终人物美术的存放门禁
+
+按[唯一制作规范第8节](../../docs/design/character-art-pipeline.md#8-目录迁移与成本)，人物最终图片及其配套布局/映射/mask/manifest必须实际归入`art/characters/parts/`。母版用`parts/body/<body-id>/<revision>/`，其他部位沿既有款式适配路径。source prepared/derived只是制作输入，template canonical只是注册参考，builds只是严格烘焙制品；都不能取代parts最终包。
+
+沿现有工具完成归档和verify，补像素/姿态/时序/注册等价记录，再同步catalog、CURRENT、部件README与新配方/评审引用。保持冻结输入，不能为了改路径覆盖旧manifest或放宽合同。本节是操作指引，不新增构建接口；旧迁移脚本不得作为新归档批处理器重跑。
+
+## 完整body-only候选评审
+
+`python3 tools/characters/review.py body-actions` 先严格preflight再打开共享Godot评审场景。`body_review.py preflight --suite <配置>` 检查24能力、逐pose与pack裁格RGBA及完整依赖；`snapshot --suite <配置> --evidence /private/tmp/coastal-<新目录> --observer world` 冻结原生输入；`verify-inputs --evidence <目录>` 复核。此消费者只接受单body层完整候选，不能据此宣称换装、接触或发布通过。
+
+配置kind为 `coastal-body-character-review-v1`，`manifest`与`packed_sources`引用相对人物库，具有实际SHA；runtime显式绑定时序。仍使用现有pack/build，不增加批次合成器。[本轮报告](../../docs/reviews/2026-11-01-tank-all-actions.md)。
+
 # 人物制作与核验工具
 
 先读[人物库结构与当前使用逻辑](../../art/characters/README.md)。日常只需三类入口：`review.py`查看已登记抽样，`build.py build/verify`构建与复核严格配方，`check.py`检查仓库边界。新构建不会自动替换现行Godot试玩或正式玩家。
 
+## 已登记源的有限body＋top审阅
+
+`python3 tools/characters/review.py registered [--dry-run]` 使用 `registered_review.py`：严格build.verify、prepare_registered_source.verify、同pose来源语义与直接父级闭包均通过后，启动既有trial的薄适配场景。仅支持普通alpha-over的body＋top、idle/walk成对方向；其余明确拒绝。
+
+`reference_sheet.py build <计划> --output <新目录>` / `verify <目录>` 只无损排参考表。`prepare_registered_source.py build <计划> --output <新目录>` / `verify <目录>` 根据真实body packing登记准备完整material、二值ownership和原RGBA提取纹理，输出仍为review-only。它们都不是第二个人物构建器，部件/配方仍经统一build.py。prepared输出与原图/标注/计划/工具哈希必须随实际严格配方绑定；当前示例见 `sources/top04-adult-v2-west-worn-r001/prepare-walk-r001.json` 与 `prepare-idle-r001.json`。
+
+
 ## 明确评审的Godot本地接入
 
-Q22=A批准默认主角使用归档身体，运行接入清单在`godot2d/assets/characters/integrations/adult-standard-v2-visible-r001/manifest.json`。复核命令：
+2026-11-02用户授权将Q27认可的背心短裤母版接入默认主角，运行接入清单在`godot2d/assets/characters/integrations/adult-v4-tank-visible-r001/manifest.json`。复核命令：
 
 ```sh
-python3 tools/characters/godot_integration.py verify godot2d/assets/characters/integrations/adult-standard-v2-visible-r001/manifest.json
+python3 tools/characters/godot_integration.py verify godot2d/assets/characters/integrations/adult-v4-tank-visible-r001/manifest.json
 ```
 
 新接入用`godot_integration.py create <严格build目录> --package godot2d/assets/characters/integrations/<新ID> --frames godot2d/resources/<新名>.tres`，输出必须不存在。此工具只接受完整四向六动作visible构建，校验既有严格输出后逐字节复制，按原毫秒时序生成SpriteFrames；不是合成器或正式发布命令，不自动改玩家场景、catalog或基线。身体世界缩放采用本次批准的0.25。
 
 导入配置固定无损、无mipmap、无透明边缘修色/预乘/通道重排，`verify`检查导入参数及source/remap。Godot测试另逐帧比对实际加载RGBA与严格摘要；文件SHA和路径不能代替导入后像素验收。
 
-门禁仅验证`runtime-baseline.local_integrations`显式登记的运行包；原文件/引用冻结仍生效。Q22的115项精确差异见`docs/reviews/2026-11-01-body-game-baseline-changes.json`；不为新接入自动刷新基线。源build仍review-only，餐馆旧NPC暂留，完整发布关闭。
+门禁仅验证`runtime-baseline.local_integrations`显式登记的运行包；原文件/引用冻结仍生效。本次111项精确文件差异见`docs/reviews/2026-11-02-tank-game-baseline-changes.json`；不为新接入自动刷新基线。源build仍review-only，餐馆旧NPC暂留，完整发布关闭。
 
 ## 日常查看
 
@@ -28,18 +55,18 @@ python3 tools/characters/godot_integration.py verify godot2d/assets/characters/i
 
 `pack_sources.py pack sources中的版本化packing计划 --output 全新目录`仅把完整源帧裁取、整帧nearest登记到公共画布，再直接复制RGBA排成图集；不组合部件、不处理mask、不补画或清理alpha。计划为`coastal-character-source-atlas-plan-v1`，路径必须为`sources/<source-id>/packing/<revision>.json`，绑定全部原PNG/提示词/作者输入SHA、原图尺寸、源格、整帧有理数倍率、根点与时序。切分和脚本处理仍须遵循任务中的用户授权。
 
-输出仅9图集等实际声明内容、`layout.json`和`manifest.json`，可放`parts/body/<design>/<revision>/`或`sources/<id>/derived/<revision>/`的全新目录；临时验证用`/private/tmp/coastal-*`。`python3 tools/characters/pack_sources.py verify <目录>`重读计划和实际输入，重建所有RGBA并逐像素比较，拒绝缺帧、越界、裁掉非零alpha、旧目录覆盖和源/布局/输出篡改。状态恒为review-only、complete_body_archive=false，不授予用户美术认可或生产资格。
+输出仅9图集等实际声明内容、`layout.json`和`manifest.json`。**最终母版图片归档必须输出到`parts/body/<design>/<revision>/`的全新目录**；`sources/<id>/derived/<revision>/`仅用于制作中间产物，`/private/tmp/coastal-*`仅用于临时验证。工具允许这几类路径不代表它们都能作为最终归档位置；仅放archive清单引用外部派生图不算完成。`python3 tools/characters/pack_sources.py verify <目录>`重读计划和实际输入，重建所有RGBA并逐像素比较，拒绝缺帧、越界、裁掉非零alpha、旧目录覆盖和源/布局/输出篡改。状态恒为review-only、complete_body_archive=false，不授予用户美术认可或生产资格。
 
 这只是统一构建前的源图准备，不能代替下方`build.py build/verify`：新增人物配方仍必须使用`coastal-character-construction-v1`，源图集仅作其已绑定输入。预处理工具有独立代码/依赖身份，不修改或刷新既有严格构建的engine哈希；不能据此绕过模板、同姿态、mask或换装接口校验。
 
 ```sh
-python3 tools/characters/build.py build art/characters/recipes/wardrobe-hoe-west/r002.json --output /private/tmp/coastal-character-build-r002
+python3 tools/characters/build.py build art/characters/recipes/adult-v4-tank-visible/r002.json --output /private/tmp/coastal-character-build-r002
 python3 tools/characters/build.py verify /private/tmp/coastal-character-build-r002
 python3 -m unittest discover -s tools/characters/tests
 python3 tools/characters/check.py
 ```
 
-输出也可指定库内全新的 `art/characters/builds/<build-id>`。已有目录即使为空也不能覆盖；修改配方后创建新revision和build目录。输出包含帧和manifest，始终为review-only；此入口没有正式发布命令。
+严格构建输出可指定库内全新的 `art/characters/builds/<build-id>`，它是烘焙/校验制品，不替代`parts/`最终美术归档。已有目录即使为空也不能覆盖；修改配方后创建新revision和build目录。输出包含帧和manifest，始终为review-only；此入口没有正式发布命令。
 
 `build_contract.py`实现严格配方合同。真实示例为 `recipes/wardrobe-hoe-west/r002.json`：绑定同一母版/动作集、B姿态、hoe-west+idle-west能力、源包、部件定义、所有实际来源、mask与逐帧层序。它用旧记录作为输入重建，不修改旧sample、认可或迁移JSON。新款或新动作沿相同字段扩展；新增动作的pose数来自模板，不要求四帧。
 

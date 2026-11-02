@@ -9,8 +9,11 @@ static func verify(library:Object,contract:Dictionary,project:String) -> Diction
  var expected_sha=files.get(suite,"")
  if not expected_sha is String or expected_sha.length()!=64 or library.get("catalog_sha256")!=expected_sha:return rejected("Actual loaded suite SHA differs")
  var bindings=library.get("manifest_bindings")
- if not bindings is Dictionary or bindings.size()!=1 or not bindings.get("hair_hat") is Dictionary:return rejected("Actual fixed-head manifest binding missing")
- var actual:Dictionary=bindings.hair_hat
+ var body:bool=contract.get("suite_kind")=="coastal-body-character-review-v1"
+ if body and library.get("suite_kind")!="coastal-body-character-review-v1":return rejected("Actual body suite kind differs")
+ var state:String="body" if body else "hair_hat"
+ if not bindings is Dictionary or bindings.size()!=1 or not bindings.get(state) is Dictionary:return rejected("Actual "+state+" manifest binding missing")
+ var actual:Dictionary=bindings[state]
  if actual.get("manifest")!=expected.get("manifest") or actual.get("sha256")!=expected.get("sha256") or actual.get("artifact_digest")!=contract.get("artifact_digest"):return rejected("Actual loaded manifest/artifact differs")
  var runtime=library.get("runtime")
  if not runtime is Dictionary or not contract.get("runtime") is Dictionary or runtime!=contract.runtime:return rejected("Actual loaded runtime differs")

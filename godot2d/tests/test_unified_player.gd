@@ -1,7 +1,7 @@
 extends SceneTree
 const Support = preload("res://tests/life_test_support.gd")
-const FRAMES_PATH := "res://resources/player_body_frames.tres"
-const MANIFEST_PATH := "res://assets/characters/integrations/adult-standard-v2-visible-r001/manifest.json"
+const FRAMES_PATH := "res://resources/player_body_v4_frames.tres"
+const MANIFEST_PATH := "res://assets/characters/integrations/adult-v4-tank-visible-r001/manifest.json"
 const DIRECTIONS := {"south":Vector2.DOWN,"west":Vector2.LEFT,"east":Vector2.RIGHT,"north":Vector2.UP}
 class WorldStub:
 	extends Node

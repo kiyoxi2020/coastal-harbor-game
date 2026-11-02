@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://dev/characters/character_walk_trial.tscn" id="1"]
+[ext_resource type="Script" path="res://dev/characters/character_registered_trial.gd" id="2"]
+
+[node name="CharacterRegisteredTrial" instance=ExtResource("1")]
+script = ExtResource("2")
+preview_root_px = Vector2(112, 200)
+
+[node name="HarborExterior" parent="." index="0"]
+world_bounds = Rect2(800, 800, 1600, 1600)
+
+[node name="TrialActor" parent="HarborExterior/DepthSortedObjects" index="1"]
+position = Vector2(1600, 1600)
+
+[node name="Pose" parent="HarborExterior/DepthSortedObjects/TrialActor" index="2"]
+scale = Vector2(0.25, 0.25)
+offset = Vector2(-123, -201)
+
+[node name="Start" parent="." index="1"]
+position = Vector2(1600, 1600)
+
+[node name="Instructions" parent="TrialUI/Panel/Margin/Rows" index="0"]
+text = "制作侧注册配方审阅 · 已登记方向移动，松开站立 · R 回起点 · 1 / 2 身体与配方对照"
+
+[node name="Status" parent="TrialUI/Panel/Margin/Rows" index="1"]
+text = "正在验证严格构建与准备源…"
+
+[node name="Short" parent="TrialUI/Panel/Margin/Rows/Controls" index="0"]
+text = "1 原身体"
+
+[node name="Long" parent="TrialUI/Panel/Margin/Rows/Controls" index="1"]
+text = "2 当前配方"
+
+[node name="SpeedLabel" parent="TrialUI/Panel/Margin/Rows/Controls" index="2"]
+text = "动作速度"
+
+[node name="Scope" parent="TrialUI/Panel/Margin/Rows" index="3"]
+text = "仅审阅已登记站立/行走；原身体与当前严格配方对照。无游戏换装或存档。"
+
+[node name="Title" parent="TrialUI/MotionReview/Margin/Rows" index="0"]
+text = "同尺度对照 · 源贴图 1:1 屏幕显示"
+
+[node name="Label" parent="TrialUI/MotionReview/Margin/Rows/Views/Reference" index="0"]
+text = "当前选择的站姿"
+
+[node name="Texture" parent="TrialUI/MotionReview/Margin/Rows/Views/Reference/Slot" index="0"]
+position = Vector2(50.5, 99.5)
+scale = Vector2(0.5, 0.5)
+
+[node name="Texture" parent="TrialUI/MotionReview/Margin/Rows/Views/Motion/Slot" index="0"]
+position = Vector2(50.5, 99.5)
+scale = Vector2(0.5, 0.5)
+
+[node name="Help" parent="TrialUI/MotionReview/Margin/Rows" index="6"]
+text = "已登记方向/动作可暂停与逐帧；世界角色沿用同一控制器。\n1 原身体 / 2 当前配方；C 显示或收起对照。"
+
+[editable path="HarborExterior"]
+[editable path="TrialUI/MotionReview"]

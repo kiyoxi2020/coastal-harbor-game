@@ -15,6 +15,21 @@
 /godot2d/verification*/
 /art/interior/processed/
 
+# Local authoring/review data; the main game uses baked godot2d/assets resources.
+# Narrow these rules only for verified main-game resource dependencies.
+/art/staging/
+/art/characters/sources/
+/art/characters/templates/
+/art/characters/parts/
+/art/characters/builds/
+/art/characters/recipes/
+/art/characters/reviews/
+
+# Local one-off review inventories, not runtime data or permanent summaries.
+/docs/reviews/2026-11-02-resource-cleanup-list.csv
+/docs/reviews/2026-11-02-tank-game-baseline-changes.json
+
+# Historical evidence exceptions; do not add new process-resource exceptions.
 # Native character-motion evidence required to reproduce committed validation.
 !/art/design/character-motion/adult-standard-v1/walk-west-proof-v1/evidence/native-originals.zip
 !/art/design/character-motion/adult-standard-v1/walk-west-proof-v1/evidence/travel-originals.zip

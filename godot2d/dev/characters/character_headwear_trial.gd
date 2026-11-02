@@ -27,7 +27,8 @@ func _ready() -> void:
  var construction_header:bool=header is Dictionary and header.get("kind")=="coastal-character-construction-review-v1"
  var legacy_construction:bool=construction_header and (header.get("schema_version") is int or header.get("schema_version") is float) and header.get("schema_version")==1
  var candidate_header:bool=header is Dictionary and header.get("kind")=="coastal-character-construction-candidate-v1"
- var full_requested:bool=candidate_header or (construction_header and header.get("schema_version")==2) or (construction_requested and not legacy_construction)
+ var body_header:bool=header is Dictionary and header.get("kind")=="coastal-body-character-review-v1"
+ var full_requested:bool=body_header or candidate_header or (construction_header and header.get("schema_version")==2) or (construction_requested and not legacy_construction)
  if full_requested:
   # A complete package is validated before setting up the shared scene. Never
   # bootstrap its action state from legacy locomotion/farming/wardrobe data.
@@ -105,7 +106,7 @@ func apply_head_state(state:String) -> void:
     if not farming_clip.is_empty() and selected_sample==sample.id:farming_clip.textures=sample.textures
    if selected_sample==sample.id:frames.B[clips.idle[direction][0]]=sample.idle_texture
 func select_head_state(state:String) -> bool:
- if uses_registered_package():return head_ready and state=="hair_hat"
+ if uses_registered_package():return head_ready and state==("body" if body_review_mode() else "hair_hat")
  if not head_ready or state not in HeadLibrary.STATES:return false
  head_state=state
  apply_head_state(state)
@@ -113,6 +114,9 @@ func select_head_state(state:String) -> bool:
  return true
 func refresh_head_label() -> void:
  if not is_instance_valid(head_label):return
+ if body_review_mode():
+  head_label.text="完整身体 · 四向全动作，待视觉验收。"
+  return
  head_label.text="当前："+str(HEAD_LABELS[head_state])+" · 切换保持当前动作进度\n"+("仅西锄四姿态＋站姿小样，外观待你验收。" if head_library.suite_kind!="" else "仅本次四组抽样，外观待你验收。")
  for state in HeadLibrary.STATES:
   $TrialUI/Headwear/Margin/Rows/Buttons.get_node(state).set_pressed_no_signal(state==head_state)
@@ -140,13 +144,18 @@ func refresh_status() -> void:
  if not is_instance_valid(status):return
  if load_error!="":status.text=load_error;return
  if motion_error!="":status.text=motion_error;return
- status.text="海军条纹衫 · %s / %s · 速度%d%%"%[current_action,facing,roundi(speed_factor*100)]
+ if body_review_mode():
+  $TrialUI/Panel/Margin/Rows/Controls/SpeedLabel.text="速度（50%–100%）"
+  $TrialUI/Panel/Margin/Rows/Controls/MaxSpeed.text="当前%d%%　− / + 调节"%roundi(speed_factor*100)
+ status.text=("身体评审" if body_review_mode() else "海军条纹衫")+" · %s / %s · 速度%d%%"%[current_action,facing,roundi(speed_factor*100)]
  if not farming_clip.is_empty():status.text+=" · 姿态%d/%d"%[farming_pose_index()+1,farming_clip.textures.size()]
 
 # Installs only a validated construction library, keeping the existing world
 # movement and one action clock. Inspector scale determines display density.
 func uses_registered_package() -> bool:
  return head_library.full_package or head_library.candidate_package
+func body_review_mode() -> bool:
+ return head_library.suite_kind=="coastal-body-character-review-v1"
 func install_full_package() -> bool:
  if not head_library.full_package or head_library.full_clips.size()!=24:return false
  return install_registered_package()
@@ -175,14 +184,14 @@ func install_registered_package() -> bool:
    clips[action][direction]=indices
   else:
    var farm:Dictionary=clip.duplicate(false)
-   farm.garment="B";farm.note="固定短发草帽配方 · 全动作评审，待视觉验收。"
+   farm.garment="B";farm.note="完整身体 · 全动作评审，待视觉验收。" if body_review_mode() else "固定短发草帽配方 · 全动作评审，待视觉验收。"
    review_panel.farming_library.clips[action+"/"+direction+"/B"]=farm
  review_panel.farming_library.catalog_version=2
  move_policy={"idle":{"base_world_speed":0,"playback_rate":1.0}}
  for action in ["walk","run"]:move_policy[action]={"base_world_speed":head_library.runtime.movement[action].base_world_speed}
  speed_factor=float(head_library.runtime.default_speed_factor)
  speed_slider.set_value_no_signal(speed_factor)
- garment="B";head_state="hair_hat";head_ready=true;head_error="";load_error="";sample_error="";motion_error=""
+ garment="B";head_state="body" if body_review_mode() else "hair_hat";head_ready=true;head_error="";load_error="";sample_error="";motion_error=""
  schema_version=2;farming_transitions_enabled=true;facing=("south" if head_library.canonical_idle.has("south") else str(head_library.canonical_idle.keys()[0]));current_action="idle";phase_ms=0;idle_phase_ms=0
  pending_locomotion_action="";stable_remaining_ms=0;run_requested=false;action_instance_key=""
  pose.visible=true
@@ -202,6 +211,13 @@ func install_registered_package() -> bool:
  review_panel.get_node("Margin/Rows/Help").text="左侧选择动作、暂停或逐帧；方向键控制世界角色。C显示或收起对照。"
  $TrialUI/Panel/Margin/Rows/Instructions.text="方向键移动 · Shift跑步 · F浇水 / G锄地 / H收获 · R回起点"
  $TrialUI/Panel/Margin/Rows/Scope.text="左侧四向六动作对照、暂停/逐帧；世界动作单独控制。评审版本，无存档。"
+ $TrialUI/Headwear.visible=not body_review_mode()
+ if body_review_mode():
+  get_window().title="潮港旧屋 · 身体全动作评审"
+  $TrialUI/Samples/Margin/Rows/Title.text="完整身体 · 四向全动作"
+  sample_label.text="身体源图 · 四向六动作\n完整身体与工具表现，待视觉验收"
+  head_label.text="完整身体"
+  review_panel.get_node("Margin/Rows/Views/Reference/Label").text="身体站姿"
  if head_library.candidate_package:
   get_window().title="潮港旧屋 · 内部动作验收"
   $TrialUI/Samples/Margin/Rows/Title.text="内部动作验收 · %d/24"%head_library.full_clips.size()

@@ -1,5 +1,6 @@
 extends RefCounted
 const ConstructionLibrary=preload("res://dev/characters/character_construction_samples.gd")
+const BodyLibrary=preload("res://dev/characters/character_body_samples.gd")
 const ResourcePaths = preload("res://dev/characters/character_resource_paths.gd")
 ## Bounded headwear views. Everything resolves against an exact accepted pose.
 const IDS=["run-east","hoe-west","water-south","harvest-north"]
@@ -54,8 +55,8 @@ func state_textures(base:String,frame:Dictionary,inputs:Dictionary,size:Vector2i
 func load_samples(project:String,path:String) -> bool:
  samples.clear();error="";catalog_sha256="";suite_kind="";manifest_bindings.clear();full_package=false;candidate_package=false;full_clips.clear();canonical_idle.clear();runtime.clear()
  var catalog=read_json(path)
- if catalog is Dictionary and catalog.get("kind") in [ConstructionLibrary.KIND,ConstructionLibrary.CANDIDATE_KIND]:
-  var strict=ConstructionLibrary.new()
+ if catalog is Dictionary and catalog.get("kind") in [ConstructionLibrary.KIND,ConstructionLibrary.CANDIDATE_KIND,BodyLibrary.BODY_KIND]:
+  var strict=BodyLibrary.new() if catalog.kind==BodyLibrary.BODY_KIND else ConstructionLibrary.new()
   if not strict.load_samples(project,path):return reject(strict.error)
   samples=strict.samples;catalog_sha256=strict.catalog_sha256;suite_kind=strict.suite_kind;manifest_bindings=strict.manifest_bindings
   full_package=strict.full_package;candidate_package=strict.candidate_package;full_clips=strict.full_clips;canonical_idle=strict.canonical_idle;runtime=strict.runtime

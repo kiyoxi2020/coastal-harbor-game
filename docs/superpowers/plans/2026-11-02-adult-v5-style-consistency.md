@@ -1,0 +1,5 @@
+# Adult-v5 action style consistency
+
+User accepts idle pixel style and requests matching motion outlines, skin palette and eyes. Keep the approved idle unchanged; treat current walk/run as failing references. Use built-in Imagegen with reference boards at equal final display density, one complete six-frame direction sample first. Check six poses and rapid idle/walk/run switching at 1x plus nearest magnification. Preserve pose order and complete whole figures; register actual generated frames, no copied face/hand patches or arbitrary runtime offsets. Persist selected images, prompts and metadata under the existing unified source/parts/template pipeline only after the sample passes style comparison. Other actions follow the user's scope response. Earlier v5 r005 and frozen strict snapshots remain diagnostics, not a visual acceptance.
+
+Completed this revision: 48 walking/running poses, accepted idle preserved exactly, final pack r007/template v5-r004, source review + native poses/96 transitions + mandatory tool gates passed. Farming style remains previous source; user motion visual acceptance pending.

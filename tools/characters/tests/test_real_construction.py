@@ -1,5 +1,5 @@
-"""Real accepted artwork is the oracle, not a duplicate of the compositor."""
-import json
+"""The tracked main-game PNGs are the real construction oracle."""
+import hashlib
 from pathlib import Path
 import sys
 import tempfile
@@ -7,24 +7,28 @@ import unittest
 from PIL import Image
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import build
+from runtime_art_fixture import runtime_png, write_fixture
 
-REPO = Path(__file__).resolve().parents[3]
 
 class RealConstructionTest(unittest.TestCase):
-    def test_west_hoe_and_idle_exact_accepted_rgba(self):
-        recipe = REPO/'art/characters/recipes/wardrobe-hoe-west/r002.json'
-        original = json.loads((REPO/'art/characters/builds/wardrobe-hoe-west-r001/sample.json').read_text())
-        with tempfile.TemporaryDirectory(prefix='coastal-real-build-',dir='/private/tmp') as temp:
-            output = Path(temp)/'result'
-            manifest = build.construct(REPO,recipe,output)
-            self.assertEqual(len(manifest['outputs']),5)
-            for action, frames in [('hoe', original['frames']), ('idle', [original['idle']])]:
-                for frame in frames:
-                    with self.subTest(pose=frame['pose_id']):
-                        current = output/f"frames/{action}/west/{frame['pose_id']}.png"
-                        with Image.open(current) as actual, Image.open(REPO/'art/characters'/frame['file']) as expected:
-                            self.assertEqual(actual.size,expected.size)
-                            self.assertEqual(actual.convert('RGBA').tobytes(),expected.convert('RGBA').tobytes())
-            build.verify(REPO,output)
+    def test_current_main_game_pixels_survive_strict_construction(self):
+        with tempfile.TemporaryDirectory(prefix='coastal-real-build-', dir='/private/tmp') as temp:
+            fixture = write_fixture(Path(temp))
+            manifest = build.construct(fixture['repo'], fixture['path'], fixture['output'])
+            clips = fixture['runtime']['clips']
+            self.assertEqual(len(clips), 24)
+            self.assertEqual(len(manifest['outputs']), 108)
+            self.assertEqual({len(c['frames']) for c in clips}, {1, 4, 6})
+            for clip in clips:
+                for frame in clip['frames']:
+                    with self.subTest(clip=(clip['action'], clip['direction']), pose=frame['pose_id']):
+                        path = fixture['output']/f"frames/{clip['action']}/{clip['direction']}/{frame['pose_id']}.png"
+                        with Image.open(path) as actual, Image.open(runtime_png(frame)) as expected:
+                            self.assertEqual(actual.size, expected.size)
+                            pixels = actual.convert('RGBA').tobytes()
+                            self.assertEqual(pixels, expected.convert('RGBA').tobytes())
+                            self.assertEqual(hashlib.sha256(pixels).hexdigest(), frame['rgba_sha256'])
+            build.verify(fixture['repo'], fixture['output'])
 
-if __name__ == '__main__':unittest.main()
+
+if __name__ == '__main__': unittest.main()

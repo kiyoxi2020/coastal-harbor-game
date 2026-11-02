@@ -7,7 +7,7 @@ import shutil
 import sys
 import unittest
 
-from PIL import Image, ImageChops, ImageDraw, PngImagePlugin
+from PIL import Image, ImageChops, PngImagePlugin
 
 TOOLS = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(TOOLS))
@@ -704,97 +704,31 @@ class RegisteredAdaptationTests(unittest.TestCase):
         extra['source_bundle'] = self.write(extra['source_bundle']['file'], data)
         self.rejected('source.*pose|pose.*source')
 
-    def test_real_collar_sources_reconstruct_only_reviewed_visible_surface(self):
-        # Real retained GPT originals, canonical walk pose, and the reviewed
-        # polygon are copied/read into this isolated synthetic consumer. No
-        # production mask, recipe or annotation is written to the repository.
-        real = TOOLS.parents[1] / 'art/characters'
-        source_base = 'sources/gpt-top03-walk-south-0-v1'
-        source_path = source_base + '/originals/complete-shirt.png'
-        repair_path = source_base + '/originals/collar-repair.png'
-        bundle_path = source_base + '/source.json'
-        poses_path = 'templates/adult-standard-v1/motions/review-motion-v1/actions/walk/r001/south/poses.json'
-        action_path = 'templates/adult-standard-v1/motions/review-motion-v1/actions/walk/r001/action.json'
-        poses = contract.read_json(real / poses_path); variant = poses['variants']['B']; frozen = variant['frames'][0]
-        for path in [source_path, repair_path, bundle_path, poses_path, action_path, frozen['file']]:
-            destination = self.lib / path; destination.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(real / path, destination)
-        def ref(path): return {'file': path, 'sha256': sha(self.lib / path)}
-        dependencies = {}
-        def reference(value, namespace=None, image_size=None):
-            contract.keys(value, 'file sha256', 'reference')
-            path = contract.safe_file(self.lib, value['file'], namespace)
-            contract.require(sha(path) == value['sha256'], 'SHA mismatch')
-            dependencies[value['file']] = value['sha256']
-            if image_size is not None:
-                with Image.open(path) as image:
-                    contract.require(image.format == 'PNG' and list(image.size) == list(image_size), 'PNG canvas mismatch')
-            return path
-        def record(value, namespace=None): return contract.read_json(reference(value, namespace))
-        size, root = variant['canvas_px'], variant['root_anchor_px']
-        visible = Image.new('L', tuple(size))
-        for layer in frozen['layers']:
-            with Image.open(real / layer['source']) as im: alpha = im.convert('RGBA').getchannel('A')
-            if layer.get('hide_mask'):
-                with Image.open(real / layer['hide_mask']) as hide:
-                    alpha = ImageChops.multiply(alpha, ImageChops.invert(hide.convert('L')))
-            support = alpha.point(lambda v: 255 if v >= 128 else 0)
-            visible = ImageChops.lighter(visible, support) if layer['id'] == 'shirt_torso' or 'sleeve' in layer['id'] else ImageChops.subtract(visible, support)
-        self.assertEqual(visible.histogram()[255], 30655)
-        namespace = 'parts/top/top03/adult-standard-v1/review-motion-v1/source-test'
-        owner = self.write(namespace + '/visible-surface-probe.png', visible)
-        review = contract.read_json(Path(__file__).parent / 'fixtures/south-walk0-selection.json')
-        polygon = review['source_selection_candidate']['polygon_target_units']
-        selection_mask = Image.new('L', tuple(size)); ImageDraw.Draw(selection_mask).polygon([tuple(p) for p in polygon], fill=255)
-        selection_ref = self.write(namespace + '/collar-source-selection-probe.png', selection_mask)
-        with Image.open(real / source_path) as original: base = original.convert('RGBA').resize(tuple(size), Image.Resampling.NEAREST)
-        with Image.open(real / repair_path) as original: repair = original.convert('RGBA').resize(tuple(size), Image.Resampling.NEAREST)
-        selected = Image.composite(repair, base, selection_mask)
-        missing = ImageChops.multiply(visible, selected.getchannel('A').point(lambda v: 255 if v < 200 else 0))
-        self.assertIsNone(missing.getbbox())
-        texture = self.write(namespace + '/expected-material-probe.png', Image.composite(selected, Image.new('RGBA', tuple(size)), visible))
-        annotation_path = 'templates/adult-standard-v1/motions/review-motion-v1/annotations/source-test/poses.json'
-        annotation = self.write(annotation_path, {
-            'kind': 'coastal-pose-annotations-v1', 'schema_version': 1, 'template_id': 'adult-standard-v1',
-            'motion_set_id': 'review-motion-v1', 'revision': 'source-test', 'records': [{
-                'record_id': 'walk-south-zero', 'poses': ref(poses_path), 'variant': 'B', 'pose_id': 'walk_south_0',
-                'reference_frame': ref(frozen['file']), 'canvas_px': size, 'root_anchor_px': root,
-                'display_scale': variant['display_scale'], 'landmarks_px': {'root': root},
-                'surfaces': {'torso': {'layer_id': 'body', 'mask': owner}}}]})
-        pose = {'document': annotation, 'record': 'walk-south-zero'}
-        normalization = {'kind': 'whole-source-rational-v1', 'filter': 'nearest', 'numerator': 1, 'denominator': 2,
-                         'raw_canvas_px': [1024, 1536], 'raw_root_anchor_px': [512, 1416],
-                         'normalized_canvas_px': size, 'normalized_root_anchor_px': root}
-        view = {'view_id': 'real-shirt', 'role': 'full-source-component', 'source_pose': pose,
-                'source': ref(source_path), 'source_bundle': ref(bundle_path), 'canvas_px': size, 'root_anchor_px': root,
-                'source_ownership': {'role': 'source-ownership', 'mask': owner}, 'extraction': {
-                    'kind': 'normalized-source-selection-v1', 'schema_version': 1, 'normalization': normalization,
-                    'ownership_space': 'normalized-source-full-frame', 'selection_space': 'normalized-source-full-frame',
-                    'selections': [{'selection_id': 'collar', 'source': ref(repair_path), 'source_bundle': ref(bundle_path),
-                                    'source_pose': pose, 'normalization': normalization,
-                                    'selection': {'role': 'source-selection', 'mask': selection_ref}}]}}
-        mapping = {'mapping_id': 'real-target', 'view_id': 'real-shirt', 'texture': texture, 'target_pose': pose,
-                   'target_surface': {'surface_id': 'torso', 'layer_id': 'body'}, 'interface_scope': 'same-cut-surface',
-                   'role': 'component-surface', 'anchors': {'name': 'root', 'source_px': root, 'target_px': root},
-                   'coverage': None, 'occlusion': None}
-        adaptation = self.write(namespace + '/views.json', {
-            'kind': 'coastal-registered-adaptations-v1', 'schema_version': 1, 'design_id': 'top03',
-            'design_revision': 'source-test', 'template_id': 'adult-standard-v1', 'motion_set_id': 'review-motion-v1',
-            'views': [view], 'mappings': [mapping]})
-        motion = contract.read_json(real / 'templates/adult-standard-v1/motions/review-motion-v1/motion-set.json')
-        mapper = contract.RegisteredAdaptations(self.lib, {'adaptations': {'top': adaptation}}, reference, record,
-                                               'adult-standard-v1', motion,
-                                               {'top': {'design_id': 'top03', 'category': 'top', 'revision': 'source-test'}})
-        top = copy.deepcopy(self.first_layer())
-        top.update(source=view['source'], source_bundle=view['source_bundle'], ownership=owner, texture=texture,
-                   pose_id='walk_south_0', view_binding={'view_id': 'real-shirt', 'mapping_id': 'real-target'})
-        clip = {'action_id': 'walk', 'direction': 'south', 'poses': ref(poses_path), 'variant': 'B',
-                'canvas_px': size, 'root_anchor_px': root, 'display_scale': variant['display_scale']}
-        frame = {'pose_id': 'walk_south_0', 'duration_ms': 80, 'composition': 'alpha-over',
-                 'layers': [{'id': 'body', 'slot': 'body', 'texture': ref(frozen['file'])}, top], 'layer_order': ['body', 'top']}
-        self.assertEqual(mapper.component(top, clip, frame), namespace.rsplit('/', 1)[0])
-        for path in [source_path, repair_path, bundle_path, selection_ref['file'], owner['file'], annotation_path, poses_path, frozen['file']]:
-            self.assertIn(path, dependencies)
+    def test_collar_selection_reconstructs_only_owned_visible_surface(self):
+        expected = self.normalized_source_fixture()
+        value = self.check()
+        view = self.adaptation['views'][0]
+        selection = view['extraction']['selections'][0]
+        for ref in [view['source'], view['source_bundle'], selection['source'],
+                    selection['source_bundle'], selection['selection']['mask'],
+                    view['source_ownership']['mask']]:
+            self.assertIn(ref['file'], value.dependencies)
+        for mapping in self.adaptation['mappings']:
+            texture = value.image(mapping['texture'])
+            x, y = mapping['anchors']['target_px']
+            self.assertEqual(texture.getpixel((x-1, y-1)), expected.getpixel((0, 0)))
+            self.assertEqual(texture.getpixel((x, y)), expected.getpixel((1, 1)))
+            self.assertEqual(texture.getpixel((x, y-1)), (0, 0, 0, 0))
+        self.assertEqual(expected.getpixel((0, 0)), (17, 33, 77, 73))
+        output = self.repo/'coastal-collar-selected'
+        build.construct(self.repo, self.path, output); build.verify(self.repo, output)
+        # A self-consistently rehashed texture cannot insert unowned material.
+        mapping = self.adaptation['mappings'][0]
+        changed = value.image(mapping['texture']).copy()
+        changed.putpixel((1, 0), (99, 88, 77, 255))
+        mapping['texture'] = self.write(mapping['texture']['file'], changed)
+        self.first_layer()['texture'] = mapping['texture']
+        self.rejected('reconstruct|RGBA|support')
 
     def test_binary_occlusion_rejects_partial_foreground_and_alpha_order_keeps_underlayer(self):
         clip = self.recipe['clips'][0]; frame = clip['frames'][0]; mapping = self.adaptation['mappings'][0]
@@ -1072,92 +1006,27 @@ class RegisteredAdaptationTests(unittest.TestCase):
         extraction['normalization']['raw_origin_px'] = [1, 0]
         self.rejected('origin')
 
-    def test_real_south_hat_atlas_rebuilds_registered_hat_without_fake_world_root(self):
-        real = TOOLS.parents[1]/'art/characters'
-        raw_path = 'sources/motion-headwear-sampling-v1-9f06fab9/originals/headwear-sheet-attempt1-b71b3574.png'
-        bundle_path = 'sources/motion-headwear-sampling-v1-9f06fab9/source.json'
-        views = contract.read_json(real/'parts/hat/hat-straw-navy-band-v1/adult-standard-v1/review-motion-v1/r001/views.json')
-        old = next(v['view'] for v in views['views'] if v['pose_id'] == 'water_south_B_ready')
-        poses_path = 'templates/adult-standard-v1/motions/review-motion-v1/actions/water/r001/south/poses.json'
-        action_path = 'templates/adult-standard-v1/motions/review-motion-v1/actions/water/r001/action.json'
-        variant = contract.read_json(real/poses_path)['variants']['B']; original = variant['frames'][0]
-        for path in [raw_path, bundle_path, poses_path, action_path, original['file'], old['file']]:
-            destination = self.lib/path; destination.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(real/path, destination)
-        def ref(path): return {'file': path, 'sha256': sha(self.lib/path)}
-        dependencies = {}
-        def reference(value, namespace=None, image_size=None):
-            contract.keys(value, 'file sha256', 'reference')
-            path = contract.safe_file(self.lib, value['file'], namespace)
-            contract.require(sha(path) == value['sha256'], 'SHA mismatch')
-            dependencies[value['file']] = value['sha256']
-            if image_size is not None:
-                with Image.open(path) as image:
-                    contract.require(image.format == 'PNG' and list(image.size) == list(image_size), 'PNG canvas mismatch')
-            return path
-        def record(value, namespace=None): return contract.read_json(reference(value, namespace))
-        reg = old['registration']; crop = reg['source_crop_px']
-        atlas_anchor = [reg['pivot_px'][i]+crop[i] for i in (0, 1)]
-        pose_anchor = reg['target_anchor_px']; delta = [pose_anchor[i]-atlas_anchor[i] for i in (0, 1)]
-        self.assertEqual(atlas_anchor, [142, 1304]); self.assertEqual(delta, [391, -575])
-        atlas_owner = Image.new('L', (3072, 1536))
-        with Image.open(real/old['source_ownership']) as owner:
-            atlas_owner.paste(owner, tuple(crop[:2]))
-        canonical_owner = Image.new('L', tuple(variant['canvas_px'])); canonical_owner.paste(atlas_owner, tuple(delta))
-        namespace = 'parts/hat/hat-straw-navy-band-v1/adult-standard-v1/review-motion-v1/atlas-test'
-        atlas_mask = self.write(namespace+'/atlas-owner-probe.png', atlas_owner)
-        canonical_mask = self.write(namespace+'/canonical-owner-probe.png', canonical_owner)
-        annotation_path = 'templates/adult-standard-v1/motions/review-motion-v1/annotations/atlas-test/poses.json'
-        annotation = self.write(annotation_path, {
-            'kind': 'coastal-pose-annotations-v1', 'schema_version': 1, 'template_id': 'adult-standard-v1',
-            'motion_set_id': 'review-motion-v1', 'revision': 'atlas-test', 'records': [{
-                'record_id': 'water-south-ready', 'poses': ref(poses_path), 'variant': 'B', 'pose_id': original['pose_id'],
-                'reference_frame': ref(original['file']), 'canvas_px': variant['canvas_px'],
-                'root_anchor_px': variant['root_anchor_px'], 'display_scale': variant['display_scale'],
-                'landmarks_px': {'left-ear-edge': pose_anchor},
-                'surfaces': {'head': {'layer_id': 'base', 'mask': canonical_mask}}}]})
-        pose = {'document': annotation, 'record': 'water-south-ready'}
-        view = {'view_id': 'real-atlas-hat', 'role': 'full-source-component', 'source_pose': pose,
-                'source': ref(raw_path), 'source_bundle': ref(bundle_path),
-                'canvas_px': variant['canvas_px'], 'root_anchor_px': variant['root_anchor_px'],
-                'source_ownership': {'role': 'source-ownership', 'mask': canonical_mask},
-                'extraction': {'kind': 'registered-source-atlas-v1', 'schema_version': 1,
-                    'atlas_canvas_px': [3072, 1536], 'normalization': {
-                        'kind': 'whole-source-rational-pad-v1', 'filter': 'nearest', 'numerator': 1536, 'denominator': 887,
-                        'raw_canvas_px': [1774, 887], 'raw_origin_px': [0, 0], 'normalized_canvas_px': [3072, 1536],
-                        'normalized_origin_px': [0, 0], 'whole_frame_offset_px': [0, 0]},
-                    'atlas_ownership': {'role': 'source-atlas-ownership', 'coordinate_space': 'normalized-source-atlas', 'mask': atlas_mask},
-                    'registration': {'kind': 'atlas-to-source-pose-anchor-v1', 'atlas_anchor_px': atlas_anchor,
-                                     'pose_anchor_name': 'left-ear-edge', 'pose_anchor_px': pose_anchor}}}
-        mapping = {'mapping_id': 'ready', 'view_id': view['view_id'], 'texture': ref(old['file']), 'target_pose': pose,
-                   'target_surface': {'surface_id': 'head', 'layer_id': 'base'}, 'interface_scope': 'same-cut-surface',
-                   'role': 'component-surface', 'anchors': {'name': 'left-ear-edge', 'source_px': pose_anchor, 'target_px': pose_anchor},
-                   'coverage': None, 'occlusion': None}
-        adaptation = {'kind': 'coastal-registered-adaptations-v1', 'schema_version': 1,
-                      'design_id': 'hat-straw-navy-band-v1', 'design_revision': 'atlas-test', 'template_id': 'adult-standard-v1',
-                      'motion_set_id': 'review-motion-v1', 'views': [view], 'mappings': [mapping]}
-        motion = contract.read_json(real/'templates/adult-standard-v1/motions/review-motion-v1/motion-set.json')
-        def mapper():
-            selected = self.write(namespace+'/views.json', adaptation)
-            return contract.RegisteredAdaptations(self.lib, {'adaptations': {'hat': selected}}, reference, record,
-                'adult-standard-v1', motion,
-                {'hat': {'design_id': 'hat-straw-navy-band-v1', 'category': 'hat', 'revision': 'atlas-test'}})
-        layer = {'id': 'near_hat', 'slot': 'hat', 'pose_id': original['pose_id'], 'texture': mapping['texture'],
-                 'source': view['source'], 'source_bundle': view['source_bundle'], 'ownership': canonical_mask,
-                 'coverage': None, 'occlusion': None, 'interface_scope': 'registered-component',
-                 'placement_mode': 'full_frame', 'offset_px': [0, 0], 'local_scale': [1, 1],
-                 'view_binding': {'view_id': view['view_id'], 'mapping_id': 'ready'}}
-        clip = dict(action_id='water', direction='south', poses=ref(poses_path), variant='B',
-                    **{k: variant[k] for k in ['canvas_px', 'root_anchor_px', 'display_scale']})
-        frame = {'pose_id': original['pose_id'], 'duration_ms': original['duration_ms'], 'composition': 'alpha-over',
-                 'layers': [{'id': 'base', 'slot': 'body', 'texture': ref(original['file'])}, layer], 'layer_order': ['base', 'near_hat']}
-        self.assertEqual(mapper().component(layer, clip, frame), namespace.rsplit('/', 1)[0])
-        self.assertNotEqual(view['source']['file'], mapping['texture']['file'])
-        for path in [raw_path, bundle_path, atlas_mask['file'], canonical_mask['file'], poses_path, annotation_path, original['file']]:
-            self.assertIn(path, dependencies)
-        view['extraction']['registration']['atlas_anchor_px'][0] += 1
-        with self.assertRaisesRegex(ValueError, 'reconstruct'):
-            mapper().component(layer, clip, frame)
+    def test_atlas_component_preserves_pose_root_and_rejects_fake_world_root(self):
+        self.atlas_source_fixture()
+        value = self.check()
+        view = self.adaptation['views'][0]
+        extraction = view['extraction']
+        self.assertEqual(extraction['registration']['atlas_anchor_px'], [1, 3])
+        self.assertEqual(extraction['registration']['pose_anchor_px'], [1, 1])
+        self.assertEqual(view['canvas_px'], [2, 2])
+        self.assertEqual(view['root_anchor_px'], [1, 1])
+        self.assertNotEqual(view['source']['file'], self.adaptation['mappings'][0]['texture']['file'])
+        for mapping in self.adaptation['mappings']:
+            image = value.image(mapping['texture'])
+            x, y = mapping['anchors']['target_px']
+            self.assertEqual(image.getpixel((x-1, y-1)), (200, 30, 40, 128))
+            self.assertEqual(image.getpixel((x, y)), (30, 40, 200, 200))
+        for ref in [view['source'], view['source_bundle'], extraction['atlas_ownership']['mask']]:
+            self.assertIn(ref['file'], value.dependencies)
+        # Atlas coordinates must not be substituted for the world-space root.
+        view['root_anchor_px'] = extraction['registration']['atlas_anchor_px']
+        self.rejected('geometry')
+
 
     def test_binary_source_bundle_declared_pose_must_match_source_annotation(self):
         bundle = contract.read_json(self.lib/self.bundle['file'])
